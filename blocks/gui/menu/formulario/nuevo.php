@@ -205,12 +205,12 @@ $enlaceFinSesion['nombre'] = "Cerrar Sesión";
             </ul>
         </li>
 
-        <!--li>
+        <li>
             <a href="#">Asignación Inventarios a Contratistas</a>
             <ul class="dl-submenu">
                 <li><a href="<?php echo $enlaceasignarInventarioC['urlCodificada'] ?>"><?php echo $enlaceasignarInventarioC['nombre'] ?></a></li>
             </ul>
-        </li-->
+        </li>
 
  <li>
             <a href="<?php echo$enlaceReportico['urlCodificada'] ?>"><?php echo $enlaceReportico['nombre'] ?></a>
