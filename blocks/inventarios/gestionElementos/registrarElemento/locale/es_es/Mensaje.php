@@ -2,6 +2,22 @@
 <?php
 $this->idioma ["noDefinido"] = "Etiqueta no esta definida en locale/es_es/Mensaje.php";
 
+$this->idioma ["tipo_registro"] ="Tipo de Registro	";
+
+$this->idioma ["documentos_elementos"] ="Archivo de Elementos";
+
+$this->idioma ["placa_cc"] ="Placa : ";
+$this->idioma ["tipo_bienTitulo"] ="Placa Generada";
+
+$this->idioma ["placa_dev"] ="Placa : ";
+$this->idioma ["placa_devTitulo"] ="Placa Generada";
+
+
+$this->idioma ["tipo_poliza"] ="Tipo de Poliza : ";
+$this->idioma ["tipo_polizaTitulo"] ="Seleccione Tipo de Poliza";
+
+
+
 $this->idioma ["tipo_bien"] ="Tipo de Bien : ";
 $this->idioma ["tipo_bienTitulo"] ="Seleccione Tipo de Bien";
 
