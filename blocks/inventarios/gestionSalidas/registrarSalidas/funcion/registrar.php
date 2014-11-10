@@ -66,7 +66,7 @@ class RegistradorOrden {
 		}
 		
 		var_dump ( $inserto );
-		exit ();
+// 		exit ();
 		$arreglo = array (
 				"salida" => $id_salida [0] [0],
 				"entrada" => $_REQUEST ['numero_entrada'],

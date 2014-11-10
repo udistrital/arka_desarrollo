@@ -1,6 +1,6 @@
 <?php
 
-namespace inventarios\gestionActa\registrarActa\funcion;
+namespace inventarios\asignarInventarioC\asignarInventario\funcion;
 
 if (!isset($GLOBALS ["autorizado"])) {
     include ("index.php");
@@ -18,8 +18,7 @@ class redireccion {
                 $variable = "pagina=" . $miPaginaActual;
                 $variable .= "&opcion=mensaje";
                 $variable .= "&mensaje=confirma";
-                $variable .= "&numero_acta=" . $valor [0];
-                $variable .= "&fecha_acta=" . $valor [1];
+                $variable .= "&contratista=" . $valor [0];
                 break;
 
             case "noInserto" :

@@ -1,5 +1,5 @@
 <?php
-use inventarios\gestionActa\registrarActa\Sql;
+use inventarios\asignarInventarioC\asignarInventario\Sql;
 
 $conexion = "inventarios";
 $esteRecursoDB = $this->miConfigurador->fabricaConexiones->getRecursoDB ( $conexion );

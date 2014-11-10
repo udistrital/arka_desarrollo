@@ -43,13 +43,12 @@ class registrarForm {
 
         $_REQUEST['usuario']='1100000';
         $_REQUEST ['tiempo'] = time();
-
+$tiempo = $_REQUEST ['tiempo'];
         // -------------------------------------------------------------------------------------------------
         $conexion = "inventarios";
         $esteRecursoDB = $this->miConfigurador->fabricaConexiones->getRecursoDB($conexion);
-        $cadenaSql = $this->miSql->getCadenaSql('tipoOrden');
-        $tipoOrden = $esteRecursoDB->ejecutarAcceso($cadenaSql, "busqueda");
-
+        
+      
         // Limpia Items Tabla temporal
         // ---------------- SECCION: Parámetros Generales del Formulario ----------------------------------
         $esteCampo = $esteBloque ['nombre'];
@@ -64,12 +63,13 @@ class registrarForm {
         // $atributos ['titulo'] = $this->lenguaje->getCadena ( $esteCampo );
         // Si no se coloca, entonces toma el valor predeterminado.
         $atributos ['estilo'] = '';
-        $atributos ['marco'] = true;
+        $atributos ['marco'] = false;
         $tab = 1;
         // ---------------- FIN SECCION: de Parámetros Generales del Formulario ----------------------------
         // ----------------INICIAR EL FORMULARIO ------------------------------------------------------------
         $atributos ['tipoEtiqueta'] = 'inicio';
         echo $this->miFormulario->formulario($atributos);
+        {
         // ---------------- SECCION: Controles del Formulario -----------------------------------------------
 
         $esteCampo = "marcoDatosBasicos";
@@ -93,7 +93,7 @@ class registrarForm {
         $atributos ['dobleLinea'] = 0;
         $atributos ['tabIndex'] = $tab;
         $atributos ['etiqueta'] = $this->lenguaje->getCadena($esteCampo);
-        $atributos ['validar'] = 'maxSize[15],custom[onlyNumberSp]';
+        $atributos ['validar'] = 'required, maxSize[15],custom[onlyNumberSp]';
 
         if (isset($_REQUEST [$esteCampo])) {
             $atributos ['valor'] = $_REQUEST [$esteCampo];
@@ -122,7 +122,7 @@ class registrarForm {
         $atributos ["tabIndex"] = $tab;
         $atributos ["tipo"] = 'boton';
         // submit: no se coloca si se desea un tipo button genérico
-        $atributos ['submit'] = true;
+        $atributos ['submit'] = 'true';
         $atributos ["estiloMarco"] = '';
         $atributos ["estiloBoton"] = 'jqueryui';
         // verificar: true para verificar el formulario antes de pasarlo al servidor.
@@ -141,7 +141,7 @@ class registrarForm {
         echo $this->miFormulario->division("fin");
 
         echo $this->miFormulario->marcoAgrupacion('fin');
-
+        }
         // ------------------- SECCION: Paso de variables ------------------------------------------------
 
         /**

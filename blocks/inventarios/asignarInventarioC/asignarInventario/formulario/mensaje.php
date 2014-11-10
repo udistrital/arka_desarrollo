@@ -78,8 +78,7 @@ class registrarForm {
 			{
 				if (isset($_REQUEST ['mensaje'])&&$_REQUEST ['mensaje'] == 'confirma') {
 					
-					$mensaje = "Se Registro el Acta de Recibido <br> Número de Acta: " . $_REQUEST ['numero_acta'] . "  
-							<br>Fecha Acta: " . $_REQUEST ['fecha_acta'];
+					$mensaje = "Se realizó la asignación de los items para el contratista ".$_REQUEST['contratista'];
 					
 					// ---------------- CONTROL: Cuadro de Texto --------------------------------------------------------
 					$esteCampo = 'mensajeRegistro';
@@ -97,7 +96,7 @@ class registrarForm {
 				}
 				if (isset($_REQUEST ['mensaje'])&&$_REQUEST ['mensaje'] == 'error') {
 					
-					$mensaje = "No Se Pudo Hacer Registro del Acta de Recibido";
+					$mensaje = "No fue posible realizar la asignación de los items al contratista.";
 					
 					// ---------------- CONTROL: Cuadro de Texto --------------------------------------------------------
 					$esteCampo = 'mensajeRegistro';

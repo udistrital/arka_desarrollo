@@ -45,19 +45,16 @@ class Funcion {
     function funcionEjemplo() {
         include_once ($this->ruta . "/funcion/funcionEjemplo.php");
     }
+    
+     function asignarInventario() {
+        include_once ($this->ruta . "/funcion/asignarInventario.php");
+    }
 
     function procesarAjax() {
         include_once ($this->ruta . "funcion/procesarAjax.php");
     }
 
-    function registrarActa() {
-        include_once ($this->ruta . "funcion/registrarActa.php");
-    }
-
-    function consultarOrden() {
-        include_once ($this->ruta . "funcion/ConsultarOrden.php");
-    }
-
+  
     function action() {
 
 
@@ -79,20 +76,19 @@ class Funcion {
 
             // Realizar una validación específica para los campos de este formulario:
             // $validacion = $this->verificarCampos ();
-            if ($_REQUEST ['opcion'] == 'registrarActa') {
-                $this->registrarActa();
-            } elseif (isset($_REQUEST ["opcion"])) {
-
-                if (isset($_REQUEST ["redireccionar"]) && $_REQUEST ['redireccionar'] == 'regresar') {
-                    redireccion::redireccionar($_REQUEST['opcion']);
-                }
-
-
-                if ($_REQUEST ['opcion'] == 'ConsultarOrden') {
-
-                    $this->consultarOrden();
-                }
+            if ($_REQUEST ['opcion'] == 'asignar') {
+                $this->asignarInventario();
             }
+
+            if (isset($_REQUEST ["redireccionar"]) && $_REQUEST ['redireccionar'] == 'regresar') {
+                redireccion::redireccionar($_REQUEST['opcion']);
+            }
+
+            if ($_REQUEST ['opcion'] == 'ConsultarOrden') {
+
+                $this->consultarOrden();
+            }
+
 // 			if ($validacion == false) {
 // 				// Instanciar a la clase pagina con mensaje de correcion de datos
 // 				echo "Datos Incorrectos";
@@ -145,5 +141,4 @@ class Funcion {
     }
 
 }
-
 ?>
