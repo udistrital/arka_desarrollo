@@ -208,24 +208,12 @@ class registrarForm {
 						$atributos ['tamanno'] = 1;
 						$atributos ['estilo'] = 'jqueryui';
 						$atributos ['validar'] = 'required';
-						$atributos ['limitar'] = true;
+						$atributos ['limitar'] = false;
 						$atributos ['etiqueta'] = $this->lenguaje->getCadena ( $esteCampo );
 						$atributos ['anchoEtiqueta'] = 213;
-						// Valores a mostrar en el control
-						$matrizItems = array (
-								array (
-										1,
-										'Consumo' 
-								),
-								array (
-										2,
-										'Consumo Controlado' 
-								),
-								array (
-										3,
-										'Devolutivo' 
-								) 
-						);
+						
+						$atributos ['cadena_sql'] = $this->miSql->getCadenaSql ( "consultar_tipo_bien" );
+						$matrizItems = $esteRecursoDB->ejecutarAcceso ( $atributos ['cadena_sql'], "busqueda" );
 						
 						$atributos ['matrizItems'] = $matrizItems;
 						
@@ -255,12 +243,12 @@ class registrarForm {
 							$atributos ['tabIndex'] = $tab;
 							$atributos ['etiqueta'] = $this->lenguaje->getCadena ( $esteCampo );
 							$atributos ['validar'] = 'required, minSize[1],maxSize[30],custom[onlyNumberSp]';
-							
-							if (isset ( $_REQUEST [$esteCampo] )) {
-								$atributos ['valor'] = $_REQUEST [$esteCampo];
-							} else {
-								$atributos ['valor'] = '';
-							}
+							$atributos ['valor'] = '123123123';
+// 							if (isset ( $_REQUEST [$esteCampo] )) {
+// 								$atributos ['valor'] = $_REQUEST [$esteCampo];
+// 							} else {
+// 								$atributos ['valor'] = '';
+// 							}
 							$atributos ['titulo'] = $this->lenguaje->getCadena ( $esteCampo . 'Titulo' );
 							$atributos ['deshabilitado'] = false;
 							$atributos ['tamanno'] = 10;
@@ -293,12 +281,12 @@ class registrarForm {
 							$atributos ['tabIndex'] = $tab;
 							$atributos ['etiqueta'] = $this->lenguaje->getCadena ( $esteCampo );
 							$atributos ['validar'] = 'required, minSize[1],maxSize[30],custom[onlyNumberSp]';
-							
-							if (isset ( $_REQUEST [$esteCampo] )) {
-								$atributos ['valor'] = $_REQUEST [$esteCampo];
-							} else {
-								$atributos ['valor'] = '';
-							}
+							$atributos ['valor'] = '123123123';
+// 							if (isset ( $_REQUEST [$esteCampo] )) {
+// 								$atributos ['valor'] = $_REQUEST [$esteCampo];
+// 							} else {
+// 								$atributos ['valor'] = '';
+// 							}
 							$atributos ['titulo'] = $this->lenguaje->getCadena ( $esteCampo . 'Titulo' );
 							$atributos ['deshabilitado'] = false;
 							$atributos ['tamanno'] = 10;
@@ -329,16 +317,8 @@ class registrarForm {
 							$atributos ['etiqueta'] = $this->lenguaje->getCadena ( $esteCampo );
 							$atributos ['anchoEtiqueta'] = 213;
 							// Valores a mostrar en el control
-							$matrizItems = array (
-									array (
-										0,
-											'No Aplica' 
-									),
-									array (
-										1,
-											'De Calidad' 
-									) 
-							);
+							$atributos ['cadena_sql'] = $this->miSql->getCadenaSql ( "consultar_tipo_poliza" );
+							$matrizItems = $esteRecursoDB->ejecutarAcceso ( $atributos ['cadena_sql'], "busqueda" );
 							
 							$atributos ['matrizItems'] = $matrizItems;
 							
@@ -418,8 +398,6 @@ class registrarForm {
 								// Aplica atributos globales al control
 								$atributos = array_merge ( $atributos, $atributosGlobales );
 								echo $this->miFormulario->campoCuadroTexto ( $atributos );
-								
-								
 							}
 							echo $this->miFormulario->division ( "fin" );
 						}
@@ -500,7 +478,7 @@ class registrarForm {
 						$atributos ['dobleLinea'] = 0;
 						$atributos ['tabIndex'] = $tab;
 						$atributos ['etiqueta'] = $this->lenguaje->getCadena ( $esteCampo );
-						$atributos ['validar'] = 'required, minSize[1],maxSize[30],custom[onlyNumberSp]';
+						$atributos ['validar'] = 'required, minSize[1] ';
 						
 						if (isset ( $_REQUEST [$esteCampo] )) {
 							$atributos ['valor'] = $_REQUEST [$esteCampo];
@@ -531,8 +509,7 @@ class registrarForm {
 						$atributos ['dobleLinea'] = 0;
 						$atributos ['tabIndex'] = $tab;
 						$atributos ['etiqueta'] = $this->lenguaje->getCadena ( $esteCampo );
-						$atributos ['validar'] = 'required, minSize[1],maxSize[30],custom[onlyNumberSp]';
-						
+						$atributos ['validar'] = 'required, minSize[1],maxSize[30],custom[number]';						
 						if (isset ( $_REQUEST [$esteCampo] )) {
 							$atributos ['valor'] = $_REQUEST [$esteCampo];
 						} else {
@@ -567,25 +544,10 @@ class registrarForm {
 						$atributos ['limitar'] = true;
 						$atributos ['etiqueta'] = $this->lenguaje->getCadena ( $esteCampo );
 						$atributos ['anchoEtiqueta'] = 213;
+						
 						// Valores a mostrar en el control
-						$matrizItems = array (
-								array (
-										0,
-										'Exento' 
-								),
-								array (
-										1,
-										'Tarifa de Cero' 
-								),
-								array (
-										2,
-										'5 %' 
-								),
-								array (
-										3,
-										'4 %' 
-								) 
-						);
+						$atributos ['cadena_sql'] = $this->miSql->getCadenaSql ( "consultar_tipo_iva" );
+						$matrizItems = $esteRecursoDB->ejecutarAcceso ( $atributos ['cadena_sql'], "busqueda" );
 						
 						$atributos ['matrizItems'] = $matrizItems;
 						
@@ -609,7 +571,7 @@ class registrarForm {
 						$atributos ['dobleLinea'] = 0;
 						$atributos ['tabIndex'] = $tab;
 						$atributos ['etiqueta'] = $this->lenguaje->getCadena ( $esteCampo );
-						$atributos ['validar'] = 'required, minSize[1],maxSize[30],custom[onlyNumberSp]';
+						$atributos ['validar'] = 'required, minSize[1],maxSize[30],custom[number]';
 						
 						if (isset ( $_REQUEST [$esteCampo] )) {
 							$atributos ['valor'] = $_REQUEST [$esteCampo];
@@ -641,26 +603,13 @@ class registrarForm {
 						$atributos ['tab'] = $tab;
 						$atributos ['tamanno'] = 1;
 						$atributos ['estilo'] = 'jqueryui';
-						$atributos ['validar'] = '';
+						$atributos ['validar'] = 'required';
 						$atributos ['limitar'] = false;
 						$atributos ['etiqueta'] = $this->lenguaje->getCadena ( $esteCampo );
 						$atributos ['anchoEtiqueta'] = 213;
 						// Valores a mostrar en el control
-						$matrizItems = array (
-								array (
-										0,
-										'Bodega Central 40' 
-								),
-								array (
-										1,
-										'Bodega Aduanilla' 
-								),
-								array (
-										2,
-										'Bodega Tomas Jeferson' 
-								) 
-						);
-						
+						$atributos ['cadena_sql'] = $this->miSql->getCadenaSql ( "consultar_bodega" );
+						$matrizItems = $esteRecursoDB->ejecutarAcceso ( $atributos ['cadena_sql'], "busqueda" );
 						$atributos ['matrizItems'] = $matrizItems;
 						
 						// Utilizar lo siguiente cuando no se pase un arreglo:
@@ -683,7 +632,7 @@ class registrarForm {
 						$atributos ['dobleLinea'] = 0;
 						$atributos ['tabIndex'] = $tab;
 						$atributos ['etiqueta'] = $this->lenguaje->getCadena ( $esteCampo );
-						$atributos ['validar'] = 'required, minSize[1],maxSize[30],custom[onlyNumberSp]';
+						$atributos ['validar'] = 'required, minSize[1],maxSize[30],custom[number]';
 						
 						if (isset ( $_REQUEST [$esteCampo] )) {
 							$atributos ['valor'] = $_REQUEST [$esteCampo];
@@ -714,7 +663,7 @@ class registrarForm {
 						$atributos ['dobleLinea'] = 0;
 						$atributos ['tabIndex'] = $tab;
 						$atributos ['etiqueta'] = $this->lenguaje->getCadena ( $esteCampo );
-						$atributos ['validar'] = 'required, minSize[1],maxSize[30],custom[onlyNumberSp]';
+						$atributos ['validar'] = 'required, minSize[1],maxSize[30],custom[number]';
 						
 						if (isset ( $_REQUEST [$esteCampo] )) {
 							$atributos ['valor'] = $_REQUEST [$esteCampo];
@@ -745,7 +694,7 @@ class registrarForm {
 						$atributos ['dobleLinea'] = 0;
 						$atributos ['tabIndex'] = $tab;
 						$atributos ['etiqueta'] = $this->lenguaje->getCadena ( $esteCampo );
-						$atributos ['validar'] = 'required, minSize[4],maxSize[4],custom[onlyNumberSp]';
+						$atributos ['validar'] = 'required, minSize[1],maxSize[30],custom[number]';
 						
 						if (isset ( $_REQUEST [$esteCampo] )) {
 							$atributos ['valor'] = $_REQUEST [$esteCampo];
@@ -754,7 +703,7 @@ class registrarForm {
 						}
 						$atributos ['titulo'] = $this->lenguaje->getCadena ( $esteCampo . 'Titulo' );
 						$atributos ['deshabilitado'] = false;
-						$atributos ['tamanno'] = 3;
+						$atributos ['tamanno'] = 10;
 						$atributos ['maximoTamanno'] = '';
 						$atributos ['anchoEtiqueta'] = 220;
 						$tab ++;
@@ -829,7 +778,7 @@ class registrarForm {
 			$valorCodificado .= "&bloque=" . $esteBloque ['nombre'];
 			$valorCodificado .= "&bloqueGrupo=" . $esteBloque ["grupo"];
 			$valorCodificado .= "&opcion=registrar";
-			// $valorCodificado .= "&numero_acta_r=" . $_REQUEST ['numero_acta'];
+
 			
 			/**
 			 * SARA permite que los nombres de los campos sean dinámicos.

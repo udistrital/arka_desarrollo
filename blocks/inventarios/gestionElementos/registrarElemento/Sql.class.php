@@ -149,6 +149,34 @@ class Sql extends \Sql {
 			 * Clausulas Del Caso Uso.
 			 */
 			
+			case "consultar_tipo_bien" :
+				
+				$cadenaSql = "SELECT id_tipo_bien, descripcion ";
+				$cadenaSql .= "FROM tipo_bien;";
+				break;
+			
+			case "consultar_tipo_poliza" :
+				
+				$cadenaSql = "SELECT id_tipo_poliza, descripcion ";
+				$cadenaSql .= "FROM tipo_poliza;";
+				
+				break;
+			
+			case "consultar_tipo_iva" :
+				
+				$cadenaSql = "SELECT id_iva, descripcion ";
+				$cadenaSql .= "FROM aplicacion_iva;";
+				
+				break;
+
+				
+			case "consultar_bodega" :
+				
+				$cadenaSql = "SELECT id_bodega, descripcion ";
+				$cadenaSql .= "FROM bodega;";
+				
+				break;
+			
 			case "polizas" :
 				$cadenaSql = " SELECT ";
 				$cadenaSql .= " id_polizas,";

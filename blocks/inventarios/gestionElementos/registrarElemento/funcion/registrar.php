@@ -25,19 +25,38 @@ class RegistradorOrden {
 	}
 	function procesarFormulario() {
 		
+		$conexion = "inventarios";
+		$esteRecursoDB = $this->miConfigurador->fabricaConexiones->getRecursoDB ( $conexion );
 		$fechaActual = date ( 'Y-m-d' );
+		
+		
+		var_dump ( $_REQUEST );
+		exit ();
+		
+		if ($_REQUEST ['tipo_registro'] == 1) {
+			
+			$arreglo=array(
+					
+			);
+			
+			
+		} else if ($_REQUEST ['tipo_registro'] == 2) {
+			
+			echo "archivo";
+			exit ();
+		}
 		
 		$conexion = "inventarios";
 		$esteRecursoDB = $this->miConfigurador->fabricaConexiones->getRecursoDB ( $conexion );
 		
 		if ($_REQUEST ['objeto_contrato'] == '') {
-		
-		redireccion::redireccionar ( 'notextos' );
+			
+			redireccion::redireccionar ( 'notextos' );
 		}
 		
 		if ($_REQUEST ['forma_pago'] == '') {
-		
-		redireccion::redireccionar ( 'notextos' );
+			
+			redireccion::redireccionar ( 'notextos' );
 		}
 		
 		$datosSolicitante = array (
@@ -108,10 +127,6 @@ class RegistradorOrden {
 		$cadenaSql = $this->miSql->getCadenaSql ( 'insertarEncargado', $datosOrdenador );
 		$id_ordenador = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
 		
-		
-
-		
-		
 		// Registro Orden
 		
 		$datosOrden = array (
@@ -139,23 +154,19 @@ class RegistradorOrden {
 				$id_contratista [0] [0],
 				$id_jefe [0] [0],
 				$id_ordenador [0] [0],
-				$id_solicitante[0][0],
-				$id_supervisor[0][0] 
+				$id_solicitante [0] [0],
+				$id_supervisor [0] [0] 
 		);
-				
+		
 		$cadenaSql = $this->miSql->getCadenaSql ( 'insertarOrden', $datosOrden );
 		
 		$id_orden = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
-		
-		
 		
 		$datos = array (
 				$id_orden [0] [0],
 				$fechaActual 
 		);
 		
-
-		 
 		if ($id_orden) {
 			
 			redireccion::redireccionar ( 'inserto', $datos );
