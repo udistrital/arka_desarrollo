@@ -168,8 +168,7 @@ class Sql extends \Sql {
 				$cadenaSql .= "FROM aplicacion_iva;";
 				
 				break;
-
-				
+			
 			case "consultar_bodega" :
 				
 				$cadenaSql = "SELECT id_bodega, descripcion ";
@@ -177,6 +176,67 @@ class Sql extends \Sql {
 				
 				break;
 			
+			case "consultar_placa" :
+				
+				$cadenaSql = "SELECT MAX( placa) ";
+				$cadenaSql .= "FROM elemento ";
+				$cadenaSql .= "WHERE tipo_bien='1';";
+				
+				break;
+			
+			
+			case "ingresar_elemento_tipo_1" :
+				$cadenaSql = " INSERT INTO ";
+				$cadenaSql .= " elemento(";
+				$cadenaSql .= "fecha_registro, tipo_bien, descripcion, cantidad, ";
+				$cadenaSql .= "unidad, valor, iva, ajuste, bodega, subtotal_sin_iva, total_iva, ";
+				$cadenaSql .= "total_iva_con, placa) ";
+				$cadenaSql .= " VALUES (";
+				$cadenaSql .= "'" . $variable [0] . "',";
+				$cadenaSql .= "'" . $variable [1] . "',";
+				$cadenaSql .= "'" . $variable [2] . "',";
+				$cadenaSql .= "'" . $variable [3] . "',";
+				$cadenaSql .= "'" . $variable [4] . "',";
+				$cadenaSql .= "'" . $variable [5] . "',";
+				$cadenaSql .= "'" . $variable [6] . "',";
+				$cadenaSql .= "'" . $variable [7] . "',";
+				$cadenaSql .= "'" . $variable [8] . "',";
+				$cadenaSql .= "'" . $variable [9] . "',";
+				$cadenaSql .= "'" . $variable [10] . "',";
+				$cadenaSql .= "'" . $variable [11] . "',";
+				$cadenaSql .= "'" . $variable [12] . "') ";
+				$cadenaSql .= "RETURNING  id_elemento; ";
+				
+				break;
+			
+			case "ingresar_elemento_tipo_2" :
+				$cadenaSql = " INSERT INTO ";
+				$cadenaSql .= " elemento(";
+				$cadenaSql .= "fecha_registro, tipo_bien, descripcion, cantidad, ";
+				$cadenaSql .= "unidad, valor, iva, ajuste, bodega, subtotal_sin_iva, total_iva, ";
+				$cadenaSql .= "total_iva_con, placa,tipo_poliza, fecha_inicio_pol, fecha_final_pol) ";
+				$cadenaSql .= " VALUES (";
+				$cadenaSql .= "'" . $variable [0] . "',";
+				$cadenaSql .= "'" . $variable [1] . "',";
+				$cadenaSql .= "'" . $variable [2] . "',";
+				$cadenaSql .= "'" . $variable [3] . "',";
+				$cadenaSql .= "'" . $variable [4] . "',";
+				$cadenaSql .= "'" . $variable [5] . "',";
+				$cadenaSql .= "'" . $variable [6] . "',";
+				$cadenaSql .= "'" . $variable [7] . "',";
+				$cadenaSql .= "'" . $variable [8] . "',";
+				$cadenaSql .= "'" . $variable [9] . "',";
+				$cadenaSql .= "'" . $variable [10] . "',";
+				$cadenaSql .= "'" . $variable [11] . "',";
+				$cadenaSql .= "'" . $variable [12] . "',";
+				$cadenaSql .= "'" . $variable [13] . "',";
+				$cadenaSql .= "'" . $variable [14] . "',";
+				$cadenaSql .= "'" . $variable [15] . "') ";
+				$cadenaSql .= "RETURNING  id_elemento; ";
+				
+				break;
+			
+			// ___________________________________
 			case "polizas" :
 				$cadenaSql = " SELECT ";
 				$cadenaSql .= " id_polizas,";
@@ -251,64 +311,9 @@ class Sql extends \Sql {
 				$cadenaSql .= "'" . $variable [4] . "') ";
 				$cadenaSql .= "RETURNING  id_encargado; ";
 				break;
-			
-			// id_solicitante integer,
-			// id_supervisor integer,
-			case "insertarOrden" :
-				$cadenaSql = " INSERT INTO ";
-				$cadenaSql .= " orden_servicio(";
-				$cadenaSql .= "  fecha_registro, objeto_contrato, poliza1, ";
-				$cadenaSql .= " poliza2, poliza3, poliza4, duracion_pago, fecha_inicio_pago, ";
-				$cadenaSql .= " fecha_final_pago, forma_pago, total_preliminar, iva, total, fecha_diponibilidad,";
-				$cadenaSql .= " numero_disponibilidad, valor_disponibilidad, fecha_registrop,  ";
-				$cadenaSql .= " numero_registrop, valor_registrop, letra_registrop, id_contratista,id_contratista_encargado, id_jefe_encargado, id_ordenador_encargado,id_solicitante,id_supervisor)";
-				$cadenaSql .= " VALUES (";
-				$cadenaSql .= "'" . $variable [0] . "',";
-				$cadenaSql .= "'" . $variable [1] . "',";
 				
-				if ($variable [2] != '') {
-					$cadenaSql .= "'" . $variable [2] . "',";
-				} else {
-					$cadenaSql .= "'0',";
-				}
-				if ($variable [3] != '') {
-					$cadenaSql .= "'" . $variable [3] . "',";
-				} else {
-					$cadenaSql .= "'0',";
-				}
-				if ($variable [4] != '') {
-					$cadenaSql .= "'" . $variable [4] . "',";
-				} else {
-					$cadenaSql .= "'0',";
-				}
-				if ($variable [5] != '') {
-					$cadenaSql .= "'" . $variable [5] . "',";
-				} else {
-					$cadenaSql .= "'0',";
-				}
-				$cadenaSql .= "'" . $variable [6] . "',";
-				$cadenaSql .= "'" . $variable [7] . "',";
-				$cadenaSql .= "'" . $variable [8] . "',";
-				$cadenaSql .= "'" . $variable [9] . "',";
-				$cadenaSql .= "'" . $variable [10] . "',";
-				$cadenaSql .= "'" . $variable [11] . "',";
-				$cadenaSql .= "'" . $variable [12] . "',";
-				$cadenaSql .= "'" . $variable [13] . "',";
-				$cadenaSql .= "'" . $variable [14] . "',";
-				$cadenaSql .= "'" . $variable [15] . "',";
-				$cadenaSql .= "'" . $variable [16] . "',";
-				$cadenaSql .= "'" . $variable [17] . "',";
-				$cadenaSql .= "'" . $variable [18] . "',";
-				$cadenaSql .= "'" . $variable [19] . "',";
-				$cadenaSql .= "'" . $variable [20] . "',";
-				$cadenaSql .= "'" . $variable [21] . "',";
-				$cadenaSql .= "'" . $variable [22] . "',";
-				$cadenaSql .= "'" . $variable [23] . "',";
-				$cadenaSql .= "'" . $variable [24] . "',";
-				$cadenaSql .= "'" . $variable [25] . "') ";
-				$cadenaSql .= "RETURNING  id_orden_servicio; ";
-				
-				break;
+				// id_solicitante integer,
+				// id_supervisor integer,
 				
 				break;
 		}

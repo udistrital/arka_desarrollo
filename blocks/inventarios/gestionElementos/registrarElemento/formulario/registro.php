@@ -243,12 +243,12 @@ class registrarForm {
 							$atributos ['tabIndex'] = $tab;
 							$atributos ['etiqueta'] = $this->lenguaje->getCadena ( $esteCampo );
 							$atributos ['validar'] = 'required, minSize[1],maxSize[30],custom[onlyNumberSp]';
-							$atributos ['valor'] = '123123123';
-// 							if (isset ( $_REQUEST [$esteCampo] )) {
-// 								$atributos ['valor'] = $_REQUEST [$esteCampo];
-// 							} else {
-// 								$atributos ['valor'] = '';
-// 							}
+							
+							if (isset ( $_REQUEST [$esteCampo] )) {
+								$atributos ['valor'] = $_REQUEST [$esteCampo];
+							} else {
+								$atributos ['valor'] = '';
+							}
 							$atributos ['titulo'] = $this->lenguaje->getCadena ( $esteCampo . 'Titulo' );
 							$atributos ['deshabilitado'] = false;
 							$atributos ['tamanno'] = 10;
@@ -281,12 +281,12 @@ class registrarForm {
 							$atributos ['tabIndex'] = $tab;
 							$atributos ['etiqueta'] = $this->lenguaje->getCadena ( $esteCampo );
 							$atributos ['validar'] = 'required, minSize[1],maxSize[30],custom[onlyNumberSp]';
-							$atributos ['valor'] = '123123123';
-// 							if (isset ( $_REQUEST [$esteCampo] )) {
-// 								$atributos ['valor'] = $_REQUEST [$esteCampo];
-// 							} else {
-// 								$atributos ['valor'] = '';
-// 							}
+							
+							if (isset ( $_REQUEST [$esteCampo] )) {
+								$atributos ['valor'] = $_REQUEST [$esteCampo];
+							} else {
+								$atributos ['valor'] = '';
+							}
 							$atributos ['titulo'] = $this->lenguaje->getCadena ( $esteCampo . 'Titulo' );
 							$atributos ['deshabilitado'] = false;
 							$atributos ['tamanno'] = 10;

@@ -82,7 +82,7 @@ class registrarForm {
 				
 				if (isset($_REQUEST ['mensaje'])&&$_REQUEST ['mensaje'] == 'confirma') {
 					
-					$mensaje = "Se Registro la Orden de Servicios <br> Número de Orden Servicios: " . $_REQUEST ['numero_orden'] . "  
+					$mensaje = "Se Cargo Elemento <br> Número ID Elemento: " . $_REQUEST ['numero_orden'] . "  
 							<br>Fecha : " . $_REQUEST ['fecha_orden'];
 					
 					// ---------------- CONTROL: Cuadro de Texto --------------------------------------------------------
@@ -99,9 +99,30 @@ class registrarForm {
 					echo $this->miFormulario->cuadroMensaje ( $atributos );
 					// --------------- FIN CONTROL : Cuadro de Texto --------------------------------------------------
 				}
+				
+				if (isset($_REQUEST ['mensaje'])&&$_REQUEST ['mensaje'] == 'confirmaMasivo') {
+						
+					$mensaje = "Se Cargo con Exito los  Elementos  del Archivo<br>
+							<br>Fecha  Registro : " . date ( 'Y-m-d' );
+						
+					// ---------------- CONTROL: Cuadro de Texto --------------------------------------------------------
+					$esteCampo = 'mensajeRegistro';
+					$atributos ['id'] = $esteCampo;
+					$atributos ['tipo'] = 'success';
+					$atributos ['estilo'] = 'textoCentrar';
+					$atributos ['mensaje'] = $mensaje;
+						
+					$tab ++;
+						
+					// Aplica atributos globales al control
+					$atributos = array_merge ( $atributos, $atributosGlobales );
+					echo $this->miFormulario->cuadroMensaje ( $atributos );
+					// --------------- FIN CONTROL : Cuadro de Texto --------------------------------------------------
+				}
+				
 				if (isset($_REQUEST ['mensaje'])&&$_REQUEST ['mensaje'] == 'error') {
 					
-					$mensaje = "No Se Pudo Hacer Registro la Orden de Servicios";
+					$mensaje = "No Se Pudo Hacer la  Carga del Elemento";
 					
 					// ---------------- CONTROL: Cuadro de Texto --------------------------------------------------------
 					$esteCampo = 'mensajeRegistro';
@@ -118,7 +139,24 @@ class registrarForm {
 					// --------------- FIN CONTROL : Cuadro de Texto --------------------------------------------------
 				}
 				
+				if (isset($_REQUEST ['mensaje'])&&$_REQUEST ['mensaje'] == 'noExtension') {
 						
+					$mensaje = "Extension Incorrecta del Archivo a Cargar";
+						
+					// ---------------- CONTROL: Cuadro de Texto --------------------------------------------------------
+					$esteCampo = 'mensajeRegistro';
+					$atributos ['id'] = $esteCampo;
+					$atributos ['tipo'] = 'error';
+					$atributos ['estilo'] = 'textoCentrar';
+					$atributos ['mensaje'] = $mensaje;
+						
+					$tab ++;
+						
+					// Aplica atributos globales al control
+					$atributos = array_merge ( $atributos, $atributosGlobales );
+					echo $this->miFormulario->cuadroMensaje ( $atributos );
+					// --------------- FIN CONTROL : Cuadro de Texto --------------------------------------------------
+				}		
 				if (isset($_REQUEST['errores'])&&$_REQUEST ['errores'] == 'notextos') {
 					
 					$mensaje = "No se Creo Orden de Servicios, No se Colocaron Objeto de Contrato Y/O Forma de Pago";

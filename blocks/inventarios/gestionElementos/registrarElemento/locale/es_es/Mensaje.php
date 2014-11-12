@@ -7,10 +7,10 @@ $this->idioma ["tipo_registro"] ="Tipo de Registro	";
 $this->idioma ["documentos_elementos"] ="Archivo de Elementos";
 
 $this->idioma ["placa_cc"] ="Placa : ";
-$this->idioma ["tipo_bienTitulo"] ="Placa Generada";
+$this->idioma ["tipo_bienTitulo"] ="Ingrese Número de Placa ";
 
 $this->idioma ["placa_dev"] ="Placa : ";
-$this->idioma ["placa_devTitulo"] ="Placa Generada";
+$this->idioma ["placa_devTitulo"] ="Ingrese Número de Placa";
 
 
 $this->idioma ["tipo_poliza"] ="Tipo de Poliza : ";

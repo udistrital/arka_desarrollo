@@ -1,6 +1,6 @@
 <?
 
-namespace inventarios\gestionCompras\registrarOrdenServicios\funcion;
+namespace inventarios\gestionElementos\registrarElemento\funcion;
 
 if (! isset ( $GLOBALS ["autorizado"] )) {
 	include ("index.php");
@@ -10,17 +10,30 @@ class redireccion {
 	public static function redireccionar($opcion, $valor = "") {
 		$miConfigurador = \Configurador::singleton ();
 		$miPaginaActual = $miConfigurador->getVariableConfiguracion ( "pagina" );
-
+		
 		switch ($opcion) {
 			case "inserto" :
-
+				
 				$variable = "pagina=" . $miPaginaActual;
 				$variable .= "&opcion=mensaje";
 				$variable .= "&mensaje=confirma";
 				$variable .= "&numero_orden=" . $valor [0];
 				$variable .= "&fecha_orden=" . $valor [1];
 				
+				break;
+			
+			case "inserto_M" :
 				
+				$variable = "pagina=" . $miPaginaActual;
+				$variable .= "&opcion=mensaje";
+				$variable .= "&mensaje=confirmaMasivo";
+				break;
+			
+			case "noExtension" :
+				
+				$variable = "pagina=" . $miPaginaActual;
+				$variable .= "&opcion=mensaje";
+				$variable .= "&mensaje=noExtension";
 				break;
 			
 			case "noInserto" :
@@ -30,7 +43,6 @@ class redireccion {
 				
 				break;
 			
-						
 			case "notextos" :
 				$variable = "pagina=" . $miPaginaActual;
 				$variable .= "&opcion=mensaje";
@@ -48,7 +60,6 @@ class redireccion {
 			unset ( $_REQUEST [$clave] );
 		}
 		
-
 		$url = $miConfigurador->configuracion ["host"] . $miConfigurador->configuracion ["site"] . "/index.php?";
 		$enlace = $miConfigurador->configuracion ['enlace'];
 		$variable = $miConfigurador->fabricaConexiones->crypto->codificar ( $variable );
@@ -56,15 +67,15 @@ class redireccion {
 		$redireccion = $url . $_REQUEST [$enlace];
 		
 		echo "<script>location.replace('" . $redireccion . "')</script>";
-
-// 		$enlace =$miConfigurador->getVariableConfiguracion("enlace");
-// 		$variable = $miConfigurador->fabricaConexiones->crypto->codificar($variable);
-// // 		 echo $enlace;
-// // // 		 echo $variable;
-// // 		 exit;
-// 		$_REQUEST[$enlace] = $variable;
-// 		$_REQUEST["recargar"] = true;
-// 		return true;
+		
+		// $enlace =$miConfigurador->getVariableConfiguracion("enlace");
+		// $variable = $miConfigurador->fabricaConexiones->crypto->codificar($variable);
+		// // echo $enlace;
+		// // // echo $variable;
+		// // exit;
+		// $_REQUEST[$enlace] = $variable;
+		// $_REQUEST["recargar"] = true;
+		// return true;
 	}
 }
 
