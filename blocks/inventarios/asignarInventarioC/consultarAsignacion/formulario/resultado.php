@@ -68,7 +68,7 @@ class registrarForm {
             $docContratista = '';
         }
 
-        $supervisor=$_REQUEST['usuario'];
+        $supervisor = $_REQUEST['usuario'];
 
         $cadenaSql = $this->miSql->getCadenaSql('consultarContratista', $docContratista);
         $contratista = $esteRecursoDB->ejecutarAcceso($cadenaSql, "busqueda");
@@ -77,10 +77,15 @@ class registrarForm {
             $supervisor,
             $docContratista);
 
-
+        //COnsultar Elementos Activos del supervisor para asignarlos al contratista
         $cadenaSql = $this->miSql->getCadenaSql('consultarElementosSupervisor', $variables);
         $elementos_supervisor = $esteRecursoDB->ejecutarAcceso($cadenaSql, "busqueda");
 
+        //Consultar Elementos Asignados al contratista
+        $cadenaSql = $this->miSql->getCadenaSql('consultarElementosContratista', $variables);
+        $elementos_contratista = $esteRecursoDB->ejecutarAcceso($cadenaSql, "busqueda");
+        
+        
         // ---------------- SECCION: Parámetros Generales del Formulario ----------------------------------
         $esteCampo = $esteBloque ['nombre'];
         $atributos ['id'] = $esteCampo;
@@ -106,8 +111,14 @@ class registrarForm {
         $atributos ['id'] = $esteCampo;
         $atributos ["estilo"] = "jqueryui";
         $atributos ['tipoEtiqueta'] = 'inicio';
-        $atributos ["leyenda"] = "Modificar Asignación de Elementos a Contratista " . $docContratista;
+        $atributos ["leyenda"] = "Asignación de Elementos a Contratista " . $docContratista;
         echo $this->miFormulario->marcoAgrupacion('inicio', $atributos);
+
+
+
+        // ------------------Fin Division para los botones-------------------------
+        echo $this->miFormulario->division("fin");
+
 
         if ($elementos_supervisor !== false) {
 
@@ -213,7 +224,9 @@ class registrarForm {
             // Se debe declarar el mismo atributo de marco con que se inició el formulario.
             // -----------------FIN CONTROL: Botón -----------------------------------------------------------
             // ------------------Fin Division para los botones-------------------------
- 
+            echo $this->miFormulario->division("fin");
+
+            echo $this->miFormulario->marcoAgrupacion('fin');
 
             // ------------------- SECCION: Paso de variables ------------------------------------------------
 
@@ -235,8 +248,8 @@ class registrarForm {
             $valorCodificado .= "&bloque=" . $esteBloque ['nombre'];
             $valorCodificado .= "&bloqueGrupo=" . $esteBloque ["grupo"];
             $valorCodificado .= "&opcion=asignar";
-            $valorCodificado .= "&contratista=".$docContratista;
-            $valorCodificado .= "&supervisor=".$supervisor;
+            $valorCodificado .= "&contratista=" . $docContratista;
+            $valorCodificado .= "&supervisor=" . $supervisor;
 
             /**
              * SARA permite que los nombres de los campos sean dinámicos.

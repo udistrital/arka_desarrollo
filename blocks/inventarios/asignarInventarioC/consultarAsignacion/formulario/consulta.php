@@ -43,7 +43,7 @@ class registrarForm {
 
         $_REQUEST['usuario']='1100000';
         $_REQUEST ['tiempo'] = time();
-$tiempo = $_REQUEST ['tiempo'];
+        $tiempo = $_REQUEST ['tiempo'];
         // -------------------------------------------------------------------------------------------------
         $conexion = "inventarios";
         $esteRecursoDB = $this->miConfigurador->fabricaConexiones->getRecursoDB($conexion);
@@ -76,7 +76,7 @@ $tiempo = $_REQUEST ['tiempo'];
         $atributos ['id'] = $esteCampo;
         $atributos ["estilo"] = "jqueryui";
         $atributos ['tipoEtiqueta'] = 'inicio';
-        $atributos ["leyenda"] = "Consultar Contratista para Asignación de Elementos";
+        $atributos ["leyenda"] = "Consultar Contratista para Modificar Asignación de Elementos";
         echo $this->miFormulario->marcoAgrupacion('inicio', $atributos);
 
 
