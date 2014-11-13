@@ -151,8 +151,8 @@ class Sql extends \Sql {
 			
 			case "consultar_tipo_bien" :
 				
-				$cadenaSql = "SELECT id_tipo_bien, descripcion ";
-				$cadenaSql .= "FROM tipo_bien;";
+				$cadenaSql = "SELECT id_tipo_bienes, descripcion ";
+				$cadenaSql .= "FROM tipo_bienes;";
 				break;
 			
 			case "consultar_tipo_poliza" :
@@ -184,37 +184,23 @@ class Sql extends \Sql {
 				
 				break;
 			
+				
+// 				SELECT id_catalogo, tipo_bien, codigo, nombre
+// 				FROM catalogo_elemento;
+				
+			case "consultar_nivel_inventario" :
+				
+				$cadenaSql = "SELECT id_catalogo,(codigo||' - '||nombre) AS nivel ";
+				$cadenaSql .= "FROM catalogo_elemento ;";
+				
+				break;
 			
 			case "ingresar_elemento_tipo_1" :
 				$cadenaSql = " INSERT INTO ";
 				$cadenaSql .= " elemento(";
-				$cadenaSql .= "fecha_registro, tipo_bien, descripcion, cantidad, ";
+				$cadenaSql .= "fecha_registro,nivel, tipo_bien, descripcion, cantidad, ";
 				$cadenaSql .= "unidad, valor, iva, ajuste, bodega, subtotal_sin_iva, total_iva, ";
-				$cadenaSql .= "total_iva_con, placa) ";
-				$cadenaSql .= " VALUES (";
-				$cadenaSql .= "'" . $variable [0] . "',";
-				$cadenaSql .= "'" . $variable [1] . "',";
-				$cadenaSql .= "'" . $variable [2] . "',";
-				$cadenaSql .= "'" . $variable [3] . "',";
-				$cadenaSql .= "'" . $variable [4] . "',";
-				$cadenaSql .= "'" . $variable [5] . "',";
-				$cadenaSql .= "'" . $variable [6] . "',";
-				$cadenaSql .= "'" . $variable [7] . "',";
-				$cadenaSql .= "'" . $variable [8] . "',";
-				$cadenaSql .= "'" . $variable [9] . "',";
-				$cadenaSql .= "'" . $variable [10] . "',";
-				$cadenaSql .= "'" . $variable [11] . "',";
-				$cadenaSql .= "'" . $variable [12] . "') ";
-				$cadenaSql .= "RETURNING  id_elemento; ";
-				
-				break;
-			
-			case "ingresar_elemento_tipo_2" :
-				$cadenaSql = " INSERT INTO ";
-				$cadenaSql .= " elemento(";
-				$cadenaSql .= "fecha_registro, tipo_bien, descripcion, cantidad, ";
-				$cadenaSql .= "unidad, valor, iva, ajuste, bodega, subtotal_sin_iva, total_iva, ";
-				$cadenaSql .= "total_iva_con, placa,tipo_poliza, fecha_inicio_pol, fecha_final_pol) ";
+				$cadenaSql .= "total_iva_con, placa,marca,serie) ";
 				$cadenaSql .= " VALUES (";
 				$cadenaSql .= "'" . $variable [0] . "',";
 				$cadenaSql .= "'" . $variable [1] . "',";
@@ -232,6 +218,36 @@ class Sql extends \Sql {
 				$cadenaSql .= "'" . $variable [13] . "',";
 				$cadenaSql .= "'" . $variable [14] . "',";
 				$cadenaSql .= "'" . $variable [15] . "') ";
+				$cadenaSql .= "RETURNING  id_elemento; ";
+				
+				break;
+			
+			case "ingresar_elemento_tipo_2" :
+				$cadenaSql = " INSERT INTO ";
+				$cadenaSql .= " elemento(";
+				$cadenaSql .= "fecha_registro,nivel,tipo_bien, descripcion, cantidad, ";
+				$cadenaSql .= "unidad, valor, iva, ajuste, bodega, subtotal_sin_iva, total_iva, ";
+				$cadenaSql .= "total_iva_con, placa,tipo_poliza, fecha_inicio_pol, fecha_final_pol,marca,serie) ";
+				$cadenaSql .= " VALUES (";
+				$cadenaSql .= "'" . $variable [0] . "',";
+				$cadenaSql .= "'" . $variable [1] . "',";
+				$cadenaSql .= "'" . $variable [2] . "',";
+				$cadenaSql .= "'" . $variable [3] . "',";
+				$cadenaSql .= "'" . $variable [4] . "',";
+				$cadenaSql .= "'" . $variable [5] . "',";
+				$cadenaSql .= "'" . $variable [6] . "',";
+				$cadenaSql .= "'" . $variable [7] . "',";
+				$cadenaSql .= "'" . $variable [8] . "',";
+				$cadenaSql .= "'" . $variable [9] . "',";
+				$cadenaSql .= "'" . $variable [10] . "',";
+				$cadenaSql .= "'" . $variable [11] . "',";
+				$cadenaSql .= "'" . $variable [12] . "',";
+				$cadenaSql .= "'" . $variable [13] . "',";
+				$cadenaSql .= "'" . $variable [14] . "',";
+				$cadenaSql .= "'" . $variable [15] . "',";
+				$cadenaSql .= "'" . $variable [16] . "',";
+				$cadenaSql .= "'" . $variable [17] . "',";
+				$cadenaSql .= "'" . $variable [18] . "') ";
 				$cadenaSql .= "RETURNING  id_elemento; ";
 				
 				break;

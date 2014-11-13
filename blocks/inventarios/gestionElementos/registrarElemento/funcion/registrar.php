@@ -41,8 +41,6 @@ class RegistradorOrden {
 		$rutaBloque .= $esteBloque ['nombre'];
 		$host = $this->miConfigurador->getVariableConfiguracion ( "host" ) . $this->miConfigurador->getVariableConfiguracion ( "site" ) . "/blocks/inventarios/gestionEntradas/" . $esteBloque ['nombre'];
 		
-
-		
 		switch ($_REQUEST ['tipo_registro']) {
 			
 			case '1' :
@@ -61,6 +59,7 @@ class RegistradorOrden {
 					
 					$arreglo = array (
 							$fechaActual,
+							$_REQUEST['nivel'],
 							$_REQUEST ['tipo_bien'],
 							$_REQUEST ['descripcion'],
 							$_REQUEST ['cantidad'],
@@ -72,7 +71,9 @@ class RegistradorOrden {
 							$_REQUEST ['subtotal_sin_iva'],
 							$_REQUEST ['total_iva'],
 							$_REQUEST ['total_iva_con'],
-							$placa 
+							$placa,
+							$_REQUEST ['marca'],
+							$_REQUEST ['serie'] 
 					);
 					
 					$cadenaSql = $this->miSql->getCadenaSql ( 'ingresar_elemento_tipo_1', $arreglo );
@@ -82,6 +83,7 @@ class RegistradorOrden {
 					
 					$arreglo = array (
 							$fechaActual,
+							$_REQUEST['nivel'],
 							$_REQUEST ['tipo_bien'],
 							$_REQUEST ['descripcion'],
 							$_REQUEST ['cantidad'] = 1,
@@ -93,7 +95,9 @@ class RegistradorOrden {
 							$_REQUEST ['subtotal_sin_iva'],
 							$_REQUEST ['total_iva'],
 							$_REQUEST ['total_iva_con'],
-							$_REQUEST ['placa_cc'] 
+							$_REQUEST ['placa_cc'],
+							$_REQUEST ['marca'],
+							$_REQUEST ['serie'] 
 					);
 					
 					$cadenaSql = $this->miSql->getCadenaSql ( 'ingresar_elemento_tipo_1', $arreglo );
@@ -104,6 +108,7 @@ class RegistradorOrden {
 					if ($_REQUEST ['tipo_poliza'] == 1) {
 						$arreglo = array (
 								$fechaActual,
+								$_REQUEST['nivel'],
 								$_REQUEST ['tipo_bien'],
 								$_REQUEST ['descripcion'],
 								$_REQUEST ['cantidad'] = 1,
@@ -118,11 +123,14 @@ class RegistradorOrden {
 								$_REQUEST ['placa_dev'],
 								$_REQUEST ['tipo_poliza'],
 								'0001-01-01',
-								'0001-01-01' 
+								'0001-01-01',
+								$_REQUEST ['marca'],
+								$_REQUEST ['serie'] 
 						);
 					} else if ($_REQUEST ['tipo_poliza'] == 2) {
 						$arreglo = array (
 								$fechaActual,
+								$_REQUEST['nivel'],
 								$_REQUEST ['tipo_bien'],
 								$_REQUEST ['descripcion'],
 								$_REQUEST ['cantidad'] = 1,
@@ -137,10 +145,11 @@ class RegistradorOrden {
 								$_REQUEST ['placa_dev'],
 								$_REQUEST ['tipo_poliza'],
 								$_REQUEST ['fecha_inicio'],
-								$_REQUEST ['fecha_final'] 
+								$_REQUEST ['fecha_final'],
+								$_REQUEST ['marca'],
+								$_REQUEST ['serie'] 
 						);
 					}
-					var_dump ( $arreglo );
 					
 					$cadenaSql = $this->miSql->getCadenaSql ( 'ingresar_elemento_tipo_2', $arreglo );
 					
@@ -162,7 +171,7 @@ class RegistradorOrden {
 				
 				break;
 			case '2' :
-				$ingreso=0;
+				$ingreso = 0;
 				
 				$ruta_eliminar_xlsx = $rutaBloque . "/archivo/*.xlsx";
 				
@@ -238,46 +247,53 @@ class RegistradorOrden {
 						
 						for($i = 2; $i <= $highestRow; $i ++) {
 							
-							$datos [$i] ['Tipo_Bien'] = $objPHPExcel->getActiveSheet ()->getCell ( 'A' . $i )->getCalculatedValue ();
+							$datos [$i] ['Nivel'] = $objPHPExcel->getActiveSheet ()->getCell ( 'A' . $i )->getCalculatedValue ();
+								
 							
-							$datos [$i] ['Descripcion'] = $objPHPExcel->getActiveSheet ()->getCell ( 'B' . $i )->getCalculatedValue ();
+							$datos [$i] ['Tipo_Bien'] = $objPHPExcel->getActiveSheet ()->getCell ( 'B' . $i )->getCalculatedValue ();
 							
-							$datos [$i] ['Cantidad'] = $objPHPExcel->getActiveSheet ()->getCell ( 'C' . $i )->getCalculatedValue ();
+							$datos [$i] ['Descripcion'] = $objPHPExcel->getActiveSheet ()->getCell ( 'C' . $i )->getCalculatedValue ();
 							
-							$datos [$i] ['Unidad_Medida'] = $objPHPExcel->getActiveSheet ()->getCell ( 'D' . $i )->getCalculatedValue ();
+							$datos [$i] ['Cantidad'] = $objPHPExcel->getActiveSheet ()->getCell ( 'D' . $i )->getCalculatedValue ();
 							
-							$datos [$i] ['Valor_Precio'] = $objPHPExcel->getActiveSheet ()->getCell ( 'E' . $i )->getCalculatedValue ();
+							$datos [$i] ['Unidad_Medida'] = $objPHPExcel->getActiveSheet ()->getCell ( 'E' . $i )->getCalculatedValue ();
 							
-							$datos [$i] ['Iva'] = $objPHPExcel->getActiveSheet ()->getCell ( 'F' . $i )->getCalculatedValue ();
+							$datos [$i] ['Valor_Precio'] = $objPHPExcel->getActiveSheet ()->getCell ( 'F' . $i )->getCalculatedValue ();
 							
-							$datos [$i] ['Ajuste'] = $objPHPExcel->getActiveSheet ()->getCell ( 'G' . $i )->getCalculatedValue ();
+							$datos [$i] ['Iva'] = $objPHPExcel->getActiveSheet ()->getCell ( 'G' . $i )->getCalculatedValue ();
 							
-							$datos [$i] ['Bodega'] = $objPHPExcel->getActiveSheet ()->getCell ( 'H' . $i )->getCalculatedValue ();
+							$datos [$i] ['Ajuste'] = $objPHPExcel->getActiveSheet ()->getCell ( 'H' . $i )->getCalculatedValue ();
 							
-							$datos [$i] ['Subtotal_Sin_Iva'] = $objPHPExcel->getActiveSheet ()->getCell ( 'I' . $i )->getCalculatedValue ();
+							$datos [$i] ['Bodega'] = $objPHPExcel->getActiveSheet ()->getCell ( 'I' . $i )->getCalculatedValue ();
 							
-							$datos [$i] ['Total_Iva'] = $objPHPExcel->getActiveSheet ()->getCell ( 'J' . $i )->getCalculatedValue ();
+							$datos [$i] ['Subtotal_Sin_Iva'] = $objPHPExcel->getActiveSheet ()->getCell ( 'J' . $i )->getCalculatedValue ();
 							
-							$datos [$i] ['Total_Con_Iva'] = $objPHPExcel->getActiveSheet ()->getCell ( 'K' . $i )->getCalculatedValue ();
+							$datos [$i] ['Total_Iva'] = $objPHPExcel->getActiveSheet ()->getCell ( 'K' . $i )->getCalculatedValue ();
 							
-							$datos [$i] ['Placa'] = $objPHPExcel->getActiveSheet ()->getCell ( 'L' . $i )->getCalculatedValue ();
+							$datos [$i] ['Total_Con_Iva'] = $objPHPExcel->getActiveSheet ()->getCell ( 'L' . $i )->getCalculatedValue ();
 							
-							$datos [$i] ['Tipo_poliza'] = $objPHPExcel->getActiveSheet ()->getCell ( 'M' . $i )->getCalculatedValue ();
+							$datos [$i] ['Placa'] = $objPHPExcel->getActiveSheet ()->getCell ( 'M' . $i )->getCalculatedValue ();
 							
-							$datos [$i] ['Fecha_Inicio_Poliza'] = $objPHPExcel->getActiveSheet ()->getCell ( 'N' . $i )->getCalculatedValue ();
+							$datos [$i] ['Tipo_poliza'] = $objPHPExcel->getActiveSheet ()->getCell ( 'N' . $i )->getCalculatedValue ();
 							
-							$datos [$i] ['Fecha_Final_Poliza'] = $objPHPExcel->getActiveSheet ()->getCell ( 'O' . $i )->getCalculatedValue ();
+							$datos [$i] ['Fecha_Inicio_Poliza'] = $objPHPExcel->getActiveSheet ()->getCell ( 'O' . $i )->getCalculatedValue ();
+							
+							$datos [$i] ['Fecha_Final_Poliza'] = $objPHPExcel->getActiveSheet ()->getCell ( 'P' . $i )->getCalculatedValue ();
+							
+							$datos [$i] ['Marca'] = $objPHPExcel->getActiveSheet ()->getCell ( 'Q' . $i )->getCalculatedValue ();
+							
+							$datos [$i] ['Serie'] = $objPHPExcel->getActiveSheet ()->getCell ( 'R' . $i )->getCalculatedValue ();
 						}
 						
-						
-						for($i=2;$i<=$highestRow;$i++){
+						for($i = 2; $i <= $highestRow; $i ++) {
 							
 							$arreglo = array (
 									$fechaActual,
+									$datos [$i] ['Nivel'],
 									$datos [$i] ['Tipo_Bien'],
-									trim($datos [$i] ['Descripcion'],"'"),
+									trim ( $datos [$i] ['Descripcion'], "'" ),
 									$datos [$i] ['Cantidad'],
-									trim($datos [$i] ['Unidad_Medida'],"'"),
+									trim ( $datos [$i] ['Unidad_Medida'], "'" ),
 									$datos [$i] ['Valor_Precio'],
 									$datos [$i] ['Iva'],
 									$datos [$i] ['Ajuste'],
@@ -287,25 +303,24 @@ class RegistradorOrden {
 									$datos [$i] ['Total_Con_Iva'],
 									$datos [$i] ['Placa'],
 									$datos [$i] ['Tipo_poliza'],
-									trim($datos [$i] ['Fecha_Inicio_Poliza'],"'"),
-									trim($datos [$i] ['Fecha_Final_Poliza'],"'") 
+									trim ( $datos [$i] ['Fecha_Inicio_Poliza'], "'" ),
+									trim ( $datos [$i] ['Fecha_Final_Poliza'], "'" ) ,
+									trim ( $datos [$i] ['Marca'], "'" ),
+									trim ( $datos [$i] ['Serie'], "'" )
 							);
 							
-							
-							
 							$cadenaSql = $this->miSql->getCadenaSql ( 'ingresar_elemento_tipo_2', $arreglo );
-								
+							
 							$elemento = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
 							
-							$ingreso=1;
+							$ingreso = 1;
 						}
 						
-						
-						if ($ingreso==1) {
-								
+						if ($ingreso == 1) {
+							
 							redireccion::redireccionar ( 'inserto_M', $fechaActual );
 						} else {
-								
+							
 							redireccion::redireccionar ( 'noInserto', $datos );
 						}
 					}
@@ -314,7 +329,6 @@ class RegistradorOrden {
 					redireccion::redireccionar ( 'noExtension' );
 				}
 				
-			
 				break;
 		}
 		

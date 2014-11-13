@@ -12,10 +12,24 @@ $this->idioma ["tipo_bienTitulo"] ="Ingrese Número de Placa ";
 $this->idioma ["placa_dev"] ="Placa : ";
 $this->idioma ["placa_devTitulo"] ="Ingrese Número de Placa";
 
+$this->idioma ["marca"] ="Marca : ";
+$this->idioma ["marcaTitulo"] ="Ingrese Marca Elemento";
+
+$this->idioma ["serie"] ="Serie : ";
+$this->idioma ["serieTitulo"] ="Ingrese Serie Elemento";
+
+
+$this->idioma ["placa_dev"] ="Placa : ";
+$this->idioma ["placa_devTitulo"] ="Ingrese Número de Placa";
+
 
 $this->idioma ["tipo_poliza"] ="Tipo de Poliza : ";
 $this->idioma ["tipo_polizaTitulo"] ="Seleccione Tipo de Poliza";
 
+
+
+$this->idioma ["nivel"] ="Nivel de Inventarios : ";
+$this->idioma ["nivelTitulo"] ="Seleccione Nivel de Inventarios";
 
 
 $this->idioma ["tipo_bien"] ="Tipo de Bien : ";
