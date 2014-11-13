@@ -184,7 +184,6 @@ class Sql extends \Sql {
                 $cadenaSql.= " FROM asignar_elementos";
                 $cadenaSql.= " JOIN elementos_fantasma ON elementos_fantasma.id_elemento=asignar_elementos.id_elemento";
                 $cadenaSql.= " WHERE asignar_elementos.estado='1'";
-                $cadenaSql.= " AND elementos_fantasma.estado='1'";
                 $cadenaSql.= " AND asignar_elementos.supervisor='" . $variable[0] . "'";
                 $cadenaSql.= " AND asignar_elementos.contratista='" . $variable[1] . "'";
                 break;

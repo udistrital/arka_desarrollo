@@ -84,8 +84,8 @@ class registrarForm {
         //Consultar Elementos Asignados al contratista
         $cadenaSql = $this->miSql->getCadenaSql('consultarElementosContratista', $variables);
         $elementos_contratista = $esteRecursoDB->ejecutarAcceso($cadenaSql, "busqueda");
-        
-        
+
+
         // ---------------- SECCION: Parámetros Generales del Formulario ----------------------------------
         $esteCampo = $esteBloque ['nombre'];
         $atributos ['id'] = $esteCampo;
@@ -114,14 +114,6 @@ class registrarForm {
         $atributos ["leyenda"] = "Modificar Asignación de Elementos a Contratista " . $docContratista;
         echo $this->miFormulario->marcoAgrupacion('inicio', $atributos);
 
-
-
-        // ------------------Fin Division para los botones-------------------------
-        echo $this->miFormulario->division("fin");
-
-        
-        var_dump($elementos_contratista);
-        exit;
         if ($elementos_supervisor !== false) {
 
             echo "<table id='tablaTitulos'>";
@@ -185,7 +177,7 @@ class registrarForm {
                 unset($mostrarHtml);
                 unset($variable);
             }
-            
+
             for ($i = 0; $i < count($elementos_contratista); $i ++) {
 
                 $mostrarHtml = "
@@ -217,7 +209,7 @@ class registrarForm {
                 } else {
                     $atributos ['valor'] = $elementos_contratista [$i] [0];
                 }
-
+                $atributos ['seleccionado'] = true;
                 $atributos ['deshabilitado'] = false;
                 $tab ++;
 
@@ -271,10 +263,7 @@ class registrarForm {
             // Se debe declarar el mismo atributo de marco con que se inició el formulario.
             // -----------------FIN CONTROL: Botón -----------------------------------------------------------
             // ------------------Fin Division para los botones-------------------------
-            echo $this->miFormulario->division("fin");
-
-            echo $this->miFormulario->marcoAgrupacion('fin');
-
+       
             // ------------------- SECCION: Paso de variables ------------------------------------------------
 
             /**
