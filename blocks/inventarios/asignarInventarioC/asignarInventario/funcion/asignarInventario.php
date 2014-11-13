@@ -41,10 +41,10 @@ class RegistradorActa {
         $esteRecursoDB = $this->miConfigurador->fabricaConexiones->getRecursoDB($conexion);
 
         //recuperar datos de la asignacion
-        $datos= array(
-                $_REQUEST ['contratista'],
-                $_REQUEST ['supervisor'],
-            );
+        $datos = array(
+            $_REQUEST ['contratista'],
+            $_REQUEST ['supervisor'],
+        );
         // asociar super-cont-item
 
 
@@ -74,12 +74,11 @@ class RegistradorActa {
             $asignar = $esteRecursoDB->ejecutarAcceso($cadenaSql, "insertar");
 
             $cadenaSql2 = $this->miSql->getCadenaSql('inactivarElemento', $datosInactivar);
-            $inactivar = $esteRecursoDB->ejecutarAcceso($cadenaSql, "insertar");
+            $inactivar = $esteRecursoDB->ejecutarAcceso($cadenaSql2, "insertar");
         }
-        
-     
+
         //inactivar item para asignar
-        if ($asignar == true) {
+        if ($inactivar == true) {
             redireccion::redireccionar('inserto', $datos);
         } else {
             redireccion::redireccionar('noInserto', $datos);

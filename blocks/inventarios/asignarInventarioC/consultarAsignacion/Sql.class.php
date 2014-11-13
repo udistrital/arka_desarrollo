@@ -155,7 +155,7 @@ class Sql extends \Sql {
                 break;
 
             case "consultarElementosSupervisor" :
-                $cadenaSql = "SELECT id_elemento,elementos_fantasma.nivel_inventario, ";
+                $cadenaSql = "SELECT elementos_fantasma.nivel_inventario, ";
                 $cadenaSql.= " elementos_fantasma.unidad_medida,  ";
                 $cadenaSql.= " elementos_fantasma.cantidad,  ";
                 $cadenaSql.= " elementos_fantasma.marca, ";
@@ -166,7 +166,27 @@ class Sql extends \Sql {
                 $cadenaSql.= "WHERE 1 = 1";
                 $cadenaSql.= " AND estado = '1' ";
                 $cadenaSql.= " AND documento_supervisor = '" . $variable[0] . "' ";
-                $cadenaSql.= " AND documento_contratista = '" . $variable[1] . "' ";
+                //$cadenaSql.= " AND documento_contratista = '" . $variable[1] . "' ";
+                break;
+
+            case "consultarElementosContratista" :
+                $cadenaSql = "SELECT ";
+                $cadenaSql.= "  elementos_fantasma.nivel_inventario, ";
+                $cadenaSql.= "  elementos_fantasma.unidad_medida,   ";
+                $cadenaSql.= "  elementos_fantasma.cantidad,   ";
+                $cadenaSql.= "  elementos_fantasma.marca,  ";
+                $cadenaSql.= "  elementos_fantasma.serie, "
+                        . "elementos_fantasma.valor_unitario,  ";
+                $cadenaSql.= "  elementos_fantasma.subtotal, "
+                        . "elementos_fantasma.total_iva,  ";
+                $cadenaSql.= "  elementos_fantasma.total_ajustado,";
+                $cadenaSql.= "  supervisor, contratista";
+                $cadenaSql.= " FROM asignar_elementos";
+                $cadenaSql.= " JOIN elementos_fantasma ON elementos_fantasma.id_elemento=asignar_elementos.id_elemento";
+                $cadenaSql.= " WHERE asignar_elementos.estado='1'";
+                $cadenaSql.= " AND elementos_fantasma.estado='1'";
+                $cadenaSql.= " AND asignar_elementos.supervisor='" . $variable[0] . "'";
+                $cadenaSql.= " AND asignar_elementos.contratista='" . $variable[1] . "'";
                 break;
 
 
@@ -178,19 +198,19 @@ class Sql extends \Sql {
                 $cadenaSql.= " estado,  ";
                 $cadenaSql.= " fecha_registro) ";
                 $cadenaSql.= " VALUES ( ";
-                $cadenaSql.= " '".$variable[0]."',";
-                $cadenaSql.= " '".$variable[1]."',";
-                $cadenaSql.= " '".$variable[2]."',";
-                $cadenaSql.= " '".$variable[3]."',";
-                $cadenaSql.= " '".$variable[4]."'";
+                $cadenaSql.= " '" . $variable[0] . "',";
+                $cadenaSql.= " '" . $variable[2] . "',";
+                $cadenaSql.= " '" . $variable[1] . "',";
+                $cadenaSql.= " '" . $variable[3] . "',";
+                $cadenaSql.= " '" . $variable[4] . "'";
                 $cadenaSql.= " ); ";
                 break;
-            
+
             case "inactivarElemento" :
                 $cadenaSql = "UPDATE elementos_fantasma ";
                 $cadenaSql.= " SET ";
-                $cadenaSql.= " estado = '".$variable[1]."', ";
-                $cadenaSql.= " fecha_registro ='".$variable[2]."'";
+                $cadenaSql.= " estado = '" . $variable[1] . "', ";
+                $cadenaSql.= " fecha_registro ='" . $variable[2] . "'";
                 $cadenaSql.= " WHERE id_elemento = '" . $variable[0] . "'; ";
                 break;
 

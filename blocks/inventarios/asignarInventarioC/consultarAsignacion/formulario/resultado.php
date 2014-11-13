@@ -111,7 +111,7 @@ class registrarForm {
         $atributos ['id'] = $esteCampo;
         $atributos ["estilo"] = "jqueryui";
         $atributos ['tipoEtiqueta'] = 'inicio';
-        $atributos ["leyenda"] = "Asignación de Elementos a Contratista " . $docContratista;
+        $atributos ["leyenda"] = "Modificar Asignación de Elementos a Contratista " . $docContratista;
         echo $this->miFormulario->marcoAgrupacion('inicio', $atributos);
 
 
@@ -119,7 +119,9 @@ class registrarForm {
         // ------------------Fin Division para los botones-------------------------
         echo $this->miFormulario->division("fin");
 
-
+        
+        var_dump($elementos_contratista);
+        exit;
         if ($elementos_supervisor !== false) {
 
             echo "<table id='tablaTitulos'>";
@@ -143,8 +145,8 @@ class registrarForm {
             for ($i = 0; $i < count($elementos_supervisor); $i ++) {
 
                 $mostrarHtml = "<tr>
-                    <td><center>" . $elementos_supervisor [$i][1] . "</center></td>
                     <td><center>" . $elementos_supervisor [$i][0] . "</center></td>
+                    <td><center>" . $elementos_supervisor [$i][1] . "</center></td>
                     <td><center>" . $elementos_supervisor [$i][2] . "</center></td>
                     <td><center>" . $elementos_supervisor [$i][3] . "</center></td>
                     <td><center>" . $elementos_supervisor [$i][4] . "</center></td>
@@ -152,7 +154,6 @@ class registrarForm {
                     <td><center>" . $elementos_supervisor [$i][6] . "</center></td>
                     <td><center>" . $elementos_supervisor [$i][7] . "</center></td>
                     <td><center>" . $elementos_supervisor [$i][8] . "</center></td>
-                        
                     <td><center>";
                 // ---------------- CONTROL: Cuadro de Texto --------------------------------------------------------
                 $nombre = 'item' . $i;
@@ -169,6 +170,52 @@ class registrarForm {
                     $atributos ['valor'] = $_REQUEST [$esteCampo];
                 } else {
                     $atributos ['valor'] = $elementos_supervisor [$i] [0];
+                }
+
+                $atributos ['deshabilitado'] = false;
+                $tab ++;
+
+                // Aplica atributos globales al control
+                $atributos = array_merge($atributos, $atributosGlobales);
+                $mostrarHtml .= $this->miFormulario->campoCuadroSeleccion($atributos);
+
+                $mostrarHtml .= "</center></td>
+                    </tr>";
+                echo $mostrarHtml;
+                unset($mostrarHtml);
+                unset($variable);
+            }
+            
+            for ($i = 0; $i < count($elementos_contratista); $i ++) {
+
+                $mostrarHtml = "
+                    <tr>
+                    <td><center>" . $elementos_contratista [$i][0] . "</center></td>
+                    <td><center>" . $elementos_contratista [$i][1] . "</center></td>
+                    <td><center>" . $elementos_contratista [$i][2] . "</center></td>
+                    <td><center>" . $elementos_contratista [$i][3] . "</center></td>
+                    <td><center>" . $elementos_contratista [$i][4] . "</center></td>
+                    <td><center>" . $elementos_contratista [$i][5] . "</center></td>
+                    <td><center>" . $elementos_contratista [$i][6] . "</center></td>
+                    <td><center>" . $elementos_contratista [$i][7] . "</center></td>
+                    <td><center>" . $elementos_contratista [$i][8] . "</center></td>
+                        
+                    <td><center>";
+                // ---------------- CONTROL: Cuadro de Texto --------------------------------------------------------
+                $nombre = 'item' . $i;
+                $atributos ['id'] = $nombre;
+                $atributos ['nombre'] = $nombre;
+                $atributos ['marco'] = true;
+                $atributos ['estiloMarco'] = true;
+                $atributos ["etiquetaObligatorio"] = true;
+                $atributos ['columnas'] = 1;
+                $atributos ['dobleLinea'] = 1;
+                $atributos ['tabIndex'] = $tab;
+                $atributos ['etiqueta'] = '';
+                if (isset($_REQUEST [$esteCampo])) {
+                    $atributos ['valor'] = $_REQUEST [$esteCampo];
+                } else {
+                    $atributos ['valor'] = $elementos_contratista [$i] [0];
                 }
 
                 $atributos ['deshabilitado'] = false;

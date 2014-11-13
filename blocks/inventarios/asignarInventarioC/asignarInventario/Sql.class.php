@@ -179,8 +179,8 @@ class Sql extends \Sql {
                 $cadenaSql.= " fecha_registro) ";
                 $cadenaSql.= " VALUES ( ";
                 $cadenaSql.= " '".$variable[0]."',";
-                $cadenaSql.= " '".$variable[1]."',";
                 $cadenaSql.= " '".$variable[2]."',";
+                $cadenaSql.= " '".$variable[1]."',";
                 $cadenaSql.= " '".$variable[3]."',";
                 $cadenaSql.= " '".$variable[4]."'";
                 $cadenaSql.= " ); ";
