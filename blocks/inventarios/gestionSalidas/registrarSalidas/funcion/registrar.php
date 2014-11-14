@@ -35,7 +35,7 @@ class RegistradorOrden {
 		);
 		
 		$cadenaSql = $this->miSql->getCadenaSql ( 'insertar_funcionario', $arreglo );
-		echo $cadenaSql;
+		
 		$id_funcionario = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
 		
 		$arreglo = array (
@@ -48,7 +48,7 @@ class RegistradorOrden {
 		);
 		
 		$cadenaSql = $this->miSql->getCadenaSql ( 'insertar_salida', $arreglo );
-		echo $cadenaSql;
+		
 		$id_salida = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
 		
 		$items = unserialize ( $_REQUEST ['items'] );
@@ -61,12 +61,11 @@ class RegistradorOrden {
 			);
 			
 			$cadenaSql = $this->miSql->getCadenaSql ( 'insertar_salida_item', $arreglo );
-			echo $cadenaSql;
+			
 			$inserto = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "acceso" );
 		}
 		
-		var_dump ( $inserto );
-		exit ();
+	
 		$arreglo = array (
 				"salida" => $id_salida [0] [0],
 				"entrada" => $_REQUEST ['numero_entrada'],
