@@ -107,7 +107,7 @@ class Select extends HtmlBase {
             if (! isset ( $this->atributos [self::SELECCION] )) {
                 $this->atributos [self::SELECCION] = - 1;
             }
-            
+
             $this->atributos [self::EVENTO] = $this->definirEvento ();
             
             $this->armarSelect ();

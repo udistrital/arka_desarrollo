@@ -60,6 +60,3 @@ event.preventDefault();
 		$(document).tooltip();
 	});
 	
-        	$(function() {
-		$("#tabs").tabs();
-	}); 

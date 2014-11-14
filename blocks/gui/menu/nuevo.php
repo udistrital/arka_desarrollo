@@ -109,6 +109,8 @@ $enlaceModificarSalidas ['urlCodificada'] = $this->miConfigurador->fabricaConexi
 $enlaceModificarSalidas ['nombre'] = "Consultar y Modificar Salidas";
 
 
+
+
 // Registro Elementos
 $enlaceRegistroElementos ['enlace'] = "pagina=registrarElemento";
 $enlaceRegistroElementos ['enlace'] .= "&usuario=" . $miSesion->getSesionUsuarioId();
@@ -125,7 +127,6 @@ $enlaceModificarElementos['enlace'] .= "&usuario=" . $miSesion->getSesionUsuario
 
 $enlaceModificarElementos ['urlCodificada'] = $this->miConfigurador->fabricaConexiones->crypto->codificar_url($enlaceModificarElementos ['enlace'], $directorio);
 $enlaceModificarElementos ['nombre'] = "Consultar y Modificar Elementos";
-
 
 
 
@@ -210,6 +211,8 @@ $enlaceFinSesion['nombre'] = "Cerrar Sesión";
             </ul>
         </li>
 		
+        
+        
         <li>
             <a href="#">Catálogo</a>
             <ul class="dl-submenu">

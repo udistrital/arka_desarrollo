@@ -90,7 +90,7 @@ class Div extends HtmlBase {
                 $this->cadenaHTML = "<div class='ui-widget ";
             } else {
                 $this->cadenaHTML = "<div class='" . $atributos [self::ESTILO] . " ";
-            }
+            } 
         } else {
             $this->cadenaHTML = "<div class='campoTexto' ";
         }
