@@ -39,10 +39,7 @@ class registrarForm {
 		// -------------------------------------------------------------------------------------------------
 		$conexion = "inventarios";
 		$esteRecursoDB = $this->miConfigurador->fabricaConexiones->getRecursoDB ( $conexion );
-		$cadenaSql = $this->miSql->getCadenaSql ( 'polizas' );
-		$resultado_polizas = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
-		$resultado_polizas = $resultado_polizas [0];
-		
+
 		// Limpia Items Tabla temporal
 		
 		// $cadenaSql = $this->miSql->getCadenaSql ( 'limpiar_tabla_items' );
@@ -138,6 +135,29 @@ class registrarForm {
 					echo $this->miFormulario->cuadroMensaje ( $atributos );
 					// --------------- FIN CONTROL : Cuadro de Texto --------------------------------------------------
 				}
+				
+				
+				
+				if (isset($_REQUEST ['mensaje'])&&$_REQUEST ['mensaje'] == 'noElemento') {
+						
+				$mensaje = "No Se Pudo Hacer la  Carga del Elemento<br>Numeró maximo de elementos Registrados con Acta de Recibido ";
+						
+					// ---------------- CONTROL: Cuadro de Texto --------------------------------------------------------
+					$esteCampo = 'mensajeRegistro';
+					$atributos ['id'] = $esteCampo;
+					$atributos ['tipo'] = 'error';
+					$atributos ['estilo'] = 'textoCentrar';
+					$atributos ['mensaje'] = $mensaje;
+						
+					$tab ++;
+						
+					// Aplica atributos globales al control
+					$atributos = array_merge ( $atributos, $atributosGlobales );
+					echo $this->miFormulario->cuadroMensaje ( $atributos );
+					// --------------- FIN CONTROL : Cuadro de Texto --------------------------------------------------
+				}
+				
+				
 				
 				if (isset($_REQUEST ['mensaje'])&&$_REQUEST ['mensaje'] == 'noExtension') {
 						

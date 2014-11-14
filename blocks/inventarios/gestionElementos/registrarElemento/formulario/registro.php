@@ -20,6 +20,7 @@ class registrarForm {
 		$this->miSql = $sql;
 	}
 	function miForm() {
+		
 		// Rescatar los datos de este bloque
 		$esteBloque = $this->miConfigurador->getVariableConfiguracion ( "esteBloque" );
 		
@@ -880,6 +881,7 @@ class registrarForm {
 			$valorCodificado .= "&bloque=" . $esteBloque ['nombre'];
 			$valorCodificado .= "&bloqueGrupo=" . $esteBloque ["grupo"];
 			$valorCodificado .= "&opcion=registrar";
+			$valorCodificado .= "&entrada=".$_REQUEST['numero_entrada'];
 
 			
 			/**

@@ -25,10 +25,7 @@
             });
         });
 
-                     $('#tablaTitulos').dataTable( {
-                "sPaginationType": "full_numbers"
-                 } );
-
+              
 
              
  $('#<?php echo $this->campoSeguro('numero_entrada_c')?>').attr('disabled','');
@@ -348,6 +345,10 @@
 			  }
 			
 	   });
+	   
+	          $('#tablaTitulos').dataTable( {
+                "sPaginationType": "full_numbers"
+                 } );
 	   
           
 

@@ -184,10 +184,30 @@ class Sql extends \Sql {
 				
 				break;
 			
+			case "consultar_entrada_acta" :
 				
-// 				SELECT id_catalogo, tipo_bien, codigo, nombre
-// 				FROM catalogo_elemento;
+				$cadenaSql = "SELECT acta_recibido ";
+				$cadenaSql .= "FROM entrada ";
+				$cadenaSql .= "WHERE id_entrada='" . $variable . "'";
 				
+				break;
+			
+			case "consultar_elementos_acta" :
+				
+				$cadenaSql = "SELECT id_items ";
+				$cadenaSql .= "FROM items_actarecibido ";
+				$cadenaSql .= "WHERE id_acta='" . $variable . "'";
+				
+				break;
+			
+			case "consultar_elementos_entrada" :
+				
+				$cadenaSql = "SELECT id_elemento ";
+				$cadenaSql .= "FROM elemento  ";
+				$cadenaSql .= "WHERE id_entrada='" . $variable . "'";
+				
+				break;
+			
 			case "consultar_nivel_inventario" :
 				
 				$cadenaSql = "SELECT id_catalogo,(codigo||' - '||nombre) AS nivel ";
@@ -200,7 +220,7 @@ class Sql extends \Sql {
 				$cadenaSql .= " elemento(";
 				$cadenaSql .= "fecha_registro,nivel, tipo_bien, descripcion, cantidad, ";
 				$cadenaSql .= "unidad, valor, iva, ajuste, bodega, subtotal_sin_iva, total_iva, ";
-				$cadenaSql .= "total_iva_con, placa,marca,serie) ";
+				$cadenaSql .= "total_iva_con, placa,marca,serie,id_entrada) ";
 				$cadenaSql .= " VALUES (";
 				$cadenaSql .= "'" . $variable [0] . "',";
 				$cadenaSql .= "'" . $variable [1] . "',";
@@ -217,7 +237,8 @@ class Sql extends \Sql {
 				$cadenaSql .= "'" . $variable [12] . "',";
 				$cadenaSql .= "'" . $variable [13] . "',";
 				$cadenaSql .= "'" . $variable [14] . "',";
-				$cadenaSql .= "'" . $variable [15] . "') ";
+				$cadenaSql .= "'" . $variable [15] . "',";
+				$cadenaSql .= "'" . $variable [16] . "') ";
 				$cadenaSql .= "RETURNING  id_elemento; ";
 				
 				break;
@@ -227,7 +248,7 @@ class Sql extends \Sql {
 				$cadenaSql .= " elemento(";
 				$cadenaSql .= "fecha_registro,nivel,tipo_bien, descripcion, cantidad, ";
 				$cadenaSql .= "unidad, valor, iva, ajuste, bodega, subtotal_sin_iva, total_iva, ";
-				$cadenaSql .= "total_iva_con, placa,tipo_poliza, fecha_inicio_pol, fecha_final_pol,marca,serie) ";
+				$cadenaSql .= "total_iva_con, placa,tipo_poliza, fecha_inicio_pol, fecha_final_pol,marca,serie,id_entrada) ";
 				$cadenaSql .= " VALUES (";
 				$cadenaSql .= "'" . $variable [0] . "',";
 				$cadenaSql .= "'" . $variable [1] . "',";
@@ -247,89 +268,33 @@ class Sql extends \Sql {
 				$cadenaSql .= "'" . $variable [15] . "',";
 				$cadenaSql .= "'" . $variable [16] . "',";
 				$cadenaSql .= "'" . $variable [17] . "',";
-				$cadenaSql .= "'" . $variable [18] . "') ";
+				$cadenaSql .= "'" . $variable [18] . "',";
+				$cadenaSql .= "'" . $variable [19] . "') ";
 				$cadenaSql .= "RETURNING  id_elemento; ";
 				
 				break;
 			
-			// ___________________________________
-			case "polizas" :
-				$cadenaSql = " SELECT ";
-				$cadenaSql .= " id_polizas,";
-				$cadenaSql .= " poliza_1, ";
-				$cadenaSql .= " poliza_2, ";
-				$cadenaSql .= " poliza_3,";
-				$cadenaSql .= " poliza_4 ";
-				$cadenaSql .= " FROM";
-				$cadenaSql .= " polizas ";
-				$cadenaSql .= " WHERE ";
-				$cadenaSql .= " estado=TRUE ";
-				$cadenaSql .= " AND ";
-				$cadenaSql .= " modulo_tipo=2 ";
-				break;
-			
-			case "textos" :
-				$cadenaSql = " SELECT ";
-				$cadenaSql .= " tipo_parrafo,parrafo";
-				$cadenaSql .= " FROM";
-				$cadenaSql .= " parrafos ";
-				$cadenaSql .= " WHERE ";
-				$cadenaSql .= " estado=TRUE ";
-				$cadenaSql .= " AND ";
-				$cadenaSql .= " modulo_parrafo=2  ";
-				$cadenaSql .= " ORDER BY id_parrafos DESC ";
-				break;
-			
-			case "insertarSolicitante" :
-				$cadenaSql = " INSERT INTO solicitante_servicios(";
-				$cadenaSql .= " dependencia, ";
-				$cadenaSql .= " rubro )";
-				$cadenaSql .= " VALUES (";
-				$cadenaSql .= "'" . $variable [0] . "',";
-				$cadenaSql .= "'" . $variable [1] . "') ";
-				$cadenaSql .= "RETURNING  id_solicitante; ";
-				break;
-			
-			case "insertarSupervisor" :
-				$cadenaSql = " INSERT INTO supervisor_servicios(";
-				$cadenaSql .= " nombre,cargo, dependencia) ";
-				$cadenaSql .= " VALUES (";
-				$cadenaSql .= "'" . $variable [0] . "',";
-				$cadenaSql .= "'" . $variable [1] . "',";
-				$cadenaSql .= "'" . $variable [2] . "') ";
-				$cadenaSql .= "RETURNING  id_supervisor; ";
-				break;
-			
-			case "insertarContratista" :
-				$cadenaSql = " INSERT INTO contratista_servicios(";
-				$cadenaSql .= " nombre_razon_social, identificacion,direccion, telefono,cargo) ";
-				$cadenaSql .= " VALUES (";
-				$cadenaSql .= "'" . $variable [0] . "',";
-				$cadenaSql .= "'" . $variable [1] . "',";
-				$cadenaSql .= "'" . $variable [2] . "',";
-				$cadenaSql .= "'" . $variable [3] . "',";
-				$cadenaSql .= "'" . $variable [4] . "') ";
-				$cadenaSql .= "RETURNING  id_contratista; ";
-				break;
-			
-			case "insertarEncargado" :
-				$cadenaSql = " INSERT INTO arka_inventarios.encargado(";
-				$cadenaSql .= " id_tipo_encargado,";
-				$cadenaSql .= " nombre, ";
-				$cadenaSql .= " identificacion,";
-				$cadenaSql .= " cargo, ";
-				$cadenaSql .= " asignacion)";
-				$cadenaSql .= " VALUES (";
-				$cadenaSql .= "'" . $variable [0] . "',";
-				$cadenaSql .= "'" . $variable [1] . "',";
-				$cadenaSql .= "'" . $variable [2] . "',";
-				$cadenaSql .= "'" . $variable [3] . "',";
-				$cadenaSql .= "'" . $variable [4] . "') ";
-				$cadenaSql .= "RETURNING  id_encargado; ";
-				break;
+			case "consultarEntrada" :
 				
-				// id_solicitante integer,
-				// id_supervisor integer,
+				$cadenaSql = "SELECT DISTINCT ";
+				$cadenaSql .= "id_entrada, fecha_registro,  ";
+				$cadenaSql .= "nit, razon_social  ";
+				$cadenaSql .= "FROM entrada ";
+				$cadenaSql .= "JOIN proveedor ON proveedor.id_proveedor = entrada.proveedor ";
+				$cadenaSql .= "WHERE 1=1";
+				if ($variable [0] != '') {
+					$cadenaSql .= " AND fecha_registro BETWEEN CAST ( '" . $variable [4] . "' AS DATE) ";
+					$cadenaSql .= " AND  CAST ( '" . $variable [5] . "' AS DATE)  ";
+				}
+				if ($variable [2] != '') {
+					$cadenaSql .= " AND id_entrada = '" . $variable [0] . "'";
+				}
+				if ($variable [3] != '') {
+					$cadenaSql .= " AND  nit= '" . $variable [1] . "'";
+				}
+				if ($variable [4] != '') {
+					$cadenaSql .= " AND  nombre= '" . $variable [3] . "'";
+				}
 				
 				break;
 		}
