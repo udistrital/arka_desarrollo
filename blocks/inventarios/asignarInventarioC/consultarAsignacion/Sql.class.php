@@ -155,62 +155,75 @@ class Sql extends \Sql {
                 break;
 
             case "consultarElementosSupervisor" :
-                $cadenaSql = "SELECT elementos_fantasma.nivel_inventario, ";
-                $cadenaSql.= " elementos_fantasma.unidad_medida,  ";
-                $cadenaSql.= " elementos_fantasma.cantidad,  ";
-                $cadenaSql.= " elementos_fantasma.marca, ";
-                $cadenaSql.= " elementos_fantasma.serie, elementos_fantasma.valor_unitario, ";
-                $cadenaSql.= " elementos_fantasma.subtotal, elementos_fantasma.total_iva, ";
-                $cadenaSql.= " elementos_fantasma.total_ajustado, estado,documento_supervisor ";
-                $cadenaSql.= " FROM elementos_fantasma ";
-                $cadenaSql.= "WHERE 1 = 1";
-                $cadenaSql.= " AND estado = '1' ";
-                $cadenaSql.= " AND documento_supervisor = '" . $variable[0] . "' ";
-                //$cadenaSql.= " AND documento_contratista = '" . $variable[1] . "' ";
+                $cadenaSql = "SELECT  ";
+                $cadenaSql.= " id_elemento,  ";
+                $cadenaSql.= " nivel,  ";
+                $cadenaSql.= " unidad, ";
+                $cadenaSql.= " cantidad,  ";
+                $cadenaSql.= " marca,  ";
+                $cadenaSql.= " serie, ";
+                $cadenaSql.= " valor, ";
+                $cadenaSql.= " subtotal_sin_iva,  ";
+                $cadenaSql.= " total_iva, ";
+                $cadenaSql.= " total_iva_con, ";
+                $cadenaSql.= " identificacion ";
+                $cadenaSql.= " FROM elemento, salida ";
+                $cadenaSql.= " JOIN funcionario ON funcionario.id_funcionario = salida.funcionario ";
+                $cadenaSql.= " WHERE elemento.estado=TRUE ";
+                $cadenaSql.= " AND elemento.estado_asignacion=FALSE ";
+                $cadenaSql.= " AND salida.id_entrada=elemento.id_entrada ";
+                $cadenaSql.= " AND identificacion='" . $variable[0] . "' ";
+                $cadenaSql.= " ORDER BY nivel ASC ";
                 break;
 
             case "consultarElementosContratista" :
                 $cadenaSql = "SELECT ";
-                $cadenaSql.= "  elementos_fantasma.nivel_inventario, ";
-                $cadenaSql.= "  elementos_fantasma.unidad_medida,   ";
-                $cadenaSql.= "  elementos_fantasma.cantidad,   ";
-                $cadenaSql.= "  elementos_fantasma.marca,  ";
-                $cadenaSql.= "  elementos_fantasma.serie, "
-                        . "elementos_fantasma.valor_unitario,  ";
-                $cadenaSql.= "  elementos_fantasma.subtotal, "
-                        . "elementos_fantasma.total_iva,  ";
-                $cadenaSql.= "  elementos_fantasma.total_ajustado,";
-                $cadenaSql.= "  supervisor, contratista";
-                $cadenaSql.= " FROM asignar_elementos";
-                $cadenaSql.= " JOIN elementos_fantasma ON elementos_fantasma.id_elemento=asignar_elementos.id_elemento";
-                $cadenaSql.= " WHERE asignar_elementos.estado='1'";
-                $cadenaSql.= " AND asignar_elementos.supervisor='" . $variable[0] . "'";
-                $cadenaSql.= " AND asignar_elementos.contratista='" . $variable[1] . "'";
+                $cadenaSql.= " nivel,  ";
+                $cadenaSql.= " unidad, ";
+                $cadenaSql.= " cantidad,  ";
+                $cadenaSql.= " marca,  ";
+                $cadenaSql.= " serie, ";
+                $cadenaSql.= " valor, ";
+                $cadenaSql.= " subtotal_sin_iva,  ";
+                $cadenaSql.= " total_iva, ";
+                $cadenaSql.= " total_iva_con, ";
+                $cadenaSql.= " identificacion, ";
+                $cadenaSql.= " elemento.id_elemento  ";
+                $cadenaSql.= " FROM elemento, asignar_elementos, salida ";
+                $cadenaSql.= " JOIN funcionario ON funcionario.id_funcionario = salida.funcionario ";
+                $cadenaSql.= " WHERE elemento.estado=TRUE ";
+                $cadenaSql.= " AND elemento.id_elemento=asignar_elementos.id_elemento ";
+                $cadenaSql.= " AND elemento.estado_asignacion=TRUE ";
+                $cadenaSql.= " AND salida.id_entrada=elemento.id_entrada ";
+                $cadenaSql.= " AND identificacion='" . $variable[0] . "' ";
+                $cadenaSql.= " AND contratista='" . $variable[1] . "' ";
+                $cadenaSql.= " ORDER BY nivel ASC ";
                 break;
-
 
             case "asignarElemento" :
                 $cadenaSql = "INSERT INTO asignar_elementos( ";
-                $cadenaSql.= " supervisor,  ";
-                $cadenaSql.= " contratista,  ";
-                $cadenaSql.= " id_elemento,  ";
-                $cadenaSql.= " estado,  ";
+                $cadenaSql.= " supervisor, ";
+                $cadenaSql.= " contratista, ";
+                $cadenaSql.= " id_elemento, ";
+                $cadenaSql.= " estado, ";
                 $cadenaSql.= " fecha_registro) ";
                 $cadenaSql.= " VALUES ( ";
-                $cadenaSql.= " '" . $variable[0] . "',";
-                $cadenaSql.= " '" . $variable[2] . "',";
-                $cadenaSql.= " '" . $variable[1] . "',";
-                $cadenaSql.= " '" . $variable[3] . "',";
+                $cadenaSql.= " '" . $variable[0] . "', ";
+                $cadenaSql.= " '" . $variable[2] . "', ";
+                $cadenaSql.= " '" . $variable[1] . "', ";
+                $cadenaSql.= " '" . $variable[3] . "', ";
                 $cadenaSql.= " '" . $variable[4] . "'";
-                $cadenaSql.= " ); ";
+                $cadenaSql.= " );
+";
                 break;
 
             case "inactivarElemento" :
                 $cadenaSql = "UPDATE elementos_fantasma ";
                 $cadenaSql.= " SET ";
                 $cadenaSql.= " estado = '" . $variable[1] . "', ";
-                $cadenaSql.= " fecha_registro ='" . $variable[2] . "'";
-                $cadenaSql.= " WHERE id_elemento = '" . $variable[0] . "'; ";
+                $cadenaSql.= " fecha_registro = '" . $variable[2] . "'";
+                $cadenaSql.= " WHERE id_elemento = '" . $variable[0] . "';
+";
                 break;
 
 
@@ -247,7 +260,7 @@ class Sql extends \Sql {
                 $cadenaSql .= " FROM ";
                 $cadenaSql .= " arka_inventarios.tipo_orden ";
                 $cadenaSql .= " WHERE to_estado = '1';
-            ";
+";
                 break;
 
             case "tipoComprador":
@@ -257,7 +270,7 @@ class Sql extends \Sql {
                 $cadenaSql .= " FROM ";
                 $cadenaSql .= " arka_inventarios.tipo_comprador ";
                 $cadenaSql .= " WHERE tc_estado = '1';
-            ";
+";
                 break;
 
             case "tipoAccion":
@@ -267,7 +280,7 @@ class Sql extends \Sql {
                 $cadenaSql .= " FROM ";
                 $cadenaSql .= " arka_inventarios.tipo_accion ";
                 $cadenaSql .= " WHERE ta_estado = '1';
-            ";
+";
                 break;
 
             case "tipoBien":
@@ -277,7 +290,7 @@ class Sql extends \Sql {
                 $cadenaSql .= " FROM ";
                 $cadenaSql .= " arka_inventarios.tipo_bien ";
                 $cadenaSql .= " WHERE tb_estado = '1';
-            ";
+";
                 break;
 
 //----------  Para registrar los items de la factura ------------//
@@ -292,14 +305,14 @@ class Sql extends \Sql {
                 $cadenaSql .= " FROM ";
                 $cadenaSql .= " arka_inventarios.items_actarecibido_temp ";
                 $cadenaSql .= " WHERE seccion = '" . $variable . "';
-            ";
+";
                 break;
 
             case "limpiar_tabla_items" :
                 $cadenaSql = " DELETE FROM ";
                 $cadenaSql .= " arka_inventarios.items_actarecibido_temp";
                 $cadenaSql .= " WHERE seccion = '" . $variable . "';
-            ";
+";
                 break;
 
             case "insertarItem" :
@@ -315,21 +328,21 @@ class Sql extends \Sql {
                 $cadenaSql .= "'" . $variable [4] . "', ";
                 $cadenaSql .= "'" . $variable [5] . "', ";
                 $cadenaSql .= "'" . $variable [6] . "' );
-            ";
+";
                 break;
 
             case "eliminarItem" :
                 $cadenaSql = " DELETE FROM ";
                 $cadenaSql .= " arka_inventarios.items_actarecibido_temp";
                 $cadenaSql .= " WHERE id_items = '" . $variable . "';
-            ";
+";
                 break;
 
             case "id_items_temporal" :
                 $cadenaSql = " SELECT ";
                 $cadenaSql .= " max(id_items)";
                 $cadenaSql .= " FROM arka_inventarios.items_actarecibido_temp;
-            ";
+";
                 break;
 
             /*             * ***************** */
@@ -365,7 +378,7 @@ class Sql extends \Sql {
                 $cadenaSql .= "'" . $variable [12] . "', ";
                 $cadenaSql .= "'" . $variable [1] . "' ) ";
                 $cadenaSql .= "RETURNING id_actarecibido;
-            ";
+";
                 break;
 
             case "insertarItems" :
@@ -382,7 +395,7 @@ class Sql extends \Sql {
                 $cadenaSql .= "'" . $variable [5] . "', ";
                 $cadenaSql .= "'1', ";
                 $cadenaSql .= "'" . date('Y-m-d') . "' );
-                        ";
+";
                 break;
         }
         return $cadenaSql;

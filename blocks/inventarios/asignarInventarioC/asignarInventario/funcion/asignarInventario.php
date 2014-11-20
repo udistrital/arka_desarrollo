@@ -66,7 +66,7 @@ class RegistradorActa {
 
             $datosInactivar = array(
                 $items[$key],
-                0,
+                TRUE,
                 $fechaActual,
             );
 

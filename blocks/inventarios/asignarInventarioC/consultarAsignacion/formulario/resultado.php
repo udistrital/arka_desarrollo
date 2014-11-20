@@ -283,7 +283,7 @@ class registrarForm {
             $valorCodificado .= "&pagina=" . $this->miConfigurador->getVariableConfiguracion('pagina');
             $valorCodificado .= "&bloque=" . $esteBloque ['nombre'];
             $valorCodificado .= "&bloqueGrupo=" . $esteBloque ["grupo"];
-            $valorCodificado .= "&opcion=asignar";
+            $valorCodificado .= "&opcion=modificar";
             $valorCodificado .= "&contratista=" . $docContratista;
             $valorCodificado .= "&supervisor=" . $supervisor;
 
