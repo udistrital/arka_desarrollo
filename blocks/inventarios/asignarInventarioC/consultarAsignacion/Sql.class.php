@@ -151,7 +151,13 @@ class Sql extends \Sql {
             case "consultarContratista":
                 $cadenaSql = " SELECT id_contratista, identificacion ";
                 $cadenaSql.= " FROM contratista_servicios ";
-                $cadenaSql.= " WHERE identificacion='" . $variable . "';";
+                $cadenaSql.= " ORDER BY id_contratista ASC ";
+                break;
+
+            case "consultarID":
+                $cadenaSql = " SELECT id_contratista ";
+                $cadenaSql.= " FROM contratista_servicios ";
+                $cadenaSql.= " WHERE identificacion='" . $variable . "' ";
                 break;
 
             case "consultarElementosSupervisor" :
@@ -172,7 +178,7 @@ class Sql extends \Sql {
                 $cadenaSql.= " WHERE elemento.estado=TRUE ";
                 $cadenaSql.= " AND elemento.estado_asignacion=FALSE ";
                 $cadenaSql.= " AND salida.id_entrada=elemento.id_entrada ";
-                $cadenaSql.= " AND identificacion='" . $variable[0] . "' ";
+                $cadenaSql.= " AND identificacion='" . $variable . "' ";
                 $cadenaSql.= " ORDER BY nivel ASC ";
                 break;
 
@@ -188,15 +194,15 @@ class Sql extends \Sql {
                 $cadenaSql.= " total_iva, ";
                 $cadenaSql.= " total_iva_con, ";
                 $cadenaSql.= " identificacion, ";
-                $cadenaSql.= " elemento.id_elemento  ";
+                $cadenaSql.= " elemento.id_elemento,contratista ";
                 $cadenaSql.= " FROM elemento, asignar_elementos, salida ";
                 $cadenaSql.= " JOIN funcionario ON funcionario.id_funcionario = salida.funcionario ";
                 $cadenaSql.= " WHERE elemento.estado=TRUE ";
                 $cadenaSql.= " AND elemento.id_elemento=asignar_elementos.id_elemento ";
                 $cadenaSql.= " AND elemento.estado_asignacion=TRUE ";
                 $cadenaSql.= " AND salida.id_entrada=elemento.id_entrada ";
-                $cadenaSql.= " AND identificacion='" . $variable[0] . "' ";
-                $cadenaSql.= " AND contratista='" . $variable[1] . "' ";
+                $cadenaSql.= " AND identificacion='" . $variable . "' ";
+                //$cadenaSql.= " AND contratista='" . $variable[1] . "' ";
                 $cadenaSql.= " ORDER BY nivel ASC ";
                 break;
 

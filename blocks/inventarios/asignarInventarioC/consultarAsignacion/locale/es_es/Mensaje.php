@@ -10,6 +10,8 @@ $this->idioma ["fecha_finalTitulo"] ="Seleccione Fecha Final";
 $this->idioma ["aprobacionCheck"] ="&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp¿Aprobado?:";
 $this->idioma ["aprobacionCheckTitulo"] ="Seleccione en caso de ser aprobado";
 
+$this->idioma ["contratistaLista"] ="";
+$this->idioma ["contratistaListaTitulo"] ="Seleccione el contratista asignar el elemento";
 
 $this->idioma ["botonAceptar"] ="Modificar Elementos";
 $this->idioma ["botonCancelar"] ="Cancelar";

@@ -9,6 +9,11 @@ $estilo[$indice++]="autocomplete.css";
 $estilo[$indice++]="chosen.css";
 $estilo[$indice++]="select2.css";
 $estilo[$indice++]="jquery_switch.css";
+$estilo[$indice++]="jquery_switch.css";
+$estilo[$indice++]="jquery-ui.css";
+$estilo[$indice++]="jquery.ui.theme.css";
+$estilo[$indice++]="jquery-ui.min.css";
+
 
 // Tablas
 $estilo[$indice++]="demo_page.css";

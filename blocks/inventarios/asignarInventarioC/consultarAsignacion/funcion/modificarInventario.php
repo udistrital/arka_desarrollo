@@ -40,70 +40,61 @@ class RegistradorActa {
         $conexion = "inventarios";
         $esteRecursoDB = $this->miConfigurador->fabricaConexiones->getRecursoDB($conexion);
 
-        $variables = array(
-            $_REQUEST['supervisor'],
-            $_REQUEST['contratista'],
-        );
+
         //Consultar Elementos Asignados al contratista
         $cadenaSql = $this->miSql->getCadenaSql('consultarElementosContratista', $variables);
         $elementos_contratista = $esteRecursoDB->ejecutarAcceso($cadenaSql, "busqueda");
 
-        //COnsultar Elementos del supervisor para asignarlos al contratista
-        $cadenaSql = $this->miSql->getCadenaSql('consultarElementosSupervisor', $variables);
-        $elementos_supervisor = $esteRecursoDB->ejecutarAcceso($cadenaSql, "busqueda");
-
-        var_dump($elementos_supervisor);
-        exit;
         //recuperar datos de la asignacion
-        $datos = array(
-            $_REQUEST ['contratista'],
-            $_REQUEST ['supervisor'],
-        );
+        $supervisor = $_REQUEST ['supervisor'];
+        $cadenaSql = $this->miSql->getCadenaSql('consultarID', $supervisor);
+        $supervisor_id1 = $esteRecursoDB->ejecutarAcceso($cadenaSql, "busqueda");
+        $supervisor_id = $supervisor_id1[0][0];
+
         // asociar super-cont-item
 
         for ($i = 0; $i <= 200; $i ++) {
-            if (isset($_REQUEST ['item' . $i])) {
-                $items [] = $_REQUEST ['item' . $i];
+            if (isset($_REQUEST ['elementoContratista_' . $i])) {
+                $items_contratista [$i]['identificacion'] = $_REQUEST ['elementoContratista_' . $i];
+                $items_contratista [$i]['elemento'] = $i;
             }
         }
 
-        //items que tiene el supervisor 
         for ($i = 0; $i <= 200; $i ++) {
-            if (isset($elementos_supervisor[11])) {
-                $items_supervisor ['id_item'] = $elementos_supervisor[0][11];
-                $items_supervisor ['estado'] = $elementos_supervisor[0][11];
+            if (isset($_REQUEST ['elementoSupervisor_' . $i])) {
+                $items_supervisor [$i]['identificacion'] = $_REQUEST ['elementoSupervisor_' . $i];
+                $items_supervisor[$i]['elemento'] = $i;
             }
         }
 
-        //comparar el cambio de estado
-        foreach ($items as $key => $values) {
-            
-        }
+        $items_concatenados = array_merge($items_contratista, $items_supervisor);
 
-
-        foreach ($items as $key => $values) {
+        foreach ($items_concatenados as $key => $values) {
 
             $datosAsignacion = array(
-                $_REQUEST ['contratista'],
+                $items_concatenados[$key]['identificacion'],
                 $_REQUEST ['supervisor'],
-                $items[$key],
+                $items_concatenados[$key]['item'],
                 1,
                 $fechaActual,
             );
 
             $datosInactivar = array(
-                $items[$key],
-                0,
+                $items_concatenados[$key]['item'],
+                TRUE,
                 $fechaActual,
             );
 
-            //Asignar elementos
-            $cadenaSql = $this->miSql->getCadenaSql('asignarElemento', $datosAsignacion);
-            $asignar = $esteRecursoDB->ejecutarAcceso($cadenaSql, "insertar");
+            if ($items_concatenados[$key]['identificacion'] == $supervisor_id1) {
+                
+                
+            } else {
+                $cadenaSql = $this->miSql->getCadenaSql('asignarElemento', $datosAsignacion);
+                $asignar = $esteRecursoDB->ejecutarAcceso($cadenaSql, "insertar");
 
-            //Inhabilitar elementos            
-            $cadenaSql2 = $this->miSql->getCadenaSql('inactivarElemento', $datosInactivar);
-            $inactivar = $esteRecursoDB->ejecutarAcceso($cadenaSql, "insertar");
+                $cadenaSql2 = $this->miSql->getCadenaSql('inactivarElemento', $datosInactivar);
+                $inactivar = $esteRecursoDB->ejecutarAcceso($cadenaSql2, "insertar");
+            }
         }
 
 
