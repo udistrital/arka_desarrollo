@@ -160,6 +160,13 @@ class Sql extends \Sql {
                 $cadenaSql.= " WHERE identificacion='" . $variable . "' ";
                 break;
 
+            case "consultarAsignacion":
+                $cadenaSql = "SELECT id_asignacion ";
+                $cadenaSql.= " FROM asignar_elementos ";
+                $cadenaSql.= " WHERE id_elemento='" . $variable . "' ";
+                $cadenaSql.= " AND estado='1' ";
+                break;
+
             case "consultarElementosSupervisor" :
                 $cadenaSql = "SELECT  ";
                 $cadenaSql.= " id_elemento,  ";
@@ -194,13 +201,14 @@ class Sql extends \Sql {
                 $cadenaSql.= " total_iva, ";
                 $cadenaSql.= " total_iva_con, ";
                 $cadenaSql.= " identificacion, ";
-                $cadenaSql.= " elemento.id_elemento,contratista ";
+                $cadenaSql.= " elemento.id_elemento,contratista, id_asignacion ";
                 $cadenaSql.= " FROM elemento, asignar_elementos, salida ";
                 $cadenaSql.= " JOIN funcionario ON funcionario.id_funcionario = salida.funcionario ";
                 $cadenaSql.= " WHERE elemento.estado=TRUE ";
                 $cadenaSql.= " AND elemento.id_elemento=asignar_elementos.id_elemento ";
                 $cadenaSql.= " AND elemento.estado_asignacion=TRUE ";
                 $cadenaSql.= " AND salida.id_entrada=elemento.id_entrada ";
+                $cadenaSql.= " AND asignar_elementos.estado='1' ";
                 $cadenaSql.= " AND identificacion='" . $variable . "' ";
                 //$cadenaSql.= " AND contratista='" . $variable[1] . "' ";
                 $cadenaSql.= " ORDER BY nivel ASC ";
@@ -214,22 +222,36 @@ class Sql extends \Sql {
                 $cadenaSql.= " estado, ";
                 $cadenaSql.= " fecha_registro) ";
                 $cadenaSql.= " VALUES ( ";
+                $cadenaSql.= " '" . $variable[1] . "', ";
                 $cadenaSql.= " '" . $variable[0] . "', ";
                 $cadenaSql.= " '" . $variable[2] . "', ";
-                $cadenaSql.= " '" . $variable[1] . "', ";
                 $cadenaSql.= " '" . $variable[3] . "', ";
                 $cadenaSql.= " '" . $variable[4] . "'";
-                $cadenaSql.= " );
-";
+                $cadenaSql.= " );";
+                break;
+            
+            case "inactivarAsignacion" :
+                $cadenaSql = "UPDATE asignar_elementos ";
+                $cadenaSql.= " SET ";
+                $cadenaSql.= " estado = '" . $variable[1] . "', ";
+                $cadenaSql.= " fecha_registro ='" . $variable[2] . "'";
+                $cadenaSql.= " WHERE id_elemento = '" . $variable[0] . "'; ";
+                break;
+            
+            case "activarElemento" :
+                $cadenaSql = "UPDATE elemento ";
+                $cadenaSql.= " SET ";
+                $cadenaSql.= " estado_asignacion = TRUE, ";
+                $cadenaSql.= " fecha_asignacion ='" . $variable[2] . "'";
+                $cadenaSql.= " WHERE id_elemento = '" . $variable[0] . "'; ";
                 break;
 
             case "inactivarElemento" :
-                $cadenaSql = "UPDATE elementos_fantasma ";
+                $cadenaSql = "UPDATE elemento ";
                 $cadenaSql.= " SET ";
-                $cadenaSql.= " estado = '" . $variable[1] . "', ";
-                $cadenaSql.= " fecha_registro = '" . $variable[2] . "'";
-                $cadenaSql.= " WHERE id_elemento = '" . $variable[0] . "';
-";
+                $cadenaSql.= " estado_asignacion = FALSE, ";
+                $cadenaSql.= " fecha_asignacion ='" . $variable[2] . "'";
+                $cadenaSql.= " WHERE id_elemento = '" . $variable[0] . "'; ";
                 break;
 
 

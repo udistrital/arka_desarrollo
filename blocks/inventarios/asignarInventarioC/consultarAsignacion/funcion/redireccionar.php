@@ -1,6 +1,6 @@
 <?php
 
-namespace inventarios\asignarInventarioC\asignarInventario\funcion;
+namespace inventarios\asignarInventarioC\consultarAsignacion\funcion;
 
 if (!isset($GLOBALS ["autorizado"])) {
     include ("index.php");
@@ -18,7 +18,7 @@ class redireccion {
                 $variable = "pagina=" . $miPaginaActual;
                 $variable .= "&opcion=mensaje";
                 $variable .= "&mensaje=confirma";
-                $variable .= "&contratista=" . $valor [0];
+                $variable .= "&supervisor=" . $valor;
                 break;
 
             case "noInserto" :

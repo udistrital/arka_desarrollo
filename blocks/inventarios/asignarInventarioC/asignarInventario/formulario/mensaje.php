@@ -115,7 +115,7 @@ class registrarForm {
 				
 				if (isset($_REQUEST['errores'])&&$_REQUEST ['errores'] == 'noItems') {
 					
-					$mensaje = "No se Agregaron Items Al Acta de Recibido";
+					$mensaje = "No se Agregaron Items ";
 					
 					// ---------------- CONTROL: Cuadro de Texto --------------------------------------------------------
 					$esteCampo = 'mensajeRegistro';

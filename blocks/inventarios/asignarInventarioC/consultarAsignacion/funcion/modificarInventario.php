@@ -40,16 +40,11 @@ class RegistradorActa {
         $conexion = "inventarios";
         $esteRecursoDB = $this->miConfigurador->fabricaConexiones->getRecursoDB($conexion);
 
-
-        //Consultar Elementos Asignados al contratista
-        $cadenaSql = $this->miSql->getCadenaSql('consultarElementosContratista', $variables);
-        $elementos_contratista = $esteRecursoDB->ejecutarAcceso($cadenaSql, "busqueda");
-
         //recuperar datos de la asignacion
         $supervisor = $_REQUEST ['supervisor'];
         $cadenaSql = $this->miSql->getCadenaSql('consultarID', $supervisor);
         $supervisor_id1 = $esteRecursoDB->ejecutarAcceso($cadenaSql, "busqueda");
-        $supervisor_id = $supervisor_id1[0][0];
+       $supervisor_id = $supervisor_id1[0][0];
 
         // asociar super-cont-item
 
@@ -57,52 +52,99 @@ class RegistradorActa {
             if (isset($_REQUEST ['elementoContratista_' . $i])) {
                 $items_contratista [$i]['identificacion'] = $_REQUEST ['elementoContratista_' . $i];
                 $items_contratista [$i]['elemento'] = $i;
+
+                $elemento = $items_contratista[$i]['elemento'];
+                //Consultar Elementos Asignados al contratista
+                $cadenaSql = $this->miSql->getCadenaSql('consultarAsignacion', $elemento);
+                $elementos_contratista = $esteRecursoDB->ejecutarAcceso($cadenaSql, "busqueda");
+                $items_contratista [$i]['id_asignacion'] = $elementos_contratista[0][0];
             }
         }
 
         for ($i = 0; $i <= 200; $i ++) {
             if (isset($_REQUEST ['elementoSupervisor_' . $i])) {
-                $items_supervisor [$i]['identificacion'] = $_REQUEST ['elementoSupervisor_' . $i];
+                $items_supervisor[$i]['identificacion'] = $_REQUEST ['elementoSupervisor_' . $i];
                 $items_supervisor[$i]['elemento'] = $i;
+
+                $elemento = $items_supervisor[$i]['elemento'];
+                //Consultar Elementos Asignados al contratista
+                $cadenaSql = $this->miSql->getCadenaSql('consultarAsignacion', $elemento);
+                $elementos_supervisor_con = $esteRecursoDB->ejecutarAcceso($cadenaSql, "busqueda");
+                $items_supervisor[$i]['id_asignacion'] = $elementos_supervisor_con[0][0];
             }
         }
 
-        $items_concatenados = array_merge($items_contratista, $items_supervisor);
+        if (is_array($items_contratista) && is_array($items_supervisor)) {
+            $items_concatenados = array_merge($items_contratista, $items_supervisor);
+        } elseif (is_array($items_contratista)) {
+            $items_concatenados = $items_contratista;
+        } else {
+            $items_concatenados = $items_supervisor;
+        }
+
 
         foreach ($items_concatenados as $key => $values) {
 
             $datosAsignacion = array(
                 $items_concatenados[$key]['identificacion'],
-                $_REQUEST ['supervisor'],
-                $items_concatenados[$key]['item'],
+                $supervisor_id,
+                $items_concatenados[$key]['elemento'],
                 1,
                 $fechaActual,
             );
 
             $datosInactivar = array(
-                $items_concatenados[$key]['item'],
+                $items_concatenados[$key]['elemento'],
+                0,
+                $fechaActual,
+            );
+
+            $datosInactivarE = array(
+                $items_concatenados[$key]['elemento'],
+                FALSE,
+                $fechaActual,
+            );
+
+            $datosActivar = array(
+                $items_concatenados[$key]['elemento'],
                 TRUE,
                 $fechaActual,
             );
 
-            if ($items_concatenados[$key]['identificacion'] == $supervisor_id1) {
-                
-                
+
+
+
+            if ($items_concatenados[$key]['identificacion'] == $supervisor_id) {
+
+                // inactivar el elemento en la asignación
+                $cadenaSql = $this->miSql->getCadenaSql('inactivarAsignacion', $datosInactivar);
+                $noasignar = $esteRecursoDB->ejecutarAcceso($cadenaSql, "insertar");
+
+                // cambiar estado de asignacion en elementos, reactivar para permitir una nueva asignacion
+               $cadenaSql2 = $this->miSql->getCadenaSql('inactivarElemento', $datosInactivarE);
+               $reactivar = $esteRecursoDB->ejecutarAcceso($cadenaSql2, "insertar");
             } else {
+
+                // inactivar el elemento en la asignación
+                $cadenaSql = $this->miSql->getCadenaSql('inactivarAsignacion', $datosInactivar);
+                $noasignar = $esteRecursoDB->ejecutarAcceso($cadenaSql, "insertar");
+
+                // reasginar el elemento en asignación
                 $cadenaSql = $this->miSql->getCadenaSql('asignarElemento', $datosAsignacion);
                 $asignar = $esteRecursoDB->ejecutarAcceso($cadenaSql, "insertar");
 
-                $cadenaSql2 = $this->miSql->getCadenaSql('inactivarElemento', $datosInactivar);
+                $cadenaSql2 = $this->miSql->getCadenaSql('activarElemento', $datosActivar);
                 $inactivar = $esteRecursoDB->ejecutarAcceso($cadenaSql2, "insertar");
             }
         }
-
-
-        //inactivar item para asignar
-        if ($asignar == true) {
-            redireccion::redireccionar('inserto', $datos);
+        
+        
+        if ($reactivar == true) {
+            redireccion::redireccionar('inserto', $supervisor);
+        } elseif ($inactivar == true) {
+            redireccion::redireccionar('inserto', $supervisor);
         } else {
-            redireccion::redireccionar('noInserto', $datos);
+            redireccion::redireccionar('noInserto', $supervisor);
         }
     }
 
