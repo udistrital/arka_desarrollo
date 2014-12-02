@@ -111,9 +111,6 @@ class RegistradorActa {
                 $fechaActual,
             );
 
-
-
-
             if ($items_concatenados[$key]['identificacion'] == $supervisor_id) {
 
                 // inactivar el elemento en la asignación
