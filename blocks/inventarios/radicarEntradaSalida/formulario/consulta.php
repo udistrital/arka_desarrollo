@@ -193,7 +193,7 @@ class registrarForm {
         $atributos['ajax_function'] = "";
         $atributos['ajax_control'] = $esteCampo;
         $atributos['estilo'] = "jqueryui";
-        $atributos['validar'] = "required";
+        $atributos['validar'] = "";
         $atributos['limitar'] = false;
        // $atributos['matrizItems'] = $matrizItems;
         //$atributos['miniRegistro']=;
@@ -253,7 +253,7 @@ class registrarForm {
         $valorCodificado = "&pagina=" . $this->miConfigurador->getVariableConfiguracion('pagina');
         $valorCodificado .= "&bloque=" . $esteBloque ['nombre'];
         $valorCodificado .= "&bloqueGrupo=" . $esteBloque ["grupo"];
-        $valorCodificado .= "&opcion=registroCargue";
+        $valorCodificado .= "&opcion=resultados";
         /**
          * SARA permite que los nombres de los campos sean dinámicos.
          * Para ello utiliza la hora en que es creado el formulario para

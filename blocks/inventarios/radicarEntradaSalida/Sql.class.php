@@ -155,22 +155,20 @@ class Sql extends \Sql {
 
             //**************** SQL de Consultar para la Entrada*******************//
             case "consultarEntradaRegistro":
-                $cadenaSql = " SELECT id_entrada ";
-                $cadena_sql .= " FROM entrada ";
-                $cadena_sql .= "JOIN proveedor ON proveedor.id_proveedor = entrada.proveedor ";
-                $cadena_sql .= " WHERE estado_entrada='1' ";
+                $cadenaSql = " SELECT id_entrada, fecha_registro, nit, razon_social, observaciones ";
+                $cadenaSql.= " FROM entrada ";
+                $cadenaSql.= "JOIN proveedor ON proveedor.id_proveedor = entrada.proveedor ";
+                $cadenaSql.= " WHERE estado_entrada='1' ";
 
                 if ($variable [0] != '' && $variable[1] != '') {
-                    $cadena_sql .= " AND fecha_registro BETWEEN '" . $variable [0] . "' AND '" . $variable [1] . "' ";
+                    $cadenaSql .= " AND fecha_registro BETWEEN '" . $variable [0] . "' AND '" . $variable [1] . "' ";
                 }
                 if ($variable [2] != '') {
-                    $cadena_sql .= " AND id_entrada = '" . $variable [2] . "'";
+                    $cadenaSql .= " AND id_entrada = '" . $variable [2] . "'";
                 }
                  if ($variable [3] != '') {
-                    $cadena_sql .= " AND id_proveedor = '" . $variable [3] . "'";
+                    $cadenaSql.= " AND id_proveedor = '" . $variable [3] . "'";
                 }
-                
-                $cadena_sql .= " ORDER BY id_experiencia";
                 break;
 
             case "insertarAsignar" :

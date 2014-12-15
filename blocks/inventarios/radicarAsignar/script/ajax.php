@@ -73,8 +73,7 @@ $urlFinal3 = $url . $cadena3;
             width: 350,
             mtype: "GET",
             colNames: ["Descripción"],
-            colModel: [
-                {name: "descripcion", width: 105, align: "center", editable: true}],
+            colModel: [{name: "descripcion", width: 105, align: "center", editable: true}],
             pager: "#barraNavegacion",
             rowNum: 5,
             rowList: [5, 10, 15],

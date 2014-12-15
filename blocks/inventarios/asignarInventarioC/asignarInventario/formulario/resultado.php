@@ -1,6 +1,6 @@
 <?php
 
-use inventarios\gestionActa\registrarActa\funcion\redireccion;
+use inventarios\asignarInventarioC\asignarInventario\funcion\redireccion;
 
 if (!isset($GLOBALS ["autorizado"])) {
     include ("../index.php");

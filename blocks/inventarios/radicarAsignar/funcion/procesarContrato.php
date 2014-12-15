@@ -29,7 +29,7 @@ class RegistradorContrato {
 
     function procesarFormulario() {
 
-       
+       $subida=1;
         $fechaActual = date('Y-m-d');
 
         $esteBloque = $this->miConfigurador->getVariableConfiguracion("esteBloque");
@@ -119,13 +119,16 @@ class RegistradorContrato {
                         $resultado = $esteRecursoDB->ejecutarAcceso($cadenaSql, 'insertar');
                     } else {
                         $status = "<br>Error al subir el archivo 1";
+                        $subida=0;
                     }
                 } else {
                     $status = "<br>Error al subir archivo 2";
+                    $subida=0;
                 }
             }
         } else {
             echo "<br>NO existe el archivo D:!!!";
+            $subida=0;
         }
 
         // Registro de Items
@@ -149,8 +152,7 @@ class RegistradorContrato {
             $fechaActual
         );
 
-  
-        if ($items == 1) {
+        if ($items == 1 && $subida== 1) {
             redireccion::redireccionar('inserto', $datos);
         } else {
             redireccion::redireccionar('noInserto', $datos);

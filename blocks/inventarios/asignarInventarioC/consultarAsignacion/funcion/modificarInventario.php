@@ -44,7 +44,7 @@ class RegistradorActa {
         $supervisor = $_REQUEST ['supervisor'];
         $cadenaSql = $this->miSql->getCadenaSql('consultarID', $supervisor);
         $supervisor_id1 = $esteRecursoDB->ejecutarAcceso($cadenaSql, "busqueda");
-       $supervisor_id = $supervisor_id1[0][0];
+        $supervisor_id = $supervisor_id1[0][0];
 
         // asociar super-cont-item
 
@@ -118,8 +118,8 @@ class RegistradorActa {
                 $noasignar = $esteRecursoDB->ejecutarAcceso($cadenaSql, "insertar");
 
                 // cambiar estado de asignacion en elementos, reactivar para permitir una nueva asignacion
-               $cadenaSql2 = $this->miSql->getCadenaSql('inactivarElemento', $datosInactivarE);
-               $reactivar = $esteRecursoDB->ejecutarAcceso($cadenaSql2, "insertar");
+                $cadenaSql2 = $this->miSql->getCadenaSql('inactivarElemento', $datosInactivarE);
+                $reactivar = $esteRecursoDB->ejecutarAcceso($cadenaSql2, "insertar");
             } else {
 
                 // inactivar el elemento en la asignación
@@ -134,8 +134,8 @@ class RegistradorActa {
                 $inactivar = $esteRecursoDB->ejecutarAcceso($cadenaSql2, "insertar");
             }
         }
-        
-        
+
+
         if ($reactivar == true) {
             redireccion::redireccionar('inserto', $supervisor);
         } elseif ($inactivar == true) {

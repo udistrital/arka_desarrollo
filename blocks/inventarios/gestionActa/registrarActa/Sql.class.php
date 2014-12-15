@@ -259,7 +259,7 @@ class Sql extends \Sql {
             case "insertarItem" :
                 $cadenaSql = " INSERT INTO ";
                 $cadenaSql .= " arka_inventarios.items_actarecibido_temp(";
-                $cadenaSql .= " id_items,item,descripcion,cantidad, ";
+                $cadenaSql .= " id_items,item,cantidad, descripcion,";
                 $cadenaSql .= " valor_unitario,valor_total,seccion)";
                 $cadenaSql .= " VALUES (";
                 $cadenaSql .= "'" . $variable [0] . "',";

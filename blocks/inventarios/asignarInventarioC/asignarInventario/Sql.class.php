@@ -177,6 +177,11 @@ class Sql extends \Sql {
                 //$cadenaSql.= " AND documento_contratista = '" . $variable[1] . "' "; corregir si se va a activar
                 break;
 
+            case "consultarID":
+                $cadenaSql = " SELECT id_contratista ";
+                $cadenaSql.= " FROM contratista_servicios ";
+                $cadenaSql.= " WHERE identificacion='" . $variable . "' ";
+                break;
 
             case "asignarElemento" :
                 $cadenaSql = "INSERT INTO asignar_elementos( ";
@@ -203,7 +208,6 @@ class Sql extends \Sql {
                 break;
 
             /*             * ***************** */
-       
         }
         return $cadenaSql;
     }

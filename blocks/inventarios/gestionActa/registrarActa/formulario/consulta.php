@@ -81,7 +81,7 @@ class registrarForm {
 
 //------------------CONTROL: Lista desplegable -----------------------------------------------------
 
-        $matrizItems = $tipoOrden;
+       // $matrizItems = $tipoOrden;
 
         $esteCampo = "tipoOrden";
         $atributos['nombre'] = $esteCampo;
@@ -89,7 +89,7 @@ class registrarForm {
         $atributos['etiqueta'] = $this->lenguaje->getCadena($esteCampo);
         $atributos['tab'] = $tab ++;
         $atributos['seleccion']=-1;
-        $atributos['evento'] = 2;
+        $atributos['evento'] = '';
         if (isset($_REQUEST [$esteCampo])) {
             $atributos ['valor'] = $_REQUEST [$esteCampo];
         } else {
@@ -103,7 +103,7 @@ class registrarForm {
         $atributos['estilo'] = "jqueryui";
         $atributos['validar'] = "required";
         $atributos['limitar'] = false;
-        $atributos['matrizItems'] = $matrizItems;
+        //$atributos['matrizItems'] = $matrizItems;
         //$atributos['miniRegistro']=;
         $atributos['baseDatos'] = "inventarios";
         $atributos['cadena_sql'] = $this->miSql->getCadenaSql("tipoOrden");

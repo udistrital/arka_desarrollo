@@ -127,13 +127,39 @@ $enlaceRadicarAsignar ['urlCodificada'] = $this->miConfigurador->fabricaConexion
 $enlaceRadicarAsignar ['nombre'] = "Asignar Entrada";
 
 
+// Radicar entrada y salida de elementos
+
+$enlaceradicarEntradaSalida ['enlace'] = "pagina=radicarEntradaSalida";
+$enlaceradicarEntradaSalida ['enlace'] .= "&usuario=" . $miSesion->getSesionUsuarioId();
+
+$enlaceradicarEntradaSalida ['urlCodificada'] = $this->miConfigurador->fabricaConexiones->crypto->codificar_url($enlaceradicarEntradaSalida ['enlace'], $directorio);
+$enlaceradicarEntradaSalida ['nombre'] = "Entrada y Salida de Elementos";
+
+
 //Asignar inventarios a Contratistas
 
 $enlaceasignarInventarioC ['enlace'] = "pagina=asignarInventarioC";
 $enlaceasignarInventarioC ['enlace'] .= "&usuario=" . $miSesion->getSesionUsuarioId();
 
 $enlaceasignarInventarioC ['urlCodificada'] = $this->miConfigurador->fabricaConexiones->crypto->codificar_url($enlaceasignarInventarioC ['enlace'], $directorio);
-$enlaceasignarInventarioC ['nombre'] = "Asignación de  Inventarios a Contratistas";
+$enlaceasignarInventarioC ['nombre'] = "Asignación de  Elementos a Contratistas";
+
+
+//modificar inventarios a Contratistas
+
+$enlaceconsultarAsignacion ['enlace'] = "pagina=consultarAsignacion";
+$enlaceconsultarAsignacion ['enlace'] .= "&usuario=" . $miSesion->getSesionUsuarioId();
+
+$enlaceconsultarAsignacion ['urlCodificada'] = $this->miConfigurador->fabricaConexiones->crypto->codificar_url($enlaceconsultarAsignacion ['enlace'], $directorio);
+$enlaceconsultarAsignacion ['nombre'] = "Modificar Asignación de  Elementos a Contratistas";
+
+//descargar inventarios a Contratistas
+
+$enlacedescargarInventario ['enlace'] = "pagina=descargarInventario";
+$enlacedescargarInventario ['enlace'] .= "&usuario=" . $miSesion->getSesionUsuarioId();
+
+$enlacedescargarInventario ['urlCodificada'] = $this->miConfigurador->fabricaConexiones->crypto->codificar_url($enlacedescargarInventario ['enlace'], $directorio);
+$enlacedescargarInventario ['nombre'] = "Descargar  Elementos a Contratista";
 
 // Reportico
 $enlaceReportico ['enlace'] = "pagina=reportico";
@@ -200,8 +226,8 @@ $enlaceFinSesion['nombre'] = "Cerrar Sesión";
             <ul class="dl-submenu">
                 <li><a href="<?php echo $enlaceRadicarAsignar['urlCodificada'] ?>"><?php echo $enlaceRadicarAsignar['nombre'] ?></a></li>
                 <!--li><a href="">Entrada y Salida de Elementos</a></li>
-                <li><a href="">Movimientos</a></li>
-                <li><a href="">Consultar Radicación</a></li-->
+                <li><a href="">Movimientos</a></li-->
+                <li><a href="<?php echo $enlaceradicarEntradaSalida['urlCodificada'] ?>"><?php echo $enlaceradicarEntradaSalida['nombre'] ?></a></li>
             </ul>
         </li>
 
@@ -209,6 +235,8 @@ $enlaceFinSesion['nombre'] = "Cerrar Sesión";
             <a href="#">Asignación Inventarios a Contratistas</a>
             <ul class="dl-submenu">
                 <li><a href="<?php echo $enlaceasignarInventarioC['urlCodificada'] ?>"><?php echo $enlaceasignarInventarioC['nombre'] ?></a></li>
+                <li><a href="<?php echo $enlaceconsultarAsignacion['urlCodificada'] ?>"><?php echo $enlaceconsultarAsignacion['nombre'] ?></a></li>
+                <li><a href="<?php echo $enlacedescargarInventario['urlCodificada'] ?>"><?php echo $enlacedescargarInventario['nombre'] ?></a></li>
             </ul>
         </li>
 

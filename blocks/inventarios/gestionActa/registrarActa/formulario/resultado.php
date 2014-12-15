@@ -41,8 +41,8 @@ class registrarForm {
 
 
         $rutaBloque = $this->miConfigurador->getVariableConfiguracion("host");
-        $rutaBloque .= $this->miConfigurador->getVariableConfiguracion("site") . "/blocks/";
-        $rutaBloque .= $esteBloque ['grupo'] . $esteBloque ['nombre'];
+        $rutaBloque.= $this->miConfigurador->getVariableConfiguracion("site") . "/blocks/";
+        $rutaBloque.= $esteBloque ['grupo'] ."/". $esteBloque ['nombre'];
 
         // ---------------- SECCION: Parámetros Globales del Formulario ----------------------------------
         /**
@@ -100,25 +100,24 @@ class registrarForm {
             case 1:
                 $cadenaSql = $this->miSql->getCadenaSql('consultarOrdenServicios', $arreglo);
                 $resultado_orden = $esteRecursoDB->ejecutarAcceso($cadenaSql, "busqueda");
-       
+                $titulo="Consultar y Modificar Orden de Servicios";
                 break;
 
             case 2:
                 $cadenaSql = $this->miSql->getCadenaSql('consultarOrdenCompra', $arreglo);
                 $resultado_orden = $esteRecursoDB->ejecutarAcceso($cadenaSql, "busqueda");
+                $titulo="Consultar y Modificar Orden de Compra";
                 break;
 
             case 3:
                 $datos='';
                 redireccion::redireccionar('registrar', $datos);
+                $titulo="Consultar y Modificar Otros";
                 break;
 
             default:
                 break;
         }
-
-
-
 
         // ---------------- SECCION: Parámetros Generales del Formulario ----------------------------------
         $esteCampo = $esteBloque ['nombre'];
@@ -147,7 +146,7 @@ class registrarForm {
         $atributos ['id'] = $esteCampo;
         $atributos ["estilo"] = "jqueryui";
         $atributos ['tipoEtiqueta'] = 'inicio';
-        $atributos ["leyenda"] = "Consultar y Modificar Orden Compra";
+        $atributos ["leyenda"] = $titulo;
         echo $this->miFormulario->marcoAgrupacion('inicio', $atributos);
 
 
@@ -180,9 +179,7 @@ class registrarForm {
         // ------------------Fin Division para los botones-------------------------
         echo $this->miFormulario->division("fin");
 
-
-
-        if (isset($resultado_orden)) {
+        if ($resultado_orden!==FALSE) {
 
             echo "<table id='tablaTitulos'>";
 

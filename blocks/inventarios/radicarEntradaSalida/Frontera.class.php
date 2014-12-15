@@ -63,23 +63,13 @@ class Frontera {
                     include_once ($this->ruta . "/formulario/mensaje.php");
                     break;
 
-                case "registroCargue" :
-                    switch ($_REQUEST['tipoCargue']) {
-                        case 1:
-                            include_once ($this->ruta . "/formulario/registrarAvance.php");
-                            break;
-
-                        case 2:
-                            include_once ($this->ruta . "/formulario/registrarCompra.php");
-                            break;
-
-                        case 3:
-                            include_once ($this->ruta . "/formulario/registrarContrato.php");
-                            break;
-                    }
-
+                case "resultados" :
+                    include_once ($this->ruta . "/formulario/resultado.php");
                     break;
-
+                
+                 case "formularioRegistro" :
+                    include_once ($this->ruta . "/formulario/formRegistro.php");
+                    break;
             }
         } else {
             $_REQUEST ['opcion'] = "mostrar";

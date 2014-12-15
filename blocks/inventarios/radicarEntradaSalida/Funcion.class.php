@@ -46,24 +46,8 @@ class Funcion {
         include_once ($this->ruta . "/funcion/funcionEjemplo.php");
     }
 
-    function procesarAjax() {
-        include_once ($this->ruta . "funcion/procesarAjax.php");
-    }
-
-    function procesarCompra() {
-        include_once ($this->ruta . "funcion/procesarCompra.php");
-    }
-
-    function procesarContrato() {
-        include_once ($this->ruta . "funcion/procesarContrato.php");
-    }
-    
-     function procesarAvance() {
-        include_once ($this->ruta . "funcion/procesarAvance.php");
-    }
-
-    function consultarOrden() {
-        include_once ($this->ruta . "funcion/ConsultarOrden.php");
+    function registrar() {
+        include_once ($this->ruta . "funcion/registrar.php");
     }
 
     function action() {
@@ -83,21 +67,15 @@ class Funcion {
             $this->procesarAjax();
         } elseif (isset($_REQUEST ["opcion"])) {
 
-            if ($_REQUEST ['opcion'] == 'registrarCompra') {
-                $this->procesarCompra();
-            }
 
             if (isset($_REQUEST ["redireccionar"]) && $_REQUEST ['redireccionar'] == 'regresar') {
                 redireccion::redireccionar($_REQUEST['opcion']);
             }
 
-            if ($_REQUEST ['opcion'] == 'procesarContrato') {
-                $this->procesarContrato();
+            if ($_REQUEST ['opcion'] == 'registrar') {
+                $this->registrar();
             }
-            
-            if ($_REQUEST ['opcion'] == 'procesarAvance') {
-                $this->procesarAvance();
-            }
+      
 		
         }
     }

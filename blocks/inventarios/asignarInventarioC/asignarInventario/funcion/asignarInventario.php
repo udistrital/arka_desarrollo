@@ -45,6 +45,14 @@ class RegistradorActa {
             $_REQUEST ['contratista'],
             $_REQUEST ['supervisor'],
         );
+
+        $cadenaSql = $this->miSql->getCadenaSql('consultarID', $_REQUEST['supervisor']);
+        $supervisor_id1 = $esteRecursoDB->ejecutarAcceso($cadenaSql, "busqueda");
+        $supervisor_id = $supervisor_id1[0][0];
+        
+        $cadenaSql = $this->miSql->getCadenaSql('consultarID', $_REQUEST['contratista']);
+        $contratista_id1 = $esteRecursoDB->ejecutarAcceso($cadenaSql, "busqueda");
+        $contratista_id = $contratista_id1[0][0];
         // asociar super-cont-item
 
 
@@ -57,8 +65,8 @@ class RegistradorActa {
         foreach ($items as $key => $values) {
 
             $datosAsignacion = array(
-                $_REQUEST ['contratista'],
-                $_REQUEST ['supervisor'],
+                $contratista_id,
+                $supervisor_id,
                 $items[$key],
                 1,
                 $fechaActual,

@@ -171,7 +171,7 @@ class registrarForm {
                     $atributos ["etiquetaObligatorio"] = true;
                     $atributos['tab'] = $tab ++;
                     $atributos['seleccion'] = -1;
-                    $atributos['evento'] = 2;
+                    $atributos['evento'] = '';
                     if (isset($_REQUEST [$esteCampo])) {
                         $atributos ['valor'] = $_REQUEST [$esteCampo];
                     } else {
@@ -519,6 +519,7 @@ class registrarForm {
                     $atributos ['titulo'] = $this->lenguaje->getCadena($esteCampo . 'Titulo');
                     $atributos ['deshabilitado'] = false;
                     $atributos ['tamanno'] = 20;
+                    $atributos ['seleccionado'] = true;
                     $atributos ['maximoTamanno'] = '';
                     $atributos ['anchoEtiqueta'] = 220;
                     $tab ++;
