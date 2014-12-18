@@ -58,6 +58,26 @@ $cadena3 = $this->miConfigurador->fabricaConexiones->crypto->codificar_url ( $ca
 $urlFinal3 = $url . $cadena3;
 
 
+// Variables
+$cadenaACodificar4 = "pagina=" . $this->miConfigurador->getVariableConfiguracion ( "pagina" );
+$cadenaACodificar4 .= "&procesarAjax=true";
+$cadenaACodificar4 .= "&action=index.php";
+$cadenaACodificar4 .= "&bloqueNombre=" . $esteBloque ["nombre"];
+$cadenaACodificar4 .= "&bloqueGrupo=" . $esteBloque ["grupo"];
+$cadenaACodificar4 .= $cadenaACodificar . "&funcion=SeleccionProveedor";
+$cadenaACodificar4 .="&tiempo=".$_REQUEST['tiempo'];
+
+// Codificar las variables
+$enlace4 = $this->miConfigurador->getVariableConfiguracion ( "enlace" );
+$cadena4 = $this->miConfigurador->fabricaConexiones->crypto->codificar_url ( $cadenaACodificar4, $enlace4 );
+
+// URL definitiva
+$urlFinal4 = $url . $cadena4;
+
+
+
+
+
 
 
 // echo $urlFinal;exit;
@@ -66,6 +86,37 @@ $urlFinal3 = $url . $cadena3;
 
 ?>
 <script type='text/javascript'>
+
+
+function datosInfo(elem, request, response){
+	  $.ajax({
+	    url: "<?php echo $urlFinal4?>",
+	    dataType: "json",
+	    data: { personaje:$("#<?php echo $this->campoSeguro('selec_proveedor')?>").val()},
+	    success: function(data){ 
+
+	    		if(data[0]!='null'){
+
+	    			$("#<?php echo $this->campoSeguro('proveedor')?>").val(data[0]);
+					$("#<?php echo $this->campoSeguro('nitProveedor')?>").val(data[1]);
+					$("#<?php echo $this->campoSeguro('direccionProveedor')?>").val(data[2]);
+					$("#<?php echo $this->campoSeguro('telefonoProveedor')?>").val(data[3]);
+
+	    			
+		    		}else{
+
+				
+
+
+			    		
+		    		}
+
+	    }
+		                    
+	   });
+	};
+
+
 $(function() {
 
     $("#tablaContenido").jqGrid({
@@ -209,8 +260,23 @@ $(function() {
      {},
      {}
    	);
+
+
+    $("#<?php echo $this->campoSeguro('selec_proveedor')?>").select2({
+    	 placeholder: "Search for a repository",
+    	 minimumInputLength: 3,
+
+        });
+
+    $("#<?php echo $this->campoSeguro('selec_proveedor')?>").change(function() {datosInfo(); });
+
+
     
 });
+
+
+
+
 
 </script>
 

@@ -1,6 +1,8 @@
 <?php
 use inventarios\gestionCompras\registrarOrdenCompra\Sql;
 
+
+
 $conexion = "inventarios";
 $esteRecursoDB = $this->miConfigurador->fabricaConexiones->getRecursoDB ( $conexion );
 
@@ -112,7 +114,7 @@ if ($_REQUEST ['funcion'] == 'AgregarItem') {
 				$_GET ['descripcion'],
 				$_GET ['valor_unitario'],
 				$_GET ['valor_total'],
-				$_REQUEST ['tiempo']
+				$_REQUEST ['tiempo'] 
 		);
 	}
 	
@@ -130,6 +132,16 @@ if ($_REQUEST ['funcion'] == 'EliminarItem') {
 	$resultadoItems = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "acceso" );
 	
 	echo $resultadoItems;
+}
+
+if ($_REQUEST ['funcion'] == 'SeleccionProveedor') {
+	
+	$cadenaSql = $this->sql->getCadenaSql ( 'informacion_proveedor', $_REQUEST ['personaje'] );
+	$resultadoItems = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
+	
+	$resultado =json_encode($resultadoItems [0])  ;
+
+	echo $resultado;
 }
 
 ?>

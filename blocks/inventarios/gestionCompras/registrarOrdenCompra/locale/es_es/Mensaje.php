@@ -1,10 +1,20 @@
 <?php
 $this->idioma ["noDefinido"] = "Etiqueta no esta definida en locale/es_es/Mensaje.php";
 
+$this->idioma ["selec_dependencia"] ="Dependencia : ";
+$this->idioma ["selec_dependenciaTitulo"] ="Seleccione Dependencia";
 
+
+
+$this->idioma ["reg_proveedor"] ="Registrar Proveedor: ";
+$this->idioma ["reg_proveedorTitulo"] ="Seleccione Proveedor";
 
 $this->idioma ["diponibilidad"] ="Disponibilidad Presupuestal : ";
 $this->idioma ["diponibilidadTitulo"] ="Ingrese Disponibilidad Presupuestal";
+
+$this->idioma ["selec_proveedor"] ="Proveedor : ";
+$this->idioma ["selec_proveedorTitulo"] ="Seleccione Proveedor";
+
 
 
 

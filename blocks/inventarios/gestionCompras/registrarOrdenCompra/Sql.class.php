@@ -149,6 +149,51 @@ class Sql extends \Sql {
 			 * Clausulas Del Caso Uso.
 			 */
 			
+			// SELECT id_rubro, nombre, codigo
+//   FROM rubro;
+			
+			case "rubros" :
+				$cadenaSql = " SELECT ";
+				$cadenaSql .= " id_rubro,";
+				$cadenaSql .= " codigo  ||' - '|| nombre as rubro ";
+				$cadenaSql .= " FROM";
+				$cadenaSql .= " rubro ; ";
+				break;
+			
+			case "dependencia" :
+				$cadenaSql = " SELECT ";
+				$cadenaSql .= " id_dependencia,";
+				$cadenaSql .= " cod_dependencia  ||' - '|| nombre as dependencia ";
+				$cadenaSql .= " FROM";
+				$cadenaSql .= " dependencia ; ";
+				break;
+			
+			case "informacion_proveedor" :
+				$cadenaSql = " SELECT ";
+				$cadenaSql .= " razon_social, nit_proveedor, direccion, telefono ";
+				$cadenaSql .= " FROM";
+				$cadenaSql .= " proveedor ";
+				$cadenaSql .= " WHERE id_proveedor='" . $variable . "';";
+				break;
+			
+			case "proveedor" :
+				$cadenaSql = " SELECT ";
+				$cadenaSql .= " id_proveedor,";
+				$cadenaSql .= " nit_proveedor ||' - '|| razon_social as proveedor ";
+				$cadenaSql .= " FROM";
+				$cadenaSql .= " proveedor ; ";
+				break;
+			
+			case "proveedors" :
+				$cadenaSql = " INSERT INTO proveedor( ";
+				$cadenaSql .= " razon_social, nit_proveedor, direccion, telefono)";
+				$cadenaSql .= " VALUES (";
+				$cadenaSql .= "'" . $variable [0] . "',";
+				$cadenaSql .= "'" . $variable [1] . "',";
+				$cadenaSql .= "'" . $variable [2] . "',";
+				$cadenaSql .= "'" . $variable [3] . "'); ";
+				break;
+			
 			case "polizas" :
 				$cadenaSql = " SELECT ";
 				$cadenaSql .= " id_polizas,";
