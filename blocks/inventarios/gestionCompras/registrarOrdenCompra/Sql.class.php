@@ -150,7 +150,7 @@ class Sql extends \Sql {
 			 */
 			
 			// SELECT id_rubro, nombre, codigo
-//   FROM rubro;
+			// FROM rubro;
 			
 			case "rubros" :
 				$cadenaSql = " SELECT ";
@@ -166,6 +166,15 @@ class Sql extends \Sql {
 				$cadenaSql .= " cod_dependencia  ||' - '|| nombre as dependencia ";
 				$cadenaSql .= " FROM";
 				$cadenaSql .= " dependencia ; ";
+				break;
+			
+			case "informacion_dependencia" :
+				$cadenaSql = " SELECT ";
+				$cadenaSql .= " direccion, telefono ";
+				$cadenaSql .= " FROM";
+				$cadenaSql .= " dependencia ";
+				$cadenaSql .= " WHERE id_dependencia='" . $variable . "';";
+				
 				break;
 			
 			case "informacion_proveedor" :

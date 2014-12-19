@@ -25,6 +25,10 @@
         	$('#<?php echo $this->campoSeguro('nitProveedor')?>').attr('disabled','');
         	$('#<?php echo $this->campoSeguro('direccionProveedor')?>').attr('disabled','');
         	$('#<?php echo $this->campoSeguro('telefonoProveedor')?>').attr('disabled','');
+        	$('#<?php echo $this->campoSeguro('direccionDependencia')?>').attr('disabled','');
+        	$('#<?php echo $this->campoSeguro('telefonoDependencia')?>').attr('disabled','');
+        	
+        	
         	
         
             $("#<?php echo $this->campoSeguro('reg_prov')?>").select2();
@@ -55,10 +59,7 @@
         
         if($( "#<?php echo $this->campoSeguro('reg_proveedor')?>" ).val()==0){
         
-        
-        
-        $("#<?php echo $this->campoSeguro('selec_proveedor')?>> option[value='']").attr('selected','selected');
-        
+      
         
         
         $('#<?php echo $this->campoSeguro('proveedor')?>').val('');
@@ -77,7 +78,6 @@
         
         }else if($( "#<?php echo $this->campoSeguro('reg_proveedor')?>" ).val()==1){
         
-        $("#<?php echo $this->campoSeguro('selec_proveedor')?>> option[value='']").attr('selected','selected');
         
  		$('#<?php echo $this->campoSeguro('proveedor')?>').val('');
         $('#<?php echo $this->campoSeguro('nitProveedor')?>').val('');
@@ -85,7 +85,7 @@
         $('#<?php echo $this->campoSeguro('telefonoProveedor')?>').val('');
         	
         $('#<?php echo $this->campoSeguro('proveedor')?>').removeAttr('disabled');
-        $('#<?php echo $this->campoSeguro('nitProveedor')?>').removeaAtr('disabled');
+        $('#<?php echo $this->campoSeguro('nitProveedor')?>').removeAttr('disabled');
         $('#<?php echo $this->campoSeguro('direccionProveedor')?>').removeAttr('disabled');
         $('#<?php echo $this->campoSeguro('telefonoProveedor')?>').removeAttr('disabled');
         	

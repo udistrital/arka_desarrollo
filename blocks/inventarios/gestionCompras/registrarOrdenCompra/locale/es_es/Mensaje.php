@@ -119,7 +119,7 @@ $this->idioma ["nombreOrdenadorTitulo"] ="Ingrese Nombre y Apellidos ";
 $this->idioma ["asignacionOrdenador"] ="&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspAsignación : ";
 $this->idioma ["asignacionOrdenadorTitulo"] ="Ingrese Asignación de Ordenador del Gasto";
  
-
+$this->idioma ["botonCalcular"] ="Calcular Total Valor Items";
 $this->idioma ["botonAceptar"] ="Guardar";
 $this->idioma ["botonCancelar"] ="Cancelar";
 $this->idioma ["botonContinuar"] ="Continuar";

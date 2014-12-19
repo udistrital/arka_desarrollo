@@ -75,6 +75,21 @@ $cadena4 = $this->miConfigurador->fabricaConexiones->crypto->codificar_url ( $ca
 $urlFinal4 = $url . $cadena4;
 
 
+// Variables
+$cadenaACodificar5 = "pagina=" . $this->miConfigurador->getVariableConfiguracion ( "pagina" );
+$cadenaACodificar5 .= "&procesarAjax=true";
+$cadenaACodificar5 .= "&action=index.php";
+$cadenaACodificar5 .= "&bloqueNombre=" . $esteBloque ["nombre"];
+$cadenaACodificar5 .= "&bloqueGrupo=" . $esteBloque ["grupo"];
+$cadenaACodificar5 .= $cadenaACodificar . "&funcion=SeleccionDependencia";
+$cadenaACodificar5 .="&tiempo=".$_REQUEST['tiempo'];
+
+// Codificar las variables
+$enlace5 = $this->miConfigurador->getVariableConfiguracion ( "enlace" );
+$cadena5 = $this->miConfigurador->fabricaConexiones->crypto->codificar_url ( $cadenaACodificar5, $enlace5 );
+
+// URL definitiva
+$urlFinal5 = $url . $cadena5;
 
 
 
@@ -117,6 +132,36 @@ function datosInfo(elem, request, response){
 	};
 
 
+
+	function datosDependencia(elem, request, response){
+		  $.ajax({
+		    url: "<?php echo $urlFinal5?>",
+		    dataType: "json",
+		    data: { dependencia:$("#<?php echo $this->campoSeguro('selec_dependencia')?>").val()},
+		    success: function(data){ 
+
+		    		if(data[0]!='null'){
+
+		    			$("#<?php echo $this->campoSeguro('direccionDependencia')?>").val(data[0]);
+						$("#<?php echo $this->campoSeguro('telefonoDependencia')?>").val(data[1]);
+		
+
+		    			
+			    		}else{
+
+					
+
+
+				    		
+			    		}
+
+		    }
+			                    
+		   });
+		};
+		
+
+
 $(function() {
 
     $("#tablaContenido").jqGrid({
@@ -125,7 +170,7 @@ $(function() {
         height: 200,
         width: 930,
         mtype: "GET",
-        colNames: [ "Item", "Unidad de Medida", "Cantidad", "Descripción", "Valor Unitario","Valor Total"],
+        colNames: [ "Item", "Unidad de Medida", "Cantidad", "Descripción", "($)Valor Unitario","($)Valor Total"],
         colModel: [
             
             { name: "item", width: 90,align: "center", editable:true },
@@ -133,7 +178,7 @@ $(function() {
             { name: "cantidad", width: 80, align: "center" ,editable:true,editrules:{number:true},sorttype:'number',formatter:'number' },
             { name: "descripcion", width: 80, align: "center",editable:true },
             { name: "valor_unitario", width: 80, align: "center",editable:true,editrules:{number:true},sorttype:'number',formatter:'number' },
-            { name: "valor_total", width: 80, align: "center",editable:true,editrules:{number:true},sorttype:'number',formatter:'number' },
+            { name: "valor_total", width: 80, align: "center",editable:false,editrules:{number:true},sorttype:'number',formatter:'number' },
             ],
 
         pager: "#barraNavegacion",
@@ -269,6 +314,12 @@ $(function() {
         });
 
     $("#<?php echo $this->campoSeguro('selec_proveedor')?>").change(function() {datosInfo(); });
+
+
+    $("#<?php echo $this->campoSeguro('selec_dependencia')?>").change(function(){ datosDependencia(); });
+
+
+    $("#<?php echo $this->campoSeguro('botonCalcular')?>").blur(function(){ alert('stiv!!!!');exit; });
 
 
     
