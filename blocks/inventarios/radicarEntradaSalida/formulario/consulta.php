@@ -47,8 +47,6 @@ class registrarForm {
         // -------------------------------------------------------------------------------------------------
         $conexion = "inventarios";
         $esteRecursoDB = $this->miConfigurador->fabricaConexiones->getRecursoDB($conexion);
-        $cadenaSql = $this->miSql->getCadenaSql('tipoCargue');
-        $tipoCargue = $esteRecursoDB->ejecutarAcceso($cadenaSql, "busqueda");
 
         // Limpia Items Tabla temporal
         // ---------------- SECCION: Parámetros Generales del Formulario ----------------------------------
