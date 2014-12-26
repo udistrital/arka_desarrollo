@@ -1,6 +1,6 @@
 <?php
 
-namespace inventarios\gestionActa\registrarActa\funcion;
+namespace inventarios\gestionActa\consultarActa\funcion;
 
 if (!isset($GLOBALS ["autorizado"])) {
     include ("index.php");
@@ -17,15 +17,27 @@ class redireccion {
             case "inserto" :
                 $variable = "pagina=" . $miPaginaActual;
                 $variable .= "&opcion=mensaje";
-                $variable .= "&mensaje=confirma";
+                $variable .= "&mensaje=actualizo";
                 $variable .= "&numero_acta=" . $valor [0];
-                $variable .= "&fecha_acta=" . $valor [1];
                 break;
 
             case "noInserto" :
                 $variable = "pagina=" . $miPaginaActual;
-                $variable .= "&opcion=mensaje";
+                $variable .= "&opcion=noactualizo";
                 $variable .= "&mensaje=error";
+                break;
+
+            case "elimino" :
+                $variable = "pagina=" . $miPaginaActual;
+                $variable .= "&opcion=mensaje";
+                $variable .= "&mensaje=elimino";
+                $variable .= "&numero_acta=" . $valor;
+                break;
+
+            case "noElimino" :
+                $variable = "pagina=" . $miPaginaActual;
+                $variable .= "&opcion=noelimino";
+                $variable .= "&mensaje=errorEliminar";
                 break;
 
             case "noItems" :
@@ -33,15 +45,19 @@ class redireccion {
                 $variable .= "&opcion=mensaje";
                 $variable .= "&mensaje=otros";
                 $variable .= "&errores=noItems";
+
+                break;
+
+            case "noObligaciones" :
+                $variable = "pagina=" . $miPaginaActual;
+                $variable .= "&opcion=mensaje";
+                $variable .= "&mensaje=otros";
+                $variable .= "&errores=noObligaciones";
+
                 break;
 
             case "regresar" :
                 $variable = "pagina=" . $miPaginaActual;
-                break;
-
-            case "registrar" :
-                $variable = "pagina=" . $miPaginaActual;
-                $variable .= "&opcion=asociarActa";
                 break;
 
             case "paginaPrincipal" :
@@ -53,7 +69,6 @@ class redireccion {
             unset($_REQUEST [$clave]);
         }
 
-
         $url = $miConfigurador->configuracion ["host"] . $miConfigurador->configuracion ["site"] . "/index.php?";
         $enlace = $miConfigurador->configuracion ['enlace'];
         $variable = $miConfigurador->fabricaConexiones->crypto->codificar($variable);
@@ -61,15 +76,6 @@ class redireccion {
         $redireccion = $url . $_REQUEST [$enlace];
 
         echo "<script>location.replace('" . $redireccion . "')</script>";
-
-// 		$enlace =$miConfigurador->getVariableConfiguracion("enlace");
-// 		$variable = $miConfigurador->fabricaConexiones->crypto->codificar($variable);
-// // 		 echo $enlace;
-// // // 		 echo $variable;
-// // 		 exit;
-// 		$_REQUEST[$enlace] = $variable;
-// 		$_REQUEST["recargar"] = true;
-// 		return true;
     }
 
 }

@@ -1,8 +1,8 @@
 <?php
 
-namespace inventarios\gestionActa\registrarActa;
+namespace inventarios\gestionActa\consultarActa;
 
-use inventarios\gestionActa\registrarActa\funcion\redireccion;
+use inventarios\gestionActa\consultarActa\funcion\redireccion;
 
 if (!isset($GLOBALS ["autorizado"])) {
     include ("../index.php");
@@ -50,8 +50,16 @@ class Funcion {
         include_once ($this->ruta . "funcion/procesarAjax.php");
     }
 
-    function registrarActa() {
-        include_once ($this->ruta . "funcion/registrarActa.php");
+    function procesarCompra() {
+        include_once ($this->ruta . "funcion/procesarCompra.php");
+    }
+
+    function procesarContrato() {
+        include_once ($this->ruta . "funcion/procesarContrato.php");
+    }
+    
+     function procesarAvance() {
+        include_once ($this->ruta . "funcion/procesarAvance.php");
     }
 
     function consultarOrden() {
@@ -59,8 +67,6 @@ class Funcion {
     }
 
     function action() {
-
-
 
 // 		
         // Evitar que se ingrese codigo HTML y PHP en los campos de texto
@@ -77,31 +83,22 @@ class Funcion {
             $this->procesarAjax();
         } elseif (isset($_REQUEST ["opcion"])) {
 
-            // Realizar una validación específica para los campos de este formulario:
-            // $validacion = $this->verificarCampos ();
-            if ($_REQUEST ['opcion'] == 'registrarActa') {
-                $this->registrarActa();
-            } elseif (isset($_REQUEST ["opcion"])) {
-
-                if (isset($_REQUEST ["redireccionar"]) && $_REQUEST ['redireccionar'] == 'regresar') {
-                    redireccion::redireccionar($_REQUEST['opcion']);
-                }
-
-
-                if ($_REQUEST ['opcion'] == 'ConsultarOrden') {
-
-                    $this->consultarOrden();
-                }
+            if ($_REQUEST ['opcion'] == 'registrarCompra') {
+                $this->procesarCompra();
             }
-// 			if ($validacion == false) {
-// 				// Instanciar a la clase pagina con mensaje de correcion de datos
-// 				echo "Datos Incorrectos";
-// 			} else {
-// 				// Validar las variables para evitar un tipo insercion de SQL
-// 				$_REQUEST = $this->miInspectorHTML->limpiarSQL ( $_REQUEST );
-// 				$this->funcionEjemplo ();
-// 				$this->redireccionar ( "exito" );
-// 			}
+
+            if (isset($_REQUEST ["redireccionar"]) && $_REQUEST ['redireccionar'] == 'regresar') {
+                redireccion::redireccionar($_REQUEST['opcion']);
+            }
+
+            if ($_REQUEST ['opcion'] == 'procesarContrato') {
+                $this->procesarContrato();
+            }
+            
+            if ($_REQUEST ['opcion'] == 'procesarAvance') {
+                $this->procesarAvance();
+            }
+		
         }
     }
 

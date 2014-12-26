@@ -1,8 +1,8 @@
 <?php
 
-namespace inventarios\gestionActa\registrarActa\funcion;
+namespace inventarios\gestionActa\consultarActa\funcion;
 
-use inventarios\gestionActa\registrarActa\funcion\redireccion;
+use inventarios\gestionActa\consultarActa\funcion\redireccion;
 
 include_once ('redireccionar.php');
 if (!isset($GLOBALS ["autorizado"])) {
@@ -10,7 +10,7 @@ if (!isset($GLOBALS ["autorizado"])) {
     exit();
 }
 
-class RegistradorActa {
+class RegistradorOrden {
 
     var $miConfigurador;
     var $lenguaje;
@@ -29,18 +29,16 @@ class RegistradorActa {
 
     function procesarFormulario() {
 
-        $fechaActual = date('Y-m-d');
-
         $esteBloque = $this->miConfigurador->getVariableConfiguracion("esteBloque");
 
         $rutaBloque = $this->miConfigurador->getVariableConfiguracion("raizDocumento") . "/blocks/inventarios/gestionActa/";
-        $rutaBloque .= $esteBloque ['nombre'];
-        $host = $this->miConfigurador->getVariableConfiguracion("host") . $this->miConfigurador->getVariableConfiguracion("site") . "/blocks/inventarios/gestionActa/" . $esteBloque ['nombre'];
+        $rutaBloque .=$esteBloque ['nombre'];
+        $host = $this->miConfigurador->getVariableConfiguracion("host") . $this->miConfigurador->getVariableConfiguracion("site") . "/blocks/inventarios/gestionActa/consultarActa/";
 
         $conexion = "inventarios";
         $esteRecursoDB = $this->miConfigurador->fabricaConexiones->getRecursoDB($conexion);
 
-        $cadenaSql = $this->miSql->getCadenaSql('items', $_REQUEST['seccion']);
+        $cadenaSql = $this->miSql->getCadenaSql('items', $_REQUEST ['seccion']);
         $items = $esteRecursoDB->ejecutarAcceso($cadenaSql, "busqueda");
 
 
@@ -48,62 +46,71 @@ class RegistradorActa {
             redireccion::redireccionar('noItems');
         }
 
-
-        //Registro del Acta de Recibido
+        $fechaActual = date('Y-m-d');
+        //Actualizar Acta de Recibido
 
         $datosActa = array(
             $_REQUEST ['dependencia'],
             $fechaActual,
-            $_REQUEST ['tipoBien'],
-            $_REQUEST ['nitProveedor'],
+            $_REQUEST ['tipo_bien'],
+            $_REQUEST ['nitproveedor'],
             $_REQUEST ['proveedor'],
-            $_REQUEST ['numFactura'],
+            $_REQUEST ['numfactura'],
             $_REQUEST ['fecha_factura'],
-            $_REQUEST ['tipoComprador'],
-            $_REQUEST ['tipoAccion'],
+            $_REQUEST ['tipocomprador'],
+            $_REQUEST ['tipoaccion'],
             $_REQUEST ['fecha_revision'],
             $_REQUEST ['revisor'],
-            $_REQUEST ['observacionesActa'],
+            $_REQUEST ['observacionesacta'],
             1,
+            $_REQUEST ['id_acta'],
         );
 
-        $cadenaSql = $this->miSql->getCadenaSql('insertarActa', $datosActa);
+        $cadenaSql = $this->miSql->getCadenaSql('actualizarActa', $datosActa);
         $id_acta = $esteRecursoDB->ejecutarAcceso($cadenaSql, "busqueda");
 
-        // Registro de Items
+
+        $cadenaSql = $this->miSql->getCadenaSql('limpiarItems', $_REQUEST ['id_acta']);
+        $limpiar = $esteRecursoDB->ejecutarAcceso($cadenaSql, "busqueda");
+
+         
         foreach ($items as $contenido) {
 
             $datosItems = array(
-                $id_acta [0][0],
+                $_REQUEST ['id_acta'],
                 $contenido ['item'],
-                $contenido ['descripcion'],
                 $contenido ['cantidad'],
+                $contenido ['descripcion'],
                 $contenido ['valor_unitario'],
-                $contenido ['valor_total']
-            );
+                $contenido ['valor_total'],
+                $fechaActual
+                    )
+            ;
 
             $cadenaSql = $this->miSql->getCadenaSql('insertarItems', $datosItems);
             $items = $esteRecursoDB->ejecutarAcceso($cadenaSql, "acceso");
-      
         }
-
-        $cadenaSql = $this->miSql->getCadenaSql('limpiar_tabla_items', $_REQUEST['seccion']);
+    
+   
+        $cadenaSql = $this->miSql->getCadenaSql('limpiar_tabla_items', $_REQUEST ['seccion']);
         $resultado_secuencia = $esteRecursoDB->ejecutarAcceso($cadenaSql, "acceso");
 
         $datos = array(
-            $id_acta[0][0],
-            $fechaActual
+            $_REQUEST['id_acta'],
+            $fechaActual,
         );
-
         if ($items == 1) {
+
             redireccion::redireccionar('inserto', $datos);
         } else {
+
             redireccion::redireccionar('noInserto', $datos);
         }
     }
 
     function resetForm() {
         foreach ($_REQUEST as $clave => $valor) {
+
             if ($clave != 'pagina' && $clave != 'development' && $clave != 'jquery' && $clave != 'tiempo') {
                 unset($_REQUEST [$clave]);
             }
@@ -112,7 +119,7 @@ class RegistradorActa {
 
 }
 
-$miRegistrador = new RegistradorActa($this->lenguaje, $this->sql, $this->funcion);
+$miRegistrador = new RegistradorOrden($this->lenguaje, $this->sql, $this->funcion);
 
 $resultado = $miRegistrador->procesarFormulario();
 ?>

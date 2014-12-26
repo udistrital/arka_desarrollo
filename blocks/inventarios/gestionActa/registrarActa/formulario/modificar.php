@@ -55,10 +55,10 @@ class registrarForm {
 
 
         // Consultar Orden Compra--------------------------------------------------------------------------------------------
-        $cadenaSql = $this->miSql->getCadenaSql('consultarActaM', $_REQUEST['numero_acta']);
+        $cadenaSql = $this->miSql->getCadenaSql('consultarActaM', $_REQUEST ['numero_acta']);
         $Acta = $esteRecursoDB->ejecutarAcceso($cadenaSql, "busqueda");
 
-       $cadenaSql = $this->miSql->getCadenaSql('consultarItems', $_REQUEST['numero_acta']);
+        $cadenaSql = $this->miSql->getCadenaSql('consultarItems', $_REQUEST ['numero_acta']);
         $items = $esteRecursoDB->ejecutarAcceso($cadenaSql, "busqueda");
         $seccion['tiempo'] = $tiempo;
 
@@ -68,6 +68,7 @@ class registrarForm {
             $insertados = $esteRecursoDB->ejecutarAcceso($cadenaSql, "acceso");
         }
 
+   
         $conexion = "inventarios";
         $esteRecursoDB = $this->miConfigurador->fabricaConexiones->getRecursoDB($conexion);
 

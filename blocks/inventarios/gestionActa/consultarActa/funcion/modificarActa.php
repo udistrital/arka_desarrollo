@@ -69,29 +69,24 @@ class RegistradorOrden {
         $cadenaSql = $this->miSql->getCadenaSql('actualizarActa', $datosActa);
         $id_acta = $esteRecursoDB->ejecutarAcceso($cadenaSql, "busqueda");
 
-
         $cadenaSql = $this->miSql->getCadenaSql('limpiarItems', $_REQUEST ['id_acta']);
         $limpiar = $esteRecursoDB->ejecutarAcceso($cadenaSql, "busqueda");
 
-         
         foreach ($items as $contenido) {
-
             $datosItems = array(
                 $_REQUEST ['id_acta'],
                 $contenido ['item'],
-                $contenido ['cantidad'],
                 $contenido ['descripcion'],
+                $contenido ['cantidad'],
                 $contenido ['valor_unitario'],
                 $contenido ['valor_total'],
                 $fechaActual
-                    )
-            ;
-
+            );
+            
             $cadenaSql = $this->miSql->getCadenaSql('insertarItems', $datosItems);
             $items = $esteRecursoDB->ejecutarAcceso($cadenaSql, "acceso");
         }
-    
-   
+
         $cadenaSql = $this->miSql->getCadenaSql('limpiar_tabla_items', $_REQUEST ['seccion']);
         $resultado_secuencia = $esteRecursoDB->ejecutarAcceso($cadenaSql, "acceso");
 
@@ -99,7 +94,8 @@ class RegistradorOrden {
             $_REQUEST['id_acta'],
             $fechaActual,
         );
-        if ($items == 1) {
+   
+        if ($items == true) {
 
             redireccion::redireccionar('inserto', $datos);
         } else {

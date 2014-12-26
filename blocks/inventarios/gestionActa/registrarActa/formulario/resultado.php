@@ -1,7 +1,5 @@
 <?php
 
-use inventarios\gestionActa\registrarActa\funcion\redireccion;
-
 if (!isset($GLOBALS ["autorizado"])) {
     include ("../index.php");
     exit();
@@ -41,8 +39,8 @@ class registrarForm {
 
 
         $rutaBloque = $this->miConfigurador->getVariableConfiguracion("host");
-        $rutaBloque.= $this->miConfigurador->getVariableConfiguracion("site") . "/blocks/";
-        $rutaBloque.= $esteBloque ['grupo'] ."/". $esteBloque ['nombre'];
+        $rutaBloque .= $this->miConfigurador->getVariableConfiguracion("site") . "/blocks/";
+        $rutaBloque .= $esteBloque ['grupo'] . $esteBloque ['nombre'];
 
         // ---------------- SECCION: Parámetros Globales del Formulario ----------------------------------
         /**
@@ -55,70 +53,46 @@ class registrarForm {
          */
         $atributosGlobales ['campoSeguro'] = 'true';
 
-
         // -------------------------------------------------------------------------------------------------
         $conexion = "inventarios";
         $esteRecursoDB = $this->miConfigurador->fabricaConexiones->getRecursoDB($conexion);
 
-       if (isset($_REQUEST['tipoOrden']) && $_REQUEST['tipoOrden'] != '') {
-             $tipo_orden = $_REQUEST['tipoOrden'];
+        if (isset($_REQUEST ['fecha_recibido']) && $_REQUEST ['fecha_recibido'] != '') {
+            $fechaRecibido = $_REQUEST ['fecha_recibido'];
         } else {
-             $tipo_orden = '';
-        }
-        
-       
-
-        if (isset($_REQUEST ['fecha_inicio']) && $_REQUEST ['fecha_inicio'] != '') {
-            $fechaInicio = $_REQUEST ['fecha_inicio'];
-        } else {
-            $fechaInicio = '';
+            $fechaRecibido = '';
         }
 
-
-        if (isset($_REQUEST ['fecha_final']) && $_REQUEST ['fecha_final'] != '') {
-            $fechaFinal = $_REQUEST ['fecha_final'];
+        if (isset($_REQUEST ['numero_acta']) && $_REQUEST ['numero_acta'] != '') {
+            $numeroActa = $_REQUEST ['numero_acta'];
         } else {
-            $fechaFinal = '';
+            $numeroActa = '';
         }
 
-        if (isset($_REQUEST ['numero_orden']) && $_REQUEST ['numero_orden'] != '') {
-            $numeroOrden = $_REQUEST ['numero_orden'];
+        if (isset($_REQUEST ['nitProveedor']) && $_REQUEST ['nitProveedor'] != '') {
+            $nit = $_REQUEST ['nitProveedor'];
         } else {
-            $numeroOrden = '';
+            $nit = '';
         }
 
+        if (isset($_REQUEST ['numFactura']) && $_REQUEST ['numFactura'] != '') {
+            $factura = $_REQUEST ['numFactura'];
+        } else {
+            $factura = '';
+        }
 
         $arreglo = array(
-            $fechaInicio,
-            $fechaFinal,
-            $numeroOrden
+            $numeroActa,
+            $fechaRecibido,
+            $nit,
+            $factura
         );
 
 
-     
-        switch ($tipo_orden) {
-            case 1:
-                $cadenaSql = $this->miSql->getCadenaSql('consultarOrdenServicios', $arreglo);
-                $resultado_orden = $esteRecursoDB->ejecutarAcceso($cadenaSql, "busqueda");
-                $titulo="Consultar y Modificar Orden de Servicios";
-                break;
+        $cadenaSql = $this->miSql->getCadenaSql('consultarActa', $arreglo);
+        $Acta = $esteRecursoDB->ejecutarAcceso($cadenaSql, "busqueda");
 
-            case 2:
-                $cadenaSql = $this->miSql->getCadenaSql('consultarOrdenCompra', $arreglo);
-                $resultado_orden = $esteRecursoDB->ejecutarAcceso($cadenaSql, "busqueda");
-                $titulo="Consultar y Modificar Orden de Compra";
-                break;
-
-            case 3:
-                $datos='';
-                redireccion::redireccionar('registrar', $datos);
-                $titulo="Consultar y Modificar Otros";
-                break;
-
-            default:
-                break;
-        }
-
+       
         // ---------------- SECCION: Parámetros Generales del Formulario ----------------------------------
         $esteCampo = $esteBloque ['nombre'];
         $atributos ['id'] = $esteCampo;
@@ -140,13 +114,11 @@ class registrarForm {
         echo $this->miFormulario->formulario($atributos);
         // ---------------- SECCION: Controles del Formulario -----------------------------------------------
 
-
-
         $esteCampo = "marcoDatosBasicos";
         $atributos ['id'] = $esteCampo;
         $atributos ["estilo"] = "jqueryui";
         $atributos ['tipoEtiqueta'] = 'inicio';
-        $atributos ["leyenda"] = $titulo;
+        $atributos ["leyenda"] = "Consultar y Modificar Acta Recibido";
         echo $this->miFormulario->marcoAgrupacion('inicio', $atributos);
 
 
@@ -179,34 +151,68 @@ class registrarForm {
         // ------------------Fin Division para los botones-------------------------
         echo $this->miFormulario->division("fin");
 
-        if ($resultado_orden!==FALSE) {
+
+
+        if ($Acta) {
 
             echo "<table id='tablaTitulos'>";
 
             echo "<thead>
-                <tr>
-                <th>Fecha Orden Compra</th>
-                <th>Número Orden Compra </th>
-		<th>Seleccionar</th>
-                </tr>
+                             <tr>
+                                <th>Número Acta Recibido</th>
+                                <th>Dependencia</th>
+                                <th>Fecha Recibido</th>
+                                <th>Tipo de Bien</th>
+                                <th>Nit Proveedor</th>
+                                <th>Proveedor</th>
+				<th>Número Factura</th>
+                                <th>Fecha Factura</th>
+                                <th>Comprador</th>
+                                <th>Acción</th>
+                                <th>Fecha Revisión</th>
+                                <th>Revisor</th>
+                                <th>Observaciones</th>
+			        <th>Modificar</th>
+                                <th>Eliminar</th>
+                             </tr>
             </thead>
             <tbody>";
 
-            for ($i = 0; $i < count($resultado_orden); $i ++) {
-                
+            for ($i = 0; $i < count($Acta); $i ++) {
                 $variable = "pagina=" . $miPaginaActual; // pendiente la pagina para modificar parametro
-                $variable .= "&opcion=asociarActa";
-// 				$variable .= "&usuario=" . $miSesion->getSesionUsuarioId ();
-                $variable .= "&numero_orden=" . $resultado_orden [$i] [0];
-                $variable .= "&tipo_orden=" . $resultado_orden [$i] [0];
+                $variable .= "&opcion=modificar";
+                $variable .= "&numero_acta=" . $Acta [$i] [0];
                 $variable = $this->miConfigurador->fabricaConexiones->crypto->codificar_url($variable, $directorio);
+                
+                
+                $variable1= "pagina=" . $miPaginaActual; // pendiente la pagina para modificar parametro
+                $variable1.= "&opcion=eliminarActa";
+                $variable1.= "&numero_acta=" . $Acta [$i] [0];
+                $variable1= $this->miConfigurador->fabricaConexiones->crypto->codificar_url($variable1, $directorio);
 
                 $mostrarHtml = "<tr>
-                    <td><center>" . $resultado_orden [$i] [1] . "</center></td>
-                    <td><center>" . $resultado_orden [$i] [0] . "</center></td>
+                    <td><center>" . $Acta [$i] [0] . "</center></td>
+                    <td><center>" . $Acta [$i] [1] . "</center></td>
+                    <td><center>" . $Acta [$i] [2] . "</center></td>
+                    <td><center>" . $Acta [$i] [3] . "</center></td>
+                    <td><center>" . $Acta [$i] [4] . "</center></td>
+                    <td><center>" . $Acta [$i] [5] . "</center></td>
+                    <td><center>" . $Acta [$i] [6] . "</center></td>
+                    <td><center>" . $Acta [$i] [7] . "</center></td>
+                    <td><center>" . $Acta [$i] [8] . "</center></td>
+                    <td><center>" . $Acta [$i] [9] . "</center></td>
+                    <td><center>" . $Acta [$i] [10] . "</center></td>
+                    <td><center>" . $Acta [$i] [11] . "</center></td>
+                    <td><center>" . $Acta [$i] [12] . "</center></td>
                     <td><center>
                     	<a href='" . $variable . "'>
                             <img src='" . $rutaBloque . "/css/images/edit.png' width='15px'>
+                        </a>
+                  	</center> </td>
+                    <td><center>
+                    
+                    	<a href='" . $variable1 . "'>
+                            <img src='" . $rutaBloque . "/css/images/delete.png' width='15px'>
                         </a>
                   	</center> </td>
            
@@ -224,7 +230,7 @@ class registrarForm {
             // echo $this->miFormulario->marcoAgrupacion("fin");
         } else {
 
-            $mensaje = "No Se Encontraron<br>Ordenes Asociadas";
+            $mensaje = "No Se Encontraron<br>Actas de Recibido";
 
             // ---------------- CONTROL: Cuadro de Texto --------------------------------------------------------
             $esteCampo = 'mensajeRegistro';

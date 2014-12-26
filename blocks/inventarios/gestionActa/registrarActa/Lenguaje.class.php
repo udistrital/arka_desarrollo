@@ -1,5 +1,5 @@
 <?php
-namespace inventarios\gestionActa\registrarActa;
+namespace inventarios\gestionActa\consultarActa;
 
 if (! isset ( $GLOBALS ["autorizado"] )) {
     include ("../index.php");

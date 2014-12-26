@@ -50,7 +50,7 @@ class Funcion {
         include_once ($this->ruta . "funcion/procesarAjax.php");
     }
 
-    function ConsultarActa() {
+     function ConsultarActa() {
         include_once ($this->ruta . "funcion/ConsultarActa.php");
     }
 
@@ -62,10 +62,11 @@ class Funcion {
         include_once ($this->ruta . "funcion/eliminarActa.php");
     }
 
+
     function action() {
 
-
-        // Evitar qu44444444rrrre se ingrese codigo HTML y PHP en los campos de texto
+// 		
+        // Evitar que se ingrese codigo HTML y PHP en los campos de texto
         // Campos que se quieren excluir de la limpieza de código. Formato: nombreCampo1|nombreCampo2|nombreCampo3
         $excluir = "";
         $_REQUEST = $this->miInspectorHTML->limpiarPHPHTML($_REQUEST);
@@ -79,7 +80,7 @@ class Funcion {
             $this->procesarAjax();
         } elseif (isset($_REQUEST ["opcion"])) {
 
-            if (isset($_REQUEST ["redireccionar"]) && $_REQUEST ['redireccionar'] == 'regresar') {
+                if (isset($_REQUEST ["redireccionar"]) && $_REQUEST ['redireccionar'] == 'regresar') {
                 redireccion::redireccionar($_REQUEST['opcion']);
             }
 
@@ -90,6 +91,7 @@ class Funcion {
             if ($_REQUEST ['opcion'] == 'eliminarActa') {
                 $this->eliminarActa();
             }
+		
         }
     }
 
