@@ -77,11 +77,16 @@ class RegistradorOrden {
 					$destino1 = $host . "/cotizaciones/" . $prefijo . "_" . $archivo1;
 				} else {
 					$status = "Error al subir el archivo";
+					
 				}
 			} else {
 				$status = "Error al subir archivo";
+				
 			}
 		}
+		
+		
+	   
 		
 		$datosProveedor = array (
 				$_REQUEST ['proveedor'],
@@ -96,6 +101,9 @@ class RegistradorOrden {
 		$cadenaSql = $this->miSql->getCadenaSql ( 'insertarProveedor', $datosProveedor );
 		$id_proveedor = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
 		
+		
+		
+		
 		$datosDependencia = array (
 				$_REQUEST ['dependencia'],
 				$_REQUEST ['direccionDependencia'],
@@ -104,6 +112,7 @@ class RegistradorOrden {
 		
 		// Registro Dependencia
 		$cadenaSql = $this->miSql->getCadenaSql ( 'insertarDependencia', $datosDependencia );
+		
 		$id_dependencia = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
 		
 		$datosContratista = array (
@@ -168,8 +177,13 @@ class RegistradorOrden {
 				$id_ordenador [0] [0] 
 		);
 		
+		
+				
+		
 		$cadenaSql = $this->miSql->getCadenaSql ( 'insertarOrden', $datosOrden );
+		
 		$id_orden = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
+
 		
 		foreach ( $items as $contenido ) {
 			
@@ -194,6 +208,9 @@ class RegistradorOrden {
 				$id_orden [0] [0],
 				$fechaActual 
 		);
+		
+		
+		
 		
 	
 		if ($items == 1) {

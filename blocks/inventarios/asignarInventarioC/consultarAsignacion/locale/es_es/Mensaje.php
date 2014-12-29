@@ -7,11 +7,22 @@ $this->idioma ["documentoContratistaTitulo"] ="Ingrese Documento Contratista";
 $this->idioma ["fecha_final"] ="Fecha Final : ";
 $this->idioma ["fecha_finalTitulo"] ="Seleccione Fecha Final";
 
+$this->idioma ["proveedor"] ="&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspNombre o Razón Social:";
+$this->idioma ["proveedorTitulo"] ="Ingrese Nombre Proveedor";
+
+$this->idioma ["nitProveedor"] ="&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspNIT Proveedor :";
+$this->idioma ["nitProveedorTitulo"] ="Ingrese NIT Proveedor";
+
+$this->idioma ["numFactura"] ="&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspNúmero Factura :";
+$this->idioma ["numFacturaTitulo"] ="Ingrese Número Factura";
+
+$this->idioma ["descripcionFactura"] ="Descripción Factura";
+
+$this->idioma ["observacionesActa"] ="Observaciones: ";
+
 $this->idioma ["aprobacionCheck"] ="&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp¿Aprobado?:";
 $this->idioma ["aprobacionCheckTitulo"] ="Seleccione en caso de ser aprobado";
 
-$this->idioma ["contratistaLista"] ="";
-$this->idioma ["contratistaListaTitulo"] ="Seleccione el contratista asignar el elemento";
 
 $this->idioma ["botonAceptar"] ="Modificar Elementos";
 $this->idioma ["botonCancelar"] ="Cancelar";

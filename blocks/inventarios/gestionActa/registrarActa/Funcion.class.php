@@ -1,8 +1,8 @@
 <?php
 
-namespace inventarios\gestionActa\consultarActa;
+namespace inventarios\gestionActa\registrarActa;
 
-use inventarios\gestionActa\consultarActa\funcion\redireccion;
+use inventarios\gestionActa\registrarActa\funcion\redireccion;
 
 if (!isset($GLOBALS ["autorizado"])) {
     include ("../index.php");
@@ -50,16 +50,9 @@ class Funcion {
         include_once ($this->ruta . "funcion/procesarAjax.php");
     }
 
-    function procesarCompra() {
-        include_once ($this->ruta . "funcion/procesarCompra.php");
-    }
 
-    function procesarContrato() {
-        include_once ($this->ruta . "funcion/procesarContrato.php");
-    }
-    
-     function procesarAvance() {
-        include_once ($this->ruta . "funcion/procesarAvance.php");
+    function registrarActa() {
+        include_once ($this->ruta . "funcion/registrarActa.php");
     }
 
     function consultarOrden() {
@@ -83,20 +76,16 @@ class Funcion {
             $this->procesarAjax();
         } elseif (isset($_REQUEST ["opcion"])) {
 
-            if ($_REQUEST ['opcion'] == 'registrarCompra') {
-                $this->procesarCompra();
+           if ($_REQUEST ['opcion'] == 'registrarActa') {
+                $this->registrarActa();
             }
 
             if (isset($_REQUEST ["redireccionar"]) && $_REQUEST ['redireccionar'] == 'regresar') {
                 redireccion::redireccionar($_REQUEST['opcion']);
             }
 
-            if ($_REQUEST ['opcion'] == 'procesarContrato') {
-                $this->procesarContrato();
-            }
-            
-            if ($_REQUEST ['opcion'] == 'procesarAvance') {
-                $this->procesarAvance();
+            if ($_REQUEST ['opcion'] == 'ConsultarOrden') {
+                $this->consultarOrden();
             }
 		
         }

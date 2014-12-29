@@ -42,7 +42,7 @@ class registrarForm {
 
         $_REQUEST ['tiempo'] = time();
         $tiempo = $_REQUEST['tiempo'];
-   
+
 
         // lineas para conectar base de d atos-------------------------------------------------------------------------------------------------
         $conexion = "inventarios";
@@ -58,7 +58,7 @@ class registrarForm {
         $cadenaSql = $this->miSql->getCadenaSql('consultarActaM', $_REQUEST['numero_acta']);
         $Acta = $esteRecursoDB->ejecutarAcceso($cadenaSql, "busqueda");
 
-       $cadenaSql = $this->miSql->getCadenaSql('consultarItems', $_REQUEST['numero_acta']);
+        $cadenaSql = $this->miSql->getCadenaSql('consultarItems', $_REQUEST['numero_acta']);
         $items = $esteRecursoDB->ejecutarAcceso($cadenaSql, "busqueda");
         $seccion['tiempo'] = $tiempo;
 
@@ -100,7 +100,8 @@ class registrarForm {
         // ---------------- FIN SECCION: de Parámetros Generales del Formulario ----------------------------
         // ----------------INICIAR EL FORMULARIO ------------------------------------------------------------
         $atributos ['tipoEtiqueta'] = 'inicio';
-        echo $this->miFormulario->formulario($atributos); {
+        echo $this->miFormulario->formulario($atributos);
+        {
             // ---------------- SECCION: Controles del Formulario -----------------------------------------------
 
             $esteCampo = "marcoDatosBasicos";
@@ -109,13 +110,15 @@ class registrarForm {
             $atributos ['tipoEtiqueta'] = 'inicio';
             $atributos ["leyenda"] = "Modificar Acta Recibido";
             echo $this->miFormulario->marcoAgrupacion('inicio', $atributos);
-            unset($atributos); {
+            unset($atributos);
+            {
 
 
                 $esteCampo = "AgrupacionActa";
                 $atributos ['id'] = $esteCampo;
                 $atributos ['leyenda'] = "Datos Iniciales";
-                echo $this->miFormulario->agrupacion('inicio', $atributos); {
+                echo $this->miFormulario->agrupacion('inicio', $atributos);
+                {
 
 // ---------------- CONTROL: Cuadro de Texto --------------------------------------------------------
                     $esteCampo = 'dependencia';
@@ -351,7 +354,8 @@ class registrarForm {
                     $esteCampo = "descripcionFactura";
                     $atributos ['id'] = $esteCampo;
                     $atributos ['leyenda'] = $this->lenguaje->getCadena($esteCampo);
-                    echo $this->miFormulario->agrupacion('inicio', $atributos); {
+                    echo $this->miFormulario->agrupacion('inicio', $atributos);
+                    {
                         ?>
                         <center>
                             <table id="tablaContenido">
@@ -373,8 +377,7 @@ class registrarForm {
                     $esteCampo = "AgrupacionActa";
                     $atributos ['id'] = $esteCampo;
                     $atributos ['leyenda'] = "Información General";
-                    echo $this->miFormulario->agrupacion('inicio', $atributos);
-                    {
+                    echo $this->miFormulario->agrupacion('inicio', $atributos); {
 ///------------------CONTROL: Lista desplegable -----------------------------------------------------
 
                         $matrizItems = $tipoComprador;
@@ -453,8 +456,7 @@ class registrarForm {
                     $esteCampo = "AgrupacionActa";
                     $atributos ['id'] = $esteCampo;
                     $atributos ['leyenda'] = "Validación de la Información";
-                    echo $this->miFormulario->agrupacion('inicio', $atributos);
-                    {
+                    echo $this->miFormulario->agrupacion('inicio', $atributos); {
 ///------------------CONTROL: Lista desplegable -----------------------------------------------------
 // ---------------- CONTROL: Cuadro de Texto --------------------------------------------------------
                         $esteCampo = 'fecha_revision';
@@ -675,8 +677,8 @@ class registrarForm {
                 $valorCodificado .= "&bloque=" . $esteBloque ['nombre'];
                 $valorCodificado .= "&bloqueGrupo=" . $esteBloque ["grupo"];
                 $valorCodificado .= "&opcion=modificarActa";
-                $valorCodificado .= "&seccion=".$tiempo;
-                $valorCodificado .= "&id_acta=".$_REQUEST ['numero_acta'];
+                $valorCodificado .= "&seccion=" . $tiempo;
+                $valorCodificado .= "&id_acta=" . $_REQUEST ['numero_acta'];
 
                 /**
                  * SARA permite que los nombres de los campos sean dinámicos.

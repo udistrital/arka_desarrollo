@@ -1,6 +1,6 @@
 <?php
 
-namespace inventarios\gestionActa\consultarActa;
+namespace inventarios\gestionActa\registrarActa;
 
 if (!isset($GLOBALS ["autorizado"])) {
     include ("../index.php");
@@ -53,9 +53,7 @@ class Frontera {
 
         $this->miFormulario = new \FormularioHtml ();
 
-
-
-        if (isset($_REQUEST ['opcion'])) {
+  if (isset($_REQUEST ['opcion'])) {
 
             switch ($_REQUEST ['opcion']) {
 
@@ -63,23 +61,13 @@ class Frontera {
                     include_once ($this->ruta . "/formulario/mensaje.php");
                     break;
 
-                case "registroCargue" :
-                    switch ($_REQUEST['tipoCargue']) {
-                        case 1:
-                            include_once ($this->ruta . "/formulario/registrarAvance.php");
-                            break;
-
-                        case 2:
-                            include_once ($this->ruta . "/formulario/registrarCompra.php");
-                            break;
-
-                        case 3:
-                            include_once ($this->ruta . "/formulario/registrarContrato.php");
-                            break;
-                    }
-
+                case "consultarOrden" :
+                    include_once ($this->ruta . "/formulario/resultado.php");
                     break;
-
+                
+                case "asociarActa":
+                    include_once ($this->ruta . "/formulario/registro.php");
+                    break;
             }
         } else {
             $_REQUEST ['opcion'] = "mostrar";

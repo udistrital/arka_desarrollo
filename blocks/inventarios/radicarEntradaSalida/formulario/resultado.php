@@ -117,7 +117,6 @@ class registrarForm {
         $atributos ['tipoEtiqueta'] = 'inicio';
         echo $this->miFormulario->formulario($atributos);
         // ---------------- SECCION: Controles del Formulario -----------------------------------------------
- 
         // ------------------Division para los botones-------------------------
         $atributos ["id"] = "botones";
         $atributos ["estilo"] = "marcoBotones";
@@ -152,7 +151,7 @@ class registrarForm {
         $atributos ['id'] = $esteCampo;
         $atributos ["estilo"] = "jqueryui";
         $atributos ['tipoEtiqueta'] = 'inicio';
-        $atributos ["leyenda"] = "Seleccinar Entrada para el Registro de Datos";
+        $atributos ["leyenda"] = "Seleccionar Entrada para el Registro de Datos";
         echo $this->miFormulario->marcoAgrupacion('inicio', $atributos);
 
         if ($registroEntrada !== false) {
@@ -199,7 +198,7 @@ class registrarForm {
 
             echo "</table>";
 
-      
+
 
             echo $this->miFormulario->marcoAgrupacion('fin');
 
@@ -228,8 +227,6 @@ class registrarForm {
             $valorCodificado .= "&bloque=" . $esteBloque ['nombre'];
             $valorCodificado .= "&bloqueGrupo=" . $esteBloque ["grupo"];
             $valorCodificado .= "&opcion=asignar";
-            $valorCodificado .= "&contratista=" . $docContratista;
-            $valorCodificado .= "&supervisor=" . $supervisor;
 
             /**
              * SARA permite que los nombres de los campos sean dinámicos.

@@ -65,8 +65,8 @@ class RegistradorActa {
         foreach ($items as $key => $values) {
 
             $datosAsignacion = array(
-                $contratista_id,
-                $supervisor_id,
+                $_REQUEST ['contratista'],
+                $_REQUEST ['supervisor'],
                 $items[$key],
                 1,
                 $fechaActual,

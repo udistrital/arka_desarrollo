@@ -61,22 +61,30 @@ class registrarForm {
         // -------------------------------------------------------------------------------------------------
         $conexion = "inventarios";
         $esteRecursoDB = $this->miConfigurador->fabricaConexiones->getRecursoDB($conexion);
-        //$supervisor = $_REQUEST['usuario'];
-        $supervisor = '1100000';
 
-        $cadenaSql = $this->miSql->getCadenaSql('consultarID', $supervisor);
-        $supervisor_id1 = $esteRecursoDB->ejecutarAcceso($cadenaSql, "busqueda");
-        $supervisor_id = $supervisor_id1[0][0];
+        if (isset($_REQUEST['documentoContratista']) && $_REQUEST['documentoContratista'] != '') {
+            $docContratista = $_REQUEST['documentoContratista'];
+        } else {
+            $docContratista = '';
+        }
+
+        $supervisor = $_REQUEST['usuario'];
+
+        $cadenaSql = $this->miSql->getCadenaSql('consultarContratista', $docContratista);
+        $contratista = $esteRecursoDB->ejecutarAcceso($cadenaSql, "busqueda");
+
+        $variables = array(
+            $supervisor,
+            $docContratista);
 
         //COnsultar Elementos Activos del supervisor para asignarlos al contratista
-        $cadenaSql = $this->miSql->getCadenaSql('consultarElementosSupervisor', $supervisor);
+        $cadenaSql = $this->miSql->getCadenaSql('consultarElementosSupervisor', $variables);
         $elementos_supervisor = $esteRecursoDB->ejecutarAcceso($cadenaSql, "busqueda");
 
-        $cadenaSql = $this->miSql->getCadenaSql('consultarElementosContratista', $supervisor);
+        //Consultar Elementos Asignados al contratista
+        $cadenaSql = $this->miSql->getCadenaSql('consultarElementosContratista', $variables);
         $elementos_contratista = $esteRecursoDB->ejecutarAcceso($cadenaSql, "busqueda");
 
-
-        //Consultar Elementos Asignados al contratista
         // ---------------- SECCION: Parámetros Generales del Formulario ----------------------------------
         $esteCampo = $esteBloque ['nombre'];
         $atributos ['id'] = $esteCampo;
@@ -102,12 +110,13 @@ class registrarForm {
         $atributos ['id'] = $esteCampo;
         $atributos ["estilo"] = "jqueryui";
         $atributos ['tipoEtiqueta'] = 'inicio';
-        $atributos ["leyenda"] = "Modificar Asignación de Elementos a Contratista";
+        $atributos ["leyenda"] = "Modificar Asignación de Elementos a Contratista " . $docContratista;
         echo $this->miFormulario->marcoAgrupacion('inicio', $atributos);
 
         if ($elementos_supervisor !== false || $elementos_contratista !== false) {
 
             echo "<table id='tablaTitulos'>";
+
             echo "<thead>
                 <tr>
                 <th>Nivel de Inventario</th>
@@ -117,9 +126,9 @@ class registrarForm {
                 <th>Serie Elemento</th>
                 <th>Valor Unitario</th>
                 <th>Subtotal</th>
-                <th>Total con IVA</th>
+                <th>Total IVA</th>
                 <th>Total Ajustado</th>
-		<th>Asignar</th>
+		<th>Estado Asignación</th>
                 </tr>
             </thead>
             <tbody>";
@@ -128,46 +137,39 @@ class registrarForm {
                 for ($i = 0; $i < count($elementos_supervisor); $i ++) {
 
                     $mostrarHtml = "<tr>
-                    <td><center>" . $elementos_supervisor [$i][0] . "</center></td>
-                    <td><center>" . $elementos_supervisor [$i][1] . "</center></td>
-                    <td><center>" . $elementos_supervisor [$i][2] . "</center></td>
-                    <td><center>" . $elementos_supervisor [$i][3] . "</center></td>
-                    <td><center>" . $elementos_supervisor [$i][4] . "</center></td>
-                    <td><center>" . $elementos_supervisor [$i][5] . "</center></td>
-                    <td><center>" . $elementos_supervisor [$i][6] . "</center></td>
-                    <td><center>" . $elementos_supervisor [$i][7] . "</center></td>
-                    <td><center>" . $elementos_supervisor [$i][8] . "</center></td>
+                    <td><center>" . $elementos_supervisor [$i]['nivel'] . "</center></td>
+                    <td><center>" . $elementos_supervisor [$i]['unidad'] . "</center></td>
+                    <td><center>" . $elementos_supervisor [$i]['cantidad'] . "</center></td>
+                    <td><center>" . $elementos_supervisor [$i]['marca'] . "</center></td>
+                    <td><center>" . $elementos_supervisor [$i]['serie'] . "</center></td>
+                    <td><center>" . $elementos_supervisor [$i]['valor'] . "</center></td>
+                    <td><center>" . $elementos_supervisor [$i]['subtotal_sin_iva'] . "</center></td>
+                    <td><center>" . $elementos_supervisor [$i]['total_iva'] . "</center></td>
+                    <td><center>" . $elementos_supervisor [$i]['total_iva_con'] . "</center></td>
                     <td><center>";
-                    // ---------------- CONTROL: Lista Desplegable--------------------------------------------------------
-
-                    $esteCampo = "elementoSupervisor_" . $elementos_supervisor [$i][0];
-                    $atributos['nombre'] = $esteCampo;
-                    $atributos['id'] = $esteCampo;
-                    //$atributos['etiqueta'] = $this->lenguaje->getCadena($esteCampo);
-                    $atributos['tab'] = $tab ++;
-                    $atributos['seleccion'] = $supervisor_id;
-                    $atributos['evento'] = 2;
+                    // ---------------- CONTROL: Cuadro de Texto --------------------------------------------------------
+                    $nombre = 'item_sup' . $i;
+                    $atributos ['id'] = $nombre;
+                    $atributos ['nombre'] = $nombre;
+                    $atributos ['marco'] = true;
+                    $atributos ['estiloMarco'] = true;
+                    $atributos ["etiquetaObligatorio"] = true;
+                    $atributos ['columnas'] = 1;
+                    $atributos ['dobleLinea'] = 1;
+                    $atributos ['tabIndex'] = $tab;
+                    $atributos ['etiqueta'] = '';
                     if (isset($_REQUEST [$esteCampo])) {
                         $atributos ['valor'] = $_REQUEST [$esteCampo];
                     } else {
-                        $atributos ['valor'] = '';
+                        $atributos ['valor'] = $elementos_supervisor [$i] ['id_elemento'];
                     }
-                    $atributos['deshabilitado'] = false;
-                    $atributos['columnas'] = "1";
-                    $atributos['tamanno'] = 1;
-                    $atributos['ajax_function'] = "";
-                    $atributos['ajax_control'] = $esteCampo;
-                    $atributos['estilo'] = "jqueryui";
-                    $atributos['validar'] = "required";
-                    $atributos['limitar'] = false;
-                    //$atributos['matrizItems'] = $matrizItems;
-                    //$atributos['miniRegistro']=;
-                    $atributos['baseDatos'] = "inventarios";
-                    $atributos['cadena_sql'] = $this->miSql->getCadenaSql("consultarContratista");
+
+                    $atributos ['deshabilitado'] = false;
+                    $tab ++;
+
                     // Aplica atributos globales al control
                     $atributos = array_merge($atributos, $atributosGlobales);
-                    $mostrarHtml.= $this->miFormulario->campoCuadroLista($atributos);
-
+                    $mostrarHtml .= $this->miFormulario->campoCuadroSeleccion($atributos);
 
                     $mostrarHtml .= "</center></td>
                     </tr>";
@@ -176,59 +178,45 @@ class registrarForm {
                     unset($variable);
                 }
             }
+            if ($elementos_contratista !== false) {
 
-            if ($elementos_contratista !== FALSE) {
                 for ($i = 0; $i < count($elementos_contratista); $i ++) {
 
-                    $identificacion1 = $elementos_contratista[$i][11];
-
-                    $cadenaSql = $this->miSql->getCadenaSql('consultarID', $identificacion1);
-                    $contratista_id1 = $esteRecursoDB->ejecutarAcceso($cadenaSql, "busqueda");
-                    $contratista_id = $contratista_id1[0][0];
-
-
                     $mostrarHtml = "
-              <tr>
-              <td><center>" . $elementos_contratista [$i][0] . "</center></td>
-              <td><center>" . $elementos_contratista [$i][1] . "</center></td>
-              <td><center>" . $elementos_contratista [$i][2] . "</center></td>
-              <td><center>" . $elementos_contratista [$i][3] . "</center></td>
-              <td><center>" . $elementos_contratista [$i][4] . "</center></td>
-              <td><center>" . $elementos_contratista [$i][5] . "</center></td>
-              <td><center>" . $elementos_contratista [$i][6] . "</center></td>
-              <td><center>" . $elementos_contratista [$i][7] . "</center></td>
-              <td><center>" . $elementos_contratista [$i][8] . "</center></td>
-
-              <td><center>";
+                    <tr>
+                    <td><center>" . $elementos_contratista [$i]['nivel'] . "</center></td>
+                    <td><center>" . $elementos_contratista [$i]['unidad'] . "</center></td>
+                    <td><center>" . $elementos_contratista [$i]['cantidad'] . "</center></td>
+                    <td><center>" . $elementos_contratista [$i]['marca'] . "</center></td>
+                    <td><center>" . $elementos_contratista [$i]['serie'] . "</center></td>
+                    <td><center>" . $elementos_contratista [$i]['valor'] . "</center></td>
+                    <td><center>" . $elementos_contratista [$i]['subtotal_sin_iva'] . "</center></td>
+                    <td><center>" . $elementos_contratista [$i]['total_iva'] . "</center></td>
+                    <td><center>" . $elementos_contratista [$i]['total_iva_con'] . "</center></td>
+                    <td><center>";
                     // ---------------- CONTROL: Cuadro de Texto --------------------------------------------------------
-                    $esteCampo = "elementoContratista_" . $elementos_contratista[$i][10];
-                    $atributos['nombre'] = $esteCampo;
-                    $atributos['id'] = $esteCampo;
-                    //$atributos['etiqueta'] = $this->lenguaje->getCadena($esteCampo);
-                    $atributos['tab'] = $tab ++;
-                    $atributos['seleccion'] = $identificacion1;
-                    $atributos['evento'] = 2;
-                    if (isset($identificacion1)) {
-                        $atributos ['valor'] = $identificacion1;
+                    $nombre = 'item_cont' . $i;
+                    $atributos ['id'] = $nombre;
+                    $atributos ['nombre'] = $nombre;
+                    $atributos ['marco'] = true;
+                    $atributos ['estiloMarco'] = true;
+                    $atributos ["etiquetaObligatorio"] = true;
+                    $atributos ['columnas'] = 1;
+                    $atributos ['dobleLinea'] = 1;
+                    $atributos ['tabIndex'] = $tab;
+                    $atributos ['etiqueta'] = '';
+                    if (isset($_REQUEST [$esteCampo])) {
+                        $atributos ['valor'] = $_REQUEST [$esteCampo];
                     } else {
-                        $atributos ['valor'] = '';
+                        $atributos ['valor'] = $elementos_contratista [$i] ['id_elemento'];
                     }
-                    $atributos['deshabilitado'] = false;
-                    $atributos['columnas'] = "1";
-                    $atributos['tamanno'] = 1;
-                    $atributos['ajax_function'] = "";
-                    $atributos['ajax_control'] = $esteCampo;
-                    $atributos['estilo'] = "jqueryui";
-                    $atributos['validar'] = "required";
-                    $atributos['limitar'] = false;
-                    //$atributos['matrizItems'] = $matrizItems;
-                    //$atributos['miniRegistro']=;
-                    $atributos['baseDatos'] = "inventarios";
-                    $atributos['cadena_sql'] = $this->miSql->getCadenaSql("consultarContratista");
+                    $atributos ['seleccionado'] = true;
+                    $atributos ['deshabilitado'] = false;
+                    $tab ++;
+
                     // Aplica atributos globales al control
                     $atributos = array_merge($atributos, $atributosGlobales);
-                    $mostrarHtml.= $this->miFormulario->campoCuadroLista($atributos);
-
+                    $mostrarHtml .= $this->miFormulario->campoCuadroSeleccion($atributos);
 
                     $mostrarHtml .= "</center></td>
                     </tr>";
@@ -296,7 +284,8 @@ class registrarForm {
             $valorCodificado .= "&pagina=" . $this->miConfigurador->getVariableConfiguracion('pagina');
             $valorCodificado .= "&bloque=" . $esteBloque ['nombre'];
             $valorCodificado .= "&bloqueGrupo=" . $esteBloque ["grupo"];
-            $valorCodificado .= "&opcion=modificar";
+            $valorCodificado .= "&opcion=asignar";
+            $valorCodificado .= "&contratista=" . $docContratista;
             $valorCodificado .= "&supervisor=" . $supervisor;
 
             /**
