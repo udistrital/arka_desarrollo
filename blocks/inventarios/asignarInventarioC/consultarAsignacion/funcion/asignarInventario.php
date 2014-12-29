@@ -59,6 +59,8 @@ class RegistradorActa {
         );
         // asociar super-cont-item
 
+        $valor = 0;
+
         for ($i = 0; $i <= 200; $i ++) {
             if (isset($_REQUEST ['item_sup' . $i])) {
                 $items_sup [] = $_REQUEST ['item_sup' . $i];
@@ -69,6 +71,12 @@ class RegistradorActa {
             foreach ($elementos_supervisor as $key => $values) {
                 foreach ($items_sup as $cont => $values) {
                     if ($items_sup[$cont] == $elementos_supervisor[$key][0]) {
+                        $valor = 1;
+                    } else {
+                        $valor = $valor;
+                    }
+
+                    if ($valor == 1) {
                         //si son iguales, significa que un elemento del supervisor fue asignado
                         //activar asignación a contratista
                         $datosAsignacion = array(
@@ -101,7 +109,7 @@ class RegistradorActa {
 
                         $datosInactivar = array(
                             $elementos_supervisor[$key][0],
-                            't',
+                            'f',
                             $fechaActual,
                         );
 
@@ -112,6 +120,8 @@ class RegistradorActa {
                         $inactivar_sup = $esteRecursoDB->ejecutarAcceso($cadenaSql2, "insertar");
                     }
                 }
+
+                $valor = 0;
             }
         }
 
@@ -123,7 +133,6 @@ class RegistradorActa {
                     $items_cont [] = $_REQUEST ['item_cont' . $i];
                 }
             }
-
             $valor = 0;
 
             foreach ($elementos_contratista as $key => $values) {
@@ -160,7 +169,7 @@ class RegistradorActa {
             }
         }
         //inactivar item para asignar
-        if (isset($asignar_cont) == true && isset($asignar_sup) == true && isset($inactivar_cont) == true && isset($inactivar_sup) == true) {
+        if (isset($asignar_cont) == true && isset($asignar_sup) == true || isset($inactivar_cont) == true || isset($inactivar_sup) == true) {
             redireccion::redireccionar('inserto', $datos);
         } else {
             redireccion::redireccionar('noInserto', $datos);
