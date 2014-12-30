@@ -133,4 +133,50 @@ if ($_REQUEST ['funcion'] == 'EliminarItem') {
 	echo $resultadoItems;
 }
 
+if ($_REQUEST ['funcion'] == 'SeleccionProveedor') {
+
+	$cadenaSql = $this->sql->getCadenaSql ( 'informacion_proveedor', $_REQUEST ['personaje'] );
+	$resultadoItems = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
+
+	$resultado =json_encode($resultadoItems [0])  ;
+
+	echo $resultado;
+}
+
+
+
+if ($_REQUEST ['funcion'] == 'SeleccionDependencia') {
+
+	$cadenaSql = $this->sql->getCadenaSql ( 'informacion_dependencia', $_REQUEST ['dependencia'] );
+	$resultadoItems = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
+
+	$resultado =json_encode($resultadoItems [0])  ;
+
+	echo $resultado;
+}
+
+
+
+if ($_REQUEST ['funcion'] == 'SeleccionOrdenador') {
+
+	$cadenaSql = $this->sql->getCadenaSql ( 'informacion_ordenador', $_REQUEST ['ordenador'] );
+	$resultadoItems = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
+
+	$resultado =json_encode($resultadoItems [0])  ;
+
+	echo $resultado;
+}
+
+
+
+if ($_REQUEST ['funcion'] == 'SeleccionCargo') {
+
+	$cadenaSql = $this->sql->getCadenaSql ( 'informacion_cargo_jefe', $_REQUEST ['cargo'] );
+	$resultadoItems = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
+
+	$resultado =json_encode($resultadoItems [0])  ;
+
+	echo $resultado;
+}
+
 ?>

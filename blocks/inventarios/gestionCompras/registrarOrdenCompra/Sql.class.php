@@ -149,8 +149,52 @@ class Sql extends \Sql {
 			 * Clausulas Del Caso Uso.
 			 */
 			
-			// SELECT id_rubro, nombre, codigo
-			// FROM rubro;
+			case "informacion_cargo_jefe" :
+				$cadenaSql = " SELECT ";
+				$cadenaSql .= " nombres ||' '||apellidos,";
+				$cadenaSql .= " id_encargado ";
+				$cadenaSql .= " FROM";
+				$cadenaSql .= " encargado ";
+				$cadenaSql .= " WHERE id_tipo_encargado='2' AND estado='TRUE' ";
+				$cadenaSql .= "AND cargo='" . $variable . "';";
+				
+				break;
+			
+			case "informacion_ordenador" :
+				$cadenaSql = " SELECT ";
+				$cadenaSql .= " nombres ||' '||apellidos, ";
+				$cadenaSql .= " id_encargado";
+				$cadenaSql .= " FROM";
+				$cadenaSql .= " encargado ";
+				$cadenaSql .= " WHERE id_tipo_encargado='1' AND estado='TRUE' ";
+				$cadenaSql .= "AND asignacion='" . $variable . "';";
+				
+				break;
+			
+			case "ordenador_gasto" :
+				$cadenaSql = " SELECT ";
+				$cadenaSql .= " id_ordenador,";
+				$cadenaSql .= " descripcion ";
+				$cadenaSql .= " FROM";
+				$cadenaSql .= " tipo_ordenador_gasto ";
+				break;
+			
+			case "constratistas" :
+				$cadenaSql = " SELECT ";
+				$cadenaSql .= " id_encargado,";
+				$cadenaSql .= "identificacion ||' - '|| nombres ||' 	'||apellidos as contratista ";
+				$cadenaSql .= " FROM";
+				$cadenaSql .= " encargado ";
+				$cadenaSql .= " WHERE id_tipo_encargado='3' AND estado='TRUE'";
+				break;
+			
+			case "cargo_jefe" :
+				$cadenaSql = " SELECT ";
+				$cadenaSql .= " id_cargo,";
+				$cadenaSql .= "descripcion ";
+				$cadenaSql .= " FROM";
+				$cadenaSql .= " tipo_cargo ; ";
+				break;
 			
 			case "rubros" :
 				$cadenaSql = " SELECT ";
@@ -324,8 +368,8 @@ class Sql extends \Sql {
 				$cadenaSql .= " fecha_registro, disponibilidad_presupuestal, ";
 				$cadenaSql .= " fecha_disponibilidad, rubro, obligaciones_proveedor, obligaciones_contratista, ";
 				$cadenaSql .= " poliza1, poliza2, poliza3, poliza4, poliza5, lugar_entrega, destino, ";
-				$cadenaSql .= " tiempo_esntrega, forma_pago, supervision, inhabilidades, id_proveedor, ";
-				$cadenaSql .= " id_dependencia, id_contratista, id_jefe, id_ordenador)";
+				$cadenaSql .= " tiempo_entrega, forma_pago, supervision, inhabilidades, id_proveedor,ruta_cotizacion,nombre_cotizacion,";
+				$cadenaSql .= " id_dependencia, id_contratista, id_jefe, id_ordenador,estado)";
 				$cadenaSql .= " VALUES (";
 				$cadenaSql .= "'" . $variable [0] . "',";
 				$cadenaSql .= "'" . $variable [1] . "',";
@@ -369,7 +413,10 @@ class Sql extends \Sql {
 				$cadenaSql .= "'" . $variable [18] . "',";
 				$cadenaSql .= "'" . $variable [19] . "',";
 				$cadenaSql .= "'" . $variable [20] . "',";
-				$cadenaSql .= "'" . $variable [21] . "') ";
+				$cadenaSql .= "'" . $variable [21] . "',";
+				$cadenaSql .= "'" . $variable [22] . "',";
+				$cadenaSql .= "'" . $variable [23] . "',";
+				$cadenaSql .= "'" . $variable [24] . "') ";
 				$cadenaSql .= "RETURNING  id_orden_compra; ";
 				
 				break;

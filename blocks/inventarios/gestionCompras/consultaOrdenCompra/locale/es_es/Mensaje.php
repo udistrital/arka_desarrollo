@@ -1,6 +1,20 @@
 <?php
 $this->idioma ["noDefinido"] = "Etiqueta no esta definida en locale/es_es/Mensaje.php";
 
+$this->idioma ["reg_proveedor"] ="Registrar Proveedor: ";
+$this->idioma ["reg_proveedorTitulo"] ="Seleccione Proveedor";
+
+$this->idioma ["diponibilidad"] ="Disponibilidad Presupuestal : ";
+$this->idioma ["diponibilidadTitulo"] ="Ingrese Disponibilidad Presupuestal";
+
+$this->idioma ["selec_proveedor"] ="Proveedor : ";
+$this->idioma ["selec_proveedorTitulo"] ="Seleccione Proveedor";
+
+
+$this->idioma ["selec_dependencia"] ="Dependencia : ";
+$this->idioma ["selec_dependenciaTitulo"] ="Seleccione Dependencia";
+
+
 
 $this->idioma ["fecha_inicio"] ="Fecha Inicial : ";
 $this->idioma ["fecha_inicioTitulo"] ="Seleccione Fecha Inicial";
@@ -16,7 +30,7 @@ $this->idioma ["numero_ordenTitulo"] ="Ingrese Número Orden Compra";
 $this->idioma ["nit"] ="Nit : ";
 $this->idioma ["nitTitulo"] ="Ingrese Nit";
 
-$this->idioma ["dependencia_soli"] ="Dependencia Solicitante : ";
+$this->idioma ["dependencia_soli"] ="Nit y/o Dependencia Solicitante : ";
 $this->idioma ["dependencia_soliTitulo"] ="Ingrese Dependecia Solicitante";
 
 $this->idioma ["nombreCotizacion"] ="&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspNombre Cotización : ";
@@ -49,8 +63,8 @@ $this->idioma ["direccionProveedorTitulo"] ="Ingrese Dirección Proveedor";
 $this->idioma ["telefonoProveedor"] ="&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspTeléfono :";
 $this->idioma ["telefonoProveedorTitulo"] ="Ingrese Teléfono Proveedor";
 
-$this->idioma ["proveedorCotizacion"] ="Cotización :";
-$this->idioma ["proveedorCotizacionTitulo"] ="Ingrese Archivo Cotización Proveedor";
+$this->idioma ["proveedorCotizacion"] ="&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspCotización :";
+$this->idioma ["proveedorCotizacionTitulo"] ="Cargue Archivo Cotización Proveedor";
 
 $this->idioma ["rubro"] ="Rubro :";
 $this->idioma ["rubroTitulo"] ="Ingrese Rubro";
@@ -131,7 +145,7 @@ $this->idioma ["nombreOrdenadorTitulo"] ="Ingrese Nombre y Apellidos ";
 $this->idioma ["asignacionOrdenador"] ="&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspAsignación : ";
 $this->idioma ["asignacionOrdenadorTitulo"] ="Ingrese Asignación de Ordenador del Gasto";
  
-$this->idioma ["actualizarCotizacion"] ="&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspActualizar Cotización : ";
+$this->idioma ["actualizarCotizacion"] ="&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspActualizar Cotización : ";
 $this->idioma ["actualizarCotizacionTitulo"] ="Seleccione Si desea Actualizar Cotizacion ";
 
 

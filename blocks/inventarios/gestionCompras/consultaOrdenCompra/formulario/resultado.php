@@ -22,8 +22,6 @@ class registrarForm {
 	}
 	function miForm() {
 	
-// 		var_dump ( $_REQUEST );
-// 		exit ();
 		// Rescatar los datos de este bloque
 		$esteBloque = $this->miConfigurador->getVariableConfiguracion ( "esteBloque" );
 		$miPaginaActual=$this->miConfigurador->getVariableConfiguracion ( 'pagina' );
@@ -79,12 +77,7 @@ class registrarForm {
 			$numeroOrden = '';
 		}
 		
-		if (isset ( $_REQUEST ['nit'] ) && $_REQUEST ['nit'] != '') {
-			$nit = $_REQUEST ['nit'];
-		} else {
-			$nit = '';
-		}
-		
+
 		if (isset ( $_REQUEST ['dependencia_soli'] ) && $_REQUEST ['dependencia_soli'] != '') {
 			$dependencia = $_REQUEST ['dependencia_soli'];
 		} else {
@@ -94,13 +87,13 @@ class registrarForm {
 		
 		
 		$arreglo = array (
+				$numeroOrden,
+				$dependencia,
 				$fechaInicio,
 				$fechaFinal,
-				$numeroOrden,
-				$nit,
-				$dependencia
+				
 		);
-		
+
 	 
 		$cadenaSql = $this->miSql->getCadenaSql ( 'consultarOrden',$arreglo );
 		$ordenCompra = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );

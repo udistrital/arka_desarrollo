@@ -154,4 +154,28 @@ if ($_REQUEST ['funcion'] == 'SeleccionDependencia') {
 
 	echo $resultado;
 }
+
+
+
+if ($_REQUEST ['funcion'] == 'SeleccionOrdenador') {
+
+	$cadenaSql = $this->sql->getCadenaSql ( 'informacion_ordenador', $_REQUEST ['ordenador'] );
+	$resultadoItems = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
+
+	$resultado =json_encode($resultadoItems [0])  ;
+
+	echo $resultado;
+}
+
+
+
+if ($_REQUEST ['funcion'] == 'SeleccionCargo') {
+
+	$cadenaSql = $this->sql->getCadenaSql ( 'informacion_cargo_jefe', $_REQUEST ['cargo'] );
+	$resultadoItems = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
+
+	$resultado =json_encode($resultadoItems [0])  ;
+
+	echo $resultado;
+}
 ?>

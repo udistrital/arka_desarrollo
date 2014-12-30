@@ -51,6 +51,16 @@
          $("#<?php echo $this->campoSeguro('selec_dependencia')?>").select2();
          
          $("#<?php echo $this->campoSeguro('rubro')?>").select2();
+         
+    
+    
+         
+          $("#<?php echo $this->campoSeguro('cargoJefeSeccion')?>").select2();
+	      $("#<?php echo $this->campoSeguro('nombreContratista')?>").select2();
+          $("#<?php echo $this->campoSeguro('asignacionOrdenador')?>").select2();
+         
+    		$('#<?php echo $this->campoSeguro('nombreJefeSeccion')?>').attr('disabled','');
+        	$('#<?php echo $this->campoSeguro('nombreOrdenador')?>').attr('disabled','');     
         
         
 	             

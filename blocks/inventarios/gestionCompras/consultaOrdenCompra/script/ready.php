@@ -29,7 +29,30 @@
                 "sPaginationType": "full_numbers"
                  } );
 
+                     
+                       $("#<?php echo $this->campoSeguro('selec_dependencia')?>").select2();
+         
+          $("#<?php echo $this->campoSeguro('rubro')?>").select2();
+          $("#<?php echo $this->campoSeguro('cargoJefeSeccion')?>").select2();
+	      $("#<?php echo $this->campoSeguro('nombreContratista')?>").select2();
+          $("#<?php echo $this->campoSeguro('asignacionOrdenador')?>").select2();
+         
+	    	  $('#<?php echo $this->campoSeguro('nombreJefeSeccion')?>').attr('disabled','');
+	          $('#<?php echo $this->campoSeguro('nombreOrdenador')?>').attr('disabled','');     
+	          $('#<?php echo $this->campoSeguro('proveedor')?>').attr('disabled','');
+	          $('#<?php echo $this->campoSeguro('nitProveedor')?>').attr('disabled','');
+	          $('#<?php echo $this->campoSeguro('direccionProveedor')?>').attr('disabled','');
+      	  	  $('#<?php echo $this->campoSeguro('telefonoProveedor')?>').attr('disabled','');
+        	  $('#<?php echo $this->campoSeguro('direccionDependencia')?>').attr('disabled','');
+        	  $('#<?php echo $this->campoSeguro('telefonoDependencia')?>').attr('disabled','');
+        		
+        	
 
+             $("#<?php echo $this->campoSeguro('dependencia_soli')?>").select2({
+             	 placeholder: "Search for a repository",
+              	 minimumInputLength: 3,
+              	 });
+             
              
                   $('#<?php echo $this->campoSeguro('nombreCotizacion')?>').attr('disabled','');
                   

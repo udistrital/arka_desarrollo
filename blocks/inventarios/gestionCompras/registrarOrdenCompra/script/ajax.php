@@ -93,6 +93,41 @@ $urlFinal5 = $url . $cadena5;
 
 
 
+// Variables
+$cadenaACodificar6 = "pagina=" . $this->miConfigurador->getVariableConfiguracion ( "pagina" );
+$cadenaACodificar6 .= "&procesarAjax=true";
+$cadenaACodificar6 .= "&action=index.php";
+$cadenaACodificar6 .= "&bloqueNombre=" . $esteBloque ["nombre"];
+$cadenaACodificar6 .= "&bloqueGrupo=" . $esteBloque ["grupo"];
+$cadenaACodificar6 .= $cadenaACodificar . "&funcion=SeleccionOrdenador";
+$cadenaACodificar6 .="&tiempo=".$_REQUEST['tiempo'];
+
+// Codificar las variables
+$enlace6 = $this->miConfigurador->getVariableConfiguracion ( "enlace" );
+$cadena6 = $this->miConfigurador->fabricaConexiones->crypto->codificar_url ( $cadenaACodificar6, $enlace6 );
+
+// URL definitiva
+$urlFinal6 = $url . $cadena6;
+
+
+
+// Variables
+$cadenaACodificar7 = "pagina=" . $this->miConfigurador->getVariableConfiguracion ( "pagina" );
+$cadenaACodificar7 .= "&procesarAjax=true";
+$cadenaACodificar7 .= "&action=index.php";
+$cadenaACodificar7 .= "&bloqueNombre=" . $esteBloque ["nombre"];
+$cadenaACodificar7 .= "&bloqueGrupo=" . $esteBloque ["grupo"];
+$cadenaACodificar7 .= $cadenaACodificar . "&funcion=SeleccionCargo";
+$cadenaACodificar7 .="&tiempo=".$_REQUEST['tiempo'];
+
+// Codificar las variables
+$enlace7 = $this->miConfigurador->getVariableConfiguracion ( "enlace" );
+$cadena7 = $this->miConfigurador->fabricaConexiones->crypto->codificar_url ( $cadenaACodificar7, $enlace7 );
+
+// URL definitiva
+$urlFinal7 = $url . $cadena7;
+
+
 
 
 // echo $urlFinal;exit;
@@ -132,21 +167,19 @@ function datosInfo(elem, request, response){
 	};
 
 
-
-	function datosDependencia(elem, request, response){
+	function datosCargo(elem, request, response){
 		  $.ajax({
-		    url: "<?php echo $urlFinal5?>",
+		    url: "<?php echo $urlFinal7?>",
 		    dataType: "json",
-		    data: { dependencia:$("#<?php echo $this->campoSeguro('selec_dependencia')?>").val()},
+		    data: { cargo:$("#<?php echo $this->campoSeguro('cargoJefeSeccion')?>").val()},
 		    success: function(data){ 
 
 		    		if(data[0]!='null'){
 
-		    			$("#<?php echo $this->campoSeguro('direccionDependencia')?>").val(data[0]);
-						$("#<?php echo $this->campoSeguro('telefonoDependencia')?>").val(data[1]);
-		
-
+		    			$("#<?php echo $this->campoSeguro('nombreJefeSeccion')?>").val(data[0]);
+		    			$("#<?php echo $this->campoSeguro('id_jefe')?>").val(data[1]);
 		    			
+								    			
 			    		}else{
 
 					
@@ -159,7 +192,64 @@ function datosInfo(elem, request, response){
 			                    
 		   });
 		};
-		
+	
+
+	
+	function datosOrdenador(elem, request, response){
+		  $.ajax({
+		    url: "<?php echo $urlFinal6?>",
+		    dataType: "json",
+		    data: { ordenador:$("#<?php echo $this->campoSeguro('asignacionOrdenador')?>").val()},
+		    success: function(data){ 
+
+		    		if(data[0]!='null'){
+
+		    			$("#<?php echo $this->campoSeguro('nombreOrdenador')?>").val(data[0]);
+		    			$("#<?php echo $this->campoSeguro('id_ordenador')?>").val(data[1]);
+								    			
+			    		}else{
+
+					
+
+
+				    		
+			    		}
+
+		    }
+			                    
+		   });
+		};
+
+
+
+
+
+		function datosDependencia(elem, request, response){
+			  $.ajax({
+			    url: "<?php echo $urlFinal5?>",
+			    dataType: "json",
+			    data: { dependencia:$("#<?php echo $this->campoSeguro('selec_dependencia')?>").val()},
+			    success: function(data){ 
+
+			    		if(data[0]!='null'){
+
+			    			$("#<?php echo $this->campoSeguro('direccionDependencia')?>").val(data[0]);
+							$("#<?php echo $this->campoSeguro('telefonoDependencia')?>").val(data[1]);
+			
+
+			    			
+				    		}else{
+
+						
+
+
+					    		
+				    		}
+
+			    }
+				                    
+			   });
+			};
 
 
 $(function() {
@@ -319,7 +409,12 @@ $(function() {
     $("#<?php echo $this->campoSeguro('selec_dependencia')?>").change(function(){ datosDependencia(); });
 
 
-    $("#<?php echo $this->campoSeguro('botonCalcular')?>").blur(function(){ alert('stiv!!!!');exit; });
+    $("#<?php echo $this->campoSeguro('asignacionOrdenador')?>").change(function(){ datosOrdenador(); });
+
+    $("#<?php echo $this->campoSeguro('cargoJefeSeccion')?>").change(function(){ datosCargo(); });
+
+
+  
 
 
     

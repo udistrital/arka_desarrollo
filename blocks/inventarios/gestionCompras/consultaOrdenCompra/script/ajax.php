@@ -58,6 +58,76 @@ $cadena3 = $this->miConfigurador->fabricaConexiones->crypto->codificar_url ( $ca
 $urlFinal3 = $url . $cadena3;
 
 
+// Variables
+$cadenaACodificar4 = "pagina=" . $this->miConfigurador->getVariableConfiguracion ( "pagina" );
+$cadenaACodificar4 .= "&procesarAjax=true";
+$cadenaACodificar4 .= "&action=index.php";
+$cadenaACodificar4 .= "&bloqueNombre=" . $esteBloque ["nombre"];
+$cadenaACodificar4 .= "&bloqueGrupo=" . $esteBloque ["grupo"];
+$cadenaACodificar4 .= $cadenaACodificar . "&funcion=SeleccionProveedor";
+$cadenaACodificar4 .="&tiempo=".$_REQUEST['tiempo'];
+
+// Codificar las variables
+$enlace4 = $this->miConfigurador->getVariableConfiguracion ( "enlace" );
+$cadena4 = $this->miConfigurador->fabricaConexiones->crypto->codificar_url ( $cadenaACodificar4, $enlace4 );
+
+// URL definitiva
+$urlFinal4 = $url . $cadena4;
+
+
+// Variables
+$cadenaACodificar5 = "pagina=" . $this->miConfigurador->getVariableConfiguracion ( "pagina" );
+$cadenaACodificar5 .= "&procesarAjax=true";
+$cadenaACodificar5 .= "&action=index.php";
+$cadenaACodificar5 .= "&bloqueNombre=" . $esteBloque ["nombre"];
+$cadenaACodificar5 .= "&bloqueGrupo=" . $esteBloque ["grupo"];
+$cadenaACodificar5 .= $cadenaACodificar . "&funcion=SeleccionDependencia";
+$cadenaACodificar5 .="&tiempo=".$_REQUEST['tiempo'];
+
+// Codificar las variables
+$enlace5 = $this->miConfigurador->getVariableConfiguracion ( "enlace" );
+$cadena5 = $this->miConfigurador->fabricaConexiones->crypto->codificar_url ( $cadenaACodificar5, $enlace5 );
+
+// URL definitiva
+$urlFinal5 = $url . $cadena5;
+
+
+
+// Variables
+$cadenaACodificar6 = "pagina=" . $this->miConfigurador->getVariableConfiguracion ( "pagina" );
+$cadenaACodificar6 .= "&procesarAjax=true";
+$cadenaACodificar6 .= "&action=index.php";
+$cadenaACodificar6 .= "&bloqueNombre=" . $esteBloque ["nombre"];
+$cadenaACodificar6 .= "&bloqueGrupo=" . $esteBloque ["grupo"];
+$cadenaACodificar6 .= $cadenaACodificar . "&funcion=SeleccionOrdenador";
+$cadenaACodificar6 .="&tiempo=".$_REQUEST['tiempo'];
+
+// Codificar las variables
+$enlace6 = $this->miConfigurador->getVariableConfiguracion ( "enlace" );
+$cadena6 = $this->miConfigurador->fabricaConexiones->crypto->codificar_url ( $cadenaACodificar6, $enlace6 );
+
+// URL definitiva
+$urlFinal6 = $url . $cadena6;
+
+
+
+// Variables
+$cadenaACodificar7 = "pagina=" . $this->miConfigurador->getVariableConfiguracion ( "pagina" );
+$cadenaACodificar7 .= "&procesarAjax=true";
+$cadenaACodificar7 .= "&action=index.php";
+$cadenaACodificar7 .= "&bloqueNombre=" . $esteBloque ["nombre"];
+$cadenaACodificar7 .= "&bloqueGrupo=" . $esteBloque ["grupo"];
+$cadenaACodificar7 .= $cadenaACodificar . "&funcion=SeleccionCargo";
+$cadenaACodificar7 .="&tiempo=".$_REQUEST['tiempo'];
+
+// Codificar las variables
+$enlace7 = $this->miConfigurador->getVariableConfiguracion ( "enlace" );
+$cadena7 = $this->miConfigurador->fabricaConexiones->crypto->codificar_url ( $cadenaACodificar7, $enlace7 );
+
+// URL definitiva
+$urlFinal7 = $url . $cadena7;
+
+
 
 
 // echo $urlFinal;exit;
@@ -66,6 +136,122 @@ $urlFinal3 = $url . $cadena3;
 
 ?>
 <script type='text/javascript'>
+
+
+function datosInfo(elem, request, response){
+	  $.ajax({
+	    url: "<?php echo $urlFinal4?>",
+	    dataType: "json",
+	    data: { personaje:$("#<?php echo $this->campoSeguro('selec_proveedor')?>").val()},
+	    success: function(data){ 
+
+	    		if(data[0]!='null'){
+
+	    			$("#<?php echo $this->campoSeguro('proveedor')?>").val(data[0]);
+					$("#<?php echo $this->campoSeguro('nitProveedor')?>").val(data[1]);
+					$("#<?php echo $this->campoSeguro('direccionProveedor')?>").val(data[2]);
+					$("#<?php echo $this->campoSeguro('telefonoProveedor')?>").val(data[3]);
+
+	    			
+		    		}else{
+
+				
+
+
+			    		
+		    		}
+
+	    }
+		                    
+	   });
+	};
+
+
+	function datosCargo(elem, request, response){
+		  $.ajax({
+		    url: "<?php echo $urlFinal7?>",
+		    dataType: "json",
+		    data: { cargo:$("#<?php echo $this->campoSeguro('cargoJefeSeccion')?>").val()},
+		    success: function(data){ 
+
+		    		if(data[0]!='null'){
+
+		    			$("#<?php echo $this->campoSeguro('nombreJefeSeccion')?>").val(data[0]);
+		    			$("#<?php echo $this->campoSeguro('id_jefe')?>").val(data[1]);
+		    			
+								    			
+			    		}else{
+
+					
+
+
+				    		
+			    		}
+
+		    }
+			                    
+		   });
+		};
+	
+
+	
+	function datosOrdenador(elem, request, response){
+		  $.ajax({
+		    url: "<?php echo $urlFinal6?>",
+		    dataType: "json",
+		    data: { ordenador:$("#<?php echo $this->campoSeguro('asignacionOrdenador')?>").val()},
+		    success: function(data){ 
+
+		    		if(data[0]!='null'){
+
+		    			$("#<?php echo $this->campoSeguro('nombreOrdenador')?>").val(data[0]);
+		    			$("#<?php echo $this->campoSeguro('id_ordenador')?>").val(data[1]);
+								    			
+			    		}else{
+
+					
+
+
+				    		
+			    		}
+
+		    }
+			                    
+		   });
+		};
+
+
+
+
+
+		function datosDependencia(elem, request, response){
+			  $.ajax({
+			    url: "<?php echo $urlFinal5?>",
+			    dataType: "json",
+			    data: { dependencia:$("#<?php echo $this->campoSeguro('selec_dependencia')?>").val()},
+			    success: function(data){ 
+
+			    		if(data[0]!='null'){
+
+			    			$("#<?php echo $this->campoSeguro('direccionDependencia')?>").val(data[0]);
+							$("#<?php echo $this->campoSeguro('telefonoDependencia')?>").val(data[1]);
+			
+
+			    			
+				    		}else{
+
+						
+
+
+					    		
+				    		}
+
+			    }
+				                    
+			   });
+			};
+
+
 $(function() {
 
     $("#tablaContenido").jqGrid({
@@ -74,7 +260,7 @@ $(function() {
         height: 200,
         width: 930,
         mtype: "GET",
-        colNames: [ "Item", "Unidad de Medida", "Cantidad", "Descripción", "Valor Unitario","Valor Total"],
+        colNames: [ "Item", "Unidad de Medida", "Cantidad", "Descripción", "($)Valor Unitario","($)Valor Total"],
         colModel: [
             
             { name: "item", width: 90,align: "center", editable:true },
@@ -82,7 +268,7 @@ $(function() {
             { name: "cantidad", width: 80, align: "center" ,editable:true,editrules:{number:true},sorttype:'number',formatter:'number' },
             { name: "descripcion", width: 80, align: "center",editable:true },
             { name: "valor_unitario", width: 80, align: "center",editable:true,editrules:{number:true},sorttype:'number',formatter:'number' },
-            { name: "valor_total", width: 80, align: "center",editable:true,editrules:{number:true},sorttype:'number',formatter:'number' },
+            { name: "valor_total", width: 80, align: "center",editable:false,editrules:{number:true},sorttype:'number',formatter:'number' },
             ],
 
         pager: "#barraNavegacion",
@@ -209,8 +395,34 @@ $(function() {
      {},
      {}
    	);
+
+
+    $("#<?php echo $this->campoSeguro('selec_proveedor')?>").select2({
+    	 placeholder: "Search for a repository",
+    	 minimumInputLength: 3,
+
+        });
+
+    $("#<?php echo $this->campoSeguro('selec_proveedor')?>").change(function() {datosInfo(); });
+
+
+    $("#<?php echo $this->campoSeguro('selec_dependencia')?>").change(function(){ datosDependencia(); });
+
+
+    $("#<?php echo $this->campoSeguro('asignacionOrdenador')?>").change(function(){ datosOrdenador(); });
+
+    $("#<?php echo $this->campoSeguro('cargoJefeSeccion')?>").change(function(){ datosCargo(); });
+
+
+  
+
+
     
 });
+
+
+
+
 
 </script>
 

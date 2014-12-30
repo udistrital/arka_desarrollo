@@ -37,7 +37,7 @@ class RegistradorOrden {
 		
 		$cadenaSql = $this->miSql->getCadenaSql ( 'items', $_REQUEST ['seccion'] );
 		$items = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
-		
+
 		
 		if ($items == 0) {
 			redireccion::redireccionar ( 'noItems' );
@@ -54,7 +54,7 @@ class RegistradorOrden {
 		}
 		
 		if ($_REQUEST ['actualizarCotizacion'] == '1') {
-			echo "leasas";
+			
 			
 			// Archivo de Cotizacion
 			foreach ( $_FILES as $key => $values ) {
@@ -90,70 +90,8 @@ class RegistradorOrden {
 			$archivo1 = $_REQUEST ['nombreArchivo'];
 		}
 		
-		$datosProveedor = array (
-				$_REQUEST ['proveedor'],
-				$_REQUEST ['nitProveedor'],
-				$_REQUEST ['direccionProveedor'],
-				$_REQUEST ['telefonoProveedor'],
-				$destino1,
-				$archivo1,
-				$_REQUEST ['idproveedor'] 
-		);
-		
-		// Actualizar Proveedor
-		$cadenaSql = $this->miSql->getCadenaSql ( 'actualizarProveedor', $datosProveedor );
-		$id_proveedor = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
-		
-		$datosDependencia = array (
-				$_REQUEST ['dependencia'],
-				$_REQUEST ['direccionDependencia'],
-				$_REQUEST ['telefonoDependencia'],
-				$_REQUEST ['iddependencia'] 
-		);
-		
-		// Actualizacion Dependencia
-		$cadenaSql = $this->miSql->getCadenaSql ( 'actualizarDependencia', $datosDependencia );
-		$id_dependencia = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
-		
-		$datosContratista = array (
-				'3',
-				$_REQUEST ['nombreContratista'],
-				$_REQUEST ['identificacionContratista'],
-				'NULL',
-				'NULL',
-				$_REQUEST ['idcontratista'] 
-		);
-		
-		$datosjefe = array (
-				'2',
-				$_REQUEST ['nombreJefeSeccion'],
-				'NULL',
-				$_REQUEST ['cargoJefeSeccion'],
-				'NULL',
-				$_REQUEST ['idjefe'] 
-		);
-		
-		$datosOrdenador = array (
-				'1',
-				$_REQUEST ['nombreOrdenador'],
-				'NULL',
-				'NULL',
-				$_REQUEST ['asignacionOrdenador'],
-				$_REQUEST ['idordenador'] 
-		);
-		
-		// Registro Encargados
-		
-		$cadenaSql = $this->miSql->getCadenaSql ( 'actualizarEncargado', $datosContratista );
-		$id_contratista = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
-		
-		$cadenaSql = $this->miSql->getCadenaSql ( 'actualizarEncargado', $datosjefe );
-		$id_jefe = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
-		
-		$cadenaSql = $this->miSql->getCadenaSql ( 'actualizarEncargado', $datosOrdenador );
-		$id_ordenador = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
-		
-		// Actualizar Orden
+
+				// Actualizar Orden
 		
 		$datosOrden = array (
 				$_REQUEST ['diponibilidad'],
@@ -172,16 +110,24 @@ class RegistradorOrden {
 				$_REQUEST ['formaPago'],
 				$_REQUEST ['supervision'],
 				$_REQUEST ['inhabilidades'],
-				$_REQUEST ['idproveedor'],
-				$_REQUEST ['iddependencia'],
-				$_REQUEST ['idcontratista'],
-				$_REQUEST ['idjefe'],
-				$_REQUEST ['idordenador'],
+				$_REQUEST ['selec_proveedor'],
+				$destino1,
+				$archivo1,
+				$_REQUEST ['selec_dependencia'],
+				$_REQUEST ['nombreContratista'],
+				$_REQUEST ['id_jefe_oculto'],
+				$_REQUEST ['id_ordenador_oculto'],
 				$_REQUEST ['numero_orden'] 
 		);
 		
+		
+		
 		$cadenaSql = $this->miSql->getCadenaSql ( 'actualizarOrden', $datosOrden );
+		
 		$id_orden = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
+		
+		
+		
 		
 		$cadenaSql = $this->miSql->getCadenaSql ( 'limpiarItems', $_REQUEST ['numero_orden'] );
 		
