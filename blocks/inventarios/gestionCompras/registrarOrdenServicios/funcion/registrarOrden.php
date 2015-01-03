@@ -25,6 +25,9 @@ class RegistradorOrden {
 	}
 	function procesarFormulario() {
 		
+		
+		var_dump($_REQUEST);exit;
+		
 		$fechaActual = date ( 'Y-m-d' );
 		
 		$conexion = "inventarios";

@@ -409,11 +409,29 @@ $(function() {
     $("#<?php echo $this->campoSeguro('selec_dependencia')?>").change(function(){ datosDependencia(); });
 
 
-    $("#<?php echo $this->campoSeguro('asignacionOrdenador')?>").change(function(){ datosOrdenador(); });
+    $("#<?php echo $this->campoSeguro('asignacionOrdenador')?>").change(function(){
 
-    $("#<?php echo $this->campoSeguro('cargoJefeSeccion')?>").change(function(){ datosCargo(); });
+    	if($("#<?php echo $this->campoSeguro('asignacionOrdenador')?>").val()!=''){
+    		datosOrdenador();
+		}else{
+			$("#<?php echo $this->campoSeguro('nombreOrdenador')?>").val('');
+			}
 
 
+
+	      });
+
+    $("#<?php echo $this->campoSeguro('cargoJefeSeccion')?>").change(function(){
+
+
+		if($("#<?php echo $this->campoSeguro('cargoJefeSeccion')?>").val()!=''){
+			datosCargo();
+		}else{
+			$("#<?php echo $this->campoSeguro('nombreJefeSeccion')?>").val('');
+			}
+
+
+	      });
   
 
 

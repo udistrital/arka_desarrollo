@@ -80,6 +80,30 @@ class RegistradorOrden {
 			}
 		}
 		
+		if ($_REQUEST ['reg_proveedor'] == 1) {
+			
+			$datosProveedor = array (
+					$_REQUEST ['proveedor'],
+					$_REQUEST ['nitProveedor'],
+					$_REQUEST ['direccionProveedor'],
+					$_REQUEST ['telefonoProveedor'] 
+			);
+			
+			$cadenaSql = $this->miSql->getCadenaSql ( 'insertarProveedor', $datosProveedor );
+			$id_proveedor = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
+			
+			
+			$_REQUEST ['selec_proveedor'] = $id_proveedor[0][0];
+			
+			
+		}elseif($_REQUEST ['reg_proveedor'] == 0){
+			
+			
+			$_REQUEST ['selec_proveedor']=$_REQUEST ['selec_proveedor'];
+			
+			
+		}
+		
 		// Registro Orden
 		
 		$datosOrden = array (

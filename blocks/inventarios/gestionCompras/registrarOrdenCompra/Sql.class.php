@@ -226,7 +226,13 @@ class Sql extends \Sql {
 				$cadenaSql .= " razon_social, nit_proveedor, direccion, telefono ";
 				$cadenaSql .= " FROM";
 				$cadenaSql .= " proveedor ";
-				$cadenaSql .= " WHERE id_proveedor='" . $variable . "';";
+				$cadenaSql .= " WHERE id_proveedor='" . $variable . "' ";
+				$cadenaSql .= " UNION SELECT ";
+				$cadenaSql .= " razon_social, nit_proveedor, direccion, telefono ";
+				$cadenaSql .= " FROM";
+				$cadenaSql .= " proveedor_nuevo";
+				$cadenaSql .= " WHERE id_proveedor_n='" . $variable . "';";
+				
 				break;
 			
 			case "proveedor" :
@@ -234,7 +240,13 @@ class Sql extends \Sql {
 				$cadenaSql .= " id_proveedor,";
 				$cadenaSql .= " nit_proveedor ||' - '|| razon_social as proveedor ";
 				$cadenaSql .= " FROM";
-				$cadenaSql .= " proveedor ; ";
+				$cadenaSql .= " proveedor  ";
+				$cadenaSql .= " UNION SELECT ";
+				$cadenaSql .= " id_proveedor_n,";
+				$cadenaSql .= " nit_proveedor ||' - '|| razon_social as proveedor ";
+				$cadenaSql .= " FROM";
+				$cadenaSql .= " proveedor_nuevo ; ";
+				
 				break;
 			
 			case "proveedors" :
@@ -317,21 +329,19 @@ class Sql extends \Sql {
 			
 			case "insertarProveedor" :
 				$cadenaSql = " INSERT INTO ";
-				$cadenaSql .= " arka_inventarios.proveedor(";
+				$cadenaSql .= " proveedor_nuevo(";
 				$cadenaSql .= " razon_social,";
 				$cadenaSql .= " nit_proveedor,";
 				$cadenaSql .= " direccion,";
-				$cadenaSql .= " telefono, ";
-				$cadenaSql .= " ruta_cotizacion, ";
-				$cadenaSql .= " nombre_cotizacion)";
+				$cadenaSql .= " telefono ";
+				$cadenaSql .= " )";
 				$cadenaSql .= " VALUES (";
 				$cadenaSql .= "'" . $variable [0] . "',";
 				$cadenaSql .= "'" . $variable [1] . "',";
 				$cadenaSql .= "'" . $variable [2] . "',";
-				$cadenaSql .= "'" . $variable [3] . "',";
-				$cadenaSql .= "'" . $variable [4] . "',";
-				$cadenaSql .= "'" . $variable [5] . "') ";
-				$cadenaSql .= "RETURNING  id_proveedor; ";
+				$cadenaSql .= "'" . $variable [3] . "') ";
+				$cadenaSql .= "RETURNING  id_proveedor_n; ";
+				
 				break;
 			
 			case "insertarDependencia" :

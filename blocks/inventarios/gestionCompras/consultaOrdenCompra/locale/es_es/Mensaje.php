@@ -1,13 +1,13 @@
 <?php
 $this->idioma ["noDefinido"] = "Etiqueta no esta definida en locale/es_es/Mensaje.php";
 
-$this->idioma ["reg_proveedor"] ="Registrar Proveedor: ";
-$this->idioma ["reg_proveedorTitulo"] ="Seleccione Proveedor";
+$this->idioma ["reg_proveedor"] ="&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspRegistrar Proveedor: ";
+$this->idioma ["reg_proveedorTitulo"] ="Seleccione Registro Proveedor";
 
 $this->idioma ["diponibilidad"] ="Disponibilidad Presupuestal : ";
 $this->idioma ["diponibilidadTitulo"] ="Ingrese Disponibilidad Presupuestal";
 
-$this->idioma ["selec_proveedor"] ="Proveedor : ";
+$this->idioma ["selec_proveedor"] ="&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspProveedor : ";
 $this->idioma ["selec_proveedorTitulo"] ="Seleccione Proveedor";
 
 
@@ -30,8 +30,8 @@ $this->idioma ["numero_ordenTitulo"] ="Ingrese Número Orden Compra";
 $this->idioma ["nit"] ="Nit : ";
 $this->idioma ["nitTitulo"] ="Ingrese Nit";
 
-$this->idioma ["dependencia_soli"] ="Nit y/o Dependencia Solicitante : ";
-$this->idioma ["dependencia_soliTitulo"] ="Ingrese Dependecia Solicitante";
+$this->idioma ["proveedor_consulta"] ="Nit y/o Razon Social Proveedor : ";
+$this->idioma ["proveedor_consultaTitulo"] ="Ingrese Dependecia Solicitante";
 
 $this->idioma ["nombreCotizacion"] ="&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspNombre Cotización : ";
 
@@ -46,6 +46,9 @@ $this->idioma ["obligacionesContratista"] ="El Contratista se Obliga a: ";
 $this->idioma ["diponibilidad"] ="Disponibilidad Presupuestal : ";
 $this->idioma ["diponibilidadTitulo"] ="Ingrese Disponibilidad Presupuestal";
 
+
+$this->idioma ["selec_dependencia_Sol"] ="Dependencia Solicitante : ";
+$this->idioma ["selec_dependencia_SolTitulo"] ="Seleccione Dependencia Solicitante";
 
 
 $this->idioma ["fecha_diponibilidad"] ="Fecha Disponibilidad : ";

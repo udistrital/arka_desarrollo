@@ -12,7 +12,7 @@ $this->idioma ["reg_proveedorTitulo"] ="Seleccione Proveedor";
 $this->idioma ["diponibilidad"] ="Disponibilidad Presupuestal : ";
 $this->idioma ["diponibilidadTitulo"] ="Ingrese Disponibilidad Presupuestal";
 
-$this->idioma ["selec_proveedor"] ="Proveedor : ";
+$this->idioma ["selec_proveedor"] ="&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspProveedor : ";
 $this->idioma ["selec_proveedorTitulo"] ="Seleccione Proveedor";
 
 

@@ -45,14 +45,18 @@ $this->idioma ["fecha_final_pagoTitulo"] = "Seleccione Fecha de Final";
 
 $this->idioma ["forma_pago"] = "Forma de Pago";
 
-$this->idioma ["total_preliminar"] = "Total Preliminar :";
+$this->idioma ["total_preliminar"] = "Total Preliminar ($):";
 $this->idioma ["total_preliminarTitulo"] = "Ingrese Total Preliminar";
 
-$this->idioma ["total"] = "Total :";
+$this->idioma ["total"] = "Total ($):";
 $this->idioma ["totalTitulo"] = "Ingrese Total: ";
 
-$this->idioma ["iva"] = "Iva 16% :";
-$this->idioma ["ivaTitulo"] = "Ingrese Iva 16%";
+$this->idioma ["iva"] = "Aplicar Iva 16% :";
+$this->idioma ["ivaTitulo"] = "Aplicar Iva 16%";
+
+
+$this->idioma ["total_iva"] = "Total Iva ($):";
+// $this->idioma ["total_ivaTitulo"] = ;
 
 $this->idioma ["Encargados"] = "Firmas ";
 

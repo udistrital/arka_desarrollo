@@ -32,6 +32,8 @@
                      
                        $("#<?php echo $this->campoSeguro('selec_dependencia')?>").select2();
          
+         
+         $("#<?php echo $this->campoSeguro('selec_dependencia_Sol')?>").select2();
           $("#<?php echo $this->campoSeguro('rubro')?>").select2();
           $("#<?php echo $this->campoSeguro('cargoJefeSeccion')?>").select2();
 	      $("#<?php echo $this->campoSeguro('nombreContratista')?>").select2();
@@ -144,7 +146,50 @@
                 
          
         
+            $( "#<?php echo $this->campoSeguro('reg_proveedor')?>" ).change(function() {
         
+        
+        if($( "#<?php echo $this->campoSeguro('reg_proveedor')?>" ).val()==0){
+        
+      
+        
+        $('#<?php echo $this->campoSeguro('proveedorDiv')?>').css('display','block');
+        
+        $('#<?php echo $this->campoSeguro('proveedor')?>').val('');
+        $('#<?php echo $this->campoSeguro('nitProveedor')?>').val('');
+        $('#<?php echo $this->campoSeguro('direccionProveedor')?>').val('');
+        $('#<?php echo $this->campoSeguro('telefonoProveedor')?>').val('');
+        	
+        $('#<?php echo $this->campoSeguro('proveedor')?>').attr('disabled','');
+        $('#<?php echo $this->campoSeguro('nitProveedor')?>').attr('disabled','');
+        $('#<?php echo $this->campoSeguro('direccionProveedor')?>').attr('disabled','');
+        $('#<?php echo $this->campoSeguro('telefonoProveedor')?>').attr('disabled','');
+        	
+
+        	
+        	
+        
+        }else if($( "#<?php echo $this->campoSeguro('reg_proveedor')?>" ).val()==1){
+        
+        
+        $('#<?php echo $this->campoSeguro('proveedorDiv')?>').css('display','none');
+        
+ 		$('#<?php echo $this->campoSeguro('proveedor')?>').val('');
+        $('#<?php echo $this->campoSeguro('nitProveedor')?>').val('');
+        $('#<?php echo $this->campoSeguro('direccionProveedor')?>').val('');
+        $('#<?php echo $this->campoSeguro('telefonoProveedor')?>').val('');
+        	
+        $('#<?php echo $this->campoSeguro('proveedor')?>').removeAttr('disabled');
+        $('#<?php echo $this->campoSeguro('nitProveedor')?>').removeAttr('disabled');
+        $('#<?php echo $this->campoSeguro('direccionProveedor')?>').removeAttr('disabled');
+        $('#<?php echo $this->campoSeguro('telefonoProveedor')?>').removeAttr('disabled');
+        	
+
+        
+        }
+        
+        
+        });
         
           
 

@@ -71,6 +71,7 @@
         
       
         
+        $('#<?php echo $this->campoSeguro('proveedorDiv')?>').css('display','block');
         
         $('#<?php echo $this->campoSeguro('proveedor')?>').val('');
         $('#<?php echo $this->campoSeguro('nitProveedor')?>').val('');
@@ -88,6 +89,8 @@
         
         }else if($( "#<?php echo $this->campoSeguro('reg_proveedor')?>" ).val()==1){
         
+        
+        $('#<?php echo $this->campoSeguro('proveedorDiv')?>').css('display','none');
         
  		$('#<?php echo $this->campoSeguro('proveedor')?>').val('');
         $('#<?php echo $this->campoSeguro('nitProveedor')?>').val('');
