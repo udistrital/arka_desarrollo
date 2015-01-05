@@ -9,10 +9,9 @@ $dropdown_menu = array(
         "title" => "Gestión de Reportes",
         "items" => array(
             array("reportfile" => "consultarEntrada.xml", "title" => "Reporte Entrada de Almacén"),
-        /* array ( "reportfile" =>"estudiosAcademicos.xml","title" => "Estudios Académicos" ),
-          array ( "reportfile" =>"maximoNivel.xml" ,"title" => "Máximo Nivel Académico" ),
-          array ( "reportfile" =>"informeGeneral.xml","title" => "Informe General Docentes" ),
-          array ( "reportfile" =>"informeCategoria.xml" ,"title" => "Informe por Categoría Docentes" ) */
+            array("reportfile" => "reporteSalidaAlmacen.xml", "title" => "Reporte Salida de Almacén"),
+            array("reportfile" => "actaRecibido.xml", "title" => "Acta Recibido del Bien"),
+            array("reportfile" => "consultarElemento.xml", "title" => "Consulte Elementos"),
         )
     ),
     array(
@@ -20,6 +19,7 @@ $dropdown_menu = array(
         "title" => "Gestión Asignación de Inventarios a Contratistas",
         "items" => array(
             array("reportfile" => "consultarInventariosContratistas.xml", "title" => "Consultar Inventarios de Contratistas"),
+            array("reportfile" => "pazysalvo.xml", "title" => "Generar Paz y Salvo Contratistas"),
         )
     ),
     array(
