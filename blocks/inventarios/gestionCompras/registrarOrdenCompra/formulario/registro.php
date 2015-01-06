@@ -1201,7 +1201,7 @@ class registrarForm {
 			$esteCampo = 'botonAceptar';
 			$atributos ["id"] = $esteCampo;
 			$atributos ["tabIndex"] = $tab;
-			$atributos ["tipo"] = '';
+			$atributos ["tipo"] = 'boton';
 			// submit: no se coloca si se desea un tipo button genérico
 			$atributos ['submit'] = 'true';
 			$atributos ["estiloMarco"] = '';

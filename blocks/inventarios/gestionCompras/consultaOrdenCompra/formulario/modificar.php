@@ -53,7 +53,7 @@ class registrarForm {
 		$cadenaSql = $this->miSql->getCadenaSql ( 'consultarOrdenCompra', $_REQUEST ['numero_orden'] );
 		
 		$OrdenCompra = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
-		
+
 		$datos = array (
 				'diponibilidad' => $OrdenCompra [0] [1],
 				'fecha_diponibilidad' => $OrdenCompra [0] [2],
@@ -1301,7 +1301,7 @@ class registrarForm {
 					$atributos ['etiqueta'] = $this->lenguaje->getCadena ( $esteCampo );
 					$atributos ["etiquetaObligatorio"] = true;
 					$atributos ['tab'] = $tab ++;
-					$atributos ['anchoEtiqueta'] = 290;
+					$atributos ['anchoEtiqueta'] = 295;
 					$atributos ['evento'] = '';
 					if (isset ( $_REQUEST [$esteCampo] )) {
 						$atributos ['seleccion'] = $_REQUEST [$esteCampo];
@@ -1351,7 +1351,7 @@ class registrarForm {
 			$esteCampo = 'botonAceptar';
 			$atributos ["id"] = $esteCampo;
 			$atributos ["tabIndex"] = $tab;
-			$atributos ["tipo"] = '';
+			$atributos ["tipo"] = 'boton';
 			// submit: no se coloca si se desea un tipo button genérico
 			$atributos ['submit'] = 'true';
 			$atributos ["estiloMarco"] = '';

@@ -28,8 +28,7 @@ class RegistradorOrden {
 		$this->miFuncion = $funcion;
 	}
 	function procesarFormulario() {
-		
-		
+
 		
 				
 		$conexion = "inventarios";
@@ -49,34 +48,18 @@ class RegistradorOrden {
 		$cadenaSql = $this->miSql->getCadenaSql ( 'consultarOrdenServicios', $_REQUEST ['numero_orden'] );
 		$orden = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
 		
-		
-		
-		
-		$datosSolicitante = array (
-				$_REQUEST ['dependencia_solicitante'],
-				$_REQUEST ['rubro'],
-				$orden[0][23]	
-		);
-			
-	// Actualizar Solicitante
-		$cadenaSql = $this->miSql->getCadenaSql ( 'actualizarSolicitante', $datosSolicitante );
-		$id_solicitante = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
+
 		
 		$datosSupervisor = array (
 				$_REQUEST ['nombre_supervisor'],
 				$_REQUEST ['cargo_supervisor'],
 				$_REQUEST ['dependencia_supervisor'],
-				$orden[0][24] 
+				$orden[0][25] 
 		);
 		
 		// Actualizar Supervisor
 		$cadenaSql = $this->miSql->getCadenaSql ( 'actualizarSupervisor', $datosSupervisor );
 		$id_supervisor = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
-		
-
-		
-		
-		
 		
 		$datosContratistaC = array (
 				$_REQUEST ['nombre_razon_contratista'],
@@ -84,7 +67,7 @@ class RegistradorOrden {
 				$_REQUEST ['direccion_contratista'],
 				$_REQUEST ['telefono_contratista'],
 				$_REQUEST ['cargo_contratista'],
-				$orden[0][19]
+				$orden[0][21]
 		);
 		
 		// Actualizar Contratista
@@ -92,51 +75,12 @@ class RegistradorOrden {
 		$id_ContratistaC = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
 		
 		
-		// Actualizar Encargados
-		
-		$datosContratista = array (
-				'3',
-				$_REQUEST ['nombreContratista'],
-				$_REQUEST ['identificacionContratista'],
-				'NULL',
-				'NULL',
-				$orden[0][20] 
-		);
-		
-		$datosjefe = array (
-				'2',
-				$_REQUEST ['nombreJefeSeccion'],
-				'NULL',
-				$_REQUEST ['cargoJefeSeccion'],
-				'NULL',
-				$orden[0][21]
-		);
-		
-		$datosOrdenador = array (
-				'1',
-				$_REQUEST ['nombreOrdenador'],
-				'NULL',
-				'NULL',
-				$_REQUEST ['asignacionOrdenador'],
-				$orden[0][22]
-		);
-		
-		// Actualizar Encargados
-		
-		$cadenaSql = $this->miSql->getCadenaSql ( 'actualizarEncargado', $datosContratista );
-		$id_contratista = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
-	
-		$cadenaSql = $this->miSql->getCadenaSql ( 'actualizarEncargado', $datosjefe );
-		$id_jefe = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
-	
-		$cadenaSql = $this->miSql->getCadenaSql ( 'actualizarEncargado', $datosOrdenador );
-		$id_ordenador = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
-	
-		
-		
+// var_dump($_REQUEST);
 			// Actualizar Orden
 		
 		$datosOrden = array (
+				$_REQUEST['dependencia_solicitante'],
+				$_REQUEST['rubro'],				
 				$_REQUEST ['objeto_contrato'],
 				isset ( $_REQUEST ['polizaA'] ),
 				isset ( $_REQUEST ['polizaB'] ),
@@ -156,13 +100,19 @@ class RegistradorOrden {
 				$_REQUEST ['numero_registro'],
 				$_REQUEST ['valor_registro'],
 				$_REQUEST ['valorLetras_registro'],
+				$_REQUEST['id_ordenador'],
+				$_REQUEST['id_jefe'],
+				$_REQUEST['nombreContratista'],
 				$_REQUEST['numero_orden']
 		);
-				
+		
+	
+// var_dump($datosOrden);
 		$cadenaSql = $this->miSql->getCadenaSql ( 'actualizarOrden', $datosOrden );
+
   
 		$id_orden = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "acceso" );
-		
+// 		exit;		
 
 		$datos = array (
 				$_REQUEST ['numero_orden'] 

@@ -662,6 +662,20 @@ class registrarForm {
 					unset ( $atributos );
 					// --------------- FIN CONTROL : Cuadro de Texto --------------------------------------------------
 					
+					
+					
+					$atributos ["id"] = "numero_dias"; // No cambiar este nombre
+					$atributos ["tipo"] = "hidden";
+					$atributos ['estilo'] = '';
+					$atributos ["obligatorio"] = false;
+					$atributos ['marco'] = true;
+					$atributos ["etiqueta"] = "";
+					$atributos ["valor"] = '';
+					$atributos = array_merge ( $atributos, $atributosGlobales );
+					echo $this->miFormulario->campoCuadroTexto ( $atributos );
+					unset ( $atributos );
+					
+					
 					// ---------------- CONTROL: Cuadro de Texto --------------------------------------------------------
 					$esteCampo = 'forma_pago';
 					$atributos ['id'] = $esteCampo;
@@ -1204,6 +1218,7 @@ class registrarForm {
 					
 					echo $this->miFormulario->agrupacion ( 'fin' );
 					unset ( $atributos );
+					
 					$esteCampo = "jefeSeccion";
 					$atributos ['id'] = $esteCampo;
 					$atributos ['leyenda'] = $this->lenguaje->getCadena ( $esteCampo );
@@ -1366,7 +1381,7 @@ class registrarForm {
 				$esteCampo = 'botonAceptar';
 				$atributos ["id"] = $esteCampo;
 				$atributos ["tabIndex"] = $tab;
-				$atributos ["tipo"] = '';
+				$atributos ["tipo"] = 'boton';
 				// submit: no se coloca si se desea un tipo button genérico
 				$atributos ['submit'] = 'true';
 				$atributos ["estiloMarco"] = '';

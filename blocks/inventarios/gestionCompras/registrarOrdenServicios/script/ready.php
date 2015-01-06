@@ -57,6 +57,9 @@
                     if($('#<?php echo $this->campoSeguro('fecha_final_pago')?>').val()!=''){
                     
                     $('#<?php echo $this->campoSeguro('duracion')?>').val(dias);
+                    
+                    $('#<?php echo $this->campoSeguro('numero_dias')?>').val(dias);
+                    
                     }
                     
                     
@@ -105,6 +108,8 @@
                     if($('#<?php echo $this->campoSeguro('fecha_inicio_pago')?>').val()!=''){
                     
                     $('#<?php echo $this->campoSeguro('duracion')?>').val(dias);
+                                        
+                    $('#<?php echo $this->campoSeguro('numero_dias')?>').val(dias);
                     }
 			  }
 			

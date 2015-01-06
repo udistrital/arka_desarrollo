@@ -106,7 +106,7 @@ $this->idioma ["cargoJefeSeccionTitulo"] ="Ingrese Cargo ";
 
 
 $this->idioma ["nombreContratista"] ="&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspIdentificación y/o Nombre Apellidos  : ";
-$this->idioma ["nombreContratistaTitulo"] ="Ingrese Nombre y Apellidos ";
+$this->idioma ["nombreContratistaTitulo"] ="Seleccione Identificación y/o Nombre Apellidos ";
 
 $this->idioma ["identificacionContratista"] ="&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspIdentificación : ";
 $this->idioma ["nombreContratistaTitulo"] ="Ingrese Identificación del Contratista ";

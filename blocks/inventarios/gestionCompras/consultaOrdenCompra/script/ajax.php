@@ -177,7 +177,7 @@ function datosInfo(elem, request, response){
 		    		if(data[0]!='null'){
 
 		    			$("#<?php echo $this->campoSeguro('nombreJefeSeccion')?>").val(data[0]);
-		    			$("#<?php echo $this->campoSeguro('id_jefe')?>").val(data[1]);
+		    			$("#<?php echo $this->campoSeguro('id_jefe_oculto')?>").val(data[1]);
 		    			
 								    			
 			    		}else{
@@ -205,7 +205,7 @@ function datosInfo(elem, request, response){
 		    		if(data[0]!='null'){
 
 		    			$("#<?php echo $this->campoSeguro('nombreOrdenador')?>").val(data[0]);
-		    			$("#<?php echo $this->campoSeguro('id_ordenador')?>").val(data[1]);
+		    			$("#<?php echo $this->campoSeguro('id_ordenador_oculto')?>").val(data[1]);
 								    			
 			    		}else{
 
