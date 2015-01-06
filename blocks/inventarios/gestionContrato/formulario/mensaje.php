@@ -47,7 +47,7 @@ if (!isset($GLOBALS["autorizado"])) {
     if ($_REQUEST['mensaje'] == 'confirma') {
 
         $tipo = 'success';
-        $mensaje = "Se subió el archivo correctamente";
+        $mensaje = "Se ha Registrado Contrato.<br>Se subió el archivo correctamente";
         $boton = "continuar";
 
         $valorCodificado = "pagina=gestionContrato";
