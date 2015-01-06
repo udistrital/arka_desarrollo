@@ -1,5 +1,8 @@
 <?php
 
+$this->idioma["FechasError"] =  "<center>Error al Seleccionar rango de Fechas<br>Falta Fecha Inicial y/o Final.</center>";
+$this->idioma["nFechasErrorTitulo"] = "Ingrese Número Contrato ";
+
 
 $this->idioma["num_contrato"] = "Número Contrato :";
 $this->idioma["num_contratoTitulo"] = "Ingrese Número Contrato ";

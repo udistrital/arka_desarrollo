@@ -79,7 +79,7 @@ class Formulario {
 			$atributos ['estilo'] = 'jqueryui';
 			$atributos ['marco'] = true;
 			$atributos ['estiloMarco'] = '';
-			$atributos ["etiquetaObligatorio"] = true;
+			$atributos ["etiquetaObligatorio"] = false;
 			$atributos ['columnas'] = 2;
 			$atributos ['dobleLinea'] = 0;
 			$atributos ['tabIndex'] = $tab;
@@ -95,7 +95,7 @@ class Formulario {
 			$atributos ['deshabilitado'] = false;
 			$atributos ['tamanno'] = 25;
 			$atributos ['maximoTamanno'] = '';
-			$atributos ['anchoEtiqueta'] = 220;
+			$atributos ['anchoEtiqueta'] = 250;
 			$tab ++;
 			
 			// Aplica atributos globales al control

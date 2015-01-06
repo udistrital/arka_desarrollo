@@ -27,11 +27,6 @@ class Sql extends \Sql {
 		$idSesion = $this->miConfigurador->getVariableConfiguracion ( "id_sesion" );
 		
 		switch ($tipo) {
-			// INSERT INTO contratos(
-			// id_contrato, nombre_contratista, numero_contrato, fecha_contrato,
-			// id_documento_soporte, fecha_registro, estado)
-			// VALUES (?, ?, ?, ?,
-			// ?, ?, ?);
 			
 			case 'registroContrato' :
 				$cadenaSql = 'INSERT INTO ';
@@ -76,18 +71,44 @@ class Sql extends \Sql {
 				$cadenaSql .= ') RETURNING documento_id;';
 				break;
 			
-			case 'consultarContrato' :
-				$cadenaSql = 'SELECT  ';
-				$cadenaSql .= ' documento_nombre, ';
-				$cadenaSql .= ' documento_fechar, ';
-				$cadenaSql .= ' documento_ruta, ';
-				$cadenaSql .= ' documento_estado, ';
-				$cadenaSql .= ' documento_idunico ';
-				$cadenaSql .= ' FROM ';
-				$cadenaSql .= 'arka_inventarios.registro_documento';
-				if ($variable != '') {
-					$cadenaSql .= ' WHERE documento_fechar=';
-					$cadenaSql .= '\'' . $variable . '\' ';
+			case "consultarContratoParticular" :
+				$cadenaSql = "SELECT  ";
+				$cadenaSql .= "nombre_contratista, numero_contrato, fecha_contrato,id_documento_soporte ";
+				$cadenaSql .= " FROM contratos ";
+				$cadenaSql .= "WHERE  id_contrato='" . $variable . "';";
+				
+				break;
+			
+			case "consultarContrato" :
+				
+				$cadenaSql = "SELECT  ";
+				$cadenaSql .= " documento_nombre, ";
+				$cadenaSql .= " documento_fechar, ";
+				$cadenaSql .= " documento_ruta, ";
+				$cadenaSql .= " documento_estado, ";
+				$cadenaSql .= " documento_idunico, ";
+				
+				$cadenaSql .= " nombre_contratista, ";
+				$cadenaSql .= " numero_contrato, ";
+				$cadenaSql .= " fecha_contrato, ";
+				$cadenaSql .= " fecha_registro, ";
+				$cadenaSql .= " id_contrato  ";
+				$cadenaSql .= " FROM ";
+				$cadenaSql .= " contratos ";
+				$cadenaSql .= " JOIN registro_documento ON documento_id= id_documento_soporte ";
+				$cadenaSql .= " WHERE 1=1 AND contratos.estado='TRUE' ";
+				if ($variable [0] != '') {
+					$cadenaSql .= " AND  numero_contrato= '" . $variable [0] . "'";
+				}
+				
+				if ($variable [1] != '') {
+					$cadenaSql .= " AND fecha_contrato BETWEEN CAST ( '" . $variable [1] . "' AS DATE) ";
+					$cadenaSql .= " AND  CAST ( '" . $variable [2] . "' AS DATE)  ";
+				}
+				
+				if ($variable [3] != '') {
+					$cadenaSql .= " AND fecha_registro BETWEEN CAST ( '" . $variable [3] . "' AS DATE) ";
+					$cadenaSql .= " AND  CAST ( '" . $variable [4] . "' AS DATE)  ";
 				}
 				
 				break;
@@ -99,10 +120,21 @@ class Sql extends \Sql {
 				$cadenaSql .= 'documento_fechar=\'' . $variable ['fecha_registro'] . '\',';
 				$cadenaSql .= 'documento_ruta=\'' . $variable ['ruta'] . '\',';
 				$cadenaSql .= 'documento_estado=\'' . $variable ['estado'] . '\'';
-				$cadenaSql .= ' WHERE documento_idunico=';
-				$cadenaSql .= '\'' . $variable ['anterior_documento'] . '\' ';
+				$cadenaSql .= ' WHERE documento_id=';
+				$cadenaSql .= '\'' . $variable ['id_doc'] . '\' ';
+				break;
+			
+			case 'actualizarContrato' :
+				$cadenaSql = "UPDATE contratos SET ";
+				$cadenaSql .= "nombre_contratista='" . $variable [0] . "',";
+				$cadenaSql .= "numero_contrato='" . $variable [1] . "',";
+				$cadenaSql .= "fecha_contrato='" . $variable [2] . "' ";
+				$cadenaSql .= " WHERE id_contrato=";
+				$cadenaSql .= "'" . $variable [3] . "' ";
+				
 				break;
 			/**
+			 * /**
 			 * Clausulas específicas
 			 */
 			case "buscarUsuario" :

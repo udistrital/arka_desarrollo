@@ -59,7 +59,7 @@ event.preventDefault();
 	
 	
 	
-      $('#<?php echo $this->campoSeguro('fechaRegistro')?>').datepicker({
+      $('#<?php echo $this->campoSeguro('fecha_contrato')?>').datepicker({
         dateFormat: 'yy-mm-dd',
         maxDate: 0,
         changeYear: true,
