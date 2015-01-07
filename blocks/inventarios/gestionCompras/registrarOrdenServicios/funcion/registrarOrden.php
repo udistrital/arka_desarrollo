@@ -121,7 +121,7 @@ class RegistradorOrden {
 				$id_orden [0] [0],
 				$fechaActual 
 		);
-		var_dump ( $id_orden );
+		
 		if ($id_orden) {
 			
 			redireccion::redireccionar ( 'inserto', $datos );
