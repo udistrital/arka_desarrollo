@@ -69,9 +69,10 @@ class Formulario {
 		$esteCampo = $esteBloque ['nombre'];
 		{
 			$tab = 1;
-			$valorCodificado = "&solicitud=nuevo";
-			$valorCodificado .= "&bloque=" . $esteBloque ["id_bloque"];
+			$valorCodificado = "&pagina=" . $this->miConfigurador->getVariableConfiguracion ( 'pagina' );
+			$valorCodificado .= "&bloque=" . $esteBloque ['nombre'];
 			$valorCodificado .= "&bloqueGrupo=" . $esteBloque ["grupo"];
+			$valorCodificado .= "&opcion=nuevo";
 			$valorCodificado = $this->miConfigurador->fabricaConexiones->crypto->codificar ( $valorCodificado );
 			
 			// ---------------Inicio Formulario (<form>)--------------------------------

@@ -93,7 +93,7 @@ class Formulario {
 			}
 			$atributos ['titulo'] = $this->lenguaje->getCadena ( $esteCampo . 'Titulo' );
 			$atributos ['deshabilitado'] = false;
-			$atributos ['tamanno'] = 25;
+			$atributos ['tamanno'] = 20;
 			$atributos ['maximoTamanno'] = '';
 			$atributos ['anchoEtiqueta'] = 250;
 			$tab ++;

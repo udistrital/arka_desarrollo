@@ -37,7 +37,7 @@ if (!isset($GLOBALS ["autorizado"])) {
                 break;
 
             case "paginaPrincipal":
-                $variable = "pagina=index";
+                $variable = "pagina=gestionContrato";
                 break;
 
             default:
