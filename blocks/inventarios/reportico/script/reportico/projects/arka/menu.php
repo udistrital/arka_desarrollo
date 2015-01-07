@@ -12,6 +12,8 @@ $dropdown_menu = array(
             array("reportfile" => "reporteSalidaAlmacen.xml", "title" => "Reporte Salida de Almacén"),
             array("reportfile" => "actaRecibido.xml", "title" => "Acta Recibido del Bien"),
             array("reportfile" => "consultarElemento.xml", "title" => "Consulte Elementos"),
+            array("reportfile" => "contabilidadEntradas.xml", "title" => "Informe Contabilidad Entradas"),
+            array("reportfile" => "contabilidadSalidas.xml", "title" => "Informe Contabilidad Salidas"),
         )
     ),
     array(
