@@ -27,7 +27,9 @@
         	$('#<?php echo $this->campoSeguro('telefonoProveedor')?>').attr('disabled','');
         	$('#<?php echo $this->campoSeguro('direccionDependencia')?>').attr('disabled','');
         	$('#<?php echo $this->campoSeguro('telefonoDependencia')?>').attr('disabled','');
-        	
+        	$('#<?php echo $this->campoSeguro('total_iva')?>').attr('disabled',''); 
+		    $('#<?php echo $this->campoSeguro('total')?>').attr('disabled','');  
+		    $('#<?php echo $this->campoSeguro('total_preliminar')?>').attr('disabled','');    
         	
         	
         
@@ -110,12 +112,9 @@
         });
    
         
+ 
         
-          $('#tablaTitulos').dataTable( {
-                "sPaginationType": "full_numbers"
-        } );
-        
-        
+
         
         
           

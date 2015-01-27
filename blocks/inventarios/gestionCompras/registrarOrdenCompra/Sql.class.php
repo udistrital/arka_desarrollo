@@ -148,6 +148,16 @@ class Sql extends \Sql {
 			/**
 			 * Clausulas Del Caso Uso.
 			 */
+
+			
+			case "datos_item" :
+				$cadenaSql = " SELECT ";
+				$cadenaSql .= " valor_total ";
+				$cadenaSql .= " FROM";
+				$cadenaSql .= " items_orden_compra_temp ";
+				$cadenaSql .= " WHERE seccion='" . $variable . "';";
+				
+				break;
 			
 			case "informacion_cargo_jefe" :
 				$cadenaSql = " SELECT ";
