@@ -58,6 +58,21 @@ class RegistradorOrden {
 			redireccion::redireccionar ( 'noObligaciones' );
 		}
 		
+		$Subtotal = 0;
+		
+		foreach ( $items as $n ) {
+			$Subtotal = $Subtotal + $n [6];
+		}
+		
+		if ($_REQUEST ['iva'] == 1) {
+			
+			$iva = $Subtotal * 0.16;
+		} else {
+			$iva = 0;
+		}
+		
+		$total = $Subtotal + $iva;
+		
 		// Archivo de Cotizacion
 		if ($archivo) {
 			// obtenemos los datos del archivo
@@ -92,16 +107,10 @@ class RegistradorOrden {
 			$cadenaSql = $this->miSql->getCadenaSql ( 'insertarProveedor', $datosProveedor );
 			$id_proveedor = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
 			
+			$_REQUEST ['selec_proveedor'] = $id_proveedor [0] [0];
+		} elseif ($_REQUEST ['reg_proveedor'] == 0) {
 			
-			$_REQUEST ['selec_proveedor'] = $id_proveedor[0][0];
-			
-			
-		}elseif($_REQUEST ['reg_proveedor'] == 0){
-			
-			
-			$_REQUEST ['selec_proveedor']=$_REQUEST ['selec_proveedor'];
-			
-			
+			$_REQUEST ['selec_proveedor'] = $_REQUEST ['selec_proveedor'];
 		}
 		
 		// Registro Orden
@@ -131,8 +140,13 @@ class RegistradorOrden {
 				$_REQUEST ['nombreContratista'],
 				$_REQUEST ['id_jefe'],
 				$_REQUEST ['id_ordenador'],
+				$Subtotal,
+				$iva,
+				$total,
+				$_REQUEST['valorLetras_registro'],
 				'TRUE' 
 		);
+		
 		$cadenaSql = $this->miSql->getCadenaSql ( 'insertarOrden', $datosOrden );
 		$id_orden = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
 		

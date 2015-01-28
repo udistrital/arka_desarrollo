@@ -53,6 +53,22 @@ class RegistradorOrden {
 			redireccion::redireccionar ( 'noObligaciones' );
 		}
 		
+		$Subtotal = 0;
+		
+		foreach ( $items as $n ) {
+			$Subtotal = $Subtotal + $n [6];
+		}
+		
+		if ($_REQUEST ['iva'] == 1) {
+				
+			$iva = $Subtotal * 0.16;
+		} else {
+			$iva = 0;
+		}
+		
+		$total = $Subtotal + $iva;
+		
+		
 		if ($_REQUEST ['actualizarCotizacion'] == '1') {
 			
 			
@@ -147,6 +163,10 @@ class RegistradorOrden {
 				$_REQUEST ['nombreContratista'],
 				$_REQUEST ['id_jefe_oculto'],
 				$_REQUEST ['id_ordenador_oculto'],
+				$Subtotal,
+				$iva,
+				$total,
+				$_REQUEST['valorLetras_registro'],
 				$_REQUEST ['numero_orden'] 
 		);
 		

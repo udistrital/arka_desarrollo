@@ -61,6 +61,23 @@ class RegistradorOrden {
 			redireccion::redireccionar ( 'noObligaciones' );
 		}
 		
+		
+		$Subtotal = 0;
+		
+		foreach ( $items as $n ) {
+			$Subtotal = $Subtotal + $n [6];
+		}
+		
+		if ($_REQUEST ['iva'] == 1) {
+				
+			$iva = $Subtotal * 0.16;
+		} else {
+			$iva = 0;
+		}
+		
+		$total = $Subtotal + $iva;
+		
+		
 		// Archivo de Cotizacion
 		if ($archivo) {
 			// obtenemos los datos del archivo
@@ -165,7 +182,11 @@ class RegistradorOrden {
 				$id_dependencia [0] [0],
 				$id_contratista [0] [0],
 				$id_jefe [0] [0],
-				$id_ordenador [0] [0] 
+				$id_ordenador [0] [0],
+				$Subtotal,
+				$iva,
+				$total,
+				$_REQUEST['valorLetras_registro']
 		);
 		
 		$cadenaSql = $this->miSql->getCadenaSql ( 'insertarOrden', $datosOrden );

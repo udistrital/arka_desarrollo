@@ -15,6 +15,21 @@ $this->idioma ["selec_dependencia"] ="Dependencia : ";
 $this->idioma ["selec_dependenciaTitulo"] ="Seleccione Dependencia";
 
 
+$this->idioma ["valorLetras_registro"] = "Valor en Letras:";
+
+$this->idioma ["total_preliminar"] = "SubTotal  ($):";
+
+
+$this->idioma ["total"] = "Total ($):";
+$this->idioma ["totalTitulo"] = "Ingrese Total: ";
+
+$this->idioma ["iva"] = "Aplicar Iva 16% :";
+$this->idioma ["ivaTitulo"] = "Aplicar Iva 16%";
+
+
+$this->idioma ["total_iva"] = "Total Iva ($):";
+
+
 
 $this->idioma ["fecha_inicio"] ="Fecha Inicial : ";
 $this->idioma ["fecha_inicioTitulo"] ="Seleccione Fecha Inicial";

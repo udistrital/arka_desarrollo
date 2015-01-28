@@ -265,7 +265,7 @@ if ($_REQUEST ['funcion'] == 'letrasNumeros') {
 	
 	$funcionLetras = new EnLetras ();
 	
-	$Letras =  $funcionLetras->ValorEnLetras ( $_REQUEST ['valor'], '( $Pesos ).' ) ;
+	$Letras =  $funcionLetras->ValorEnLetras ( $_REQUEST ['valor'], ' Pesos ' ) ;
 	
 	$Letras = json_encode ( $Letras );
 	

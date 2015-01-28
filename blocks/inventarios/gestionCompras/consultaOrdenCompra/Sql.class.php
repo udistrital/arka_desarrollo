@@ -149,6 +149,15 @@ class Sql extends \Sql {
 			 * Clausulas Del Caso Uso.
 			 */
 			
+			case "datos_item" :
+				$cadenaSql = " SELECT ";
+				$cadenaSql .= " valor_total ";
+				$cadenaSql .= " FROM";
+				$cadenaSql .= " items_orden_compra_temp ";
+				$cadenaSql .= " WHERE seccion='" . $variable . "';";
+				
+				break;
+				
 			case "insertarProveedor" :
 				$cadenaSql = " INSERT INTO ";
 				$cadenaSql .= " proveedor_nuevo(";
@@ -311,7 +320,7 @@ class Sql extends \Sql {
 			
 			case "limpiar_tabla_items" :
 				$cadenaSql = " DELETE FROM ";
-				$cadenaSql .= " arka_inventarios.items_orden_compra_temp";
+				$cadenaSql .= " items_orden_compra_temp";
 				$cadenaSql .= " WHERE seccion ='" . $variable . "';";
 				
 				break;
@@ -350,7 +359,7 @@ class Sql extends \Sql {
 				$cadenaSql .= " fecha_disponibilidad, rubro, obligaciones_proveedor, obligaciones_contratista,";
 				$cadenaSql .= " poliza1, poliza2, poliza3, poliza4, poliza5, lugar_entrega, destino,";
 				$cadenaSql .= " tiempo_entrega, forma_pago, supervision, inhabilidades, id_proveedor,";
-				$cadenaSql .= " ruta_cotizacion, nombre_cotizacion, id_dependencia, id_contratista,id_jefe, id_ordenador ";
+				$cadenaSql .= " ruta_cotizacion, nombre_cotizacion, id_dependencia, id_contratista,id_jefe, id_ordenador,subtotal, iva, total, valor_letras ";
 				$cadenaSql .= " FROM orden_compra ";
 				$cadenaSql .= " WHERE id_orden_compra='" . $variable . "' AND estado='TRUE'";
 				
@@ -448,15 +457,8 @@ class Sql extends \Sql {
 				
 				break;
 			
-			// UPDATE orden_compra
-			// SET id_orden_compra=?, fecha_registro=?, disponibilidad_presupuestal=?,
-			// fecha_disponibilidad=?, rubro=?, obligaciones_proveedor=?, obligaciones_contratista=?,
-			// poliza1=?, poliza2=?, poliza3=?, poliza4=?, poliza5=?, lugar_entrega=?,
-			// destino=?, tiempo_entrega=?, forma_pago=?, supervision=?, inhabilidades=?,
-			// id_proveedor=?, ruta_cotizacion=?, nombre_cotizacion=?, id_dependencia=?,
-			// id_contratista=?, id_jefe=?, id_ordenador=?, estado=?
-			// WHERE <condition>;
-			
+
+				
 			case "actualizarOrden" :
 				$cadenaSql = " UPDATE ";
 				$cadenaSql .= " orden_compra ";
@@ -503,8 +505,12 @@ class Sql extends \Sql {
 				$cadenaSql .= " id_dependencia='" . $variable [19] . "', ";
 				$cadenaSql .= " id_contratista='" . $variable [20] . "', ";
 				$cadenaSql .= " id_jefe='" . $variable [21] . "', ";
-				$cadenaSql .= " id_ordenador='" . $variable [22] . "'  ";
-				$cadenaSql .= "  WHERE id_orden_compra='" . $variable [23] . "';";
+				$cadenaSql .= " id_ordenador='" . $variable [22] . "',  ";
+				$cadenaSql .= " subtotal='" . $variable [23] . "',  ";
+				$cadenaSql .= " iva='" . $variable [24] . "',  ";
+				$cadenaSql .= " total='" . $variable [25] . "',  ";
+				$cadenaSql .= " valor_letras='" . $variable [26] . "'  ";
+				$cadenaSql .= "  WHERE id_orden_compra='" . $variable [27] . "';";
 				
 				break;
 			

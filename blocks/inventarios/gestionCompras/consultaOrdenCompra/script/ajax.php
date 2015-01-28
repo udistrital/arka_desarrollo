@@ -127,6 +127,37 @@ $cadena7 = $this->miConfigurador->fabricaConexiones->crypto->codificar_url ( $ca
 // URL definitiva
 $urlFinal7 = $url . $cadena7;
 
+// Variables
+$cadenaACodificar8 = "pagina=" . $this->miConfigurador->getVariableConfiguracion ( "pagina" );
+$cadenaACodificar8 .= "&procesarAjax=true";
+$cadenaACodificar8 .= "&action=index.php";
+$cadenaACodificar8 .= "&bloqueNombre=" . $esteBloque ["nombre"];
+$cadenaACodificar8 .= "&bloqueGrupo=" . $esteBloque ["grupo"];
+$cadenaACodificar8 .= $cadenaACodificar . "&funcion=CalItem";
+$cadenaACodificar8 .= "&tiempo=" . $_REQUEST ['tiempo'];
+
+// Codificar las variables
+$enlace8 = $this->miConfigurador->getVariableConfiguracion ( "enlace" );
+$cadena8 = $this->miConfigurador->fabricaConexiones->crypto->codificar_url ( $cadenaACodificar8, $enlace8 );
+
+// URL definitiva
+$urlFinal8 = $url . $cadena8;
+
+// Variables
+$cadenaACodificar9 = "pagina=" . $this->miConfigurador->getVariableConfiguracion ( "pagina" );
+$cadenaACodificar9 .= "&procesarAjax=true";
+$cadenaACodificar9 .= "&action=index.php";
+$cadenaACodificar9 .= "&bloqueNombre=" . $esteBloque ["nombre"];
+$cadenaACodificar9 .= "&bloqueGrupo=" . $esteBloque ["grupo"];
+$cadenaACodificar9 .= $cadenaACodificar9 . "&funcion=letrasNumeros";
+$cadenaACodificar9 .= "&tiempo=" . $_REQUEST ['tiempo'];
+
+// Codificar las variables
+$enlace = $this->miConfigurador->getVariableConfiguracion ( "enlace" );
+$cadena9 = $this->miConfigurador->fabricaConexiones->crypto->codificar_url ( $cadenaACodificar9, $enlace );
+
+// URL definitiva
+$urlFinal9 = $url . $cadena9;
 
 
 
@@ -136,6 +167,57 @@ $urlFinal7 = $url . $cadena7;
 
 ?>
 <script type='text/javascript'>
+
+
+
+function valorLetras(elem, request, response){
+	  $.ajax({
+	    url: "<?php echo $urlFinal9?>",
+	    dataType: "json",
+	    data: { valor:$("#<?php echo $this->campoSeguro('total')?>").val()},
+	    success: function(data){ 
+
+
+	    			$("#<?php echo $this->campoSeguro('valorLetras_registro')?>").val(data);
+
+	    }
+		                    
+	   });
+	};
+
+function CalItem(elem, request, response){
+	  $.ajax({
+	    url: "<?php echo $urlFinal8?>",
+	    dataType: "json",
+	    data: { tiempo:"<?php echo $_REQUEST['tiempo']?>"},
+	    success: function(data){ 
+
+	    		if(data[0]!='null'){
+
+	    			$("#<?php echo $this->campoSeguro('total_preliminar')?>").val(data[0]);
+
+	    			$("#<?php echo $this->campoSeguro('total_iva')?>").val(0);
+	    			
+	    			$('#<?php echo $this->campoSeguro('iva')?>').val(0);
+	    				    			
+	    			$("#<?php echo $this->campoSeguro('total')?>").val(Number(data[0])+Number($("#<?php echo $this->campoSeguro('total_iva')?>").val()));
+
+	    			$("#<?php echo $this->campoSeguro('valorLetras_registro')?>").val(data[1]);
+	    			
+	    			
+		    		}else{
+
+				
+
+
+			    		
+		    		}
+
+	    }
+		                    
+	   });
+	};
+
 
 
 function datosInfo(elem, request, response){
@@ -260,7 +342,7 @@ $(function() {
         height: 200,
         width: 930,
         mtype: "GET",
-        colNames: [ "Item", "Unidad de Medida", "Cantidad", "Descripción", "($)Valor Unitario","($)Valor Total"],
+        colNames: [ "Nombre Item", "Unidad de Medida", "Cantidad", "Descripción", "($)Valor Unitario","($)Valor Total"],
         colModel: [
             
             { name: "item", width: 90,align: "center", editable:true },
@@ -342,6 +424,7 @@ $(function() {
             var r=response;
             var p=postdata;
             var f=formid;
+            CalItem();
         } },//add
      {
 			
@@ -389,6 +472,7 @@ $(function() {
                 var r=response;
                 var p=postdata;
                 var f=formid;
+                CalItem();
             } 
 
             },//del
@@ -440,6 +524,69 @@ $(function() {
 	      });
 
 
+
+
+	$("#<?php echo $this->campoSeguro('iva')?>").change(function(){ 
+		
+		switch($("#<?php echo $this->campoSeguro('iva')?>").val())
+		
+		{
+	
+			case '0':
+		
+				$('#<?php echo $this->campoSeguro('total_iva')?>').val(0);
+				
+				var total =$('#<?php echo $this->campoSeguro('total_preliminar')?>').val();
+				var iva =$('#<?php echo $this->campoSeguro('total_iva')?>').val();
+				var numero = Number(total) + Number(iva) ;
+				
+				$('#<?php echo $this->campoSeguro('total')?>').val(numero);
+
+				if ($('#<?php echo $this->campoSeguro('total_preliminar')?>').val()!=0){
+
+					valorLetras();
+
+					}else{
+
+
+						$("#<?php echo $this->campoSeguro('valorLetras_registro')?>").val('');
+
+
+						}
+				
+		
+		
+			break;
+		
+			case '1':
+		
+				$('#<?php echo $this->campoSeguro('total_iva')?>').val($('#<?php echo $this->campoSeguro('total_preliminar')?>').val() * 0.16);
+		
+				var total =$('#<?php echo $this->campoSeguro('total_preliminar')?>').val();
+				var iva =$('#<?php echo $this->campoSeguro('total_iva')?>').val();
+				var numero = Number(total) + Number(iva) ;
+				
+				$('#<?php echo $this->campoSeguro('total')?>').val(numero);
+
+				if ($('#<?php echo $this->campoSeguro('total_preliminar')?>').val()!=0){
+
+					valorLetras();
+
+					}else{
+
+
+						$("#<?php echo $this->campoSeguro('valorLetras_registro')?>").val('');
+
+
+						}
+		
+		
+			break;	
+
+		
+		}
+		
+		 });
   
 
 
