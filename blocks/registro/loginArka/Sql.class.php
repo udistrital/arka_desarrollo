@@ -69,7 +69,8 @@ class Sql extends \Sql {
 				$cadenaSql .= "VALUES( ";
 				$cadenaSql .= "'" . $variable[0] . "', ";
 				$cadenaSql .= "'" . $variable[1] . "', ";
-				$cadenaSql .= "'" . time () . "') ";
+				$cadenaSql .= "'" .date('Y-m-d  h:i:s A') . "') ";
+
 				break;
 
         }

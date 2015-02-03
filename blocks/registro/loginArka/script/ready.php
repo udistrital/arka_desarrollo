@@ -27,3 +27,7 @@ $('#<?php echo sha1('clave'.$_REQUEST['tiempo']);?>').keydown(function(e) {
  {
     event.preventDefault();
     });
+    
+setTimeout(function() {
+    $('#divMensaje').hide( "drop", { direction: "up" }, "slow" );
+}, 4000); // <-- time in milliseconds
