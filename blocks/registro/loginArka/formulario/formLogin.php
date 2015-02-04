@@ -6,9 +6,6 @@ if (! isset ( $GLOBALS ["autorizado"] )) {
 	include ("../index.php");
 	exit ();
 }
-
-
-var_dump($_REQUEST);
 class Formulario {
 	var $miConfigurador;
 	var $lenguaje;
@@ -69,6 +66,11 @@ class Formulario {
 		$atributos = array_merge ( $atributos, $atributosGlobales );
 		echo $this->miFormulario->formulario ( $atributos );
 		
+		$atributos ["id"] = "botones";
+		$atributos ["estilo"] = "marcoBotones";
+		echo $this->miFormulario->division ( "inicio", $atributos );
+		unset ( $atributos );
+		
 		$esteCampo = 'usuario';
 		$atributos ['id'] = $esteCampo;
 		$atributos ['nombre'] = $esteCampo;
@@ -78,7 +80,7 @@ class Formulario {
 		$atributos ['columnas'] = 1;
 		$atributos ['dobleLinea'] = false;
 		$atributos ['tabIndex'] = $tab;
-		$atributos ['etiqueta'] = $this->lenguaje->getCadena ( $esteCampo );
+		$atributos ['textoFondo'] = $this->lenguaje->getCadena ( $esteCampo );
 		$atributos ['validar'] = 'required';
 		
 		if (isset ( $_REQUEST [$esteCampo] )) {
@@ -88,7 +90,7 @@ class Formulario {
 		}
 		$atributos ['titulo'] = $this->lenguaje->getCadena ( $esteCampo . 'Titulo' );
 		$atributos ['deshabilitado'] = false;
-		$atributos ['tamanno'] = 10;
+		$atributos ['tamanno'] = 20;
 		$atributos ['maximoTamanno'] = '10';
 		$tab ++;
 		
@@ -96,6 +98,8 @@ class Formulario {
 		$atributos = array_merge ( $atributos, $atributosGlobales );
 		echo $this->miFormulario->campoCuadroTexto ( $atributos );
 		unset ( $atributos );
+		
+		echo '<br>';
 		
 		$esteCampo = 'clave';
 		$atributos ['id'] = $esteCampo;
@@ -106,7 +110,7 @@ class Formulario {
 		$atributos ['columnas'] = 1;
 		$atributos ['dobleLinea'] = false;
 		$atributos ['tabIndex'] = $tab;
-		$atributos ['etiqueta'] = $this->lenguaje->getCadena ( $esteCampo );
+		$atributos ['textoFondo'] = $this->lenguaje->getCadena ( $esteCampo );
 		$atributos ['validar'] = 'required';
 		
 		if (isset ( $_REQUEST [$esteCampo] )) {
@@ -116,7 +120,7 @@ class Formulario {
 		}
 		$atributos ['titulo'] = $this->lenguaje->getCadena ( $esteCampo . 'Titulo' );
 		$atributos ['deshabilitado'] = false;
-		$atributos ['tamanno'] = 10;
+		$atributos ['tamanno'] = 20;
 		$atributos ['maximoTamanno'] = '10';
 		$tab ++;
 		
@@ -124,6 +128,8 @@ class Formulario {
 		$atributos = array_merge ( $atributos, $atributosGlobales );
 		echo $this->miFormulario->campoCuadroTexto ( $atributos );
 		unset ( $atributos );
+		
+		echo $this->miFormulario->division ( "fin" );
 		
 		$atributos ["id"] = "botones";
 		$atributos ["estilo"] = "marcoBotones";
@@ -227,8 +233,6 @@ class Formulario {
 
 <?php
 	}
-	
-	
 	function mensaje() {
 		
 		// Si existe algun tipo de error en el login aparece el siguiente mensaje
@@ -236,24 +240,23 @@ class Formulario {
 		
 		$this->miConfigurador->setVariableConfiguracion ( 'mostrarMensaje', null );
 		
-		if ($_REQUEST=='claveNoValida') {
+		if (isset ( $_REQUEST ['error'] )) {
 			
-			$tipoMensaje = $this->miConfigurador->getVariableConfiguracion ( 'tipoMensaje' );
-			
-			if ($tipoMensaje == 'json') {
+			if ($_REQUEST ['error'] == 'formularioExpirado') {
 				
-				$atributos ['mensaje'] = $mensaje;
-				$atributos ['json'] = true;
+				$atributos ["estilo"] = 'information';
 			} else {
-				$atributos ['mensaje'] = $this->lenguaje->getCadena ( $mensaje );
+				
+				$atributos ["estilo"] = 'error';
 			}
 			// -------------Control texto-----------------------
 			$esteCampo = 'divMensaje';
 			$atributos ['id'] = $esteCampo;
 			$atributos ["tamanno"] = '';
-			$atributos ["estilo"] = 'information';
+			
 			$atributos ["etiqueta"] = '';
 			$atributos ["columnas"] = ''; // El control ocupa 47% del tamaño del formulario
+			$atributos ['mensaje'] = $this->lenguaje->getCadena ( $_REQUEST ['error'] );
 			echo $this->miFormulario->campoMensaje ( $atributos );
 			unset ( $atributos );
 		}

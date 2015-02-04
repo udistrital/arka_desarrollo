@@ -42,8 +42,7 @@ class FormProcessor {
 		$variable ['usuario'] = $_REQUEST ["usuario"];
 		$variable ['clave'] = $this->miConfigurador->fabricaConexiones->crypto->codificarClave ( $_REQUEST ["clave"] );
 		
-		// var_dump($this->miConfigurador);
-		// exit;
+
 		// Verificar que el tiempo registrado en los controles no sea superior al tiempo actual + el tiempo de expiración
 		if ($_REQUEST ['tiempo'] <= time () + $this->miConfigurador->getVariableConfiguracion ( 'expiracion' )) {
 			
@@ -122,7 +121,13 @@ class FormProcessor {
 			}
 		} else {
 			
-			
+			// Registrar evento por tiempo de expiración en controles
+			$arregloLogin = array (
+					'formularioExpirado',
+					$variable ['usuario'],
+					$_SERVER ['REMOTE_ADDR'],
+					$_SERVER ['HTTP_USER_AGENT']
+			);
 			
 		}
 		
