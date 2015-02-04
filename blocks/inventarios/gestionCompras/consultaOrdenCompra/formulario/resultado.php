@@ -92,22 +92,20 @@ class registrarForm {
 		
 		$cadenaSql = $this->miSql->getCadenaSql ( 'consultarOrden1', $arreglo );
 		$ordenCompra1 = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
-// 		var_dump ( $ordenCompra1 );
+		// var_dump ( $ordenCompra1 );
 		
 		$cadenaSql = $this->miSql->getCadenaSql ( 'consultarOrden2', $arreglo );
 		$ordenCompra2 = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
 		
-// 		var_dump ( $ordenCompra2 );
-		
-		
+		// var_dump ( $ordenCompra2 );
 		
 		if ($ordenCompra1 == false) {
 			
 			$ordenCompra = $ordenCompra2;
-		}else if ($ordenCompra2 == false) {
-				
+		} else if ($ordenCompra2 == false) {
+			
 			$ordenCompra = $ordenCompra1;
-		}else{
+		} else {
 			$ordenCompra = array_merge ( $ordenCompra1, $ordenCompra2 );
 		}
 		
@@ -216,29 +214,29 @@ class registrarForm {
 			
 			echo "</table>";
 			// ------------------Division para los botones-------------------------
-			// $atributos ["id"] = "botones";
-			// $atributos ["estilo"] = "marcoBotones";
-			// echo $this->miFormulario->division ( "inicio", $atributos );
+			$atributos ["id"] = "botones";
+			$atributos ["estilo"] = "marcoBotones";
+			echo $this->miFormulario->division ( "inicio", $atributos );
 			
-			// // -----------------CONTROL: Botón ----------------------------------------------------------------
-			// $esteCampo = 'botonReporte';
-			// $atributos ["id"] = $esteCampo;
-			// $atributos ["tabIndex"] = $tab;
-			// $atributos ["tipo"] = 'boton';
-			// // submit: no se coloca si se desea un tipo button genérico
-			// $atributos ['submit'] = true;
-			// $atributos ["estiloMarco"] = '';
-			// $atributos ["estiloBoton"] = 'jqueryui';
-			// // verificar: true para verificar el formulario antes de pasarlo al servidor.
-			// $atributos ["verificar"] = '';
-			// $atributos ["tipoSubmit"] = 'jquery'; // Dejar vacio para un submit normal, en este caso se ejecuta la función submit declarada en ready.js
-			// $atributos ["valor"] = $this->lenguaje->getCadena ( $esteCampo );
-			// $atributos ['nombreFormulario'] = $esteBloque ['nombre'];
-			// $tab ++;
+			// -----------------CONTROL: Botón ----------------------------------------------------------------
+			$esteCampo = 'botonReporte';
+			$atributos ["id"] = $esteCampo;
+			$atributos ["tabIndex"] = $tab;
+			$atributos ["tipo"] = 'boton';
+			// submit: no se coloca si se desea un tipo button genérico
+			$atributos ['submit'] = true;
+			$atributos ["estiloMarco"] = '';
+			$atributos ["estiloBoton"] = 'jqueryui';
+			// verificar: true para verificar el formulario antes de pasarlo al servidor.
+			$atributos ["verificar"] = '';
+			$atributos ["tipoSubmit"] = 'jquery'; // Dejar vacio para un submit normal, en este caso se ejecuta la función submit declarada en ready.js
+			$atributos ["valor"] = $this->lenguaje->getCadena ( $esteCampo );
+			$atributos ['nombreFormulario'] = $esteBloque ['nombre'];
+			$tab ++;
 			
-			// // Aplica atributos globales al control
-			// $atributos = array_merge ( $atributos, $atributosGlobales );
-			// echo $this->miFormulario->campoBoton ( $atributos );
+			// Aplica atributos globales al control
+			$atributos = array_merge ( $atributos, $atributosGlobales );
+			echo $this->miFormulario->campoBoton ( $atributos );
 			// -----------------FIN CONTROL: Botón -----------------------------------------------------------
 			
 			// ---------------------------------------------------------

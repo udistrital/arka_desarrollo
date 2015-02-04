@@ -6,7 +6,11 @@ use inventarios\gestionCompras\consultaOrdenServicios\funcion\redireccion;
 
 $ruta = $this->miConfigurador->getVariableConfiguracion ( "raizDocumento" );
 
-// include ($ruta . '/plugin/html2pdf/html2pdf.class.php');
+$host = $this->miConfigurador->getVariableConfiguracion ( "host" ) . $this->miConfigurador->getVariableConfiguracion ( "site" ) . "/blocks/inventarios/";
+
+// echo $host;exit();
+
+include ($ruta . '/plugin/html2pdf/html2pdf.class.php');
 
 if (! isset ( $GLOBALS ["autorizado"] )) {
 	include ("../index.php");
@@ -144,7 +148,7 @@ td{
 			$contenido .= "</tr>";
 			
 			if ($i == 24) {
-				$paginaPDF = $this->paginas ( $contenido,'Ordenes de Compra', $directorio );
+				$paginaPDF = $this->paginas ( $contenido, 'Ordenes de Compra', $directorio );
 				$pagina .= $paginaPDF;
 				$contenido = '';
 				
@@ -167,8 +171,21 @@ td{
 		
 		$arreglo = unserialize ( $_REQUEST ['arreglo'] );
 		
-		$cadenaSql = $this->miSql->getCadenaSql ( 'consultarOrden', $arreglo );
-		$ordenCompra = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
+		$cadenaSql = $this->miSql->getCadenaSql ( 'consultarOrden1', $arreglo );
+		$ordenCompra1 = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
+		
+		$cadenaSql = $this->miSql->getCadenaSql ( 'consultarOrden2', $arreglo );
+		$ordenCompra2 = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
+		
+		if ($ordenCompra1 == false) {
+			
+			$ordenCompra = $ordenCompra2;
+		} else if ($ordenCompra2 == false) {
+			
+			$ordenCompra = $ordenCompra1;
+		} else {
+			$ordenCompra = array_merge ( $ordenCompra1, $ordenCompra2 );
+		}
 		
 		return $ordenCompra;
 	}
@@ -178,23 +195,44 @@ $miRegistrador = new RegistradorOrden ( $this->lenguaje, $this->sql, $this->func
 
 $resultado = $miRegistrador->procesarFormulario ();
 
-
 $textos = $miRegistrador->armarContenido ( count ( $resultado ), $resultado, $_REQUEST ['directorio'] );
+// ob_clean(); // cleaning the buffer before Output()
+try {
+	
+	$html2pdf = new \HTML2PDF ( 'L', 'LETTER', 'es' );
+	
+	$html2pdf->WriteHTML ( $textos );
 
+	$html2pdf->Output ( 'Compra.pdf','I' );
+} catch ( HTML2PDF_exception $e ) {
+	die ( $e );
+	echo "estoy";
+}
 
-$html2pdf = new \HTML2PDF ( 'L', 'LETTER', 'es' );
-//  echo $textos;
-// $html2pdf->pdf->SetDisplayMode('fullpage');
+// header('Location: http://localhost/arka/blocks/inventarios/gestionCompras/doc/Compra.pdf');
 
+// $pdf->Output($ruta."/documentos/prueba.pdf",'F');
 
-$res = $html2pdf->WriteHTML ( $textos );
+// $html2pdf->Output ($host."gestionCompras/doc/prueba.pdf",'E');
+// echo "<script language='javascript'>window.open('".$host."gestionCompras/doc/prueba.pdf','_self','');</script>";//para ver el archivo pdf generado
+//
 
-ob_end_clean();
-$html2pdf->Output ( 'Reporte Orden Compra.pdf', 'D' );
+// ob_end_flush();
+// $len=filesize($ruta);
 
+// header("Content-type: application/pdf");
+// header("Content-Length: $html2pdf->Output ( 'Reporte Orden Compra.pdf', 'D' ) ");
+// //header("Content-Disposition: inline; filename=reporte.pdf");
 
-exit;
+// //header("Content-type: application/octet-stream");
+// header("Content-Disposition: attachment; filename=reporte.pdf");
 
+// // readfile($ruta);
+// ob_start();
+// echo $res;
+// $post="/usr/local/apache/htdocs/arka/blocks/inventarios/gestionCompras/doc/Compra.pdf";
+
+// exit ();
 
 ?>
 
