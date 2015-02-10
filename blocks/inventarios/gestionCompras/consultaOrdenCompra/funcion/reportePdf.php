@@ -1,4 +1,4 @@
-<?php
+<?
 
 namespace inventarios\gestionCompras\consultaOrdenServicios\funcion;
 
@@ -8,10 +8,7 @@ $ruta = $this->miConfigurador->getVariableConfiguracion ( "raizDocumento" );
 
 $host = $this->miConfigurador->getVariableConfiguracion ( "host" ) . $this->miConfigurador->getVariableConfiguracion ( "site" ) . "/blocks/inventarios/";
 
-// echo $host;exit();
-
-include ($ruta . '/plugin/html2pdf/html2pdf.class.php');
-
+// ob_end_clean();
 if (! isset ( $GLOBALS ["autorizado"] )) {
 	include ("../index.php");
 	exit ();
@@ -98,9 +95,7 @@ td{
 	
 	
 	
-	
-	<!--Columnas-->
-					<thead>
+						<thead>
 				<tr role='row'>
 					<th aria-label='Documento' aria-sort='ascending'
 						style='width: 100px;' colspan='1' rowspan='1'
@@ -196,43 +191,19 @@ $miRegistrador = new RegistradorOrden ( $this->lenguaje, $this->sql, $this->func
 $resultado = $miRegistrador->procesarFormulario ();
 
 $textos = $miRegistrador->armarContenido ( count ( $resultado ), $resultado, $_REQUEST ['directorio'] );
-// ob_clean(); // cleaning the buffer before Output()
-try {
-	
-	$html2pdf = new \HTML2PDF ( 'L', 'LETTER', 'es' );
-	
-	$html2pdf->WriteHTML ( $textos );
 
-	$html2pdf->Output ( 'Compra.pdf','I' );
-} catch ( HTML2PDF_exception $e ) {
-	die ( $e );
-	echo "estoy";
-}
+ob_start ();
+$html2pdf = new \HTML2PDF ( 'L', 'LETTER', 'es' );
 
-// header('Location: http://localhost/arka/blocks/inventarios/gestionCompras/doc/Compra.pdf');
+$html2pdf->WriteHTML ( $textos );
 
-// $pdf->Output($ruta."/documentos/prueba.pdf",'F');
+// ob_end_clean();
 
-// $html2pdf->Output ($host."gestionCompras/doc/prueba.pdf",'E');
-// echo "<script language='javascript'>window.open('".$host."gestionCompras/doc/prueba.pdf','_self','');</script>";//para ver el archivo pdf generado
-//
-
-// ob_end_flush();
-// $len=filesize($ruta);
-
-// header("Content-type: application/pdf");
-// header("Content-Length: $html2pdf->Output ( 'Reporte Orden Compra.pdf', 'D' ) ");
-// //header("Content-Disposition: inline; filename=reporte.pdf");
-
-// //header("Content-type: application/octet-stream");
-// header("Content-Disposition: attachment; filename=reporte.pdf");
-
-// // readfile($ruta);
-// ob_start();
-// echo $res;
-// $post="/usr/local/apache/htdocs/arka/blocks/inventarios/gestionCompras/doc/Compra.pdf";
-
-// exit ();
+$html2pdf->Output ( 'Compra.pdf', 'D' );
 
 ?>
+
+
+
+
 

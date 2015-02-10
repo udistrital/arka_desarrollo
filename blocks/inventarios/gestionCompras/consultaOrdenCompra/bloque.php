@@ -121,5 +121,4 @@ if (isset ( $lenguaje )) {
 }
 
 $esteBloque->bloque ();
-
 ?>

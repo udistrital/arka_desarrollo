@@ -176,28 +176,15 @@
         
         
         $('#<?php echo $this->campoSeguro('proveedorDiv')?>').css('display','none');
-        
- 		$('#<?php echo $this->campoSeguro('proveedor')?>').val('');
+        $('#<?php echo $this->campoSeguro('proveedor')?>').val('');
         $('#<?php echo $this->campoSeguro('nitProveedor')?>').val('');
         $('#<?php echo $this->campoSeguro('direccionProveedor')?>').val('');
         $('#<?php echo $this->campoSeguro('telefonoProveedor')?>').val('');
-        	
         $('#<?php echo $this->campoSeguro('proveedor')?>').removeAttr('disabled');
         $('#<?php echo $this->campoSeguro('nitProveedor')?>').removeAttr('disabled');
         $('#<?php echo $this->campoSeguro('direccionProveedor')?>').removeAttr('disabled');
         $('#<?php echo $this->campoSeguro('telefonoProveedor')?>').removeAttr('disabled');
-        	
-
         
         }
-        
-        
-        });
-        
-          
-
-
-
-
-
-
+       
+        }); 
