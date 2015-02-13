@@ -3,8 +3,10 @@
 namespace inventarios\asignarInventarioC\generarPazSalvo\funcion;
 
 use inventarios\asignarInventarioC\generarPazSalvo\funcion\redireccion;
+use inventarios\asignarInventarioC\generarPazSalvo\script\html2pdf;
 
 include_once ('redireccionar.php');
+include_once ('html2pdf.class.php');
 
 if (!isset($GLOBALS ["autorizado"])) {
     include ("../index.php");
@@ -30,10 +32,8 @@ class RegistradorActa {
 
     function procesarFormulario() {
         date_default_timezone_set('America/Bogota');
-        $esteBloque = $this->miConfigurador->getVariableConfiguracion("esteBloque");
-        $fecha=date('d-m-Y');
-        
-        include_once ($esteBloque . "/script/html2pdf/html2pdf.class.php");
+
+        $fecha = date('d-m-Y');
 
         ob_start();
 
@@ -116,7 +116,7 @@ class RegistradorActa {
         $html2pdf->pdf->SetDisplayMode('fullpage');
         $html2pdf->WriteHTML($ContenidoPdf);
         clearstatcache();
-        $html2pdf->Output('EstadoCuenta_"' . $arreglo . '".pdf', 'D');
+        $html2pdf->Output('PazSalvo.pdf', 'D');
     }
 
 }

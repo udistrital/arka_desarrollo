@@ -161,6 +161,12 @@ $enlacedescargarInventario ['enlace'] .= "&usuario=" . $miSesion->getSesionUsuar
 $enlacedescargarInventario ['urlCodificada'] = $this->miConfigurador->fabricaConexiones->crypto->codificar_url($enlacedescargarInventario ['enlace'], $directorio);
 $enlacedescargarInventario ['nombre'] = "Descargar  Elementos a Contratista";
 
+$enlacegenerarPazSalvo ['enlace'] = "pagina=generarPazSalvo";
+$enlacegenerarPazSalvo ['enlace'] .= "&usuario=" . $miSesion->getSesionUsuarioId();
+
+$enlacegenerarPazSalvo ['urlCodificada'] = $this->miConfigurador->fabricaConexiones->crypto->codificar_url($enlacegenerarPazSalvo ['enlace'], $directorio);
+$enlacegenerarPazSalvo ['nombre'] = "Generar Paz y Salvo Contratista";
+
 // Reportico
 $enlaceReportico ['enlace'] = "pagina=reportico";
 $enlaceReportico ['enlace'] .= "&usuario=" . $miSesion->getSesionUsuarioId();
@@ -206,12 +212,12 @@ $enlaceFinSesion['nombre'] = "Cerrar Sesión";
                 <li><a href="<?php echo $enlaceModificarEntradas['urlCodificada'] ?>"><?php echo $enlaceModificarEntradas['nombre'] ?></a></li>   
             </ul>
         </li>
-        
+
         <li>
             <a href="#">Salidas</a>
             <ul class="dl-submenu">
                 <li><a href="<?php echo $enlaceRegistroSalidas['urlCodificada'] ?>"><?php echo $enlaceRegistroSalidas['nombre'] ?></a></li>
-				<li><a href="<?php echo $enlaceModificarSalidas['urlCodificada'] ?>"><?php echo $enlaceModificarSalidas['nombre'] ?></a></li>   
+                <li><a href="<?php echo $enlaceModificarSalidas['urlCodificada'] ?>"><?php echo $enlaceModificarSalidas['nombre'] ?></a></li>   
             </ul>
         </li>
 
@@ -221,7 +227,7 @@ $enlaceFinSesion['nombre'] = "Cerrar Sesión";
                 <li><a href="<?php echo $enlaceGestionarCatalogo['urlCodificada'] ?>"><?php echo $enlaceGestionarCatalogo['nombre'] ?></a></li>
             </ul>
         </li>
-       <li>
+        <li>
             <a href="#">Radiación Documentos</a>
             <ul class="dl-submenu">
                 <li><a href="<?php echo $enlaceRadicarAsignar['urlCodificada'] ?>"><?php echo $enlaceRadicarAsignar['nombre'] ?></a></li>
@@ -240,8 +246,13 @@ $enlaceFinSesion['nombre'] = "Cerrar Sesión";
             </ul>
         </li>
 
- <li>
-            <a href="<?php echo$enlaceReportico['urlCodificada'] ?>"><?php echo $enlaceReportico['nombre'] ?></a>
+        <li>
+            <a href="#">Gestor de Reportes</a>
+            <ul class="dl-submenu">
+                <li><a href="<?php echo$enlaceReportico['urlCodificada'] ?>"><?php echo $enlaceReportico['nombre'] ?></a></li>
+                <li><a href="<?php echo $enlacegenerarPazSalvo['urlCodificada'] ?>"><?php echo $enlacegenerarPazSalvo['nombre'] ?></a></li>
+            </ul>
+
         </li>
 
         <li>

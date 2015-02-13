@@ -73,13 +73,9 @@ class registrarForm {
         $cadenaSql = $this->miSql->getCadenaSql('consultarID', $docContratista);
         $contratista = $esteRecursoDB->ejecutarAcceso($cadenaSql, "busqueda");
 
-
-
-
         $variables = array(
             $supervisor,
             $docContratista);
-
 
 //Consultar Elementos Asignados al contratista
         $cadenaSql = $this->miSql->getCadenaSql('consultarElementosContratista', $variables);
@@ -228,24 +224,14 @@ class registrarForm {
                 $atributos = array_merge($atributos, $atributosGlobales);
                 echo $this->miFormulario->campoBoton($atributos);
 // -----------------FIN CONTROL: Botón -----------------------------------------------------------
-
-                $valorCodificado = "actionBloque=" . $esteBloque ["nombre"];
-                //$valorCodificado .= "&pagina=" . $this->miConfigurador->getVariableConfiguracion('pagina');
-                $valorCodificado = "&bloque=" . $esteBloque ['nombre'];
-                $valorCodificado .= "&bloqueGrupo=" . $esteBloque ["grupo"];
-                $valorCodificado .= "&opcion=generarPDF";
-                $valorCodificado .= "&contratista=" . $docContratista;
-
-                /**
-                 * SARA permite que los nombres de los campos sean dinámicos.
-                 * Para ello utiliza la hora en que es creado el formulario para
-                 * codificar el nombre de cada campo. Si se utiliza esta técnica es necesario pasar dicho tiempo como una variable:
-                 * (a) invocando a la variable $_REQUEST ['tiempo'] que se ha declarado en ready.php o
-                 * (b) asociando el tiempo en que se está creando el formulario
-                 */
-                $valorCodificado .= "&campoSeguro=" . $_REQUEST ['tiempo'];
-                $valorCodificado .= "&tiempo=" . time();
-// Paso 2: codificar la cadena resultante
+                $valorCodificado = "action=". $esteBloque ["nombre"];
+                $valorCodificado.= "&pagina=" . $this->miConfigurador->getVariableConfiguracion('pagina');
+                $valorCodificado.= "&bloque=". $esteBloque ['nombre'];
+                $valorCodificado.= "&bloqueGrupo=" . $esteBloque ["grupo"];
+                $valorCodificado.= "&opcion=generarPDF";
+                $valorCodificado.= "&contratista=" . $docContratista;
+                $valorCodificado.= "&campoSeguro=" . $_REQUEST ['tiempo'];
+               // Paso 2: codificar la cadena resultante
                 $valorCodificado = $this->miConfigurador->fabricaConexiones->crypto->codificar($valorCodificado);
 
                 $atributos ["id"] = "formSaraData"; // No cambiar este nombre

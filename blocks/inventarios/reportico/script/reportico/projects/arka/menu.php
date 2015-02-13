@@ -1,6 +1,6 @@
 <?php
 
-$menu_title = 'Gestor Reportes Sistema Gestión de Inventarios';
+$menu_title = 'Gestor Reportes';
 $menu = array();
 
 $dropdown_menu = array(

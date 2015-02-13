@@ -151,9 +151,22 @@ $enlaceRadicarAsignar ['nombre'] = "Asignar Entrada";
 
 $enlaceasignarInventarioC ['enlace'] = "pagina=asignarInventarioC";
 $enlaceasignarInventarioC ['enlace'] .= "&usuario=" . $miSesion->getSesionUsuarioId();
-
 $enlaceasignarInventarioC ['urlCodificada'] = $this->miConfigurador->fabricaConexiones->crypto->codificar_url($enlaceasignarInventarioC ['enlace'], $directorio);
 $enlaceasignarInventarioC ['nombre'] = "Asignación de  Elementos a Contratistas";
+
+//modificar inventarios a Contratistas
+$enlaceconsultarAsignacion ['enlace'] = "pagina=consultarAsignacion";
+$enlaceconsultarAsignacion ['enlace'] .= "&usuario=" . $miSesion->getSesionUsuarioId();
+$enlaceconsultarAsignacion ['urlCodificada'] = $this->miConfigurador->fabricaConexiones->crypto->codificar_url($enlaceconsultarAsignacion ['enlace'], $directorio);
+$enlaceconsultarAsignacion ['nombre'] = "Modificar Asignación de  Elementos a Contratistas";
+
+//descargar inventarios a Contratistas
+$enlacedescargarInventario ['enlace'] = "pagina=descargarInventario";
+$enlacedescargarInventario ['enlace'] .= "&usuario=" . $miSesion->getSesionUsuarioId();
+$enlacedescargarInventario ['urlCodificada'] = $this->miConfigurador->fabricaConexiones->crypto->codificar_url($enlacedescargarInventario ['enlace'], $directorio);
+$enlacedescargarInventario ['nombre'] = "Descargar  Elementos a Contratista";
+
+
 
 // Reportico
 $enlaceReportico ['enlace'] = "pagina=reportico";
@@ -188,7 +201,7 @@ $enlaceFinSesion['nombre'] = "Cerrar Sesión";
             <a href="#">Acta Recibido</a>
             <ul class="dl-submenu">
                 <li><a href="<?php echo $enlacegestionActa['urlCodificada'] ?>"><?php echo $enlacegestionActa['nombre'] ?></a></li>
-                <li><a href="<?php echo$enlaceconsultaActa['urlCodificada'] ?>"><?php echo $enlaceconsultaActa['nombre'] ?></a></li>
+                <!--li><a href="<?php echo$enlaceconsultaActa['urlCodificada'] ?>"><?php echo $enlaceconsultaActa['nombre'] ?></a></li-->
             </ul>
         </li>
 
