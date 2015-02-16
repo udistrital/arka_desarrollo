@@ -77,6 +77,7 @@ class Funcion {
 			
 			if (isset ( $_REQUEST ['botonReporte'] ) && $_REQUEST ['botonReporte'] == 'true') {
 				$this->reporteOrden ();
+				exit;
 			}
 			
 			if (isset ( $_REQUEST ["redireccionar"] ) && $_REQUEST ['redireccionar'] == 'regresar') {

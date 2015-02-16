@@ -1,44 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <buildpath>
-	<buildpathentry kind="src" path="blocks/bloquesModelo/bloqueModelo1"/>
-	<buildpathentry kind="src" path="blocks/bloquesModelo/bloqueModelo2"/>
-	<buildpathentry kind="src" path="blocks/development"/>
-	<buildpathentry kind="src" path="blocks/gui/bannerUsuario"/>
-	<buildpathentry kind="src" path="blocks/gui/menu"/>
-	<buildpathentry kind="src" path="blocks/gui/pie"/>
-	<buildpathentry kind="src" path="blocks/inventarios/catalogo"/>
-	<buildpathentry kind="src" path="blocks/inventarios/gestionActa/consultarActa"/>
-	<buildpathentry kind="src" path="blocks/inventarios/gestionActa/registrarActa"/>
-	<buildpathentry kind="src" path="blocks/inventarios/gestionCompras/consultaOrdenCompra"/>
-	<buildpathentry kind="src" path="blocks/inventarios/gestionCompras/consultaOrdenServicios"/>
-	<buildpathentry kind="src" path="blocks/inventarios/gestionCompras/registrarOrdenCompra"/>
-	<buildpathentry kind="src" path="blocks/inventarios/gestionCompras/registrarOrdenServicios"/>
-	<buildpathentry kind="src" path="blocks/inventarios/gestionContrato"/>
-	<buildpathentry kind="src" path="blocks/inventarios/gestionElementos/modificarElemento"/>
-	<buildpathentry kind="src" path="blocks/inventarios/gestionElementos/registrarElemento"/>
-	<buildpathentry kind="src" path="blocks/inventarios/gestionEntradas/consultaEntradas"/>
-	<buildpathentry kind="src" path="blocks/inventarios/gestionEntradas/modificarEntradas"/>
-	<buildpathentry kind="src" path="blocks/inventarios/gestionEntradas/registrarEntradas"/>
-	<buildpathentry kind="src" path="blocks/inventarios/gestionSalidas/modificarSalidas"/>
-	<buildpathentry kind="src" path="blocks/inventarios/gestionSalidas/registrarSalidas"/>
-	<buildpathentry kind="src" path="blocks/inventarios/radicarAsignar"/>
-	<buildpathentry kind="src" path="blocks/inventarios/reportico"/>
-	<buildpathentry kind="src" path="blocks/registro/login"/>
-	<buildpathentry kind="src" path="blocks/registro/loginArka"/>
-	<buildpathentry kind="src" path="component"/>
-	<buildpathentry kind="src" path="config"/>
-	<buildpathentry kind="src" path="core/auth"/>
-	<buildpathentry kind="src" path="core/builder"/>
-	<buildpathentry kind="src" path="core/connection"/>
-	<buildpathentry kind="src" path="core/crypto"/>
-	<buildpathentry kind="src" path="core/general"/>
-	<buildpathentry kind="src" path="core/locale"/>
-	<buildpathentry kind="src" path="core/manager"/>
-	<buildpathentry kind="src" path="install"/>
-	<buildpathentry kind="src" path="plugin/namshi/notificator/spec/Namshi/Notificator"/>
-	<buildpathentry kind="src" path="plugin/namshi/notificator/src/Namshi/Notificator"/>
-	<buildpathentry kind="src" path="plugin/phpsqlparser"/>
-	<buildpathentry kind="src" path="plugin/scripts"/>
-	<buildpathentry kind="src" path="theme/basico"/>
+	<buildpathentry kind="src" path=""/>
 	<buildpathentry kind="con" path="org.eclipse.php.core.LANGUAGE"/>
 </buildpath>

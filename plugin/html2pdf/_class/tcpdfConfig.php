@@ -52,7 +52,7 @@ if (!defined('K_TCPDF_EXTERNAL_CONFIG')) {
             );
         } else {
             // define here your DOCUMENT_ROOT path if the previous fails
-            $_SERVER['DOCUMENT_ROOT'] = '/var/www';
+            $_SERVER['DOCUMENT_ROOT'] = '/usr/local/apache/htdocs/';
         }
     }
 

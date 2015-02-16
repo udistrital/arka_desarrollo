@@ -3,6 +3,7 @@ if (! isset ( $GLOBALS ["autorizado"] )) {
 	include ("../index.php");
 	exit ();
 }
+ob_start();
 
 $esteBloque = $this->miConfigurador->getVariableConfiguracion ( "esteBloque" );
 

@@ -1,7 +1,7 @@
 <?
 
 namespace inventarios\gestionCompras\consultaOrdenServicios\funcion;
-
+// var_dump($_REQUEST);
 use inventarios\gestionCompras\consultaOrdenServicios\funcion\redireccion;
 
 $ruta = $this->miConfigurador->getVariableConfiguracion ( "raizDocumento" );
@@ -197,9 +197,18 @@ $html2pdf = new \HTML2PDF ( 'L', 'LETTER', 'es' );
 
 $html2pdf->WriteHTML ( $textos );
 
-// ob_end_clean();
+// var_dump($_REQUEST);
 
+
+
+// ob_end_clean();
 $html2pdf->Output ( 'Compra.pdf', 'D' );
+
+
+// echo '<a href="'.$html2pdf->Output ( 'Compra.pdf', 'D' ).'" target="_blank">Página en blanco</a>';
+// echo '<a href="www.google.com" target="_blank">Página en blanco</a>';
+
+// exit;
 
 ?>
 

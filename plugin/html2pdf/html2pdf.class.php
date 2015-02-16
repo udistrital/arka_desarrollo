@@ -345,6 +345,8 @@ if (!defined('__CLASS_HTML2PDF__')) {
          */
         public function Output($name = '', $dest = false)
         {
+        	
+        	
             // close the pdf and clean up
             $this->_cleanUp();
 
@@ -371,7 +373,11 @@ if (!defined('__CLASS_HTML2PDF__')) {
             }
 
             // call the output of TCPDF
+//             ob_end_clean();
+//             ob_end_clean();
             return $this->pdf->Output($name, $dest);
+            
+            
         }
 
         /**
@@ -488,7 +494,7 @@ if (!defined('__CLASS_HTML2PDF__')) {
             $content = preg_replace('/<\/barcode([^>]*)>/isU', '', $content);
             $content = preg_replace('/<qrcode([^>]*)>/isU', '<hr>qrcode : $1<hr>', $content);
             $content = preg_replace('/<\/qrcode([^>]*)>/isU', '', $content);
-
+//  echo $content;
             echo '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
     <head>
@@ -1259,6 +1265,7 @@ if (!defined('__CLASS_HTML2PDF__')) {
 
             // return the result
             return $res;
+            
         }
 
         /**

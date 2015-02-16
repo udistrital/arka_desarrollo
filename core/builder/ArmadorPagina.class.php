@@ -85,6 +85,10 @@ class ArmadorPagina {
         }
         
         // Funciones javascript globales del aplicativo
+        
+        include_once ("plugin/html2pdf/html2pdf.class.php");
+        
+        // Funciones javascript globales del aplicativo
         include_once ("plugin/scripts/Script.php");
         
         // Insertar las funciones js definidas en cada bloque
