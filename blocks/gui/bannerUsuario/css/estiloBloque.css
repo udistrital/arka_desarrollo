@@ -13,11 +13,9 @@
     height:50px;
     top:5px;
     float:right;
-    left:-100px;
+    left:-1px;
     opacity: 0.2;
     z-index:3001;
-    background-image: url("../images/caja_banner.jpg");
-    background: url("../images/caja_banner.jpg");
 }
 
 .divCalendario{
