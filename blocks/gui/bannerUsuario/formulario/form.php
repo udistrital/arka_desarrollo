@@ -54,7 +54,7 @@ class Formulario {
             //--------------------Imagen ---------------------------------------------
             $esteCampo = 'divLogoArka';
             $atributos ['id'] = $esteCampo;
-            $atributos['imagen'] = $this->miConfigurador->getVariableConfiguracion('rutaUrlBloque') . 'css/images/banner_arka.png';
+            $atributos['imagen'] = $this->miConfigurador->getVariableConfiguracion('rutaUrlBloque') . 'css/images/banner_arka2.png';
             $atributos['estilo'] = $esteCampo;
             $atributos['etiqueta'] = $this->lenguaje->getCadena($esteCampo . 'Titulo');
             $atributos['ancho'] = '100%';
