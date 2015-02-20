@@ -438,7 +438,28 @@ class Sql extends \Sql {
 				$cadenaSql .= "  RETURNING  id_recuperacion ";
 				
 				break;
+				
+				
+				
+				
+				case "EliminarSalidasSinElementos" :
+					$cadenaSql = " UPDATE recuperacion_entrada ";
+					$cadenaSql .= " SET observaciones='" . $variable [2] . "' ";
+					if ($variable [0] == 1) {
+							
+						$cadenaSql .= " , ruta_acta='" . $variable [3] . "' , ";
+						$cadenaSql .= "  nombre_acta='" . $variable [4] . "'  ";
+					}
+					$cadenaSql .= "  WHERE id_recuperacion='" . $variable [1] . "' ";
+					$cadenaSql .= "  RETURNING  id_recuperacion ";
+				
+					break;
+				
+				
 		}
+		
+		
+		
 		return $cadenaSql;
 	}
 }

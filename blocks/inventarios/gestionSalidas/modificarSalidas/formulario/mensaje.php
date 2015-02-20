@@ -40,6 +40,8 @@ class registrarForm {
 		$esteRecursoDB = $this->miConfigurador->fabricaConexiones->getRecursoDB ( $conexion );
 		$Semaforo2 = 0;
 		
+		
+		
 		if (isset ( $_REQUEST ['salida'] ) && $_REQUEST ['salida'] != 0) {
 			$cadenaSql = $this->miSql->getCadenaSql ( 'consultarEntradaParticular', $_REQUEST ['entrada'] );
 			
@@ -48,16 +50,50 @@ class registrarForm {
 			$cadenaSql = $this->miSql->getCadenaSql ( 'consulta_elementos_sin_actualizar', $entrada [0] [12] );
 			
 			$elementos = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
-			
+
+						
 			$arreglo = array (
 					$_REQUEST ['salida'],
 					$_REQUEST ['entrada'] 
 			);
 			
-			if ($_REQUEST ['salidaSA'] != 0) {
+			$ids = unserialize ( $_REQUEST ['salidaSA'] );
+			
+					
+			
+				
+			if ($ids != 0) {
 				$ids = unserialize ( $_REQUEST ['salidaSA'] );
 				$Semaforo2 = 1;
+				
+				
 			}
+			
+			
+			
+			if ($ids!=0 && $elementos==false ) {
+				
+				foreach ($ids as $i){
+					
+
+					
+					$cadenaSql = $this->miSql->getCadenaSql ( 'EliminarSalidasSinElementos', $i );
+					
+						
+					$elementos = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "acceso" );
+					
+					
+					
+					
+					
+				}
+			
+			
+			
+			
+			}
+			
+			
 		}
 		// Limpia Items Tabla temporal
 		
