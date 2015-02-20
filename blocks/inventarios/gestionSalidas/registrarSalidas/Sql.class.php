@@ -157,20 +157,21 @@ class Sql extends \Sql {
 				$cadenaSql .= "FROM entrada ";
 				$cadenaSql .= "JOIN proveedor ON proveedor.id_proveedor = entrada.proveedor ";
 				$cadenaSql .= "WHERE 1=1 AND id_salida ='0' ";
+				
 				if ($variable [0] != '') {
-					$cadenaSql .= " AND fecha_registro BETWEEN CAST ( '" . $variable [4] . "' AS DATE) ";
-					$cadenaSql .= " AND  CAST ( '" . $variable [5] . "' AS DATE)  ";
-				}
-				if ($variable [2] != '') {
 					$cadenaSql .= " AND id_entrada = '" . $variable [0] . "'";
 				}
-				if ($variable [3] != '') {
+				if ($variable [1] != '') {
 					$cadenaSql .= " AND  nit= '" . $variable [1] . "'";
 				}
-				if ($variable [4] != '') {
+				if ($variable [2] != '') {
 					$cadenaSql .= " AND  nombre= '" . $variable [3] . "'";
 				}
 				
+				if ($variable [3] != '') {
+					$cadenaSql .= " AND fecha_registro BETWEEN CAST ( '" . $variable [3] . "' AS DATE) ";
+					$cadenaSql .= " AND  CAST ( '" . $variable [4] . "' AS DATE)  ";
+				}
 				break;
 			
 			case "consultarEntradaParticular" :
@@ -211,8 +212,8 @@ class Sql extends \Sql {
 			
 			case "consultar_dependencia" :
 				
-				$cadenaSql = "SELECT id_dependecia, (id_dependecia||' - '|| nombre) AS Dependencia ";
-				$cadenaSql .= "FROM dependecia ;";
+				$cadenaSql = "SELECT id_dependencia, (id_dependencia||' - '|| nombre) AS Dependencia ";
+				$cadenaSql .= "FROM dependencia ;";
 				
 				break;
 			
@@ -264,8 +265,7 @@ class Sql extends \Sql {
 				break;
 			
 			// _________________________________________________
-			
-					}
+		}
 		return $cadenaSql;
 	}
 }

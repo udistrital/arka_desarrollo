@@ -85,10 +85,10 @@ class registrarForm {
 				$proveedor,
 				$fechaInicio,
 				$fechaFinal 
-		)
-		;
+		);
 		
 		$cadenaSql = $this->miSql->getCadenaSql ( 'consultarEntrada', $arreglo );
+		
 		$entrada = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
 		
 		// ---------------- SECCION: Parámetros Generales del Formulario ----------------------------------
