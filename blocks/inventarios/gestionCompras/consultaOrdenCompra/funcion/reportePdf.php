@@ -6,10 +6,13 @@ use inventarios\gestionCompras\consultaOrdenServicios\funcion\redireccion;
 
 $ruta = $this->miConfigurador->getVariableConfiguracion ( "raizDocumento" );
 
-$host = $this->miConfigurador->getVariableConfiguracion ( "host" ) . $this->miConfigurador->getVariableConfiguracion ( "site" ) . "/blocks/inventarios/";
+$host = $this->miConfigurador->getVariableConfiguracion ( "host" ) . $this->miConfigurador->getVariableConfiguracion ( "site" ) . "/plugin/html2pfd/";
+
+
+include ($ruta."/plugin/html2pdf/html2pdf.class.php");
 
 // ob_end_clean();
-if (! isset ( $GLOBALS ["autorizado"] )) {
+if (! isset ( $GLOBALS ["autorizado"])) {
 	include ("../index.php");
 	exit ();
 }
@@ -197,18 +200,10 @@ $html2pdf = new \HTML2PDF ( 'L', 'LETTER', 'es' );
 
 $html2pdf->WriteHTML ( $textos );
 
-// var_dump($_REQUEST);
-
-
-
-// ob_end_clean();
 $html2pdf->Output ( 'Compra.pdf', 'D' );
 
 
-// echo '<a href="'.$html2pdf->Output ( 'Compra.pdf', 'D' ).'" target="_blank">Página en blanco</a>';
-// echo '<a href="www.google.com" target="_blank">Página en blanco</a>';
 
-// exit;
 
 ?>
 
