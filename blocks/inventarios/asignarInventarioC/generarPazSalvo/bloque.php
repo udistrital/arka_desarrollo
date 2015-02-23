@@ -53,7 +53,7 @@ class Bloque implements \Bloque {
         $rutaURL = $this->miConfigurador->getVariableConfiguracion("host") . $this->miConfigurador->getVariableConfiguracion("site");
 
         if (!isset($esteBloque ["grupo"]) || $esteBloque ["grupo"] == "") {
-            $ruta .= "/blocks/" . $esteBloque ["nombre"] . "/";
+            $ruta .= "/blocks/" . $esteBloque ["nombre"] . "";
             $rutaURL .= "/blocks/" . $esteBloque ["nombre"] . "/";
         } else {
             $ruta .= "/blocks/" . $esteBloque ["grupo"] . "/" . $esteBloque ["nombre"] . "/";
@@ -75,7 +75,6 @@ class Bloque implements \Bloque {
         } else if (isset($_REQUEST ['botonContinuar']) && $_REQUEST ['botonContinuar'] == "true") {
             redireccion::redireccionar("paginaPrincipal");
         } else {
-
             $this->miFrontera->setSql($this->miSql);
             $this->miFrontera->setFuncion($this->miFuncion);
             $this->miFrontera->setLenguaje($this->miLenguaje);
@@ -85,10 +84,9 @@ class Bloque implements \Bloque {
             $this->miFuncion->setLenguaje($this->miLenguaje);
 
             if (!isset($_REQUEST ['action'])) {
-// 				echo "bloque";exit;
                 $this->miFrontera->frontera();
             } else {
-
+         
                 $respuesta = $this->miFuncion->action();
 
                 // Si $respuesta==false, entonces se debe recargar el formulario y mostrar un mensaje de error.

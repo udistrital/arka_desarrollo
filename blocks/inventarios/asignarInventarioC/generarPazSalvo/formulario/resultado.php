@@ -126,7 +126,6 @@ class registrarForm {
                 <th>Subtotal</th>
                 <th>Total IVA</th>
                 <th>Total Ajustado</th>
-		<th>Estado Asignación</th>
                 </tr>
             </thead>
             <tbody>";
@@ -146,14 +145,6 @@ class registrarForm {
                     <td><center>" . $elementos_contratista [$i]['subtotal_sin_iva'] . "</center></td>
                     <td><center>" . $elementos_contratista [$i]['total_iva'] . "</center></td>
                     <td><center>" . $elementos_contratista [$i]['total_iva_con'] . "</center></td>
-                    <td><center>";
-
-
-// Aplica atributos globales al control
-                        $atributos = array_merge($atributos, $atributosGlobales);
-                        $mostrarHtml .= $this->miFormulario->campoCuadroSeleccion($atributos);
-
-                        $mostrarHtml .= "</center></td>
                     </tr>";
                         echo $mostrarHtml;
                         unset($mostrarHtml);
@@ -224,29 +215,6 @@ class registrarForm {
                 $atributos = array_merge($atributos, $atributosGlobales);
                 echo $this->miFormulario->campoBoton($atributos);
 // -----------------FIN CONTROL: Botón -----------------------------------------------------------
-                $valorCodificado = "action=". $esteBloque ["nombre"];
-                $valorCodificado.= "&pagina=" . $this->miConfigurador->getVariableConfiguracion('pagina');
-                $valorCodificado.= "&bloque=". $esteBloque ['nombre'];
-                $valorCodificado.= "&bloqueGrupo=" . $esteBloque ["grupo"];
-                $valorCodificado.= "&opcion=generarPDF";
-                $valorCodificado.= "&contratista=" . $docContratista;
-                $valorCodificado.= "&campoSeguro=" . $_REQUEST ['tiempo'];
-               // Paso 2: codificar la cadena resultante
-                $valorCodificado = $this->miConfigurador->fabricaConexiones->crypto->codificar($valorCodificado);
-
-                $atributos ["id"] = "formSaraData"; // No cambiar este nombre
-                $atributos ["tipo"] = "hidden";
-                $atributos ['estilo'] = '';
-                $atributos ["obligatorio"] = false;
-                $atributos ['marco'] = true;
-                $atributos ["etiqueta"] = "";
-                $atributos ["valor"] = $valorCodificado;
-                echo $this->miFormulario->campoCuadroTexto($atributos);
-                unset($atributos);
-
-                $atributos ['marco'] = true;
-                $atributos ['tipoEtiqueta'] = 'fin';
-                echo $this->miFormulario->formulario($atributos);
             }
         } else {
 
@@ -266,6 +234,42 @@ class registrarForm {
             echo $this->miFormulario->cuadroMensaje($atributos);
             // --------------- FIN CONTROL : Cuadro de Texto --------------------------------------------------
         }
+
+        $valorCodificado = "action=" . $esteBloque ["nombre"];
+        $valorCodificado .= "&pagina=" . $this->miConfigurador->getVariableConfiguracion('pagina');
+        $valorCodificado .= "&bloque=" . $esteBloque ['nombre'];
+        $valorCodificado .= "&bloqueGrupo=" . $esteBloque ["grupo"];
+        $valorCodificado .= "&opcion=generarPDF";
+        $valorCodificado .= "&redireccionar=regresar";
+        $valorCodificado .= "&documentoContratista=" . $docContratista;
+        $valorCodificado .= "&directorio=" . $rutaBloque;
+        /**
+         * SARA permite que los nombres de los campos sean dinámicos.
+         * Para ello utiliza la hora en que es creado el formulario para
+         * codificar el nombre de cada campo. Si se utiliza esta técnica es necesario pasar dicho tiempo como una variable:
+         * (a) invocando a la variable $_REQUEST ['tiempo'] que se ha declarado en ready.php o
+         * (b) asociando el tiempo en que se está creando el formulario
+         */
+        $valorCodificado .= "&campoSeguro=" . $_REQUEST ['tiempo'];
+        $valorCodificado .= "&tiempo=" . time();
+// Paso 2: codificar la cadena resultante
+        $valorCodificado = $this->miConfigurador->fabricaConexiones->crypto->codificar($valorCodificado);
+        $atributos ["id"] = "formSaraData"; // No cambiar este nombre
+        $atributos ["tipo"] = "hidden";
+        $atributos ['estilo'] = '';
+        $atributos ["obligatorio"] = false;
+        $atributos ['marco'] = true;
+        $atributos ["etiqueta"] = "";
+        $atributos ["valor"] = $valorCodificado;
+        echo $this->miFormulario->campoCuadroTexto($atributos);
+        unset($atributos);
+        $atributos ['marco'] = true;
+        $atributos ['tipoEtiqueta'] = 'fin';
+        echo $this->miFormulario->formulario($atributos);
+
+        $atributos ['marco'] = true;
+        $atributos ['tipoEtiqueta'] = 'fin';
+        echo $this->miFormulario->formulario($atributos);
     }
 
 }
