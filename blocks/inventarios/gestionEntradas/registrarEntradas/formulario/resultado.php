@@ -67,12 +67,6 @@ class registrarForm {
 			$numeroActa = '';
 		}
 		
-		if (isset ( $_REQUEST ['nit'] ) && $_REQUEST ['nit'] != '') {
-			$nit = $_REQUEST ['nit'];
-		} else {
-			$nit = '';
-		}
-		
 		if (isset ( $_REQUEST ['proveedor'] ) && $_REQUEST ['proveedor'] != '') {
 			$proveedor = $_REQUEST ['proveedor'];
 		} else {
@@ -80,12 +74,13 @@ class registrarForm {
 		}
 		
 		$arreglo = array (
-				$numeroActa,
-				$nit,
+				$numeroActa,				
 				$proveedor,
 				$fechaInicio,
 				$fechaFinal 
 		);
+		
+		
 		
 		$cadenaSql = $this->miSql->getCadenaSql ( 'consultarActa', $arreglo );
 		$actas = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );

@@ -151,11 +151,19 @@ class Sql extends \Sql {
 			
 			// _________________________________________________
 			
-			// SELECT id_actarecibido, dependencia, fecha_recibido, tipo_bien, nitproveedor,
-			// proveedor, numfactura, fecha_factura, tipocomprador, tipoaccion,
-			// fecha_revision, revisor, observacionesacta, estado_registro,
-			// fecha_registro
-			// FROM registro_actarecibido;
+			case "seleccion_proveedor" :
+				$cadenaSql = " SELECT ";
+				$cadenaSql .= " id_proveedor,";
+				$cadenaSql .= " nit_proveedor ||' - '|| razon_social as proveedor ";
+				$cadenaSql .= " FROM";
+				$cadenaSql .= " proveedor  ";
+				$cadenaSql .= " UNION SELECT ";
+				$cadenaSql .= " id_proveedor_n,";
+				$cadenaSql .= " nit_proveedor ||' - '|| razon_social as proveedor ";
+				$cadenaSql .= " FROM";
+				$cadenaSql .= " proveedor_nuevo ;";
+				
+				break;
 			
 			case "consultarActa" :
 				
@@ -164,21 +172,22 @@ class Sql extends \Sql {
 				$cadenaSql .= "nitproveedor, proveedor  ";
 				$cadenaSql .= "FROM registro_actarecibido ";
 				$cadenaSql .= "WHERE 1=1";
-				if ($variable [3] != '') {
-					$cadenaSql .= " AND fecha_registro BETWEEN CAST ( '" . $variable [3] . "' AS DATE) ";
-					$cadenaSql .= " AND  CAST ( '" . $variable [4] . "' AS DATE)  ";
-				}
+		
 				if ($variable [0] != '') {
 					$cadenaSql .= " AND id_actarecibido = '" . $variable [0] . "'";
 				}
+
 				if ($variable [1] != '') {
-					$cadenaSql .= " AND  nitproveedor= '" . $variable [1] . "'";
+					$cadenaSql .= " AND  proveedor= '" . $variable [1] . "'";
 				}
-				if ($variable [2] != '') {
-					$cadenaSql .= " AND  proveedor= '" . $variable [2] . "'";
-				}
-				$cadenaSql .= " ; ";
 				
+				if ($variable [2] != '') {
+					$cadenaSql .= " AND fecha_registro BETWEEN CAST ( '" . $variable [2] . "' AS DATE) ";
+					$cadenaSql .= " AND  CAST ( '" . $variable [3] . "' AS DATE)  ";
+				}
+		
+				$cadenaSql .= " ; ";
+					
 				break;
 			
 			case "clase_entrada" :
@@ -264,10 +273,6 @@ class Sql extends \Sql {
 				
 				break;
 			
-				
-				
-
-				
 			case "insertarEntrada" :
 				$cadenaSql = " INSERT INTO ";
 				$cadenaSql .= " entrada(";
