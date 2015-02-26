@@ -13,11 +13,8 @@ $this->idioma ["numero_acta"] ="Número de Acta de Recibido : ";
 $this->idioma ["numero_actaTitulo"] ="Ingrese Número Acta de Recibido";
 
 
-$this->idioma ["nit"] ="Nit : ";
-$this->idioma ["nitTitulo"] ="Ingrese Nit";
-
-$this->idioma ["proveedor"] ="Proveedor : ";
-$this->idioma ["proveedorTitulo"] ="Ingrese Proveedor";
+$this->idioma ["proveedor"] ="Proveedor y/o Nit : ";
+$this->idioma ["proveedorTitulo"] ="Seleccione Nit y/o Proveedor";
 
 
 $this->idioma ["vigencia"] ="Vigencia : ";
@@ -41,6 +38,10 @@ $this->idioma ["actoAdministrativoTitulo"] ="Carge Acto Administraivo de la Dona
 
 $this->idioma ["observaciones_sobrante"] ="Observaciones : ";
 $this->idioma ["observaciones_sobranteTitulo"] ="Ingrese Observaciones";
+
+$this->idioma ["observaciones_donacion"] ="Observaciones : ";
+$this->idioma ["observaciones_donacionTitulo"] ="Ingrese Observaciones";
+
 
 $this->idioma ["acta_sobrante"] ="Acta : ";
 $this->idioma ["acta_sobranteTitulo"] ="Carge Archivo Acta";
