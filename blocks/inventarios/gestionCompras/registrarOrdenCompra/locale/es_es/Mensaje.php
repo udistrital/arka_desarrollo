@@ -1,10 +1,34 @@
 <?php
 $this->idioma ["noDefinido"] = "Etiqueta no esta definida en locale/es_es/Mensaje.php";
 
+$this->idioma ["selec_dependencia"] ="Dependencia : ";
+$this->idioma ["selec_dependenciaTitulo"] ="Seleccione Dependencia";
 
+
+$this->idioma ["valorLetras_registro"] = "Valor en Letras:";
+
+$this->idioma ["total_preliminar"] = "SubTotal  ($):";
+
+
+$this->idioma ["total"] = "Total ($):";
+$this->idioma ["totalTitulo"] = "Ingrese Total: ";
+
+$this->idioma ["iva"] = "Aplicar Iva 16% :";
+$this->idioma ["ivaTitulo"] = "Aplicar Iva 16%";
+
+
+$this->idioma ["total_iva"] = "Total Iva ($):"; 
+
+
+$this->idioma ["reg_proveedor"] ="Registrar Proveedor: ";
+$this->idioma ["reg_proveedorTitulo"] ="Seleccione Proveedor";
 
 $this->idioma ["diponibilidad"] ="Disponibilidad Presupuestal : ";
 $this->idioma ["diponibilidadTitulo"] ="Ingrese Disponibilidad Presupuestal";
+
+$this->idioma ["selec_proveedor"] ="&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspProveedor : ";
+$this->idioma ["selec_proveedorTitulo"] ="Seleccione Proveedor";
+
 
 
 
@@ -95,8 +119,8 @@ $this->idioma ["cargoJefeSeccion"] ="&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspCar
 $this->idioma ["cargoJefeSeccionTitulo"] ="Ingrese Cargo ";
 
 
-$this->idioma ["nombreContratista"] ="&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspNombre y Apellidos : ";
-$this->idioma ["nombreContratistaTitulo"] ="Ingrese Nombre y Apellidos ";
+$this->idioma ["nombreContratista"] ="&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspIdentificación y/o Nombre Apellidos  : ";
+$this->idioma ["nombreContratistaTitulo"] ="Seleccione Identificación y/o Nombre Apellidos ";
 
 $this->idioma ["identificacionContratista"] ="&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspIdentificación : ";
 $this->idioma ["nombreContratistaTitulo"] ="Ingrese Identificación del Contratista ";
@@ -109,7 +133,7 @@ $this->idioma ["nombreOrdenadorTitulo"] ="Ingrese Nombre y Apellidos ";
 $this->idioma ["asignacionOrdenador"] ="&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspAsignación : ";
 $this->idioma ["asignacionOrdenadorTitulo"] ="Ingrese Asignación de Ordenador del Gasto";
  
-
+$this->idioma ["botonCalcular"] ="Calcular Total Valor Items";
 $this->idioma ["botonAceptar"] ="Guardar";
 $this->idioma ["botonCancelar"] ="Cancelar";
 $this->idioma ["botonContinuar"] ="Continuar";

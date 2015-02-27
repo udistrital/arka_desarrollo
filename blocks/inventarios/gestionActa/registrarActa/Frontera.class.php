@@ -53,9 +53,7 @@ class Frontera {
 
         $this->miFormulario = new \FormularioHtml ();
 
-
-
-        if (isset($_REQUEST ['opcion'])) {
+  if (isset($_REQUEST ['opcion'])) {
 
             switch ($_REQUEST ['opcion']) {
 

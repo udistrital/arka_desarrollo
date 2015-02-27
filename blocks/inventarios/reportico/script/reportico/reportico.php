@@ -388,8 +388,9 @@ class reportico extends reportico_object {
     var $initial_project = 'arka';
     
 //Con o sin menú de administrador
-    var $initial_execute_mode = false;
+    var $initial_execute_mode = 'MENU';
        
+    //var $initial_execute_mode = FALSE;
     
     var $initial_report = false;
     var $initial_project_password = false;
@@ -403,8 +404,13 @@ class reportico extends reportico_object {
     var $initial_show_criteria = false;
     var $initial_execution_parameters = false;
     var $initial_sql = false;
-    // Access mode - one of FULL, ALLPROJECTS, ONEPROJECT, REPORTOUTPUT
-    var $access_mode = false;
+    
+
+// Access mode - one of FULL, ALLPROJECTS, ONEPROJECT, REPORTOUTPUT
+    var $access_mode = 'ONEPROJECT';
+    //var $access_mode = false;
+    
+    
     // Whether to show refresh button on report output
     var $show_refresh_button = false;
     // Whether to show print button on report output
@@ -1828,7 +1834,7 @@ class reportico extends reportico_object {
             }
 
             if ($expval) {
-                $str = " AND " . $this->match_column . " ILIKE '%" . $expval . "%'";
+                $str = " AND CAST(" . $this->match_column . " AS TEXT) ILIKE '%" . $expval . "%'";
             }
         }
 

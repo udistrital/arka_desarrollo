@@ -163,7 +163,7 @@ class Sql extends \Sql {
                 $cadenaSql .= "nit_proveedor, nombre  ";
                 $cadenaSql .= "FROM orden_compra ";
                 $cadenaSql .= "JOIN proveedor ON proveedor.id_proveedor = orden_compra.id_proveedor ";
-                $cadenaSql .= "JOIN dependecia ON dependecia.id_dependecia = orden_compra.id_dependencia ";
+                $cadenaSql .= "JOIN dependencia ON dependencia.id_dependencia = orden_compra.id_dependencia ";
                 $cadenaSql .= "WHERE 1=1";
                 if ($variable [0] != '') {
                     $cadenaSql .= " AND fecha_registro BETWEEN CAST ( '" . $variable [0] . "' AS DATE) ";
@@ -259,7 +259,7 @@ class Sql extends \Sql {
             case "insertarItem" :
                 $cadenaSql = " INSERT INTO ";
                 $cadenaSql .= " arka_inventarios.items_actarecibido_temp(";
-                $cadenaSql .= " id_items,item,descripcion,cantidad, ";
+                $cadenaSql .= " id_items,item,cantidad, descripcion,";
                 $cadenaSql .= " valor_unitario,valor_total,seccion)";
                 $cadenaSql .= " VALUES (";
                 $cadenaSql .= "'" . $variable [0] . "',";

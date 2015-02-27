@@ -83,7 +83,7 @@ $urlFinal3 = $url . $cadena3;
             pager: "#barraNavegacion",
             rowNum: 10,
             rowList: [10, 20, 30],
-            sortname: "id_items",
+                 sortname: "id_items",
             sortorder: "desc",
             viewrecords: false,
             loadtext: "Cargando...",

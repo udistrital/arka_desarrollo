@@ -50,6 +50,7 @@ class Funcion {
         include_once ($this->ruta . "funcion/procesarAjax.php");
     }
 
+
     function registrarActa() {
         include_once ($this->ruta . "funcion/registrarActa.php");
     }
@@ -59,8 +60,6 @@ class Funcion {
     }
 
     function action() {
-
-
 
 // 		
         // Evitar que se ingrese codigo HTML y PHP en los campos de texto
@@ -77,31 +76,18 @@ class Funcion {
             $this->procesarAjax();
         } elseif (isset($_REQUEST ["opcion"])) {
 
-            // Realizar una validación específica para los campos de este formulario:
-            // $validacion = $this->verificarCampos ();
-            if ($_REQUEST ['opcion'] == 'registrarActa') {
+           if ($_REQUEST ['opcion'] == 'registrarActa') {
                 $this->registrarActa();
-            } elseif (isset($_REQUEST ["opcion"])) {
-
-                if (isset($_REQUEST ["redireccionar"]) && $_REQUEST ['redireccionar'] == 'regresar') {
-                    redireccion::redireccionar($_REQUEST['opcion']);
-                }
-
-
-                if ($_REQUEST ['opcion'] == 'ConsultarOrden') {
-
-                    $this->consultarOrden();
-                }
             }
-// 			if ($validacion == false) {
-// 				// Instanciar a la clase pagina con mensaje de correcion de datos
-// 				echo "Datos Incorrectos";
-// 			} else {
-// 				// Validar las variables para evitar un tipo insercion de SQL
-// 				$_REQUEST = $this->miInspectorHTML->limpiarSQL ( $_REQUEST );
-// 				$this->funcionEjemplo ();
-// 				$this->redireccionar ( "exito" );
-// 			}
+
+            if (isset($_REQUEST ["redireccionar"]) && $_REQUEST ['redireccionar'] == 'regresar') {
+                redireccion::redireccionar($_REQUEST['opcion']);
+            }
+
+            if ($_REQUEST ['opcion'] == 'ConsultarOrden') {
+                $this->consultarOrden();
+            }
+		
         }
     }
 

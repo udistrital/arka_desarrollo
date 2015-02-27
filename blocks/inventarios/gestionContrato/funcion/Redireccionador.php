@@ -27,7 +27,7 @@ if (!isset($GLOBALS ["autorizado"])) {
             case "actualizoDocumento":
                 $variable = "pagina=gestionContrato";
                 $variable.="&opcion=mensaje";
-                $variable.="&mensaje=confirma";
+                $variable.="&mensaje=mensajeActualizacion";
                 break;
 
             case "noactualizoDocumento":

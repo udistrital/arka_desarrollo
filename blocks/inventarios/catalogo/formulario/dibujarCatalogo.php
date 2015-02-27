@@ -19,6 +19,7 @@ class Formulario {
     var $arrayElementos ;
     var $arrayDatos ;
     var $funcion;
+    var $conteoListas;
 
     function __construct($lenguaje, $formulario , $sql , $funcion) {
 
@@ -33,6 +34,8 @@ class Formulario {
         $this->sql = $sql;
         
         $this->funcion = $funcion;
+        
+        $this->conteoListas = 0;
         
         $conexion = "catalogo";
         $this->esteRecursoDB = $this->miConfigurador->fabricaConexiones->getRecursoDB($conexion);
@@ -52,7 +55,7 @@ class Formulario {
     	if(!$registros){
     		$this->miConfigurador->setVariableConfiguracion ( 'mostrarMensaje', 'catalogoVacio' );
     		$this->mensaje();
-    		exit;
+    		
     	}
     	
     	$this->arrayElementos = $registros;
@@ -81,73 +84,124 @@ class Formulario {
     	
     	$base = $this->consultarElementosNivel(0);
     	
+    	$this->consultarDatosCatalogo();
+    	
+    	
     	//Inicio Lista
     	echo "<br>";
     	echo '<div id = "arbol">';
-    	echo "<br>";
+    	echo '<fieldset class="ui-corner-all ui-widget ui-widget-content ui-corner-all">';
+    	echo '<legend>'.utf8_encode($this->arrayDatos[0]['lista_nombre']).'</legend>';
+    	
+    	
+    	
+    	
     	if(!$base){
     		$this->miConfigurador->setVariableConfiguracion ( 'mostrarMensaje', 'catalogoVacio' );
+    		
     		$this->mensaje();
-    		exit;
+    		
     	}else  	$this->dibujarLista($base);
-    	echo "</div>";
     	
+    	echo "</fieldset>";
+    	echo "</div>";
+    	echo "<br>";
+    	
+    	$textos[8]=$this->lenguaje->getCadena("listaCasa");
+    	echo '<div class="marcoBotones">';
+    	echo '<button id="volver"  class="botonMenu" value="'.$textos[8].'" title="'.$textos[8].'">'.$textos[8];
+    	echo '</button>';
+    	echo "</div>";
     	
     	
     }
     
-    private function dibujarLista($base){
+    private function dibujarLista($base,$hijo = false){
     	
     	if($base){
     		
-	    	echo '<ul  style="list-style: none;">';
+	    	echo '<ul  ';
+	    	//if($this->conteoListas==0&&!$hijo) echo 'class="tree" ' ;
+	    	//else echo 'style="list-style: none; ';
+	    	$this->conteoListas++;
+	    	echo '">';
 	    	foreach ($base as $b){
 	    		
+	    		//var_dump($this->conteoListas);echo "<br>";
 	    		$base2 = $this->consultarElementosNivel($b['elemento_id']);
-	    		echo '<div class="cont contenedor'.$b['elemento_padre'].'" id="elemento'.$b['elemento_padre'].'" ';
+	    		echo '<div ';
+	    		if($hijo)	echo	'style="display:none;" ';
+	    		
+	    		echo 'class="cont contenedor'.$b['elemento_padre'].'" id="elemento'.$b['elemento_padre'].'" ';
 	    		echo ">";
+	    		
+	    		
+	    		
 	    		echo '<li id="el'.$b['elemento_id'].'">';
 	    		
 	    		/////comienzo fila
-	    		echo '<div class="listaCatalogo ui-state-default ui-corner-all">';
+	    		echo '<div class="fila">';
 	    		echo '<div class="interno" >';
-	    		if(isset($_REQUEST['editar'])&&$_REQUEST['editar']==true){
-		    		//edicion
-		    	
-		    		echo '<a title="click para editar" style="color: transparent;" class="editarElemento2" onclick="editarElementoCatalogo('.$b['elemento_id'].','.$b['elemento_padre'].','.$b['elemento_codigo'].',\''.$b['elemento_nombre'].'\','.$b['elemento_catalogo'].')">e';
-		    		echo "</a>";
-		    		echo '<a title="click para eliminar" style="color: transparent;" class="eliminarElemento" onclick="eliminarElementoCatalogo('.$b['elemento_id'].','.$b['elemento_padre'].','.$b['elemento_codigo'].','.$b['elemento_catalogo'].')">e';
-		    		echo "</a>";
-		    		
-	    		}
+	    		//contraer - expandir
 	    		if($base2){
-		    		echo '<a title="click para contraer elementos" style="color: transparent;" class="disminuir" onclick="cambioHijos(\'contenedor'.$b['elemento_id'].'\',this)">+';
-		    		echo "</a>";
+	    			
+	    			echo '<button title="click para expandir elementos" class="expandir" onclick="cambioHijos(\'contenedor'.$b['elemento_id'].'\',this)">';
+	    			echo "</button>";
 	    		}
+	    		
+	    		
+	    		
+	    		
 	    		echo "</div>";
-	    		//expandir hijos
+	    		
 	    		echo '<div class="interno"   ';
-	    		if(isset($_REQUEST['editar'])&&$_REQUEST['editar']==true){
+	    		/*if(isset($_REQUEST['editar'])&&$_REQUEST['editar']==true){
 	    			echo 'title="click para seleccionar el padre"';
-	    		}
+	    		}*/
 	    		
 	    		
-	    		echo ' onclick="accion(\'contenedor'.$b['elemento_id'].'\','.$b['elemento_codigo'].','.$b['elemento_id'].')"';
-	    		//}		
+	    		echo ' title="'.$b['elemento_fecha_creacion'].'" onclick="accion(\'contenedor'.$b['elemento_id'].'\','.$b['elemento_codigo'].','.$b['elemento_id'].')"';
+	    			
 	    		echo '>';
-	    		echo $b['elemento_codigo'].". ".$b['elemento_nombre']." - ".$b['elemento_fecha_creacion'];
+	    		echo $b['elemento_codigo']." ".$b['elemento_nombre']."  ";
 	    		echo "</div>";
+	    		
+	    		
+	    		if(isset($_REQUEST['editar'])&&$_REQUEST['editar']==true){
+	    			//edicion
+
+	    			echo '<div class="interno">';
+	    			echo '<div class="posiscion">';
+	    			
+	    			//eliminar
+	    			echo '<button title="click para eliminar" class="eliminar" onclick="eliminarElementoCatalogo('.$b['elemento_id'].','.$b['elemento_padre'].','.$b['elemento_codigo'].','.$b['elemento_catalogo'].')">';
+	    			echo "</button>";
+	    		
+	    			//editar
+	    			echo '<button title="click para editar" class="editar" onclick="editarElementoCatalogo('.$b['elemento_id'].','.$b['elemento_padre'].','.$b['elemento_codigo'].',\''.$b['elemento_nombre'].'\','.$b['elemento_catalogo'].')">';
+	    			echo "</button>";
+	    		
+	    		
+	    			echo '</div>';
+	    			echo '</div>';
+	    		}
 	    		
 	    		echo "</div>";
 	    		///fin fila
 	    		
 	    
 	    		
-	    		if($base2)	$this->dibujarLista($base2);
+	    		if($base2){    			
+	    			$this->dibujarLista($base2,true);   			
+	    			
+	    		}
 	    
 	    		echo "</li>";
 	    		echo "</div>";
+	    		
+	    		
 	    	}
+	    	$this->conteoListas = 0;
 	    	echo "</ul>";
     	}
     	return true;
@@ -167,8 +221,9 @@ class Formulario {
 
         // Si existe algun tipo de error en el login aparece el siguiente mensaje
         $mensaje = $this->miConfigurador->getVariableConfiguracion ( 'mostrarMensaje' );
+     
         //$this->miConfigurador->setVariableConfiguracion ( 'mostrarMensaje', null );
-
+        $atributos = array();
         if ($mensaje) {
 
             $tipoMensaje = $this->miConfigurador->getVariableConfiguracion ( 'tipoMensaje' );
@@ -184,15 +239,18 @@ class Formulario {
             $esteCampo = 'divMensaje';
             $atributos ['id'] = $esteCampo;
             $atributos ["tamanno"] = '';
-            $atributos ["estilo"] = 'information';
+            if( $tipoMensaje)  $atributos ["estilo"] = $tipoMensaje;
+            else $atributos ["estilo"] = 'information';
             $atributos ["etiqueta"] = '';
             $atributos ["columnas"] = ''; // El control ocupa 47% del tamaño del formulario
+            
             echo $this->miFormulario->campoMensaje ( $atributos );
+           
             unset ( $atributos );
 
              
         }
-
+        $this->miConfigurador->setVariableConfiguracion ( 'mostrarMensaje', null );
         return true;
 
     }
@@ -204,6 +262,7 @@ $miFormulario = new Formulario ( $this->lenguaje, $this->miFormulario,$this->sql
 
 
 $miFormulario->dibujarCatalogo ();
-$miFormulario->mensaje ();
+
+//$miFormulario->mensaje ();
 
 ?>

@@ -98,9 +98,12 @@ class registrarForm {
 				$fechaFinal
 			
 		);
-		
+	
 	 
 		$cadenaSql = $this->miSql->getCadenaSql ( 'consultarEntrada',$arreglo );
+		
+		
+		
 		$entrada = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
 		 
 		
@@ -166,7 +169,7 @@ class registrarForm {
 		
 		// ------------------Fin Division para los botones-------------------------
 		echo $this->miFormulario->division ( "fin" );
-		
+
 
 		
 		if ($entrada) {
@@ -184,6 +187,7 @@ class registrarForm {
             </thead>
             <tbody>";
 		
+			
 			for($i = 0; $i < count ( $entrada ); $i ++) {
 				$variable = "pagina=" . $miPaginaActual; // pendiente la pagina para modificar parametro
 				$variable .= "&opcion=modificar";

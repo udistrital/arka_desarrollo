@@ -58,7 +58,7 @@ $this->idioma ["aprobacionCheck"] ="&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp¿Ap
 $this->idioma ["aprobacionCheckTitulo"] ="Seleccione en caso de ser aprobado";
 
 
-$this->idioma ["botonAceptar"] ="Actualizar Acta de Recibido";
+$this->idioma ["botonAceptar"] ="Registrar Acta de Recibido";
 $this->idioma ["botonCancelar"] ="Cancelar";
 $this->idioma ["botonContinuar"] ="Continuar";
 $this->idioma ["botonConsultar"] ="Consultar";

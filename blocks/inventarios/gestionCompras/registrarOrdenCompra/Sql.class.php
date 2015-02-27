@@ -148,6 +148,126 @@ class Sql extends \Sql {
 			/**
 			 * Clausulas Del Caso Uso.
 			 */
+
+			
+			case "datos_item" :
+				$cadenaSql = " SELECT ";
+				$cadenaSql .= " valor_total ";
+				$cadenaSql .= " FROM";
+				$cadenaSql .= " items_orden_compra_temp ";
+				$cadenaSql .= " WHERE seccion='" . $variable . "';";
+				
+				break;
+			
+			case "informacion_cargo_jefe" :
+				$cadenaSql = " SELECT ";
+				$cadenaSql .= " nombres ||' '||apellidos,";
+				$cadenaSql .= " id_encargado ";
+				$cadenaSql .= " FROM";
+				$cadenaSql .= " encargado ";
+				$cadenaSql .= " WHERE id_tipo_encargado='2' AND estado='TRUE' ";
+				$cadenaSql .= "AND cargo='" . $variable . "';";
+				
+				break;
+			
+			case "informacion_ordenador" :
+				$cadenaSql = " SELECT ";
+				$cadenaSql .= " nombres ||' '||apellidos, ";
+				$cadenaSql .= " id_encargado";
+				$cadenaSql .= " FROM";
+				$cadenaSql .= " encargado ";
+				$cadenaSql .= " WHERE id_tipo_encargado='1' AND estado='TRUE' ";
+				$cadenaSql .= "AND asignacion='" . $variable . "';";
+				
+				break;
+			
+			case "ordenador_gasto" :
+				$cadenaSql = " SELECT ";
+				$cadenaSql .= " id_ordenador,";
+				$cadenaSql .= " descripcion ";
+				$cadenaSql .= " FROM";
+				$cadenaSql .= " tipo_ordenador_gasto ";
+				break;
+			
+			case "constratistas" :
+				$cadenaSql = " SELECT ";
+				$cadenaSql .= " id_encargado,";
+				$cadenaSql .= "identificacion ||' - '|| nombres ||' 	'||apellidos as contratista ";
+				$cadenaSql .= " FROM";
+				$cadenaSql .= " encargado ";
+				$cadenaSql .= " WHERE id_tipo_encargado='3' AND estado='TRUE'";
+				break;
+			
+			case "cargo_jefe" :
+				$cadenaSql = " SELECT ";
+				$cadenaSql .= " id_cargo,";
+				$cadenaSql .= "descripcion ";
+				$cadenaSql .= " FROM";
+				$cadenaSql .= " tipo_cargo ; ";
+				break;
+			
+			case "rubros" :
+				$cadenaSql = " SELECT ";
+				$cadenaSql .= " id_rubro,";
+				$cadenaSql .= " codigo  ||' - '|| nombre as rubro ";
+				$cadenaSql .= " FROM";
+				$cadenaSql .= " rubro ; ";
+				break;
+			
+			case "dependencia" :
+				$cadenaSql = " SELECT ";
+				$cadenaSql .= " id_dependencia,";
+				$cadenaSql .= " cod_dependencia  ||' - '|| nombre as dependencia ";
+				$cadenaSql .= " FROM";
+				$cadenaSql .= " dependencia ; ";
+				break;
+			
+			case "informacion_dependencia" :
+				$cadenaSql = " SELECT ";
+				$cadenaSql .= " direccion, telefono ";
+				$cadenaSql .= " FROM";
+				$cadenaSql .= " dependencia ";
+				$cadenaSql .= " WHERE id_dependencia='" . $variable . "';";
+				
+				break;
+			
+			case "informacion_proveedor" :
+				$cadenaSql = " SELECT ";
+				$cadenaSql .= " razon_social, nit_proveedor, direccion, telefono ";
+				$cadenaSql .= " FROM";
+				$cadenaSql .= " proveedor ";
+				$cadenaSql .= " WHERE id_proveedor='" . $variable . "' ";
+				$cadenaSql .= " UNION SELECT ";
+				$cadenaSql .= " razon_social, nit_proveedor, direccion, telefono ";
+				$cadenaSql .= " FROM";
+				$cadenaSql .= " proveedor_nuevo";
+				$cadenaSql .= " WHERE id_proveedor_n='" . $variable . "';";
+				
+				break;
+			
+			case "proveedor" :
+				$cadenaSql = " SELECT ";
+				$cadenaSql .= " id_proveedor,";
+				$cadenaSql .= " nit_proveedor ||' - '|| razon_social as proveedor ";
+				$cadenaSql .= " FROM";
+				$cadenaSql .= " proveedor  ";
+				$cadenaSql .= " UNION SELECT ";
+				$cadenaSql .= " id_proveedor_n,";
+				$cadenaSql .= " nit_proveedor ||' - '|| razon_social as proveedor ";
+				$cadenaSql .= " FROM";
+				$cadenaSql .= " proveedor_nuevo ; ";
+				
+				break;
+			
+			case "proveedors" :
+				$cadenaSql = " INSERT INTO proveedor( ";
+				$cadenaSql .= " razon_social, nit_proveedor, direccion, telefono)";
+				$cadenaSql .= " VALUES (";
+				$cadenaSql .= "'" . $variable [0] . "',";
+				$cadenaSql .= "'" . $variable [1] . "',";
+				$cadenaSql .= "'" . $variable [2] . "',";
+				$cadenaSql .= "'" . $variable [3] . "'); ";
+				break;
 			
 			case "polizas" :
 				$cadenaSql = " SELECT ";
@@ -219,21 +339,19 @@ class Sql extends \Sql {
 			
 			case "insertarProveedor" :
 				$cadenaSql = " INSERT INTO ";
-				$cadenaSql .= " arka_inventarios.proveedor(";
+				$cadenaSql .= " proveedor_nuevo(";
 				$cadenaSql .= " razon_social,";
 				$cadenaSql .= " nit_proveedor,";
 				$cadenaSql .= " direccion,";
-				$cadenaSql .= " telefono, ";
-				$cadenaSql .= " ruta_cotizacion, ";
-				$cadenaSql .= " nombre_cotizacion)";
+				$cadenaSql .= " telefono ";
+				$cadenaSql .= " )";
 				$cadenaSql .= " VALUES (";
 				$cadenaSql .= "'" . $variable [0] . "',";
 				$cadenaSql .= "'" . $variable [1] . "',";
 				$cadenaSql .= "'" . $variable [2] . "',";
-				$cadenaSql .= "'" . $variable [3] . "',";
-				$cadenaSql .= "'" . $variable [4] . "',";
-				$cadenaSql .= "'" . $variable [5] . "') ";
-				$cadenaSql .= "RETURNING  id_proveedor; ";
+				$cadenaSql .= "'" . $variable [3] . "') ";
+				$cadenaSql .= "RETURNING  id_proveedor_n; ";
+				
 				break;
 			
 			case "insertarDependencia" :
@@ -270,8 +388,8 @@ class Sql extends \Sql {
 				$cadenaSql .= " fecha_registro, disponibilidad_presupuestal, ";
 				$cadenaSql .= " fecha_disponibilidad, rubro, obligaciones_proveedor, obligaciones_contratista, ";
 				$cadenaSql .= " poliza1, poliza2, poliza3, poliza4, poliza5, lugar_entrega, destino, ";
-				$cadenaSql .= " tiempo_esntrega, forma_pago, supervision, inhabilidades, id_proveedor, ";
-				$cadenaSql .= " id_dependencia, id_contratista, id_jefe, id_ordenador)";
+				$cadenaSql .= " tiempo_entrega, forma_pago, supervision, inhabilidades, id_proveedor,ruta_cotizacion,nombre_cotizacion,";
+				$cadenaSql .= " id_dependencia, id_contratista, id_jefe, id_ordenador,subtotal, iva, total,valor_letras,estado)";
 				$cadenaSql .= " VALUES (";
 				$cadenaSql .= "'" . $variable [0] . "',";
 				$cadenaSql .= "'" . $variable [1] . "',";
@@ -315,7 +433,14 @@ class Sql extends \Sql {
 				$cadenaSql .= "'" . $variable [18] . "',";
 				$cadenaSql .= "'" . $variable [19] . "',";
 				$cadenaSql .= "'" . $variable [20] . "',";
-				$cadenaSql .= "'" . $variable [21] . "') ";
+				$cadenaSql .= "'" . $variable [21] . "',";
+				$cadenaSql .= "'" . $variable [22] . "',";
+				$cadenaSql .= "'" . $variable [23] . "',";
+				$cadenaSql .= "'" . $variable [24] . "',";
+				$cadenaSql .= "'" . $variable [25] . "',";
+				$cadenaSql .= "'" . $variable [26] . "',";
+				$cadenaSql .= "'" . $variable [27] . "',";
+				$cadenaSql .= "'" . $variable [28] . "') ";
 				$cadenaSql .= "RETURNING  id_orden_compra; ";
 				
 				break;

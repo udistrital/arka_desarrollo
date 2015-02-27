@@ -49,6 +49,9 @@ class Formulario {
     	$textos[6]=$this->lenguaje->getCadena("listaMenu");
     	$textos[7]=$this->lenguaje->getCadena("listaId");
     	$textos[8]=$this->lenguaje->getCadena("listaCasa");
+    	$textos[9]=$this->lenguaje->getCadena("listaMostrar");
+    	$textos[10]=$this->lenguaje->getCadena("listaEdicion");
+    	$textos[11]=$this->lenguaje->getCadena("listaEliminacion");
     	$cadena_sql = $this->sql->getCadenaSql("listarCatalogos",'');
     	$registros = $this->esteRecursoDB->ejecutarAcceso($cadena_sql,"busqueda");
     	
@@ -59,16 +62,18 @@ class Formulario {
     	$cadena1 = "<br><br><br><br><br><br><br>";
     	$cadena1 .= "<div id='espacioTrabajo'>";
     	
+    	
+    	
+    	
     	//menu 
     	$cadena1 .= "<div id='marcoMenu'>";
-    	$cadena1 .= '<div  id="menu" class="menu2">';
-    	//$cadena .= '<div class="menu" style="max-width: 80%;margin: 0 auto;color:green;text-align:center;">';
-    	$cadena1 .= '<div  class="ui-state-default ui-corner-all botonMenu">';
-    	$cadena1 .='<a style="text-align: center;" class="ui-icon ui-icon-plus" onclick="agregarElementoLista()"  title="'.$textos[0].'">+</a>';
-    	$cadena1 .='</div>';
-    	$cadena1 .= '<div  class="ui-state-default ui-corner-all botonMenu">';
-    	$cadena1 .='<a style="text-align: center;" class="ui-icon ui-icon-home" onclick="irACasa()"  title="'.$textos[8].'">+</a>';
-    	$cadena1 .='</div>';
+    	$cadena1 .= '<div  id="menu"  class="ui-widget-header ui-corner-all">';
+    	
+    	$cadena1 .= '<button id="agregarElemento"  class="botonMenu" title="'.$textos[0].'">';
+    	$cadena1 .='</button>';
+    	
+    	$cadena1 .= '<button id="irACasa"  class="botonMenu" title="'.$textos[8].'">';
+    	$cadena1 .='</button>';
     	//</div>';
     	//$cadena .='</div>';
     	$cadena1 .='</div>';
@@ -86,13 +91,15 @@ class Formulario {
     		exit;
     	}
     	
-    	$cadena = '<table id="listadoCatalogo">';
+    	$cadena = '<table id="tabla" class="tabla">';
     	$cadena .= "<thead>";
     	$cadena .= "<tr>";
     	$cadena .= "<th>".$textos[7]."</th>";
     	$cadena .= "<th>".$textos[3]."</th>";
     	$cadena .= "<th>".$textos[4]."</th>";
-    	$cadena .= "<th>".$textos[6]."     </th>";
+    	$cadena .= "<th>".$textos[9]."</th>";
+    	$cadena .= "<th>".$textos[10]."</th>";
+    	$cadena .= "<th>".$textos[11]."</th>";
     	$cadena .= "</tr>";
     	$cadena .= "</thead>";
     	$cadena .= "<tfoot>";
@@ -100,7 +107,9 @@ class Formulario {
     	$cadena .= "<th>".$textos[7]."</th>";
     	$cadena .= "<th>".$textos[3]."</th>";
     	$cadena .= "<th>".$textos[4]."</th>";
-    	$cadena .= "<th>".$textos[6]."      </th>";
+    	$cadena .= "<th>".$textos[9]."</th>";
+    	$cadena .= "<th>".$textos[10]."</th>";
+    	$cadena .= "<th>".$textos[11]."</th>";
     	$cadena .= "</tr>";
     	$cadena .= "</tfoot>";
     	//exit;
@@ -130,14 +139,24 @@ class Formulario {
     		$cadena .= "</td>";
     		
     		//Edicion
+    		//mostrar
     		$cadena .= "<td>";
     		
-    		$cadena .= '<div class="interno">';
-    		$cadena .= '<div class="mostrarElemento" onclick="mostrarElementoLista('.$fila[0].')" id="el'.$fila[0].'" title="'.$textos[1].'">v</div>';
-    		$cadena .= '<div class="editarElemento2"  onclick="editarElementoLista(this)" id="el'.$fila[0].'" title="'.$textos[2].'">e</div>';
-    		$cadena .= '<div class="eliminarElemento" onclick="eliminarElementoLista(this)" id="el'.$fila[0].'" title="'.$textos[5].'">x</div>';
-    		$cadena .='</div>';
+    		$cadena .= '<button class="mostrar" onclick="mostrarElementoLista('.$fila[0].')" id="el'.$fila[0].'" title="'.$textos[1].'"></button>';
     		
+    		$cadena .= "</td>";
+    		
+    		//editar elementos
+    		$cadena .= "<td>";
+    		
+    		$cadena .= '<button class="editar"  onclick="editarElementoLista(this)" id="el'.$fila[0].'" title="'.$textos[2].'"></button>';
+    		
+    		$cadena .= "</td>";
+    		
+    		//Eliminar
+    		$cadena .= "<td>";
+    		
+    		$cadena .= '<button class="eliminar" onclick="eliminarElementoLista(this)" id="el'.$fila[0].'" title="'.$textos[5].'"></button>';
     		
     		$cadena .= "</td>";
     		

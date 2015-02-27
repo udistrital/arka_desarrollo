@@ -47,7 +47,7 @@ if (!isset($GLOBALS["autorizado"])) {
     if ($_REQUEST['mensaje'] == 'confirma') {
 
         $tipo = 'success';
-        $mensaje = "Se subió el archivo correctamente";
+        $mensaje = "Se ha Registrado Contrato.<br>Se subió el archivo correctamente";
         $boton = "continuar";
 
         $valorCodificado = "pagina=gestionContrato";
@@ -56,9 +56,19 @@ if (!isset($GLOBALS["autorizado"])) {
         $valorCodificado.="&bloqueGrupo=" . $esteBloque["grupo"];
         
         
-    } elseif($_REQUEST['mensaje'] == 'error') {
+    } else if($_REQUEST['mensaje'] == 'error') {
         $tipo = 'error';
         $mensaje = "Error en el cargue. No se subió el archivo correctamente";
+        $boton = "regresar";
+
+        $valorCodificado = "pagina=gestionContrato";
+        $valorCodificado.="&opcion=nuevo";
+        $valorCodificado.="&bloque=" . $esteBloque["id_bloque"];
+        $valorCodificado.="&bloqueGrupo=" . $esteBloque["grupo"];
+       
+    } else if($_REQUEST['mensaje'] == 'mensajeActualizacion') {
+        $tipo = 'success';
+        $mensaje = "Se actualizo correctamente el registro del contrato.<br>";
         $boton = "regresar";
 
         $valorCodificado = "pagina=gestionContrato";

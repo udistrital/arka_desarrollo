@@ -50,18 +50,19 @@ values
 CREATE TABLE public.arka_usuario
 (
   id_usuario serial NOT NULL,
-  nombre character varying(50) NOT NULL DEFAULT ''::character varying,
-  apellido character varying(50) NOT NULL DEFAULT ''::character varying,
+  identificacion integer NOT NULL,
+  nombre text NOT NULL DEFAULT '',
+  apellido text NOT NULL DEFAULT '',
   alias text NOT NULL,
   descripcion text NOT NULL,
-  correo character varying(100) NOT NULL DEFAULT ''::character varying,
-  telefono character varying(50) NOT NULL DEFAULT ''::character varying,
-  imagen character(255) NOT NULL,
-  clave character varying(100) NOT NULL DEFAULT ''::character varying,
-  tipo character varying(255) NOT NULL DEFAULT ''::character varying,
-  estilo character varying(50) NOT NULL DEFAULT 'basico'::character varying,
-  idioma character varying(50) NOT NULL DEFAULT 'es_es'::character varying,
-  estado integer NOT NULL DEFAULT 0,
+  correo text NOT NULL DEFAULT '',
+  telefono text NOT NULL DEFAULT '',
+  imagen text NOT NULL DEFAULT '',
+  clave text NOT NULL DEFAULT '',
+  tipo text NOT NULL DEFAULT '',
+  estilo text NOT NULL DEFAULT '',
+  idioma text NOT NULL DEFAULT 'es_es',
+  estado_registro_id integer NOT NULL DEFAULT 0,
   CONSTRAINT arka_usuario_pkey PRIMARY KEY (id_usuario)
 )WITH (
   OIDS=FALSE

@@ -101,6 +101,7 @@ class registrarForm {
 		
 	 
 		$cadenaSql = $this->miSql->getCadenaSql ( 'consultarEntrada',$arreglo );
+		
 		$entrada = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
 		 
 		

@@ -38,26 +38,27 @@ class registrarForm {
 		// -------------------------------------------------------------------------------------------------
 		$conexion = "inventarios";
 		$esteRecursoDB = $this->miConfigurador->fabricaConexiones->getRecursoDB ( $conexion );
+		$Semaforo2 = 0;
 		
-		$cadenaSql = $this->miSql->getCadenaSql ( 'consultarEntradaParticular', $_REQUEST ['entrada'] );
-		
-		$entrada = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
-		
-		$cadenaSql = $this->miSql->getCadenaSql ( 'consulta_elementos_sin_actualizar', $entrada [0] [12] );
-		
-		$elementos = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
-		
-		$arreglo = array (
-				$_REQUEST ['salida'],
-				$_REQUEST ['entrada'] 
-		);
-
-		
-		
-		if ($_REQUEST ['salidaSA'] !=0) {
-			$ids = unserialize ( $_REQUEST ['salidaSA'] );
+		if (isset ( $_REQUEST ['salida'] ) && $_REQUEST ['salida'] != 0) {
+			$cadenaSql = $this->miSql->getCadenaSql ( 'consultarEntradaParticular', $_REQUEST ['entrada'] );
+			
+			$entrada = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
+			
+			$cadenaSql = $this->miSql->getCadenaSql ( 'consulta_elementos_sin_actualizar', $entrada [0] [12] );
+			
+			$elementos = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
+			
+			$arreglo = array (
+					$_REQUEST ['salida'],
+					$_REQUEST ['entrada'] 
+			);
+			
+			if ($_REQUEST ['salidaSA'] != 0) {
+				$ids = unserialize ( $_REQUEST ['salidaSA'] );
+				$Semaforo2 = 1;
+			}
 		}
-		
 		// Limpia Items Tabla temporal
 		
 		// $cadenaSql = $this->miSql->getCadenaSql ( 'limpiar_tabla_items' );
@@ -94,7 +95,7 @@ class registrarForm {
 			echo $this->miFormulario->marcoAgrupacion ( 'inicio', $atributos );
 			
 			{
-				if ($_REQUEST ['mensaje'] == 'inserto' && $elementos) {
+				if ($_REQUEST ['mensaje'] == 'inserto' && $elementos && $Semaforo2 == 1) {
 					
 					$semaforo = 1;
 					
@@ -114,7 +115,27 @@ class registrarForm {
 					$atributos = array_merge ( $atributos, $atributosGlobales );
 					echo $this->miFormulario->cuadroMensaje ( $atributos );
 					// --------------- FIN CONTROL : Cuadro de Texto --------------------------------------------------
-				} else {
+				} else if ($_REQUEST ['mensaje'] == 'inserto' && $elementos && $Semaforo2 == 0) {
+					
+					$semaforo = 1;
+					
+					$mensaje = "Se Actualizo Salida <br> Número de Salida: " . $_REQUEST ['salida'];
+					$mensaje .= "<br>\"Existen Elementos que NO tienen Salidas Relacionadas\"<br>Registre La Salida con los Elementos Sin Relacionar";
+					
+					// ---------------- CONTROL: Cuadro de Texto --------------------------------------------------------
+					$esteCampo = 'mensajeRegistro';
+					$atributos ['id'] = $esteCampo;
+					$atributos ['tipo'] = 'warning';
+					$atributos ['estilo'] = 'textoCentrar';
+					$atributos ['mensaje'] = $mensaje;
+					
+					$tab ++;
+					
+					// Aplica atributos globales al control
+					$atributos = array_merge ( $atributos, $atributosGlobales );
+					echo $this->miFormulario->cuadroMensaje ( $atributos );
+					// --------------- FIN CONTROL : Cuadro de Texto --------------------------------------------------
+				} else if ($_REQUEST ['mensaje'] == 'inserto') {
 					$semaforo = 0;
 					$cadenaSql = $this->miSql->getCadenaSql ( 'actualizar_entrada', $arreglo );
 					$inserto = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "acceso" );
@@ -134,28 +155,9 @@ class registrarForm {
 					$atributos = array_merge ( $atributos, $atributosGlobales );
 					echo $this->miFormulario->cuadroMensaje ( $atributos );
 				}
-				if ($_REQUEST ['mensaje'] == 'error') {
+				if ($_REQUEST ['mensaje'] == 'noitems') {
 					
-					$mensaje = "No Se Pudo Actualizar o Modificar  la Entrada ";
-					
-					// ---------------- CONTROL: Cuadro de Texto --------------------------------------------------------
-					$esteCampo = 'mensajeRegistro';
-					$atributos ['id'] = $esteCampo;
-					$atributos ['tipo'] = 'error';
-					$atributos ['estilo'] = 'textoCentrar';
-					$atributos ['mensaje'] = $mensaje;
-					
-					$tab ++;
-					
-					// Aplica atributos globales al control
-					$atributos = array_merge ( $atributos, $atributosGlobales );
-					echo $this->miFormulario->cuadroMensaje ( $atributos );
-					// --------------- FIN CONTROL : Cuadro de Texto --------------------------------------------------
-				}
-				
-				if (isset ( $_REQUEST ['errores'] ) && $_REQUEST ['errores'] == 'notextos') {
-					
-					$mensaje = "No se Actualizo Entrada, No se Colocaron Observaciones";
+					$mensaje = "No Selecciono Items<br>Error Actualizar Salida";
 					
 					// ---------------- CONTROL: Cuadro de Texto --------------------------------------------------------
 					$esteCampo = 'mensajeRegistro';
@@ -169,6 +171,7 @@ class registrarForm {
 					// Aplica atributos globales al control
 					$atributos = array_merge ( $atributos, $atributosGlobales );
 					echo $this->miFormulario->cuadroMensaje ( $atributos );
+					$semaforo = 0;
 					// --------------- FIN CONTROL : Cuadro de Texto --------------------------------------------------
 				}
 			}
@@ -243,7 +246,7 @@ class registrarForm {
 		$valorCodificado .= "&bloque=" . $esteBloque ['nombre'];
 		$valorCodificado .= "&bloqueGrupo=" . $esteBloque ["grupo"];
 		
-		if ($semaforo == 1) {
+		if ($semaforo == 1 && $Semaforo2 == 1) {
 			
 			$valorCodificado .= "&opcion=modificando";
 			$valorCodificado .= "&numero_salida=" . $ids [0];

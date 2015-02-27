@@ -29,7 +29,7 @@ class RegistradorAvance {
 
     function procesarFormulario() {
 
-       
+        $subida = 1;
         $fechaActual = date('Y-m-d');
 
         $esteBloque = $this->miConfigurador->getVariableConfiguracion("esteBloque");
@@ -60,17 +60,16 @@ class RegistradorAvance {
             $fechaActual,
             1,
         );
-
         $cadenaSql = $this->miSql->getCadenaSql('insertarAsignar_Avance', $datosAvance);
         $id_asignar = $esteRecursoDB->ejecutarAcceso($cadenaSql, "busqueda");
-        
+
         //Guardar el archivo
         if ($_FILES) {
             foreach ($_FILES as $key => $values) {
                 $documento = $documento + 1;
                 $archivo = $_FILES[$key];
 
-                $tipoD='';
+                $tipoD = '';
                 switch ($documento) {
                     case 1:
                         $tipoD = 'resolucion';
@@ -94,7 +93,7 @@ class RegistradorAvance {
                 $tipo = $archivo['type'];
                 $archivo1 = $archivo['name'];
                 $prefijo = substr(md5(uniqid(rand())), 0, 6);
-                
+
 
                 if ($archivo1 != "") {
                     // guardamos el archivo a la carpeta files
@@ -118,15 +117,16 @@ class RegistradorAvance {
                         $resultado = $esteRecursoDB->ejecutarAcceso($cadenaSql, 'insertar');
                     } else {
                         echo $status = "<br>Error al subir el archivo 1";
-                        exit;
+                        $subida = 0;
                     }
                 } else {
                     echo $status = "<br>Error al subir archivo 2";
-                    exit;
+                    $subida = 0;
                 }
             }
         } else {
             echo "<br>NO existe el archivo D:!!!";
+            $subida = 0;
         }
 
         // Registro de Items
@@ -137,11 +137,9 @@ class RegistradorAvance {
                 $contenido ['id_items'],
                 $contenido ['descripcion']
             );
-
             $cadenaSql = $this->miSql->getCadenaSql('insertarItems_avance', $datosItems);
             $items = $esteRecursoDB->ejecutarAcceso($cadenaSql, "acceso");
         }
-
         $cadenaSql = $this->miSql->getCadenaSql('limpiar_tabla_items', $_REQUEST['seccion']);
         $resultado_secuencia = $esteRecursoDB->ejecutarAcceso($cadenaSql, "acceso");
 
@@ -150,8 +148,7 @@ class RegistradorAvance {
             $fechaActual
         );
 
-  
-        if ($items == 1) {
+        if ($items == 1 && $subida == 1) {
             redireccion::redireccionar('inserto', $datos);
         } else {
             redireccion::redireccionar('noInserto', $datos);

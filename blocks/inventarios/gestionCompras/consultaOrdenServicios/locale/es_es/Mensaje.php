@@ -1,6 +1,8 @@
 <?php
 $this->idioma ["noDefinido"] = "Etiqueta no esta definida en locale/es_es/Mensaje.php";
 
+$this->idioma ["contratista_consulta"] ="Nit y/o Identificación Contratista :";
+$this->idioma ["contratista_consultaTitulo"] ="Ingrese Nit";
 
 $this->idioma ["fecha_inicio"] ="Fecha Inicial : ";
 $this->idioma ["fecha_inicioTitulo"] ="Seleccione Fecha Inicial";
@@ -16,8 +18,8 @@ $this->idioma ["numero_ordenTitulo"] ="Ingrese Número Orden Servicio";
 $this->idioma ["nit"] ="Nit o Identificación : ";
 $this->idioma ["nitTitulo"] ="Ingrese Nit";
 
-$this->idioma ["dependencia_soli"] ="Dependencia Solicitante : ";
-$this->idioma ["dependencia_soliTitulo"] ="Ingrese Dependecia Solicitante";
+$this->idioma ["selec_dependencia_Sol"] ="Dependencia Solicitante : ";
+$this->idioma ["selec_dependencia_SolTitulo"] ="Seleccione Dependecia Solicitante";
 
 $this->idioma ["dependencia_solicitante"] = "Dependencia :";
 $this->idioma ["dependencia_solicitanteTitulo"] = "Seleccione Dependencia";
@@ -69,8 +71,11 @@ $this->idioma ["total_preliminarTitulo"] = "Ingrese Total Preliminar";
 $this->idioma ["total"] = "Total :";
 $this->idioma ["totalTitulo"] = "Ingrese Total: ";
 
-$this->idioma ["iva"] = "Iva 16% :";
-$this->idioma ["ivaTitulo"] = "Ingrese Iva 16%";
+$this->idioma ["iva"] = "Aplicar Iva 16% :";
+$this->idioma ["ivaTitulo"] = "Aplicar Iva 16%";
+
+$this->idioma ["total_iva"] = "Total Iva ($):";
+
 
 $this->idioma ["Encargados"] = "Firmas ";
 
@@ -101,8 +106,8 @@ $this->idioma ["nombreJefeSeccionTitulo"] = "Ingrese Nombre y Apellidos ";
 $this->idioma ["cargoJefeSeccion"] = "&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspCargo : ";
 $this->idioma ["cargoJefeSeccionTitulo"] = "Ingrese Cargo ";
 
-$this->idioma ["nombreContratista"] = "&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspNombre y Apellidos : ";
-$this->idioma ["nombreContratistaTitulo"] = "Ingrese Nombre y Apellidos ";
+$this->idioma ["nombreContratista"] ="&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspIdentificación y/o Nombre Apellidos  : ";
+$this->idioma ["nombreContratistaTitulo"] ="Seleccione Identificación y/o Nombre Apellidos ";
 
 $this->idioma ["identificacionContratista"] = "&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspIdentificación : ";
 $this->idioma ["nombreContratistaTitulo"] = "Ingrese Identificación del Contratista ";

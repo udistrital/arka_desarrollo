@@ -58,7 +58,7 @@ class FormProcessor {
     			if($registro){
     				
     				if ($registro [0] ['clave'] == $variable ["clave"]) {
-    						
+    					
     					// 1. Crear una sesión de trabajo
     					$estaSesion = $this->miSesion->crearSesion ( $registro [0] ["id_usuario"] );
     					    						
@@ -68,7 +68,9 @@ class FormProcessor {
     							$_SERVER ['REMOTE_ADDR'],
     							$_SERVER ['HTTP_USER_AGENT']
     					);
-    						
+
+    					
+    					
     					$argumento = json_encode ( $arregloLogin );
     					$arreglo = array($registro [0] ["id_usuario"],$argumento);
     						

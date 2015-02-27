@@ -27,6 +27,17 @@ class RegistradorOrden {
 		$conexion = "inventarios";
 		$esteRecursoDB = $this->miConfigurador->fabricaConexiones->getRecursoDB ( $conexion );
 		
+		for($i = 0; $i <= 200; $i ++) {
+		
+			if (isset ( $_REQUEST ['item' . $i] )) {
+					
+				$items [] = $_REQUEST ['item' . $i];
+			}
+		}
+		
+		
+		
+		
 		$arreglo = array (
 				$_REQUEST ['funcionarioP'],
 				$_REQUEST ['identificacion'],
@@ -77,14 +88,7 @@ class RegistradorOrden {
 			
 			
 			
-			for($i = 0; $i <= 200; $i ++) {
-				
-				if (isset ( $_REQUEST ['item' . $i] )) {
-					
-					$items [] = $_REQUEST ['item' . $i];
-				}
-			}
-			
+		
 			foreach ( $items as $i ) {
 				
 				$arreglo = array (
@@ -102,6 +106,11 @@ class RegistradorOrden {
 					"salidasAS" => $salidasSA 
 			);
 		}else if ($_REQUEST ['actualizar'] == '1') {
+			
+			if (! isset ( $items )) {
+			
+				redireccion::redireccionar('noitems');
+			}
 			
 			$cadenaSql = $this->miSql->getCadenaSql ( 'consultarEntradaParticular', $_REQUEST ['numero_entrada'] );
 			

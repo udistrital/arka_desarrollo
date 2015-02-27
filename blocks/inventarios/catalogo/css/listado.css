@@ -1,10 +1,36 @@
 @CHARSET "ISO-8859-1";
 
+* {
+ font-size: 100%;
+ font-family: sans-serif;
+}
+
+.posiscion {
+    clear: both;
+    display: inline-block;
+    position: absolute;
+    right: 5em;
+    text-align: right;
+    
+}
+
+ul
+{
+list-style-type: none;
+}
+
+.fila:hover  { background: #FECA40; }
+.fila:active  { background: #F39814; color: white; }
+
 .interno{
 	
 	text-align: left;
 	display:inline;
 	
+}
+
+.tabla tr td {
+    text-align: center;
 }
 
 .cont:hover{

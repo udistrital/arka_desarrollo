@@ -214,7 +214,7 @@ class Sql extends \Sql {
             case "insertarItem" :
                 $cadenaSql = " INSERT INTO ";
                 $cadenaSql .= " arka_inventarios.items_actarecibido_temp(";
-                $cadenaSql .= " id_items,item,descripcion,cantidad, ";
+                $cadenaSql .= " id_items,item,cantidad,descripcion, ";
                 $cadenaSql .= " valor_unitario,valor_total,seccion)";
                 $cadenaSql .= " VALUES (";
                 $cadenaSql .= "'" . $variable [0] . "',";
@@ -229,7 +229,7 @@ class Sql extends \Sql {
             case "insertarItems" :
                 $cadenaSql = " INSERT INTO ";
                 $cadenaSql .= " arka_inventarios.items_actarecibido(";
-                $cadenaSql .= " id_acta, item,  descripcion,cantidad, ";
+                $cadenaSql .= " id_acta, item, descripcion,cantidad, ";
                 $cadenaSql .= " valor_unitario, valor_total, estado_registro, fecha_registro)";
                 $cadenaSql .= " VALUES (";
                 $cadenaSql .= "'" . $variable [0] . "',";
@@ -254,7 +254,7 @@ class Sql extends \Sql {
             case "insertarItemTemporal" :
                 $cadenaSql = " INSERT INTO ";
                 $cadenaSql .= " arka_inventarios.items_actarecibido_temp(";
-                $cadenaSql .= " id_items,item,descripcion,cantidad, ";
+                $cadenaSql .= " id_items,item,cantidad,descripcion, ";
                 $cadenaSql .= " valor_unitario,valor_total,seccion)";
                 $cadenaSql .= " VALUES (";
                 $cadenaSql .= "'" . $variable [0] . "',";
