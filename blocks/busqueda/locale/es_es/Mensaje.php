@@ -28,6 +28,33 @@ $this->idioma['crearAccionFallo']="Falló al crear elementos:";
 $this->idioma['actualizarAccionFallo']="Falló al actualizar elementos:";
 $this->idioma['id']="id";
 $this->idioma['idTitulo']="Ingrese Identificador";
+$this->idioma['id_usuario']="Identificación Usuario";
+$this->idioma['id_usuarioTitulo']="Ingrese Identificación Usuario";
+$this->idioma['estado_registro_id']="Estado Registro";
+$this->idioma['estado_registro_idTitulo']="Seleccione estado";
+
+$this->idioma['apellido']="Apellido";
+$this->idioma['apellidoTitulo']="Ingrese apellido";
+$this->idioma['estilo']="Estilo";
+$this->idioma['estiloTitulo']="Ingrese estilo";
+$this->idioma['tipo']="Tipo";
+$this->idioma['tipoTitulo']="Ingrese tipo";
+$this->idioma['idioma']="Idioma";
+$this->idioma['idiomaTitulo']="Ingrese idioma";
+
+$this->idioma['grupo']="Grupo";
+$this->idioma['grupoTitulo']="Ingrese grupo";
+$this->idioma['id_bloque']="Bloque";
+$this->idioma['id_bloqueTitulo']="Ingrese bloque";
+$this->idioma['id_pagina']="Página";
+$this->idioma['id_paginaTitulo']="Ingrese Página";
+$this->idioma['modulo']="Módulo";
+$this->idioma['moduloTitulo']="Ingrese Módulo";
+$this->idioma['nivel']="Nivel";
+$this->idioma['nivelTitulo']="Ingrese Nivel";
+$this->idioma['parametro']="Parámetro";
+$this->idioma['parametroTitulo']="Ingrese Parámetro";
+
 $this->idioma['buscar']="Buscar";
 $this->idioma['buscarTitulo']="Ingrese Buscar";
 $this->idioma['nombre']="nombre";

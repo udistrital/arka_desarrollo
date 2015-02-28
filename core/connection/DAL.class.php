@@ -49,7 +49,7 @@ class DAL{
 	private $idObjetoGlobal;
 	private $prefijoTabla;
 	private $nombreTablaObjetos;
-	
+	private $columnasConsulta;
 	
 	function __construct($tabla = null, $esquema = 'public',$conexion = '') {
 	
@@ -896,7 +896,7 @@ class DAL{
 			foreach ($leido as $a => $b){
 				if(!is_numeric($a)){
 					
-					if(strpos($a,$this->prefijoColumnas)!==false) $valorNoPrefijo = str_replace($this->prefijoColumnas,'',$a);
+					if($this->prefijoColumnas&&strpos($a,$this->prefijoColumnas)!==false) $valorNoPrefijo = str_replace($this->prefijoColumnas,'',$a);
 					else $valorNoPrefijo = $a;
 					$resultado[$valorNoPrefijo] = $b ;
 					

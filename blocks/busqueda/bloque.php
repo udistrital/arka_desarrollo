@@ -105,8 +105,8 @@ if (! class_exists ( '\\bloquesModelo\\bloqueModelo1\\Bloque' )) {
                     
                     //$this->miFrontera->frontera ();
                                 $gh =  new GestorHTMLCRUD($this->miLenguaje);
-                    			//$gh->setOperaciones($this->operaciones());
-                    			$gh->setObjetos('3,5');
+                    			$gh->setOperaciones($this->operaciones());
+                    			$gh->setObjetos('1,2,8,10,17,18');
 								//var_dump($gh->setObjetos('3,5'));exit;
 								//$gh->setObjetos('3');
 								$gh->setFuncionInicio('if($(\'#objetoId\').val()!=0) 	getFormularioConsulta(true);');

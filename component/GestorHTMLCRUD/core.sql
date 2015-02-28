@@ -8,26 +8,35 @@
   operacion_nombre text NOT NULL,
   operacion_alias text NOT NULL,
   operacion_descripcion text NOT NULL,
+  operacion_cadena text NOT NULL,
+  operacion_text bool NOT NULL DEFAULT false,
+  operacion_icono text NOT NULL,
+  operacion_click text NOT NULL,
   CONSTRAINT operacion_pk PRIMARY KEY (operacion_id)
 )
 WITH (
   OIDS=FALSE
 );
 ALTER TABLE public.arka_operacion
-  OWNER TO geminis;
+  OWNER TO arka_frame;
 
 
 
 
 INSERT INTO public.arka_operacion
-(  operacion_id,  operacion_nombre,  operacion_alias,  operacion_descripcion)
+(  operacion_id,  operacion_nombre,  operacion_alias,  
+   operacion_descripcion, operacion_cadena, operacion_text, operacion_icono, operacion_click)
 VALUES
-(1,'crear','Crear','Crear CRUD'),
-(2,'consultar','Consultar','Consultar CRUD'),
-(3,'actualizar','Actualizar','Actualizar CRUD'),
-(4,'duplicar','Consultar','Consultar CRUD'),
-(5,'activarInactivar','Cambiar Estado','Cambiar estado registro activo/inactivo'),
-(6,'eliminar','Eliminar','Eliminar CRUD');
+(1,'crear','Crear','Crear CRUD','principalCrear',false,'ui-icon-plus','$("#selectedItems").val("");getFormularioCreacionEdicion(true);'),
+(2,'consultar','Consultar','Consultar CRUD','principalConsultar',false,'ui-icon-search','getFormularioConsulta(true);'),
+(3,'actualizar','Actualizar','Actualizar CRUD','principalEditar',false,'ui-icon-pencil','if($"#selectedItems").val()!="") 	getFormularioCreacionEdicion(false)'),
+(4,'duplicar','Consultar','Consultar CRUD','principalDuplicar',false,'ui-icon-pause','if($("#selectedItems").val()!="") 	duplicarElemento();'),
+(5,'activarInactivar','Cambiar Estado','Cambiar estado registro activo/inactivo','principalCambiarEstado',false,'ui-icon-transferthick-e-w','if($("#selectedItems").val()!="") 	cambiarEstadoElemento();'),
+(6,'eliminar','Eliminar','Eliminar CRUD','principalEliminar',false,'ui-icon-close','if($("#selectedItems").val()!="") 	eliminarElemento();'),
+(7,'ver','Ver','Ver información Elemento Objeto','principalVer',false,'ui-icon-info','if($("#selectedItems").val()!="") 	verElemento();'),
+(8,'validar','Validar','Validar elemento lista','principalValidar',false,'ui-icon-check','if($("#selectedItems").val()!="") 	validarElemento();'),
+(9,'ejecutar','Ejecutar','ejecutar Tarea elemento','principalEjecutar',false,'ui-icon-play','if($("#selectedItems").val()!="") 	ejecutarElemento();')
+;
 
 
 --Tabla de tipo_dato (esquema del core)
@@ -42,7 +51,7 @@ WITH (
   OIDS=FALSE
 );
 ALTER TABLE public.arka_tipo_dato
-  OWNER TO geminis;
+  OWNER TO arka_frame;
 
  --Llenar tabla
   INSERT INTO public.arka_tipo_dato(
@@ -55,7 +64,10 @@ ALTER TABLE public.arka_tipo_dato
     ('date','Fecha'),
     ('string','Texto'),
     ('array','Lista'),
-    ('NULL','Vacio');
+    ('NULL','Vacio'),
+    ('email','Email'),
+    ('tel','Telefono'),
+    ('password','Contraseña');
 
 
   CREATE TABLE public.arka_grupo_aplicacion
@@ -70,7 +82,7 @@ WITH (
   OIDS=FALSE
 );
 ALTER TABLE public.arka_grupo_aplicacion
-  OWNER TO geminis;
+  OWNER TO arka_frame;
   
   INSERT INTO public.arka_grupo_aplicacion
   (grupo_aplicacion_nombre,grupo_aplicacion_alias,grupo_aplicacion_descripcion)
@@ -109,7 +121,7 @@ WITH (
   OIDS=FALSE
 );
 ALTER TABLE public.arka_objetos
-  OWNER TO geminis;
+  OWNER TO arka_frame;
   
   
   ---Lnea Tabla de Objetos
@@ -127,6 +139,12 @@ ALTER TABLE public.arka_objetos
             objetos_cambiarEstado , objetos_duplicar , objetos_eliminar,objetos_historico)
    VALUES 
 --core
+( 'public.arka_pagina','Página', 'pagina','Paginas registradas en el sistema','',1,true ,false,false,false,false,false,false,false,false),
+( 'public.arka_bloque','Bloque', 'bloque','Bloques registrados en el sistema','',1,true ,false,false,false,false,false,false,false,false),
+( 'public.arka_bloque_pagina','Relacion Bloques y Páginas', 'bloquePagina','Bloques registrados con paginas en el sistema','',1,true ,false,false,false,false,false,false,false,false),
+( 'public.arka_configuracion','Configuración', 'configuracion','Configuraciones del sistema','',1,true ,false,false,false,false,false,false,false,false),
+( 'public.arka_dbms','Conexiones', 'conexion','Conexiones del sistema','',1,true ,false,false,false,false,false,false,false,false),
+--( 'public.arka_estilo','Estilos usuarios', 'configuracion','Configuraciones del sistema','',1,true ,false,false,false,false,false,false,false,false),
 ( 'public.arka_estado_registro','Estado Registro', 'estadoRegistro','Tabla parametrica core','estado_registro_',1,true ,false,false,false,false,false,false, false,false),
 ( 'public.arka_tipo_dato','Tipos de datos', 'tipoDato','Tabla parametrica core','tipo_dato_',1,true ,false,false,false,false,false,false,false,false),
 ( 'public.arka_objetos','Objetos', 'objetos','Tabla parametrica core','objetos_',1,true ,false,false,false,false,false,false,false,false),
@@ -135,14 +153,20 @@ ALTER TABLE public.arka_objetos
 ( 'public.arka_eventos_html','Eventos HTML', 'eventosHtml','Tabla parametrica core','eventos_html_',1,true ,false,false,false,false,false,false,false,false),
 ( 'public.arka_eventos_columnas','Eventos HTML de las columnas', 'eventosColumnas','Tabla parametrica core','eventos_columnas_',1,true ,true,true,true,true,false,false,false,false),
 ( 'public.arka_operacion','Operaciones', 'operacion','Tabla parametrica core','operacion_',1,true ,true,true,true,true,false,false,false,false),
+( 'public.arka_usuario_telefono','Telefono', 'telefono','Tabla de telefonos del usuario','usuario_telefono_',1,true ,false,false,false,false,false,false,false,false),
+( 'public.arka_usuario_correo','Tipos de datos', 'tipoDato','Tabla de emails usuarios','usuario_correo_',1,true ,false,false,false,false,false,false,false,false),
+( 'public.arka_permiso','Permisos', 'permiso','Tabla lista permisos del gestor de usuarios','permiso_',2,true ,false,false,false,false,false,false,false,false),
 
 --usuarios y accesos
-( 'usuarios.usuario','Usuario' ,'usuario','Tabla de usuario del gestor de usuarios','usuario_',2,false, true,true,true,true,true,true,false,false),
-( 'usuarios.relaciones','Permisos', 'relacion','Tabla de relaciones entre usuarios, permisos, objetos y registros de los objetos','rel_',2,false,true,true,true,true,true,false,true,true),
-( 'usuarios.acceso','Acceso', 'acceso','Tabla de log de acceso del gestor de usuarios','acc_',2,false,false,true,false,false,false,false,false,false),
-( 'usuarios.rol','Rol', 'rol','Tabla de roles del gestor de usuarios','rol_',2,false ,true,true,true,true,false,false,false,false),
-( 'usuarios.usuario_rol','Rol', 'usuarioRol','Tabla de roles del gestor de usuarios','usuario_rol_',2,false ,true,true,true,true,false,false,false,false),
-( 'usuarios.permiso','Permisos', 'permiso','Tabla lista permisos del gestor de usuarios','permiso_',2,true ,false,false,false,false,false,false,false,false),
+( 'public.arka_usuario','Usuario' ,'usuario','Tabla de usuario del gestor de usuarios','',2,false, true,true,true,true,true,true,false,false),
+( 'public.arka_rol','Rol', 'rol','Tabla de roles del gestor de usuarios','rol_',2,false ,true,true,true,true,false,false,false,false),
+( 'public.arka_relaciones_usuario','Permisos Usuario', 'relacionUsuario','Tabla de relaciones entre usuarios, permisos, objetos y registros de los objetos','rel_',2,false,true,true,true,true,true,false,true,true),
+( 'public.arka_relaciones_rol','Permisos Roles', 'relacionRol','Tabla de relaciones entre roles, permisos, objetos y registros de los objetos','rer_',2,false,true,true,true,true,true,false,true,true),
+--( 'public.arka_acceso','Acceso', 'acceso','Tabla de log de acceso del gestor de usuarios','acc_',2,false,false,true,false,false,false,false,false,false),
+( 'public.arka_usuario_rol','Rol Usuario', 'usuarioRol','Tabla de roles del gestor de usuarios','usuario_rol_',2,false ,true,true,true,true,false,false,false,false),
+( 'public.arka_usuario_pagina','Permisos página usuario', 'usuarioPagina','Tabla de permisos pagina usuarios','usuario_pagina_',2,true ,false,false,false,false,false,false,false,false),
+( 'public.arka_rol_pagina','Permisos página rol', 'rolPagina','Tabla de permisos pagina roles','rol_pagina_',2,true ,false,false,false,false,false,false,false,false),
+
 
 --reglas
 ( 'reglas.parametros','Parametros','parametro','Tabla de parametros de las reglas','par_',3,false, true,true,true,true,true,true,false,true),
@@ -217,7 +241,7 @@ WITH (
   OIDS=FALSE
 );
 ALTER TABLE public.arka_columnas
-  OWNER TO geminis;
+  OWNER TO arka_frame;
 
 insert into public.arka_columnas
 (
@@ -230,24 +254,53 @@ columnas_requerido_consultar,  columnas_requerido_crear ,  columnas_requerido_ac
 VALUES
   ----core
   ('id','Identificación','text', 2,1,0,'estructura',true,false,false,false,false,false,false,true,false,false,false,false,true,true),
+  ('identificacion','Identificación usuario','text', 2,1,0,'estructura',true,false,false,false,false,false,false,true,false,false,false,false,true,true),
+  ('grupo','Grupo','text', 2,1,0,'estructura',true,false,false,false,false,false,false,true,false,false,false,false,true,true),
   ('nombre','Nombre','text', 6,1,0,'estructura',true,true,true,false,false,false,false,true,false,false,true, true, false,true),
+  ('parametro','Parametro','text', 6,1,0,'estructura',true,true,true,false,false,false,false,true,false,false,true, true, false,true),
+  ('valor','Valor','text', 6,1,0,'estructura',true,true,true,false,false,false,false,true,false,false,true, true, false,true),
+  ('apellido','Apellido','text', 6,1,0,'estructura',true,true,true,false,false,false,false,true,false,false,true, true, false,true),
+  ('dbms','DBMS','text', 6,1,0,'estructura',true,true,true,false,false,false,false,true,false,false,true, true, false,true),
+  ('servidor','Servidor','text', 6,1,0,'estructura',true,true,true,false,false,false,false,true,false,false,true, true, false,true),
+  ('puerto','Puerto','text', 2,1,0,'estructura',true,false,false,false,false,false,false,true,false,false,false,false,true,true),
+  ('modulo','Modulo','text', 6,1,0,'estructura',true,true,true,false,false,false,false,true,false,false,true, true, false,true),
+  ('nivel','Nivel','text', 2,1,0,'estructura',true,false,false,false,false,false,false,true,false,false,false,false,true,true),
+  
+  ('db','Base de datos','text', 6,1,0,'estructura',true,true,true,false,false,false,false,true,false,false,true, true, false,true),
+  ('esquema','Esquema','text', 6,1,0,'estructura',true,true,true,false,false,false,false,true,false,false,true, true, false,true),
+  ('conexionssh','Conexion ssh','text', 6,1,0,'estructura',true,true,true,false,false,false,false,true,false,false,true, true, false,true),
+  ('password','Password','password', 11,1,0,'estructura',true,false,false,false,false,false,false,true,false,false,false,false,true,true),
+  
+  ('telefono','Telefono','tel', 10,1,0,'estructura',true,true,true,false,false,false,false,true,false,false,true, true, false,true),
+  ('email','email','email', 9,1,0,'estructura',true,true,true,false,false,false,false,true,false,false,true, true, false,true),
+  ('estilo','Estilo','text', 6,1,0,'estructura',true,true,true,false,false,false,false,true,false,false,true, true, false,true),
+  ('idioma','Idioma','text', 6,1,0,'estructura',true,true,true,false,false,false,false,true,false,false,true, true, false,true),
+  ('tipo','Tipo','text', 2,1,0,'estructura',true,false,false,false,false,false,false,true,false,false,false,false,true,true),
+  ('clave','Contraseña','password', 11,1,0,'estructura',true,false,false,false,false,false,false,true,false,false,false,false,true,true),
+  --('imagen','Imagen','documento_imagen', 6,1,0,'estructura',true,true,true,false,false,false,false,true,false,false,true, true, false,true),
   ('alias','Alias','text',6,1,0,'estructura',true,true,true,false,false,false,false,true,false,false,true, true, false,true),
   ('descripcion','Descripción','textarea',6,1,0,'estructura',false,true,true,false,false,false,false,false,false,false,false, false, false,false),
+  ('detalle','Detalle','text',6,1,0,'estructura',true,true,true,false,false,false,false,true,false,false,true, true, false,true),
   ('etiquetas','Etiquetas','tags',6,1,0,'estructura',false,true,true,false,false,false,false,false,false,false,false, false, false,false),
   ('nombre_real','Nombre Real','text',6,1,0,'estructura',false,true,true,false,false,false,false,false,false,false,false, false, false,false),
-  ('estado_registro_id','Estado Registro','select',2,1,1,'estructura',true,true,true,true,false,false,false, true,true,true, true,true,true,true),
   ('fecha_registro','Fecha Registro','date',5,1,0,'estructura',true,false,false,false,true,true,false,false,false,false,false, false, false,true),
-  ('tipo_dato_id','Tipo Dato','select',2,1,2,'estructura',true,true,true,true,false,false,false, true,true,true, true,true,true,true),
+  ('registro','Registro','text',2,1,0,'estructura',true,true,true,false,false,false,false,true,false,false,true, true, false,true),
+  ('codigo','Codigo','text',6,1,0,'estructura',true,true,true,false,false,false,false,true,false,false,true, true, false,true),
+  ('usuario','Usuario','text',6,1,0,'estructura',true,true,true,false,false,false,false,true,false,false,true, true, false,true),
+  
+  ('id_pagina','Página','text',2,1,1,'estructura',true,true,true,true,false,false,false, true,true,true, true,true,true,true),
+  ('id_bloque','Bloque','text',2,1,2,'estructura',true,true,true,true,false,false,false, true,true,true, true,true,true,true),
+  ('estado_registro_id','Estado Registro','select',2,1,6,'estructura',true,true,true,true,false,false,false, true,true,true, true,true,true,true),
+  ('tipo_dato_id','Tipo Dato','select',2,1,7,'estructura',true,true,true,true,false,false,false, true,true,true, true,true,true,true),
+  ('objetos_id','Objeto','select',2,1,8,'estructura',true,true,true,true,false,false,false, true,true,true, true,true,true,true),
+  ('permiso_id','Permiso','text',2,1,16,'estructura',true,true,true,true,false,false,false, true,true,true, true,true,true,true),
   
   -----usuarios
-  ('usuario_id','Usuario','text',2,1,9,'academica',true,true,true,false,false,false,false,true,false,false,true, true, false,true),
-  ('objetos_id','Objeto','select',2,1,3,'academica',true,true,true,true,false,false,false, true,true,true, true,true,true,true),
-  ('registro','Registro','text',2,1,0,'academica',true,true,true,false,false,false,false,true,false,false,true, true, false,true),
-  ('permiso_id','Permiso','text',2,1,14,'academica',true,true,true,true,false,false,false, true,true,true, true,true,true,true),
-  ('rol_id','Permiso','text',2,1,12,'academica',true,true,true,true,false,false,false, true,true,true, true,true,true,true),
-  ('codigo','Codigo','text',6,1,0,'academica',true,true,true,false,false,false,false,true,false,false,true, true, false,true),
-  ('usuario','Usuario','text',6,1,0,'academica',true,true,true,false,false,false,false,true,false,false,true, true, false,true),
-  ('detalle','Detalle','text',6,1,0,'academica',true,true,true,false,false,false,false,true,false,false,true, true, false,true),
+  ('id_usuario','Usuario','text',2,1,17,'estructura',true,true,true,false,false,false,false,true,false,false,true, true, false,true),
+  ('rol_id','Permiso','text',2,1,18,'estructura',true,true,true,true,false,false,false, true,true,true, true,true,true,true),
+  
+  
+  
   
   -----procesos
   ('estado_paso_id','Id del estado del paso','select',2,3,24,'academica',true,true,true,true,false,false,false, true,true,true, true,true,true,true),
@@ -282,7 +335,7 @@ WITH (
   OIDS=FALSE
 );
 ALTER TABLE public.arka_estado_registro
-  OWNER TO geminis;
+  OWNER TO arka_frame;
 
 insert into public.arka_estado_registro (estado_registro_nombre,estado_registro_alias,estado_registro_descripcion)
 VALUES
