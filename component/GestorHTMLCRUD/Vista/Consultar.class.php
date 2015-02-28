@@ -264,8 +264,8 @@ class Consultar {
     	
     	$cadena= '';
     	$textos = array();
-    	$textos[0] = $this->lenguaje->getCadena ($elemento);
-    	$textos[1] = $this->lenguaje->getCadena ($elemento."Titulo");
+    	$textos[0] = utf8_encode($this->lenguaje->getCadena ($elemento));
+    	$textos[1] = utf8_encode($this->lenguaje->getCadena ($elemento."Titulo"));
     	$cadena .= '<div  class="form-group" >';
     	
     	$cadena .= '<label for="'.$textos[0].'">';
@@ -303,8 +303,8 @@ class Consultar {
     	$cadenaHidden= '';
     	$valor = ''; 
     	$textos = array();
-    	$textos[0] = $this->lenguaje->getCadena ($elemento);
-    	$textos[1] = $this->lenguaje->getCadena ($elemento."Titulo");
+    	$textos[0] = utf8_encode($this->lenguaje->getCadena ($elemento));
+    	$textos[1] = utf8_encode($this->lenguaje->getCadena ($elemento."Titulo"));
     	$cadena .='<div class="form-group" >';
     	
     	$cadena .= '<label for="'.$textos[0].'">';

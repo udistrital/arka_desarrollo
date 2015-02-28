@@ -149,7 +149,7 @@ class Principal {
 		if(is_array($this->operaciones)){
 			
 			foreach ($this->operaciones as $operacion) {
-				echo '<button id="'.$operacion["nombre"].'">'.$this->lenguaje->getCadena($operacion['cadena']).'</button>';	
+				echo '<button id="'.$operacion["nombre"].'">'.utf8_encode($this->lenguaje->getCadena($operacion['cadena'])).'</button>';	
 			}
 			
 		}
@@ -174,7 +174,7 @@ class Principal {
 			  foreach ($this->objetos as $objeto){
 			  	if($objeto['visible']=='t'){
 			  		$conteoVisibles++;
-					$cadenaTemp.= '<li onclick="setObjeto('.$objeto['id'].',\''.$objeto['alias'].'\')">'.utf8_encode($objeto['alias']).'</li>';
+					$cadenaTemp.= '<li onclick="setObjeto('.$objeto['id'].',\''.$objeto['alias'].'\')">'.$objeto['alias'].'</li>';
 			  	}
 			  	
 			  }
