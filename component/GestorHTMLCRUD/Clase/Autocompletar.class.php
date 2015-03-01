@@ -103,6 +103,8 @@ class Autocompletar {
     		
     		$metodo = "consultar".ucfirst($this->objetoAliasSingular);
     		
+    		$this->cliente->setGroupBy(array($nombre));
+    		$this->cliente->columnasConsulta($nombre);
     		$peticion = $this->cliente->$metodo();
     		
     		if(!is_array($peticion)) return false;
@@ -124,19 +126,18 @@ class Autocompletar {
     	
 		if(!is_null($objetoId)&&$objetoId!='')  $this->setObjetoId($objetoId);
 		else $this->setObjetoId($_REQUEST['objetoId']);
-    	
+		
     	$mensaje = 'accionAutocompletar';
     	
 		//valida si la columna esta registrada
-		$idColumna = $this->cliente->getColumnas($_REQUEST['field'],'nombre','id');
+		$idColumna = $this->cliente->getColumnas(stripslashes ($_REQUEST['field']),'nombre','id');
 		$idObjetoColumna = $this->cliente->getColumnas($idColumna,'id','objetos_id');
 		
 		if($idObjetoColumna===FALSE) return false;
-		
 		 
 		//accion 1: si es fk
 		if($idObjetoColumna!=$_REQUEST['objetoId']&&$idObjetoColumna!=0){
-		
+			
           $nombreEjecucion = $this->cliente->getObjeto($_REQUEST['objetoId'],'id','ejecutar');
 			
 			if($nombreEjecucion===false) return false;		
@@ -144,13 +145,17 @@ class Autocompletar {
 		  $lista =  	$this->cliente->$metodo();
 		  
 		  if(is_array($lista))echo json_encode($lista);
-		  else echo json_encode(false);
+		  else{
+		  	echo json_encode($this->getListaPropiedad(stripslashes ($_REQUEST['field'])));
+		  	echo json_encode(false);
+		  }
 		  
 		  
 			
 		}////accion 2 si no es fk, columna cualquiera de la misma tabla
 		else{
-			echo json_encode($this->getListaPropiedad($_REQUEST['field']));
+			var_dump($idColumna,$idObjetoColumna,$_REQUEST['field']);
+			echo json_encode($this->getListaPropiedad(stripslashes ($_REQUEST['field'])));
 		}
 		
 		return true;

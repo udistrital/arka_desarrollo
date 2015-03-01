@@ -50,6 +50,8 @@ class DAL{
 	private $prefijoTabla;
 	private $nombreTablaObjetos;
 	private $columnasConsulta;
+	private $groupBy;
+	private $orderBy;
 	
 	function __construct($tabla = null, $esquema = 'public',$conexion = '') {
 	
@@ -71,6 +73,22 @@ class DAL{
 	    if(!is_null($tabla)&&$tabla!="") $this->setAmbiente($tabla);
 	    
 	
+	}
+	
+	public function setOrderBy($valor){
+		$this->orderBy =  $valor;
+	}
+	
+	public function setGroupBy($valor){
+		$this->groupBy = $valor;
+	}
+	
+	public function getOrderBy(){
+		return $this->orderBy ;
+	}
+	
+	public function getGroupBy(){
+		return $this->groupBy ;
 	}
 
 	public function validarConexion(){
@@ -226,6 +244,7 @@ class DAL{
 	private	function recuperarColumnas(){
 		$this->columnas = $this->persistencia->getListaColumnas($this->excluidos);
 		if(!is_array($this->columnas)) return false;
+		if(count($this->columnasNoPrefijo)>0) $this->columnasNoPrefijo =  array(); 
 		foreach($this->columnas as $columna)
 			$this->columnasNoPrefijo[] = str_replace($this->prefijoColumnas, "", $columna);
 	}
@@ -485,6 +504,11 @@ class DAL{
 		return call_user_func_array(array($this , $method_name), $arguments);
 		 
 	}
+	
+	public function listaLlavesPrimarias($objetoId){
+		
+		return $this->peristencia->getPks();
+	}
 		 
 		 
 	
@@ -665,6 +689,7 @@ class DAL{
 		
 		if(is_null($colIndex)||$colIndex==''||is_null($valor)||$valor=='') {
 			$this->mensaje->addMensaje("101","errorEntradaParametros",'error');
+			
 			return false;
 		}
 		
@@ -677,14 +702,15 @@ class DAL{
 		
 		
 		
-		if(!$tipoDatoID||!$columnaId){
+		if($tipoDatoID===false||$columnaId===false){
 			$this->mensaje->addMensaje("101","errorEntradaColumnaInvalida: ".$colIndex,'error');
 			$this->setConexion($conexion);
 			return false;
 		}
 		
 		
-		if(!Tipos::validarTipo($valor,$tipoDatoID)){
+		if(Tipos::validarTipo($valor,$tipoDatoID)===false){
+			
 			$this->mensaje->addMensaje("101","errorTipoDatoColumna: ".$colIndex,'error');
 			$this->setConexion($conexion);
 			return false;
@@ -692,7 +718,8 @@ class DAL{
 		
 		$nuevoValor =  Tipos::evaluarTipo($valor,$tipoDatoID);
 		
-		if(!$nuevoValor){
+		if($nuevoValor===false){
+			
 			$this->mensaje->addMensaje("101","errorValorColumna:".$colIndex,'error');
 			$this->setConexion($conexion);
 			return false;
@@ -700,7 +727,7 @@ class DAL{
 		
 		//validar si es una lista, si el id de la lista existe
 		$tipoInput = $this->getColumnas($columnaId, 'id', 'input');
-		if(!$tipoInput){
+		if($tipoInput===false){
 			$this->mensaje->addMensaje("101","errorInput: ".$colIndex,'error');
 			$this->setConexion($conexion);
 			return false;
@@ -714,7 +741,7 @@ class DAL{
 			$this->setConexion('estructura');
 			
 			$objetoId =  $this->getColumnas($columnaId, 'id', 'objetos_id');
-			if(!$objetoId){
+			if($objetoId===false){
 				$this->mensaje->addMensaje("101","registroObjetoNoExiste",'error');
 				$this->setConexion($conexion);
 				return false;
@@ -722,7 +749,7 @@ class DAL{
 			
 			$objetoNombre = $this->getObjeto($objetoId, 'id', 'ejecutar');
 			
-			if(!$objetoNombre){
+			if($objetoNombre===false){
 				$this->mensaje->addMensaje("101","registroObjetoNoExiste",'error');
 				$this->setConexion($conexion);
 				return false;
@@ -738,7 +765,7 @@ class DAL{
 			
 			$validacionIdEnLista = (bool) call_user_func_array(array($this,$ejecucion), array($nuevoValor,'id','id'));
 			
-			if(!$validacionIdEnLista){
+			if($validacionIdEnLista===false){
 				$this->mensaje->addMensaje("101","errorFk: ".$colIndex,'error');
 				$this->setConexion($conexion);
 				return false;
@@ -787,6 +814,7 @@ class DAL{
 			
 			
 		    $colIndex =  $this->getNombreColumnaReal($a);
+		    
 		    if($colIndex===false) continue;
 			
 			$tabla = $this->tabla;
@@ -796,12 +824,15 @@ class DAL{
 			
 			$validacion =  $this->validarColumna($a, $b);
 			
+			
 				
 			$this->setAmbiente($tabla, $historico, $prefijo);
 
 			
-			if(!$validacion) return false;
-			
+			if(!$validacion) {
+				
+				return false;
+			}
 			
 			
 			switch($a){
@@ -1052,7 +1083,7 @@ class DAL{
 
 				
 				if(!$this->procesarParametros($parametros)){
-						
+					
 					return false;
 				}
 				else{
@@ -1066,11 +1097,14 @@ class DAL{
 					if($this->columnasConsulta == 'tabla') $this->columnasConsulta('_tabla_');
 					
 					if(is_array($this->columnasConsulta)) {
-						
-						$leido = $this->persistencia->read($this->columnasConsulta,$this->where);
+					
+						$leido = $this->persistencia->read($this->columnasConsulta,$this->where,$this->groupBy,$this->orderBy);
+					}else{
+					
+						$leido = $this->persistencia->read($this->columnas,$this->where,$this->groupBy,$this->orderBy);
 					}
-					else $leido = $this->persistencia->read($this->columnas,$this->where);
 
+					
 					
 					if(!$leido){
 						
@@ -1099,7 +1133,7 @@ class DAL{
 				   
 				   if(!$this->persistencia->update($this->parametros,$this->valores,$this->where)){
 					
-				   	var_dump($this->getConexion(), $this->getTabla(), $this->getQuery(), $justificacion);
+				   	
 					$this->mensaje->addMensaje("101","errorActualizar: ".$this->tablaAlias,'error');
 					
 				

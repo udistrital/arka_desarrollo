@@ -106,6 +106,62 @@ class Script {
 		$( '#max'+toTitleCase(elemento) ).datepicker( "option", "disabled", true );
 	}
 	
+	function setRango(elemento){
+		if(elemento.length>0){
+			var minimo = $('#min'+toTitleCase(elemento)).val();
+			var maximo = $('#max'+toTitleCase(elemento)).val();
+			var cadena = minimo + "," + maximo;
+
+
+			//if((fmin instanceof Date));
+            
+			
+			//var fmin = $.datepicker.parseDate( "dd/mm/yy", minimo);
+			//var fmax = $.datepicker.parseDate( "dd/mm/yy", maximo);
+
+			skip =  false;
+			try {
+				if(($.datepicker.parseDate( "dd/mm/yy", minimo) instanceof Date)) {
+					skip = true;
+		            			    
+				    }
+			}
+			catch(err) {
+			}
+
+
+			try {
+				if(($.datepicker.parseDate( "dd/mm/yy", maximo) instanceof Date)) {
+					skip = true;			    
+				    }
+			}
+			catch(err) {
+			}
+            
+			if(skip==false){
+				if(Number(minimo)>Number(maximo)){
+					
+					$('#'+elemento).val('0,1');
+					$('#min'+toTitleCase(elemento)).val('');
+					$('#max'+toTitleCase(elemento)).val('');
+					$("<div><span>Rango Inv&aacutelido</span></div>").dialog();
+				}
+			}
+			
+			$('#'+elemento).val(cadena);
+ 				}
+	}
+
+    function goToByScroll(id){
+        // Reove "link" from the ID
+      id = id.replace("link", "");
+        // Scroll
+      $('html,body').animate({
+          scrollTop: $("#"+id).offset().top},
+          'slow');
+  }
+	
+	
 	function toTitleCase(str){
       return str.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
      }
@@ -542,8 +598,13 @@ class Script {
 		$('#botones').toggle();
 	}
 	    
+	    
 	    function getFormularioConsulta(skip, mensaje){
 
+	         listaIds =  [];
+             listaNombres = [];
+             listaAlias = [];
+	    
         	
         	idObjeto = $('#idObjeto').val();
             

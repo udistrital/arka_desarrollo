@@ -2,7 +2,6 @@
 
 namespace component\GestoHTMLCRUD\Vista;
 
-
 include_once ('core/builder/Mensaje.class.php');
 
 include_once 'component/GestorHTMLCRUD/Modelo/Modelo.class.php';
@@ -160,11 +159,13 @@ class Consultar {
     	   $this->listaElementos =  $this->cliente->$metodo($argumentos);
     	   
     	if(!is_array($this->listaElementos)) {
+    		
     		$this->mensaje->addMensaje("4000","errorLectura: ".ucfirst($this->objetoAlias),'information');
     		return false;
     	}
 		
 		if(count($this->listaElementos)==0) {
+			
     		$this->mensaje->addMensaje("4001","errorLectura: ".ucfirst($this->objetoAlias),'information');
     		
     	}
@@ -442,7 +443,7 @@ class Consultar {
 		//muestra el formulario
     	echo '<div class="container-fluid" id="contenedorFormularioConsulta">';
     	echo $this->formularioConsulta();
-    	echo '</div>';
+    	echo '</div>';	
     	
     	
     	
