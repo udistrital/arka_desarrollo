@@ -149,6 +149,144 @@ class Sql extends \Sql {
 			 * Clausulas Del Caso Uso.
 			 */
 			
+			case "datos_item" :
+				$cadenaSql = " SELECT ";
+				$cadenaSql .= " valor_total ";
+				$cadenaSql .= " FROM";
+				$cadenaSql .= " items_orden_compra_temp ";
+				$cadenaSql .= " WHERE seccion='" . $variable . "';";
+				
+				break;
+				
+			case "insertarProveedor" :
+				$cadenaSql = " INSERT INTO ";
+				$cadenaSql .= " proveedor_nuevo(";
+				$cadenaSql .= " razon_social,";
+				$cadenaSql .= " nit_proveedor,";
+				$cadenaSql .= " direccion,";
+				$cadenaSql .= " telefono ";
+				$cadenaSql .= " )";
+				$cadenaSql .= " VALUES (";
+				$cadenaSql .= "'" . $variable [0] . "',";
+				$cadenaSql .= "'" . $variable [1] . "',";
+				$cadenaSql .= "'" . $variable [2] . "',";
+				$cadenaSql .= "'" . $variable [3] . "') ";
+				$cadenaSql .= "RETURNING  id_proveedor_n; ";
+				
+				break;
+			
+			case "informacion_cargo_jefe" :
+				$cadenaSql = " SELECT ";
+				$cadenaSql .= " nombres ||' '||apellidos,";
+				$cadenaSql .= " id_encargado ";
+				$cadenaSql .= " FROM";
+				$cadenaSql .= " encargado ";
+				$cadenaSql .= " WHERE id_tipo_encargado='2' AND estado='TRUE' ";
+				$cadenaSql .= "AND cargo='" . $variable . "';";
+				
+				break;
+			
+			case "informacion_ordenador" :
+				$cadenaSql = " SELECT ";
+				$cadenaSql .= " nombres ||' '||apellidos, ";
+				$cadenaSql .= " id_encargado";
+				$cadenaSql .= " FROM";
+				$cadenaSql .= " encargado ";
+				$cadenaSql .= " WHERE id_tipo_encargado='1' AND estado='TRUE' ";
+				$cadenaSql .= "AND asignacion='" . $variable . "';";
+				
+				break;
+			
+			case "ordenador_gasto" :
+				$cadenaSql = " SELECT ";
+				$cadenaSql .= " id_ordenador,";
+				$cadenaSql .= " descripcion ";
+				$cadenaSql .= " FROM";
+				$cadenaSql .= " tipo_ordenador_gasto ";
+				break;
+			
+			case "constratistas" :
+				$cadenaSql = " SELECT ";
+				$cadenaSql .= " id_encargado,";
+				$cadenaSql .= "identificacion ||' - '|| nombres ||' 	'||apellidos as contratista ";
+				$cadenaSql .= " FROM";
+				$cadenaSql .= " encargado ";
+				$cadenaSql .= " WHERE id_tipo_encargado='3' AND estado='TRUE'";
+				break;
+			
+			case "cargo_jefe" :
+				$cadenaSql = " SELECT ";
+				$cadenaSql .= " id_cargo,";
+				$cadenaSql .= "descripcion ";
+				$cadenaSql .= " FROM";
+				$cadenaSql .= " tipo_cargo ; ";
+				break;
+			
+			case "rubros" :
+				$cadenaSql = " SELECT ";
+				$cadenaSql .= " id_rubro,";
+				$cadenaSql .= " codigo  ||' - '|| nombre as rubro ";
+				$cadenaSql .= " FROM";
+				$cadenaSql .= " rubro ; ";
+				break;
+			
+			case "dependencia" :
+				$cadenaSql = " SELECT ";
+				$cadenaSql .= " id_dependencia,";
+				$cadenaSql .= " cod_dependencia  ||' - '|| nombre as dependencia ";
+				$cadenaSql .= " FROM";
+				$cadenaSql .= " dependencia ; ";
+				break;
+			
+			case "informacion_dependencia" :
+				$cadenaSql = " SELECT ";
+				$cadenaSql .= " direccion, telefono ";
+				$cadenaSql .= " FROM";
+				$cadenaSql .= " dependencia ";
+				$cadenaSql .= " WHERE id_dependencia='" . $variable . "';";
+				
+				break;
+			
+			case "informacion_proveedor" :
+				$cadenaSql = " SELECT ";
+				$cadenaSql .= " razon_social, nit_proveedor, direccion, telefono ";
+				$cadenaSql .= " FROM";
+				$cadenaSql .= " proveedor ";
+				$cadenaSql .= " WHERE id_proveedor='" . $variable . "' ";
+				$cadenaSql .= " UNION SELECT ";
+				$cadenaSql .= " razon_social, nit_proveedor, direccion, telefono ";
+				$cadenaSql .= " FROM";
+				$cadenaSql .= " proveedor_nuevo";
+				$cadenaSql .= " WHERE id_proveedor_n='" . $variable . "';";
+				break;
+			
+			case "proveedor" :
+				$cadenaSql = " SELECT ";
+				$cadenaSql .= " id_proveedor,";
+				$cadenaSql .= " nit_proveedor ||' - '|| razon_social as proveedor ";
+				$cadenaSql .= " FROM";
+				$cadenaSql .= " proveedor  ";
+				$cadenaSql .= " UNION SELECT ";
+				$cadenaSql .= " id_proveedor_n,";
+				$cadenaSql .= " nit_proveedor ||' - '|| razon_social as proveedor ";
+				$cadenaSql .= " FROM";
+				$cadenaSql .= " proveedor_nuevo ; ";
+				break;
+			
+			case "seleccion_proveedor" :
+				$cadenaSql = " SELECT ";
+				$cadenaSql .= " id_proveedor,";
+				$cadenaSql .= " nit_proveedor ||' - '|| razon_social as proveedor ";
+				$cadenaSql .= " FROM";
+				$cadenaSql .= " proveedor  ";
+				$cadenaSql .= " UNION SELECT ";
+				$cadenaSql .= " id_proveedor_n,";
+				$cadenaSql .= " nit_proveedor ||' - '|| razon_social as proveedor ";
+				$cadenaSql .= " FROM";
+				$cadenaSql .= " proveedor_nuevo ;";
+				
+				break;
+			
 			case "polizas" :
 				$cadenaSql = " SELECT ";
 				$cadenaSql .= " id_polizas,";
@@ -182,7 +320,7 @@ class Sql extends \Sql {
 			
 			case "limpiar_tabla_items" :
 				$cadenaSql = " DELETE FROM ";
-				$cadenaSql .= " arka_inventarios.items_orden_compra_temp";
+				$cadenaSql .= " items_orden_compra_temp";
 				$cadenaSql .= " WHERE seccion ='" . $variable . "';";
 				
 				break;
@@ -220,35 +358,40 @@ class Sql extends \Sql {
 				$cadenaSql .= " fecha_registro, disponibilidad_presupuestal,";
 				$cadenaSql .= " fecha_disponibilidad, rubro, obligaciones_proveedor, obligaciones_contratista,";
 				$cadenaSql .= " poliza1, poliza2, poliza3, poliza4, poliza5, lugar_entrega, destino,";
-				$cadenaSql .= " tiempo_esntrega, forma_pago, supervision, inhabilidades, id_proveedor,";
-				$cadenaSql .= " id_dependencia, id_contratista, id_jefe, id_ordenador";
+				$cadenaSql .= " tiempo_entrega, forma_pago, supervision, inhabilidades, id_proveedor,";
+				$cadenaSql .= " ruta_cotizacion, nombre_cotizacion, id_dependencia, id_contratista,id_jefe, id_ordenador,subtotal, iva, total, valor_letras ";
 				$cadenaSql .= " FROM orden_compra ";
-				$cadenaSql .= " WHERE id_orden_compra='" . $variable . "'";
+				$cadenaSql .= " WHERE id_orden_compra='" . $variable . "' AND estado='TRUE'";
 				
 				break;
 			
 			case "consultarProveedor" :
 				$cadenaSql = " SELECT ";
-				$cadenaSql .= " razon_social, nit_proveedor, direccion, telefono,";
-				$cadenaSql .= " ruta_cotizacion, nombre_cotizacion";
+				$cadenaSql .= " razon_social, nit_proveedor, direccion, telefono ";
+				$cadenaSql .= "  ";
 				$cadenaSql .= " FROM proveedor ";
-				$cadenaSql .= " WHERE id_proveedor='" . $variable . "'";
+				$cadenaSql .= " WHERE id_proveedor='" . $variable . "' ";
+				$cadenaSql .= " UNION SELECT ";
+				$cadenaSql .= " razon_social, nit_proveedor, direccion, telefono ";
+				$cadenaSql .= "  ";
+				$cadenaSql .= " FROM proveedor_nuevo ";
+				$cadenaSql .= " WHERE id_proveedor_n='" . $variable . "'";
 				
 				break;
 			
 			case "consultarDependencia" :
 				$cadenaSql = " SELECT ";
 				$cadenaSql .= "  nombre, direccion, telefono ";
-				$cadenaSql .= " FROM dependecia ";
-				$cadenaSql .= " WHERE id_dependecia='" . $variable . "'";
+				$cadenaSql .= " FROM dependencia ";
+				$cadenaSql .= " WHERE id_dependencia='" . $variable . "'";
 				
 				break;
 			
 			case "consultarEncargado" :
 				$cadenaSql = " SELECT ";
-				$cadenaSql .= " id_tipo_encargado, nombre, identificacion, cargo,asignacion  ";
+				$cadenaSql .= " nombres ||' '||apellidos as nombre, cargo,asignacion  ";
 				$cadenaSql .= " FROM encargado ";
-				$cadenaSql .= " WHERE id_encargado='" . $variable . "'";
+				$cadenaSql .= " WHERE id_encargado='" . $variable . "' AND estado=TRUE";
 				
 				break;
 			
@@ -314,6 +457,8 @@ class Sql extends \Sql {
 				
 				break;
 			
+
+				
 			case "actualizarOrden" :
 				$cadenaSql = " UPDATE ";
 				$cadenaSql .= " orden_compra ";
@@ -350,16 +495,22 @@ class Sql extends \Sql {
 				}
 				$cadenaSql .= " lugar_entrega='" . $variable [10] . "', ";
 				$cadenaSql .= " destino='" . $variable [11] . "', ";
-				$cadenaSql .= " tiempo_esntrega='" . $variable [12] . "', ";
+				$cadenaSql .= " tiempo_entrega='" . $variable [12] . "', ";
 				$cadenaSql .= " forma_pago='" . $variable [13] . "', ";
 				$cadenaSql .= " supervision='" . $variable [14] . "', ";
 				$cadenaSql .= " inhabilidades='" . $variable [15] . "', ";
 				$cadenaSql .= " id_proveedor='" . $variable [16] . "', ";
-				$cadenaSql .= " id_dependencia='" . $variable [17] . "', ";
-				$cadenaSql .= " id_contratista='" . $variable [18] . "', ";
-				$cadenaSql .= " id_jefe='" . $variable [19] . "', ";
-				$cadenaSql .= " id_ordenador='" . $variable [20] . "'  ";
-				$cadenaSql .= "  WHERE id_orden_compra='" . $variable [21] . "';";
+				$cadenaSql .= " ruta_cotizacion='" . $variable [17] . "', ";
+				$cadenaSql .= " nombre_cotizacion='" . $variable [18] . "', ";
+				$cadenaSql .= " id_dependencia='" . $variable [19] . "', ";
+				$cadenaSql .= " id_contratista='" . $variable [20] . "', ";
+				$cadenaSql .= " id_jefe='" . $variable [21] . "', ";
+				$cadenaSql .= " id_ordenador='" . $variable [22] . "',  ";
+				$cadenaSql .= " subtotal='" . $variable [23] . "',  ";
+				$cadenaSql .= " iva='" . $variable [24] . "',  ";
+				$cadenaSql .= " total='" . $variable [25] . "',  ";
+				$cadenaSql .= " valor_letras='" . $variable [26] . "'  ";
+				$cadenaSql .= "  WHERE id_orden_compra='" . $variable [27] . "';";
 				
 				break;
 			
@@ -385,29 +536,60 @@ class Sql extends \Sql {
 				
 				break;
 			
-			case "consultarOrden" :
+			case "consultarOrden1" :
 				
 				$cadenaSql = "SELECT DISTINCT ";
 				$cadenaSql .= "id_orden_compra, fecha_registro,  ";
 				$cadenaSql .= "nit_proveedor, nombre  ";
 				$cadenaSql .= "FROM orden_compra ";
 				$cadenaSql .= "JOIN proveedor ON proveedor.id_proveedor = orden_compra.id_proveedor ";
-				$cadenaSql .= "JOIN dependecia ON dependecia.id_dependecia = orden_compra.id_dependencia ";
-				$cadenaSql .= "WHERE 1=1";
+				$cadenaSql .= "JOIN dependencia ON dependencia.id_dependencia = orden_compra.id_dependencia ";
+				$cadenaSql .= "WHERE 1=1 AND estado=TRUE  ";
+				
 				if ($variable [0] != '') {
-					$cadenaSql .= " AND fecha_registro BETWEEN CAST ( '" . $variable [0] . "' AS DATE) ";
-					$cadenaSql .= " AND  CAST ( '" . $variable [1] . "' AS DATE)  ";
+					$cadenaSql .= " AND id_orden_compra = '" . $variable [0] . "'";
 				}
+				if ($variable [1] != '') {
+					$cadenaSql .= " AND  orden_compra.id_proveedor= '" . $variable [1] . "'";
+				}
+				
 				if ($variable [2] != '') {
-					$cadenaSql .= " AND id_orden_compra = '" . $variable [2] . "'";
+					$cadenaSql .= " AND  dependencia.id_dependencia= '" . $variable [2] . "'";
 				}
+				
 				if ($variable [3] != '') {
-					$cadenaSql .= " AND  nit_proveedor= '" . $variable [3] . "'";
+					$cadenaSql .= " AND fecha_registro BETWEEN CAST ( '" . $variable [3] . "' AS DATE) ";
+					$cadenaSql .= " AND  CAST ( '" . $variable [4] . "' AS DATE)  ";
 				}
-				if ($variable [4] != '') {
-					$cadenaSql .= " AND  nombre= '" . $variable [4] . "'";
+				
+				break;
+			
+			case "consultarOrden2" :
+				
+				$cadenaSql = "SELECT DISTINCT ";
+				$cadenaSql .= "id_orden_compra, fecha_registro,  ";
+				$cadenaSql .= "nit_proveedor, nombre  ";
+				$cadenaSql .= "FROM orden_compra ";
+				$cadenaSql .= "JOIN proveedor_nuevo ON proveedor_nuevo.id_proveedor_n = orden_compra.id_proveedor ";
+				$cadenaSql .= "JOIN dependencia ON dependencia.id_dependencia = orden_compra.id_dependencia ";
+				$cadenaSql .= "WHERE 1=1 AND estado=TRUE  ";
+				
+				if ($variable [0] != '') {
+					$cadenaSql .= " AND id_orden_compra = '" . $variable [0] . "'";
 				}
-				// echo $cadenaSql;exit;
+				if ($variable [1] != '') {
+					$cadenaSql .= " AND  orden_compra.id_proveedor= '" . $variable [1] . "'";
+				}
+				
+				if ($variable [2] != '') {
+					$cadenaSql .= " AND  dependencia.id_dependencia= '" . $variable [2] . "'";
+				}
+				
+				if ($variable [3] != '') {
+					$cadenaSql .= " AND fecha_registro BETWEEN CAST ( '" . $variable [3] . "' AS DATE) ";
+					$cadenaSql .= " AND  CAST ( '" . $variable [4] . "' AS DATE)  ";
+				}
+				
 				break;
 		}
 		return $cadenaSql;

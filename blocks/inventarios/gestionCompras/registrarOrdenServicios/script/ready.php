@@ -44,6 +44,27 @@
                 }else {
                         $('#<?php echo $this->campoSeguro('fecha_final_pago')?>').attr("class", "cuadroTexto ui-widget ui-widget-content ui-corner-all ");
                     }
+                    
+                    var fechaIn = new Date($('#<?php echo $this->campoSeguro('fecha_inicio_pago')?>').datepicker('getDate'));
+                    
+                    var fechaFin = new Date($('#<?php echo $this->campoSeguro('fecha_final_pago')?>').datepicker('getDate'));
+                    
+                    
+                    var tiempo = fechaFin.getTime() - fechaIn.getTime();
+                    
+                    var dias = Math.floor(tiempo / (1000*60*60*24));
+                    
+                    if($('#<?php echo $this->campoSeguro('fecha_final_pago')?>').val()!=''){
+                    
+                    $('#<?php echo $this->campoSeguro('duracion')?>').val(dias);
+                    
+                    $('#<?php echo $this->campoSeguro('numero_dias')?>').val(dias);
+                    
+                    }
+                    
+                    
+                    
+                    
 			  }
 			
         		
@@ -72,6 +93,23 @@
                         $('#<?php echo $this->campoSeguro('fecha_inicio_pago')?>').attr("class", "cuadroTexto ui-widget ui-widget-content ui-corner-all   validate[required]");
                 }else {
                         $('#<?php echo $this->campoSeguro('fecha_inicio_pago')?>').attr("class", "cuadroTexto ui-widget ui-widget-content ui-corner-all ");
+                    }
+                    
+                    
+                    var fechaIn = new Date($('#<?php echo $this->campoSeguro('fecha_inicio_pago')?>').datepicker('getDate'));
+                    
+                    var fechaFin = new Date($('#<?php echo $this->campoSeguro('fecha_final_pago')?>').datepicker('getDate'));
+                    
+                    
+                    var tiempo = fechaFin.getTime() - fechaIn.getTime();
+                    
+                    var dias = Math.floor(tiempo / (1000*60*60*24));
+                    
+                    if($('#<?php echo $this->campoSeguro('fecha_inicio_pago')?>').val()!=''){
+                    
+                    $('#<?php echo $this->campoSeguro('duracion')?>').val(dias);
+                                        
+                    $('#<?php echo $this->campoSeguro('numero_dias')?>').val(dias);
                     }
 			  }
 			
@@ -104,18 +142,78 @@
         });
         
         
+		$('#<?php echo $this->campoSeguro('duracion')?>').attr('disabled',''); 
+		$('#<?php echo $this->campoSeguro('total_iva')?>').attr('disabled',''); 
+		$('#<?php echo $this->campoSeguro('total')?>').attr('disabled','');    
+		$('#<?php echo $this->campoSeguro('nombreOrdenador')?>').attr('disabled',''); 
+		$('#<?php echo $this->campoSeguro('nombreJefeSeccion')?>').attr('disabled',''); 
+		
+		
+		
+		
+		
+		$("#<?php echo $this->campoSeguro('iva')?>").change(function(){ 
+		
+		switch($("#<?php echo $this->campoSeguro('iva')?>").val())
+		
+		{
+	
+			case '0':
+		
+				$('#<?php echo $this->campoSeguro('total_iva')?>').val(0);
+				
+				var total =$('#<?php echo $this->campoSeguro('total_preliminar')?>').val();
+				var iva =$('#<?php echo $this->campoSeguro('total_iva')?>').val();
+				var numero = Number(total) + Number(iva) ;
+				
+				$('#<?php echo $this->campoSeguro('total')?>').val(numero);
+		
+		
+			break;
+		
+			case '1':
+		
+				$('#<?php echo $this->campoSeguro('total_iva')?>').val($('#<?php echo $this->campoSeguro('total_preliminar')?>').val() * 0.16);
+		
+				var total =$('#<?php echo $this->campoSeguro('total_preliminar')?>').val();
+				var iva =$('#<?php echo $this->campoSeguro('total_iva')?>').val();
+				var numero = Number(total) + Number(iva) ;
+				
+				$('#<?php echo $this->campoSeguro('total')?>').val(numero);
+		
+		
+			break;	
+
+		
+		}
+		
+		 });
+		 
+		 
+		 $("#<?php echo $this->campoSeguro('total_preliminar')?>").keyup(function(){ 
+		
+	
+				var total =$('#<?php echo $this->campoSeguro('total_preliminar')?>').val();
+				var iva =$('#<?php echo $this->campoSeguro('total_iva')?>').val();
+				var numero = Number(total) + Number(iva) 
+				
+				$('#<?php echo $this->campoSeguro('total')?>').val(numero);
+
+			
+		 });
+		    
+		    
+		    $("#<?php echo $this->campoSeguro('dependencia_solicitante')?>").select2();
+		    $("#<?php echo $this->campoSeguro('dependencia_supervisor')?>").select2();
+		    $("#<?php echo $this->campoSeguro('rubro')?>").select2();
+          $("#<?php echo $this->campoSeguro('cargoJefeSeccion')?>").select2();
+	      $("#<?php echo $this->campoSeguro('nombreContratista')?>").select2();
+          $("#<?php echo $this->campoSeguro('asignacionOrdenador')?>").select2();
+		    
         
+               
         
-        
-   
-        
-        
-          $('#tablaTitulos').dataTable( {
-                "sPaginationType": "full_numbers"
-        } );
-        
-        
-        
+
         
           
 

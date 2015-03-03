@@ -109,7 +109,6 @@ class registrarForm {
         $atributos ["leyenda"] = "Elementos Asignados Actualmente al Contratista " . $docContratista;
         echo $this->miFormulario->marcoAgrupacion('inicio', $atributos);
 
-
         if (!empty($contratista)) {
             if ($elementos_contratista !== false) {
 

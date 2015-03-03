@@ -53,9 +53,6 @@ class registrarForm {
          */
         $atributosGlobales ['campoSeguro'] = 'true';
 
-        $_REQUEST ['tiempo'] = time();
-        $tiempo = $_REQUEST ['tiempo'];
-        
         // -------------------------------------------------------------------------------------------------
         $conexion = "inventarios";
         $esteRecursoDB = $this->miConfigurador->fabricaConexiones->getRecursoDB($conexion);
@@ -153,6 +150,8 @@ class registrarForm {
         // ---------------------------------------------------------
         // ------------------Fin Division para los botones-------------------------
         echo $this->miFormulario->division("fin");
+
+
 
         if ($Acta) {
 

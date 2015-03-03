@@ -1,0 +1,45 @@
+-- Table: contratos
+
+-- DROP TABLE contratos;
+
+CREATE TABLE contratos
+(
+  id_contrato serial NOT NULL,
+  nombre_contratista character varying,
+  numero_contrato character varying,
+  fecha_contrato date,
+  id_documento_soporte integer,
+  fecha_registro date,
+  estado boolean,
+  CONSTRAINT pk_id_contrato PRIMARY KEY (id_contrato)
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE contratos
+  OWNER TO arka_inventarios;
+COMMENT ON TABLE contratos
+  IS 'Tabla Permite hacer registro de los Contratos de Vicerectoria';
+
+
+-- Table: registro_documento
+
+-- DROP TABLE registro_documento;
+
+CREATE TABLE registro_documento
+(
+  documento_id serial NOT NULL,
+  documento_idunico character varying(50) NOT NULL,
+  documento_nombre character varying(50) NOT NULL,
+  documento_ruta character varying(250),
+  documento_fechar date NOT NULL,
+  documento_estado boolean,
+  CONSTRAINT registro_documento_pkey PRIMARY KEY (documento_id, documento_nombre)
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE registro_documento
+  OWNER TO arka_inventarios;
+
+
