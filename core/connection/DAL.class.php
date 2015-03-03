@@ -671,12 +671,14 @@ class DAL{
 		$testWhere = str_replace(' ', '', trim($testWhere));
 		$testWhere  = preg_replace('/\s+/', '', trim($testWhere));
 		
+		$this->fechaBetween = '';
+		
 		if(count($fechas)==1&&$this->validar_fecha($fechas[0])){
-			$this->fechaBetween .=" ".$this->prefijoColumnas."fecha_registro='".$fechas[0]."'::DATE " ;
+			$this->fechaBetween .=" ".$this->prefijoColumnas."fecha_registro='".$fechas[0]."' " ;
 			return $fechas[0];
 		}elseif(count($fechas)>1&&$this->validar_fecha($fechas[0])&&$this->validar_fecha($fechas[1])){
-			$this->fechaBetween .=" (".$this->prefijoColumnas."fecha_registro, ".$this->prefijoColumnas."fecha_registro) OVERLAPS ('".$fechas[0]."'::DATE, '".$fechas[1]."'::DATE)";
-			
+			//$this->fechaBetween .=" (".$this->prefijoColumnas."fecha_registro, ".$this->prefijoColumnas."fecha_registro) OVERLAPS ('".$fechas[0]."'::DATE, '".$fechas[1]."'::DATE)";
+			$this->fechaBetween .=" ".$this->prefijoColumnas."fecha_registro>='".$fechas[0]."' AND ".$this->prefijoColumnas."fecha_registro<='".$fechas[1]."' ";
 			return $fechas[0];
 		}else{
 			return false;
@@ -699,6 +701,7 @@ class DAL{
 		$columnaId = $this->getColumnas($colIndex,'nombre','id');
 		$tipoDatoID = $this->getColumnas($columnaId,'id','tipo_dato_id');
 		
+		$tipoDatoNombre = $this->getTipoDato($tipoDatoID,'id','nombre');
 		
 		
 		
@@ -708,22 +711,51 @@ class DAL{
 			return false;
 		}
 		
+		$tipoDatoNombre = $this->getTipoDato($tipoDatoID,'id','nombre');
 		
-		if(Tipos::validarTipo($valor,$tipoDatoID)===false){
+		//si es fecha
+		if($tipoDatoNombre=='date'){
+			$valor =  explode(",",$valor);
+
+			foreach ($valor as $val){
+				if(Tipos::validarTipo($val,$tipoDatoID)===false){
+						
+					$this->mensaje->addMensaje("101","errorTipoDatoColumna: ".$colIndex,'error');
+					$this->setConexion($conexion);
+					return false;
+				}
+				
+				$nuevoValor =  Tipos::evaluarTipo($val,$tipoDatoID);
+				
+				if($nuevoValor===false){
+						
+					$this->mensaje->addMensaje("101","errorValorColumna:".$colIndex,'error');
+					$this->setConexion($conexion);
+					return false;
+				}
+				
+			}
+		}else{
 			
-			$this->mensaje->addMensaje("101","errorTipoDatoColumna: ".$colIndex,'error');
-			$this->setConexion($conexion);
-			return false;
+			if(Tipos::validarTipo($valor,$tipoDatoID)===false){
+					
+				$this->mensaje->addMensaje("101","errorTipoDatoColumna: ".$colIndex,'error');
+				$this->setConexion($conexion);
+				return false;
+			}
+			
+			$nuevoValor =  Tipos::evaluarTipo($valor,$tipoDatoID);
+			
+			if($nuevoValor===false){
+					
+				$this->mensaje->addMensaje("101","errorValorColumna:".$colIndex,'error');
+				$this->setConexion($conexion);
+				return false;
+			}
+				
 		}
 		
-		$nuevoValor =  Tipos::evaluarTipo($valor,$tipoDatoID);
 		
-		if($nuevoValor===false){
-			
-			$this->mensaje->addMensaje("101","errorValorColumna:".$colIndex,'error');
-			$this->setConexion($conexion);
-			return false;
-		}
 		
 		//validar si es una lista, si el id de la lista existe
 		$tipoInput = $this->getColumnas($columnaId, 'id', 'input');

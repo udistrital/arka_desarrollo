@@ -1,13 +1,14 @@
 <?php 
-namespace reglas\formulario;
 
-include_once (dirname(__FILE__).'/../ClienteServicioReglas.class.php');
-include_once (dirname(__FILE__).'/../Mensaje.class.php');
-include_once (dirname(__FILE__).'/../Tipos.class.php');
 
-use reglas\Tipos as Tipos;
-use reglas\ClienteServicioReglas as ClienteServicioReglas;
-use reglas\Mensaje as Mensaje;
+namespace component\GestorHTMLCRUD\Vista;
+
+
+include_once 'component/GestorHTMLCRUD/Modelo/Modelo.class.php';
+use component\GestorHTMLCRUD\Modelo\Modelo as Modelo;
+include_once ('core/builder/Mensaje.class.php');
+
+include_once ("core/manager/Configurador.class.php");
 
 if(!isset($GLOBALS["autorizado"])) {
 	include("../index.php");
@@ -15,7 +16,7 @@ if(!isset($GLOBALS["autorizado"])) {
 }
 
 
-class FormularioCrear {
+class Editar {
 
     var $miConfigurador;
     
@@ -56,25 +57,13 @@ class FormularioCrear {
         $this->lenguaje = $lenguaje;
         $this->mensaje = new Mensaje();
         $this->cliente  = new ClienteServicioReglas();
+        
         $this->objeto = $this->cliente->getListaObjetos();
-        $this->tipo = $this->cliente->getListaTipos();
-        $this->estado = $this->cliente->getListaEstados();
-        $this->permiso = $this->cliente->getListaPermisos();
-        $this->categoria = $this->cliente->getListaCategorias();
         $this->columnas = $this->cliente->getDatosColumnas();
-        $this->operadores = $this->cliente->getListaOperadores();
         $this->proceso = $this->cliente->getListaProcesos();
 
     }
     
-    private function getColumnaAliasPorNombre($nombre = ''){
-    	foreach ($this->columnas as $columna){
-    		
-    		if($columna['nombre'] ==$nombre) return $columna['alias']; 
-    		
-    	}
-    	return "no definido";
-    }
     
     private function determinarListaParametros(){
     	
@@ -254,44 +243,6 @@ class FormularioCrear {
     	
     	
     }
-    
-    private function dibujarTabla(){
-    	$columnasFila = '';
-    	$textoElemento = '';
-    	
-    	foreach ($this->listaElementos as $fila){
-    		$textoElemento .= "<tr>";
-    		$columnasFila = '';
-    		foreach ($fila as $g=>$f){
-    			$textoElemento .= "<td>".ucfirst(strtolower($this->setTextoTabla($f,$g)))."</td>";;
-    			if(end($this->listaElementos)== $fila) $columnasFila .="<th>".ucfirst(strtolower($this->getColumnaAliasPorNombre($g)))."</th>";
-    		}
-    		$textoElemento .= "</tr>";
-    	}
-    	
-    	$cadena = '<table id="tabla" class="tabla">';
-    	 
-    	$cadena .= "<thead>";
-    	$cadena .= "<tr>";
-    	$cadena .= $columnasFila;
-    	$cadena .= "</tr>";
-    	$cadena .= "</thead>";
-    	 
-    	$cadena .= "<tfoot>";
-    	$cadena .= "<tr>";
-        $cadena .= $columnasFila;
-    	$cadena .= "</tr>";
-    	$cadena .= "</tfoot>";
-    	
-    	$cadena .= '<tbody>';
-        $cadena .= $textoElemento;
-    	$cadena .= '</tbody>';
-    	$cadena .= "</table>";
-    	return $cadena;
-    	 
-    }
-    
-    
     
     private function selectElemento($elemento='elemento', $blanco = false){
     	$cambio = '';
@@ -731,16 +682,6 @@ class FormularioCrear {
     	$cadena .= '<button type="button" onclick="formularioClean(\'formularioCreacionEdicion\')" tabindex="2" id="botonLimpiar" value="'.$textos[1].'" class="ui-button-text ui-state-default ui-corner-all ui-button-text-only">'.ucfirst($textos[2]).'</button>';
     	$cadena .= '</div>';
     	
-    	if(strtolower($this->objetoAliasSingular=='funcion')||
-    	   strtolower($this->objetoAliasSingular=='regla')||
-    	   strtolower($this->objetoAliasSingular=='parametro')||
-    	   strtolower($this->objetoAliasSingular=='variable')){
-
-    		$cadena .= '<div class="campoBoton">';
-    		$cadena .= '<button type="button" onclick="evaluarTexto()" tabindex="2" id="botonEvaluarFormulario" value="'.$textos[3].'" class="ui-button-text ui-state-default ui-corner-all ui-button-text-only">'.ucfirst($textos[3]).'</button>';
-    		$cadena .= '</div>';
-    		 
-    	}
     	
     	$cadena .= '</div>';
     	 
@@ -788,46 +729,7 @@ class FormularioCrear {
     	
     }
 
-    function mensaje() {
-
-        // Si existe algun tipo de error en el login aparece el siguiente mensaje
-        $mensaje = $this->miConfigurador->getVariableConfiguracion ( 'mostrarMensaje' );
-        $this->miConfigurador->setVariableConfiguracion ( 'mostrarMensaje', null );
-
-        if ($mensaje) {
-
-            $tipoMensaje = $this->miConfigurador->getVariableConfiguracion ( 'tipoMensaje' );
-
-            if ($tipoMensaje == 'json') {
-
-                $atributos ['mensaje'] = $mensaje;
-                $atributos ['json'] = true;
-            } else {
-                $atributos ['mensaje'] = $this->lenguaje->getCadena ( $mensaje );
-            }
-            // -------------Control texto-----------------------
-            $esteCampo = 'divMensaje';
-            $atributos ['id'] = $esteCampo;
-            $atributos ["tamanno"] = '';
-            $atributos ["estilo"] = 'information';
-            $atributos ["etiqueta"] = '';
-            $atributos ["columnas"] = ''; // El control ocupa 47% del tamaño del formulario
-            echo $this->miFormulario->campoMensaje ( $atributos );
-            unset ( $atributos );
-
-             
-        }
-
-        return true;
-
-    }
 
 }
-
-$miFormulario = new FormularioCrear ( $this->lenguaje,$objetoId );
-
-
-$miFormulario->formulario ();
-$miFormulario->mensaje ();
 
 ?>

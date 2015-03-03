@@ -156,6 +156,7 @@ class Consultar {
 		
 		$this->cliente->columnasConsulta('_tabla_');
     	   
+		
     	   $this->listaElementos =  $this->cliente->$metodo($argumentos);
     	   
     	if(!is_array($this->listaElementos)) {
@@ -450,6 +451,7 @@ class Consultar {
     	//Muestra la tbla
     	echo '<div id="resultado">'; 
 
+    	
     	
     	if(!$verifica){
     		echo $this->mensaje->getLastMensaje();
