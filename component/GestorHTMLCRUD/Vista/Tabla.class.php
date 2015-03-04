@@ -95,6 +95,8 @@ class Tabla {
     	
     	$nombreSelect = '';
     	$aliasSelect = '';
+    	if(!is_array($this->columnas)) return $valor;
+    	
     	foreach ($this->columnas as $columna){
     		
     		
@@ -126,39 +128,11 @@ class Tabla {
 		
 		$metodo = "get".ucfirst($nombreEjecucion);
 		 
-		return $this->cliente->$metodo($id, 'id','alias');
+		return $this->cliente->$metodo($id, 'id','alias')?$this->cliente->$metodo($id, 'id','alias'):$objeto;
 		
     }
 	
-    
 	
-	private function permitidoTabla($nombre){
-		
-		
-		return   $this->setBool($this->cliente->getColumnas($nombre, 'nombre', 'requerido_tabla'));
-		
-	}
-	
-	private function filtrarElementosTabla(){
-		$resultado = array( );
-		foreach ($this->listaElementos as $fila){
-			foreach ($fila as $g=>$f){
-    			$registro =  array();
-				//determina si aparece en la tabla
-				
-			if($this->setBool($this->permitidoTabla($g))) {
-					$registro[]= array($g=>$f);
-				} 
-				$resultado[] = $registro; 
-			}
-			
-		}
-		
-		$this->listaElementos = $resultado;	
-			
-		
-	}
-    
     public function dibujarTabla($listaElementos){
     	
     	if(!is_array($listaElementos)) return false;

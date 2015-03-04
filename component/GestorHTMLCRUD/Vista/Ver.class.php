@@ -223,7 +223,7 @@ class Ver {
     		echo "<form><fieldset><table>";
     		foreach ($fila as $f=>$g){
     			if(!$this->columnaVer($f)) continue;
-    			echo "<tr><td><div><span><b>".utf8_encode($this->lenguaje->getCadena ($f))."</b>: </span></td><td><span> ".ucfirst(strtolower($this->setTextoTabla($g,$f)))."</span></div></td></tr>";;
+    			echo "<tr><td><div><span><b>".utf8_encode($this->lenguaje->getCadena ($f))."</b>: </span></td><td><span> ".strtolower($this->setTextoTabla($g,$f))."</span></div></td></tr>";;
     		}
     		echo "</table></fieldset></form><br>";
     		

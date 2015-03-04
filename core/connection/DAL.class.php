@@ -80,7 +80,16 @@ class DAL{
 	}
 	
 	public function setGroupBy($valor){
+		if(!is_array($valor)) return false;
 		$this->groupBy = $valor;
+		if(!is_array($this->columnas)) return false;
+		$this->groupBy = array();
+		foreach ($valor as $columna){
+			if(in_array($columna,$this->columnas)) $this->groupBy[] =  $columna;
+			if(in_array($columna,$this->columnasNoPrefijo)) $this->groupBy[] =  $this->prefijoTabla.$columna;
+		}
+		
+		
 	}
 	
 	public function getOrderBy(){
@@ -226,6 +235,9 @@ class DAL{
 	
 	public function columnasConsulta($lista = ''){
 		if($lista==''||is_null($lista)) return false;
+		$tabla =  $this->getTabla();
+		$columnasNoPrefijo = $this->columnasNoPrefijo;
+		$columnas = $this->columnas;
 		
 		if($lista=='_tabla_'){
 			$this->columnasConsulta = 'tabla';
@@ -233,7 +245,22 @@ class DAL{
 			if(!is_array($this->columnasNoPrefijo)) return false;
 			$this->columnasConsulta = $this->filtrarColumnasComodin($comodin);
 		} 
-		else $this->columnasConsulta =  explode(",",$lista);
+		else{
+			if(!is_array($this->columnasNoPrefijo)){
+				$this->columnasConsulta = $lista;
+				return false;
+			}
+			
+			//if(is_array($lista)) $lista =  implode(',',$lista);
+			$listado = explode(",",$lista);
+			$this->columnasConsulta = array();
+			foreach ($listado as $columna){
+				
+				if(in_array($columna,$this->columnas)) $this->columnasConsulta[] =  $columna;
+				if(in_array($columna,$this->columnasNoPrefijo))$this->columnasConsulta[] =  $this->prefijoTabla.$columna;
+			} 
+				
+		}
 		
 	}
 	
@@ -824,10 +851,10 @@ class DAL{
 
     private function getNombreColumnaReal($a){
     	if($this->persistencia->columnaEnTabla($this->prefijoColumnas.$a)){
-				$colIndex = $this->prefijoColumnas.$a;
+				return $this->prefijoColumnas.$a;
 				
 			}elseif ($this->persistencia->columnaEnTabla($a)){
-				$colIndex = $a;
+				return $a;
 				
 			}else {
 				$colIndex = $a;
@@ -1138,10 +1165,18 @@ class DAL{
 					if(strlen($this->fechaBetween)>0&&strlen($this->where)>0) $this->where .= " AND ".$this->fechaBetween;
 					elseif(strlen($this->fechaBetween)>0&&!$this->where) $this->where .= $this->fechaBetween;
                     
-					if($this->columnasConsulta == 'tabla') $this->columnasConsulta('_tabla_');
+					if($this->columnasConsulta == 'tabla'){
+						$this->columnasConsulta('_tabla_');
+						
+					}
+					else{
+						$this->columnasConsulta($this->columnasConsulta);
+					}
+					
+					$this->setGroupBy($this->groupBy);
 					
 					if(is_array($this->columnasConsulta)) {
-					
+						
 						$leido = $this->persistencia->read($this->columnasConsulta,$this->where,$this->groupBy,$this->orderBy);
 					}else{
 					

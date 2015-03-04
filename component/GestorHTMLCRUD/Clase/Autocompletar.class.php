@@ -154,8 +154,9 @@ class Autocompletar {
 			
 		}////accion 2 si no es fk, columna cualquiera de la misma tabla
 		else{
-			var_dump($idColumna,$idObjetoColumna,$_REQUEST['field']);
+			
 			echo json_encode($this->getListaPropiedad(stripslashes ($_REQUEST['field'])));
+			
 		}
 		
 		return true;
