@@ -859,13 +859,13 @@ class DAL{
 			}else {
 				$colIndex = $a;
 				$this->mensaje->addMensaje("101","columnaNoExiste: ".$this->tablaAlias,'information');
-			    return false;
+			    
 			}
 			
 			return $colIndex;
     } 
 	
-	private function procesarParametros($parametros){
+	private function procesarParametros($parametros,$validar=true){
 			
 		$this->parametros = array();
 		$this->valores = array();
@@ -882,10 +882,11 @@ class DAL{
 		
 		foreach($param as $a=>$b){
 			
+			$b= trim($b);
 			
 		    $colIndex =  $this->getNombreColumnaReal($a);
 		    
-		    if($colIndex===false) continue;
+		    if($colIndex===false&&$validar===true) continue;
 			
 			$tabla = $this->tabla;
 			$historico = $this->historico;
@@ -899,7 +900,7 @@ class DAL{
 			$this->setAmbiente($tabla, $historico, $prefijo);
 
 			
-			if(!$validacion) {
+			if(!$validacion&&$validar===true) {
 				
 				return false;
 			}
@@ -975,13 +976,18 @@ class DAL{
 			
 		}elseif ($where=='id'){
 
-			
+			$where='';
 			if(isset($this->indexado[$this->prefijoColumnas.'id'])){
 				$where =$this->prefijoColumnas.'id='.$this->indexado[$this->prefijoColumnas.'id'];
 			}else{
-				$this->mensaje->addMensaje("101","errorIdNoDefinido: ".$this->tablaAlias,'information');
-				$where = '';
-				return false;
+				
+				if(is_array($this->indexado)){
+					foreach ($this->indexado as $a=>$b) {
+						if($a !=$this->prefijoColumnas.'fecha_registro')$where.=" ".$a.'='.$b. " AND";
+					}
+					$where=substr($where, 0, strlen ($where)-3);
+				}
+				
 			}
 			
 		}
@@ -1228,6 +1234,7 @@ class DAL{
 				
 				 
 				if(!$this->procesarParametros($parametros)||!$this->setWhere('id')){
+					
 				  return false;
 				}else{
 					
@@ -1237,6 +1244,7 @@ class DAL{
 					$parametros = array();
 					unset($columnas[0]);
 					$leido = $this->persistencia->read($columnas,$this->where);
+					 
 					if(!$leido) return false;
 					
 					$justificacion =  'duplicate';
@@ -1244,6 +1252,7 @@ class DAL{
 					$this->persistencia->setHistorico($historico);
 					//2. Crear
 						$parametros = $this->procesarLeido($leido[0]);
+						
 						$nombre = $parametros['nombre'];
 						$creacion =  false;
 						$i = 0;
@@ -1252,10 +1261,11 @@ class DAL{
 							
 							if($i==0) $parametros['nombre'] = $nombre." copia";
 							else $parametros['nombre'] = $nombre." copia".$i;
-							$this->procesarParametros(array($parametros));
+							$this->procesarParametros(array($parametros),false);
 							$this->persistencia->setHistorico($historico);
+				
 							$creacion =  $this->persistencia->create($this->parametros,$this->valores);
-							
+				            
 							$i++;
 						}while (!$creacion&&$i<self::numeroCopiasMaxima);
 							

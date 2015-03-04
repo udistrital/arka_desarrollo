@@ -205,7 +205,7 @@ class Duplicar {
     		else $cadenaMensaje .= ' <span style="color=green;">EXITO</span>';
     		$cadenaMensaje .= '<br>';
     		
-    		
+    		var_dump($accion);
     	
     	}
     	
