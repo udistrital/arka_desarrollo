@@ -36,10 +36,13 @@ class Funcion {
     
     function cambiarEstado($objetoId) {
     	 
-    	
+    	$this->gestorHTMLCRUD->setObjetoIdCambiarEstado($objetoId);
+    	$this->gestorHTMLCRUD->setLenguajeCambiarEstado($this->lenguaje);
+    	return $this->gestorHTMLCRUD->cambiarEstado($objetoId);
     
     
     }
+    
     
     function evaluar($objetoId,$texto =  false) {
     
@@ -51,24 +54,41 @@ class Funcion {
     
     function duplicar($objetoId) {
     
-    	include_once ($this->ruta . "funcion/duplicar.php");
+    	$this->gestorHTMLCRUD->setObjetoIdDuplicar($objetoId);
+    	$this->gestorHTMLCRUD->setLenguajeDuplicar($this->lenguaje);
+    	return $this->gestorHTMLCRUD->duplicar($objetoId);
+       
+    }
+    
+    function editar($objetoId) {
+    
+    	$this->gestorHTMLCRUD->setObjetoIdEditar($objetoId);
+    	$this->gestorHTMLCRUD->setLenguajeEditar($this->lenguaje);
+    	return $this->gestorHTMLCRUD->editar($objetoId);
     
     
     }
     
-    function crear($objetoId) {
-    
-    	
-    
-    
-    }
-    
-    function consultarForm($objetoId) {
+    function consultar($objetoId) {
         $this->gestorHTMLCRUD->setObjetoIdConsultar($objetoId);
 		$this->gestorHTMLCRUD->setLenguajeConsultar($this->lenguaje);
     	return $this->gestorHTMLCRUD->consultar($objetoId);
     
     
+    }
+    
+    function ver($objetoId) {
+    	$this->gestorHTMLCRUD->setObjetoIdVer($objetoId);
+    	$this->gestorHTMLCRUD->setLenguajeVer($this->lenguaje);
+    	return $this->gestorHTMLCRUD->ver($objetoId);
+    
+    
+    }
+    
+    function eliminar($objetoId){
+    	$this->gestorHTMLCRUD->setObjetoIdEliminar($objetoId);
+    	$this->gestorHTMLCRUD->setLenguajeEliminar($this->lenguaje);
+    	return $this->gestorHTMLCRUD->eliminar($objetoId);
     }
     
     function guardarDatos($objetoId) {
@@ -80,16 +100,15 @@ class Funcion {
     
     function autocompletar($objetoId) {
     
-    	
-		
        	return $this->gestorHTMLCRUD->autocompletar($objetoId);
     
     }
     
-    function crearForm($objetoId) {
+    function crear($objetoId) {
     	 
-    	
-    
+    	$this->gestorHTMLCRUD->setObjetoIdCrear($objetoId);
+    	$this->gestorHTMLCRUD->setLenguajeCrear($this->lenguaje);
+    	return $this->gestorHTMLCRUD->crear($objetoId);
     
     }
     
@@ -121,34 +140,38 @@ class Funcion {
         
         // Importante: Es adecuado que sea una variable llamada opcion o action la que guie el procesamiento:
         if(isset($_REQUEST['funcion'])&&isset($_REQUEST['objetoId'])){
+        	
 	        switch($_REQUEST['funcion']){
-	        	case 'consultarForm':
-	        		$this->consultarForm($_REQUEST['objetoId']);
+	        	case 'consultar':
+	        		$this->consultar($_REQUEST['objetoId']);
 	        		break;
-	            case 'crearForm':
-	        		$this->crearForm($_REQUEST['objetoId']);
+	        	case 'ver':
+	        		$this->ver($_REQUEST['objetoId']);
+	        		break;
+	            case 'crear':
+	        		$this->crear($_REQUEST['objetoId']);
+	        		break;
+	        	case 'editar':
+	        		$this->editar($_REQUEST['objetoId']);
 	        		break;
 	        	case 'guardarDatos':
 	        		$this->guardarDatos($_REQUEST['objetoId']);
-	        		break;
-	        	case 'editarForm':
-	        		$this->editar($_REQUEST['objetoId']);
 	        		break;
 	        	case 'duplicar':
 	        		$this->duplicar($_REQUEST['objetoId']);
 	        		break;
 	        	case 'cambiarEstado':
+	        		
 	        		$this->cambiarEstado($_REQUEST['objetoId']);
 	        		break;
 	        	case 'evaluar':
 	        		 $this->evaluar($_REQUEST['objetoId']);
-	        			break;
-	        	case 'evaluarTexto':
-	        			$this->evaluar($_REQUEST['objetoId'],true);
-	        			break;
+	        		break;
 	        	case 'autocompletar':
 	        		$this->autocompletar($_REQUEST['objetoId']);
 	        		break;
+	        	case 'eliminar':
+	        		$this->eliminar($_REQUEST['objetoId']);
 	        	default:
 	        		default;
 	        	

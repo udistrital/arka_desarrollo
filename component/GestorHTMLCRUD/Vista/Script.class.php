@@ -69,7 +69,7 @@ class Script {
 		$enlace=$this->miConfigurador->getVariableConfiguracion("enlace");
 		
 		//Cadena codificada para consultar
-		$cadenaACodificar1=$cadenaACodificar."&".$cadena;//"&funcion=consultarForm";
+		$cadenaACodificar1=$cadenaACodificar."&".$cadena;//"&funcion=consultar";
 		$cadena1=$this->miConfigurador->fabricaConexiones->crypto->codificar_url($cadenaACodificar1,$enlace);
 		
 		return $this->urlBase.$cadena1;
@@ -589,8 +589,162 @@ class Script {
         echo "</script>\n";
 	
 		}
+		
+		public function cambiarEstado($queryString = "funcion=cambiarEstado"){
+			echo "<script type='text/javascript'>\n";
+			?>
+					       
+					    function cambiarEstadoElemento(){
+        	var data =  $( "#objetosFormulario" ).serialize()+"&"+$( "#identificacionFormulario" ).serialize();
+        	data += "&"+ $( "#seleccionFormulario" ).serialize();
+
+        	var div = document.getElementById("espacioMensaje");
+			div.innerHTML = '<div id="loading"></div>';
+			
+        	
+        	if($('#formularioConsulta').length>0) $('#formularioConsulta')[0].reset();
+        	$.ajax({
+	            url: "<?php echo $this->setUrl($queryString);?>",
+	            type:"post",
+	            data:data,
+	            dataType: "html",
+	            success: function(jresp){
+	            	 
+	            	getFormularioConsulta(true, jresp);
+		  			
+			       }
+	        });
+        	
+           }
+			
+					    
+						<?php
+						echo "\n";
+				        echo "</script>\n";
+					
+						
+					}
+
+					public function eliminar($queryString = "funcion=eliminar"){
+						echo "<script type='text/javascript'>\n";
+						?>
+										       
+										    function eliminarElemento(){
+					        	var data =  $( "#objetosFormulario" ).serialize()+"&"+$( "#identificacionFormulario" ).serialize();
+					        	data += "&"+ $( "#seleccionFormulario" ).serialize();
+					
+					        	var div = document.getElementById("espacioMensaje");
+								div.innerHTML = '<div id="loading"></div>';
+								
+					        	
+					        	if($('#formularioConsulta').length>0) $('#formularioConsulta')[0].reset();
+					        	$.ajax({
+						            url: "<?php echo $this->setUrl($queryString);?>",
+						            type:"post",
+						            data:data,
+						            dataType: "html",
+						            success: function(jresp){
+						            	 
+						            	getFormularioConsulta(true, jresp);
+							  			
+								       }
+						        });
+					        	
+					           }
+								
+										    
+											<?php
+											echo "\n";
+									        echo "</script>\n";
+										
+											
+										}					
+
+		public function ver($queryString = "funcion=ver"){
+			echo "<script type='text/javascript'>\n";
+			?>
+			       
+			    
+			    function verElemento(){
+		
+			    	
+		        	idObjeto = $('#idObjeto').val();
+		            
+		            var data =  $( "#objetosFormulario" ).serialize()+"&"+$( "#identificacionFormulario" ).serialize();
+					data +="&"+$( "#selectedItems" ).serialize();
+		            
+		            var div = document.getElementById("espacioMensaje");
+					div.innerHTML = '<div id="loading"></div>';
+					$('#selectedItems').val('');
+		            $.ajax({
+			            url: "<?php echo $this->setUrl($queryString);?>",
+			            type:"post",
+			            data:data,
+			            dataType: "html",
+			            success: function(jresp){
+			                
+				  			var div = document.getElementById("espacioTrabajo");
+				  			div.innerHTML = jresp;
+		                    
+				  			var div = document.getElementById("espacioMensaje");
+				  			
+				  			 div.innerHTML="";
+				  			
+					       }
+			        });
+		
+		            }
+		
+			    
+				<?php
+				echo "\n";
+		        echo "</script>\n";
+			
+				
+			}
+
+			public function duplicar($queryString = "funcion=duplicar"){
+				echo "<script type='text/javascript'>\n";
+				?>
+						       
+						    
+		function duplicarElemento(){
+        	var data =  $( "#objetosFormulario" ).serialize()+"&"+$( "#identificacionFormulario" ).serialize();
+        	data += "&"+ $( "#seleccionFormulario" ).serialize();
+
+        	var div = document.getElementById("espacioMensaje");
+			div.innerHTML = '<div id="loading"></div>';
+			
+        	
+			if($('#formularioConsulta').length>0) $('#formularioConsulta')[0].reset();
+        	
+        	$.ajax({
+	            url: "<?php echo $this->setUrl($queryString);?>",
+	            type:"post",
+	            data:data,
+	            dataType: "html",
+	            success: function(jresp){
+	                
+	            	getFormularioConsulta(true, jresp);
+	            	
+			       }
+	        });
+        	
+           }
+							
+						    
+							<?php
+							echo "\n";
+					        echo "</script>\n";
+						
+							
+						}	
+					
+			
+
 	
-	public function formularioConsulta($queryString = "funcion=consultarForm"){
+						
+	public function formularioConsulta($queryString = "funcion=consultar"){
 	  	echo "<script type='text/javascript'>\n";
 		?>
 	    function cambiarVisibilidadBusqueda(){
@@ -624,7 +778,7 @@ class Script {
 	                
 		  			var div = document.getElementById("espacioTrabajo");
 		  			div.innerHTML = jresp;
-                    tablaConsulta();
+                    tablaConsulta('selectedItems');
 		  			var div = document.getElementById("espacioMensaje");
 		  			if(mensaje&&mensaje.length>0){
 			  			 div.innerHTML=mensaje;
@@ -684,16 +838,18 @@ class Script {
 		   
 		   foreach ($this->operaciones as $operacion) {
 		  
-		  echo '  $( "#'.$operacion['nombre'].'" ).button({'."\n";
-	      echo '  text: '.$operacion['text'].','."\n";
-	      echo '  icons: {'."\n";
-	      echo '  primary: "'.$operacion['icono'].'"'."\n";
-	      echo '  }'."\n";
-	      echo '  }).click(function() {'."\n";
-		  echo '      if($("#objetoId").val()!=0){'."\n";
-	      echo '         '.$operacion['click']."\n";
-	      echo '  };});'."\n";
-	
+                  if($operacion['cadena']==''&&$operacion['icono']=='') continue;
+               
+				  echo '  $( "#'.$operacion['nombre'].'" ).button({'."\n";
+			      echo '  text: '.$operacion['text'].','."\n";
+			      echo '  icons: {'."\n";
+			      echo '  primary: "'.$operacion['icono'].'"'."\n";
+			      echo '  }'."\n";
+			      echo '  }).click(function() {'."\n";
+				  echo '      if($("#objetoId").val()!=0){'."\n";
+			      echo '         '.$operacion['click']."\n";
+			      echo '  };});'."\n";
+			
 			
 				
 			}

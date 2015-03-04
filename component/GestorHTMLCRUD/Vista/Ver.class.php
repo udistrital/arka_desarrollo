@@ -14,7 +14,7 @@ if(!isset($GLOBALS["autorizado"])) {
 }
 
 
-class Tabla {
+class Ver {
 
     var $miConfigurador;
     
@@ -42,6 +42,7 @@ class Tabla {
     private $proceso;
 	private $lenguaje;
 	private $listaElementos;
+	private $listaPks;
     
     function __construct($lenguaje = '') {
 
@@ -82,6 +83,71 @@ class Tabla {
     	}
     	return "no definido";
     }
+    
+    private function seleccionarObjeto(){
+    	 
+    
+    
+    	$this->objetoNombre = $this->cliente->getObjeto($this->objetoId, 'id','nombre');;
+    	if(!$this->objetoNombre) return false;
+    	$this->objetoAlias = $this->cliente->getObjeto($this->objetoId, 'id','alias'); 	;
+    	$this->objetoAliasSingular = $this->cliente->getObjeto($this->objetoId, 'id','ejecutar');;
+    	 
+    	$this->objetoVisble = $this->setBool($this->cliente->getObjeto($this->objetoId, 'id','visible'));
+    	 
+    	
+    	 
+    	return true;
+    	 
+    }
+    
+    private function determinarListaParametros(){
+    	$nombreObjeto = 'selectedItems';
+    	$this->listaParametros = array();
+    	 
+    	$this->listaAtributosParametro = array();
+    	if(isset($_REQUEST[$nombreObjeto])) $this->listaParametros = explode( ',', $_REQUEST[$nombreObjeto] );
+    
+    }
+    
+    private function getListaElementos(){
+    	 
+    	//determinar si en la variable request hay algo de aqui
+    	//$this->atributosObjeto
+    	//
+    	$this->determinarListaParametros();
+    	 
+    	$metodo = "consultar".ucfirst($this->objetoAliasSingular);
+    	
+    
+    	$this->listaPks =  $this->cliente->listaLlavesPrimarias($this->objetoId);
+    	$this->listaElementos =  array();
+    	foreach ($this->listaParametros as $parametro){
+
+    		$argumentos =  array($this->listaPks[0]=>$parametro);
+    		 
+    		$lista =  $this->cliente->$metodo($argumentos);
+    		
+    		if(!is_array($lista)) {
+    		
+    			$this->mensaje->addMensaje("4000","errorLectura: ".ucfirst($this->objetoAlias),'information');
+    			continue;
+    		}
+    		
+    		if(count($lista)==0) {
+    			 
+    			$this->mensaje->addMensaje("4001","errorLectura: ".ucfirst($this->objetoAlias),'information');
+    		
+    		}
+    		$this->listaElementos =  array_merge($this->listaElementos,$lista);
+    		
+    	}
+    	
+    		 
+    	return true;
+    }
+    
+    
 	
     private function setBool($valor = ''){
     	if($valor=='t') return true;
@@ -89,11 +155,7 @@ class Tabla {
     }
     
     
-    private function getObjetoAliasPorId($objeto ='', $id = ''){
-    	foreach ($this->$objeto as $elemento){
-    		if($elemento['id']==$id) return $elemento['alias'];
-    	}
-    }
+    
     
     private function setTextoTabla($valor = '', $nombre =''){
     	
@@ -111,7 +173,7 @@ class Tabla {
     		if($columna['nombre']==$nombre&&$columna['input']=='select'){
     			$objeto = $columna['nombre'];
     			$id = $valor;
-    			return $this->getObjetoAliasPorId($objeto , $id);
+    			return $this->getObjetoAliasPorId($objeto, $id);
     		}
     		
     		
@@ -122,65 +184,53 @@ class Tabla {
     	
     }
     
-    private function getObjetoNombrePorId($objeto ='', $id = ''){
-    	foreach ($this->$objeto as $elemento){
-    		if($elemento['id']==$id) return $elemento['nombre'];
-    	}
+	private function getObjetoAliasPorId($objeto= '', $id = ''){
+    	
+		$idObjeto = $this->cliente->getColumnas($objeto, 'nombre','objetos_id');
+		
+		$nombreEjecucion = $this->cliente->getObjeto($idObjeto, 'id','ejecutar');
+		
+		$metodo = "get".ucfirst($nombreEjecucion);
+		 
+		return $this->cliente->$metodo($id, 'id','alias');
+		
+    }
+    
+
+    private function columnaVer($nombre){
+    	 
+    	$idColumna = $this->cliente->getColumnas($nombre, 'nombre','id');
+    
+    	return  $this->setBool($this->cliente->getColumnas($idColumna, 'id','ver'));
+    
+    	
+    
     }
 	
-	private function permitidoTabla($nombre){
-		
-		//rescata id de columna
-		$idCol =  $this->cliente->getColumnas($nombre, 'nombre', 'id');
-		if($idCol===false) return FALSE;
-		
-		return $this->setBool($this->cliente->getColumnas($idCol, 'id', 'requerido_tabla')); 
-		
-	}
-    
-    public function dibujarTabla($listaElementos){
+    public function ver(){
     	
-    	if(!is_array($listaElementos)) return false;
-		$this->listaElementos = $listaElementos ;
-		
-    	$columnasFila = '';
-    	$textoElemento = '';
     	
-    	foreach ($this->listaElementos as $fila){
-    		$textoElemento .= "<tr class=\"fila\">";
-    		$columnasFila = '';
-    		foreach ($fila as $g=>$f){
-    			
-				//determina si aparece en la tabla
-				if($this->permitidoTabla($g)){
-				  $textoElemento .= "<td>".ucfirst(strtolower($this->setTextoTabla($f,$g)))."</td>";;
-    			  if(end($this->listaElementos)== $fila) $columnasFila .="<th>".ucfirst(strtolower($this->getColumnaAliasPorNombre($g)))."</th>";	
-				}
-    			
-    		}
-    		$textoElemento .= "</tr>";
+    	
+    	if(!$this->seleccionarObjeto()||!$this->getListaElementos()){
+    	
+    		$verifica =  false;
+    		 
     	}
+		
+		
+		echo '<div class="container-fluid">';
+    	foreach ($this->listaElementos as $fila){
+    		echo "<form><fieldset><table>";
+    		foreach ($fila as $f=>$g){
+    			if(!$this->columnaVer($f)) continue;
+    			echo "<tr><td><div><span><b>".utf8_encode($this->lenguaje->getCadena ($f))."</b>: </span></td><td><span> ".ucfirst(strtolower($this->setTextoTabla($g,$f)))."</span></div></td></tr>";;
+    		}
+    		echo "</table></fieldset></form><br>";
+    		
+    	}
+    	echo "</div>";
     	
-    	$cadena = '<table id="tabla" class="tabla">';
-    	 
-    	$cadena .= "<thead>";
-    	$cadena .= "<tr>";
-    	$cadena .= $columnasFila;
-    	$cadena .= "</tr>";
-    	$cadena .= "</thead>";
-    	 
-    	$cadena .= "<tfoot>";
-    	$cadena .= "<tr>";
-        $cadena .= $columnasFila;
-    	$cadena .= "</tr>";
-    	$cadena .= "</tfoot>";
-    	
-    	$cadena .= '<tbody>';
-        $cadena .= $textoElemento;
-    	$cadena .= '</tbody>';
-    	$cadena .= "</table>";
-    	return $cadena;
-    	 
+    	    	 
     }
     
 }

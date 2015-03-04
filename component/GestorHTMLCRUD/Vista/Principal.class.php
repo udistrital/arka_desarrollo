@@ -108,8 +108,43 @@ class Principal {
 		$this->script->tablaConsulta();
 		$this->script->ayudasFormulario();
 		$this->script->extensiones();
-		$this->script->autocompletar($this->queryStringAutocompletar);
-		$this->script->formularioConsulta($this->queryStringConsulta);
+		
+		
+	    foreach ($this->operaciones as $operacion){
+	    	
+			switch ($operacion['nombre']){
+				case 'consultar':
+					$this->script->formularioConsulta($operacion['query_string']);
+					break;
+				case 'crear':
+					break;
+				case 'editar':
+					break;
+				case 'ver':
+					$this->script->ver($operacion['query_string']);
+					break;
+				case 'autocompletar':
+					$this->script->autocompletar($operacion['query_string']);
+					break;
+			    case 'duplicar':
+			    	$this->script->duplicar($operacion['query_string']);
+					break;
+			    case 'eliminar':
+			    	$this->script->eliminar($operacion['query_string']);
+			    	break;
+				case 'activarInactivar':
+					$this->script->cambiarEstado($operacion['query_string']);
+					break;
+				case 'evaluar':
+					
+					break;
+				default:
+					break;
+			}
+			
+			
+		}
+		
 		
 		
 		$this->script->ready();
@@ -149,6 +184,8 @@ class Principal {
 		if(is_array($this->operaciones)){
 			
 			foreach ($this->operaciones as $operacion) {
+				if($operacion['cadena']==''&&$operacion['icono']=='') continue;
+				
 				echo '<button id="'.$operacion["nombre"].'">'.utf8_encode($this->lenguaje->getCadena($operacion['cadena'])).'</button>';	
 			}
 			

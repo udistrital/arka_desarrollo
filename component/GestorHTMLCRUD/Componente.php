@@ -14,10 +14,22 @@ use component\GestoHTMLCRUD\Vista\Consultar as Consultar;
 require_once ('component/GestorHTMLCRUD/Vista/Principal.class.php');
 use component\GestorHTMLCRUD\Vista\Principal as Principal;
 
+require_once ('component/GestorHTMLCRUD/Vista/Ver.class.php');
+use component\GestorHTMLCRUD\Vista\Ver as Ver;
+
+
 //CONTROLADOR
 require_once ('component/GestorHTMLCRUD/Clase/Autocompletar.class.php');
 use component\GestoHTMLCRUD\Clase\Autocompletar as Autocompletar;
 
+require_once ('component/GestorHTMLCRUD/Clase/Duplicar.class.php');
+use component\GestoHTMLCRUD\Clase\Duplicar as Duplicar;
+
+require_once ('component/GestorHTMLCRUD/Clase/CambiarEstado.class.php');
+use component\GestoHTMLCRUD\Clase\CambiarEstado as CambiarEstado;
+
+require_once ('component/GestorHTMLCRUD/Clase/Eliminar.class.php');
+use component\GestoHTMLCRUD\Clase\Eliminar as Eliminar;
 
 class Componente extends Component  {
 	
@@ -26,6 +38,10 @@ class Componente extends Component  {
 	private $idElemento;
 	private $principal;
 	private $autocompletar;
+	private $ver;
+	private $duplicar;
+	private $cambiarEstado;
+	private $eliminar;
 	// El componente actua como Fachada
 	
 	/**
@@ -36,7 +52,11 @@ class Componente extends Component  {
 
          $this->consultarForm =  new Consultar($lenguaje, $idElemento);
 		 $this->principal = new Principal($lenguaje);
+		 $this->ver = new \component\GestoHTMLCRUD\Vista\Ver($lenguaje);
+		 $this->duplicar = new \component\GestoHTMLCRUD\Clase\Duplicar($lenguaje);
 		 $this->autocompletar =  new \component\GestoHTMLCRUD\Clase\Autocompletar($lenguaje);
+		 $this->cambiarEstado =  new \component\GestoHTMLCRUD\Clase\CambiarEstado($lenguaje);
+		 $this->eliminar =  new \component\GestoHTMLCRUD\Clase\Eliminar($lenguaje);
 	}
 	
 	public function iniciarPrincipal()	{
@@ -84,7 +104,55 @@ class Componente extends Component  {
 	}
 	
 	public function autocompletar($valor = '')	{
-		$this->autocompletar->autocompletar($valor = '');
+		$this->autocompletar->autocompletar($valor);
+	}
+	
+	public function setLenguajeVer($lenguaje){
+		$this->ver->setLenguaje($lenguaje);
+	}
+	
+	public function setObjetoIdVer($id)	{
+		$this->ver->setObjetoId($id);
+	}
+	
+	public function ver($valor = '')	{
+		$this->ver->ver($valor );
+	}
+	
+	public function setLenguajeDuplicar($lenguaje){
+		$this->duplicar->setLenguaje($lenguaje);
+	}
+	
+	public function setObjetoIdDuplicar($id)	{
+		$this->duplicar->setObjetoId($id);
+	}
+	
+	public function duplicar($valor = '')	{
+		$this->duplicar->duplicar($valor );
+	}
+	
+	public function setLenguajeCambiarEstado($lenguaje){
+		$this->cambiarEstado->setLenguaje($lenguaje);
+	}
+	
+	public function setObjetoIdCambiarEstado($id)	{
+		$this->cambiarEstado->setObjetoId($id);
+	}
+	
+	public function cambiarEstado($valor = '')	{
+		$this->cambiarEstado->cambiarEstado($valor );
+	}
+	
+	public function setLenguajeEliminar($lenguaje){
+		$this->eliminar->setLenguaje($lenguaje);
+	}
+	
+	public function setObjetoIdEliminar($id)	{
+		$this->eliminar->setObjetoId($id);
+	}
+	
+	public function eliminar($valor = '')	{
+		$this->eliminar->eliminar($valor );
 	}
 		
 	

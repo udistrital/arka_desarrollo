@@ -507,7 +507,18 @@ class DAL{
 	
 	public function listaLlavesPrimarias($objetoId){
 		
-		return $this->peristencia->getPks();
+		$nombre = $this->getObjeto($objetoId,'id','nombre');
+		$prefijo = $this->getObjeto($objetoId,'id','prefijo_columna');
+		$this->persistencia =  new Persistencia($this->conexion,$nombre);
+		$listaPks =  $this->persistencia->getPks();
+		if(!is_array($listaPks)) return false;
+		$listaFinal =  array();
+		foreach ($listaPks as $fila){
+			$listaFinal[] =  $str = str_replace($prefijo, '', $fila);
+		}
+		
+		return $listaFinal;
+		
 	}
 		 
 		 
@@ -1050,7 +1061,7 @@ class DAL{
 			unset($parametros['justificacion']);
 		}else $justificacion = 'sin justificacion';
 		$tabla = $this->getObjeto($idObjeto,'id','nombre');
-		$historico = $this->getObjeto($idObjeto,'id','historico');
+		
 		if(!$tabla) return false;
 		
 		
@@ -1093,6 +1104,7 @@ class DAL{
 				}
 				$justificacion =  'create';
 				$this->persistencia->setJustificacion($justificacion);
+				$this->persistencia->setHistorico($historico);
 				
 				if(!$this->persistencia->create($this->parametros,$this->valores)){
 					
@@ -1159,8 +1171,9 @@ class DAL{
 				if(!$this->procesarParametros($parametros)||
 				   !$this->setWhere('id')) return false;
 
-				    $this->persistencia->setJustificacion($justificacion);
 				
+				    $this->persistencia->setJustificacion($justificacion);
+				    $this->persistencia->setHistorico($historico);
 				
 				   
 				   if(!$this->persistencia->update($this->parametros,$this->valores,$this->where)){
@@ -1193,6 +1206,7 @@ class DAL{
 					
 					$justificacion =  'duplicate';
 					$this->persistencia->setJustificacion($justificacion);
+					$this->persistencia->setHistorico($historico);
 					//2. Crear
 						$parametros = $this->procesarLeido($leido[0]);
 						$nombre = $parametros['nombre'];
@@ -1204,6 +1218,7 @@ class DAL{
 							if($i==0) $parametros['nombre'] = $nombre." copia";
 							else $parametros['nombre'] = $nombre." copia".$i;
 							$this->procesarParametros(array($parametros));
+							$this->persistencia->setHistorico($historico);
 							$creacion =  $this->persistencia->create($this->parametros,$this->valores);
 							
 							$i++;
@@ -1233,6 +1248,7 @@ class DAL{
 					return false;
 				}else{
 					
+					
 					$leido = $this->persistencia->read($this->columnas,$this->where);
 					 
 					if(!$leido) return false;
@@ -1252,9 +1268,10 @@ class DAL{
 
 					$justificacion =  'activo/inactivo';
 					$this->persistencia->setJustificacion($justificacion);
+					$this->persistencia->setHistorico($historico);
 					
 					if(!$this->persistencia->update($this->parametros,$this->valores,$this->where)){
-
+                        
 						$this->mensaje->addMensaje("101","errorCambiarEstado: ".$this->tablaAlias,'error');
 						return false;
 					}
@@ -1268,6 +1285,7 @@ class DAL{
 				
 				$justificacion =  'delete';
 				$this->persistencia->setJustificacion($justificacion);
+				$this->persistencia->setHistorico($historico);
 				
 				if(!$this->persistencia->delete($this->where)){
 					

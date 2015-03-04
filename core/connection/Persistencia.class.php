@@ -570,7 +570,7 @@ class Persistencia {
     	return true;
     }
     
-    private function getPks(){
+    public function getPks(){
     	//si se va a ahcer publica validar la tabla
     	//esta funcion esta hecha solo para postgres
     	$sql = "SELECT ";

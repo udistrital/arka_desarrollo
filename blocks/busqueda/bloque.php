@@ -12,6 +12,7 @@ if (! isset ( $GLOBALS ["autorizado"] )) {
 include_once ("core/builder/Bloque.interface.php");
 include_once ("core/manager/Configurador.class.php");
 include_once ("core/builder/FormularioHtml.class.php");
+include_once ("core/connection/DAL.class.php");
 
 // Elementos que constituyen un bloque típico CRUD.
 
@@ -134,114 +135,41 @@ if (! class_exists ( '\\bloquesModelo\\bloqueModelo1\\Bloque' )) {
             }
         }
         
+        private function setBool($valor = ''){
+        	if($valor=='t') return 'true';
+        	return 'false';
+        }
+        
 		public function operaciones(){
 				$operaciones =  array();
 			
+			$operacionesPermitidas =  array(
+				'consultar',
+				'crear', 
+				'actualizar', 
+				'ver',
+				'activarInactivar',
+				'duplicar',
+				'eliminar',
+				//'ejecutar',
+				//'validar',
+				'autocompletar'
+			);
+
+			$datos =  new \DAL();
 			
-			//Crear
-			$operacion = array(
-			                  "nombre"=>'crear',
-			                  "cadena"=>'principalCrear',
-			                  "text"=>"false",
-			                  "icono"=>"ui-icon-plus",
-			                  "click"=>"$('#selectedItems').val('');getFormularioCreacionEdicion(true);"
-							  );
-			$operaciones[] =$operacion;
-			unset($operacion);
-			
-			
-			//consultar
-			$operacion = array(
-			                  "nombre"=>'consultar',
-			                  "cadena"=>'principalConsultar',
-			                  "text"=>"false",
-			                  "icono"=>"ui-icon-search",
-			                  "click"=>"getFormularioConsulta(true);"
-							  );
-			$operaciones[] =$operacion;
-			unset($operacion);
-			
-			//editar
-			$operacion = array(
-			                  "nombre"=>'editar',
-			                  "cadena"=>'principalEditar',
-			                  "text"=>"false",
-			                  "icono"=>"ui-icon-pencil",
-			                  "click"=>"if($('#selectedItems').val()!='') 	getFormularioCreacionEdicion(false)"
-							  );
-			$operaciones[] =$operacion;
-			unset($operacion);
-			
-			//duplicar
-			$operacion = array(
-			                  "nombre"=>'duplicar',
-			                  "cadena"=>'principalDuplicar',
-			                  "text"=>"false",
-			                  "icono"=>"ui-icon-pause",
-			                  "click"=>"if($('#selectedItems').val()!='') 	duplicarElemento();"
-							  );
-			$operaciones[] =$operacion;
-			unset($operacion);
+			$listaOperaciones =  $datos->getListaOperacion();
 			
 			
-			//cambiar estado
-			$operacion = array(
-			                  "nombre"=>'cambiarEstado',
-			                  "cadena"=>'principalCambiarEstado',
-			                  "text"=>"false",
-			                  "icono"=>"ui-icon-transferthick-e-w",
-			                  "click"=>"if($('#selectedItems').val()!='') 	cambiarEstadoElemento();"
-							  );
-			$operaciones[] =$operacion;
-			unset($operacion);
+			foreach ($listaOperaciones as $elemento){
+				if(in_array($elemento['nombre'],$operacionesPermitidas)){
+					$elemento['text'] =  $this->setBool($elemento['text']);
+					$operaciones[] = $elemento;
+				}
+			}
 			
-			//eliminar
-			$operacion = array(
-			                  "nombre"=>'eliminar',
-			                  "cadena"=>'principalEliminar',
-			                  "text"=>"false",
-			                  "icono"=>"ui-icon-close",
-			                  "click"=>"if($('#selectedItems').val()!='') 	eliminarElemento();"
-							  );
-			$operaciones[] =$operacion;
-			unset($operacion);
-			
-			//ver
-			$operacion = array(
-			                  "nombre"=>'ver',
-			                  "cadena"=>'principalVer',
-			                  "text"=>"false",
-			                  "icono"=>"ui-icon-info",
-			                  "click"=>"if($('#selectedItems').val()!='') 	verElemento();"
-							  );
-			$operaciones[] =$operacion;
-			unset($operacion);
-			
-			
-			//validar
-			$operacion = array(
-			                  "nombre"=>'validar',
-			                  "cadena"=>'principalValidar',
-			                  "text"=>"false",
-			                  "icono"=>"ui-icon-check",
-			                  "click"=>"if($('#selectedItems').val()!='') 	validarElemento();"
-							  );
-			$operaciones[] =$operacion;
-			unset($operacion);
-			
-			//ejecutar
-			$operacion = array(
-			                  "nombre"=>'ejecutar',
-			                  "cadena"=>'principalEjecutar',
-			                  "text"=>"false",
-			                  "icono"=>"ui-icon-play",
-			                  "click"=>"if($('#selectedItems').val()!='') 	ejecutarElemento();"
-							  );
-			$operaciones[] =$operacion;
-			unset($operacion);
-			
-			return $operaciones; 
-		}   
+			return $operaciones;
+		}    
 }
 }
 // @ Crear un objeto bloque especifico

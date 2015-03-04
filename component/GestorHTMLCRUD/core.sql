@@ -12,6 +12,7 @@
   operacion_text bool NOT NULL DEFAULT false,
   operacion_icono text NOT NULL,
   operacion_click text NOT NULL,
+  operacion_query_string text NOT NULL,
   CONSTRAINT operacion_pk PRIMARY KEY (operacion_id)
 )
 WITH (
@@ -25,17 +26,18 @@ ALTER TABLE public.arka_operacion
 
 INSERT INTO public.arka_operacion
 (  operacion_id,  operacion_nombre,  operacion_alias,  
-   operacion_descripcion, operacion_cadena, operacion_text, operacion_icono, operacion_click)
+   operacion_descripcion, operacion_cadena, operacion_text, operacion_icono, operacion_click, operacion_query_string)
 VALUES
-(1,'crear','Crear','Crear CRUD','principalCrear',false,'ui-icon-plus','$("#selectedItems").val("");getFormularioCreacionEdicion(true);'),
-(2,'consultar','Consultar','Consultar CRUD','principalConsultar',false,'ui-icon-search','getFormularioConsulta(true);'),
-(3,'actualizar','Actualizar','Actualizar CRUD','principalEditar',false,'ui-icon-pencil','if($"#selectedItems").val()!="") 	getFormularioCreacionEdicion(false)'),
-(4,'duplicar','Consultar','Consultar CRUD','principalDuplicar',false,'ui-icon-pause','if($("#selectedItems").val()!="") 	duplicarElemento();'),
-(5,'activarInactivar','Cambiar Estado','Cambiar estado registro activo/inactivo','principalCambiarEstado',false,'ui-icon-transferthick-e-w','if($("#selectedItems").val()!="") 	cambiarEstadoElemento();'),
-(6,'eliminar','Eliminar','Eliminar CRUD','principalEliminar',false,'ui-icon-close','if($("#selectedItems").val()!="") 	eliminarElemento();'),
-(7,'ver','Ver','Ver información Elemento Objeto','principalVer',false,'ui-icon-info','if($("#selectedItems").val()!="") 	verElemento();'),
-(8,'validar','Validar','Validar elemento lista','principalValidar',false,'ui-icon-check','if($("#selectedItems").val()!="") 	validarElemento();'),
-(9,'ejecutar','Ejecutar','ejecutar Tarea elemento','principalEjecutar',false,'ui-icon-play','if($("#selectedItems").val()!="") 	ejecutarElemento();')
+(1,'crear','Crear','Crear CRUD','principalCrear',false,'ui-icon-plus','$("#selectedItems").val("");getFormularioCreacionEdicion(true);','funcion=crear,funcion=guardarDatos'),
+(2,'consultar','Consultar','Consultar CRUD','principalConsultar',false,'ui-icon-search','getFormularioConsulta(true);','funcion=consultar'),
+(3,'actualizar','Actualizar','Actualizar CRUD','principalEditar',false,'ui-icon-pencil','if($("#selectedItems").val()!="") 	getFormularioCreacionEdicion(false)','funcion=editar,funcion=guardarDatos'),
+(4,'duplicar','Consultar','Consultar CRUD','principalDuplicar',false,'ui-icon-pause','if($("#selectedItems").val()!="") 	duplicarElemento();','funcion=duplicar'),
+(5,'activarInactivar','Cambiar Estado','Cambiar estado registro activo/inactivo','principalCambiarEstado',false,'ui-icon-transferthick-e-w','if($("#selectedItems").val()!="") 	cambiarEstadoElemento();','funcion=cambiarEstado'),
+(6,'eliminar','Eliminar','Eliminar CRUD','principalEliminar',false,'ui-icon-close','if($("#selectedItems").val()!="") 	eliminarElemento();','funcion=eliminar'),
+(7,'ver','Ver','Ver información Elemento Objeto','principalVer',false,'ui-icon-info','if($("#selectedItems").val()!="") 	verElemento();','funcion=ver'),
+(8,'validar','Validar','Validar elemento lista','principalValidar',false,'ui-icon-check','if($("#selectedItems").val()!="") 	validarElemento();','funcion=validar'),
+(9,'ejecutar','Ejecutar','ejecutar Tarea elemento','principalEjecutar',false,'ui-icon-play','if($("#selectedItems").val()!="") 	ejecutarElemento();','funcion=ejecutar'),
+(10,'autocompletar','Autocompletar','autocompletar texto','',false,'','','funcion=autocompletar')
 ;
 
 
@@ -225,6 +227,7 @@ ALTER TABLE public.arka_objetos
   columnas_requerido_crear bool NOT NULL DEFAULT FALSE,
   columnas_requerido_actualizar bool NOT NULL DEFAULT FALSE,
   columnas_requerido_tabla bool NOT NULL DEFAULT FALSE,
+  columnas_ver bool NOT NULL DEFAULT FALSE,
   CONSTRAINT grupo_aplicacion_fk FOREIGN KEY (grupo_aplicacion_id)
       REFERENCES public.arka_grupo_aplicacion (grupo_aplicacion_id) MATCH SIMPLE
       ON UPDATE NO ACTION ON DELETE SET NULL,
@@ -249,11 +252,11 @@ columnas_nombre , columnas_alias ,  columnas_input ,tipo_dato_id , grupo_aplicac
 columnas_consultar ,  columnas_crear ,  columnas_actualizar ,  columnas_codificada , 
 columnas_deshabilitado_consultar ,  columnas_deshabilitado_crear ,  columnas_deshabilitado_actualizar , 
 columnas_autocompletar_consultar ,  columnas_autocompletar_crear ,  columnas_autocompletar_actualizar ,  
-columnas_requerido_consultar,  columnas_requerido_crear ,  columnas_requerido_actualizar, columnas_requerido_tabla  
+columnas_requerido_consultar,  columnas_requerido_crear ,  columnas_requerido_actualizar, columnas_requerido_tabla, columnas_ver   
 )
 VALUES
   ----core
-  ('id','Identificación','text', 2,1,0,'estructura',true,false,false,false,false,false,false,true,false,false,false,false,true,true),
+  ('id','Identificación','text', 2,1,0,'estructura',true,false,false,false,false,false,false,true,false,false,false,false,true,true,true),
   ('identificacion','Identificación usuario','text', 2,1,0,'estructura',true,false,false,false,false,false,false,true,false,false,false,false,true,true),
   ('grupo','Grupo','text', 2,1,0,'estructura',true,false,false,false,false,false,false,true,false,false,false,false,true,true),
   ('nombre','Nombre','text', 6,1,0,'estructura',true,true,true,false,false,false,false,true,false,false,true, true, false,true),
