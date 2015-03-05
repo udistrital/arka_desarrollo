@@ -220,7 +220,7 @@ class DAL{
 		$tabla =  $this->getTabla();
 		foreach ($this->columnasNoPrefijo as $columna) {
 			$idCol = $this->getColumnas($columna,'nombre','id');
-				if($this->getColumnas($idCol,'id',$comodin)){
+				if($this->setBool($this->getColumnas($idCol,'id',$comodin))){
 					$this->setTabla($tabla);
 		            $this->crearPersistencia();
 					$resultado[] = $this->getNombreColumnaReal($columna);

@@ -5,6 +5,8 @@ namespace component\GestoHTMLCRUD\Clase;
 
 include_once ('core/builder/Mensaje.class.php');
 
+include_once ("core/manager/Configurador.class.php");
+
 include_once 'component/GestorHTMLCRUD/Modelo/Modelo.class.php';
 use component\GestorHTMLCRUD\Modelo\Modelo as Modelo;
 
@@ -113,16 +115,19 @@ class GuardarDatos {
     	foreach ($this->atributosObjeto as $nombreObjeto){
     		foreach ($this->columnas as $datosColumna){
     			if($datosColumna['nombre']==$nombreObjeto&&$datosColumna[$this->metodoAccion]=='t'){
-    				if($nombreObjeto == 'usuario'){
-    					if(isset($_REQUEST[$nombreObjeto."Definitivo"])) $this->listaParametros[$nombreObjeto] = $_REQUEST[$nombreObjeto."Definitivo"];
-    					else $this->listaParametros[] = '';
-    					$this->listaAtributosParametros[] = $datosColumna;
-    					continue;
-    				}
+    				
+    				
+    				
     				if(isset($_REQUEST[$nombreObjeto])&&$datosColumna['codificada']!='t') $this->listaParametros[$nombreObjeto] = $_REQUEST[$nombreObjeto];
     				elseif (isset($_REQUEST[$nombreObjeto])&&$datosColumna['codificada']=='t') $this->listaParametros[$nombreObjeto] = $_REQUEST[$nombreObjeto."Codificado"];
     				else $this->listaParametros[$nombreObjeto] = '';
+    				
+    				if(isset($_REQUEST[$nombreObjeto])&&$datosColumna['input']=='password')
+    					$this->listaParametros[$nombreObjeto] = $this->miConfigurador->fabricaConexiones->crypto->codificarClave ($_REQUEST[$nombreObjeto]);
+    				
+    				
     				$this->listaAtributosParametros[] = $datosColumna;
+    				
     			}
     		}
     	}
@@ -187,7 +192,7 @@ class GuardarDatos {
 	    	else {
 	    		$cadenaMensaje = $this->lenguaje->getCadena ( $this->metodoAccion."Accion" );
 	    		
-	    		if($this->metodoAccion=='crear') ;//$cadenaMensaje .= $accion;
+	    		if($this->metodoAccion=='crear') ;
 	    		else $cadenaMensaje .= $this->listaParametros[0];
 	    	}
 	    	$cadenaMensaje .= '<br>';

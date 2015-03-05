@@ -373,7 +373,7 @@ class Consultar {
     	//inicio
     	$cadena = '<form role="form" class="form-inline"  name="formularioConsulta" id="formularioConsulta">';
     	
-    	$textos[1] = $this->lenguaje->getCadena ('buscar'). " ".$this->objetoAlias;;
+    	$textos[1] = $this->lenguaje->getCadena ('buscar'). " ".$this->objetoAlias;
     	$cadena .='<fieldset >';
     	
     	$cadena .='<legend title="'.$this->lenguaje->getCadena ('buscar').'" onclick="cambiarVisibilidadBusqueda()" class="expandible">'.$textos[1].'</legend>';
@@ -383,6 +383,9 @@ class Consultar {
     	$requerido = 'requerido_consultar';
     	$codificado = 'codificada';
     	$autocompletar = 'autocompletar_consultar';
+    	
+    	
+    	
     	//crea formularios
     	foreach ($this->listaAtributosParametros as $elemento){
     		switch($elemento['input']){
@@ -446,6 +449,13 @@ class Consultar {
     			
     	}
     	
+    	
+       if($this->objetoConsultar==false) {
+    		$this->mensaje->addMensaje("4000","errorOperacionNoPermitida: ".ucfirst('consultar'),'information');
+    		echo $this->mensaje->getLastMensaje();
+    		return false;
+    	}
+    	
 		//muestra el formulario
     	echo '<div class="container-fluid" id="contenedorFormularioConsulta">';
     	echo $this->formularioConsulta();
@@ -458,7 +468,7 @@ class Consultar {
 
     	
     	
-    	if(!$verifica){
+    	if(!$verifica||!$this->objetoConsultar){
     		echo $this->mensaje->getLastMensaje();
     		return false;
     	}

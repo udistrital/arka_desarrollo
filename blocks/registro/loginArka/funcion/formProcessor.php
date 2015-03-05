@@ -4,7 +4,7 @@ namespace registro\loginArka;
 
 
 include_once('Redireccionador.php');
-//  var_dump($_REQUEST);exit;
+
 class FormProcessor {
     
     var $miConfigurador;
@@ -55,6 +55,8 @@ class FormProcessor {
     			$cadena_sql = $this->miSql->getCadenaSql ( "buscarUsuario", $variable );
     			$registro = $esteRecursoDB->ejecutarAcceso ( $cadena_sql, "busqueda" );
     			
+    			
+    			
     			if($registro){
     				
     				if ($registro [0] ['clave'] == $variable ["clave"]) {
@@ -78,6 +80,7 @@ class FormProcessor {
     					$registroAcceso = $esteRecursoDB->ejecutarAcceso ( $cadena_sql, "acceso" );
     					
     					if ($estaSesion) {
+    						
     	
     						switch ($registro [0] ["tipo"]) {
     								

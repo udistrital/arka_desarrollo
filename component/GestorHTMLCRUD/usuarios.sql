@@ -107,6 +107,25 @@ ALTER TABLE public.arka_usuario_telefono
   OWNER TO arka_frame;
   
 
+CREATE TABLE public.arka_usuario_pagina
+(
+  usuario_pagina_id serial NOT NULL,
+  id_usuario integer NOT NULL,
+  id_pagina integer NOT NULL,
+  CONSTRAINT usuario_fk FOREIGN KEY (id_usuario)
+      REFERENCES public.arka_usuario (id_usuario) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE SET NULL,
+  CONSTRAINT pagina_fk FOREIGN KEY (id_pagina)
+      REFERENCES public.arka_pagina (id_pagina) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE SET NULL,
+  CONSTRAINT arka_usuario_pagina_pkey PRIMARY KEY (usuario_pagina_id)
+)WITH (
+  OIDS=FALSE
+);
+ALTER TABLE public.arka_usuario_pagina
+  OWNER TO arka_frame;
+
+
 --Tabla de rol  (esquema de usuarios)
 ------Tabla Rol
 CREATE TABLE public.arka_rol
@@ -128,6 +147,28 @@ WITH (
 ALTER TABLE public.arka_rol
   OWNER TO arka_frame;
   
+
+CREATE TABLE public.arka_rol_pagina
+(
+  rol_pagina_id serial NOT NULL,
+  rol_id integer NOT NULL,
+  id_pagina integer NOT NULL,
+  CONSTRAINT rol_fk FOREIGN KEY (rol_id)
+      REFERENCES public.arka_rol (rol_id) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE SET NULL,
+  CONSTRAINT pagina_fk FOREIGN KEY (id_pagina)
+      REFERENCES public.arka_pagina (id_pagina) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE SET NULL,
+  CONSTRAINT arka_rol_pagina_pkey PRIMARY KEY (rol_pagina_id)
+)WITH (
+  OIDS=FALSE
+);
+ALTER TABLE public.arka_rol_pagina
+  OWNER TO arka_frame;
+
+
+
+
 --Tabla de usuario_rol  (esquema de usuarios)
 -----------------tabla rol_usuario
 

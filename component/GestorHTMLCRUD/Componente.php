@@ -3,6 +3,8 @@
 namespace component\GestoHTMLCRUD;
 
 
+include_once ("core/manager/Configurador.class.php");
+
 require_once ('component/Component.class.php');
 
 use component\Component as Component;

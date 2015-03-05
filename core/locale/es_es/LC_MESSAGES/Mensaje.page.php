@@ -72,62 +72,6 @@ $this->idioma["errorEliminar"] = "Error Eliminando ";
 $this->idioma["errorCambiarEstado"] = "Error Cambiando Estados ";
 $this->idioma["errorRegistroPropietario"]="Error, registro propietario ";
 
-/*
-$this->idioma["errorCreacionParametros"] = "Error Creando Parámetros";
-$this->idioma["errorLecturaParametros"] = "No se encontraron registros de Parámetros";
-$this->idioma["errorIdNoDefinidoParametros"] = "Identificador del parámetro no definido";
-$this->idioma["errorActualizarParametros"] = "Error Actualizando Parámetros";
-$this->idioma["errorIdNoExisteParametros"] = "Identificador del parámetro no Existe";
-$this->idioma["errorDuplicarParametros"] = "Error Duplicando Parámetros";
-$this->idioma["errorEliminarParametros"] = "Error Eliminando Parámetros";
-$this->idioma["errorCambiarEstadoParametros"] = "Error Cambiando Estados Parámetros";
-
-
-$this->idioma["errorCreacionFunciones"] = "Error Creando Funciones";
-$this->idioma["errorLecturaFunciones"] = "No se encontraron registros de Funciones";
-$this->idioma["errorIdNoDefinidoFunciones"] = "Identificador de la Función no definido";
-$this->idioma["errorActualizarFunciones"] = "Error Actualizando Función";
-$this->idioma["errorIdNoExisteFunciones"] = "Identificador de la función no Existe";
-$this->idioma["errorDuplicarFunciones"] = "Error Duplicando Funciones";
-$this->idioma["errorEliminarFunciones"] = "Error Eliminando Funciones";
-$this->idioma["errorCambiarEstadoFunciones"] = "Error Cambiando Estados Funciones";
-
-$this->idioma["errorCreacionVariables"] = "Error Creando Variables";
-$this->idioma["errorLecturaVariables"] = "No se encontraron registros de Variables";
-$this->idioma["errorIdNoDefinidoVariables"] = "Identificador de la Variable no definido";
-$this->idioma["errorActualizarVariables"] = "Error Actualizando Variable";
-$this->idioma["errorIdNoExisteVariables"] = "Identificador de la Variable no Existe";
-$this->idioma["errorDuplicarVariables"] = "Error Duplicando Variable";
-$this->idioma["errorEliminarVariables"] = "Error Eliminando Variable";
-$this->idioma["errorCambiarEstadoVariables"] = "Error Cambiando Estados Variable";
-
-$this->idioma["errorCreacionPermisos"] = "Error Creando Permisos";
-$this->idioma["errorLecturaPermisos"] = "No se encontraron registros de Permisos";
-$this->idioma["errorIdNoDefinidoPermisos"] = "Identificador del permiso no definido";
-$this->idioma["errorActualizarPermisos"] = "Error Actualizando Permisos";
-$this->idioma["errorIdNoExistePermisos"] = "Identificador de la permiso no Existe";
-$this->idioma["errorDuplicarPermisos"] = "Error Duplicando Permisos";
-$this->idioma["errorEliminarPermisos"] = "Error Eliminando Permisos";
-$this->idioma["errorCambiarEstadoPermisos"] = "Error Cambiando Estados Permisos";
-
-$this->idioma["errorCreacionReglas"] = "Error Creando Reglas";
-$this->idioma["errorLecturaReglas"] = "No se encontraron registros de Reglas";
-$this->idioma["errorIdNoDefinidoReglas"] = "Identificador de la regla no definido";
-$this->idioma["errorActualizarReglas"] = "Error Actualizando Reglas";
-$this->idioma["errorIdNoExisteReglas"] = "Identificador de la regla no Existe";
-$this->idioma["errorDuplicarReglas"] = "Error Duplicando Reglas";
-$this->idioma["errorEliminarReglas"] = "Error Eliminando Reglas";
-$this->idioma["errorCambiarEstadoReglas"] = "Error Cambiando Estados Reglas";
-
-$this->idioma["errorCreacionRelaciones"] = "Error Creando Permiso";
-$this->idioma["errorLecturaRelaciones"] = "No se encontraron registros de Permisos";
-$this->idioma["errorIdNoDefinidoRelaciones"] = "Identificador del permiso no definido";
-$this->idioma["errorActualizarRelaciones"] = "Error Actualizando Permiso";
-$this->idioma["errorIdNoExisteRelaciones"] = "Identificador del permiso no Existe";
-$this->idioma["errorDuplicarRelaciones"] = "Error Duplicando Permiso";
-$this->idioma["errorEliminarRelaciones"] = "Error Eliminando Permiso";
-$this->idioma["errorCambiarEstadoRelaciones"] = "Error Cambiando Estados Permiso";
-*/
 
 $this->idioma["columnaNoExiste"] ="Columna no existe en tabla ";
 $this->idioma["usuarioIndefinido"]="Usuario Indefinido";
@@ -156,6 +100,7 @@ $this->idioma["errorRecuperarOperadores"]="Error, recuperando operadores";
 $this->idioma["errorRegistroPropietario"]="Error, registro propietario";
 //fin valores
 
+$this->idioma['errorOperacionNoPermitida']='Error, Operación no permitida ';
 
 //valores para el componente de documentos
 $this->idioma["errorVariableArchivoVacia"]="Error, variable FILES vacia";
