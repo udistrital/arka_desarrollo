@@ -629,61 +629,6 @@ class DAL{
 	}
 	
 	
-	private function validarId($valor){
-		$valor = (float) $valor;
-		if(!is_numeric($valor)){
-			$this->mensaje->addMensaje("101","errorEntradaParametrosId",'error');
-			return false;
-		}
-		return true;
-		
-	}
-	
-	private function validarNombre($valor){
-		if(!is_string($valor)||strlen(trim($valor))>self::limiteNombre||trim($valor)==""){
-			$this->mensaje->addMensaje("101","errorEntradaParametrosNombre",'error');
-			return false;
-		} return true;
-	}
-	
-	private function validarDescripcion($valor){
-		if(!is_string($valor)||strlen(trim($valor))>self::limiteDescripcion||trim($valor)==""){
-			$this->mensaje->addMensaje("101","errorEntradaParametrosDescripcion",'error');
-			return false;
-		} return true;
-	}
-	
-	private function validarProceso($valor){
-		if(!is_numeric($valor)){
-			$this->mensaje->addMensaje("101","errorEntradaParametrosProceso",'error');
-			return false;
-		}
-		return true;
-	}
-	
-	private function validarTipo($valor){
-		if(!is_numeric($valor)||!$this->getTipo($valor,'id','id')){
-			$this->mensaje->addMensaje("101","errorEntradaParametrosTipo",'error');
-			return false;
-		}
-		return true;
-	}
-	
-	private function validarValor($valor){
-		if(!is_string($valor)||strlen(trim($valor))>self::limiteValor||trim($valor)==""){
-			$this->mensaje->addMensaje("101","errorEntradaParametrosValor",'error');
-			return false;
-		} return true;
-	}
-	
-	private function validarEstado($valor){
-		if(!is_numeric($valor)||!$this->getEstado($valor,'id','id')){
-			$this->mensaje->addMensaje("101","errorEntradaParametrosEstado",'error');
-			return false;
-		}
-		return true;
-	}
-	
 	//http://www.sergiomejias.com/2007/09/validar-una-fecha-con-expresiones-regulares-en-php/
 	private function validar_fecha($fecha){
 		if (ereg("(0[1-9]|[12][0-9]|3[01])[/](0[1-9]|1[012])[/](19|20)[0-9]{2}", $fecha)) {
@@ -746,6 +691,7 @@ class DAL{
 		if($tipoDatoID===false||$columnaId===false){
 			$this->mensaje->addMensaje("101","errorEntradaColumnaInvalida: ".$colIndex,'error');
 			$this->setConexion($conexion);
+			
 			return false;
 		}
 		
@@ -776,7 +722,7 @@ class DAL{
 		}else{
 			
 			if(Tipos::validarTipo($valor,$tipoDatoID)===false){
-					
+				
 				$this->mensaje->addMensaje("101","errorTipoDatoColumna: ".$colIndex,'error');
 				$this->setConexion($conexion);
 				return false;
@@ -882,9 +828,17 @@ class DAL{
 		
 		foreach($param as $a=>$b){
 			
+			
+			if(!$this->validarColumna($a, $b)) {
+				echo $this->getQuery();
+				echo $this->mensaje->getLastMensaje();
+			}
+			 
+			
 			$b= trim($b);
 			
 		    $colIndex =  $this->getNombreColumnaReal($a);
+		    
 		    
 		    if($colIndex===false&&$validar===true) continue;
 			
@@ -894,7 +848,6 @@ class DAL{
 			
 			
 			$validacion =  $this->validarColumna($a, $b);
-			
 			
 				
 			$this->setAmbiente($tabla, $historico, $prefijo);
@@ -907,34 +860,6 @@ class DAL{
 			
 			
 			switch($a){
-				case 'id':
-					if(!$this->validarId($b)) return false;
-					$valor = $b;
-					break;
-				/*case 'nombre':
-					if(!$this->validarNombre($b)) return false;
-					$valor = "'".$b."'";
-					break;*/
-				case 'descripcion':
-					if(!$this->validarDescripcion($b)) return false;
-					$valor = "'".$b."'";
-					break;
-				case 'proceso':
-					if(!$this->validarProceso($b)) return false;
-					$valor = $b;
-					break;
-				case 'tipo':
-					if(!$this->validarTipo($b)) return false;
-					$valor = $b;
-					break;
-				case 'valor':
-					if(!$this->validarValor($b)) return false;
-					$valor = "'".$b."'";
-					break;
-				case 'estado_registro':
-					//if(!$this->validarEstado($b)) return false;
-					 $valor = $b;
-					break;
 				case 'fecha_registro':
 					$limiteFecha = $this->validarFechaRegistro($b);
 					if(!$limiteFecha) return false;
@@ -1025,7 +950,9 @@ class DAL{
 	
 	private function recuperarUltimoId(){
 		
-		$maxId = 'max('.$this->getPrefijoColumna().'id)';
+		$lista = $this->listaLlavesPrimarias($this->idObjetoGlobal);
+		
+		$maxId = 'max('.$lista[0].')';
 		$leido = $this->persistencia->read(array($maxId));
 		 
 		
@@ -1139,18 +1066,20 @@ class DAL{
 				$this->persistencia->setJustificacion($justificacion);
 				$this->persistencia->setHistorico($historico);
 				
-				if(!$this->persistencia->create($this->parametros,$this->valores)){
-					
+				
+				$creacion =  $this->persistencia->create($this->parametros,$this->valores);
+				
+				if($creacion==false){
 					
 					$this->mensaje->addMensaje("101","errorCreacion: ".$this->tablaAlias,'error');
 					return false;
 				}
-				$ultimoId =  $this->recuperarUltimoId();
+				//$ultimoId =  $this->recuperarUltimoId();
 				
-				 
+				 return $creacion;
 				//registrar propietario
 						
-				if($this->usuario!=-1&&$this->usuario!='__indefinido__'&&!$this->registrarPropietario($ultimoId,$idObjeto)) return false;
+				//if($this->usuario!=-1&&$this->usuario!='__indefinido__'&&!$this->registrarPropietario($ultimoId,$idObjeto)) return false;
 				
 				return $ultimoId;
 				

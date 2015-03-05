@@ -72,6 +72,8 @@ class Duplicar {
 		
 		$this->objeto = $this->cliente->getListaObjetos();
            $this->columnas = $this->cliente->getListaColumnas();
+           
+           
     }
 	
     
@@ -95,6 +97,12 @@ class Duplicar {
     	 
     	$this->objetoVisble = $this->setBool($this->cliente->getObjeto($this->objetoId, 'id','visible'));
     	 
+    	$estado = $this->setBool($this->cliente->getObjeto($this->objetoId, 'id','duplicar'));
+    	
+    	if($estado==false) {
+    		$this->mensaje->addMensaje("4000","errorOperacionNoPermitida: ".ucfirst('duplicar'),'information');
+    		return false;
+    	}
     	
     	 
     	return true;

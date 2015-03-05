@@ -93,7 +93,10 @@ class Funcion {
     
     function guardarDatos($objetoId) {
     	 
-    	
+    	$this->gestorHTMLCRUD->setObjetoIdGuardarDatos($objetoId);
+    	$this->gestorHTMLCRUD->setLenguajeGuardarDatos($this->lenguaje);
+    	return $this->gestorHTMLCRUD->guardarDatos($objetoId);
+    	 
     
     
     }

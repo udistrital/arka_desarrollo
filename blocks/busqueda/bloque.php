@@ -160,12 +160,19 @@ if (! class_exists ( '\\bloquesModelo\\bloqueModelo1\\Bloque' )) {
 			
 			$listaOperaciones =  $datos->getListaOperacion();
 			
-			
-			foreach ($listaOperaciones as $elemento){
-				if(in_array($elemento['nombre'],$operacionesPermitidas)){
-					$elemento['text'] =  $this->setBool($elemento['text']);
-					$operaciones[] = $elemento;
+
+			$operaciones= array();
+			foreach ($operacionesPermitidas as $a=>$b){
+				
+				foreach ($listaOperaciones as $elemento){
+					
+					if($b==$elemento['nombre']){
+						$elemento['text'] =  $this->setBool($elemento['text']);
+						$operaciones[$a] = $elemento;
+					}
+					
 				}
+			
 			}
 			
 			return $operaciones;

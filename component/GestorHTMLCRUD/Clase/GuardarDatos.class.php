@@ -1,11 +1,12 @@
 <?php 
-namespace reglas\formulario;
 
-include_once (dirname(__FILE__).'/../ClienteServicioReglas.class.php');
-include_once (dirname(__FILE__).'/../Mensaje.class.php');
+namespace component\GestoHTMLCRUD\Clase;
 
-use reglas\ClienteServicioReglas as ClienteServicioReglas;
-use reglas\Mensaje as Mensaje;
+
+include_once ('core/builder/Mensaje.class.php');
+
+include_once 'component/GestorHTMLCRUD/Modelo/Modelo.class.php';
+use component\GestorHTMLCRUD\Modelo\Modelo as Modelo;
 
 if(!isset($GLOBALS["autorizado"])) {
 	include("../index.php");
@@ -49,11 +50,24 @@ class GuardarDatos {
         if(isset($_REQUEST['usuario'])) $_REQUEST['usuarioDefinitivo'] = $_REQUEST['usuario'];
 
         $this->lenguaje = $lenguaje;
-        $this->mensaje = new Mensaje();
-        $this->cliente  = new ClienteServicioReglas();
+        $this->mensaje =  \Mensaje::singleton();
+        $this->cliente  = new Modelo();
         $this->objeto = $this->cliente->getListaObjetos();
         $this->columnas = $this->cliente->getDatosColumnas();
     }
+    
+
+    public function setLenguaje($lenguaje){
+    	if(is_object($lenguaje)) $this->lenguaje = $lenguaje;
+    }
+    
+    public function setObjetoId($objetoId){
+    	$this->objetoId = $objetoId;
+    
+    	$this->objeto = $this->cliente->getListaObjetos();
+    	$this->columnas = $this->cliente->getListaColumnas();
+    }
+    
     
     private function seleccionarObjeto(){
     	foreach ($this->objeto as $objeto){
@@ -100,14 +114,14 @@ class GuardarDatos {
     		foreach ($this->columnas as $datosColumna){
     			if($datosColumna['nombre']==$nombreObjeto&&$datosColumna[$this->metodoAccion]=='t'){
     				if($nombreObjeto == 'usuario'){
-    					if(isset($_REQUEST[$nombreObjeto."Definitivo"])) $this->listaParametros[] = $_REQUEST[$nombreObjeto."Definitivo"];
+    					if(isset($_REQUEST[$nombreObjeto."Definitivo"])) $this->listaParametros[$nombreObjeto] = $_REQUEST[$nombreObjeto."Definitivo"];
     					else $this->listaParametros[] = '';
     					$this->listaAtributosParametros[] = $datosColumna;
     					continue;
     				}
-    				if(isset($_REQUEST[$nombreObjeto])&&$datosColumna['codificada']!='t') $this->listaParametros[] = $_REQUEST[$nombreObjeto];
-    				elseif (isset($_REQUEST[$nombreObjeto])&&$datosColumna['codificada']=='t') $this->listaParametros[] = $_REQUEST[$nombreObjeto."Codificado"];
-    				else $this->listaParametros[] = '';
+    				if(isset($_REQUEST[$nombreObjeto])&&$datosColumna['codificada']!='t') $this->listaParametros[$nombreObjeto] = $_REQUEST[$nombreObjeto];
+    				elseif (isset($_REQUEST[$nombreObjeto])&&$datosColumna['codificada']=='t') $this->listaParametros[$nombreObjeto] = $_REQUEST[$nombreObjeto."Codificado"];
+    				else $this->listaParametros[$nombreObjeto] = '';
     				$this->listaAtributosParametros[] = $datosColumna;
     			}
     		}
@@ -162,72 +176,31 @@ class GuardarDatos {
 	    
 	    $metodo = $this->metodoAccion.ucfirst($this->objetoAliasSingular);
 	    	$argumentos =  $this->listaParametros;
-	    	$accion =  false;
-	    	$accion =  call_user_func_array(array($this->cliente , $metodo), $argumentos);
 	    	
+	    	$accion =  $this->cliente->$metodo($argumentos);
 	    	
-	    		
 	    	
 	    	
 	    	$cadenaMensaje = '';
-	    	if(!$accion||@strpos(strtolower($accion),'error')!==false) $cadenaMensaje = $this->lenguaje->getCadena ( $this->metodoAccion."AccionFallo" ).$accion;
+	    	
+	    	if($accion===false) $cadenaMensaje = $this->lenguaje->getCadena ( $this->metodoAccion."AccionFallo" ).$accion;
 	    	else {
 	    		$cadenaMensaje = $this->lenguaje->getCadena ( $this->metodoAccion."Accion" );
 	    		
-	    		if($this->metodoAccion=='crear') $cadenaMensaje .= $accion;
+	    		if($this->metodoAccion=='crear') ;//$cadenaMensaje .= $accion;
 	    		else $cadenaMensaje .= $this->listaParametros[0];
 	    	}
 	    	$cadenaMensaje .= '<br>';
     	
     	
     	
-    	
+	    
     	$this->mensaje->addMensaje('2001',":".$cadenaMensaje,'information');
     	echo $this->mensaje->getLastMensaje();
     	return true;
     }
     
     
-    function mensaje() {
-
-        // Si existe algun tipo de error en el login aparece el siguiente mensaje
-        $mensaje = $this->miConfigurador->getVariableConfiguracion ( 'mostrarMensaje' );
-        $this->miConfigurador->setVariableConfiguracion ( 'mostrarMensaje', null );
-
-        if ($mensaje) {
-
-            $tipoMensaje = $this->miConfigurador->getVariableConfiguracion ( 'tipoMensaje' );
-
-            if ($tipoMensaje == 'json') {
-
-                $atributos ['mensaje'] = $mensaje;
-                $atributos ['json'] = true;
-            } else {
-                $atributos ['mensaje'] = $this->lenguaje->getCadena ( $mensaje );
-            }
-            // -------------Control texto-----------------------
-            $esteCampo = 'divMensaje';
-            $atributos ['id'] = $esteCampo;
-            $atributos ["tamanno"] = '';
-            $atributos ["estilo"] = 'information';
-            $atributos ["etiqueta"] = '';
-            $atributos ["columnas"] = ''; // El control ocupa 47% del tamaño del formulario
-            echo $this->miFormulario->campoMensaje ( $atributos );
-            unset ( $atributos );
-
-             
-        }
-
-        return true;
-
-    }
-
 }
-
-$guardar = new GuardarDatos ( $this->lenguaje,$objetoId );
-
-
-$guardar->guardarDatos ($objetoId);
-$guardar->mensaje ();
 
 ?>

@@ -1,6 +1,6 @@
 <?php
 $this->idioma["usuario"]="IdentificaciÃ³n:";
-$this->idioma["clave"]="Clave:";
+$this->idioma["clave"]="Clave";
 $this->idioma["usuarioTitulo"]="NÃºmero de documento";
 $this->idioma["claveTitulo"]="Clave de Acceso";
 $this->idioma["botonAceptar"]="Aceptar";
@@ -8,8 +8,12 @@ $this->idioma["botonCancelar"]="Cancelar";
 $this->idioma["noDefinido"]="No definido";
 $this->idioma["botonIngresar"]="Ingresar";
 
+$this->idioma['claveconfirmar']="Confirmar clave";
 
+$this->idioma['crearFormulario']="Crear";
+$this->idioma['actualizarFormulario']="Actualizar";
 
+$this->idioma['errorOperacionNoPermitida']='Error, Operación no permitida ';
 
 $this->idioma['principalConsultar']="Consultar";
 $this->idioma['principalCrear']="Crear";
@@ -22,9 +26,9 @@ $this->idioma['principalVer']="Ver información del elemento";
 $this->idioma['principalSeleccionarObjeto']="Seleccione un objeto";
 $this->idioma['principalSeleccionarAccion']="Seleccione una acción";
 $this->idioma['principalValidar']="Validar";
-$this->idioma['crearAccion']="Se crea elemento con Id:";
+$this->idioma['crearAccion']="Se crea elemento exitosamente ";
 $this->idioma['actualizarAccion']="Se actualiza elemento con Id:";
-$this->idioma['crearAccionFallo']="Falló al crear elementos:";
+$this->idioma['crearAccionFallo']="Error, Falló al crear elementos:";
 $this->idioma['actualizarAccionFallo']="Falló al actualizar elementos:";
 $this->idioma['id']="id";
 $this->idioma['idTitulo']="Ingrese Identificador";

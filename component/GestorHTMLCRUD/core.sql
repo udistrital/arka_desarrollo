@@ -28,9 +28,9 @@ INSERT INTO public.arka_operacion
 (  operacion_id,  operacion_nombre,  operacion_alias,  
    operacion_descripcion, operacion_cadena, operacion_text, operacion_icono, operacion_click, operacion_query_string)
 VALUES
-(1,'crear','Crear','Crear CRUD','principalCrear',false,'ui-icon-plus','$("#selectedItems").val("");getFormularioCreacionEdicion(true);','funcion=crear,funcion=guardarDatos'),
+(1,'crear','Crear','Crear CRUD','principalCrear',false,'ui-icon-plus','$("#selectedItems").val("");getFormularioCreacion(true);','funcion=crear,funcion=guardarDatos'),
 (2,'consultar','Consultar','Consultar CRUD','principalConsultar',false,'ui-icon-search','getFormularioConsulta(true);','funcion=consultar'),
-(3,'actualizar','Actualizar','Actualizar CRUD','principalEditar',false,'ui-icon-pencil','if($("#selectedItems").val()!="") 	getFormularioCreacionEdicion(false)','funcion=editar,funcion=guardarDatos'),
+(3,'actualizar','Actualizar','Actualizar CRUD','principalEditar',false,'ui-icon-pencil','if($("#selectedItems").val()!="") 	getFormularioEdicion(false)','funcion=editar,funcion=guardarDatos'),
 (4,'duplicar','Consultar','Consultar CRUD','principalDuplicar',false,'ui-icon-pause','if($("#selectedItems").val()!="") 	duplicarElemento();','funcion=duplicar'),
 (5,'activarInactivar','Cambiar Estado','Cambiar estado registro activo/inactivo','principalCambiarEstado',false,'ui-icon-transferthick-e-w','if($("#selectedItems").val()!="") 	cambiarEstadoElemento();','funcion=cambiarEstado'),
 (6,'eliminar','Eliminar','Eliminar CRUD','principalEliminar',false,'ui-icon-close','if($("#selectedItems").val()!="") 	eliminarElemento();','funcion=eliminar'),

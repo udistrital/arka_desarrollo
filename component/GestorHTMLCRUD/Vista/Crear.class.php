@@ -15,13 +15,14 @@ include_once ('core/builder/Mensaje.class.php');
 
 
 
+
 if(!isset($GLOBALS["autorizado"])) {
 	include("../index.php");
 	exit;
 }
 
 
-class Editar {
+class Crear {
 
     var $miConfigurador;
     
@@ -62,9 +63,10 @@ class Editar {
         $this->lenguaje = $lenguaje;
         $this->mensaje =  \Mensaje::singleton();
         $this->cliente  = new Modelo();
+        
         $this->objeto = $this->cliente->getListaObjetos();
         $this->columnas = $this->cliente->getDatosColumnas();
-        $this->proceso = $this->cliente->getListaProcesos();
+        
 
     }
     
@@ -145,6 +147,11 @@ class Editar {
     			$this->objetoDuplicar = $this->setBool($objeto['duplicar']);
     			$this->objetoEliminar = $this->setBool($objeto['eliminar']);
     			
+    			if($this->objetoCrear==false) {
+    				$this->mensaje->addMensaje("4000","errorOperacionNoPermitida: ".ucfirst('consultar'),'information');
+    				return false;
+    			}
+    			
     			return true;
     		}
     	}
@@ -223,10 +230,16 @@ class Editar {
     	return true;
     }
     
-    private function getObjetoAliasPorId($objeto ='', $id = ''){
-    	foreach ($this->$objeto as $elemento){
-    		if($elemento['id']==$id) return $elemento['alias'];
-    	}
+    private function getObjetoAliasPorId($objeto= '', $id = ''){
+    	
+		$idObjeto = $this->cliente->getColumnas($objeto, 'nombre','objetos_id');
+		
+		$nombreEjecucion = $this->cliente->getObjeto($idObjeto, 'id','ejecutar');
+		
+		$metodo = "get".ucfirst($nombreEjecucion);
+		 
+		return $this->cliente->$metodo($id, 'id','alias')?$this->cliente->$metodo($id, 'id','alias'):$objeto;
+		
     }
     
     private function getObjetoNombrePorId($objeto ='', $id = ''){
@@ -295,7 +308,17 @@ class Editar {
     	if($deshabilitado) $cadena .= '  disabled ';;
     	$cadena .= ' >';
     	if(!$blanco) $cadena .= '<option ></option>';
-    	foreach ($this->$elemento as $fila){
+    	
+    	$idObjeto = $this->cliente->getColumnas($elemento,'nombre','objetos_id');
+    	if($idObjeto===false) return false;
+    	$nombreEjecucionObjeto =  $this->cliente->getObjeto($idObjeto,'id','ejecutar');
+    	
+    	$metodo =  "getLista".ucfirst($nombreEjecucionObjeto);
+    	$listaElemento = $this->cliente->$metodo();
+    	if(!is_array($listaElemento)) return false;
+    	 
+    	
+    	foreach ($listaElemento as $fila){
     		$cadena .= '<option ';
     		$cadena .= ' value = "'.$fila['id'].'" ';
     		if(isset($_REQUEST[$elemento]) && $_REQUEST[$elemento]==$fila['id'])$cadena .= '  selected ';
@@ -370,6 +393,64 @@ class Editar {
     	return $cadena; 
     }
     
+    private function password($elemento='elemento', $requerido = false, $codificada =  false, $autocompletar =  false){
+    	$cadena= '';
+    	$cadenaHidden= '';
+    	$valor = '';
+    	$textos = array();
+    	$textos[0] = utf8_encode($this->lenguaje->getCadena ($elemento));
+    	$textos[1] = utf8_encode($this->lenguaje->getCadena ($elemento."Titulo"));
+    	$textos[2] = utf8_encode($this->lenguaje->getCadena ($elemento."confirmar"));
+    	
+    	$cadena .='<fieldset>';
+    	$cadena .='<legend>'.$textos[0].'</legend>';
+    	$cadena .='<div class="form-group" >';
+    	 
+    	$cadena .= '<label for="'.$textos[0].'">';
+    	$cadena .= ucfirst(strtolower($textos[0]));
+    	$cadena .= '</label>';
+    	$cadena .= '<span style="white-space:pre;"> </span>';
+    	 
+       	$cadena .= '<input type="password" class="form-control ';
+    	 
+    	$cadena .= ' validate[required,equals['.$elemento.'_confirmar],minSize[6]] ';
+    	 
+    	$cadena .='" title="'.$textos[1].'" name="'.$elemento.'" id="'.$elemento.'"  placeholder="'.ucfirst($textos[0]).'" ';
+    	 
+    	if(isset($_REQUEST[$elemento])) $valor =' value="'.$_REQUEST[$elemento].'" ';
+    	else $valor .=' value="" ';
+    	 
+    	$cadena .=$valor;
+    	 
+    	$cadena .= '></input>';
+    	$cadena .= '</div>';
+
+    	$cadena .='<div class="form-group" >';
+    	$cadena .= '<label for="'.$textos[2].'">';
+    	$cadena .= ucfirst(strtolower($textos[2]));
+    	$cadena .= '</label>';
+    	$cadena .= '<span style="white-space:pre;"> </span>';
+    	
+    	$cadena .= '<input type="password" class="form-control ';
+    	
+    	$cadena .= ' validate[required,equals['.$elemento.'],minSize[6]] ';
+    	
+    	$cadena .='" title="'.$textos[1].'" name="'.$elemento.'_confirmar" id="'.$elemento.'_confirmar"  placeholder="'.ucfirst($textos[0]).'" ';
+    	
+    	if(isset($_REQUEST[$elemento])) $valor =' value="'.$_REQUEST[$elemento].'" ';
+    	else $valor .=' value="" ';
+    	
+    	$cadena .=$valor;
+    	
+    	$cadena .= '></input>';
+    	$cadena .= '</div>';
+    	
+    	$cadena .='</fieldset>';
+    	
+    	return $cadena;
+    }
+    
+    
     private function getVariablesListaDelTexto($texto=''){
     	$metodo = 'getVariablesListaDelTexto';
     	$argumentos =  array($texto);
@@ -378,104 +459,7 @@ class Editar {
     }
     
     
-    
-    private function listasInput($regla = false){
-    	
-    	
-    	
-    	$cadena= '';
-    	$cadena.=' <div id="tabsListas">';
-    	$cadena.=' <ul>';
-    	$cadena.=' <li><a href="#tabs-operaciones">'.utf8_encode($this->lenguaje->getCadena ('operaciones')).'</a></li>';
-    	$cadena.=' <li><a href="#tabs-parametros">'.utf8_encode($this->lenguaje->getCadena ('parametros')).'</a></li>';
-    	$cadena.=' <li><a href="#tabs-variables">'.utf8_encode($this->lenguaje->getCadena ('variables')).'</a></li>';
-    	//if($regla===true){
-    		$cadena.=' <li><a href="#tabs-funciones">'.utf8_encode($this->lenguaje->getCadena ('funciones')).'</a></li>';
-    	//}
-    	$cadena.=' </ul>';
-    	
-    	
-    	//operaciones
-    	$cadena.=' <div class="tabOverflow" id="tabs-operaciones">';
-    	$cadena.=' <div class="contenedorCalculadora">';
-    	
-    	foreach ($this->operadores as $operador){
-    		$cadena.=' <div onclick="insertarValorTextBox(\''.$operador['nombre'].'\')" class="elementoListaCalculadora"><a  title="'.$operador['alias'].'"  >'.$operador['nombre'].'</a></div>';
-    	}
-    	
-    	$cadena.=' </div>';
-    	$cadena.=' </div>';
-    	
-    	
-    	//parametros
-    	
-    	$cadena.=' <div  id="tabs-parametros">';
-    	$cadena.=' <div >';
-    	
-    	$cadena.=' <div class="form-inline"><input class="form-control" placeholder="'.utf8_encode($this->lenguaje->getCadena ('buscar')).'" type="text" id="buscarParametro" onkeyup="buscarBotonesCalculadora(\'botonParametro\' ,\'buscarParametro\')" ></input></div>';
-    	$cadena.=' <div class="tabOverflow">';
-    	
-    	 if($this->getListaElementos('parametro',array('','','','','','',1))){
-    	 	foreach ($this->listaElementos as $elemento){
-    	 		$cadena.=' <div style="overflow: hidden;" onclick="insertarValorTextBox(\'_'.$elemento['nombre'].'_\')" class="botonParametro elementoListaCalculadora"><a  title="insertar '.$elemento['nombre'].' , valor:'.base64_decode($elemento['valor']).' ,tipo:'.Tipos::getTipoAlias($elemento['tipo']).' " >'.$elemento['nombre'].'</a></div>';
-    	 	} 	
-    	 }
-    
-    	$cadena.=' </div>';
-    	$cadena.=' </div>';
-    	$cadena.=' </div>';
-
-    	
-    	//variables
-    	 
-    	$cadena.=' <div  id="tabs-variables">';
-    	$cadena.=' <div >';
-    	$cadena.=' <div class="form-inline"><input class="form-control" placeholder="'.utf8_encode($this->lenguaje->getCadena ('buscar')).'" type="text" id="buscarVariable" onkeyup="buscarBotonesCalculadora(\'botonVariable\' ,\'buscarVariable\')" ></input></div>';
-    	$cadena.=' <div class="tabOverflow">';
-    	if($this->getListaElementos('variable',array('','','','','','',1))){
-    		foreach ($this->listaElementos as $elemento){
-    			$cadena.=' <div style="overflow: hidden;" onclick="insertarValorTextBox(\''.$elemento['nombre'].'\')" class="botonVariable elementoListaCalculadora"><a  title="insertar '.$elemento['nombre'].' , valor:'.base64_decode($elemento['valor']).' ,tipo:'.Tipos::getTipoAlias($elemento['tipo']).' "  >'.$elemento['nombre'].'</a></div>';
-    		}
-    	}
-    	 
-    	$cadena.=' </div>';
-    	$cadena.=' </div>';
-    	$cadena.=' </div>';
-    	 
-    	
-    	
-    	//if($regla===true){
-    		//funciones
-    		
-    		$cadena.=' <div  id="tabs-funciones">';
-    		$cadena.=' <div >';
-    		$cadena.=' <div class="form-inline"><input class="form-control" placeholder="'.utf8_encode($this->lenguaje->getCadena ('buscar')).'" type="text" id="buscarFuncion" onkeyup="buscarBotonesCalculadora(\'botonFuncion\' ,\'buscarFuncion\')" ></input></div>';
-    		$cadena.=' <div class="tabOverflow">';
-    		if($this->getListaElementos('funcion',array('','','','','1'))){
-    			
-    			foreach ($this->listaElementos as $elemento){
-    				
-    				$v2 = $this->getVariablesListaDelTexto(base64_decode($elemento['valor']));
-    				
-    				$valorParametrosFuncion='';
-    				if(is_array($v2)){
-    					foreach ($v2 as $v) $valorParametrosFuncion.=$v[0].",";
-    				}
-    				$valorParametrosFuncion = trim($valorParametrosFuncion, ",");
-    				$cadena.=' <div style="overflow: hidden;" onclick="insertarValorTextBox(\''.$elemento['nombre'].'('.$valorParametrosFuncion.')\')" class="botonFuncion elementoListaCalculadora"><a  title="insertar '.$elemento['nombre'].'('.$valorParametrosFuncion.') ,tipo:'.Tipos::getTipoAlias($elemento['tipo']).'"  >'.$elemento['nombre'].'</a></div>';
-    			}
-    		}
-    		
-    		$cadena.=' </div>';
-    		$cadena.=' </div>';
-    		$cadena.=' </div>';
-    	//}
-    	
-    	$cadena.=' </div>';
-    	
-    	return $cadena; 
-    }
-    
+        
     private function textAreaElemento($elemento='elemento', $requerido = false, $codificada =  false){
     	$cadena= '';
     	$cadenaHidden= '';
@@ -491,16 +475,6 @@ class Editar {
     	$cadena .= ucfirst(strtolower($textos[0]));
     	$cadena .= '</label>';
     	$cadena .= '<span style="white-space:pre;"> </span>';
-    	
-    	 
-    	
-    	if(strtolower($this->objetoAlias)=='reglas'&&$elemento=='valor'){
-    		$cadena .="<br>".$this->listasInput(true);
-    	}
-    	
-    	if(strtolower($this->objetoAlias)=='funciones'&&$elemento=='valor'){
-    		$cadena .="<br>".$this->listasInput(false);
-    	}
     	
     	
     	$cadena .= ' ';
@@ -653,7 +627,7 @@ class Editar {
     	$nombre = 'nombre';
     	$requerido = 'requerido_crear';
     	$codificado = 'codificada';
-    	$autocompletar = 'autocompletar';
+    	$autocompletar = 'autocompletar_crear';
     	
     	//crea formularios
     	foreach ($this->listaAtributosParametros as $elemento){
@@ -671,6 +645,9 @@ class Editar {
     				break;
     			case 'rangeSlider':
     				$cadena .= $this->rangeSliderElemento($elemento[$nombre],$this->setBool($elemento[$requerido]),$this->setBool($elemento[$codificado]));
+    				break;
+    			case 'password':
+    				$cadena .= $this->password($elemento[$nombre],$this->setBool($elemento[$requerido]),$this->setBool($elemento[$codificado]),$this->setBool($elemento[$autocompletar]));
     				break;
     			default:
     				break;
@@ -712,7 +689,7 @@ class Editar {
         return $cadena;
     }
 
-    function editar() {
+    function crear() {
     	
     	//1. Captura  variables de la operacion del $_REQUEST
     	

@@ -17,6 +17,11 @@ use component\GestorHTMLCRUD\Vista\Principal as Principal;
 require_once ('component/GestorHTMLCRUD/Vista/Ver.class.php');
 use component\GestorHTMLCRUD\Vista\Ver as Ver;
 
+require_once ('component/GestorHTMLCRUD/Vista/Crear.class.php');
+use component\GestorHTMLCRUD\Vista\Crear as Crear;
+
+require_once ('component/GestorHTMLCRUD/Vista/Editar.class.php');
+use component\GestorHTMLCRUD\Vista\Editar as Editar;
 
 //CONTROLADOR
 require_once ('component/GestorHTMLCRUD/Clase/Autocompletar.class.php');
@@ -31,6 +36,10 @@ use component\GestoHTMLCRUD\Clase\CambiarEstado as CambiarEstado;
 require_once ('component/GestorHTMLCRUD/Clase/Eliminar.class.php');
 use component\GestoHTMLCRUD\Clase\Eliminar as Eliminar;
 
+require_once ('component/GestorHTMLCRUD/Clase/GuardarDatos.class.php');
+use component\GestoHTMLCRUD\Clase\GuardarDatos as GuardarDatos;
+
+
 class Componente extends Component  {
 	
 
@@ -42,6 +51,11 @@ class Componente extends Component  {
 	private $duplicar;
 	private $cambiarEstado;
 	private $eliminar;
+	private $crear;
+	private $editar;
+	private $guardarDatos;
+	
+	
 	// El componente actua como Fachada
 	
 	/**
@@ -53,10 +67,13 @@ class Componente extends Component  {
          $this->consultarForm =  new Consultar($lenguaje, $idElemento);
 		 $this->principal = new Principal($lenguaje);
 		 $this->ver = new \component\GestoHTMLCRUD\Vista\Ver($lenguaje);
+		 $this->crear = new Crear($lenguaje);
+		 $this->editar = new Editar($lenguaje);
 		 $this->duplicar = new \component\GestoHTMLCRUD\Clase\Duplicar($lenguaje);
 		 $this->autocompletar =  new \component\GestoHTMLCRUD\Clase\Autocompletar($lenguaje);
 		 $this->cambiarEstado =  new \component\GestoHTMLCRUD\Clase\CambiarEstado($lenguaje);
 		 $this->eliminar =  new \component\GestoHTMLCRUD\Clase\Eliminar($lenguaje);
+		 $this->guardarDatos =  new \component\GestoHTMLCRUD\Clase\GuardarDatos($lenguaje);
 	}
 	
 	public function iniciarPrincipal()	{
@@ -153,6 +170,42 @@ class Componente extends Component  {
 	
 	public function eliminar($valor = '')	{
 		$this->eliminar->eliminar($valor );
+	}
+	
+	public function setLenguajeCrear($lenguaje){
+		$this->crear->setLenguaje($lenguaje);
+	}
+	
+	public function setObjetoIdCrear($id)	{
+		$this->crear->setObjetoId($id);
+	}
+	
+	public function crear($valor = '')	{
+		$this->crear->crear($valor );
+	}
+	
+	public function setLenguajeEditar($lenguaje){
+		$this->editar->setLenguaje($lenguaje);
+	}
+	
+	public function setObjetoIdEditar($id)	{
+		$this->editar->setObjetoId($id);
+	}
+	
+	public function editar($valor = '')	{
+		$this->editar->editar($valor );
+	}
+	
+	public function setLenguajeGuardarDatos($lenguaje){
+		$this->guardarDatos->setLenguaje($lenguaje);
+	}
+	
+	public function setObjetoIdGuardarDatos($id)	{
+		$this->guardarDatos->setObjetoId($id);
+	}
+	
+	public function guardarDatos($valor = '')	{
+		$this->guardarDatos->guardarDatos($valor );
 	}
 		
 	

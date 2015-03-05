@@ -94,6 +94,13 @@ class Ver {
     	$this->objetoAliasSingular = $this->cliente->getObjeto($this->objetoId, 'id','ejecutar');;
     	 
     	$this->objetoVisble = $this->setBool($this->cliente->getObjeto($this->objetoId, 'id','visible'));
+    	
+    	$this->objetoConsultar = $this->setBool($this->cliente->getObjeto($this->objetoId, 'id','consultar'));
+    	 
+    	if($this->objetoConsultar==false) {
+    		$this->mensaje->addMensaje("4000","errorOperacionNoPermitida: ".ucfirst('consultar'),'information');
+    		return false;
+    	}
     	 
     	
     	 

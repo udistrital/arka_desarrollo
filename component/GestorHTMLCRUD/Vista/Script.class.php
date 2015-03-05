@@ -267,6 +267,229 @@ class Script {
 	
 					   
 	}
+
+	public function guardarDatos($queryString = "funcion=guardarDatos"){
+	
+		echo "<script type='text/javascript'>\n";
+			
+		?>
+		
+		
+		          function guardarElemento(){
+            
+        	if($("#formularioCreacionEdicion").validationEngine('validate')!=false){
+		        	var data =  $( "#objetosFormulario" ).serialize()+"&"+$( "#identificacionFormulario" ).serialize();
+		        	data += "&"+ $( "#seleccionFormulario" ).serialize();
+		        	data += "&"+ $( "#formularioCreacionEdicion" ).serialize(); 
+
+		    		
+
+					
+					//si esta editando y justificacion sea diferente de ''
+					if($('#justificacion').length>0) data += "&justificacion="+$('#justificacion').val();
+					
+					if($('#selectedItems').val()!=''){
+						if($('#formularioConsulta').length>0) $('#formularioConsulta')[0].reset();
+						if( $('#justificacion').length==0 || $('#justificacion').val()==''){
+
+							
+							justificacion =  '<form id="formJustificacion"><label><span>Justificaci&oacuten</span></label><textarea class="validate[required]" id="justificacion" name = "justificacion"></textarea></form>';
+
+							$(".ui-dialog-content").dialog('destroy').remove();
+							
+							$(justificacion).dialog({
+								
+								dialogClass: "no-close",
+									
+								buttons: {
+							        "Aceptar": function() {
+
+								      if($("#formJustificacion").validationEngine('validate')==false) return false;
+
+							          $( this ).dialog( "close" );
+							          
+							          guardarElemento();
+								      
+							          
+							        },
+							        "Cancelar":function() {
+							        	$( this ).dialog( "close" );
+							        	$(".ui-dialog-content").dialog('destroy').remove();
+
+								        }
+								}
+						   });
+							return 0;	   
+						}
+
+						$(".ui-dialog-content").dialog('destroy').remove();	
+						
+						
+					}
+					
+	                var div = document.getElementById("espacioMensaje");
+					div.innerHTML = '<div id="loading"></div>';
+                    
+					 
+		        	
+					if($('#formularioConsulta').length>0) $('#formularioConsulta')[0].reset();
+
+		        	
+		        	$.ajax({
+			            url: "<?php echo $this->setUrl($queryString);?>",
+			            type:"post",
+			            data:data,
+			            dataType: "html",
+			            success: function(jresp){
+			            	if(jresp.indexOf('Error')>0
+			            	  ||jresp.indexOf('error')>0
+			            	  ||jresp.indexOf('Falló')>0
+			            	  ||jresp.indexOf('Fallo')>0
+			            	  ||jresp.indexOf('fallo')>0){
+			                	div.innerHTML = '';
+			                	$(jresp).dialog();
+			                }else {
+			            	 getFormularioConsulta(true, jresp);
+			            	 $('#selectedItems').val('');
+					       }
+			            }
+			        });
+        	}
+        	
+           }
+		  
+		   
+		   
+		
+		    <?php
+		echo "\n";
+		echo "</script>\n";
+		
+		}
+	
+	
+	public function crear($queryString = "funcion=crear"){
+
+			echo "<script type='text/javascript'>\n";
+			
+			?>
+
+				
+				  function getFormularioCreacion(skip, mensaje){
+			            
+			            idObjeto = $('#idObjeto').val();
+			            if($('#formularioConsulta').length>0) $('#formularioConsulta')[0].reset();
+			            if($('#formularioCreacionEdicion').length>0) $('#formularioCreacionEdicion')[0].reset();
+			            var data =  $( "#objetosFormulario" ).serialize()+"&"+$( "#identificacionFormulario" ).serialize();
+			            if($('#selectedItems').val()!=''&&!skip) data += "&"+ $( "#seleccionFormulario" ).serialize();
+			            
+            
+            
+	            var div = document.getElementById("espacioMensaje");
+				div.innerHTML = '<div id="loading"></div>';
+
+				 
+
+		            $.ajax({
+		            url: "<?php echo $this->setUrl($queryString);?>",
+		            type:"post",
+		            data:data,
+		            dataType: "html",
+		            success: function(jresp){
+		                
+			  			var div = document.getElementById("espacioTrabajo");
+			  			div.innerHTML = jresp;
+	                    tablaConsulta();
+			  			var div = document.getElementById("espacioMensaje");
+			  			if(mensaje&&mensaje.length>0){
+				  			 div.innerHTML=mensaje;
+				  			setTimeout(function() {
+				  		        $("#divMensaje").hide('drop', {}, 500)
+				  		    }, 20000);
+			  			}
+			  			else div.innerHTML="";
+			  			
+			  			$("button").button().click(function(event) {
+	                		event.preventDefault();
+	                	});
+	                				  			
+		            }
+		        });
+
+            
+
+            }
+    
+				
+				
+	        <?php
+		echo "\n";
+		echo "</script>\n";
+
+     }
+     
+     
+
+     public function editar($queryString = "funcion=editar"){
+     
+     	echo "<script type='text/javascript'>\n";
+     		
+     	?>
+     
+     				
+     				  function getFormularioEdicion(skip, mensaje){
+     			            
+     			            idObjeto = $('#idObjeto').val();
+     			            if($('#formularioConsulta').length>0) $('#formularioConsulta')[0].reset();
+     			            if($('#formularioCreacionEdicion').length>0) $('#formularioCreacionEdicion')[0].reset();
+     			            var data =  $( "#objetosFormulario" ).serialize()+"&"+$( "#identificacionFormulario" ).serialize();
+     			            if($('#selectedItems').val()!=''&&!skip) data += "&"+ $( "#seleccionFormulario" ).serialize();
+     			            
+                 
+                 
+     	            var div = document.getElementById("espacioMensaje");
+     				div.innerHTML = '<div id="loading"></div>';
+     
+     				 
+     
+     		            $.ajax({
+     		            url: "<?php echo $this->setUrl($queryString);?>",
+     		            type:"post",
+     		            data:data,
+     		            dataType: "html",
+     		            success: function(jresp){
+     		                
+     			  			var div = document.getElementById("espacioTrabajo");
+     			  			div.innerHTML = jresp;
+     	                    tablaConsulta();
+     			  			var div = document.getElementById("espacioMensaje");
+     			  			if(mensaje&&mensaje.length>0){
+     				  			 div.innerHTML=mensaje;
+     				  			setTimeout(function() {
+     				  		        $("#divMensaje").hide('drop', {}, 500)
+     				  		    }, 20000);
+     			  			}
+     			  			else div.innerHTML="";
+     			  			
+     			  			$("button").button().click(function(event) {
+	                		event.preventDefault();
+	                	});			  			
+     		            }
+     		        });
+     
+                 
+     
+                 }
+         
+     				
+     				
+     	        <?php
+     		echo "\n";
+     		echo "</script>\n";
+     
+          }
+          
+
 	
 	public function ayudasFormulario(){
 		

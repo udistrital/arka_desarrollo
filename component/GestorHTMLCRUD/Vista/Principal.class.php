@@ -117,8 +117,14 @@ class Principal {
 					$this->script->formularioConsulta($operacion['query_string']);
 					break;
 				case 'crear':
+					$listaQueries = explode(",",$operacion['query_string']) ;
+					$this->script->crear($listaQueries[0]);
+					$this->script->guardarDatos($listaQueries[1]);
 					break;
 				case 'editar':
+					$listaQueries = explode(",",$operacion['query_string']) ;
+					$this->script->editar($listaQueries[0]);
+					$this->script->guardarDatos($listaQueries[1]);
 					break;
 				case 'ver':
 					$this->script->ver($operacion['query_string']);

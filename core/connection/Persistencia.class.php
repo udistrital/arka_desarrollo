@@ -254,14 +254,16 @@ class Persistencia {
     		$sqlInsert .= " )";
     		$this->setQuery($sqlInsert);
     		
-    		$insert = $this->ejecutar() ;
-    		 
-    		if($insert ==  false){
+    		$insert = $this->ejecutar('insertar') ;
+
+    		
+    		
+    		if($insert ===  false){
     			$this->mensaje->addMensaje("10","errorInsertar",'error');
     			return false;
     		}
     		
-    		if($this->historico){
+    		if($this->historico===true){
     			$this->justificacion = 'create';
     			if(!$this->historico($arrayFields,$arrayValues)) return false;
     		} 

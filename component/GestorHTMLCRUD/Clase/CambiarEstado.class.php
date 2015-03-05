@@ -94,6 +94,13 @@ class CambiarEstado {
     	$this->objetoAliasSingular = $this->cliente->getObjeto($this->objetoId, 'id','ejecutar');;
     	 
     	$this->objetoVisble = $this->setBool($this->cliente->getObjeto($this->objetoId, 'id','visible'));
+    	
+    	$estado = $this->setBool($this->cliente->getObjeto($this->objetoId, 'id','cambiarestado'));
+    	 
+    	if($estado==false) {
+    		$this->mensaje->addMensaje("4000","errorOperacionNoPermitida: ".ucfirst('Cambiar Estado'),'information');
+    		return false;
+    	}
     	 
     	
     	 

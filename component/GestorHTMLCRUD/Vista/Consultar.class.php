@@ -138,6 +138,11 @@ class Consultar {
     			
     			$this->objetoConsultar = $this->setBool($this->cliente->getObjeto($this->objetoId, 'id','consultar'));
     			
+    			if($this->objetoConsultar==false) {
+    				$this->mensaje->addMensaje("4000","errorOperacionNoPermitida: ".ucfirst('consultar'),'information');
+    				return false;
+    			}
+    			
     			return true;
     	
     }
