@@ -388,9 +388,9 @@ class reportico extends reportico_object {
     var $initial_project = 'arka';
     
 //Con o sin menú de administrador
-    var $initial_execute_mode = 'MENU';
+    var $initial_execute_mode = 'PREPARE';
        
-    //var $initial_execute_mode = FALSE;
+    //var $initial_execute_mode = MENU;
     
     var $initial_report = false;
     var $initial_project_password = false;

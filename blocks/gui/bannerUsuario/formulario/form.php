@@ -34,25 +34,15 @@ class Formulario {
 
     function estructura() {
         // ------------------- Inicio División -------------------------------
-        $esteCampo = 'divGeneral';
+        $esteCampo = 'divGeneral2';
         $atributos ['id'] = $esteCampo;
-        $atributos ['estilo'] = 'divGeneral';
+        $atributos ['estilo'] = 'divGeneral2';
         $atributos ['estiloEnLinea'] = '';
         $atributos ['titulo'] = $this->lenguaje->getCadena($esteCampo . 'Titulo');
-        echo $this->miFormulario->division("inicio", $atributos);
-        {
+        echo $this->miFormulario->division("inicio", $atributos); {
 
             // ------------------- Inicio División -------------------------------
             $esteCampo = 'divLogoNotificador';
-            $atributos ['id'] = $esteCampo;
-            $atributos ['estilo'] = 'divLogoNotificador';
-            $atributos ['estiloEnLinea'] = '';
-            $atributos ['titulo'] = $this->lenguaje->getCadena($esteCampo . 'Titulo');
-            echo $this->miFormulario->division("inicio", $atributos);
-            unset($atributos);
-
-            //--------------------Imagen ---------------------------------------------
-            $esteCampo = 'divLogoArka';
             $atributos ['id'] = $esteCampo;
             $atributos['imagen'] = $this->miConfigurador->getVariableConfiguracion('rutaUrlBloque') . 'css/images/banner_arka2.png';
             $atributos['estilo'] = $esteCampo;
@@ -61,11 +51,6 @@ class Formulario {
             $atributos['alto'] = '5%';
             echo $this->miFormulario->campoImagen($atributos);
             unset($atributos);
-
-            // ---------------------Fin Division -----------------------------------
-            echo $this->miFormulario->division("fin");
-
-            // ------------------- Inicio División -------------------------------
         }
 
         // ---------------------Fin Division -----------------------------------
@@ -73,6 +58,9 @@ class Formulario {
     }
 
     function formPasoVariables() {
+
+        // Rescatar los datos de este bloque
+        $esteBloque = $this->miConfigurador->getVariableConfiguracion("esteBloque");
         // ------------------- SECCION: Paso de variables ------------------------------------------------
 
         /**
@@ -94,7 +82,7 @@ class Formulario {
          * (a) invocando a la variable $_REQUEST ['tiempo'] que se ha declarado en ready.php o
          * (b) asociando el tiempo en que se está creando el formulario
          */
-        $valorCodificado .= "&tiempo=" . $_REQUEST ['tiempo'];
+        $valorCodificado .= "&tiempo=" . time();
         //Paso 2: codificar la cadena resultante
         $valorCodificado = $this->miConfigurador->fabricaConexiones->crypto->codificar($valorCodificado);
 
