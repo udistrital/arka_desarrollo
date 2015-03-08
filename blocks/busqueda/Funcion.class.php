@@ -111,6 +111,7 @@ class Funcion {
     	 
     	$this->gestorHTMLCRUD->setObjetoIdCrear($objetoId);
     	$this->gestorHTMLCRUD->setLenguajeCrear($this->lenguaje);
+    	
     	return $this->gestorHTMLCRUD->crear($objetoId);
     
     }

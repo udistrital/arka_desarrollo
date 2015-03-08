@@ -331,6 +331,40 @@ class Crear {
     	 
     }
     
+    private function checkBox($elemento='elemento', $requerido = false, $codificada =  false, $autocompletar =  false){
+    	$cadena= '';
+    	$cadenaHidden= '';
+    	$valor = '';
+    	$textos = array();
+    	$textos[0] = utf8_encode($this->lenguaje->getCadena ($elemento));
+    	$textos[1] = utf8_encode($this->lenguaje->getCadena ($elemento."Titulo"));
+    	$cadena .='<div class="form-group" >';
+    	 
+    	$cadena .= '<label for="'.$textos[0].'">';
+    	$cadena .= ucfirst(strtolower($textos[0]));
+    	$cadena .= '</label>';
+    	//$cadena .= '<span style="white-space:pre;"> </span>';
+    	 
+        $cadena .= '<input type="checkbox" class="form-control ';
+    	 
+    	if($requerido) $cadena .= ' validate[required] ';
+    	 
+    	$cadena .='" title="'.$textos[1].'" name="'.$elemento.'" id="'.$elemento.'"  placeholder="'.ucfirst($textos[0]).'" ';
+    	 
+    	if(isset($_REQUEST[$elemento])) $valor =' checked ';
+    	//elseif(!isset($_REQUEST[$elemento])&&$codificada) $valor =' onchange="codificarValor(\''.$elemento.'\')" value="" ';
+    	//elseif(isset($_REQUEST[$elemento])&&$codificada) $valor =' onchange="codificarValor(\''.$elemento.'\')" value="'.base64_decode($_REQUEST[$elemento]).'" ';
+    	
+    	 
+    	$cadena .=$valor;
+    	 
+    	$cadena .= '></input>';
+    	$cadena .= '</div>';
+    	 
+    	
+    	return $cadena;
+    }
+    
     private function textElemento($elemento='elemento', $requerido = false, $codificada =  false, $autocompletar =  false){
     	$cadena= '';
     	$cadenaHidden= '';
@@ -649,6 +683,9 @@ class Crear {
     			case 'password':
     				$cadena .= $this->password($elemento[$nombre],$this->setBool($elemento[$requerido]),$this->setBool($elemento[$codificado]),$this->setBool($elemento[$autocompletar]));
     				break;
+    			case 'checkbox':
+    				$cadena .= $this->checkBox($elemento[$nombre],$this->setBool($elemento[$requerido]),$this->setBool($elemento[$codificado]),$this->setBool($elemento[$autocompletar]));
+    				break;
     			default:
     				break;
     		}
@@ -700,6 +737,13 @@ class Crear {
     		$verifica =  false;
     	}
     	
+    	
+    	if($this->objetoCrear==false) {
+    		$this->mensaje->addMensaje("4000","errorOperacionNoPermitida: ".ucfirst('crear'),'information');
+    		echo $this->mensaje->getLastMensaje();
+    		return false;
+    	}
+    	 
     	
         //muestra el formulario
     	echo '<div id="contenedorFormularioCreacion">';

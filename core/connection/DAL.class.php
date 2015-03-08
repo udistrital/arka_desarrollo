@@ -52,6 +52,8 @@ class DAL{
 	private $columnasConsulta;
 	private $groupBy;
 	private $orderBy;
+	private $tmpTipoInputColumna;
+	private $tmpValorColumna;
 	
 	function __construct($tabla = null, $esquema = 'public',$conexion = '') {
 	
@@ -414,6 +416,7 @@ class DAL{
 		
 		foreach($listado as $lista){
 			if(strtolower ($var)==strtolower ($lista[$nombre])){
+				if($nombre==$nombreS) return true;
 				if(isset($lista[$nombreS])) return $lista[$nombreS];
 				if(isset($lista[$seleccion])) return $lista[$seleccion];
 				return false;
@@ -743,6 +746,8 @@ class DAL{
 		
 		//validar si es una lista, si el id de la lista existe
 		$tipoInput = $this->getColumnas($columnaId, 'id', 'input');
+		$this->tmpTipoInputColumna = $tipoInput;
+		$this->tmpValorColumna = $nuevoValor;
 		if($tipoInput===false){
 			$this->mensaje->addMensaje("101","errorInput: ".$colIndex,'error');
 			$this->setConexion($conexion);
@@ -779,7 +784,7 @@ class DAL{
 			
 			$this->setConexion($conexionObjeto);
 			
-			$validacionIdEnLista = (bool) call_user_func_array(array($this,$ejecucion), array($nuevoValor,'id','id'));
+			$validacionIdEnLista = (bool) $this->$ejecucion($nuevoValor,'id','id');
 			
 			if($validacionIdEnLista===false){
 				$this->mensaje->addMensaje("101","errorFk: ".$colIndex,'error');
@@ -810,6 +815,11 @@ class DAL{
 			
 			return $colIndex;
     } 
+    
+    private function setTextoBoleano($valor=false){
+    	if($valor===true||$valor==1) return 'true';
+    	else return 'false';
+    }
 	
 	private function procesarParametros($parametros,$validar=true){
 			
@@ -829,19 +839,17 @@ class DAL{
 		foreach($param as $a=>$b){
 			
 			
-			if(!$this->validarColumna($a, $b)) {
-				echo $this->getQuery();
-				echo $this->mensaje->getLastMensaje();
-			}
-			 
-			
 			$b= trim($b);
 			
 		    $colIndex =  $this->getNombreColumnaReal($a);
 		    
 		    
+		    
+		    
 		    if($colIndex===false&&$validar===true) continue;
 			
+		    	
+		    
 			$tabla = $this->tabla;
 			$historico = $this->historico;
 			$prefijo = $this->prefijoColumnas;
@@ -853,9 +861,9 @@ class DAL{
 			$this->setAmbiente($tabla, $historico, $prefijo);
 
 			
-			if(!$validacion&&$validar===true) {
+			if($validacion===false&&$validar===true) {
 				
-				return false;
+				continue;
 			}
 			
 			
@@ -865,6 +873,12 @@ class DAL{
 					if(!$limiteFecha) return false;
 					
 					$valor = "'".$limiteFecha."'";
+					break;
+				case is_bool($this->tmpValorColumna):
+					$valor = $this->setTextoBoleano($b);
+					break;
+				case is_int($this->tmpValorColumna):
+					$valor = $b;
 					break;
 				default:
 					$valor = "'".$b."'";
@@ -1070,7 +1084,7 @@ class DAL{
 				$creacion =  $this->persistencia->create($this->parametros,$this->valores);
 				
 				if($creacion==false){
-					
+					var_dump($this->getQuery());
 					$this->mensaje->addMensaje("101","errorCreacion: ".$this->tablaAlias,'error');
 					return false;
 				}

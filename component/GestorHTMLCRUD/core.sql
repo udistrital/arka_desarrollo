@@ -210,7 +210,7 @@ ALTER TABLE public.arka_objetos
   columnas_alias text NOT NULL,
   columnas_input text NOT NULL DEFAULT FALSE,
   tipo_dato_id integer NOT NULL DEFAULT 3,
-  grupo_aplicacion_id integer NOT NULL,
+  grupo_aplicacion_id integer DEFAULT 1,
   objetos_id integer NOT NULL DEFAULT 0,
   columnas_conexion_nombre text NOT NULL DEFAULT 'estructura',
   columnas_consultar bool NOT NULL DEFAULT FALSE,

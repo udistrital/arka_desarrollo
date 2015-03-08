@@ -125,6 +125,9 @@ class GuardarDatos {
     				if(isset($_REQUEST[$nombreObjeto])&&$datosColumna['input']=='password')
     					$this->listaParametros[$nombreObjeto] = $this->miConfigurador->fabricaConexiones->crypto->codificarClave ($_REQUEST[$nombreObjeto]);
     				
+    				if(isset($_REQUEST[$nombreObjeto])&&$datosColumna['input']=='checkbox')
+    					$this->listaParametros[$nombreObjeto] = $this->setCheckboxValor ($_REQUEST[$nombreObjeto]);
+    				
     				
     				$this->listaAtributosParametros[] = $datosColumna;
     				
@@ -158,6 +161,11 @@ class GuardarDatos {
     
     private function setBool($valor = ''){
     	if($valor=='t') return true;
+    	return false;
+    }
+    
+    private function setCheckboxValor($valor = ''){
+    	if($valor=='on') return true;
     	return false;
     }
     
