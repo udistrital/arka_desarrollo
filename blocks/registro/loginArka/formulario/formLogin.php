@@ -12,6 +12,7 @@ class Formulario {
     var $miConfigurador;
     var $lenguaje;
     var $miFormulario;
+    var $miSesion;
 
     function __construct($lenguaje, $formulario) {
 
@@ -22,11 +23,15 @@ class Formulario {
         $this->lenguaje = $lenguaje;
 
         $this->miFormulario = $formulario;
+        
+        $this->miSesion= \Sesion::singleton();
     }
 
     function formulario() {
 
-        $directorioImagenes = $this->miConfigurador->getVariableConfiguracion("rutaUrlBloque") . "/imagenes";
+    	if(isset($_COOKIE[\Sesion::APLICATIVO])) $this->miSesion->terminarSesion($_COOKIE[\Sesion::APLICATIVO]);
+        
+    	$directorioImagenes = $this->miConfigurador->getVariableConfiguracion("rutaUrlBloque") . "/imagenes";
         // Rescatar los datos de este bloque
         $esteBloque = $this->miConfigurador->getVariableConfiguracion("esteBloque");
         ?>

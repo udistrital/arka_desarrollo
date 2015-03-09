@@ -104,12 +104,9 @@ if (! class_exists ( '\\bloquesModelo\\bloqueModelo1\\Bloque' )) {
                 
                 if (! isset ( $_REQUEST ['action'] )) {
                     
-                    //$this->miFrontera->frontera ();
                                 $gh =  new GestorHTMLCRUD($this->miLenguaje);
                     			$gh->setOperaciones($this->operaciones());
-                    			$gh->setObjetos('1,2,8,10,17,18');
-								//var_dump($gh->setObjetos('3,5'));exit;
-								//$gh->setObjetos('3');
+                    			$gh->setObjetos('17,18');
 								$gh->setFuncionInicio('if($(\'#objetoId\').val()!=0) 	getFormularioConsulta(true);');
 								$gh->setBloque($this->bloqueNombre,$this->bloqueGrupo);
 								$gh->iniciarPrincipal();
@@ -127,9 +124,7 @@ if (! class_exists ( '\\bloquesModelo\\bloqueModelo1\\Bloque' )) {
                         $this->miConfigurador->setVariableConfiguracion ( 'errorFormulario', $miBloque ['nombre'] );
                     
                     }
-                    /*if (! isset ( $_REQUEST ['procesarAjax'] )) {
-                       $this->miFrontera->frontera ();
-                    }*/
+                    
                 
                 }
             }

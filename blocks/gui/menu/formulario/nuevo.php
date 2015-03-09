@@ -142,6 +142,15 @@ $enlaceReportico ['enlace'] .= "&usuario=" . $miSesion->getSesionUsuarioId();
 $enlaceReportico ['urlCodificada'] = $this->miConfigurador->fabricaConexiones->crypto->codificar_url($enlaceReportico ['enlace'], $directorio);
 $enlaceReportico ['nombre'] = "Reportes Inventarios";
 
+
+// gestion usuarios
+$enlaceUsuarios ['enlace'] = "pagina=gestionUsuarios";
+$enlaceUsuarios ['enlace'] .= "&usuario=" . $miSesion->getSesionUsuarioId();
+
+$enlaceUsuarios ['urlCodificada'] = $this->miConfigurador->fabricaConexiones->crypto->codificar_url($enlaceUsuarios ['enlace'], $directorio);
+$enlaceUsuarios ['nombre'] = "Gesti�n Usuarios";
+
+
 // Fin de la sesión
 
 $enlaceFinSesion['enlace'] = "pagina=index";
@@ -214,6 +223,13 @@ $enlaceFinSesion['nombre'] = "Cerrar Sesión";
 
  <li>
             <a href="<?php echo$enlaceReportico['urlCodificada'] ?>"><?php echo $enlaceReportico['nombre'] ?></a>
+        </li>
+        
+        <li>
+            <a href="#">Usuarios</a>
+            <ul class="dl-submenu">
+                <li><a href="<?php echo $enlaceUsuarios['urlCodificada'] ?>"><?php echo utf8_encode($enlaceUsuarios['nombre']) ?></a></li>
+            </ul>
         </li>
 
         <li>

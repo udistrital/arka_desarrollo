@@ -176,7 +176,9 @@ class Bootstrap {
         $this->autenticador->setPagina ( $pagina );
         
         if ($this->autenticador->iniciarAutenticacion ()) {
-            
+
+        	
+        	
             /**
              * Procesa la página solicitada por el usuario
              */

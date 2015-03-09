@@ -62,8 +62,9 @@ class FormProcessor {
     				if ($registro [0] ['clave'] == $variable ["clave"]) {
     					
     					// 1. Crear una sesión de trabajo
+    					$this->miSesion->setIdUsuario($registro [0] ["id_usuario"]);
     					$estaSesion = $this->miSesion->crearSesion ( $registro [0] ["id_usuario"] );
-    					    						
+    					
     					$arregloLogin = array (
     							'autenticacionExitosa',
     							$registro [0] ["id_usuario"],
