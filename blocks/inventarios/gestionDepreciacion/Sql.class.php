@@ -169,7 +169,6 @@ class Sql extends \Sql {
                 $cadenaSql.= " total_iva_con";
                 $cadenaSql.= " FROM elemento, salida ";
                 $cadenaSql.= " WHERE elemento.estado=TRUE ";
-                $cadenaSql.= " AND elemento.estado_asignacion=FALSE ";
                 $cadenaSql.= " AND salida.id_entrada=elemento.id_entrada ";
                 $cadenaSql.= " AND nivel='" . $variable . "' ";
                 $cadenaSql.= " ORDER BY id_elemento ASC ";
