@@ -74,7 +74,7 @@ class registrarForm {
 		}
 		
 		if (isset ( $_REQUEST ['proveedor'] ) && $_REQUEST ['proveedor'] != '') {
-			$dependencia = $_REQUEST ['proveedor'];
+			$proveedor = $_REQUEST ['proveedor'];
 		} else {
 			$proveedor = '';
 		}

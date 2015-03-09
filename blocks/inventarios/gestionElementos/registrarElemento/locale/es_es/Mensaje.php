@@ -2,6 +2,10 @@
 <?php
 $this->idioma ["noDefinido"] = "Etiqueta no esta definida en locale/es_es/Mensaje.php";
 
+$this->idioma ["numero_entrada"] ="(ID)Número Entrada: ";
+$this->idioma ["numero_entradaTitulo"] ="Ingrese Número Entrada";
+
+
 $this->idioma ["tipo_registro"] ="Tipo de Registro	";
 
 $this->idioma ["documentos_elementos"] ="Archivo de Elementos";
@@ -26,6 +30,10 @@ $this->idioma ["placa_devTitulo"] ="Ingrese Número de Placa";
 $this->idioma ["tipo_poliza"] ="Tipo de Poliza : ";
 $this->idioma ["tipo_polizaTitulo"] ="Seleccione Tipo de Poliza";
 
+
+
+$this->idioma ["nivel"] ="Nivel de Inventarios : ";
+$this->idioma ["nivelTitulo"] ="Seleccione Nivel de Inventarios";
 
 
 $this->idioma ["tipo_bien"] ="Tipo de Bien : ";

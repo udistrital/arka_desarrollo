@@ -20,6 +20,7 @@ class registrarForm {
 		$this->miSql = $sql;
 	}
 	function miForm() {
+		
 		// Rescatar los datos de este bloque
 		$esteBloque = $this->miConfigurador->getVariableConfiguracion ( "esteBloque" );
 		
@@ -193,6 +194,37 @@ class registrarForm {
 					$atributos ['leyenda'] = "Información Respecto al Elemento";
 					echo $this->miFormulario->agrupacion ( 'inicio', $atributos );
 					{
+									
+						// ---------------- CONTROL: Cuadro Lista --------------------------------------------------------
+						
+						$esteCampo = 'nivel';
+						$atributos ['columnas'] = 1;
+						$atributos ['nombre'] = $esteCampo;
+						$atributos ['id'] = $esteCampo;
+						$atributos ['seleccion'] = - 1;
+						$atributos ['evento'] = '';
+						$atributos ['deshabilitado'] = false;
+						$atributos ["etiquetaObligatorio"] = true;
+						$atributos ['tab'] = $tab;
+						$atributos ['tamanno'] = 1;
+						$atributos ['estilo'] = 'jqueryui';
+						$atributos ['validar'] = 'required';
+						$atributos ['limitar'] = false;
+						$atributos ['etiqueta'] = $this->lenguaje->getCadena ( $esteCampo );
+						$atributos ['anchoEtiqueta'] = 213;
+						
+						$atributos ['cadena_sql'] = $this->miSql->getCadenaSql("consultar_nivel_inventario");
+						$matrizItems = $esteRecursoDB->ejecutarAcceso ( $atributos ['cadena_sql'], "busqueda" );
+						
+						$atributos ['matrizItems'] = $matrizItems;
+						
+						// Utilizar lo siguiente cuando no se pase un arreglo:
+						// $atributos['baseDatos']='ponerAquiElNombreDeLaConexión';
+						// $atributos ['cadena_sql']='ponerLaCadenaSqlAEjecutar';
+						$tab ++;
+						$atributos = array_merge ( $atributos, $atributosGlobales );
+						echo $this->miFormulario->campoCuadroLista ( $atributos );
+						unset ( $atributos ); 
 						
 						// ---------------- CONTROL: Cuadro Lista --------------------------------------------------------
 						
@@ -225,6 +257,9 @@ class registrarForm {
 						echo $this->miFormulario->campoCuadroLista ( $atributos );
 						unset ( $atributos );
 						
+						
+						
+					
 						
 						
 						$esteCampo = 'marca';
@@ -844,6 +879,7 @@ class registrarForm {
 			$valorCodificado .= "&bloque=" . $esteBloque ['nombre'];
 			$valorCodificado .= "&bloqueGrupo=" . $esteBloque ["grupo"];
 			$valorCodificado .= "&opcion=registrar";
+			$valorCodificado .= "&entrada=".$_REQUEST['numero_entrada'];
 
 			
 			/**

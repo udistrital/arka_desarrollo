@@ -42,9 +42,7 @@ class Frontera {
 		$this->ruta = $this->miConfigurador->getVariableConfiguracion ( "rutaBloque" );
 		
 		$this->miFormulario = new \FormularioHtml ();
-		 
-		 
-		 		
+		
 		if (isset ( $_REQUEST ['opcion'] )) {
 			
 			switch ($_REQUEST ['opcion']) {
@@ -52,10 +50,18 @@ class Frontera {
 				case "mensaje" :
 					include_once ($this->ruta . "/formulario/mensaje.php");
 					break;
+				
+				case "ConsultarEntrada" :
+					include_once ($this->ruta . "/formulario/resultado.php");
+					break;
+				
+				case "cargarElemento" :
+					include_once ($this->ruta . "/formulario/registro.php");
+					break;
 			}
 		} else {
 			$_REQUEST ['opcion'] = "mostrar";
-			include_once ($this->ruta . "/formulario/registro.php");
+			include_once ($this->ruta . "/formulario/consulta.php");
 		}
 	}
 }

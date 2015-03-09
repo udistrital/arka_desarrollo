@@ -40,7 +40,7 @@
  $('#<?php echo $this->campoSeguro('numero_factura')?>').attr('disabled','');
  $('#<?php echo $this->campoSeguro('fecha_factura')?>').attr('disabled','');
  
- 
+ $("#<?php echo $this->campoSeguro('nivel')?>").select2();
  $("#<?php echo $this->campoSeguro('tipo_registro')?>").select2();
  $("#<?php echo $this->campoSeguro('tipo_bien')?>").select2();
  $("#<?php echo $this->campoSeguro('iva')?>").select2();

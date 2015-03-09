@@ -172,7 +172,7 @@ class Sql extends \Sql {
 			
 			case "consultarElementoParticular" :
 				$cadenaSql = " SELECT ";
-				$cadenaSql .= "tipo_bien, descripcion, cantidad, ";
+				$cadenaSql .= "nivel,tipo_bien, descripcion, cantidad, ";
 				$cadenaSql .= "unidad, valor, iva, ajuste, bodega, subtotal_sin_iva, total_iva,";
 				$cadenaSql .= "total_iva_con, placa, tipo_poliza, fecha_inicio_pol, fecha_final_pol, ";
 				$cadenaSql .= "marca, serie ";
@@ -216,6 +216,13 @@ class Sql extends \Sql {
 				
 				break;
 			
+			case "consultar_nivel_inventario" :
+				
+				$cadenaSql = "SELECT id_catalogo,(codigo||' - '||nombre) AS nivel ";
+				$cadenaSql .= "FROM catalogo_elemento ;";
+				
+				break;
+			
 			// SELECT id_elemento, fecha_registro, tipo_bien, descripcion, cantidad,
 			// unidad, valor, iva, ajuste, bodega, subtotal_sin_iva, total_iva,
 			// total_iva_con, placa, tipo_poliza, fecha_inicio_pol, fecha_final_pol,
@@ -239,7 +246,8 @@ class Sql extends \Sql {
 				$cadenaSql .= " total_iva='" . $variable [9] . "', ";
 				$cadenaSql .= " total_iva_con='" . $variable [10] . "', ";
 				$cadenaSql .= " marca='" . $variable [11] . "', ";
-				$cadenaSql .= " serie='" . $variable [12] . "'  ";
+				$cadenaSql .= " serie='" . $variable [12] . "',  ";
+				$cadenaSql .= " nivel='" . $variable [14] . "'  ";
 				$cadenaSql .= "  WHERE id_elemento='" . $variable [13] . "';";
 				
 				break;
@@ -264,7 +272,8 @@ class Sql extends \Sql {
 				$cadenaSql .= " fecha_inicio_pol='" . $variable [12] . "',  ";
 				$cadenaSql .= " fecha_final_pol='" . $variable [13] . "',  ";
 				$cadenaSql .= " marca='" . $variable [14] . "', ";
-				$cadenaSql .= " serie='" . $variable [15] . "' ";
+				$cadenaSql .= " serie='" . $variable [15] . "', ";
+				$cadenaSql .= " nivel='" . $variable [17] . "' ";
 				$cadenaSql .= "  WHERE id_elemento='" . $variable [16] . "';";
 				
 				break;

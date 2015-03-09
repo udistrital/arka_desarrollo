@@ -47,7 +47,8 @@ class RegistradorOrden {
 					$_REQUEST ['total_iva_con'],
 					$_REQUEST ['marca'],
 					$_REQUEST ['serie'],
-					$_REQUEST['id_elemento']
+					$_REQUEST['id_elemento'],
+					$_REQUEST ['nivel']
 			);
 				
 			
@@ -75,7 +76,8 @@ class RegistradorOrden {
 					$_REQUEST ['total_iva_con'],
 					$_REQUEST ['marca'],
 					$_REQUEST ['serie'],
-					$_REQUEST['id_elemento']
+					$_REQUEST['id_elemento'],
+					$_REQUEST ['nivel']
 			);
 				
 			$cadenaSql = $this->miSql->getCadenaSql ( 'actualizar_elemento_tipo_1', $arreglo );
@@ -101,7 +103,8 @@ class RegistradorOrden {
 						'0001-01-01',
 						$_REQUEST ['marca'],
 						$_REQUEST ['serie'],
-						$_REQUEST['id_elemento']
+						$_REQUEST['id_elemento'],
+						$_REQUEST ['nivel']
 				);
 			} else if ($_REQUEST ['tipo_poliza'] == 2) {
 				$arreglo = array (
@@ -121,7 +124,8 @@ class RegistradorOrden {
 						$_REQUEST ['fecha_final'],
 						$_REQUEST ['marca'],
 						$_REQUEST ['serie'],
-						$_REQUEST['id_elemento']
+						$_REQUEST['id_elemento'],
+						$_REQUEST ['nivel']
 				);
 			}
 				

@@ -158,17 +158,18 @@ class Sql extends \Sql {
 				$cadenaSql .= "JOIN proveedor ON proveedor.id_proveedor = entrada.proveedor ";
 				$cadenaSql .= "WHERE 1=1";
 				if ($variable [0] != '') {
-					$cadenaSql .= " AND fecha_registro BETWEEN CAST ( '" . $variable [4] . "' AS DATE) ";
-					$cadenaSql .= " AND  CAST ( '" . $variable [5] . "' AS DATE)  ";
-				}
-				if ($variable [2] != '') {
 					$cadenaSql .= " AND id_entrada = '" . $variable [0] . "'";
 				}
-				if ($variable [3] != '') {
+				if ($variable [1] != '') {
 					$cadenaSql .= " AND  nit= '" . $variable [1] . "'";
 				}
-				if ($variable [4] != '') {
-					$cadenaSql .= " AND  nombre= '" . $variable [3] . "'";
+				if ($variable [2] != '') {
+					$cadenaSql .= " AND  nombre= '" . $variable [2] . "'";
+				}
+				
+				if ($variable [3] != '') {
+					$cadenaSql .= " AND fecha_registro BETWEEN CAST ( '" . $variable [3] . "' AS DATE) ";
+					$cadenaSql .= " AND  CAST ( '" . $variable [4] . "' AS DATE)  ";
 				}
 				
 				break;
@@ -186,11 +187,10 @@ class Sql extends \Sql {
 				$cadenaSql .= "nit, razon_social ,estado_entrada ";
 				$cadenaSql .= "FROM entrada ";
 				$cadenaSql .= "JOIN proveedor ON proveedor.id_proveedor = entrada.proveedor ";
-				$cadenaSql .= "WHERE 1=1";
-				$cadenaSql .= " AND id_entrada = '" . $variable [0] . "'";
+				$cadenaSql .= "WHERE ";
+				$cadenaSql .= " id_entrada = '" . $variable. "';";
 				
 				break;
-
 			
 			case "actualizarEstado" :
 				$cadenaSql = " UPDATE entrada ";
@@ -198,7 +198,6 @@ class Sql extends \Sql {
 				$cadenaSql .= "  WHERE id_entrada='" . $variable [0] . "';";
 				
 				break;
-	
 		}
 		return $cadenaSql;
 	}
