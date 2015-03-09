@@ -27,11 +27,14 @@ $this->idioma ["claseTitulo"] ="Seleccione Clase de Entrada";
 $this->idioma ["id_entradaR"] ="(ID)Número Entrada : ";
 $this->idioma ["id_entradaRTitulo"] ="Ingrese Id de Entrada";
 
-$this->idioma ["id_salida"] ="(ID)Número Salida : ";
-$this->idioma ["id_salidaTitulo"] ="Ingrese Id de Salida";
+$this->idioma ["id_salidaS"] ="(ID)Número Salida : ";
+$this->idioma ["id_salidaSTitulo"] ="Ingrese Id de Salida";
 
-$this->idioma ["id_hurto"] ="(ID)Número Hurto : ";
-$this->idioma ["id_hurtoTitulo"] ="Ingrese Id de Hurto	";
+$this->idioma ["id_salidaR"] ="(ID)Número Salida : ";
+$this->idioma ["id_salidaRTitulo"] ="Ingrese Id de Salida";
+
+$this->idioma ["id_hurtoR"] ="(ID)Número Hurto : ";
+$this->idioma ["id_hurtoRTitulo"] ="Ingrese Id de Hurto	";
 
 $this->idioma ["actoAdministrativo"] ="Acto Administrativo : ";
 $this->idioma ["actoAdministrativoTitulo"] ="Carge Acto Administraivo de la Donación";
@@ -49,15 +52,30 @@ $this->idioma ["acta_sobranteTitulo"] ="Carge Archivo Acta";
 $this->idioma ["observaciones_produccion"] ="Observaciones : ";
 $this->idioma ["observaciones_produccionTitulo"] ="Ingrese Observaciones";
 
-$this->idioma ["acta_produccion"] ="Acta : ";
-$this->idioma ["acta_produccionTitulo"] ="Carge Archivo Acta";
+
+$this->idioma ["observaciones_reposicion"] ="Observaciones : ";
+$this->idioma ["observaciones_reposicionTitulo"] ="Ingrese Observaciones";
+
+$this->idioma ["id_entradaS"] ="(ID)Número Entrada: ";
+$this->idioma ["id_entradaSTitulo"] ="Ingrese (ID)Número Entrada";
+
+$this->idioma ["num_placa"] ="Número Placa: ";
+$this->idioma ["num_placaTitulo"] ="Ingrese Número Placa";
+
+
+$this->idioma ["valor_sobrante"] ="Valor ($) : ";
+$this->idioma ["valor_sobranteTitulo"] ="Ingrese Valor Sobrante";
+
+
+$this->idioma ["acta_produccion"] ="Acta Producción Propia: ";
+$this->idioma ["acta_produccionTitulo"] ="Seleccione Archivo de Acta";
 
 
 
 $this->idioma ["observaciones_recuperacion"] ="Observaciones : ";
 $this->idioma ["observaciones_recuperacionTitulo"] ="Ingrese Observaciones";
 
-$this->idioma ["acta_recuperacion"] ="Acta : ";
+$this->idioma ["acta_recuperacion"] ="Acta Recuperación : ";
 $this->idioma ["acta_recuperacionTitulo"] ="Carge Archivo Acta";
 
 $this->idioma ["tipo_contrato"] ="Tipo Contrato : ";

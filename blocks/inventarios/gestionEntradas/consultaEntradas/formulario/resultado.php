@@ -76,35 +76,31 @@ class registrarForm {
 			$numeroEntrada = '';
 		}
 		
-		if (isset ( $_REQUEST ['nit'] ) && $_REQUEST ['nit'] != '') {
-			$nit = $_REQUEST ['nit'];
-		} else {
-			$nit = '';
-		}
 		
-		if (isset ( $_REQUEST ['proveedor'] ) && $_REQUEST ['proveedor'] != '') {
-			$proveedor = $_REQUEST ['proveedor'];
+
+		
+		if (isset ( $_REQUEST ['estado'] ) && $_REQUEST ['estado'] != '') {
+			$estado = $_REQUEST ['estado'];
 		} else {
-			$proveedor = '';
+			$estado = '';
 		}
 		
 		
 		
 		$arreglo = array (
 				$numeroEntrada,
-				$nit,
-				$proveedor,
 				$fechaInicio,
-				$fechaFinal
+				$fechaFinal,
+				$estado
 			
 		);
-	
+		
+
 	 
 		$cadenaSql = $this->miSql->getCadenaSql ( 'consultarEntrada',$arreglo );
-		
-		
-		
+	
 		$entrada = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
+		
 		 
 		
 		// ---------------- SECCION: Parámetros Generales del Formulario ----------------------------------
@@ -180,8 +176,7 @@ class registrarForm {
                 <tr>
                    <th># Número Entrada</th>
                     <th>Fecha Registro </th>
-                    <th>Nit</th>
-					<th>Proveedor</th>
+                    <th>Estado Entrada</th>
 			        <th>Cambiar Estado</th>
                 </tr>
             </thead>
@@ -199,7 +194,6 @@ class registrarForm {
                     <td><center>" . $entrada [$i] [0] . "</center></td>
                     <td><center>" . $entrada [$i] [1] . "</center></td>
                     <td><center>" . $entrada [$i] [2] . "</center></td>
-                    <td><center>" . $entrada [$i] [3] . "</center></td>
                     <td><center>
                     	<a href='".$variable."'>
                             <img src='" . $rutaBloque . "/css/images/cambiar.png' width='15px'>

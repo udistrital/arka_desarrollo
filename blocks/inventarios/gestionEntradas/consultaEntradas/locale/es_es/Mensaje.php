@@ -17,8 +17,8 @@ $this->idioma ["numero_entradaM"] ="(ID)Número Entrada: ";
 
 
 
-$this->idioma ["nit"] ="Nit : ";
-$this->idioma ["nitTitulo"] ="Ingrese Nit";
+$this->idioma ["clase"] ="Clase Entrada : ";
+
 
 $this->idioma ["nitM"] ="Nit : ";
 
@@ -31,7 +31,7 @@ $this->idioma ["fecha_registroM"] ="Fecha Registro:";
 
 
 
-$this->idioma ["estado"] ="Estado de Alamacén:";
+$this->idioma ["estado"] ="Estado de Almacén:";
 $this->idioma ["estadoTitulo"] ="Seleccione Estado Almacén";
 
 

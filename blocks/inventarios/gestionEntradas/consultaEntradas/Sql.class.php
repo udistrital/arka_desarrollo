@@ -149,27 +149,38 @@ class Sql extends \Sql {
 			 * Clausulas Del Caso Uso.
 			 */
 			
-			case "consultarEntrada" :
+			case "seleccion_proveedor" :
+				$cadenaSql = " SELECT ";
+				$cadenaSql .= " id_proveedor,";
+				$cadenaSql .= " nit_proveedor ||' - '|| razon_social as proveedor ";
+				$cadenaSql .= " FROM";
+				$cadenaSql .= " proveedor  ";
+				$cadenaSql .= " UNION SELECT ";
+				$cadenaSql .= " id_proveedor_n,";
+				$cadenaSql .= " nit_proveedor ||' - '|| razon_social as proveedor ";
+				$cadenaSql .= " FROM";
+				$cadenaSql .= " proveedor_nuevo ;";
 				
+				break;
+			
+			case "consultarEntrada" :
 				$cadenaSql = "SELECT DISTINCT ";
 				$cadenaSql .= "id_entrada, fecha_registro,  ";
-				$cadenaSql .= "nit, razon_social  ";
+				$cadenaSql .= " descripcion  ";
 				$cadenaSql .= "FROM entrada ";
-				$cadenaSql .= "JOIN proveedor ON proveedor.id_proveedor = entrada.proveedor ";
-				$cadenaSql .= "WHERE 1=1";
+				$cadenaSql .= "JOIN estado_entrada ON estado_entrada.id_estado = entrada.estado_entrada ";
+				$cadenaSql .= "WHERE 1=1 ";
 				if ($variable [0] != '') {
 					$cadenaSql .= " AND id_entrada = '" . $variable [0] . "'";
 				}
+				
 				if ($variable [1] != '') {
-					$cadenaSql .= " AND  nit= '" . $variable [1] . "'";
-				}
-				if ($variable [2] != '') {
-					$cadenaSql .= " AND  nombre= '" . $variable [2] . "'";
+					$cadenaSql .= " AND fecha_registro BETWEEN CAST ( '" . $variable [1] . "' AS DATE) ";
+					$cadenaSql .= " AND  CAST ( '" . $variable [2] . "' AS DATE)  ";
 				}
 				
 				if ($variable [3] != '') {
-					$cadenaSql .= " AND fecha_registro BETWEEN CAST ( '" . $variable [3] . "' AS DATE) ";
-					$cadenaSql .= " AND  CAST ( '" . $variable [4] . "' AS DATE)  ";
+					$cadenaSql .= " AND estado_entrada = '" . $variable [3] . "'";
 				}
 				
 				break;
@@ -183,12 +194,12 @@ class Sql extends \Sql {
 			case "consultarEstadoEntradas" :
 				
 				$cadenaSql = "SELECT DISTINCT ";
-				$cadenaSql .= "id_entrada, fecha_registro,  ";
-				$cadenaSql .= "nit, razon_social ,estado_entrada ";
+				$cadenaSql .= "id_entrada, fecha_registro,descripcion ";
+				$cadenaSql .= ",estado_entrada ";
 				$cadenaSql .= "FROM entrada ";
-				$cadenaSql .= "JOIN proveedor ON proveedor.id_proveedor = entrada.proveedor ";
+				$cadenaSql .= "JOIN clase_entrada ON clase_entrada.id_clase = entrada.clase_entrada ";
 				$cadenaSql .= "WHERE ";
-				$cadenaSql .= " id_entrada = '" . $variable. "';";
+				$cadenaSql .= " id_entrada = '" . $variable . "';";
 				
 				break;
 			
