@@ -36,11 +36,20 @@ class registrarForm {
 		 * $atributos= array_merge($atributos,$atributosGlobales);
 		 */
 		
+		
 		for($i = 0; $i <= 200; $i ++) {
 			
 			if (isset ( $_REQUEST ['item' . $i] )) {
 				
 				$items [] = $_REQUEST ['item' . $i];
+			}
+		}
+		
+		for($i = 0; $i <= 200; $i ++) {
+				
+			if (isset ( $_REQUEST ['cantidadAsignar' . $i] )) {
+		
+				$cantidad [] = $_REQUEST ['cantidadAsignar' . $i];
 			}
 		}
 		
@@ -63,13 +72,13 @@ class registrarForm {
 		
 		// ___________________________________________________________________________________
 		
-		$cadenaSql = $this->miSql->getCadenaSql ( 'consultarEntradaParticular', $_REQUEST ['numero_entrada'] );
+// 		$cadenaSql = $this->miSql->getCadenaSql ( 'consultarEntradaParticular', $_REQUEST ['numero_entrada'] );
 		
-		$entrada = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
+// 		$entrada = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
 		
-		$cadenaSql = $this->miSql->getCadenaSql ( 'consulta_elementos', $entrada [0] [12] );
+// 		$cadenaSql = $this->miSql->getCadenaSql ( 'consulta_elementos', $entrada [0] [12] );
 		
-		$elementos = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
+// 		$elementos = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
 		
 		// ---------------- SECCION: Parámetros Generales del Formulario ----------------------------------
 		$esteCampo = $esteBloque ['nombre'];
@@ -330,6 +339,7 @@ class registrarForm {
 			$valorCodificado .= "&opcion=registrar";
 			$valorCodificado .= "&numero_entrada=" . $_REQUEST ['numero_entrada'];
 			$valorCodificado .= "&items=" . serialize ( $items );
+			$valorCodificado .= "&cantidad=" . serialize ( $cantidad );
 			
 			/**
 			 * SARA permite que los nombres de los campos sean dinámicos.

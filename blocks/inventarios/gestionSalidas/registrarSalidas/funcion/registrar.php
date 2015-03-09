@@ -24,6 +24,13 @@ class RegistradorOrden {
 		$this->miFuncion = $funcion;
 	}
 	function procesarFormulario() {
+		
+		
+		
+		
+		
+		
+		
 		$fechaActual = date ( 'Y-m-d' );
 		
 		$conexion = "inventarios";

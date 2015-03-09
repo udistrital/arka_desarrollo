@@ -150,6 +150,35 @@ class Sql extends \Sql {
 			 */
 			
 			case "consultarEntrada" :
+				$cadenaSql = "SELECT DISTINCT ";
+				$cadenaSql .= "id_entrada, fecha_registro,  ";
+				$cadenaSql .= " descripcion  ";
+				$cadenaSql .= "FROM entrada ";
+				$cadenaSql .= "JOIN clase_entrada ON clase_entrada.id_clase = entrada.clase_entrada ";
+				$cadenaSql .= "WHERE 1=1 ";
+				if ($variable [0] != '') {
+					$cadenaSql .= " AND id_entrada = '" . $variable [0] . "'";
+				}
+				
+				if ($variable [1] != '') {
+					$cadenaSql .= " AND fecha_registro BETWEEN CAST ( '" . $variable [1] . "' AS DATE) ";
+					$cadenaSql .= " AND  CAST ( '" . $variable [2] . "' AS DATE)  ";
+				}
+				
+				if ($variable [3] != '') {
+					$cadenaSql .= " AND clase_entrada = '" . $variable [3] . "'";
+				}
+				
+				break;
+			
+			case "clase_entrada" :
+				
+				$cadenaSql = "SELECT ";
+				$cadenaSql .= "id_clase, descripcion  ";
+				$cadenaSql .= "FROM clase_entrada;";
+				break;
+			
+			case "consultarEntrada" :
 				
 				$cadenaSql = "SELECT DISTINCT ";
 				$cadenaSql .= "id_entrada, fecha_registro,  ";
@@ -177,10 +206,9 @@ class Sql extends \Sql {
 			case "consultarEntradaParticular" :
 				
 				$cadenaSql = "SELECT DISTINCT ";
-				$cadenaSql .= "fecha_registro, vigencia, clase_entrada, tipo_entrada, ";
-				$cadenaSql .= "	tipo_contrato, numero_contrato, fecha_contrato, proveedor, nit,  ";
-				$cadenaSql .= "numero_factura, fecha_factura, observaciones, acta_recibido  ";
+				$cadenaSql .= "fecha_registro, vigencia, clase_entrada, descripcion ";
 				$cadenaSql .= "FROM entrada ";
+				$cadenaSql .= "JOIN clase_entrada ON clase_entrada.id_clase = entrada.clase_entrada ";
 				$cadenaSql .= "WHERE id_entrada='" . $variable . "';";
 				
 				break;
@@ -201,12 +229,25 @@ class Sql extends \Sql {
 				
 				break;
 			
+			// SELECT id_elemento, fecha_registro, nivel, tipo_bien, descripcion, cantidad,
+			// unidad, valor, iva, ajuste, bodega, subtotal_sin_iva, total_iva,
+			// total_iva_con, placa, tipo_poliza, fecha_inicio_pol, fecha_final_pol,
+			// marca, serie, id_entrada, estado
+			// FROM elemento;
+			
+			case "consultar_nivel_inventario" :
+				
+				$cadenaSql = "SELECT id_catalogo,(codigo||' - '||nombre) AS nivel ";
+				$cadenaSql .= "FROM catalogo_elemento ;";
+				
+				break;
+			
 			case "consulta_elementos" :
 				
-				$cadenaSql = "SELECT id_items, item, cantidad, descripcion ";
-				$cadenaSql .= "FROM items_actarecibido ";
-				$cadenaSql .= "WHERE id_acta='" . $variable . "' ";
-				$cadenaSql .= "AND  id_salida='0';";
+				$cadenaSql = "SELECT id_elemento, (codigo||' - '||nombre) AS item, cantidad, descripcion ";
+				$cadenaSql .= "FROM elemento ";
+				$cadenaSql .= "JOIN catalogo_elemento ON id_catalogo = nivel ";
+				$cadenaSql .= "WHERE id_entrada='" . $variable . "' ";
 				
 				break;
 			
