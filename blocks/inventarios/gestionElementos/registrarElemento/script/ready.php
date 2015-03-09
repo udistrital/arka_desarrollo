@@ -26,7 +26,10 @@
         });
 
               
+$("#<?php echo $this->campoSeguro('clase')?>").select2();
+$("#<?php echo $this->campoSeguro('tipo_poliza')?>").select2();
 
+        
              
  $('#<?php echo $this->campoSeguro('numero_entrada_c')?>').attr('disabled','');
  $('#<?php echo $this->campoSeguro('fecha_entrada')?>').attr('disabled','');
@@ -37,6 +40,7 @@
  $('#<?php echo $this->campoSeguro('fecha_factura')?>').attr('disabled','');
  
  $("#<?php echo $this->campoSeguro('nivel')?>").select2();
+ 
  $("#<?php echo $this->campoSeguro('tipo_registro')?>").select2();
  $("#<?php echo $this->campoSeguro('tipo_bien')?>").select2();
  $("#<?php echo $this->campoSeguro('iva')?>").select2();
@@ -136,6 +140,7 @@
                     
                   $("#<?php echo $this->campoSeguro('devolutivo')?>").css('display','block');
                   $("#<?php echo $this->campoSeguro('consumo_controlado')?>").css('display','none');
+                  $("#<?php echo $this->campoSeguro('tipo_poliza')?>").select2();
        
                 break;
                 

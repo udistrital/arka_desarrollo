@@ -37,26 +37,23 @@ class RegistradorOrden {
 		$cadenaSql = $this->miSql->getCadenaSql ( 'consultar_entrada_acta', $_REQUEST ['entrada'] );
 		$acta = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
 		
-		$acta=$acta[0][0];
+		$acta = $acta [0] [0];
 		
 		$cadenaSql = $this->miSql->getCadenaSql ( 'consultar_elementos_acta', $acta );
 		$elementos_acta = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
 		
-		$numero_elementos_acta=count($elementos_acta);
-		
+		$numero_elementos_acta = count ( $elementos_acta );
 		
 		$cadenaSql = $this->miSql->getCadenaSql ( 'consultar_elementos_entrada', $_REQUEST ['entrada'] );
 		$elementos_entrada = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
 		
-		$numero_elementos_entrada=count($elementos_entrada);
+		$numero_elementos_entrada = count ( $elementos_entrada );
 		
-		if($numero_elementos_acta==$numero_elementos_entrada){
-			
-			redireccion::redireccionar ( 'noCargarElemento' );
-			
-		}
+		// if($numero_elementos_acta==$numero_elementos_entrada){
 		
+		// redireccion::redireccionar ( 'noCargarElemento' );
 		
+		// }
 		
 		$fechaActual = date ( 'Y-m-d' );
 		
@@ -185,6 +182,23 @@ class RegistradorOrden {
 					$elemento = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
 				}
 				
+				
+				$placa = date ( 'Ymd' ) . "00000";
+				
+				for($i = 0; $i < $_REQUEST ['cantidad']; $i ++) {
+					$arregloElementosInv = array (
+							$fechaActual,
+							$placa + $i,
+							$_REQUEST ['serie'],
+							$elemento [0] [0] 
+					);
+					
+					$cadenaSql = $this->miSql->getCadenaSql ( 'ingresar_elemento_individual', $arregloElementosInv );
+					
+					$elemento_id[$i] = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
+					
+				}
+	
 				$datos = array (
 						$elemento [0] [0],
 						$fechaActual 
@@ -362,8 +376,6 @@ class RegistradorOrden {
 				
 				break;
 		}
-		
-	
 	}
 	function resetForm() {
 		foreach ( $_REQUEST as $clave => $valor ) {

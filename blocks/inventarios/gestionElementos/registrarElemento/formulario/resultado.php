@@ -56,7 +56,6 @@ class registrarForm {
 		
 		
 
-		
 		if (isset ( $_REQUEST ['fecha_inicio'] ) && $_REQUEST ['fecha_inicio'] != '') {
 			$fechaInicio = $_REQUEST ['fecha_inicio'];
 		} else {
@@ -76,32 +75,30 @@ class registrarForm {
 			$numeroEntrada = '';
 		}
 		
-		if (isset ( $_REQUEST ['nit'] ) && $_REQUEST ['nit'] != '') {
-			$nit = $_REQUEST ['nit'];
+		if (isset ( $_REQUEST ['clase'] ) && $_REQUEST ['clase'] != '') {
+			$clase = $_REQUEST ['clase'];
 		} else {
-			$nit = '';
+			$clase = '';
 		}
 		
-		if (isset ( $_REQUEST ['proveedor'] ) && $_REQUEST ['proveedor'] != '') {
-			$proveedor = $_REQUEST ['proveedor'];
-		} else {
-			$proveedor = '';
-		}
+		
 		
 		
 		
 		$arreglo = array (
 				$numeroEntrada,
-				$nit,
-				$proveedor,
 				$fechaInicio,
-				$fechaFinal
-			
+				$fechaFinal,
+				$clase
+					
 		);
 		
-	 
+		
 		$cadenaSql = $this->miSql->getCadenaSql ( 'consultarEntrada',$arreglo );
+		
+		
 		$entrada = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
+		
 
 		// ---------------- SECCION: Parámetros Generales del Formulario ----------------------------------
 		$esteCampo = $esteBloque ['nombre'];
@@ -180,8 +177,7 @@ class registrarForm {
                 <tr>
                    <th># Número Entrada</th>
                     <th>Fecha Registro </th>
-                    <th>Nit</th>
-					<th>Proveedor</th>
+                    <th>Clase Entrada</th>
 			        <th>Cargar Elementos</th>
                 </tr>
             </thead>
@@ -197,9 +193,8 @@ class registrarForm {
                     <td><center>" . $entrada [$i] [0] . "</center></td>
                     <td><center>" . $entrada [$i] [1] . "</center></td>
                     <td><center>" . $entrada [$i] [2] . "</center></td>
-                    <td><center>" . $entrada [$i] [3] . "</center></td>
                     <td><center>
-                    	<a href='".$variable."'>
+                    <a href='".$variable."'>
                             <img src='" . $rutaBloque . "/css/images/item.png' width='15px'>
                         </a>
                   	</center> </td>
