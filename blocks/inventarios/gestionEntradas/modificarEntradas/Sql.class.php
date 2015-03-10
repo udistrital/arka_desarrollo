@@ -206,9 +206,10 @@ class Sql extends \Sql {
 			case "consultarEntrada" :
 				$cadenaSql = "SELECT DISTINCT ";
 				$cadenaSql .= "id_entrada, fecha_registro,  ";
-				$cadenaSql .= " descripcion  ";
+				$cadenaSql .= " descripcion, nit_proveedor,razon_social   ";
 				$cadenaSql .= "FROM entrada ";
 				$cadenaSql .= "JOIN clase_entrada ON clase_entrada.id_clase = entrada.clase_entrada ";
+				$cadenaSql .= "JOIN proveedor ON proveedor.id_proveedor = entrada.proveedor ";
 				$cadenaSql .= "WHERE 1=1 ";
 				if ($variable [0] != '') {
 					$cadenaSql .= " AND id_entrada = '" . $variable [0] . "'";
@@ -221,6 +222,9 @@ class Sql extends \Sql {
 				
 				if ($variable [3] != '') {
 					$cadenaSql .= " AND clase_entrada = '" . $variable [3] . "'";
+				}
+				if ($variable [4] != '') {
+					$cadenaSql .= " AND entrada.proveedor = '" . $variable [4] . "'";
 				}
 				
 				break;

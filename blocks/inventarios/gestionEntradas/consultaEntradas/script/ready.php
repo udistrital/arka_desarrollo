@@ -31,7 +31,12 @@
 
 
              	$("#<?php echo $this->campoSeguro('estado')?>").select2();
-             
+                 
+			  $("#<?php echo $this->campoSeguro('proveedor')?>").select2({
+			             	 placeholder: "Search for a repository",
+			              	 minimumInputLength: 3,
+			              	 });
+              	 
                   $('#<?php echo $this->campoSeguro('numero_entradaM')?>').attr('disabled','');
                   $('#<?php echo $this->campoSeguro('fecha_registroM')?>').attr('disabled','');
                   $('#<?php echo $this->campoSeguro('clase')?>').attr('disabled','');

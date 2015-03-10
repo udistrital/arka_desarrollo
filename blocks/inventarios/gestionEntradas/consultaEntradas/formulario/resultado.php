@@ -86,12 +86,21 @@ class registrarForm {
 		}
 		
 		
+
+		if (isset ( $_REQUEST ['proveedor'] ) && $_REQUEST ['proveedor'] != '') {
+			$proveedor = $_REQUEST ['proveedor'];
+		} else {
+			$proveedor = '';
+		}
+		
+		
 		
 		$arreglo = array (
 				$numeroEntrada,
 				$fechaInicio,
 				$fechaFinal,
-				$estado
+				$estado,
+				$proveedor
 			
 		);
 		
@@ -177,6 +186,8 @@ class registrarForm {
                    <th># Número Entrada</th>
                     <th>Fecha Registro </th>
                     <th>Estado Entrada</th>
+					<th>Nit<br>Proveedor</th>
+					<th>Razon Social<br>Proveedor</th>
 			        <th>Cambiar Estado</th>
                 </tr>
             </thead>
@@ -194,6 +205,8 @@ class registrarForm {
                     <td><center>" . $entrada [$i] [0] . "</center></td>
                     <td><center>" . $entrada [$i] [1] . "</center></td>
                     <td><center>" . $entrada [$i] [2] . "</center></td>
+                    <td><center>" . $entrada [$i] [3] . "</center></td>
+                    <td><center>" . $entrada [$i] [4] . "</center></td>
                     <td><center>
                     	<a href='".$variable."'>
                             <img src='" . $rutaBloque . "/css/images/cambiar.png' width='15px'>
