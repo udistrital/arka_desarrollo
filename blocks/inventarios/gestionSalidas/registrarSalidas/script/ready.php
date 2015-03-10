@@ -43,6 +43,14 @@
  $("#<?php echo $this->campoSeguro('dependencia')?>").select2();
  $("#<?php echo $this->campoSeguro('ubicacion')?>").select2();
  $("#<?php echo $this->campoSeguro('clase')?>").select2();
+ 
+ 
+  $("#<?php echo $this->campoSeguro('proveedor')?>").select2({
+             	 placeholder: "Search for a repository",
+              	 minimumInputLength: 3,
+              	 });
+ 
+ 
                   
      
                  

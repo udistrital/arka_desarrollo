@@ -49,12 +49,11 @@ class registrarForm {
 		$conexion = "inventarios";
 		$esteRecursoDB = $this->miConfigurador->fabricaConexiones->getRecursoDB ( $conexion );
 		
-if (isset ( $_REQUEST ['fecha_inicio'] ) && $_REQUEST ['fecha_inicio'] != '') {
+		if (isset ( $_REQUEST ['fecha_inicio'] ) && $_REQUEST ['fecha_inicio'] != '') {
 			$fechaInicio = $_REQUEST ['fecha_inicio'];
 		} else {
 			$fechaInicio = '';
 		}
-		
 		
 		if (isset ( $_REQUEST ['fecha_final'] ) && $_REQUEST ['fecha_final'] != '') {
 			$fechaFinal = $_REQUEST ['fecha_final'];
@@ -74,7 +73,11 @@ if (isset ( $_REQUEST ['fecha_inicio'] ) && $_REQUEST ['fecha_inicio'] != '') {
 			$clase = '';
 		}
 		
-		
+		if (isset ( $_REQUEST ['proveedor'] ) && $_REQUEST ['proveedor'] != '') {
+			$proveedor = $_REQUEST ['proveedor'];
+		} else {
+			$proveedor = '';
+		}
 		
 		
 		
@@ -82,13 +85,11 @@ if (isset ( $_REQUEST ['fecha_inicio'] ) && $_REQUEST ['fecha_inicio'] != '') {
 				$numeroEntrada,
 				$fechaInicio,
 				$fechaFinal,
-				$clase
-					
+				$clase,
+				$proveedor 
 		);
 		
-		
-		$cadenaSql = $this->miSql->getCadenaSql ( 'consultarEntrada',$arreglo );
-		
+		$cadenaSql = $this->miSql->getCadenaSql ( 'consultarEntrada', $arreglo );
 		
 		$entrada = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
 		
@@ -169,6 +170,8 @@ if (isset ( $_REQUEST ['fecha_inicio'] ) && $_REQUEST ['fecha_inicio'] != '') {
                    <th># Número Entrada</th>
                     <th>Fecha Registro </th>
 					<th>Clase Entrada</th>
+					<th>Nit<br>Proveedor</th>
+					<th>Razon Social<br>Proveedor</th>
 			        <th>Generar Salida</th>
                 </tr>
             </thead>
@@ -185,6 +188,8 @@ if (isset ( $_REQUEST ['fecha_inicio'] ) && $_REQUEST ['fecha_inicio'] != '') {
                     <td><center>" . $entrada [$i] [0] . "</center></td>
                     <td><center>" . $entrada [$i] [1] . "</center></td>
                     <td><center>" . $entrada [$i] [2] . "</center></td>
+                    <td><center>" . $entrada [$i] [3] . "</center></td>
+                    <td><center>" . $entrada [$i] [4] . "</center></td>
                     <td><center>
                     	<a href='" . $variable . "'>
                             <img src='" . $rutaBloque . "/css/images/salida2.png' width='15px'>
