@@ -73,15 +73,12 @@ $enlaceRegistroEntradas ['enlace'] .= "&usuario=" . $miSesion->getSesionUsuarioI
 $enlaceRegistroEntradas ['urlCodificada'] = $this->miConfigurador->fabricaConexiones->crypto->codificar_url($enlaceRegistroEntradas ['enlace'], $directorio);
 $enlaceRegistroEntradas ['nombre'] = "Registrar Entrada";
 
-
 // Consultar y Modificar Estado Entradas
 $enlaceConsultaEntradas ['enlace'] = "pagina=consultaEntradas";
 $enlaceConsultaEntradas ['enlace'] .= "&usuario=" . $miSesion->getSesionUsuarioId();
 
 $enlaceConsultaEntradas ['urlCodificada'] = $this->miConfigurador->fabricaConexiones->crypto->codificar_url($enlaceConsultaEntradas ['enlace'], $directorio);
 $enlaceConsultaEntradas ['nombre'] = "Consultar y Modificar Estado Entrada";
-
-
 
 // Modificar Entradas
 
@@ -91,14 +88,26 @@ $enlaceModificarEntradas ['enlace'] .= "&usuario=" . $miSesion->getSesionUsuario
 $enlaceModificarEntradas ['urlCodificada'] = $this->miConfigurador->fabricaConexiones->crypto->codificar_url($enlaceModificarEntradas ['enlace'], $directorio);
 $enlaceModificarEntradas ['nombre'] = "Modificar Entradas";
 
+// Registro Elementos
+$enlaceRegistroElementos ['enlace'] = "pagina=registrarElemento";
+$enlaceRegistroElementos ['enlace'] .= "&usuario=" . $miSesion->getSesionUsuarioId();
+
+$enlaceRegistroElementos ['urlCodificada'] = $this->miConfigurador->fabricaConexiones->crypto->codificar_url($enlaceRegistroElementos ['enlace'], $directorio);
+$enlaceRegistroElementos ['nombre'] = "Cargar Elementos";
+
+// Consultar y Modificar Elementos
+$enlaceModificarElementos ['enlace'] = "pagina=modificarElemento";
+$enlaceModificarElementos['enlace'] .= "&usuario=" . $miSesion->getSesionUsuarioId();
+
+$enlaceModificarElementos ['urlCodificada'] = $this->miConfigurador->fabricaConexiones->crypto->codificar_url($enlaceModificarElementos ['enlace'], $directorio);
+$enlaceModificarElementos ['nombre'] = "Consultar y Modificar Elementos";
+
 // Registro Salidas
 $enlaceRegistroSalidas ['enlace'] = "pagina=registrarSalidas";
 $enlaceRegistroSalidas ['enlace'] .= "&usuario=" . $miSesion->getSesionUsuarioId();
 
 $enlaceRegistroSalidas ['urlCodificada'] = $this->miConfigurador->fabricaConexiones->crypto->codificar_url($enlaceRegistroSalidas ['enlace'], $directorio);
 $enlaceRegistroSalidas ['nombre'] = "Registrar Salida";
-
-
 
 // Consultar y Modificar Salidas
 
@@ -161,12 +170,6 @@ $enlacedescargarInventario ['enlace'] .= "&usuario=" . $miSesion->getSesionUsuar
 $enlacedescargarInventario ['urlCodificada'] = $this->miConfigurador->fabricaConexiones->crypto->codificar_url($enlacedescargarInventario ['enlace'], $directorio);
 $enlacedescargarInventario ['nombre'] = "Descargar  Elementos a Contratista";
 
-$enlacegenerarPazSalvo ['enlace'] = "pagina=generarPazSalvo";
-$enlacegenerarPazSalvo ['enlace'] .= "&usuario=" . $miSesion->getSesionUsuarioId();
-
-$enlacegenerarPazSalvo ['urlCodificada'] = $this->miConfigurador->fabricaConexiones->crypto->codificar_url($enlacegenerarPazSalvo ['enlace'], $directorio);
-$enlacegenerarPazSalvo ['nombre'] = "Generar Paz y Salvo Contratista";
-
 // Reportico
 $enlaceReportico ['enlace'] = "pagina=reportico";
 $enlaceReportico ['enlace'] .= "&usuario=" . $miSesion->getSesionUsuarioId();
@@ -174,8 +177,29 @@ $enlaceReportico ['enlace'] .= "&usuario=" . $miSesion->getSesionUsuarioId();
 $enlaceReportico ['urlCodificada'] = $this->miConfigurador->fabricaConexiones->crypto->codificar_url($enlaceReportico ['enlace'], $directorio);
 $enlaceReportico ['nombre'] = "Reportes Inventarios";
 
-// Fin de la sesión
+//generar paz y salvo
+$enlacegenerarPazSalvo ['enlace'] = "pagina=generarPazSalvo";
+$enlacegenerarPazSalvo ['enlace'] .= "&usuario=" . $miSesion->getSesionUsuarioId();
 
+$enlacegenerarPazSalvo ['urlCodificada'] = $this->miConfigurador->fabricaConexiones->crypto->codificar_url($enlacegenerarPazSalvo ['enlace'], $directorio);
+$enlacegenerarPazSalvo ['nombre'] = "Generar Paz y Salvo Contratista";
+
+//generar paz y salvo
+$enlacegenerarPazSalvo ['enlace'] = "pagina=generarPazSalvo";
+$enlacegenerarPazSalvo ['enlace'] .= "&usuario=" . $miSesion->getSesionUsuarioId();
+
+$enlacegenerarPazSalvo ['urlCodificada'] = $this->miConfigurador->fabricaConexiones->crypto->codificar_url($enlacegenerarPazSalvo ['enlace'], $directorio);
+$enlacegenerarPazSalvo ['nombre'] = "Generar Paz y Salvo Contratista";
+
+//gestión depreciación
+$enlacegestionDepreciacion ['enlace'] = "pagina=gestionDepreciacion";
+$enlacegestionDepreciacion ['enlace'] .= "&usuario=" . $miSesion->getSesionUsuarioId();
+
+$enlacegestionDepreciacion ['urlCodificada'] = $this->miConfigurador->fabricaConexiones->crypto->codificar_url($enlacegestionDepreciacion ['enlace'], $directorio);
+$enlacegestionDepreciacion ['nombre'] = "Generar Depreciación";
+
+
+// Fin de la sesión
 $enlaceFinSesion['enlace'] = "pagina=index";
 $enlaceFinSesion['enlace'] .= "&usuario=" . $miSesion->getSesionUsuarioId();
 
@@ -209,7 +233,9 @@ $enlaceFinSesion['nombre'] = "Cerrar Sesión";
             <ul class="dl-submenu">
                 <li><a href="<?php echo $enlaceRegistroEntradas['urlCodificada'] ?>"><?php echo $enlaceRegistroEntradas['nombre'] ?></a></li>
                 <li><a href="<?php echo $enlaceConsultaEntradas['urlCodificada'] ?>"><?php echo $enlaceConsultaEntradas['nombre'] ?></a></li>
-                <li><a href="<?php echo $enlaceModificarEntradas['urlCodificada'] ?>"><?php echo $enlaceModificarEntradas['nombre'] ?></a></li>   
+                <li><a href="<?php echo $enlaceModificarEntradas['urlCodificada'] ?>"><?php echo $enlaceModificarEntradas['nombre'] ?></a></li>
+                <li><a href="<?php echo $enlaceRegistroElementos['urlCodificada'] ?>"><?php echo $enlaceRegistroElementos['nombre'] ?></a></li>
+                <li><a href="<?php echo $enlaceModificarElementos['urlCodificada'] ?>"><?php echo $enlaceModificarElementos['nombre'] ?></a></li>   
             </ul>
         </li>
 
@@ -228,12 +254,12 @@ $enlaceFinSesion['nombre'] = "Cerrar Sesión";
             </ul>
         </li>
         <li>
-            <a href="#">Radiación Documentos</a>
+            <a href="#">Radicación Documentos</a>
             <ul class="dl-submenu">
                 <li><a href="<?php echo $enlaceRadicarAsignar['urlCodificada'] ?>"><?php echo $enlaceRadicarAsignar['nombre'] ?></a></li>
                 <!--li><a href="">Entrada y Salida de Elementos</a></li>
                 <li><a href="">Movimientos</a></li-->
-                <li><a href="<?php echo $enlaceradicarEntradaSalida['urlCodificada'] ?>"><?php echo $enlaceradicarEntradaSalida['nombre'] ?></a></li>
+                <!--li><a href="<?php echo $enlaceradicarEntradaSalida['urlCodificada'] ?>"><?php echo $enlaceradicarEntradaSalida['nombre'] ?></a></li-->
             </ul>
         </li>
 
@@ -247,12 +273,18 @@ $enlaceFinSesion['nombre'] = "Cerrar Sesión";
         </li>
 
         <li>
+            <a href="#">Gestión Depreciación</a>
+            <ul class="dl-submenu">
+                <li><a href="<?php echo$enlacegestionDepreciacion['urlCodificada'] ?>"><?php echo$enlacegestionDepreciacion['nombre'] ?></a></li>
+            </ul>
+        </li>
+
+        <li>
             <a href="#">Gestor de Reportes</a>
             <ul class="dl-submenu">
                 <li><a href="<?php echo$enlaceReportico['urlCodificada'] ?>"><?php echo $enlaceReportico['nombre'] ?></a></li>
                 <li><a href="<?php echo $enlacegenerarPazSalvo['urlCodificada'] ?>"><?php echo $enlacegenerarPazSalvo['nombre'] ?></a></li>
             </ul>
-
         </li>
 
         <li>
