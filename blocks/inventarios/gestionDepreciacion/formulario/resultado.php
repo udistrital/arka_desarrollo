@@ -104,7 +104,8 @@ class registrarForm {
             echo "<thead>
                 <tr>
                 <th>Nivel de Inventario</th>
-                <th>Unidad de Medida</th>
+                <th>Id Elemento General</th>
+                <th>Unidad</th>
                 <th>Cantidad</th>
                 <th>Marca Elementos</th>
                 <th>Serie Elemento</th>
@@ -120,16 +121,16 @@ class registrarForm {
             for ($i = 0; $i < count($elementos); $i ++) {
 
                 $mostrarHtml = "<tr>
-                    <td><center>" . $elementos [$i][1] . "</center></td>
-                    <td><center>" . $elementos [$i][0] . "</center></td>
-                    <td><center>" . $elementos [$i][2] . "</center></td>
-                    <td><center>" . $elementos [$i][3] . "</center></td>
-                    <td><center>" . $elementos [$i][4] . "</center></td>
-                    <td><center>" . $elementos [$i][5] . "</center></td>
-                    <td><center>" . $elementos [$i][6] . "</center></td>
-                    <td><center>" . $elementos [$i][7] . "</center></td>
-                    <td><center>" . $elementos [$i][8] . "</center></td>
-                        
+                    <td><center>" . $elementos [$i]['nivel'] . "</center></td>
+                    <td><center>" . $elementos [$i]['id_elemento'] . "</center></td>
+                    <td><center>" . $elementos [$i]['unidad'] . "</center></td>
+                    <td><center>" . $elementos [$i]['cantidad'] . "</center></td>
+                    <td><center>" . $elementos [$i]['marca'] . "</center></td>
+                    <td><center>" . $elementos [$i]['serie'] . "</center></td>
+                    <td><center>" . $elementos [$i]['valor'] . "</center></td>
+                    <td><center>" . $elementos [$i]['subtotal_sin_iva'] . "</center></td>
+                    <td><center>" . $elementos [$i]['total_iva'] . "</center></td>
+                    <td><center>" . $elementos [$i]['total_iva_con'] . "</center></td>
                     <td><center>";
                 // ---------------- CONTROL: Cuadro de Texto --------------------------------------------------------
                 $nombre = 'item' . $i;

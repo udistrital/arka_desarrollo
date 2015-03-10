@@ -151,8 +151,9 @@ class Sql extends \Sql {
                 break;
 
             case "consultar_grupo_contable" :
-                $cadenaSql = "SELECT codigo,(codigo||' - '||nombre) AS nivel ";
-                $cadenaSql .= "FROM catalogo_elemento ;";
+                $cadenaSql = "SELECT grupo_numcuenta, (grupo_numcuenta||' - '||grupo_descripcion) as grupo,grupo_mesdepreciacion ";
+                $cadenaSql.= " FROM grupo_contable  ";
+                $cadenaSql.= " WHERE grupo_estado=TRUE";
                 break;
 
             case "consultarElementos" :
