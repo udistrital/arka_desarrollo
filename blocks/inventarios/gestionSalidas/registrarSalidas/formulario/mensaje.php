@@ -45,7 +45,7 @@ class registrarForm {
 			
 			$entrada = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
 			
-			$cadenaSql = $this->miSql->getCadenaSql ( 'consulta_elementos', $entrada [0] [12] );
+// 			$cadenaSql = $this->miSql->getCadenaSql ( 'consulta_elementos', $entrada [0] [12] );
 			
 			$elementos = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
 			
