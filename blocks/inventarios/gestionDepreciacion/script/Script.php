@@ -15,6 +15,7 @@ $funcion [$indice ++] = "jquery.dataTables.min.js";
 $funcion [$indice ++] = "timepicker.js";
 $funcion[$indice ++]="modernizr.custom.js";
 $funcion[$indice ++]="jquery.dlmenu.js";
+$funcion [$indice ++] = "jquery.easing.1.3.js";
 
 $rutaBloque = $this->miConfigurador->getVariableConfiguracion("host");
 $rutaBloque .= $this->miConfigurador->getVariableConfiguracion("site");
