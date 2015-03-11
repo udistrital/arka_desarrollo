@@ -26,19 +26,23 @@ $urlFinal = $url . $cadena;
 <script type='text/javascript'>
 
     function datosInfo(elem, request, response) {
+        
+            $("#<?php echo $this->campoSeguro('meses_depreciar') ?>").val('8');
+        
         $.ajax({
             url: "<?php echo $urlFinal ?>",
             dataType: "json",
-            data: {tiempo: $("#<?php echo $this->campoSeguro('grupo_contable') ?>").val()},
-            success: function (data) {
+            data: {contable: $("#<?php echo $this->campoSeguro('grupo_contable') ?>").val()},
+        
+                    success: function (data) {
 
-                if (data[0] != 'null') {
+                        if (data[0] != 'null') {
 
-                    $("#<?php echo $this->campoSeguro('meses_depreciar') ?>").val(data[0]);
-                } else {
-                    $("#<?php echo $this->campoSeguro('meses_depreciar') ?>").val('8');
-                }
-            }
+                            $("#<?php echo $this->campoSeguro('meses_depreciar') ?>").val(data[0]);
+                        } else {
+                            $("#<?php echo $this->campoSeguro('meses_depreciar') ?>").val('8');
+                        }
+                    }
         });
     }
     ;
@@ -48,7 +52,7 @@ $urlFinal = $url . $cadena;
         minimumInputLength: 1,
     });
 
-    $("#<?php echo $this->campoSeguro('grupo_contable') ?>").change(function () {
+    $("#<?php echo $this->campoSeguro('grupo_contable')?>").change(function () {
         datosInfo();
     });
 

@@ -21,6 +21,9 @@ return false;
 $("#<?php echo $this->campoSeguro('nivel') ?>").select2();
 $("#<?php echo $this->campoSeguro('grupo_contable') ?>").select2();
 
+$("#<?php echo $this->campoSeguro('grupo_contable') ?>").change(function () {
+datosInfo();
+});
 
 
 

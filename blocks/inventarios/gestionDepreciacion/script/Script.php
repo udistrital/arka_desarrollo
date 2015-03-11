@@ -28,7 +28,6 @@ if ($esteBloque ["grupo"] == "") {
 
 $_REQUEST['tiempo'] = time();
 
-
 if (isset($funcion [0])) {
     foreach ($funcion as $clave => $nombre) {
         if (!isset($embebido [$clave])) {
