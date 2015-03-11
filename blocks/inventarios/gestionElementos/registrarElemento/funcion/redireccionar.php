@@ -15,10 +15,11 @@ class redireccion {
 			case "inserto" :
 				
 				$variable = "pagina=" . $miPaginaActual;
-				$variable .= "&opcion=mensaje";
-				$variable .= "&mensaje=confirma";
+				$variable .= "&opcion=cargarElemento";
+				$variable .= "&mensaje=registro";
 				$variable .= "&numero_orden=" . $valor [0];
 				$variable .= "&fecha_orden=" . $valor [1];
+				$variable .= "&numero_entrada=" . $valor [2];
 				
 				break;
 			

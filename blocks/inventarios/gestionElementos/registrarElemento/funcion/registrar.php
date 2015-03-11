@@ -201,7 +201,8 @@ class RegistradorOrden {
 	
 				$datos = array (
 						$elemento [0] [0],
-						$fechaActual 
+						$fechaActual ,
+						$_REQUEST['entrada']
 				);
 				
 				if ($elemento) {

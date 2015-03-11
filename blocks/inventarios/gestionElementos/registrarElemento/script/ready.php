@@ -25,6 +25,10 @@
             });
         });
 
+        setTimeout(function() {
+    		$('#divMensaje').hide( "drop", { direction: "up" }, "slow" );
+			}, 2000); // <-- time in milliseconds
+        
               
 $("#<?php echo $this->campoSeguro('clase')?>").select2();
 $("#<?php echo $this->campoSeguro('tipo_poliza')?>").select2();

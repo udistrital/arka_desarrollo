@@ -868,7 +868,7 @@ class registrarForm {
 			
 			// En este formulario se utiliza el mecanismo (b) para pasar las siguientes variables:
 			
-			$valorCodificado = "actionBloque=" . $esteBloque ["nombre"];
+			$valorCodificado = "action=" . $esteBloque ["nombre"];
 			$valorCodificado .= "&pagina=" . $this->miConfigurador->getVariableConfiguracion ( 'pagina' );
 			$valorCodificado .= "&bloque=" . $esteBloque ['nombre'];
 			$valorCodificado .= "&bloqueGrupo=" . $esteBloque ["grupo"];
@@ -904,8 +904,39 @@ class registrarForm {
 			return true;
 		}
 	}
+	function mensaje() {
+		
+		// Si existe algun tipo de error en el login aparece el siguiente mensaje
+		$mensaje = $this->miConfigurador->getVariableConfiguracion ( 'mostrarMensaje' );
+		
+		$this->miConfigurador->setVariableConfiguracion ( 'mostrarMensaje', null );
+		
+		if (isset ( $_REQUEST ['mensaje'] )) {
+			
+			if ($_REQUEST ['mensaje'] == 'registro') {
+				
+				$atributos ["estilo"] = 'success';
+			} else {
+				
+				$atributos ["estilo"] = 'error';
+			}
+			// -------------Control texto-----------------------
+			$esteCampo = 'divMensaje';
+			$atributos ['id'] = $esteCampo;
+			$atributos ["tamanno"] = '';
+			
+			$atributos ["etiqueta"] = '';
+			$atributos ["columnas"] = ''; // El control ocupa 47% del tamaño del formulario
+			$atributos ['mensaje'] ="<center>Se Cargo Elemento <br> Número ID Elemento: " . $_REQUEST ['numero_orden'] . "<br>Fecha : " . $_REQUEST ['fecha_orden']."</center>";
+			echo $this->miFormulario->campoMensaje ( $atributos );
+			unset ( $atributos );
+		}
+		
+		return true;
+	}
 }
 $miSeleccionador = new registrarForm ( $this->lenguaje, $this->miFormulario, $this->sql );
-
+$miSeleccionador->mensaje ();
 $miSeleccionador->miForm ();
+
 ?>
