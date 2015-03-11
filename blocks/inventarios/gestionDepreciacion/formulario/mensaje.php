@@ -78,7 +78,7 @@ class registrarForm {
 			{
 				if (isset($_REQUEST ['mensaje'])&&$_REQUEST ['mensaje'] == 'confirma') {
 					
-					$mensaje = "Se realizó la asignación de los items para el contratista ".$_REQUEST['contratista'];
+					$mensaje = "Se realizó la depreciación para el conjunto de items ".$_REQUEST['elemento'];
 					
 					// ---------------- CONTROL: Cuadro de Texto --------------------------------------------------------
 					$esteCampo = 'mensajeRegistro';
@@ -96,7 +96,7 @@ class registrarForm {
 				}
 				if (isset($_REQUEST ['mensaje'])&&$_REQUEST ['mensaje'] == 'error') {
 					
-					$mensaje = "No fue posible realizar la asignación de los items al contratista.";
+					$mensaje = "No fue posible realizar la depreciación para el conjunto de items seleccionado.";
 					
 					// ---------------- CONTROL: Cuadro de Texto --------------------------------------------------------
 					$esteCampo = 'mensajeRegistro';

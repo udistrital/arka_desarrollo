@@ -139,7 +139,7 @@ class registrarForm {
                     $atributos ['dobleLinea'] = 0;
                     $atributos ['tabIndex'] = $tab;
                     $atributos ['etiqueta'] = $this->lenguaje->getCadena($esteCampo);
-                    $atributos ['validar'] = 'required, minSize[1],maxSize[2],custom[onlyNumberSp]';
+                    $atributos ['validar'] = 'required, minSize[1],maxSize[3],custom[onlyNumberSp]';
 
                     if (isset($_REQUEST [$esteCampo])) {
                         $atributos ['valor'] = $_REQUEST [$esteCampo];
@@ -147,7 +147,7 @@ class registrarForm {
                         $atributos ['valor'] = '';
                     }
                     $atributos ['titulo'] = $this->lenguaje->getCadena($esteCampo . 'Titulo');
-                    $atributos ['deshabilitado'] = false;
+                    $atributos ['deshabilitado'] = true;
                     $atributos ['tamanno'] = 5;
                     $atributos ['maximoTamanno'] = '';
                     $atributos ['anchoEtiqueta'] = 220;
@@ -244,7 +244,7 @@ class registrarForm {
                         $atributos ['valor'] = '';
                     }
                     $atributos ['titulo'] = $this->lenguaje->getCadena($esteCampo . 'Titulo');
-                    $atributos ['deshabilitado'] = false;
+                    $atributos ['deshabilitado'] = true;
                     $atributos ['tamanno'] = 5;
                     $atributos ['maximoTamanno'] = '';
                     $atributos ['anchoEtiqueta'] = 220;
@@ -268,7 +268,7 @@ class registrarForm {
                     $atributos ['dobleLinea'] = 0;
                     $atributos ['tabIndex'] = $tab;
                     $atributos ['etiqueta'] = $this->lenguaje->getCadena($esteCampo);
-                    $atributos ['validar'] = 'required, minSize[1],maxSize[8],custom[onlyNumberSp]';
+                    $atributos ['validar'] = 'required, minSize[1],maxSize[13],custom[number]';
 
                     if (isset($datos_elemento[0]['valor'])) {
                         $atributos ['valor'] = $datos_elemento[0]['valor'];
@@ -309,7 +309,7 @@ class registrarForm {
                     $atributos ['dobleLinea'] = 0;
                     $atributos ['tabIndex'] = $tab;
                     $atributos ['etiqueta'] = $this->lenguaje->getCadena($esteCampo);
-                    $atributos ['validar'] = 'required, minSize[1],maxSize[8],custom[onlyNumberSp]';
+                    $atributos ['validar'] = 'required, minSize[1],maxSize[13],custom[number]';
 
                     if (isset($datos_elemento[0]['valor'])) {
                         $atributos ['valor'] = $datos_elemento[0]['valor'] * $datos_elemento[0]['cantidad'];
@@ -341,7 +341,7 @@ class registrarForm {
                     $atributos ['dobleLinea'] = 0;
                     $atributos ['tabIndex'] = $tab;
                     $atributos ['etiqueta'] = $this->lenguaje->getCadena($esteCampo);
-                    $atributos ['validar'] = 'required, minSize[1],maxSize[8],custom[onlyNumberSp]';
+                    $atributos ['validar'] = 'required, minSize[1],maxSize[13],custom[number]';
 
                     if (isset($_REQUEST [$esteCampo])) {
                         $atributos ['valor'] = $_REQUEST [$esteCampo];
@@ -373,7 +373,7 @@ class registrarForm {
                     $atributos ['dobleLinea'] = 0;
                     $atributos ['tabIndex'] = $tab;
                     $atributos ['etiqueta'] = $this->lenguaje->getCadena($esteCampo);
-                    $atributos ['validar'] = 'required, minSize[1],maxSize[8],custom[onlyNumberSp]';
+                    $atributos ['validar'] = 'required, minSize[1],maxSize[13],custom[number]';
 
                     if (isset($_REQUEST [$esteCampo])) {
                         $atributos ['valor'] = $_REQUEST [$esteCampo];
@@ -405,7 +405,7 @@ class registrarForm {
                     $atributos ['dobleLinea'] = 0;
                     $atributos ['tabIndex'] = $tab;
                     $atributos ['etiqueta'] = $this->lenguaje->getCadena($esteCampo);
-                    $atributos ['validar'] = 'required, minSize[1],maxSize[3],custom[onlyNumberSp]';
+                    $atributos ['validar'] = 'required, minSize[1],maxSize[3],custom[number]';
 
                     if (isset($_REQUEST [$esteCampo])) {
                         $atributos ['valor'] = $_REQUEST [$esteCampo];
@@ -437,7 +437,7 @@ class registrarForm {
                     $atributos ['dobleLinea'] = 0;
                     $atributos ['tabIndex'] = $tab;
                     $atributos ['etiqueta'] = $this->lenguaje->getCadena($esteCampo);
-                    $atributos ['validar'] = 'required, minSize[1],maxSize[8],custom[onlyNumberSp]';
+                    $atributos ['validar'] = 'required, minSize[1],maxSize[13],custom[number]';
 
                     if (isset($_REQUEST [$esteCampo])) {
                         $atributos ['valor'] = $_REQUEST [$esteCampo];
@@ -469,7 +469,7 @@ class registrarForm {
                     $atributos ['dobleLinea'] = 0;
                     $atributos ['tabIndex'] = $tab;
                     $atributos ['etiqueta'] = $this->lenguaje->getCadena($esteCampo);
-                    $atributos ['validar'] = 'required, minSize[1],maxSize[8],custom[onlyNumberSp]';
+                    $atributos ['validar'] = 'required, minSize[1],maxSize[13],custom[number]';
 
                     if (isset($_REQUEST [$esteCampo])) {
                         $atributos ['valor'] = $_REQUEST [$esteCampo];
@@ -501,7 +501,7 @@ class registrarForm {
                     $atributos ['dobleLinea'] = 0;
                     $atributos ['tabIndex'] = $tab;
                     $atributos ['etiqueta'] = $this->lenguaje->getCadena($esteCampo);
-                    $atributos ['validar'] = 'required, minSize[1],maxSize[8],custom[onlyNumberSp]';
+                    $atributos ['validar'] = 'required, minSize[1],maxSize[13],custom[number]';
 
                     if (isset($_REQUEST [$esteCampo])) {
                         $atributos ['valor'] = $_REQUEST [$esteCampo];
@@ -533,7 +533,7 @@ class registrarForm {
                     $atributos ['dobleLinea'] = 0;
                     $atributos ['tabIndex'] = $tab;
                     $atributos ['etiqueta'] = $this->lenguaje->getCadena($esteCampo);
-                    $atributos ['validar'] = 'required, minSize[1],maxSize[8],custom[onlyNumberSp]';
+                    $atributos ['validar'] = 'required, minSize[1],maxSize[13],custom[number]';
                     if (isset($_REQUEST [$esteCampo])) {
                         $atributos ['valor'] = $_REQUEST [$esteCampo];
                     } else {
@@ -564,7 +564,7 @@ class registrarForm {
                     $atributos ['dobleLinea'] = 0;
                     $atributos ['tabIndex'] = $tab;
                     $atributos ['etiqueta'] = $this->lenguaje->getCadena($esteCampo);
-                    $atributos ['validar'] = 'required, minSize[1],maxSize[8],custom[onlyNumberSp]';
+                    $atributos ['validar'] = 'required, minSize[1],maxSize[13],custom[number]';
 
                     if (isset($_REQUEST [$esteCampo])) {
                         $atributos ['valor'] = $_REQUEST [$esteCampo];
@@ -596,7 +596,7 @@ class registrarForm {
                     $atributos ['dobleLinea'] = 0;
                     $atributos ['tabIndex'] = $tab;
                     $atributos ['etiqueta'] = $this->lenguaje->getCadena($esteCampo);
-                    $atributos ['validar'] = 'required, minSize[1],maxSize[8],custom[onlyNumberSp]';
+                    $atributos ['validar'] = 'required, minSize[1],maxSize[13],custom[number]';
 
                     if (isset($_REQUEST [$esteCampo])) {
                         $atributos ['valor'] = $_REQUEST [$esteCampo];
@@ -702,8 +702,9 @@ class registrarForm {
             $valorCodificado .= "&pagina=" . $this->miConfigurador->getVariableConfiguracion('pagina');
             $valorCodificado .= "&bloque=" . $esteBloque ['nombre'];
             $valorCodificado .= "&bloqueGrupo=" . $esteBloque ["grupo"];
-            $valorCodificado .= "&opcion=registrarActa";
+            $valorCodificado .= "&opcion=registrarDepreciacion";
             $valorCodificado .= "&seccion=" . $tiempo;
+            $valorCodificado .= "&elemento_general=" . $_REQUEST['item0'];
             /**
              * SARA permite que los nombres de los campos sean dinámicos.
              * Para ello utiliza la hora en que es creado el formulario para

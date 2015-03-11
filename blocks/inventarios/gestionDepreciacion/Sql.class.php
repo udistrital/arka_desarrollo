@@ -160,7 +160,7 @@ class Sql extends \Sql {
                 $cadenaSql = "SELECT grupo_mesdepreciacion ";
                 $cadenaSql.= " FROM grupo_contable  ";
                 $cadenaSql.= " WHERE grupo_estado=TRUE ";
-                $cadenaSql.= " AND grupo_numcuenta='".$variable."'; ";
+                $cadenaSql.= " AND grupo_numcuenta='" . $variable . "'; ";
                 break;
 
             case "consultarElementos" :
@@ -200,6 +200,50 @@ class Sql extends \Sql {
                 $cadenaSql.= " AND salida.id_entrada=elemento.id_entrada ";
                 $cadenaSql.= " AND id_elemento='" . $variable . "' ";
                 $cadenaSql.= " ORDER BY id_elemento ASC ";
+                break;
+
+            case "registrarDepreciacion":
+                $cadenaSql = " INSERT INTO registro_depreciacion( ";
+                $cadenaSql.= " dep_idelementogen, ";
+                $cadenaSql.= " dep_grupocontable,  ";
+                $cadenaSql.= " dep_meses,  ";
+                $cadenaSql.= " dep_fechasalida,  ";
+                $cadenaSql.= " dep_fechacorte,  ";
+                $cadenaSql.= " dep_cantidad,  ";
+                $cadenaSql.= " dep_precio,  ";
+                $cadenaSql.= " dep_valorhistorico,  ";
+                $cadenaSql.= " dep_valorajustado,  ";
+                $cadenaSql.= " dep_cuota,  ";
+                $cadenaSql.= " dep_periodo,  ";
+                $cadenaSql.= " dep_depacumulada, ";
+                $cadenaSql.= " dep_circular56,";
+                $cadenaSql.= " dep_cuotainflacion, ";
+                $cadenaSql.= " dep_apicacumulada, ";
+                $cadenaSql.= " dep_circulardeprecia, ";
+                $cadenaSql.= " dep_libros, ";
+                $cadenaSql.= " dep_estado, ";
+                $cadenaSql.= " dep_registro) ";
+                $cadenaSql.= " VALUES ( ";
+                $cadenaSql.= "'".$variable['elemento_general']."', ";
+                $cadenaSql.= "'".$variable['grupo_contable']."', ";
+                $cadenaSql.= "'".$variable['meses_depreciar']."', ";
+                $cadenaSql.= "'".$variable['fechaSalida']."', ";
+                $cadenaSql.= "'".$variable['fechaCorte']."', ";
+                $cadenaSql.= "'".$variable['cantidad']."', ";
+                $cadenaSql.= "'".$variable['precio']."', ";
+                $cadenaSql.= "'".$variable['valor_historico']."', ";
+                $cadenaSql.= "'".$variable['valor_ajustado']."', ";
+                $cadenaSql.= "'".$variable['cuota']."', ";
+                $cadenaSql.= "'".$variable['periodos_fecha']."', ";
+                $cadenaSql.= "'".$variable['depreciacion_acumulada']."', ";
+                $cadenaSql.= "'".$variable['circular_56']."', ";
+                $cadenaSql.= "'".$variable['cuota_inflacion']."', ";
+                $cadenaSql.= "'".$variable['api_acumulada']."', ";
+                $cadenaSql.= "'".$variable['circular_depreciacion']."', ";
+                $cadenaSql.= "'".$variable['valor_libros']."', ";
+                $cadenaSql.= "'".$variable['estado']."', ";
+                $cadenaSql.= "'".$variable['fregistro']."') ";
+                $cadenaSql.= " ;";
                 break;
             /*             * ***************** */
         }

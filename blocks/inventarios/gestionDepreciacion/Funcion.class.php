@@ -46,8 +46,8 @@ class Funcion {
         include_once ($this->ruta . "/funcion/funcionEjemplo.php");
     }
     
-     function asignarInventario() {
-        include_once ($this->ruta . "/funcion/asignarInventario.php");
+     function registrarDepreciacion() {
+        include_once ($this->ruta . "/funcion/registrarDepreciacion.php");
     }
 
     function procesarAjax() {
@@ -73,8 +73,8 @@ class Funcion {
 
             // Realizar una validación específica para los campos de este formulario:
             // $validacion = $this->verificarCampos ();
-            if ($_REQUEST ['opcion'] == 'asignar') {
-                $this->asignarInventario();
+            if ($_REQUEST ['opcion'] == 'registrarDepreciacion') {
+                $this->registrarDepreciacion();
             }
 
             if (isset($_REQUEST ["redireccionar"]) && $_REQUEST ['redireccionar'] == 'regresar') {
