@@ -156,6 +156,13 @@ class Sql extends \Sql {
                 $cadenaSql.= " WHERE grupo_estado=TRUE";
                 break;
 
+            case "consultar_meses" :
+                $cadenaSql = "SELECT grupo_mesdepreciacion as meses_depreciar ";
+                $cadenaSql.= " FROM grupo_contable  ";
+                $cadenaSql.= " WHERE grupo_estado=TRUE ";
+                $cadenaSql.= " AND grupo_numcuenta='".$variable."' ";
+                break;
+
             case "consultarElementos" :
                 $cadenaSql = "SELECT  ";
                 $cadenaSql.= " id_elemento,  ";
