@@ -4,7 +4,7 @@ $this->idioma ["noDefinido"] = "Etiqueta no esta definida en locale/es_es/Mensaj
 $this->idioma ["nivel"] ="Grupo/Nivel de Inventario : ";
 $this->idioma ["nivelTitulo"] ="Seleccione el Grupo/Nivel de Inventario";
 
-$this->idioma ["botonAceptar"] ="Depreciar";
+$this->idioma ["botonAceptar"] ="Modificar Depreciación";
 $this->idioma ["botonCancelar"] ="Cancelar";
 $this->idioma ["botonContinuar"] ="Continuar";
 $this->idioma ["botonConsultar"] ="Consultar";
