@@ -178,22 +178,25 @@ class Sql extends \Sql {
 
             case "consultarElemento_especifico" :
                 $cadenaSql = "SELECT ";
-                $cadenaSql.= " id_elemento, ";
-                $cadenaSql.= " nivel, ";
-                $cadenaSql.= " unidad, ";
-                $cadenaSql.= " cantidad, ";
-                $cadenaSql.= " marca, ";
-                $cadenaSql.= " serie, ";
-                $cadenaSql.= " valor, ";
-                $cadenaSql.= " subtotal_sin_iva, ";
-                $cadenaSql.= " total_iva, ";
-                $cadenaSql.= " total_iva_con, ";
-                $cadenaSql.= " salida.fecha ";
-                $cadenaSql.= " FROM elemento, salida ";
-                $cadenaSql.= " WHERE elemento.estado = TRUE ";
-                $cadenaSql.= " AND salida.id_entrada = elemento.id_entrada ";
-                $cadenaSql.= " AND id_elemento = '" . $variable . "' ";
-                $cadenaSql.= " ORDER BY id_elemento ASC ";
+                $cadenaSql.= " dep_id, dep_idelementogen, dep_grupocontable as grupo_contable, ";
+                $cadenaSql.= " dep_meses as meses_depreciar, ";
+                $cadenaSql.= " dep_fechasalida as fechaSalida, ";
+                $cadenaSql.= " dep_fechacorte as fechaCorte, ";
+                $cadenaSql.= " dep_cantidad as cantidad, ";
+                $cadenaSql.= " dep_precio as precio, ";
+                $cadenaSql.= " dep_valorhistorico as valor_historico, ";
+                $cadenaSql.= " dep_valorajustado as valor_ajustado, ";
+                $cadenaSql.= " dep_cuota as cuota, ";
+                $cadenaSql.= " dep_periodo as periodos_fecha, ";
+                $cadenaSql.= " dep_depacumulada as depreciacion_acumulada, ";
+                $cadenaSql.= " dep_circular56 as circular_56, ";
+                $cadenaSql.= " dep_cuotainflacion as cuota_inflacion, ";
+                $cadenaSql.= " dep_apicacumulada as api_acumulada, ";
+                $cadenaSql.= " dep_circulardeprecia as circular_depreciacion, ";
+                $cadenaSql.= " dep_libros as valor_libros";
+                $cadenaSql.= " FROM registro_depreciacion ";
+                $cadenaSql.= " WHERE dep_estado = TRUE";
+                $cadenaSql.= " AND dep_idelementogen = '" . $variable . "'";
                 break;
 
             case "registrarDepreciacion":
