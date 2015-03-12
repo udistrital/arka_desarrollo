@@ -1,6 +1,6 @@
 <?php
 
-namespace inventarios\gestionElementos\registrarElemento;
+namespace inventarios\gestionElementos\registrarTraslados;
 
 if (! isset ( $GLOBALS ["autorizado"] )) {
 	include ("../index.php");
@@ -149,6 +149,43 @@ class Sql extends \Sql {
 			 * Clausulas Del Caso Uso.
 			 */
 			
+			case "seleccion_funcionario" :
+				
+				$cadenaSql = "SELECT id_funcionario, identificacion ||'-'||nombre AS funcionario  ";
+				$cadenaSql .= "FROM funcionario;";
+				break;
+		
+				
+			case "consultarElemento" :
+				
+				$cadenaSql = "SELECT ";
+				$cadenaSql .= "id_elemento_ind, elemento_individual.placa, elemento_individual.serie,nombre,identificacion, id_elemento_gen, ";
+				$cadenaSql .= "elemento_individual.id_salida ,tipo_bien.descripcion ";
+				$cadenaSql .= "FROM elemento_individual ";
+				$cadenaSql .= "JOIN elemento ON elemento.id_elemento = elemento_individual.id_elemento_gen ";
+				$cadenaSql .= "JOIN salida ON salida.id_salida = elemento_individual.id_salida ";
+				$cadenaSql .= "JOIN tipo_bien ON tipo_bien.id_tipo_bien = elemento.tipo_bien ";
+				$cadenaSql .= "JOIN funcionario  ON funcionario.id_funcionario = salida.funcionario ";
+				$cadenaSql .= "WHERE 1=1 ";
+				$cadenaSql .= "AND elemento.tipo_bien <> 1 ";
+				
+		
+				if ($variable [0] != '') {
+					$cadenaSql .= " AND funcionario = '" . $variable [0] . "'";
+				}
+				if ($variable [1] != '') {
+					$cadenaSql .= " AND  elemento_individual.serial= '" . $variable [1] . "'";
+				}
+				if ($variable [2] != '') {
+					$cadenaSql .= " AND  elemento_individual.placa= '" . $variable [2] . "'";
+				}
+				
+				$cadenaSql.=" ; ";
+				
+				break;
+			
+			// ---------------------------
+			
 			case "consultar_tipo_bien" :
 				
 				$cadenaSql = "SELECT id_tipo_bienes, descripcion ";
@@ -271,30 +308,6 @@ class Sql extends \Sql {
 				$cadenaSql .= "'" . $variable [18] . "',";
 				$cadenaSql .= "'" . $variable [19] . "') ";
 				$cadenaSql .= "RETURNING  id_elemento; ";
-				
-				break;
-			
-			case "consultarEntrada" :
-				
-				$cadenaSql = "SELECT DISTINCT ";
-				$cadenaSql .= "id_entrada, fecha_registro,  ";
-				$cadenaSql .= "nit, razon_social  ";
-				$cadenaSql .= "FROM entrada ";
-				$cadenaSql .= "JOIN proveedor ON proveedor.id_proveedor = entrada.proveedor ";
-				$cadenaSql .= "WHERE 1=1";
-				if ($variable [0] != '') {
-					$cadenaSql .= " AND fecha_registro BETWEEN CAST ( '" . $variable [4] . "' AS DATE) ";
-					$cadenaSql .= " AND  CAST ( '" . $variable [5] . "' AS DATE)  ";
-				}
-				if ($variable [2] != '') {
-					$cadenaSql .= " AND id_entrada = '" . $variable [0] . "'";
-				}
-				if ($variable [3] != '') {
-					$cadenaSql .= " AND  nit= '" . $variable [1] . "'";
-				}
-				if ($variable [4] != '') {
-					$cadenaSql .= " AND  nombre= '" . $variable [3] . "'";
-				}
 				
 				break;
 		}

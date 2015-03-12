@@ -1,6 +1,6 @@
 <?php
 
-namespace inventarios\gestionElementos\registrarElemento;
+namespace inventarios\gestionElementos\registrarTraslados;
 
 if (! isset ( $GLOBALS ["autorizado"] )) {
 	include ("../index.php");

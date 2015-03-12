@@ -3,7 +3,7 @@
 ?>
 
 // Asociar el widget de validación al formulario
-              $("#registrarElemento").validationEngine({
+              $("#registrarTraslados").validationEngine({
             promptPosition : "centerRight", 
             scroll: false,
             autoHidePrompt: true,
@@ -12,8 +12,8 @@
 	
         
         $(function() {
-            $("#registrarElemento").submit(function() {
-                $resultado=$("#registrarElemento").validationEngine("validate");
+            $("#registrarTraslados").submit(function() {
+                $resultado=$("#registrarTraslados").validationEngine("validate");
                    
                    
                    
@@ -27,16 +27,10 @@
 
               
 
-             
- $('#<?php echo $this->campoSeguro('numero_entrada_c')?>').attr('disabled','');
- $('#<?php echo $this->campoSeguro('fecha_entrada')?>').attr('disabled','');
- $('#<?php echo $this->campoSeguro('clase_entrada')?>').attr('disabled','');
- $('#<?php echo $this->campoSeguro('razon_social')?>').attr('disabled','');
- $('#<?php echo $this->campoSeguro('nit_proveedor')?>').attr('disabled','');
- $('#<?php echo $this->campoSeguro('numero_factura')?>').attr('disabled','');
- $('#<?php echo $this->campoSeguro('fecha_factura')?>').attr('disabled','');
+ $("#<?php echo $this->campoSeguro('responsable')?>").select2();
  
- $("#<?php echo $this->campoSeguro('nivel')?>").select2();
+ 
+ 
  $("#<?php echo $this->campoSeguro('tipo_registro')?>").select2();
  $("#<?php echo $this->campoSeguro('tipo_bien')?>").select2();
  $("#<?php echo $this->campoSeguro('iva')?>").select2();
