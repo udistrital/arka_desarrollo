@@ -46,9 +46,6 @@ class Funcion {
     
     function evaluar($objetoId,$texto =  false) {
     
-    	
-    
-    
     }
     
     
@@ -64,25 +61,30 @@ class Funcion {
     
     	$this->gestorHTMLCRUD->setObjetoIdEditar($objetoId);
     	$this->gestorHTMLCRUD->setLenguajeEditar($this->lenguaje);
+    	
+    	$this->gestorHTMLCRUD->addTablasPasoEditar(array('usuario','telefono'));
+    	$this->gestorHTMLCRUD->addTablasPasoEditar(array('usuario','correo'));
+    	$this->gestorHTMLCRUD->addTablasPasoEditar(array('usuario','usuario_rol'));
+    	
+    	$this->gestorHTMLCRUD->addTablasPasoEditar(array('rol','rol_pagina'));
+    	$this->gestorHTMLCRUD->addTablasPasoEditar(array('rol','rol_usuario'));
+    	
     	return $this->gestorHTMLCRUD->editar($objetoId);
-    
-    
     }
     
     function consultar($objetoId) {
         $this->gestorHTMLCRUD->setObjetoIdConsultar($objetoId);
 		$this->gestorHTMLCRUD->setLenguajeConsultar($this->lenguaje);
     	return $this->gestorHTMLCRUD->consultar($objetoId);
-    
-    
     }
     
     function ver($objetoId) {
+    	
     	$this->gestorHTMLCRUD->setObjetoIdVer($objetoId);
     	$this->gestorHTMLCRUD->setLenguajeVer($this->lenguaje);
+    	$this->gestorHTMLCRUD->addTablasPasoVer(array('usuario','telefono'));
+    	$this->gestorHTMLCRUD->addTablasPasoVer(array('usuario','correo'));
     	return $this->gestorHTMLCRUD->ver($objetoId);
-    
-    
     }
     
     function eliminar($objetoId){
@@ -91,14 +93,18 @@ class Funcion {
     	return $this->gestorHTMLCRUD->eliminar($objetoId);
     }
     
-    function guardarDatos($objetoId) {
-    	 
+    function guardarDatos($objetoId) {	 
     	$this->gestorHTMLCRUD->setObjetoIdGuardarDatos($objetoId);
     	$this->gestorHTMLCRUD->setLenguajeGuardarDatos($this->lenguaje);
-    	return $this->gestorHTMLCRUD->guardarDatos($objetoId);
+    	
+    	$this->gestorHTMLCRUD->addTablasPasoGuardarDatos(array('usuario','telefono'));
+    	$this->gestorHTMLCRUD->addTablasPasoGuardarDatos(array('usuario','correo'));
+    	$this->gestorHTMLCRUD->addTablasPasoGuardarDatos(array('usuario','usuario_rol'));
     	 
-    
-    
+    	$this->gestorHTMLCRUD->addTablasPasoGuardarDatos(array('rol','rol_pagina'));
+    	$this->gestorHTMLCRUD->addTablasPasoGuardarDatos(array('rol','rol_usuario'));
+    	
+    	return $this->gestorHTMLCRUD->guardarDatos($objetoId);
     }
     
     function autocompletar($objetoId) {
@@ -112,8 +118,14 @@ class Funcion {
     	$this->gestorHTMLCRUD->setObjetoIdCrear($objetoId);
     	$this->gestorHTMLCRUD->setLenguajeCrear($this->lenguaje);
     	
+    	$this->gestorHTMLCRUD->addTablasPasoCrear(array('usuario','telefono'));
+    	$this->gestorHTMLCRUD->addTablasPasoCrear(array('usuario','correo'));
+    	$this->gestorHTMLCRUD->addTablasPasoCrear(array('usuario','usuario_rol'));
+    	
+    	$this->gestorHTMLCRUD->addTablasPasoCrear(array('rol','rol_pagina'));
+    	$this->gestorHTMLCRUD->addTablasPasoCrear(array('rol','rol_usuario'));
+    	 
     	return $this->gestorHTMLCRUD->crear($objetoId);
-    
     }
     
     

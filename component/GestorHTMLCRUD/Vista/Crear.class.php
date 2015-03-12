@@ -50,6 +50,10 @@ class Crear {
     private $listaParametros;
     private $listaAtributosParametros;
     private $proceso;
+    private $tablasPaso;
+    private $listaObjetosPaso;
+    private $listaElementosPaso;
+    
     
     function __construct($lenguaje,$objetoId = '') {
 
@@ -59,6 +63,8 @@ class Crear {
         $this->miConfigurador->fabricaConexiones->setRecursoDB ( 'principal' );
 
         if(isset($_REQUEST['usuario'])) $_REQUEST['usuarioDefinitivo'] = $_REQUEST['usuario'];
+        
+        $this->tablasPaso =  array();
         
         $this->lenguaje = $lenguaje;
         $this->mensaje =  \Mensaje::singleton();
@@ -82,7 +88,9 @@ class Crear {
     	$this->columnas = $this->cliente->getListaColumnas();
     }
     
-    
+    public function addTablasPaso($valor){
+    	if(is_array($valor)) $this->tablasPaso[] = $valor;
+    }
     
     private function determinarListaParametros(){
     	

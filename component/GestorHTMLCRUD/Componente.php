@@ -138,6 +138,10 @@ class Componente extends Component  {
 		$this->ver->ver($valor );
 	}
 	
+	public function addTablasPasoVer($valor = '')	{
+		$this->ver->addTablasPaso($valor );
+	}
+	
 	public function setLenguajeDuplicar($lenguaje){
 		$this->duplicar->setLenguaje($lenguaje);
 	}
@@ -186,6 +190,10 @@ class Componente extends Component  {
 		$this->crear->crear($valor );
 	}
 	
+	public function addTablasPasoCrear($valor = '')	{
+		$this->crear->addTablasPaso($valor );
+	}
+	
 	public function setLenguajeEditar($lenguaje){
 		$this->editar->setLenguaje($lenguaje);
 	}
@@ -198,6 +206,10 @@ class Componente extends Component  {
 		$this->editar->editar($valor );
 	}
 	
+	public function addTablasPasoEditar($valor = ''){
+		$this->editar->addTablasPaso($valor );
+	}
+	
 	public function setLenguajeGuardarDatos($lenguaje){
 		$this->guardarDatos->setLenguaje($lenguaje);
 	}
@@ -208,6 +220,10 @@ class Componente extends Component  {
 	
 	public function guardarDatos($valor = '')	{
 		$this->guardarDatos->guardarDatos($valor );
+	}
+	
+	public function addTablasPasoGuardarDatos($valor = '')	{
+		$this->guardarDatos->addTablasPaso($valor );
 	}
 		
 	

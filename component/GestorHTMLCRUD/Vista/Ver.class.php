@@ -43,6 +43,9 @@ class Ver {
 	private $lenguaje;
 	private $listaElementos;
 	private $listaPks;
+	private $tablasPaso;
+	private $listaObjetosPaso;
+	private $listaElementosPaso;
     
     function __construct($lenguaje = '') {
 
@@ -55,12 +58,17 @@ class Ver {
 		
 		if($lenguaje!='')$this->lenguaje = $lenguaje;
         
+		$this->tablasPaso = array();
         	
 			$this->objeto = $this->cliente->getListaObjetos();
            $this->columnas = $this->cliente->getListaColumnas();
         
         
 
+    }
+    
+    public function addTablasPaso($valor){
+    	if(is_array($valor)) $this->tablasPaso[] = $valor;
     }
     
     public function setLenguaje($lenguaje){
@@ -146,7 +154,25 @@ class Ver {
     			$this->mensaje->addMensaje("4001","errorLectura: ".ucfirst($this->objetoAlias),'information');
     		
     		}
-    		$this->listaElementos =  array_merge($this->listaElementos,$lista);
+    		
+    		if(count($this->listaObjetosPaso>0)){
+    			$this->listaElementosPaso =  array();
+    			foreach ($this->listaObjetosPaso as $el){
+    				$metodo = "consultar".ucfirst($el);
+    				$listaPaso =  $this->cliente->$metodo($argumentos);
+    				if(is_array($listaPaso)&&count($listaPaso)>0){
+    					unset ($listaPaso[0]['id']);
+    					
+    					if(end($this->listaElementosPaso)&&isset(end($this->listaElementosPaso)[$this->listaPks[0]]))
+    					  unset($listaPaso[0][$this->listaPks[0]]);
+    					$this->listaElementosPaso = array_merge($this->listaElementosPaso,$listaPaso[0] );
+    					
+    				}
+    				
+    			}
+    		}
+    		
+    		$this->listaElementos =  array_merge_recursive($this->listaElementos,$lista);
     		
     	}
     	
@@ -216,17 +242,37 @@ class Ver {
 	
     public function ver(){
     	
+    	if(!$this->seleccionarObjeto()){
+    		$verifica =  false;
+    	}
     	
+    	$listaObjetosPaso =  array();
+    	if(count($this->tablasPaso)>0){
+    		foreach ($this->tablasPaso as $elemento){
+    			 
+    			if($this->objetoAliasSingular==$elemento[0]
+    			&&$this->cliente->getObjeto($elemento[1], 'ejecutar','id')){
+    				$idEl = $this->cliente->getObjeto($elemento[1], 'ejecutar','id') ;
+    				$listaObjetosPaso[] = $this->cliente->getObjeto($idEl, 'id','ejecutar') ;
+    			}
+    		}
+    	}
     	
-    	if(!$this->seleccionarObjeto()||!$this->getListaElementos()){
+    	$this->listaObjetosPaso = $listaObjetosPaso; 
+    	
+    	if(!$this->getListaElementos()){
     	
     		$verifica =  false;
     		 
     	}
 		
+    	$listado = $this->listaElementos   ;
+    	
+    	var_dump($this->listaElementos,$this->listaElementosPaso);
 		
 		echo '<div class="container-fluid">';
-    	foreach ($this->listaElementos as $fila){
+		
+    	foreach ($listado as $fila){
     		echo "<form><fieldset><table>";
     		foreach ($fila as $f=>$g){
     			if(!$this->columnaVer($f)) continue;
@@ -234,7 +280,9 @@ class Ver {
     		}
     		echo "</table></fieldset></form><br>";
     		
+    		
     	}
+    	
     	echo "</div>";
     	
     	    	 
