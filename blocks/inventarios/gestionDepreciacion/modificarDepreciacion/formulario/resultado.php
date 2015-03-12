@@ -60,10 +60,8 @@ class registrarForm {
         $esteRecursoDB = $this->miConfigurador->fabricaConexiones->getRecursoDB($conexion);
 
         $variable = array();
-        echo $cadenaSql = $this->miSql->getCadenaSql('consultarElementos_depreciados', $variable);
+        $cadenaSql = $this->miSql->getCadenaSql('consultarElementos_depreciados', $variable);
         $elementos = $esteRecursoDB->ejecutarAcceso($cadenaSql, "busqueda");
-
-        var_dump($elementos);
         // ---------------- SECCION: Parámetros Generales del Formulario ----------------------------------
         $esteCampo = $esteBloque ['nombre'];
         $atributos ['id'] = $esteCampo;
@@ -215,7 +213,7 @@ class registrarForm {
             $valorCodificado .= "&opcion=depreciar";
 
 
-            /*             
+            /*
              * SARA permite que los nombres de los campos sean dinámicos.
              * Para ello utiliza la hora en que es creado el formulario para
              * codificar el nombre de cada campo. Si se utiliza esta técnica es necesario pasar dicho tiempo como una variable:

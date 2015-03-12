@@ -163,7 +163,7 @@ class Sql extends \Sql {
                 $cadenaSql.= " AND grupo_numcuenta='" . $variable . "'; ";
                 break;
 
-            case "consultarElementos_Depreciados" :
+            case "consultarElementos_depreciados" :
                 $cadenaSql = " SELECT dep_idelementogen, ";
                 $cadenaSql.= " dep_grupocontable,  ";
                 $cadenaSql.= " dep_meses,  ";
