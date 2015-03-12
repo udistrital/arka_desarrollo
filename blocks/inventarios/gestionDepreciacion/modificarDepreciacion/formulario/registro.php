@@ -69,7 +69,8 @@ class registrarForm {
 // ---------------- FIN SECCION: de Parámetros Generales del Formulario ----------------------------
 // ----------------INICIAR EL FORMULARIO ------------------------------------------------------------
         $atributos ['tipoEtiqueta'] = 'inicio';
-        echo $this->miFormulario->formulario($atributos); {
+        echo $this->miFormulario->formulario($atributos);
+        {
 // ---------------- SECCION: Controles del Formulario -----------------------------------------------
 
             $esteCampo = "marcoDatosBasicos";
@@ -78,11 +79,13 @@ class registrarForm {
             $atributos ['tipoEtiqueta'] = 'inicio';
             $atributos ["leyenda"] = "Modificar Depreciación";
             echo $this->miFormulario->marcoAgrupacion('inicio', $atributos);
-            unset($atributos); {
+            unset($atributos);
+            {
                 $esteCampo = "Formular Depreciación";
                 $atributos ['id'] = $esteCampo;
                 $atributos ['leyenda'] = "Datos Iniciales";
-                echo $this->miFormulario->agrupacion('inicio', $atributos); {
+                echo $this->miFormulario->agrupacion('inicio', $atributos);
+                {
 
 // ---------------- CONTROL: Cuadro de Texto --------------------------------------------------------
                     $esteCampo = "grupo_contable";
@@ -91,14 +94,13 @@ class registrarForm {
                     $atributos ['etiqueta'] = $this->lenguaje->getCadena($esteCampo);
                     $atributos ["etiquetaObligatorio"] = true;
                     $atributos ['tab'] = $tab ++;
-                    $atributos ['seleccion'] = - 1;
+                    if (isset($datos_elemento[0][$esteCampo])) {
+                        $atributos ['seleccion'] = $datos_elemento[0][$esteCampo];
+                    } else {
+                        $atributos ['seleccion'] = - 1;
+                    }
                     $atributos ['anchoEtiqueta'] = 220;
                     $atributos ['evento'] = '';
-                    if (isset($datos_elemento[0][$esteCampo])) {
-                        $atributos ['valor'] =$datos_elemento[0][$esteCampo];
-                    } else {
-                        $atributos ['valor'] = '';
-                    }
                     $atributos ['deshabilitado'] = false;
                     $atributos ['columnas'] = 1;
                     $atributos ['tamanno'] = 1;
@@ -107,15 +109,9 @@ class registrarForm {
                     $atributos ['estilo'] = "jqueryui";
                     $atributos ['validar'] = "required";
                     $atributos ['limitar'] = 1;
-                    $atributos ['anchoCaja'] = 27;
+                    $atributos ['anchoCaja'] = 100;
                     $atributos ['miEvento'] = '';
                     $atributos ['cadena_sql'] = $this->miSql->getCadenaSql("consultar_grupo_contable");
-                    $matrizItems = array(
-                        array(
-                            0,
-                            ' '
-                        )
-                    );
                     $matrizItems = $esteRecursoDB->ejecutarAcceso($atributos ['cadena_sql'], "busqueda");
                     $atributos ['matrizItems'] = $matrizItems;
                     // $atributos['miniRegistro']=;
@@ -207,7 +203,7 @@ class registrarForm {
                     $atributos ['validar'] = 'required, minSize[1],maxSize[10]';
 
                     if (isset($datos_elemento[0]['fechacorte'])) {
-                        $atributos ['valor'] =$datos_elemento[0]['fechacorte'];
+                        $atributos ['valor'] = $datos_elemento[0]['fechacorte'];
                     } else {
                         $atributos ['valor'] = '';
                     }
@@ -295,7 +291,8 @@ class registrarForm {
                 $esteCampo = "Formular Depreciación";
                 $atributos ['id'] = $esteCampo;
                 $atributos ['leyenda'] = "Resultado Depreciación";
-                echo $this->miFormulario->agrupacion('inicio', $atributos); {
+                echo $this->miFormulario->agrupacion('inicio', $atributos);
+                {
 // ---------------- CONTROL: Cuadro de Texto --------------------------------------------------------
                     $esteCampo = 'valor_historico';
                     $atributos ['id'] = $esteCampo;
@@ -344,7 +341,7 @@ class registrarForm {
                     $atributos ['validar'] = 'required, minSize[1],maxSize[13],custom[number]';
 
                     if (isset($datos_elemento[0][$esteCampo])) {
-                        $atributos ['valor'] =$datos_elemento[0][$esteCampo];
+                        $atributos ['valor'] = $datos_elemento[0][$esteCampo];
                     } else {
                         $atributos ['valor'] = '';
                     }
@@ -376,7 +373,7 @@ class registrarForm {
                     $atributos ['validar'] = 'required, minSize[1],maxSize[13],custom[number]';
 
                     if (isset($datos_elemento[0][$esteCampo])) {
-                        $atributos ['valor'] =$datos_elemento[0][$esteCampo];
+                        $atributos ['valor'] = $datos_elemento[0][$esteCampo];
                     } else {
                         $atributos ['valor'] = '';
                     }
@@ -408,7 +405,7 @@ class registrarForm {
                     $atributos ['validar'] = 'required, minSize[1],maxSize[3],custom[number]';
 
                     if (isset($datos_elemento[0][$esteCampo])) {
-                        $atributos ['valor'] =$datos_elemento[0][$esteCampo];
+                        $atributos ['valor'] = $datos_elemento[0][$esteCampo];
                     } else {
                         $atributos ['valor'] = '';
                     }
@@ -440,7 +437,7 @@ class registrarForm {
                     $atributos ['validar'] = 'required, minSize[1],maxSize[13],custom[number]';
 
                     if (isset($datos_elemento[0][$esteCampo])) {
-                        $atributos ['valor'] =$datos_elemento[0][$esteCampo];
+                        $atributos ['valor'] = $datos_elemento[0][$esteCampo];
                     } else {
                         $atributos ['valor'] = '';
                     }
@@ -472,7 +469,7 @@ class registrarForm {
                     $atributos ['validar'] = 'required, minSize[1],maxSize[13],custom[number]';
 
                     if (isset($datos_elemento[0][$esteCampo])) {
-                        $atributos ['valor'] =$datos_elemento[0][$esteCampo];
+                        $atributos ['valor'] = $datos_elemento[0][$esteCampo];
                     } else {
                         $atributos ['valor'] = '';
                     }
@@ -504,7 +501,7 @@ class registrarForm {
                     $atributos ['validar'] = 'required, minSize[1],maxSize[13],custom[number]';
 
                     if (isset($datos_elemento[0][$esteCampo])) {
-                        $atributos ['valor'] =$datos_elemento[0][$esteCampo];
+                        $atributos ['valor'] = $datos_elemento[0][$esteCampo];
                     } else {
                         $atributos ['valor'] = '';
                     }
@@ -535,7 +532,7 @@ class registrarForm {
                     $atributos ['etiqueta'] = $this->lenguaje->getCadena($esteCampo);
                     $atributos ['validar'] = 'required, minSize[1],maxSize[13],custom[number]';
                     if (isset($datos_elemento[0][$esteCampo])) {
-                        $atributos ['valor'] =$datos_elemento[0][$esteCampo];
+                        $atributos ['valor'] = $datos_elemento[0][$esteCampo];
                     } else {
                         $atributos ['valor'] = '';
                     }
@@ -567,7 +564,7 @@ class registrarForm {
                     $atributos ['validar'] = 'required, minSize[1],maxSize[13],custom[number]';
 
                     if (isset($datos_elemento[0][$esteCampo])) {
-                        $atributos ['valor'] =$datos_elemento[0][$esteCampo];
+                        $atributos ['valor'] = $datos_elemento[0][$esteCampo];
                     } else {
                         $atributos ['valor'] = '';
                     }
@@ -599,7 +596,7 @@ class registrarForm {
                     $atributos ['validar'] = 'required, minSize[1],maxSize[13],custom[number]';
 
                     if (isset($datos_elemento[0][$esteCampo])) {
-                        $atributos ['valor'] =$datos_elemento[0][$esteCampo];
+                        $atributos ['valor'] = $datos_elemento[0][$esteCampo];
                     } else {
                         $atributos ['valor'] = '';
                     }
@@ -702,7 +699,7 @@ class registrarForm {
             $valorCodificado .= "&pagina=" . $this->miConfigurador->getVariableConfiguracion('pagina');
             $valorCodificado .= "&bloque=" . $esteBloque ['nombre'];
             $valorCodificado .= "&bloqueGrupo=" . $esteBloque ["grupo"];
-            $valorCodificado .= "&opcion=modificar";
+            $valorCodificado .= "&opcion=modificarRegistro";
             $valorCodificado .= "&seccion=" . $tiempo;
             $valorCodificado .= "&elemento_general=" . $_REQUEST['item0'];
             /**

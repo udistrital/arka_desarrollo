@@ -73,7 +73,7 @@ class Funcion {
 
             // Realizar una validación específica para los campos de este formulario:
             // $validacion = $this->verificarCampos ();
-            if ($_REQUEST ['opcion'] == 'modificar') {
+            if ($_REQUEST ['opcion'] == 'modificarRegistro') {
                 $this->modificarDepreciacion();
             }
 

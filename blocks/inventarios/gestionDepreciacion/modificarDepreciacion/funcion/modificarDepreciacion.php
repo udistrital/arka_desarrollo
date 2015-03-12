@@ -63,10 +63,9 @@ class RegistradorDepreciacion {
             'fregistro' => $fechaActual,
         );
 
-
-        $cadenaSql = $this->miSql->getCadenaSql('registrarDepreciacion', $datos_depreciacion);
+        
+        $cadenaSql = $this->miSql->getCadenaSql('modificarDepreciacion', $datos_depreciacion);
         $registro_depreciacion = $esteRecursoDB->ejecutarAcceso($cadenaSql, "insertar");
-
 
         $datos = array(
             'elemento_general' => (isset($_REQUEST['elemento_general']) ? $_REQUEST['elemento_general'] : ''),
