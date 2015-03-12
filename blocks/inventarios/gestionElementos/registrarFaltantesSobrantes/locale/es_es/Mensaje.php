@@ -2,6 +2,34 @@
 <?php
 $this->idioma ["noDefinido"] = "Etiqueta no esta definida en locale/es_es/Mensaje.php";
 
+$this->idioma ["placa"] ="Número de Placa: ";
+$this->idioma ["placaTitulo"] ="Ingrese Número Placa";
+
+
+$this->idioma ["serial"] ="Número de Serial: ";
+$this->idioma ["serialTitulo"] ="Ingrese Número Serial";
+
+$this->idioma ["responsable"] ="Indentificación o Nombre del Funcionario: ";
+$this->idioma ["responsableTitulo"] ="Seleccione Funcionario Responsable";
+
+
+
+$this->idioma ["responsable_ante"] ="Indentificación y Nombre del Funcionario Actual: ";
+
+$this->idioma ["responsable_reci"] ="Indentificación y Nombre del Funcionario Recibe: ";
+$this->idioma ["responsable_reciTitulo"] ="Seleccione Funcionario Responsable";
+
+$this->idioma ["dependencia"] ="Dependencia : ";
+$this->idioma ["dependenciaTitulo"] ="Seleccione Dependencia";
+
+
+
+//-------------
+
+
+
+
+
 $this->idioma ["numero_entrada"] ="(ID)Número Entrada: ";
 $this->idioma ["numero_entradaTitulo"] ="Ingrese Número Entrada";
 

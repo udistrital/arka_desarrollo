@@ -148,154 +148,82 @@ class Sql extends \Sql {
 			/**
 			 * Clausulas Del Caso Uso.
 			 */
-			
-			case "consultar_tipo_bien" :
-				
-				$cadenaSql = "SELECT id_tipo_bienes, descripcion ";
-				$cadenaSql .= "FROM tipo_bienes;";
+			case "dependencia" :
+				$cadenaSql = " SELECT ";
+				$cadenaSql .= " id_dependencia,";
+				$cadenaSql .= " cod_dependencia  ||' - '|| nombre as dependencia ";
+				$cadenaSql .= " FROM";
+				$cadenaSql .= " dependencia ; ";
 				break;
 			
-			case "consultar_tipo_poliza" :
+			case "seleccion_funcionario" :
 				
-				$cadenaSql = "SELECT id_tipo_poliza, descripcion ";
-				$cadenaSql .= "FROM tipo_poliza;";
-				
+				$cadenaSql = "SELECT id_funcionario, identificacion ||'-'||nombre AS funcionario  ";
+				$cadenaSql .= "FROM funcionario;";
 				break;
 			
-			case "consultar_tipo_iva" :
+			case "consultarElemento" :
 				
-				$cadenaSql = "SELECT id_iva, descripcion ";
-				$cadenaSql .= "FROM aplicacion_iva;";
+				$cadenaSql = "SELECT ";
+				$cadenaSql .= "id_elemento_ind, elemento_individual.placa, elemento_individual.serie,funcionario.nombre,funcionario.identificacion, id_elemento_gen, ";
+				$cadenaSql .= "elemento_individual.id_salida ,tipo_bien.descripcion , dependencia.nombre ";
+				$cadenaSql .= "FROM elemento_individual ";
+				$cadenaSql .= "JOIN elemento ON elemento.id_elemento = elemento_individual.id_elemento_gen ";
+				$cadenaSql .= "JOIN salida ON salida.id_salida = elemento_individual.id_salida ";
+				$cadenaSql .= "JOIN tipo_bien ON tipo_bien.id_tipo_bien = elemento.tipo_bien ";
+				$cadenaSql .= "JOIN funcionario  ON funcionario.id_funcionario = salida.funcionario ";
+				$cadenaSql .= "JOIN dependencia  ON dependencia.id_dependencia = funcionario.dependencia ";
+				$cadenaSql .= "WHERE 1=1 ";
+				$cadenaSql .= "AND elemento.tipo_bien <> 1 ";
 				
-				break;
-			
-			case "consultar_bodega" :
-				
-				$cadenaSql = "SELECT id_bodega, descripcion ";
-				$cadenaSql .= "FROM bodega;";
-				
-				break;
-			
-			case "consultar_placa" :
-				
-				$cadenaSql = "SELECT MAX( placa) ";
-				$cadenaSql .= "FROM elemento ";
-				$cadenaSql .= "WHERE tipo_bien='1';";
-				
-				break;
-			
-			case "consultar_entrada_acta" :
-				
-				$cadenaSql = "SELECT acta_recibido ";
-				$cadenaSql .= "FROM entrada ";
-				$cadenaSql .= "WHERE id_entrada='" . $variable . "'";
-				
-				break;
-			
-			case "consultar_elementos_acta" :
-				
-				$cadenaSql = "SELECT id_items ";
-				$cadenaSql .= "FROM items_actarecibido ";
-				$cadenaSql .= "WHERE id_acta='" . $variable . "'";
-				
-				break;
-			
-			case "consultar_elementos_entrada" :
-				
-				$cadenaSql = "SELECT id_elemento ";
-				$cadenaSql .= "FROM elemento  ";
-				$cadenaSql .= "WHERE id_entrada='" . $variable . "'";
-				
-				break;
-			
-			case "consultar_nivel_inventario" :
-				
-				$cadenaSql = "SELECT id_catalogo,(codigo||' - '||nombre) AS nivel ";
-				$cadenaSql .= "FROM catalogo_elemento ;";
-				
-				break;
-			
-			case "ingresar_elemento_tipo_1" :
-				$cadenaSql = " INSERT INTO ";
-				$cadenaSql .= " elemento(";
-				$cadenaSql .= "fecha_registro,nivel, tipo_bien, descripcion, cantidad, ";
-				$cadenaSql .= "unidad, valor, iva, ajuste, bodega, subtotal_sin_iva, total_iva, ";
-				$cadenaSql .= "total_iva_con, placa,marca,serie,id_entrada) ";
-				$cadenaSql .= " VALUES (";
-				$cadenaSql .= "'" . $variable [0] . "',";
-				$cadenaSql .= "'" . $variable [1] . "',";
-				$cadenaSql .= "'" . $variable [2] . "',";
-				$cadenaSql .= "'" . $variable [3] . "',";
-				$cadenaSql .= "'" . $variable [4] . "',";
-				$cadenaSql .= "'" . $variable [5] . "',";
-				$cadenaSql .= "'" . $variable [6] . "',";
-				$cadenaSql .= "'" . $variable [7] . "',";
-				$cadenaSql .= "'" . $variable [8] . "',";
-				$cadenaSql .= "'" . $variable [9] . "',";
-				$cadenaSql .= "'" . $variable [10] . "',";
-				$cadenaSql .= "'" . $variable [11] . "',";
-				$cadenaSql .= "'" . $variable [12] . "',";
-				$cadenaSql .= "'" . $variable [13] . "',";
-				$cadenaSql .= "'" . $variable [14] . "',";
-				$cadenaSql .= "'" . $variable [15] . "',";
-				$cadenaSql .= "'" . $variable [16] . "') ";
-				$cadenaSql .= "RETURNING  id_elemento; ";
-				
-				break;
-			
-			case "ingresar_elemento_tipo_2" :
-				$cadenaSql = " INSERT INTO ";
-				$cadenaSql .= " elemento(";
-				$cadenaSql .= "fecha_registro,nivel,tipo_bien, descripcion, cantidad, ";
-				$cadenaSql .= "unidad, valor, iva, ajuste, bodega, subtotal_sin_iva, total_iva, ";
-				$cadenaSql .= "total_iva_con, placa,tipo_poliza, fecha_inicio_pol, fecha_final_pol,marca,serie,id_entrada) ";
-				$cadenaSql .= " VALUES (";
-				$cadenaSql .= "'" . $variable [0] . "',";
-				$cadenaSql .= "'" . $variable [1] . "',";
-				$cadenaSql .= "'" . $variable [2] . "',";
-				$cadenaSql .= "'" . $variable [3] . "',";
-				$cadenaSql .= "'" . $variable [4] . "',";
-				$cadenaSql .= "'" . $variable [5] . "',";
-				$cadenaSql .= "'" . $variable [6] . "',";
-				$cadenaSql .= "'" . $variable [7] . "',";
-				$cadenaSql .= "'" . $variable [8] . "',";
-				$cadenaSql .= "'" . $variable [9] . "',";
-				$cadenaSql .= "'" . $variable [10] . "',";
-				$cadenaSql .= "'" . $variable [11] . "',";
-				$cadenaSql .= "'" . $variable [12] . "',";
-				$cadenaSql .= "'" . $variable [13] . "',";
-				$cadenaSql .= "'" . $variable [14] . "',";
-				$cadenaSql .= "'" . $variable [15] . "',";
-				$cadenaSql .= "'" . $variable [16] . "',";
-				$cadenaSql .= "'" . $variable [17] . "',";
-				$cadenaSql .= "'" . $variable [18] . "',";
-				$cadenaSql .= "'" . $variable [19] . "') ";
-				$cadenaSql .= "RETURNING  id_elemento; ";
-				
-				break;
-			
-			case "consultarEntrada" :
-				
-				$cadenaSql = "SELECT DISTINCT ";
-				$cadenaSql .= "id_entrada, fecha_registro,  ";
-				$cadenaSql .= "nit, razon_social  ";
-				$cadenaSql .= "FROM entrada ";
-				$cadenaSql .= "JOIN proveedor ON proveedor.id_proveedor = entrada.proveedor ";
-				$cadenaSql .= "WHERE 1=1";
 				if ($variable [0] != '') {
-					$cadenaSql .= " AND fecha_registro BETWEEN CAST ( '" . $variable [4] . "' AS DATE) ";
-					$cadenaSql .= " AND  CAST ( '" . $variable [5] . "' AS DATE)  ";
+					$cadenaSql .= " AND funcionario = '" . $variable [0] . "'";
+				}
+				if ($variable [1] != '') {
+					$cadenaSql .= " AND  elemento_individual.serial= '" . $variable [1] . "'";
 				}
 				if ($variable [2] != '') {
-					$cadenaSql .= " AND id_entrada = '" . $variable [0] . "'";
+					$cadenaSql .= " AND  elemento_individual.placa= '" . $variable [2] . "'";
 				}
 				if ($variable [3] != '') {
-					$cadenaSql .= " AND  nit= '" . $variable [1] . "'";
-				}
-				if ($variable [4] != '') {
-					$cadenaSql .= " AND  nombre= '" . $variable [3] . "'";
+					$cadenaSql .= " AND  dependencia= '" . $variable [3] . "'";
 				}
 				
+				$cadenaSql .= " ; ";
+				
+				break;
+			
+			
+			case "seleccion_funcionario_anterior" :
+				
+				$cadenaSql = "SELECT id_elemento_ind,identificacion ||'  -  '||nombre AS funcionario ,id_funcionario ";
+				$cadenaSql .= "FROM elemento_individual ";
+				$cadenaSql .= "JOIN salida ON salida.id_salida = elemento_individual.id_salida ";
+				$cadenaSql .= "JOIN funcionario  ON funcionario.id_funcionario = salida.funcionario ";
+				$cadenaSql .= "WHERE  id_elemento_ind='" . $variable . "';";
+				
+				break;
+			
+			case "insertar_historico" :
+				
+				$cadenaSql = " INSERT INTO historial_elemento_individual( ";
+				$cadenaSql .= "fecha_registro, elemento_individual, funcionario,descripcion_funcionario)  ";
+				$cadenaSql .= " VALUES (";
+				$cadenaSql .= "'" . $variable [0] . "',";
+				$cadenaSql .= "'" . $variable [1] . "',";
+				$cadenaSql .= "'" . $variable [2] . "',";
+				$cadenaSql .= "'" . $variable [3] . "') ";
+				$cadenaSql .= "RETURNING  id_evento; ";
+				
+				break;
+			
+			case "actualizar_salida" :
+				
+				$cadenaSql = " UPDATE salida ";
+				$cadenaSql .= "SET funcionario='" . $variable [1] . "',";
+				$cadenaSql .= " observaciones='" . $variable [2] . "' ";
+				$cadenaSql .= " WHERE id_salida=(SELECT id_salida FROM elemento_individual WHERE id_elemento_ind='" . $variable [0] . "' ) ;";
+				echo $cadenaSql;
 				break;
 		}
 		return $cadenaSql;

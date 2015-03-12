@@ -51,11 +51,11 @@ class Frontera {
 					include_once ($this->ruta . "/formulario/mensaje.php");
 					break;
 				
-				case "ConsultarEntrada" :
+				case "ConsultarElemento" :
 					include_once ($this->ruta . "/formulario/resultado.php");
 					break;
 				
-				case "cargarElemento" :
+				case "trasladarElemento" :
 					include_once ($this->ruta . "/formulario/registro.php");
 					break;
 			}
