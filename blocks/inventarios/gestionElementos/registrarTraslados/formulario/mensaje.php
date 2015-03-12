@@ -39,7 +39,7 @@ class registrarForm {
 		// -------------------------------------------------------------------------------------------------
 		$conexion = "inventarios";
 		$esteRecursoDB = $this->miConfigurador->fabricaConexiones->getRecursoDB ( $conexion );
-
+		
 		// Limpia Items Tabla temporal
 		
 		// $cadenaSql = $this->miSql->getCadenaSql ( 'limpiar_tabla_items' );
@@ -77,10 +77,9 @@ class registrarForm {
 			
 			{
 				
-				if (isset($_REQUEST ['mensaje'])&&$_REQUEST ['mensaje'] == 'confirma') {
+				if (isset ( $_REQUEST ['mensaje'] ) && $_REQUEST ['mensaje'] == 'confirma') {
 					
-					$mensaje = "Se Cargo Elemento <br> Número ID Elemento: " . $_REQUEST ['numero_orden'] . "  
-							<br>Fecha : " . $_REQUEST ['fecha_orden'];
+					$mensaje = "Se Traslado el Elemento del Funcionario Responsable con Exito. ";
 					
 					// ---------------- CONTROL: Cuadro de Texto --------------------------------------------------------
 					$esteCampo = 'mensajeRegistro';
@@ -97,89 +96,9 @@ class registrarForm {
 					// --------------- FIN CONTROL : Cuadro de Texto --------------------------------------------------
 				}
 				
-				if (isset($_REQUEST ['mensaje'])&&$_REQUEST ['mensaje'] == 'confirmaMasivo') {
-						
-					$mensaje = "Se Cargo con Exito los  Elementos  del Archivo<br>
-							<br>Fecha  Registro : " . date ( 'Y-m-d' );
-						
-					// ---------------- CONTROL: Cuadro de Texto --------------------------------------------------------
-					$esteCampo = 'mensajeRegistro';
-					$atributos ['id'] = $esteCampo;
-					$atributos ['tipo'] = 'success';
-					$atributos ['estilo'] = 'textoCentrar';
-					$atributos ['mensaje'] = $mensaje;
-						
-					$tab ++;
-						
-					// Aplica atributos globales al control
-					$atributos = array_merge ( $atributos, $atributosGlobales );
-					echo $this->miFormulario->cuadroMensaje ( $atributos );
-					// --------------- FIN CONTROL : Cuadro de Texto --------------------------------------------------
-				}
-				
-				if (isset($_REQUEST ['mensaje'])&&$_REQUEST ['mensaje'] == 'error') {
+				if (isset ( $_REQUEST ['mensaje'] ) && $_REQUEST ['mensaje'] == 'error') {
 					
-					$mensaje = "No Se Pudo Hacer la  Carga del Elemento";
-					
-					// ---------------- CONTROL: Cuadro de Texto --------------------------------------------------------
-					$esteCampo = 'mensajeRegistro';
-					$atributos ['id'] = $esteCampo;
-					$atributos ['tipo'] = 'error';
-					$atributos ['estilo'] = 'textoCentrar';
-					$atributos ['mensaje'] = $mensaje;
-					
-					$tab ++;
-					
-					// Aplica atributos globales al control
-					$atributos = array_merge ( $atributos, $atributosGlobales );
-					echo $this->miFormulario->cuadroMensaje ( $atributos );
-					// --------------- FIN CONTROL : Cuadro de Texto --------------------------------------------------
-				}
-				
-				
-				
-				if (isset($_REQUEST ['mensaje'])&&$_REQUEST ['mensaje'] == 'noElemento') {
-						
-				$mensaje = "No Se Pudo Hacer la  Carga del Elemento<br>Numeró maximo de elementos Registrados con Acta de Recibido ";
-						
-					// ---------------- CONTROL: Cuadro de Texto --------------------------------------------------------
-					$esteCampo = 'mensajeRegistro';
-					$atributos ['id'] = $esteCampo;
-					$atributos ['tipo'] = 'error';
-					$atributos ['estilo'] = 'textoCentrar';
-					$atributos ['mensaje'] = $mensaje;
-						
-					$tab ++;
-						
-					// Aplica atributos globales al control
-					$atributos = array_merge ( $atributos, $atributosGlobales );
-					echo $this->miFormulario->cuadroMensaje ( $atributos );
-					// --------------- FIN CONTROL : Cuadro de Texto --------------------------------------------------
-				}
-				
-				
-				
-				if (isset($_REQUEST ['mensaje'])&&$_REQUEST ['mensaje'] == 'noExtension') {
-						
-					$mensaje = "Extension Incorrecta del Archivo a Cargar";
-						
-					// ---------------- CONTROL: Cuadro de Texto --------------------------------------------------------
-					$esteCampo = 'mensajeRegistro';
-					$atributos ['id'] = $esteCampo;
-					$atributos ['tipo'] = 'error';
-					$atributos ['estilo'] = 'textoCentrar';
-					$atributos ['mensaje'] = $mensaje;
-						
-					$tab ++;
-						
-					// Aplica atributos globales al control
-					$atributos = array_merge ( $atributos, $atributosGlobales );
-					echo $this->miFormulario->cuadroMensaje ( $atributos );
-					// --------------- FIN CONTROL : Cuadro de Texto --------------------------------------------------
-				}		
-				if (isset($_REQUEST['errores'])&&$_REQUEST ['errores'] == 'notextos') {
-					
-					$mensaje = "No se Creo Orden de Servicios, No se Colocaron Objeto de Contrato Y/O Forma de Pago";
+					$mensaje = "No Se Pudo Hacer la  Traslado del Elemento";
 					
 					// ---------------- CONTROL: Cuadro de Texto --------------------------------------------------------
 					$esteCampo = 'mensajeRegistro';

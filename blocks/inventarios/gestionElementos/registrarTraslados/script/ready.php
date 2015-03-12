@@ -28,10 +28,10 @@
               
 
  $("#<?php echo $this->campoSeguro('responsable')?>").select2();
- 
- 
- 
- $("#<?php echo $this->campoSeguro('tipo_registro')?>").select2();
+$("#<?php echo $this->campoSeguro('responsable_reci')?>").select2();
+
+
+
  $("#<?php echo $this->campoSeguro('tipo_bien')?>").select2();
  $("#<?php echo $this->campoSeguro('iva')?>").select2();
  $("#<?php echo $this->campoSeguro('bodega')?>").select2();

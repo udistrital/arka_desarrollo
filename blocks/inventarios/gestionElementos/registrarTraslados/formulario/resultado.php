@@ -91,7 +91,7 @@ class registrarForm {
 		
 		
 		$elemento = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
-var_dump($elemento);
+
 		// ---------------- SECCION: Parámetros Generales del Formulario ----------------------------------
 		$esteCampo = $esteBloque ['nombre'];
 		$atributos ['id'] = $esteCampo;
@@ -120,7 +120,7 @@ var_dump($elemento);
 		$atributos ['id'] = $esteCampo;
 		$atributos ["estilo"] = "jqueryui";
 		$atributos ['tipoEtiqueta'] = 'inicio';
-		$atributos ["leyenda"] = "Consultar Entrada";
+		$atributos ["leyenda"] = "Consultar Elementos";
 		echo $this->miFormulario->marcoAgrupacion ( 'inicio', $atributos );
 		
 		
@@ -180,7 +180,7 @@ var_dump($elemento);
 			for($i = 0; $i < count ( $elemento ); $i ++) {
 				$variable = "pagina=" . $miPaginaActual; // pendiente la pagina para modificar parametro
 				$variable .= "&opcion=trasladarElemento";
-				$variable .= "&numero_salida=" . $elemento [$i] [6];
+				$variable .= "&id_elemento_ind=" . $elemento [$i] [0];
 				$variable = $this->miConfigurador->fabricaConexiones->crypto->codificar_url ( $variable, $directorio);
 		
 				$mostrarHtml = "<tr>

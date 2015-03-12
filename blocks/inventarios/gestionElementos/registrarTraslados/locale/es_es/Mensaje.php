@@ -11,6 +11,19 @@ $this->idioma ["serialTitulo"] ="Ingrese Número Serial";
 
 $this->idioma ["responsable"] ="Indentificación o Nombre del Funcionario: ";
 $this->idioma ["responsableTitulo"] ="Seleccione Funcionario Responsable";
+
+
+
+$this->idioma ["responsable_ante"] ="Indentificación y Nombre del Funcionario Actual: ";
+
+$this->idioma ["responsable_reci"] ="Indentificación y Nombre del Funcionario Recibe: ";
+$this->idioma ["responsable_reciTitulo"] ="Seleccione Funcionario Responsable";
+
+$this->idioma ["observaciones"] ="Observaciones ";
+$this->idioma ["observacionesTitulo"] ="Ingrese Observaciones";
+
+
+
 //-------------
 
 
