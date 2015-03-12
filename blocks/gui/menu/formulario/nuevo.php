@@ -117,6 +117,23 @@ $enlaceRegistroSalidas ['enlace'] .= "&usuario=" . $miSesion->getSesionUsuarioId
 $enlaceRegistroSalidas ['urlCodificada'] = $this->miConfigurador->fabricaConexiones->crypto->codificar_url($enlaceRegistroSalidas ['enlace'], $directorio);
 $enlaceRegistroSalidas ['nombre'] = "Registrar Salida";
 
+// Traslado Elementos
+$enlaceTrasladosElementos ['enlace'] = "pagina=registrarTraslados";
+$enlaceTrasladosElementos ['enlace'] .= "&usuario=" . $miSesion->getSesionUsuarioId();
+
+$enlaceTrasladosElementos ['urlCodificada'] = $this->miConfigurador->fabricaConexiones->crypto->codificar_url($enlaceTrasladosElementos ['enlace'], $directorio);
+$enlaceTrasladosElementos ['nombre'] = "Traslados Elementos";
+
+
+// Sobrantes Y faltantes
+$enlaceSobranteFlatanteElementos ['enlace'] = "pagina=registrarFaltantesSobrantes";
+$enlaceSobranteFlatanteElementos ['enlace'] .= "&usuario=" . $miSesion->getSesionUsuarioId();
+
+$enlaceSobranteFlatanteElementos ['urlCodificada'] = $this->miConfigurador->fabricaConexiones->crypto->codificar_url($enlaceSobranteFlatanteElementos ['enlace'], $directorio);
+$enlaceSobranteFlatanteElementos ['nombre'] = "Faltantes y Sobrantes Elementos";
+
+
+
 
 
 // Consultar y Modificar Salidas
@@ -235,7 +252,14 @@ $enlaceFinSesion['nombre'] = "Cerrar Sesión";
 				<li><a href="<?php echo $enlaceModificarSalidas['urlCodificada'] ?>"><?php echo $enlaceModificarSalidas['nombre'] ?></a></li>   
             </ul>
         </li>
-
+ 	    <li>
+            <a href="#">Movimientos</a>
+            <ul class="dl-submenu">
+                <li><a href="<?php echo $enlaceTrasladosElementos['urlCodificada'] ?>"><?php echo $enlaceTrasladosElementos['nombre'] ?></a></li>
+                <li><a href="<?php echo $enlaceSobranteFlatanteElementos['urlCodificada'] ?>"><?php echo $enlaceSobranteFlatanteElementos['nombre'] ?></a></li>
+                
+            </ul>
+        </li>
         <li>
             <a href="#">Catálogo</a>
             <ul class="dl-submenu">
