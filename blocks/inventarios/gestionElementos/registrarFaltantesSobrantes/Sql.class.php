@@ -148,6 +148,12 @@ class Sql extends \Sql {
 			/**
 			 * Clausulas Del Caso Uso.
 			 */
+			
+			case "tipo_faltante" :
+				$cadenaSql = " SELECT id_tipo_falt_sobr, descripcion ";
+				$cadenaSql .= " FROM tipo_falt_sobr;";
+				break;
+			
 			case "dependencia" :
 				$cadenaSql = " SELECT ";
 				$cadenaSql .= " id_dependencia,";
@@ -162,11 +168,29 @@ class Sql extends \Sql {
 				$cadenaSql .= "FROM funcionario;";
 				break;
 			
+			case "seleccion_info_elemento" :
+				
+				$cadenaSql = "SELECT ";
+				$cadenaSql .= "id_elemento_ind, elemento_individual.placa, elemento_individual.serie,funcionario.nombre,funcionario.identificacion, id_elemento_gen, ";
+				$cadenaSql .= "elemento_individual.id_salida ,tipo_bien.descripcion , dependencia.nombre AS dependencia ,salida.id_salida as salida ";
+				$cadenaSql .= "FROM elemento_individual ";
+				$cadenaSql .= "JOIN elemento ON elemento.id_elemento = elemento_individual.id_elemento_gen ";
+				$cadenaSql .= "JOIN salida ON salida.id_salida = elemento_individual.id_salida ";
+				$cadenaSql .= "JOIN tipo_bien ON tipo_bien.id_tipo_bien = elemento.tipo_bien ";
+				$cadenaSql .= "JOIN funcionario  ON funcionario.id_funcionario = salida.funcionario ";
+				$cadenaSql .= "left JOIN dependencia  ON dependencia.id_dependencia = funcionario.dependencia ";
+				$cadenaSql .= "WHERE 1=1 ";
+				$cadenaSql .= "AND elemento.tipo_bien <> 1 ";
+				$cadenaSql .= " AND  id_elemento_ind= '" . $variable . "'";
+				$cadenaSql .= " ; ";
+				
+				break;
+			
 			case "consultarElemento" :
 				
 				$cadenaSql = "SELECT ";
 				$cadenaSql .= "id_elemento_ind, elemento_individual.placa, elemento_individual.serie,funcionario.nombre,funcionario.identificacion, id_elemento_gen, ";
-				$cadenaSql .= "elemento_individual.id_salida ,tipo_bien.descripcion , dependencia.nombre AS dependencia ";
+				$cadenaSql .= "elemento_individual.id_salida ,tipo_bien.descripcion , dependencia.nombre AS dependencia ,salida.id_salida as salida ";
 				$cadenaSql .= "FROM elemento_individual ";
 				$cadenaSql .= "JOIN elemento ON elemento.id_elemento = elemento_individual.id_elemento_gen ";
 				$cadenaSql .= "JOIN salida ON salida.id_salida = elemento_individual.id_salida ";
@@ -192,7 +216,6 @@ class Sql extends \Sql {
 				$cadenaSql .= " ; ";
 				
 				break;
-			
 			
 			case "seleccion_funcionario_anterior" :
 				

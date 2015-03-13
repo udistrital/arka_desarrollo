@@ -3,7 +3,7 @@
 ?>
 
 // Asociar el widget de validación al formulario
-              $("#registrarTraslados").validationEngine({
+              $("#registrarFaltantesSobrantes").validationEngine({
             promptPosition : "centerRight", 
             scroll: false,
             autoHidePrompt: true,
@@ -12,8 +12,8 @@
 	
         
         $(function() {
-            $("#registrarTraslados").submit(function() {
-                $resultado=$("#registrarTraslados").validationEngine("validate");
+            $("#registrarFaltantesSobrantes").submit(function() {
+                $resultado=$("#registrarFaltantesSobrantes").validationEngine("validate");
                    
                    
                    
@@ -26,7 +26,7 @@
         });
 
               
-
+$("#<?php echo $this->campoSeguro('inexistencia')?>").select2();
  $("#<?php echo $this->campoSeguro('responsable')?>").select2();
 $("#<?php echo $this->campoSeguro('dependencia')?>").select2(); 
 $("#<?php echo $this->campoSeguro('responsable_reci')?>").select2();

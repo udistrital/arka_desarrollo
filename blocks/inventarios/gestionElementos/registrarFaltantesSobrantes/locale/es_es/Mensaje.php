@@ -23,6 +23,10 @@ $this->idioma ["dependencia"] ="Dependencia : ";
 $this->idioma ["dependenciaTitulo"] ="Seleccione Dependencia";
 
 
+$this->idioma ["inexistencia"] ="Tipo Inexistencia : ";
+$this->idioma ["inexistenciaTitulo"] ="Seleccione Tipo Inexistencia";
+
+
 
 //-------------
 

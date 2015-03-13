@@ -174,12 +174,14 @@ class registrarForm {
 		
 			echo "<thead>
                 <tr>
-                  <th># Número Placa</th>
+				  	<th># ID Salida </th>	
+					<th># ID Elemento </th>	
+                  	<th># Número Placa</th>
                     <th># Número Serial</th>
                     <th>Nombre Funcionario</th>
 					<th>Identificación<br>Funcionario</th>
 					<th>Tipo Bien</th>
-			        <th>Trasladar Elemento</th>
+			        <th>Generar  Faltante<br>Sobrante</th>
                 </tr>
             </thead>
             <tbody>";
@@ -188,17 +190,19 @@ class registrarForm {
 				$variable = "pagina=" . $miPaginaActual; // pendiente la pagina para modificar parametro
 				$variable .= "&opcion=trasladarElemento";
 				$variable .= "&id_elemento_ind=" . $elemento [$i] [0];
-				$variable = $this->miConfigurador->fabricaConexiones->crypto->codificar_url ( $variable, $directorio);
+			    $variable = $this->miConfigurador->fabricaConexiones->crypto->codificar_url ( $variable, $directorio);
 		
 				$mostrarHtml = "<tr>
-                    <td><center>" . $elemento [$i] [1] . "</center></td>
+					<td><center>" . $elemento [$i] [9] . "</center></td>
+                    <td><center>" . $elemento [$i] [5] . "</center></td>
+					<td><center>" . $elemento [$i] [1] . "</center></td>
                     <td><center>" . $elemento [$i] [2] . "</center></td>
                     <td><center>" . $elemento [$i] [3] . "</center></td>
                     <td><center>" . $elemento [$i] [4] . "</center></td>
                     <td><center>" . $elemento [$i] [7] . "</center></td>
                     <td><center>
                     	<a href='".$variable."'>
-                            <img src='" . $rutaBloque . "/css/images/trasladar.png' width='15px'>
+                            <img src='" . $rutaBloque . "/css/images/faltsobra.png' width='15px'>
                         </a>
                   	</center> </td>
            
@@ -211,40 +215,8 @@ class registrarForm {
 			echo "</tbody>";
 		
 			echo "</table>";
-// 			// ------------------Division para los botones-------------------------
-// 			$atributos ["id"] = "botones";
-// 			$atributos ["estilo"] = "marcoBotones";
-// 			echo $this->miFormulario->division ( "inicio", $atributos );
-			
-// 			// -----------------CONTROL: Botón ----------------------------------------------------------------
-// 			$esteCampo = 'botonReporte';
-// 			$atributos ["id"] = $esteCampo;
-// 			$atributos ["tabIndex"] = $tab;
-// 			$atributos ["tipo"] = 'boton';
-// 			// submit: no se coloca si se desea un tipo button genérico
-// 			$atributos ['submit'] = true;
-// 			$atributos ["estiloMarco"] = '';
-// 			$atributos ["estiloBoton"] = 'jqueryui';
-// 			// verificar: true para verificar el formulario antes de pasarlo al servidor.
-// 			$atributos ["verificar"] = '';
-// 			$atributos ["tipoSubmit"] = 'jquery'; // Dejar vacio para un submit normal, en este caso se ejecuta la función submit declarada en ready.js
-// 			$atributos ["valor"] = $this->lenguaje->getCadena ( $esteCampo );
-// 			$atributos ['nombreFormulario'] = $esteBloque ['nombre'];
-// 			$tab ++;
-			
-// 			// Aplica atributos globales al control
-// 			$atributos = array_merge ( $atributos, $atributosGlobales );
-// 			echo $this->miFormulario->campoBoton ( $atributos );
-			// -----------------FIN CONTROL: Botón -----------------------------------------------------------
-			
-			// ---------------------------------------------------------
-			
-			// ------------------Fin Division para los botones-------------------------
-// 			echo $this->miFormulario->division ( "fin" );
-			
+
 		
-			// Fin de Conjunto de Controles
-			// echo $this->miFormulario->marcoAgrupacion("fin");
 		} else {
 			
 			$mensaje = "No Se Encontraron<br>Elementos Asociados.";
