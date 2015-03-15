@@ -140,7 +140,7 @@ var listaAlias = [];
 		}
 
 		function eliminarElementoCatalogo(id,idPadre,codigo,idCatalogo){
-			var r = confirm("¿Está seguro que desea eliminar el elemento?");
+			var r = confirm("Â¿EstÃ¡ seguro de eliminar el Elemento?");
 			if (r == true) {
 				$(document).tooltip('destroy');
 				var str = "&idCatalogo="+idCatalogo+"&id="+codigo+"&idPadre="+idPadre+"&idReg="+id;
@@ -260,7 +260,7 @@ var listaAlias = [];
 	}
 	
 	function eliminarElementoLista(el){
-			var r = confirm("¿Está seguro que desea eliminar el elemento?");
+			var r = confirm("Â¿EstÃ¡ seguro de eliminar el Elemento?");
 			
 				var id =  el.id.substring(2);
 				if (r == true) {
@@ -311,7 +311,7 @@ var listaAlias = [];
 			    icons: {
 			    primary: "ui-icon-minus"
 			    }
-			  }).attr('title', 'click para contraer elementos');
+			  }).attr('title', 'Click para Contraer elementos');
 		
 		}else{
 			$( esto ).button({
@@ -319,7 +319,7 @@ var listaAlias = [];
 			    icons: {
 			    primary: "ui-icon-plus"
 			    }
-			  }).attr('title', 'click para expandir elementos');
+			  }).attr('title', 'Click para Expandir elementos');
 		
 		}
 		
@@ -364,12 +364,7 @@ var listaAlias = [];
 		       }
         });
 
-    	
-    	
-    	
-    	
-
-    	
+    	    	
     	
     	}
 
@@ -426,8 +421,8 @@ var listaAlias = [];
 		$('#idCatalogo').val(idCatalogo);
 		$('#lidPadre').val(padre);
 		$('#idReg').val(id);
-		$("#agregarA").html("Guardar Cambios elemento "+codigo+" con padre "+padre+"")
-		$("#agregarA").val("Guardar Cambios elemento "+codigo+" con padre "+padre+"");
+		$("#agregarA").html("Guardar Cambios sobre el elemento "+codigo+" con Padre "+padre+"")
+		$("#agregarA").val("Guardar Cambios sobre elemento "+codigo+" con Padre "+padre+"");
 		$("#agregarA").attr("onclick","guardarEdicionElementos("+id+")");
 	}
 
