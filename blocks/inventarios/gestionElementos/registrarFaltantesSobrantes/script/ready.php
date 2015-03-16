@@ -33,40 +33,84 @@ $("#<?php echo $this->campoSeguro('responsable_reci')?>").select2();
 
 
 
+
+       
+     $('#<?php echo $this->campoSeguro('fecha_hurto')?>').datepicker({
+					dateFormat: 'yy-mm-dd',
+					maxDate: 0,
+					changeYear: true,
+					changeMonth: true,
+					monthNames: ['Enero','Febrero','Marzo','Abril','Mayo','Junio',
+					    'Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'],
+					    monthNamesShort: ['Ene','Feb','Mar','Abr','May','Jun','Jul','Ago','Sep','Oct','Nov','Dic'],
+					    dayNames: ['Domingo','Lunes','Martes','Miercoles','Jueves','Viernes','Sabado'],
+					    dayNamesShort: ['Dom','Lun','Mar','Mie','Jue','Vie','Sab'],
+					    dayNamesMin: ['Do','Lu','Ma','Mi','Ju','Vi','Sa'],
+						
+						
+		});
+
+     
+          $('#<?php echo $this->campoSeguro('fecha_denuncia')?>').datepicker({
+					dateFormat: 'yy-mm-dd',
+					maxDate: 0,
+					changeYear: true,
+					changeMonth: true,
+					monthNames: ['Enero','Febrero','Marzo','Abril','Mayo','Junio',
+					    'Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'],
+					    monthNamesShort: ['Ene','Feb','Mar','Abr','May','Jun','Jul','Ago','Sep','Oct','Nov','Dic'],
+					    dayNames: ['Domingo','Lunes','Martes','Miercoles','Jueves','Viernes','Sabado'],
+					    dayNamesShort: ['Dom','Lun','Mar','Mie','Jue','Vie','Sab'],
+					    dayNamesMin: ['Do','Lu','Ma','Mi','Ju','Vi','Sa'],
+						
+						
+		});
+
+
+
+
+
  $("#<?php echo $this->campoSeguro('tipo_bien')?>").select2();
  $("#<?php echo $this->campoSeguro('iva')?>").select2();
  $("#<?php echo $this->campoSeguro('bodega')?>").select2();
  <!--$("#<?php echo $this->campoSeguro('tipo_poliza')?>").select2();  -->
                   
      
-     $( "#<?php echo $this->campoSeguro('tipo_registro')?>" ).change(function() {
+     $( "#<?php echo $this->campoSeguro('inexistencia')?>" ).change(function() {
         
-            switch($("#<?php echo $this->campoSeguro('tipo_registro')?>").val())
+            switch($("#<?php echo $this->campoSeguro('inexistencia')?>").val())
             {
                            
                 case '1':
                     
                    
-                    $("#<?php echo $this->campoSeguro('cargar_elemento')?>").css('display','block');
-                    $("#<?php echo $this->campoSeguro('cargue_elementos')?>").css('display','none');
+                    $("#<?php echo $this->campoSeguro('hurto')?>").css('display','none');
+                   
 
                    
 
                 break;
                 
                 
-                       case '2':
+                case '2':
                     
-                    $("#<?php echo $this->campoSeguro('cargar_elemento')?>").css('display','none');
-                    $("#<?php echo $this->campoSeguro('cargue_elementos')?>").css('display','block');
+                    $("#<?php echo $this->campoSeguro('hurto')?>").css('display','block');
+                    
+       
+                break;
+                
+                
+                case '3':
+                    
+                    $("#<?php echo $this->campoSeguro('hurto')?>").css('display','none');
+                    
        
                 break;
                 
 
                 default:
                 
-                    $("#<?php echo $this->campoSeguro('cargar_elemento')?>").css('display','block');
-                    $("#<?php echo $this->campoSeguro('cargue_elementos')?>").css('display','none');
+                $("#<?php echo $this->campoSeguro('hurto')?>").css('display','none');
                    
                    break;
                 
