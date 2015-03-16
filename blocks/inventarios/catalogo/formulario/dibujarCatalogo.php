@@ -86,15 +86,11 @@ class Formulario {
     	
     	$this->consultarDatosCatalogo();
     	
-    	
     	//Inicio Lista
     	echo "<br>";
     	echo '<div id = "arbol">';
     	echo '<fieldset class="ui-corner-all ui-widget ui-widget-content ui-corner-all">';
     	echo '<legend>'.$this->arrayDatos[0]['lista_nombre'].'</legend>';
-    	
-    	
-    	
     	
     	if(!$base){
     		$this->miConfigurador->setVariableConfiguracion ( 'mostrarMensaje', 'catalogoVacio' );
@@ -145,7 +141,7 @@ class Formulario {
 	    		//contraer - expandir
 	    		if($base2){
 	    			
-	    			echo '<button title="click para expandir elementos" class="expandir" onclick="cambioHijos(\'contenedor'.$b['elemento_id'].'\',this)">';
+	    			echo '<button title="Click para expandir elementos" class="expandir" onclick="cambioHijos(\'contenedor'.$b['elemento_id'].'\',this)">';
 	    			echo "</button>";
 	    		}
 	    		
@@ -174,11 +170,11 @@ class Formulario {
 	    			echo '<div class="posiscion">';
 	    			
 	    			//eliminar
-	    			echo '<button title="click para eliminar" class="eliminar" onclick="eliminarElementoCatalogo('.$b['elemento_id'].','.$b['elemento_padre'].','.$b['elemento_codigo'].','.$b['elemento_catalogo'].')">';
+	    			echo '<button title="Click para Eliminar" class="eliminar" onclick="eliminarElementoCatalogo('.$b['elemento_id'].','.$b['elemento_padre'].','.$b['elemento_codigo'].','.$b['elemento_catalogo'].')">';
 	    			echo "</button>";
 	    		
 	    			//editar
-	    			echo '<button title="click para editar" class="editar" onclick="editarElementoCatalogo('.$b['elemento_id'].','.$b['elemento_padre'].','.$b['elemento_codigo'].',\''.$b['elemento_nombre'].'\','.$b['elemento_catalogo'].')">';
+	    			echo '<button title="Click para Editar" class="editar" onclick="editarElementoCatalogo('.$b['elemento_id'].','.$b['elemento_padre'].','.$b['elemento_codigo'].',\''.$b['elemento_nombre'].'\','.$b['elemento_catalogo'].')">';
 	    			echo "</button>";
 	    		
 	    		

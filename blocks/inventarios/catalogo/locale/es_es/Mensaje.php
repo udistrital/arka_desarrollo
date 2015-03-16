@@ -37,7 +37,7 @@ $this->idioma["creacionExitosa"]="Creación exitosa";
 $this->idioma['errorId']="Error. Identificador  No Definido";
 $this->idioma['errorEliminar']="Hubo un Error Eliminando lo seleccionado";
 $this->idioma['operacionExitosa']="Operación Exitosa";
-$this->idioma["id"]="Identificador";
+$this->idioma["id"]="Identificador del Elemento";
 $this->idioma["idTitulo"]="Ingrese el Identificador Elemento";
 $this->idioma["reiniciar"]="Reiniciar";
 $this->idioma["reiniciarTitulo"]="Reiniciar valores";
@@ -68,7 +68,7 @@ $this->idioma['listaNombre']="Nombre";
 $this->idioma['listaFecha']="Fecha Creación";
 $this->idioma['listaMenu']="Menú";
 $this->idioma["listaId"]="Identificador";
-$this->idioma["listaCasa"]="Ir a la lista de Catálogos";
+$this->idioma["listaCasa"]="Regresar a la lista de Catálogos";
 $this->idioma['crearLabel']="Crear Catálogo";
 
 

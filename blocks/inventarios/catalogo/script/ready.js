@@ -31,7 +31,7 @@ $('#tabla').DataTable({
 $( "#agregarElemento" ).button({
     text: false,
     icons: {
-    primary: "ui-icon-plus"
+    //primary: "ui-icon-plus"
     }
   }).click(function() {
   	agregarElementoLista();
@@ -43,6 +43,7 @@ $( "#irACasa" ).button({
     icons: {
     primary: "ui-icon-home"
     }
+   
   }).click(function() {
   	irACasa();
   	

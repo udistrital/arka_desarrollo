@@ -100,10 +100,8 @@ class Formulario {
         //echo '<div id="agregar" class="marcoBotones">';
         echo '<fieldset class="ui-corner-all ui-widget ui-widget-content ui-corner-all">';
         echo '<legend>' . $this->lenguaje->getCadena('catalogo') . '</legend>';
-
-        echo '<div style="float:left; width:150px"><label for="nombre">' . $nombre . '</label><span style="white-space:pre;"> </span></div>';
+        echo '<div style="float:left; width:200px"><label for="nombre">' . $nombre . '</label><span style="white-space:pre;"> </span></div>';
         echo '<input type="text" maxlength="" size="50" value="' . $this->arrayDatos[0][1] . '" class="ui-widget ui-widget-content ui-corner-all  validate[required] " tabindex="1" name="nombreCatalogo" id="nombreCatalogo" title="' . $nombreTitulo . '">';
-
         echo '</fieldset>';
         echo '</form>';
     }
@@ -131,7 +129,7 @@ class Formulario {
     private function campoId() {
 
         echo '<div class= "jqueryui  anchoColumna1">';
-        echo '<div style="float:left; width:150px"><label for="id">Identificador</label><span style="white-space:pre;"> </span></div>';
+        echo '<div style="float:left; width:200px"><label for="id">Identificador Elemento</label><span style="white-space:pre;"> </span></div>';
         echo '<input type="text" maxlength="" size="50" value="" class="ui-widget ui-widget-content ui-corner-all';
         echo ' validate[required,number] " tabindex="2" name="id" id="id" title="Ingrese Identificador Elemento">';
         echo '</div>';
@@ -141,7 +139,7 @@ class Formulario {
         $idPadreTitulo = $this->lenguaje->getCadena('idPadreTitulo');
         $idPadre = $this->lenguaje->getCadena('idPadre');
         echo '<div class="jqueryui  anchoColumna1">';
-        echo '<div style="float:left;display:inline; width:150px"><label for="idPadre">' . $idPadre . '</label></div>';
+        echo '<div style="float:left;display:inline; width:200px"><label for="idPadre">' . $idPadre . '</label></div>';
         echo '<input type="text" onchange="cambiarPadre()" onkeyup="autocompletar()" class="ui-widget ui-widget-content ui-corner-all validate[required,custom[valorLista]]"  tabindex="3" size="50" value="0" name="lidPadre" id="lidPadre" title="' . $idPadreTitulo . '" class="ui-widget ui-widget-content ui-corner-all"></input>';
         echo '</div>';
     }
@@ -149,7 +147,7 @@ class Formulario {
     private function campoNombre() {
 
         echo ' <div class="jqueryui  anchoColumna1">';
-        echo ' <div style="float:left; width:150px"><label for="nombreElemento">Nombre Elemento</label><span style="white-space:pre;"> </span></div>';
+        echo ' <div style="float:left; width:200px"><label for="nombreElemento">Nombre Elemento</label><span style="white-space:pre;"> </span></div>';
         echo ' <input type="text" maxlength="" size="50" value="" class="ui-widget ui-widget-content';
         echo ' ui-corner-all  validate[required,onlyLetterNumber] " tabindex="4" name="nombreElemento" id="nombreElemento" title=" Ingrese el Nombre del Elemento">';
         echo ' </div>';
@@ -164,8 +162,6 @@ class Formulario {
     }
 
     private function principal() {
-
-
         // Rescatar los datos de este bloque
         $esteBloque = $this->miConfigurador->getVariableConfiguracion("esteBloque");
 
