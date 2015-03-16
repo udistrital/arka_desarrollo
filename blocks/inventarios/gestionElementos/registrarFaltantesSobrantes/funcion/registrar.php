@@ -64,7 +64,9 @@ class RegistradorOrden {
 						'NULL',
 						'0001-01-01',
 						'0001-01-01',
-						$fechaActual 
+						$fechaActual,
+						$_REQUEST ['inexistencia']
+						 
 				);
 				
 				break;
@@ -123,7 +125,8 @@ class RegistradorOrden {
 						$archivo1,
 						$_REQUEST ['fecha_denuncia'],
 						$_REQUEST ['fecha_hurto'],
-						$fechaActual 
+						$fechaActual ,
+						$_REQUEST ['inexistencia']
 				);
 				
 				break;
@@ -145,7 +148,8 @@ class RegistradorOrden {
 						'NULL',
 						'0001-01-01',
 						'0001-01-01',
-						$fechaActual 
+						$fechaActual,
+						$_REQUEST ['inexistencia'] 
 				);
 				
 				break;

@@ -162,7 +162,7 @@ class Sql extends \Sql {
 				
 				$cadenaSql = "INSERT INTO estado_elemento( ";
 				$cadenaSql .= "id_elemento_ind,id_faltante, id_sobrante, id_hurto, observaciones,  ";
-				$cadenaSql .= "ruta_denuncia, nombre_denuncia, fecha_denuncia, fecha_hurto, fecha_registro) ";
+				$cadenaSql .= "ruta_denuncia, nombre_denuncia, fecha_denuncia, fecha_hurto, fecha_registro,tipo_faltsobr) ";
 				$cadenaSql .= " VALUES (";
 				$cadenaSql .= "'" . $variable [0] . "',";
 				$cadenaSql .= "'" . $variable [1] . "',";
@@ -173,7 +173,8 @@ class Sql extends \Sql {
 				$cadenaSql .= "'" . $variable [6] . "',";
 				$cadenaSql .= "'" . $variable [7] . "',";
 				$cadenaSql .= "'" . $variable [8] . "',";
-				$cadenaSql .= "'" . $variable [9] . "') ";
+				$cadenaSql .= "'" . $variable [9] . "',";
+				$cadenaSql .= "'" . $variable [10] . "') ";
 				$cadenaSql .= "RETURNING  id_faltante,id_sobrante,id_hurto,id_estado_elemento; ";
 				
 				
