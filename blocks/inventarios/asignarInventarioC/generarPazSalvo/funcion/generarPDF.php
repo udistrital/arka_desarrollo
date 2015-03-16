@@ -131,7 +131,7 @@ class RegistradorActa {
                             </td>
                     </tr>
                     <tr>
-                     <td align:justify style=\"font-size:12px;\" colspan=\"2\">
+                     <td align:justify style=\"font-size:12px;\">
                             Que el contratista Stiv Verdugo Marquez, con cédula de ciudadanía No. ".$_REQUEST['documentoContratista'].", 
                             ha entregado los elementos correspondientes a su relación contraactual, y por lo tanto se encuentra
                             a <b>PAZ Y SALVO</b> con la dependencia.
