@@ -144,11 +144,32 @@ class Sql extends \Sql {
 				$cadenaSql .= "WHERE ";
 				$cadenaSql .= "id_sesion='" . $idSesion . "'";
 				break;
+				
+				/**
+				 * Clausulas Del Caso Uso.
+				 */
+				
+				INSERT
+				estado_elemento(
+						id_estado_elemento, id_faltante, id_sobrante, id_hurto, observaciones,
+						ruta_denuncia, nombre_denuncia, fecha_denuncia, fecha_hurto,
+						fecha_registro, estado_registro)
+				;
 			
-			/**
-			 * Clausulas Del Caso Uso.
-			 */
+			case "id_sobrante" :
+				$cadenaSql = " SELECT MAX(id_sobrante) ";
+				$cadenaSql .= " FROM estado_elemento;";
+				break;
 			
+			case "id_hurto" :
+				$cadenaSql = " SELECT MAX(id_hurto) ";
+				$cadenaSql .= " FROM estado_elemento;";
+				break;
+			
+			case "id_faltante" :
+				$cadenaSql = " SELECT MAX(id_faltante) ";
+				$cadenaSql .= " FROM estado_elemento;";
+				break;
 			case "tipo_faltante" :
 				$cadenaSql = " SELECT id_tipo_falt_sobr, descripcion ";
 				$cadenaSql .= " FROM tipo_falt_sobr;";

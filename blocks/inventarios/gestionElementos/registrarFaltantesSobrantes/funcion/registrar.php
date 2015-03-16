@@ -31,58 +31,96 @@ class RegistradorOrden {
 		$this->miFuncion = $funcion;
 	}
 	function procesarFormulario() {
-		
-		var_dump($_REQUEST);exit;
+		var_dump ( $_REQUEST );
+
 		$conexion = "inventarios";
 		$esteRecursoDB = $this->miConfigurador->fabricaConexiones->getRecursoDB ( $conexion );
 		
-		
 		$fechaActual = date ( 'Y-m-d' );
 		
-		
-	
-		$datos=array(
-				
-			$fechaActual,
-			$_REQUEST['elemento_ind'],
-			$_REQUEST['idfuncionario'],
-			$_REQUEST['funcionario']
-				
-		);
-		
-		$cadenaSql = $this->miSql->getCadenaSql ( 'insertar_historico',$datos );
-		$historico= $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
-		
-		
-		
-		
-		
-		
-		
-		$arreglo_datos=array(
-				
-				$_REQUEST['elemento_ind'],
-				$_REQUEST['responsable_reci'],
-				$_REQUEST['observaciones']				
-
-		);
-		
-		
-		
-		$cadenaSql = $this->miSql->getCadenaSql ( 'actualizar_salida',$arreglo_datos );
-		$traslado= $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "acceso" );
-
-
-				if ($traslado) {
-					
-					redireccion::redireccionar ( 'inserto' );
-				} else {
-					
-					redireccion::redireccionar ( 'noInserto');
-				}
+		switch ($_REQUEST ['inexistencia']) {
 			
+			case '1' :
+				
+				$cadenaSql = $this->miSql->getCadenaSql ( 'id_sobrante' );
+				$sobrante = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
+				
+				$id_sobrante=$sobrante[0][0]+1;
+				
+				
+				$arreglo=array(
+				0,		
+				$id_sobrante,
+				0,		
+				$_REQUEST['observaciones'],
+				'NULL',
+				'NULL',
+				'0001-01-01',
+				'0001-01-01',
+				$fechaActual
+				);
+				
+				break;
+			
+			case '2' :
+				
+				$cadenaSql = $this->miSql->getCadenaSql ( 'id_hurto' );
+				$hurto = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
+				
+				$id_hurto=$hurto[0][0]+1;
+				
+				break;
+			
+			case '3' :
+				
+				$cadenaSql = $this->miSql->getCadenaSql ( 'id_faltante' );
+				$faltante = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
+				
+				$id_faltante=$faltante[0][0]+1;
+				
+				
+				
+				break;
+		}
 		
 	
+		exit;
+		
+		
+		
+		
+	
+		
+		$datos = array (
+				
+				$fechaActual,
+				$_REQUEST ['elemento_ind'],
+				$_REQUEST ['idfuncionario'],
+				$_REQUEST ['funcionario'] 
+		)
+		;
+		
+		$cadenaSql = $this->miSql->getCadenaSql ( 'insertar_historico', $datos );
+		$historico = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
+		
+		$arreglo_datos = array (
+				
+				$_REQUEST ['elemento_ind'],
+				$_REQUEST ['responsable_reci'],
+				$_REQUEST ['observaciones'] 
+		)
+		;
+		
+		$cadenaSql = $this->miSql->getCadenaSql ( 'actualizar_salida', $arreglo_datos );
+		$traslado = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "acceso" );
+		
+		if ($traslado) {
+			
+			redireccion::redireccionar ( 'inserto' );
+		} else {
+			
+			redireccion::redireccionar ( 'noInserto' );
+		}
 	}
 	function resetForm() {
 		foreach ( $_REQUEST as $clave => $valor ) {
