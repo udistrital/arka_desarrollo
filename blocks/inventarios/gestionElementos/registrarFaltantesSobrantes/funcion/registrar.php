@@ -1,8 +1,8 @@
 <?php
 
-namespace inventarios\gestionElementos\registrarTraslados\funcion;
+namespace inventarios\gestionElementos\registrarFaltantesSobrantes\funcion;
 
-use inventarios\gestionElementos\registrarTraslados\funcion\redireccion;
+use inventarios\gestionElementos\registrarFaltantesSobrantes\funcion\redireccion;
 
 include_once ('redireccionar.php');
 
@@ -31,8 +31,15 @@ class RegistradorOrden {
 		$this->miFuncion = $funcion;
 	}
 	function procesarFormulario() {
-		var_dump ( $_REQUEST );
-
+		
+		
+		$esteBloque = $this->miConfigurador->getVariableConfiguracion ( "esteBloque" );
+		
+		$rutaBloque = $this->miConfigurador->getVariableConfiguracion ( "raizDocumento" ) . "/blocks/inventarios/gestionElementos/";
+		$rutaBloque .= $esteBloque ['nombre'];
+		
+		$host = $this->miConfigurador->getVariableConfiguracion ( "host" ) . $this->miConfigurador->getVariableConfiguracion ( "site" ) . "/blocks/inventarios/gestionElementos/" . $esteBloque ['nombre'];
+		
 		$conexion = "inventarios";
 		$esteRecursoDB = $this->miConfigurador->fabricaConexiones->getRecursoDB ( $conexion );
 		
@@ -45,19 +52,19 @@ class RegistradorOrden {
 				$cadenaSql = $this->miSql->getCadenaSql ( 'id_sobrante' );
 				$sobrante = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
 				
-				$id_sobrante=$sobrante[0][0]+1;
+				$id_sobrante = $sobrante [0] [0] + 1;
 				
-				
-				$arreglo=array(
-				0,		
-				$id_sobrante,
-				0,		
-				$_REQUEST['observaciones'],
-				'NULL',
-				'NULL',
-				'0001-01-01',
-				'0001-01-01',
-				$fechaActual
+				$arreglo = array (
+						$_REQUEST['elemento_ind'],
+						0,
+						$id_sobrante,
+						0,
+						$_REQUEST ['observaciones'],
+						'NULL',
+						'NULL',
+						'0001-01-01',
+						'0001-01-01',
+						$fechaActual 
 				);
 				
 				break;
@@ -67,7 +74,57 @@ class RegistradorOrden {
 				$cadenaSql = $this->miSql->getCadenaSql ( 'id_hurto' );
 				$hurto = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
 				
-				$id_hurto=$hurto[0][0]+1;
+				$id_hurto = $hurto [0] [0] + 1;
+				
+				$i=0;
+				foreach ( $_FILES as $key => $values ) {
+					
+					$archivo [$i] = $_FILES [$key];
+					$i ++;
+				}
+				$archivo=$archivo[0];
+
+							
+				if (isset ( $archivo )) {
+					// obtenemos los datos del archivo
+					$tamano = $archivo ['size'];
+					$tipo = $archivo ['type'];
+					$archivo1 = $archivo ['name'];
+					$prefijo = substr ( md5 ( uniqid ( rand () ) ), 0, 6 );
+					
+					if ($archivo1 != "") {
+						// guardamos el archivo a la carpeta files
+						$destino1 = $rutaBloque . "/documento_denuncia/" . $prefijo . "_" . $archivo1;
+						if (copy ( $archivo ['tmp_name'], $destino1 )) {
+							$status = "Archivo subido: <b>" . $archivo1 . "</b>";
+							$destino1 = $host . "/documento_denuncia/" . $prefijo . "_" . $archivo1;
+						} else {
+							$status = "Error al subir el archivo";
+							echo $status;
+						}
+					} else {
+						$status = "Error al subir archivo";
+						echo $status."2";
+					}
+					
+					$arreglo = array (
+							$destino1,
+							$archivo1 
+					);
+				}
+				
+				$arreglo = array (
+						$_REQUEST['elemento_ind'],
+						0,
+						0,
+						$id_hurto,
+						$_REQUEST ['observaciones'],
+						$destino1,
+						$archivo1,
+						$_REQUEST ['fecha_denuncia'],
+						$_REQUEST ['fecha_hurto'],
+						$fechaActual 
+				);
 				
 				break;
 			
@@ -76,47 +133,56 @@ class RegistradorOrden {
 				$cadenaSql = $this->miSql->getCadenaSql ( 'id_faltante' );
 				$faltante = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
 				
-				$id_faltante=$faltante[0][0]+1;
+				$id_faltante = $faltante [0] [0] + 1;
 				
-				
+				$arreglo = array (
+						$_REQUEST['elemento_ind'],
+						$id_faltante,
+						0,
+						0,
+						$_REQUEST ['observaciones'],
+						'NULL',
+						'NULL',
+						'0001-01-01',
+						'0001-01-01',
+						$fechaActual 
+				);
 				
 				break;
 		}
 		
-	
-		exit;
 		
 		
 		
+		$cadenaSql = $this->miSql->getCadenaSql ( 'insertar_faltante_sobrante', $arreglo );
+		$registro = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
 		
-	
 		
-		$datos = array (
+		$arreglo=array(
+				$_REQUEST['elemento_ind'],
+				$registro[0][3],
+					
 				
-				$fechaActual,
-				$_REQUEST ['elemento_ind'],
-				$_REQUEST ['idfuncionario'],
-				$_REQUEST ['funcionario'] 
-		)
-		;
+		);
+		$cadenaSql = $this->miSql->getCadenaSql ( 'actualizacion_estado_elemento', $arreglo );
+	    $actualizacion = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "acceso" );
+
+	    
 		
-		$cadenaSql = $this->miSql->getCadenaSql ( 'insertar_historico', $datos );
-		$historico = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
 		
-		$arreglo_datos = array (
-				
-				$_REQUEST ['elemento_ind'],
-				$_REQUEST ['responsable_reci'],
-				$_REQUEST ['observaciones'] 
-		)
-		;
-		
-		$cadenaSql = $this->miSql->getCadenaSql ( 'actualizar_salida', $arreglo_datos );
-		$traslado = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "acceso" );
-		
-		if ($traslado) {
+	
+		if ($registro) {
 			
-			redireccion::redireccionar ( 'inserto' );
+					
+			$arreglo=array(
+				$registro[0][0],
+					$registro[0][1],
+					$registro[0][2]	
+			);
+	
+			$registro=serialize($arreglo);
+			
+			redireccion::redireccionar ( 'inserto', $registro);
 		} else {
 			
 			redireccion::redireccionar ( 'noInserto' );

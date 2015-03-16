@@ -1,6 +1,6 @@
 <?
 
-namespace inventarios\gestionElementos\registrarTraslados\funcion;
+namespace inventarios\gestionElementos\registrarFaltantesSobrantes\funcion;
 
 if (! isset ( $GLOBALS ["autorizado"] )) {
 	include ("index.php");
@@ -17,6 +17,7 @@ class redireccion {
 				$variable = "pagina=" . $miPaginaActual;
 				$variable .= "&opcion=mensaje";
 				$variable .= "&mensaje=confirma";
+				$variable .= "&registro=".$valor;
 				
 				
 				break;

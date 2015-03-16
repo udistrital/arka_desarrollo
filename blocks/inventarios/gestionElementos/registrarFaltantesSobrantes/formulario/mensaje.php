@@ -20,6 +20,8 @@ class registrarForm {
 		$this->miSql = $sql;
 	}
 	function miForm() {
+		
+		
 		// Rescatar los datos de este bloque
 		$esteBloque = $this->miConfigurador->getVariableConfiguracion ( "esteBloque" );
 		
@@ -32,6 +34,9 @@ class registrarForm {
 		 * Si se utiliza esta técnica es necesario realizar un mezcla entre este arreglo y el específico en cada control:
 		 * $atributos= array_merge($atributos,$atributosGlobales);
 		 */
+		
+		
+		
 		$_REQUEST ['tiempo'] = time ();
 		
 		$atributosGlobales ['campoSeguro'] = 'true';
@@ -79,7 +84,26 @@ class registrarForm {
 				
 				if (isset ( $_REQUEST ['mensaje'] ) && $_REQUEST ['mensaje'] == 'confirma') {
 					
-					$mensaje = "Se Traslado el Elemento del Funcionario Responsable con Exito. ";
+					$variable=$_REQUEST['registro'];
+					$variable=unserialize($variable);
+			
+					if($variable[0]<>'0'){
+						
+						$mensaje = "Se Registro Faltante <br> # ID Faltante : ".$variable[0].".";
+						
+					}else if($variable[1]<>'0'){
+						
+						$mensaje = "Se Registro Sobrante <br> # ID Sobante : ".$variable[1].".";
+						
+					}else if($variable[2]<>'0'){
+						
+						$mensaje = "Se Registro Hurto <br> # ID Hurto : ".$variable[2].".";
+						
+					}
+					
+					
+					
+					
 					
 					// ---------------- CONTROL: Cuadro de Texto --------------------------------------------------------
 					$esteCampo = 'mensajeRegistro';
