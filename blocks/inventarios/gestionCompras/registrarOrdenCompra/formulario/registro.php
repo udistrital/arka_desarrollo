@@ -265,6 +265,7 @@ class registrarForm {
 						$atributos ['anchoCaja'] = 27;
 						$atributos ['miEvento'] = '';
 						$atributos ['cadena_sql'] = $this->miSql->getCadenaSql ( "proveedor" );
+						echo $atributos['cadena_sql'];
 						$matrizItems = array (
 								array (
 										0,
@@ -272,9 +273,10 @@ class registrarForm {
 								) 
 						);
 						$matrizItems = $esteRecursoDB->ejecutarAcceso ( $atributos ['cadena_sql'], "busqueda" );
+						var_dump($matrizItems);
 						$atributos ['matrizItems'] = $matrizItems;
 						// $atributos['miniRegistro']=;
-						$atributos ['baseDatos'] = "inventarios";
+						$atributos ['baseDatos'] = "sicaarka";
 						// $atributos ['cadena_sql'] = $this->miSql->getCadenaSql ( "clase_entrada" );
 						
 						// Aplica atributos globales al control

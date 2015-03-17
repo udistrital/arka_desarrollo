@@ -148,7 +148,6 @@ class Sql extends \Sql {
 			/**
 			 * Clausulas Del Caso Uso.
 			 */
-
 			
 			case "datos_item" :
 				$cadenaSql = " SELECT ";
@@ -245,7 +244,16 @@ class Sql extends \Sql {
 				
 				break;
 			
+// SELECT PRO_IDENTIFICADOR,PRO_NIT||' - '||PRO_RAZON_SOCIAL AS proveedor
+// FROM PROVEEDORES;
+				
 			case "proveedor" :
+				$cadenaSql = " SELECT PRO_IDENTIFICADOR,PRO_NIT||' - '||PRO_RAZON_SOCIAL AS proveedor  ";
+				$cadenaSql .= " FROM PROVEEDORES; ";
+								
+				break;
+			
+			case "proveedor123" :
 				$cadenaSql = " SELECT ";
 				$cadenaSql .= " id_proveedor,";
 				$cadenaSql .= " nit_proveedor ||' - '|| razon_social as proveedor ";

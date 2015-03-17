@@ -35,8 +35,8 @@ $this->idioma ["selec_proveedorTitulo"] ="Seleccione Proveedor";
 $this->idioma ["fecha_diponibilidad"] ="Fecha Disponibilidad : ";
 $this->idioma ["fecha_diponibilidadTitulo"] ="Ingrese Fecha Disponibilidad Presupuestal (YYYY-MM-DD)";
 
-$this->idioma ["proveedor"] ="&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspNombre o Razón Social:";
-$this->idioma ["proveedorTitulo"] ="Ingrese Nombre Proveedor";
+$this->idioma ["proveedor"] ="&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspRepresentante Legal:";
+$this->idioma ["proveedorTitulo"] ="Ingrese Representante Legal";
 
 $this->idioma ["nitProveedor"] ="&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspNIT :";
 $this->idioma ["nitProveedorTitulo"] ="Ingrese NIT Proveedor";

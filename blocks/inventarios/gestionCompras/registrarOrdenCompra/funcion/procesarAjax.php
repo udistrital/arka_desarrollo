@@ -391,6 +391,9 @@ if ($_REQUEST ['funcion'] == 'EliminarItem') {
 
 if ($_REQUEST ['funcion'] == 'SeleccionProveedor') {
 	
+// 	$conexion = "Sicaarka";
+// 	$esteRecursoDB = $this->miConfigurador->fabricaConexiones->getRecursoDB ( $conexion );
+	
 	$cadenaSql = $this->sql->getCadenaSql ( 'informacion_proveedor', $_REQUEST ['personaje'] );
 	$resultadoItems = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
 	
