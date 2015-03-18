@@ -282,13 +282,13 @@ class Oci8 extends ConectorDb {
      */
     function __construct($registro) {
 
-        $this->servidor = $registro ["dbdns"];
-        $this->db = $registro ["dbnombre"];
+        $this->servidor = trim($registro ["dbdns"]);
+        $this->db = trim($registro ["dbnombre"]);
         $this->puerto = isset($registro ['dbpuerto']) ? $registro ['dbpuerto'] : 1521;
-        $this->usuario = $registro ["dbusuario"];
-        $this->clave = $registro ["dbclave"];
-        $this->dbsys = $registro ["dbsys"];
-        $this->dbesquema = $registro ['dbesquema'];
+        $this->usuario = trim($registro ["dbusuario"]);
+        $this->clave = trim($registro ["dbclave"]);
+        $this->dbsys = trim($registro ["dbsys"]);
+        $this->dbesquema = trim($registro ['dbesquema']);
 
         $this->enlace = $this->conectar_db();
     }
