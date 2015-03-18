@@ -148,24 +148,15 @@ class Sql extends \Sql {
 			/**
 			 * Clausulas Del Caso Uso.
 			 */
-
+			
+			case "seleccionar_iva" :
+				$cadenaSql = "SELECT id_iva, descripcion ";
+				$cadenaSql .= "FROM aplicacion_iva ";
+				$cadenaSql .= " ORDER BY iva DESC ";
+				$cadenaSql .= " LIMIT 2; ";
 				
-				
-				
-				
-				
-				
-
-				case "seleccionar_iva" :
-					$cadenaSql = "SELECT id_iva, descripcion ";
-					$cadenaSql .= "FROM aplicacion_iva ";
-					$cadenaSql .= " ORDER BY iva DESC ";
-					$cadenaSql .= " LIMIT 2; ";
-					
-				
-					break;
-				
-				
+				break;
+			
 			case "datos_item" :
 				$cadenaSql = " SELECT ";
 				$cadenaSql .= " valor_total ";
@@ -261,27 +252,25 @@ class Sql extends \Sql {
 				
 				break;
 			
-
-				
-// 			case "proveedor" :
-// 				$cadenaSql = " SELECT PRO_IDENTIFICADOR,PRO_NIT||' - '||PRO_RAZON_SOCIAL AS proveedor  ";
-// 				$cadenaSql .= " FROM PROVEEDORES; ";
-								
-// 				break;
-			
-			case "proveedor" :
-				$cadenaSql = " SELECT ";
-				$cadenaSql .= " id_proveedor,";
-				$cadenaSql .= " nit_proveedor ||' - '|| razon_social as proveedor ";
-				$cadenaSql .= " FROM";
-				$cadenaSql .= " proveedor  ";
-				$cadenaSql .= " UNION SELECT ";
-				$cadenaSql .= " id_proveedor_n,";
-				$cadenaSql .= " nit_proveedor ||' - '|| razon_social as proveedor ";
-				$cadenaSql .= " FROM";
-				$cadenaSql .= " proveedor_nuevo ; ";
-				
+			case "proveedores" :
+				$cadenaSql = " SELECT PRO_IDENTIFICADOR,PRO_NIT||' - '||PRO_RAZON_SOCIAL AS proveedor ";
+				$cadenaSql .= " FROM PROVEEDORES; ";
+				echo $cadenaSql;
 				break;
+			
+			// case "proveedor" :
+			// $cadenaSql = " SELECT ";
+			// $cadenaSql .= " id_proveedor,";
+			// $cadenaSql .= " nit_proveedor ||' - '|| razon_social as proveedor ";
+			// $cadenaSql .= " FROM";
+			// $cadenaSql .= " proveedor ";
+			// $cadenaSql .= " UNION SELECT ";
+			// $cadenaSql .= " id_proveedor_n,";
+			// $cadenaSql .= " nit_proveedor ||' - '|| razon_social as proveedor ";
+			// $cadenaSql .= " FROM";
+			// $cadenaSql .= " proveedor_nuevo ; ";
+			
+			// break;
 			
 			case "proveedors" :
 				$cadenaSql = " INSERT INTO proveedor( ";
