@@ -265,7 +265,6 @@ class registrarForm {
 						$atributos ['anchoCaja'] = 27;
 						$atributos ['miEvento'] = '';
 						$atributos ['cadena_sql'] = $this->miSql->getCadenaSql ( "proveedor" );
-						echo $atributos['cadena_sql'];
 						$matrizItems = array (
 								array (
 										0,
@@ -273,10 +272,12 @@ class registrarForm {
 								) 
 						);
 						$matrizItems = $esteRecursoDB->ejecutarAcceso ( $atributos ['cadena_sql'], "busqueda" );
-						var_dump($matrizItems);
+						
 						$atributos ['matrizItems'] = $matrizItems;
 						// $atributos['miniRegistro']=;
 						$atributos ['baseDatos'] = "sicaarka";
+						$atributos ['baseDatos'] = "inventarios";
+						
 						// $atributos ['cadena_sql'] = $this->miSql->getCadenaSql ( "clase_entrada" );
 						
 						// Aplica atributos globales al control
@@ -659,7 +660,7 @@ class registrarForm {
 						$atributos ['etiqueta'] = $this->lenguaje->getCadena ( $esteCampo );
 						$atributos ["etiquetaObligatorio"] = false;
 						$atributos ['tab'] = $tab ++;
-						$atributos ['seleccion'] = 0;
+						$atributos ['seleccion'] = -1;
 						$atributos ['anchoEtiqueta'] = 200;
 						$atributos ['evento'] = '';
 						if (isset ( $_REQUEST [$esteCampo] )) {
@@ -677,19 +678,19 @@ class registrarForm {
 						$atributos ['limitar'] = 0;
 						$atributos ['anchoCaja'] = 30;
 						$atributos ['miEvento'] = '';
-						$atributos ['cadena_sql'] = $this->miSql->getCadenaSql ( "dependencia" );
-						$matrizItems = array (
-								array (
-										0,
-										'NO' 
-								),
+						$atributos ['cadena_sql'] = $this->miSql->getCadenaSql ( "seleccionar_iva" );
+// 						$matrizItems = array (
+// 								array (
+// 										0,
+// 										'NO' 
+// 								),
 								
-								array (
-										1,
-										'SI' 
-								) 
-						);
-						// $matrizItems = $esteRecursoDB->ejecutarAcceso ( $atributos ['cadena_sql'], "busqueda" );
+// 								array (
+// 										1,
+// 										'SI' 
+// 								) 
+// 						);
+						$matrizItems = $esteRecursoDB->ejecutarAcceso ( $atributos ['cadena_sql'], "busqueda" );
 						$atributos ['matrizItems'] = $matrizItems;
 						// $atributos['miniRegistro']=;
 						$atributos ['baseDatos'] = "inventarios";
