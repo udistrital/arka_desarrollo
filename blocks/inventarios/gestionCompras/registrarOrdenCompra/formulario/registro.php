@@ -272,7 +272,6 @@ class registrarForm {
 						$atributos ['anchoCaja'] = 27;
 						$atributos ['miEvento'] = '';
 						$atributos ['cadena_sql'] = $this->miSql->getCadenaSql ( "proveedores" );
-						
 						$matrizItems = array (
 								array (
 										0,
@@ -280,7 +279,6 @@ class registrarForm {
 								) 
 						);
 						$matrizItems = $esteRecursoDBO->ejecutarAcceso ( $atributos ['cadena_sql'], "busqueda" );
-						var_dump($matrizItems);
 						$atributos ['matrizItems'] = $matrizItems;
 						// $atributos['miniRegistro']=;
 						$atributos ['baseDatos'] = "sicapital";

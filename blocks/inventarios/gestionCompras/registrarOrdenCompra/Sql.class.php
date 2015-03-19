@@ -254,8 +254,8 @@ class Sql extends \Sql {
 			
 			case "proveedores" :
 				$cadenaSql = " SELECT PRO_IDENTIFICADOR,PRO_NIT||' - '||PRO_RAZON_SOCIAL AS proveedor ";
-				$cadenaSql .= " FROM PROVEEDORES; ";
-				echo $cadenaSql;
+				$cadenaSql .= " FROM PROVEEDORES ";
+				
 				break;
 			
 			// case "proveedor" :
