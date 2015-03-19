@@ -43,12 +43,9 @@ class registrarForm {
 		
 		$esteRecursoDB = $this->miConfigurador->fabricaConexiones->getRecursoDB ( $conexion );
 		
-		
 		$conexion = "sicapital";
 		
 		$esteRecursoDBO = $this->miConfigurador->fabricaConexiones->getRecursoDB ( $conexion );
-		
-		
 		
 		$cadenaSql = $this->miSql->getCadenaSql ( 'polizas' );
 		
@@ -282,7 +279,7 @@ class registrarForm {
 						$atributos ['matrizItems'] = $matrizItems;
 						// $atributos['miniRegistro']=;
 						$atributos ['baseDatos'] = "sicapital";
-// 						$atributos ['baseDatos'] = "inventarios";
+						// $atributos ['baseDatos'] = "inventarios";
 						
 						// $atributos ['cadena_sql'] = $this->miSql->getCadenaSql ( "clase_entrada" );
 						
@@ -459,8 +456,8 @@ class registrarForm {
 				$atributos ['ajax_control'] = $esteCampo;
 				$atributos ['estilo'] = "jqueryui";
 				$atributos ['validar'] = "required";
-				$atributos ['limitar'] = 1;
-				$atributos ['anchoCaja'] = 100;
+				$atributos ['limitar'] =true;
+				$atributos ['anchoCaja'] = 75;
 				$atributos ['miEvento'] = '';
 				$atributos ['cadena_sql'] = $this->miSql->getCadenaSql ( "rubros" );
 				$matrizItems = array (
@@ -469,7 +466,7 @@ class registrarForm {
 								' ' 
 						) 
 				);
-				$matrizItems = $esteRecursoDB->ejecutarAcceso ( $atributos ['cadena_sql'], "busqueda" );
+				$matrizItems = $esteRecursoDBO->ejecutarAcceso ( $atributos ['cadena_sql'], "busqueda" );
 				$atributos ['matrizItems'] = $matrizItems;
 				// $atributos['miniRegistro']=;
 				$atributos ['baseDatos'] = "inventarios";
@@ -518,10 +515,10 @@ class registrarForm {
 									' ' 
 							) 
 					);
-					$matrizItems = $esteRecursoDB->ejecutarAcceso ( $atributos ['cadena_sql'], "busqueda" );
+					$matrizItems = $esteRecursoDBO->ejecutarAcceso ( $atributos ['cadena_sql'], "busqueda" );
 					$atributos ['matrizItems'] = $matrizItems;
 					// $atributos['miniRegistro']=;
-					$atributos ['baseDatos'] = "inventarios";
+// 					$atributos ['baseDatos'] = "inventarios";
 					// $atributos ['cadena_sql'] = $this->miSql->getCadenaSql ( "clase_entrada" );
 					
 					// Aplica atributos globales al control
@@ -647,7 +644,7 @@ class registrarForm {
 							$atributos ['valor'] = '';
 						}
 						$atributos ['titulo'] = $this->lenguaje->getCadena ( $esteCampo . 'Titulo' );
-						$atributos ['deshabilitado'] =false;
+						$atributos ['deshabilitado'] = false;
 						$atributos ['tamanno'] = 32;
 						$atributos ['maximoTamanno'] = '';
 						$atributos ['anchoEtiqueta'] = 160;
@@ -666,7 +663,7 @@ class registrarForm {
 						$atributos ['etiqueta'] = $this->lenguaje->getCadena ( $esteCampo );
 						$atributos ["etiquetaObligatorio"] = false;
 						$atributos ['tab'] = $tab ++;
-						$atributos ['seleccion'] = -1;
+						$atributos ['seleccion'] = - 1;
 						$atributos ['anchoEtiqueta'] = 200;
 						$atributos ['evento'] = '';
 						if (isset ( $_REQUEST [$esteCampo] )) {
@@ -685,17 +682,17 @@ class registrarForm {
 						$atributos ['anchoCaja'] = 30;
 						$atributos ['miEvento'] = '';
 						$atributos ['cadena_sql'] = $this->miSql->getCadenaSql ( "seleccionar_iva" );
-// 						$matrizItems = array (
-// 								array (
-// 										0,
-// 										'NO' 
-// 								),
-								
-// 								array (
-// 										1,
-// 										'SI' 
-// 								) 
-// 						);
+						// $matrizItems = array (
+						// array (
+						// 0,
+						// 'NO'
+						// ),
+						
+						// array (
+						// 1,
+						// 'SI'
+						// )
+						// );
 						$matrizItems = $esteRecursoDB->ejecutarAcceso ( $atributos ['cadena_sql'], "busqueda" );
 						$atributos ['matrizItems'] = $matrizItems;
 						// $atributos['miniRegistro']=;
@@ -762,7 +759,7 @@ class registrarForm {
 						}
 						$atributos ['titulo'] = $this->lenguaje->getCadena ( $esteCampo . 'Titulo' );
 						$atributos ['deshabilitado'] = false;
-						$atributos ['tamanno'] = 32 ;
+						$atributos ['tamanno'] = 32;
 						$atributos ['maximoTamanno'] = '';
 						$atributos ['anchoEtiqueta'] = 160;
 						$tab ++;
@@ -770,11 +767,8 @@ class registrarForm {
 						// Aplica atributos globales al control
 						$atributos = array_merge ( $atributos, $atributosGlobales );
 						echo $this->miFormulario->campoCuadroTexto ( $atributos );
-
+						
 						unset ( $atributos );
-						
-						
-						
 						
 						// ---------------- CONTROL: Cuadro de Texto --------------------------------------------------------
 						$esteCampo = 'valorLetras_registro';
@@ -790,7 +784,7 @@ class registrarForm {
 						$atributos ['dobleLinea'] = 0;
 						$atributos ['tabIndex'] = $tab;
 						$atributos ['etiqueta'] = $this->lenguaje->getCadena ( $esteCampo );
-						// 						$atributos ['validar'] = 'required, minSize[1]';
+						// $atributos ['validar'] = 'required, minSize[1]';
 						$atributos ['deshabilitado'] = true;
 						$atributos ['tamanno'] = 20;
 						$atributos ['maximoTamanno'] = '';
@@ -801,15 +795,12 @@ class registrarForm {
 							$atributos ['valor'] = '';
 						}
 						$tab ++;
-							
+						
 						// Aplica atributos globales al control
 						$atributos = array_merge ( $atributos, $atributosGlobales );
 						echo $this->miFormulario->campoTextArea ( $atributos );
 						unset ( $atributos );
-						
 					}
-					
-					
 				}
 				echo $this->miFormulario->agrupacion ( 'fin' );
 				unset ( $atributos );
@@ -923,7 +914,7 @@ class registrarForm {
 					$atributos ['marco'] = true;
 					$atributos ['estiloMarco'] = '';
 					$atributos ["etiquetaObligatorio"] = true;
-					$atributos ['columnas'] = 1;
+					$atributos ['columnas'] = 2;
 					$atributos ['dobleLinea'] = 0;
 					$atributos ['tabIndex'] = $tab;
 					$atributos ['etiqueta'] = $this->lenguaje->getCadena ( $esteCampo );
@@ -955,7 +946,7 @@ class registrarForm {
 					$atributos ['marco'] = true;
 					$atributos ['estiloMarco'] = '';
 					$atributos ["etiquetaObligatorio"] = true;
-					$atributos ['columnas'] = 1;
+					$atributos ['columnas'] = 2;
 					$atributos ['dobleLinea'] = 0;
 					$atributos ['tabIndex'] = $tab;
 					$atributos ['etiqueta'] = $this->lenguaje->getCadena ( $esteCampo );
@@ -987,7 +978,7 @@ class registrarForm {
 					$atributos ['marco'] = true;
 					$atributos ['estiloMarco'] = '';
 					$atributos ["etiquetaObligatorio"] = true;
-					$atributos ['columnas'] = 1;
+					$atributos ['columnas'] =2;
 					$atributos ['dobleLinea'] = 0;
 					$atributos ['tabIndex'] = $tab;
 					$atributos ['etiqueta'] = $this->lenguaje->getCadena ( $esteCampo );
@@ -1019,7 +1010,7 @@ class registrarForm {
 					$atributos ['marco'] = true;
 					$atributos ['estiloMarco'] = '';
 					$atributos ["etiquetaObligatorio"] = true;
-					$atributos ['columnas'] = 1;
+					$atributos ['columnas'] = 2;
 					$atributos ['dobleLinea'] = 0;
 					$atributos ['tabIndex'] = $tab;
 					$atributos ['etiqueta'] = $this->lenguaje->getCadena ( $esteCampo );
@@ -1051,7 +1042,7 @@ class registrarForm {
 					$atributos ['marco'] = true;
 					$atributos ['estiloMarco'] = '';
 					$atributos ["etiquetaObligatorio"] = true;
-					$atributos ['columnas'] = 1;
+					$atributos ['columnas'] = 2;
 					$atributos ['dobleLinea'] = 0;
 					$atributos ['tabIndex'] = $tab;
 					$atributos ['etiqueta'] = $this->lenguaje->getCadena ( $esteCampo );
@@ -1083,7 +1074,7 @@ class registrarForm {
 					$atributos ['marco'] = true;
 					$atributos ['estiloMarco'] = '';
 					$atributos ["etiquetaObligatorio"] = true;
-					$atributos ['columnas'] = 1;
+					$atributos ['columnas'] = 2;
 					$atributos ['dobleLinea'] = 0;
 					$atributos ['tabIndex'] = $tab;
 					$atributos ['etiqueta'] = $this->lenguaje->getCadena ( $esteCampo );
@@ -1153,7 +1144,7 @@ class registrarForm {
 										' ' 
 								) 
 						);
-						$matrizItems = $esteRecursoDB->ejecutarAcceso ( $atributos ['cadena_sql'], "busqueda" );
+						$matrizItems = $esteRecursoDBO->ejecutarAcceso ( $atributos ['cadena_sql'], "busqueda" );
 						$atributos ['matrizItems'] = $matrizItems;
 						// $atributos['miniRegistro']=;
 						$atributos ['baseDatos'] = "inventarios";
@@ -1249,7 +1240,7 @@ class registrarForm {
 									' ' 
 							) 
 					);
-					$matrizItems = $esteRecursoDB->ejecutarAcceso ( $atributos ['cadena_sql'], "busqueda" );
+					$matrizItems = $esteRecursoDBO->ejecutarAcceso ( $atributos ['cadena_sql'], "busqueda" );
 					$atributos ['matrizItems'] = $matrizItems;
 					// $atributos['miniRegistro']=;
 					$atributos ['baseDatos'] = "inventarios";
@@ -1346,7 +1337,7 @@ class registrarForm {
 									' ' 
 							) 
 					);
-					$matrizItems = $esteRecursoDB->ejecutarAcceso ( $atributos ['cadena_sql'], "busqueda" );
+					$matrizItems = $esteRecursoDBO->ejecutarAcceso ( $atributos ['cadena_sql'], "busqueda" );
 					$atributos ['matrizItems'] = $matrizItems;
 					// $atributos['miniRegistro']=;
 					$atributos ['baseDatos'] = "inventarios";
@@ -1393,25 +1384,7 @@ class registrarForm {
 			unset ( $atributos );
 			// -----------------FIN CONTROL: Botón -----------------------------------------------------------
 			
-			// // -----------------CONTROL: Botón ----------------------------------------------------------------
-			// $esteCampo = 'botonCancelar';
-			// $atributos ["id"] = $esteCampo;
-			// $atributos ["tabIndex"] = $tab;
-			// $atributos ["tipo"] = 'boton';
-			// // submit: no se coloca si se desea un tipo button genérico
-			// $atributos ['submit'] = true;
-			// $atributos ["estiloMarco"] = '';
-			// $atributos ["estiloBoton"] = 'jqueryui';
-			// // verificar: true para verificar el formulario antes de pasarlo al servidor.
-			// $atributos ["verificar"] = '';
-			// $atributos ["tipoSubmit"] = 'jquery'; // Dejar vacio para un submit normal, en este caso se ejecuta la función submit declarada en ready.js
-			// $atributos ["valor"] = $this->lenguaje->getCadena ( $esteCampo );
-			// $atributos ['nombreFormulario'] = $esteBloque ['nombre'];
-			// $tab ++;
 			
-			// // Aplica atributos globales al control
-			// $atributos = array_merge ( $atributos, $atributosGlobales );
-			// echo $this->miFormulario->campoBoton ( $atributos );
 			
 			echo $this->miFormulario->marcoAgrupacion ( 'fin' );
 			

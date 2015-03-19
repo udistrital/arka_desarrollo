@@ -52,13 +52,16 @@
         
          $("#<?php echo $this->campoSeguro('selec_dependencia')?>").select2();
          
-         $("#<?php echo $this->campoSeguro('rubro')?>").select2();
-         
+        $("#<?php echo $this->campoSeguro('selec_proveedor')?>").select2({
+   		 placeholder: "Search for a repository",
+   		 minimumInputLength: 3,
+
+       });
     
     
          
           $("#<?php echo $this->campoSeguro('cargoJefeSeccion')?>").select2();
-	      $("#<?php echo $this->campoSeguro('nombreContratista')?>").select2();
+	      
           $("#<?php echo $this->campoSeguro('asignacionOrdenador')?>").select2();
          
     		$('#<?php echo $this->campoSeguro('nombreJefeSeccion')?>').attr('disabled','');

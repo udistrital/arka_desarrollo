@@ -30,8 +30,6 @@ $this->idioma ["selec_proveedor"] ="&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspProv
 $this->idioma ["selec_proveedorTitulo"] ="Seleccione Proveedor";
 
 
-
-
 $this->idioma ["fecha_diponibilidad"] ="Fecha Disponibilidad : ";
 $this->idioma ["fecha_diponibilidadTitulo"] ="Ingrese Fecha Disponibilidad Presupuestal (YYYY-MM-DD)";
 
@@ -102,7 +100,7 @@ $this->idioma ["tiempoEntregaTitulo"] ="Ingrese Tiempo de Entrega";
 $this->idioma ["formaPago"] ="&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspForma de Pago : ";
 $this->idioma ["formaPagoTitulo"] ="Ingrese Forma de Pago";
 
-$this->idioma ["supervision"] ="&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspSupervisado Por : ";
+$this->idioma ["supervision"] ="&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspSupervisor : ";
 $this->idioma ["supervisionTitulo"] ="Ingrese Supervisador";
 
 

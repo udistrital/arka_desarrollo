@@ -502,10 +502,22 @@ $(function() {
 
 
     $("#<?php echo $this->campoSeguro('selec_proveedor')?>").select2({
+      	 placeholder: "Search for a repository",
+      	 minimumInputLength: 5,
+
+          });
+
+    
+    $("#<?php echo $this->campoSeguro('rubro')?>").select2({
    	 placeholder: "Search for a repository",
-   	 minimumInputLength: 3,
+   	 minimumInputLength: 5,
 
        });
+    $("#<?php echo $this->campoSeguro('nombreContratista')?>").select2({
+      	 placeholder: "Search for a repository",
+       	 minimumInputLength: 3,
+
+           });
 
     $("#<?php echo $this->campoSeguro('iva')?>").select2();
 
@@ -571,9 +583,34 @@ $(function() {
 		
 			break;
 		
-			case '1':
+			case '5':
 		
 				$('#<?php echo $this->campoSeguro('total_iva')?>').val($('#<?php echo $this->campoSeguro('total_preliminar')?>').val() * 0.16);
+		
+				var total =$('#<?php echo $this->campoSeguro('total_preliminar')?>').val();
+				var iva =$('#<?php echo $this->campoSeguro('total_iva')?>').val();
+				var numero = Number(total) + Number(iva) ;
+				
+				$('#<?php echo $this->campoSeguro('total')?>').val(numero);
+
+				if ($('#<?php echo $this->campoSeguro('total_preliminar')?>').val()!=0){
+
+					valorLetras();
+
+					}else{
+
+
+						$("#<?php echo $this->campoSeguro('valorLetras_registro')?>").val('');
+
+
+						}
+		
+		
+			break;	
+
+			case '6':
+				
+				$('#<?php echo $this->campoSeguro('total_iva')?>').val($('#<?php echo $this->campoSeguro('total_preliminar')?>').val() * 0.10);
 		
 				var total =$('#<?php echo $this->campoSeguro('total_preliminar')?>').val();
 				var iva =$('#<?php echo $this->campoSeguro('total_iva')?>').val();
