@@ -157,7 +157,7 @@ class Sql extends \Sql {
 				$cadenaSql .= " WHERE seccion='" . $variable . "';";
 				
 				break;
-				
+			
 			case "insertarProveedor" :
 				$cadenaSql = " INSERT INTO ";
 				$cadenaSql .= " proveedor_nuevo(";
@@ -231,11 +231,8 @@ class Sql extends \Sql {
 				break;
 			
 			case "dependencia" :
-				$cadenaSql = " SELECT ";
-				$cadenaSql .= " id_dependencia,";
-				$cadenaSql .= " cod_dependencia  ||' - '|| nombre as dependencia ";
-				$cadenaSql .= " FROM";
-				$cadenaSql .= " dependencia ; ";
+				$cadenaSql = " SELECT DEP_IDENTIFICADOR, DEP_IDENTIFICADOR ||' - ' ||DEP_DEPENDENCIA  ";
+				$cadenaSql .= "FROM DEPENDENCIAS ";
 				break;
 			
 			case "informacion_dependencia" :
@@ -274,16 +271,8 @@ class Sql extends \Sql {
 				break;
 			
 			case "seleccion_proveedor" :
-				$cadenaSql = " SELECT ";
-				$cadenaSql .= " id_proveedor,";
-				$cadenaSql .= " nit_proveedor ||' - '|| razon_social as proveedor ";
-				$cadenaSql .= " FROM";
-				$cadenaSql .= " proveedor  ";
-				$cadenaSql .= " UNION SELECT ";
-				$cadenaSql .= " id_proveedor_n,";
-				$cadenaSql .= " nit_proveedor ||' - '|| razon_social as proveedor ";
-				$cadenaSql .= " FROM";
-				$cadenaSql .= " proveedor_nuevo ;";
+				$cadenaSql = " SELECT PRO_IDENTIFICADOR,PRO_NIT||' - '||PRO_RAZON_SOCIAL AS proveedor ";
+				$cadenaSql .= " FROM PROVEEDORES ";
 				
 				break;
 			
@@ -457,8 +446,6 @@ class Sql extends \Sql {
 				
 				break;
 			
-
-				
 			case "actualizarOrden" :
 				$cadenaSql = " UPDATE ";
 				$cadenaSql .= " orden_compra ";
