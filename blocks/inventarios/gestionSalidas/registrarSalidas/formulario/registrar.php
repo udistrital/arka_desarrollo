@@ -1,6 +1,4 @@
 <?php
-use inventarios\gestionSalidas\registrarSalidas\funcion\redireccion;
-
 if (! isset ( $GLOBALS ["autorizado"] )) {
 	include ("../index.php");
 	exit ();
@@ -38,16 +36,14 @@ class registrarForm {
 		
 		for($i = 0; $i <= 200; $i ++) {
 			
-			if (isset ( $_REQUEST ['item' . $i] )) {
+			if (isset($_REQUEST ['item' . $i])) {
 				
 				$items [] = $_REQUEST ['item' . $i];
 			}
 		}
 		
-		if (! isset ( $items )) {
-			
-			redireccion::redireccionar ( "noitems" );
-		}
+		
+		
 		
 		$atributosGlobales ['campoSeguro'] = 'true';
 		
@@ -123,8 +119,7 @@ class registrarForm {
 				$atributos ['ajax_control'] = $esteCampo;
 				$atributos ['estilo'] = "jqueryui";
 				$atributos ['validar'] = "required";
-				$atributos ['limitar'] = true;
-				$atributos ['anchoCaja'] = 27;
+				$atributos ['limitar'] = false;
 				$atributos ['miEvento'] = '';
 				$atributos ['cadena_sql'] = $this->miSql->getCadenaSql ( "consultar_dependencia" );
 				$matrizItems = $esteRecursoDB->ejecutarAcceso ( $atributos ['cadena_sql'], "busqueda" );
@@ -329,7 +324,7 @@ class registrarForm {
 			$valorCodificado .= "&bloqueGrupo=" . $esteBloque ["grupo"];
 			$valorCodificado .= "&opcion=registrar";
 			$valorCodificado .= "&numero_entrada=" . $_REQUEST ['numero_entrada'];
-			$valorCodificado .= "&items=" . serialize ( $items );
+			$valorCodificado .= "&items=" .serialize($items);
 			
 			/**
 			 * SARA permite que los nombres de los campos sean dinámicos.

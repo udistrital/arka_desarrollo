@@ -1,7 +1,5 @@
 <?php
 
-use inventarios\radicarEntradaSalida\funcion\redireccion;
-
 if (!isset($GLOBALS ["autorizado"])) {
     include ("../index.php");
     exit();
@@ -42,7 +40,7 @@ class registrarForm {
 
         $rutaBloque = $this->miConfigurador->getVariableConfiguracion("host");
         $rutaBloque .= $this->miConfigurador->getVariableConfiguracion("site") . "/blocks/";
-        $rutaBloque .= $esteBloque ['grupo'] . "/" . $esteBloque ['nombre'];
+        $rutaBloque .= $esteBloque ['grupo'] ."/". $esteBloque ['nombre'];
 
         // ---------------- SECCION: Parámetros Globales del Formulario ----------------------------------
         /**
@@ -61,8 +59,7 @@ class registrarForm {
         // -------------------------------------------------------------------------------------------------
         $conexion = "inventarios";
         $esteRecursoDB = $this->miConfigurador->fabricaConexiones->getRecursoDB($conexion);
-
-
+      
         if (isset($_REQUEST['fecha_inicio']) && $_REQUEST['fecha_inicio'] != '') {
             $fecha_inicio = $_REQUEST['fecha_inicio'];
         } else {
@@ -117,6 +114,14 @@ class registrarForm {
         $atributos ['tipoEtiqueta'] = 'inicio';
         echo $this->miFormulario->formulario($atributos);
         // ---------------- SECCION: Controles del Formulario -----------------------------------------------
+
+        $esteCampo = "marcoDatosBasicos";
+        $atributos ['id'] = $esteCampo;
+        $atributos ["estilo"] = "jqueryui";
+        $atributos ['tipoEtiqueta'] = 'inicio';
+        $atributos ["leyenda"] = "Seleccionar Entrada para el Registro de Datos";
+        echo $this->miFormulario->marcoAgrupacion('inicio', $atributos);
+
         // ------------------Division para los botones-------------------------
         $atributos ["id"] = "botones";
         $atributos ["estilo"] = "marcoBotones";
@@ -145,14 +150,6 @@ class registrarForm {
         // ---------------------------------------------------------
         // ------------------Fin Division para los botones-------------------------
         echo $this->miFormulario->division("fin");
-
-
-        $esteCampo = "marcoDatosBasicos";
-        $atributos ['id'] = $esteCampo;
-        $atributos ["estilo"] = "jqueryui";
-        $atributos ['tipoEtiqueta'] = 'inicio';
-        $atributos ["leyenda"] = "Seleccionar Entrada para el Registro de Datos";
-        echo $this->miFormulario->marcoAgrupacion('inicio', $atributos);
 
         if ($registroEntrada !== false) {
 
@@ -197,8 +194,6 @@ class registrarForm {
             echo "</tbody>";
 
             echo "</table>";
-
-
 
             echo $this->miFormulario->marcoAgrupacion('fin');
 
@@ -271,8 +266,56 @@ class registrarForm {
             echo $this->miFormulario->cuadroMensaje($atributos);
             // --------------- FIN CONTROL : Cuadro de Texto --------------------------------------------------
         }
-    }
 
+
+        echo $this->miFormulario->marcoAgrupacion('fin');
+
+        // ------------------- SECCION: Paso de variables ------------------------------------------------
+
+        /**
+         * En algunas ocasiones es útil pasar variables entre las diferentes páginas.
+         * SARA permite realizar esto a través de tres
+         * mecanismos:
+         * (a). Registrando las variables como variables de sesión. Estarán disponibles durante toda la sesión de usuario. Requiere acceso a
+         * la base de datos.
+         * (b). Incluirlas de manera codificada como campos de los formularios. Para ello se utiliza un campo especial denominado
+         * formsara, cuyo valor será una cadena codificada que contiene las variables.
+         * (c) a través de campos ocultos en los formularios. (deprecated)
+         */
+        // En este formulario se utiliza el mecanismo (b) para pasar las siguientes variables:
+        // Paso 1: crear el listado de variables
+
+        $valorCodificado = "actionBloque=" . $esteBloque ["nombre"];
+        $valorCodificado .= "&pagina=" . $this->miConfigurador->getVariableConfiguracion('pagina');
+        $valorCodificado .= "&bloque=" . $esteBloque ['nombre'];
+        $valorCodificado .= "&bloqueGrupo=" . $esteBloque ["grupo"];
+        $valorCodificado .= "&opcion=regresar";
+        $valorCodificado .= "&redireccionar=regresar";
+        /**
+         * SARA permite que los nombres de los campos sean dinámicos.
+         * Para ello utiliza la hora en que es creado el formulario para
+         * codificar el nombre de cada campo. Si se utiliza esta técnica es necesario pasar dicho tiempo como una variable:
+         * (a) invocando a la variable $_REQUEST ['tiempo'] que se ha declarado en ready.php o
+         * (b) asociando el tiempo en que se está creando el formulario
+         */
+        $valorCodificado .= "&tiempo=" . time();
+        // Paso 2: codificar la cadena resultante
+        $valorCodificado = $this->miConfigurador->fabricaConexiones->crypto->codificar($valorCodificado);
+
+        $atributos ["id"] = "formSaraData"; // No cambiar este nombre
+        $atributos ["tipo"] = "hidden";
+        $atributos ['estilo'] = '';
+        $atributos ["obligatorio"] = false;
+        $atributos ['marco'] = true;
+        $atributos ["etiqueta"] = "";
+        $atributos ["valor"] = $valorCodificado;
+        echo $this->miFormulario->campoCuadroTexto($atributos);
+        unset($atributos);
+
+        $atributos ['marco'] = true;
+        $atributos ['tipoEtiqueta'] = 'fin';
+        echo $this->miFormulario->formulario($atributos);
+    }
 }
 
 $miSeleccionador = new registrarForm($this->lenguaje, $this->miFormulario, $this->sql);

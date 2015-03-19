@@ -21,7 +21,7 @@ $dropdown_menu = array(
         "title" => "Gestión Asignación de Inventarios a Contratistas",
         "items" => array(
             array("reportfile" => "consultarInventariosContratistas.xml", "title" => "Consultar Inventarios de Contratistas"),
-//             array("reportfile" => "pazysalvo.xml", "title" => "Generar Paz y Salvo Contratistas"),
+            array("reportfile" => "pazysalvo.xml", "title" => "Generar Paz y Salvo Contratistas"),
         )
     ),
     array(
@@ -31,6 +31,15 @@ $dropdown_menu = array(
             array("reportfile" => "consultarRadicacion_avance.xml", "title" => "Consulta de Radicación por Avance"),
             array("reportfile" => "consultarRadicacion_compra.xml", "title" => "Consulta de Radicación por Compra"),
             array("reportfile" => "consultarRadicacion_contrato.xml", "title" => "Consulta de Radicación por Contrato"),
+        )
+    ),
+      array(
+        "project" => "arka",
+        "title" => "Gestión Depreciación",
+        "items" => array(
+            array("reportfile" => "consultarDepreciacion_general.xml", "title" => "Consulta Depreciación General"),
+            array("reportfile" => "consultarDepreciacion_grupo.xml", "title" => "Consulta Depreciación por Grupo Contable"),
+            array("reportfile" => "consultarDepreciacion_elemento.xml", "title" => "Consulta Depreciación por Elemento"),
         )
     ),
 );

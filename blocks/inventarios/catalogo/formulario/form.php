@@ -61,12 +61,9 @@ class Formulario {
         //menu 
         $cadena1.= "<div id = 'marcoMenu'>";
         $cadena1.= '<div  id="menu"  class="ui-widget-header ui-corner-all">';
+        $cadena1.= '<button id="irACasa"  class="botonMenu" >Paǵina Principal</button>';
+        $cadena1.= '<button id="agregarElemento" class="botonMenu" >+ Nuevo Catálogo</button>';
 
-        $cadena1.= '<button id="agregarElemento"  class="botonMenu" title="' . $textos[0] . '">';
-        $cadena1 .='</button>';
-
-        $cadena1 .= '<button id="irACasa"  class="botonMenu" title="' . $textos[8] . '">';
-        $cadena1 .='</button>';
         //</div>';
         //$cadena .='</div>';
         $cadena1 .='</div>';

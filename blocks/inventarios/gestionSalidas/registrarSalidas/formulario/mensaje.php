@@ -40,20 +40,19 @@ class registrarForm {
 		$conexion = "inventarios";
 		$esteRecursoDB = $this->miConfigurador->fabricaConexiones->getRecursoDB ( $conexion );
 		
-		if (isset ( $_REQUEST ['salida'] )) {
-			$cadenaSql = $this->miSql->getCadenaSql ( 'consultarEntradaParticular', $_REQUEST ['entrada'] );
-			
-			$entrada = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
-			
-			$cadenaSql = $this->miSql->getCadenaSql ( 'consulta_elementos', $entrada [0] [12] );
-			
-			$elementos = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
-			
-			$arreglo = array (
-					$_REQUEST ['salida'],
-					$_REQUEST ['entrada'] 
-			);
-		}
+		$cadenaSql = $this->miSql->getCadenaSql ( 'consultarEntradaParticular', $_REQUEST ['entrada'] );
+		
+		$entrada = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
+		
+		$cadenaSql = $this->miSql->getCadenaSql ( 'consulta_elementos', $entrada [0] [12] );
+		
+		$elementos = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
+		
+		$arreglo = array (
+				$_REQUEST ['salida'],
+				$_REQUEST ['entrada'] 
+		);
+		
 		// Limpia Items Tabla temporal
 		
 		// $cadenaSql = $this->miSql->getCadenaSql ( 'limpiar_tabla_items' );
@@ -109,7 +108,7 @@ class registrarForm {
 					$atributos = array_merge ( $atributos, $atributosGlobales );
 					echo $this->miFormulario->cuadroMensaje ( $atributos );
 					// --------------- FIN CONTROL : Cuadro de Texto --------------------------------------------------
-				} else if($_REQUEST ['mensaje'] == 'inserto') {
+				} else {
 					
 					$cadenaSql = $this->miSql->getCadenaSql ( 'actualizar_entrada', $arreglo );
 					$inserto = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "acceso" );
@@ -148,9 +147,9 @@ class registrarForm {
 					// --------------- FIN CONTROL : Cuadro de Texto --------------------------------------------------
 				}
 				
-				if ($_REQUEST ['mensaje'] == 'noitems') {
+				if (isset ( $_REQUEST ['errores'] ) && $_REQUEST ['errores'] == 'notextos') {
 					
-					$mensaje = "No Selecciono Items<br>Error Generar Salida";
+					$mensaje = "No se Creo Entrada, No se Colocaron Observaciones";
 					
 					// ---------------- CONTROL: Cuadro de Texto --------------------------------------------------------
 					$esteCampo = 'mensajeRegistro';
@@ -166,8 +165,6 @@ class registrarForm {
 					echo $this->miFormulario->cuadroMensaje ( $atributos );
 					// --------------- FIN CONTROL : Cuadro de Texto --------------------------------------------------
 				}
-				
-				
 			}
 			
 			// ------------------Division para los botones-------------------------

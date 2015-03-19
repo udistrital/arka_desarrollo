@@ -189,8 +189,8 @@ class Sql extends \Sql {
 			
 			case "consultar_dependencia" :
 				
-				$cadenaSql = "SELECT id_dependencia, (id_dependencia||' - '|| nombre) AS Dependencia ";
-				$cadenaSql .= "FROM dependencia ;";
+				$cadenaSql = "SELECT id_dependecia, (id_dependecia||' - '|| nombre) AS Dependencia ";
+				$cadenaSql .= "FROM dependecia ;";
 				
 				break;
 			

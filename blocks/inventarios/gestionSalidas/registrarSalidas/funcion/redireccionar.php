@@ -17,9 +17,9 @@ class redireccion {
 				$variable = "pagina=" . $miPaginaActual;
 				$variable .= "&opcion=mensaje";
 				$variable .= "&mensaje=inserto";
-				$variable .= "&salida=" . $valor ['salida'];
-				$variable .= "&entrada=" . $valor ['entrada'];
-				$variable .= "&fecha=" . $valor ['fecha'];
+				$variable .= "&salida=" . $valor['salida'];
+				$variable .= "&entrada=" . $valor['entrada'];
+				$variable .= "&fecha=" . $valor['fecha'];
 				break;
 			
 			case "noInserto" :
@@ -29,18 +29,11 @@ class redireccion {
 				
 				break;
 			
+						
 			case "NoObservaciones" :
 				$variable = "pagina=" . $miPaginaActual;
 				$variable .= "&opcion=mensaje";
 				$variable .= "&mensaje=otros";
-				$variable .= "&errores=notextos";
-				
-				break;
-			
-			case "noitems" :
-				$variable = "pagina=" . $miPaginaActual;
-				$variable .= "&opcion=mensaje";
-				$variable .= "&mensaje=noitems";
 				$variable .= "&errores=notextos";
 				
 				break;

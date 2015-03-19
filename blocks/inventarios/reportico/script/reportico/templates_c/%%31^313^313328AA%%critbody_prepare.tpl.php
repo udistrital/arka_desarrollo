@@ -1,4 +1,4 @@
-<?php /* Smarty version 2.6.26, created on 2014-12-10 10:17:53
+<?php /* Smarty version 2.6.26, created on 2014-08-10 00:02:47
          compiled from critbody_prepare.tpl */ ?>
 	<TABLE class="swPrpCritBox" cellpadding="0">
 <!---->

@@ -194,9 +194,7 @@ class registrarForm {
 					$atributos ['leyenda'] = "Información Respecto al Elemento";
 					echo $this->miFormulario->agrupacion ( 'inicio', $atributos );
 					{
-						
-						
-						
+									
 						// ---------------- CONTROL: Cuadro Lista --------------------------------------------------------
 						
 						$esteCampo = 'nivel';
@@ -215,7 +213,7 @@ class registrarForm {
 						$atributos ['etiqueta'] = $this->lenguaje->getCadena ( $esteCampo );
 						$atributos ['anchoEtiqueta'] = 213;
 						
-						$atributos ['cadena_sql'] = $this->miSql->getCadenaSql ( "consultar_nivel_inventario" );
+						$atributos ['cadena_sql'] = $this->miSql->getCadenaSql("consultar_nivel_inventario");
 						$matrizItems = $esteRecursoDB->ejecutarAcceso ( $atributos ['cadena_sql'], "busqueda" );
 						
 						$atributos ['matrizItems'] = $matrizItems;

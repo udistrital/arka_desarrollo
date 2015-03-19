@@ -41,8 +41,6 @@
  
  
  $("#<?php echo $this->campoSeguro('dependencia')?>").select2();
- $("#<?php echo $this->campoSeguro('funcionario')?>").select2();
- 
  $("#<?php echo $this->campoSeguro('ubicacion')?>").select2();
                   
      
