@@ -173,10 +173,8 @@ class Formulario {
         echo '<fieldset class="ui-corner-all ui-widget ui-widget-content ui-corner-all">';
         echo '<legend>' . $this->lenguaje->getCadena('elementos') . '</legend>';
 
-        $this->campoId();
-
         $this->campoPadre();
-
+        $this->campoId();
         $this->campoNombre();
 
         echo '<input id="idCatalogo" type="hidden" value="' . $_REQUEST['idCatalogo'] . '" name="idCatalogo">';

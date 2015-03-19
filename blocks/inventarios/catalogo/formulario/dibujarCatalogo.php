@@ -109,8 +109,6 @@ class Formulario {
 
     private function dibujarLista($base, $hijo = false) {
 
-
-
         if ($base) {
 
             echo '<ul class=tree ';

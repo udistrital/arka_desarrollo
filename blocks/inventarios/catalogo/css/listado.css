@@ -21,6 +21,7 @@ ul
 .fila:hover  { background: #DAEFFA; }
 .fila:active  { background: #BAE3F7; color: white; }
 
+
 .interno{
 
     text-align: left;
@@ -282,12 +283,13 @@ ul
     background: -ms-linear-gradient(#CDCEF9, #0E97B4);
     background: -o-linear-gradient(#CDCEF9, #0E97B4);
     background: linear-gradient(#CDCEF9, #0E97B4);
+
 }
 
 .listaParametro>a{
     cursor:pointer;
     padding:3px;
-  color:#60CBFF;
+    color:#60CBFF;
 }
 .listaParametro>div, .listaParametro>p{
     display:inline-block;
