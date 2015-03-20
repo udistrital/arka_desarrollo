@@ -197,6 +197,11 @@ $urlFinal3 = $url . $cadena3;
         );
 
     });
+    
+      $("#<?php echo $this->campoSeguro('documentoContratista') ?>").select2({
+        placeholder: "Search for a repository",
+        minimumInputLength: 1,
+    });
 
 </script>
 

@@ -46,7 +46,8 @@ class registrarForm {
         $conexion = "inventarios";
         $esteRecursoDB = $this->miConfigurador->fabricaConexiones->getRecursoDB($conexion);
 
-
+        $conexion2 = "sicapital";
+        $esteRecursoDB2 = $this->miConfigurador->fabricaConexiones->getRecursoDB($conexion2);
         // Limpia Items Tabla temporal
         // ---------------- SECCION: Parámetros Generales del Formulario ----------------------------------
         $esteCampo = $esteBloque ['nombre'];
@@ -66,7 +67,8 @@ class registrarForm {
         // ---------------- FIN SECCION: de Parámetros Generales del Formulario ----------------------------
         // ----------------INICIAR EL FORMULARIO ------------------------------------------------------------
         $atributos ['tipoEtiqueta'] = 'inicio';
-        echo $this->miFormulario->formulario($atributos); {
+        echo $this->miFormulario->formulario($atributos);
+        {
             // ---------------- SECCION: Controles del Formulario -----------------------------------------------
 
             $esteCampo = "marcoDatosBasicos";
@@ -77,37 +79,42 @@ class registrarForm {
             echo $this->miFormulario->marcoAgrupacion('inicio', $atributos);
 
 
+
 // ---------------- CONTROL: Cuadro de Texto --------------------------------------------------------
             $esteCampo = 'documentoContratista';
-            $atributos ['id'] = $esteCampo;
-            $atributos ['nombre'] = $esteCampo;
-            $atributos ['tipo'] = 'text';
-            $atributos ['estilo'] = 'jqueryui';
-            $atributos ['marco'] = true;
-            $atributos ['estiloMarco'] = '';
-            $atributos ["etiquetaObligatorio"] = true;
             $atributos ['columnas'] = 1;
-            $atributos ['dobleLinea'] = 0;
-            $atributos ['tabIndex'] = $tab;
+            $atributos ['nombre'] = $esteCampo;
+            $atributos ['id'] = $esteCampo;
+            $atributos ['seleccion'] = - 1;
+            $atributos ['evento'] = '';
+            $atributos ['deshabilitado'] = false;
+            $atributos ["etiquetaObligatorio"] = true;
+            $atributos ['tab'] = $tab;
+            $atributos ['tamanno'] = 1;
+            $atributos ['estilo'] = 'jqueryui';
+            $atributos ['validar'] = 'required, minSize[1],maxSize[15],custom[onlyNumberSp]';
+            $atributos ['limitar'] = false;
             $atributos ['etiqueta'] = $this->lenguaje->getCadena($esteCampo);
-            $atributos ['validar'] = 'required, maxSize[15],custom[onlyNumberSp]';
+            $atributos ['anchoEtiqueta'] = 213;
 
-            if (isset($_REQUEST [$esteCampo])) {
-                $atributos ['valor'] = $_REQUEST [$esteCampo];
+            if (isset($_REQUEST[0][$esteCampo])) {
+                $atributos ['valor'] = $_REQUEST[0][$esteCampo];
             } else {
                 $atributos ['valor'] = '';
             }
-            $atributos ['titulo'] = $this->lenguaje->getCadena($esteCampo . 'Titulo');
-            $atributos ['deshabilitado'] = false;
-            $atributos ['tamanno'] = 20;
-            $atributos ['maximoTamanno'] = '';
-            $atributos ['anchoEtiqueta'] = 220;
+
+            $atributos ['cadena_sql'] = $this->miSql->getCadenaSql("contratistas");
+            $matrizItems = $esteRecursoDB2->ejecutarAcceso($atributos ['cadena_sql'], "busqueda");
+            $atributos ['matrizItems'] = $matrizItems;
+
+            // Utilizar lo siguiente cuando no se pase un arreglo:
+            // $atributos['baseDatos']='ponerAquiElNombreDeLaConexión';
+            // $atributos ['cadena_sql']='ponerLaCadenaSqlAEjecutar';
             $tab ++;
-
-            // Aplica atributos globales al control
             $atributos = array_merge($atributos, $atributosGlobales);
-            echo $this->miFormulario->campoCuadroTexto($atributos);
-
+            echo $this->miFormulario->campoCuadroLista($atributos);
+            unset($atributos);
+// --------------- FIN CONTROL : Cuadro de Texto -------------------------------------------------- 
             // ------------------Division para los botones-------------------------
             $atributos ["id"] = "botones";
             $atributos ["estilo"] = "marcoBotones";
