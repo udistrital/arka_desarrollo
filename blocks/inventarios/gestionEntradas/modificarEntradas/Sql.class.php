@@ -149,6 +149,13 @@ class Sql extends \Sql {
 			 * Clausulas Del Caso Uso.
 			 */
 			
+			case "proveedor_informacion" :
+				$cadenaSql = " SELECT PRO_NIT,PRO_RAZON_SOCIAL  ";
+				$cadenaSql .= " FROM PROVEEDORES ";
+				$cadenaSql .= " WHERE PRO_IDENTIFICADOR='" . $variable . "'";
+				
+				break;
+			
 			case "consultarInfoClase" :
 				$cadenaSql = " SELECT  observacion, id_entrada, id_salida, id_hurto,";
 				$cadenaSql .= " num_placa, val_sobrante, ruta_archivo, nombre_archivo  ";
@@ -157,20 +164,11 @@ class Sql extends \Sql {
 				
 				break;
 			
-			case "seleccion_proveedor" :
-				$cadenaSql = " SELECT ";
-				$cadenaSql .= " id_proveedor,";
-				$cadenaSql .= " nit_proveedor ||' - '|| razon_social as proveedor ";
-				$cadenaSql .= " FROM";
-				$cadenaSql .= " proveedor  ";
-				$cadenaSql .= " UNION SELECT ";
-				$cadenaSql .= " id_proveedor_n,";
-				$cadenaSql .= " nit_proveedor ||' - '|| razon_social as proveedor ";
-				$cadenaSql .= " FROM";
-				$cadenaSql .= " proveedor_nuevo ;";
+			case "proveedores" :
+				$cadenaSql = " SELECT PRO_IDENTIFICADOR,PRO_NIT||' - '||PRO_RAZON_SOCIAL AS proveedor ";
+				$cadenaSql .= " FROM PROVEEDORES ";
 				
 				break;
-			
 			case "tipo_contrato_avance" :
 				
 				$cadenaSql = "SELECT id_tipo, descripcion ";
@@ -206,10 +204,10 @@ class Sql extends \Sql {
 			case "consultarEntrada" :
 				$cadenaSql = "SELECT DISTINCT ";
 				$cadenaSql .= "id_entrada, fecha_registro,  ";
-				$cadenaSql .= " descripcion, nit_proveedor,razon_social   ";
+				$cadenaSql .= " descripcion,proveedor   ";
 				$cadenaSql .= "FROM entrada ";
 				$cadenaSql .= "JOIN clase_entrada ON clase_entrada.id_clase = entrada.clase_entrada ";
-				$cadenaSql .= "JOIN proveedor ON proveedor.id_proveedor = entrada.proveedor ";
+				// $cadenaSql .= "JOIN proveedor ON proveedor.id_proveedor = entrada.proveedor ";
 				$cadenaSql .= "WHERE 1=1 ";
 				if ($variable [0] != '') {
 					$cadenaSql .= " AND id_entrada = '" . $variable [0] . "'";
@@ -359,14 +357,13 @@ class Sql extends \Sql {
 				
 				break;
 			
-				
-// 				UPDATE entrada
-// 				SET id_entrada=?, fecha_registro=?, vigencia=?, clase_entrada=?,
-// 				info_clase=?, tipo_contrato=?, numero_contrato=?, fecha_contrato=?,
-// 				proveedor=?, numero_factura=?, fecha_factura=?, observaciones=?,
-// 				acta_recibido=?, estado_entrada=?, estado_registro=?
-// 				WHERE <condition>;
-				
+			// UPDATE entrada
+			// SET id_entrada=?, fecha_registro=?, vigencia=?, clase_entrada=?,
+			// info_clase=?, tipo_contrato=?, numero_contrato=?, fecha_contrato=?,
+			// proveedor=?, numero_factura=?, fecha_factura=?, observaciones=?,
+			// acta_recibido=?, estado_entrada=?, estado_registro=?
+			// WHERE <condition>;
+			
 			case "actualizarEntrada" :
 				$cadenaSql = " UPDATE entrada ";
 				$cadenaSql .= " SET vigencia='" . $variable [0] . "', ";
@@ -381,7 +378,7 @@ class Sql extends \Sql {
 				$cadenaSql .= "  estado_entrada='1'  ";
 				$cadenaSql .= "  WHERE id_entrada='" . $variable [9] . "' ";
 				$cadenaSql .= "  RETURNING  id_entrada ";
-								
+				
 				break;
 			
 			case "insertarReposicion" :
