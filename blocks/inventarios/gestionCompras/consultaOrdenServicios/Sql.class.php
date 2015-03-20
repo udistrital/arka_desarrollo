@@ -149,80 +149,44 @@ class Sql extends \Sql {
 			 * Clausulas Del Caso Uso.
 			 */
 			
+			
+				
+	
+				case "informacion_supervisor" :
+					$cadenaSql = " SELECT JEF_NOMBRE,JEF_IDENTIFICADOR ";
+					$cadenaSql .= " FROM JEFES_DE_SECCION ";
+					$cadenaSql .= " WHERE  JEF_IDENTIFICADOR='" . $variable . "' ";
+					break;
+				
+			
 			case "informacion_cargo_jefe" :
-				$cadenaSql = " SELECT ";
-				$cadenaSql .= " nombres ||' '||apellidos,";
-				$cadenaSql .= " id_encargado ";
-				$cadenaSql .= " FROM";
-				$cadenaSql .= " encargado ";
-				$cadenaSql .= " WHERE id_tipo_encargado='2' AND estado='TRUE' ";
-				$cadenaSql .= "AND cargo='" . $variable . "';";
-				
-				break;
-			
-			case "informacion_ordenador" :
-				$cadenaSql = " SELECT ";
-				$cadenaSql .= " nombres ||' '||apellidos, ";
-				$cadenaSql .= " id_encargado";
-				$cadenaSql .= " FROM";
-				$cadenaSql .= " encargado ";
-				$cadenaSql .= " WHERE id_tipo_encargado='1' AND estado='TRUE' ";
-				$cadenaSql .= "AND asignacion='" . $variable . "';";
-				
-				break;
-			
-			case "ordenador_gasto" :
-				$cadenaSql = " SELECT ";
-				$cadenaSql .= " id_ordenador,";
-				$cadenaSql .= " descripcion ";
-				$cadenaSql .= " FROM";
-				$cadenaSql .= " tipo_ordenador_gasto ";
+				$cadenaSql = " SELECT JEF_NOMBRE,JEF_IDENTIFICADOR ";
+				$cadenaSql .= " FROM JEFES_DE_SECCION ";
+				$cadenaSql .= " WHERE  JEF_IDENTIFICADOR='" . $variable . "' ";
 				break;
 			
 			case "constratistas" :
-				$cadenaSql = " SELECT ";
-				$cadenaSql .= " id_encargado,";
-				$cadenaSql .= "identificacion ||' - '|| nombres ||' 	'||apellidos as contratista ";
-				$cadenaSql .= " FROM";
-				$cadenaSql .= " encargado ";
-				$cadenaSql .= " WHERE id_tipo_encargado='3' AND estado='TRUE'";
-				break;
-			
-			case "cargo_jefe" :
-				$cadenaSql = " SELECT ";
-				$cadenaSql .= " id_cargo,";
-				$cadenaSql .= "descripcion ";
-				$cadenaSql .= " FROM";
-				$cadenaSql .= " tipo_cargo ; ";
-				break;
-			case "informacion_cargo_jefe" :
-				$cadenaSql = " SELECT ";
-				$cadenaSql .= " nombres ||' '||apellidos,";
-				$cadenaSql .= " id_encargado ";
-				$cadenaSql .= " FROM";
-				$cadenaSql .= " encargado ";
-				$cadenaSql .= " WHERE id_tipo_encargado='2' AND estado='TRUE' ";
-				$cadenaSql .= "AND cargo='" . $variable . "';";
+				$cadenaSql = " SELECT CON_IDENTIFICADOR,CON_IDENTIFICACION ||' - '|| CON_NOMBRE ";
+				$cadenaSql .= "FROM CONTRATISTAS ";
 				
 				break;
 			
 			case "informacion_ordenador" :
-				$cadenaSql = " SELECT ";
-				$cadenaSql .= " nombres ||' '||apellidos, ";
-				$cadenaSql .= " id_encargado";
-				$cadenaSql .= " FROM";
-				$cadenaSql .= " encargado ";
-				$cadenaSql .= " WHERE id_tipo_encargado='1' AND estado='TRUE' ";
-				$cadenaSql .= "AND asignacion='" . $variable . "';";
+				$cadenaSql = " SELECT ORG_NOMBRE,ORG_IDENTIFICADOR  ";
+				$cadenaSql .= " FROM ORDENADORES_GASTO ";
+				$cadenaSql .= " WHERE  ORG_IDENTIFICADOR='" . $variable . "'";
 				
 				break;
 			
+			case "cargo_jefe" :
+				$cadenaSql = " SELECT JEF_IDENTIFICADOR,JEF_DEPENDENCIA_PERTENECIENTE ";
+				$cadenaSql .= " FROM JEFES_DE_SECCION ";
+				break;
+		
+		
 			case "ordenador_gasto" :
-				$cadenaSql = " SELECT ";
-				$cadenaSql .= " id_ordenador,";
-				$cadenaSql .= " descripcion ";
-				$cadenaSql .= " FROM";
-				$cadenaSql .= " tipo_ordenador_gasto ";
+				$cadenaSql = " 	SELECT ORG_IDENTIFICADOR, ORG_ORDENADOR_GASTO ";
+				$cadenaSql .= " FROM ORDENADORES_GASTO ";
 				break;
 			
 			case "constratistas" :
@@ -243,19 +207,14 @@ class Sql extends \Sql {
 				break;
 			
 			case "rubros" :
-				$cadenaSql = " SELECT ";
-				$cadenaSql .= " id_rubro,";
-				$cadenaSql .= " codigo  ||' - '|| nombre as rubro ";
-				$cadenaSql .= " FROM";
-				$cadenaSql .= " rubro ; ";
+				$cadenaSql = " SELECT RUB_IDENTIFICADOR, RUB_RUBRO ||' - '|| RUB_NOMBRE_RUBRO ";
+				$cadenaSql .= " FROM RUBROS ";
+				
 				break;
 			
 			case "dependencia" :
-				$cadenaSql = " SELECT ";
-				$cadenaSql .= " id_dependencia,";
-				$cadenaSql .= " cod_dependencia  ||' - '|| nombre as dependencia ";
-				$cadenaSql .= " FROM";
-				$cadenaSql .= " dependencia ; ";
+				$cadenaSql = " SELECT DEP_IDENTIFICADOR, DEP_IDENTIFICADOR ||' - ' ||DEP_DEPENDENCIA  ";
+				$cadenaSql .= "FROM DEPENDENCIAS ";
 				break;
 			
 			case 'seleccion_contratista' :
@@ -338,7 +297,7 @@ class Sql extends \Sql {
 				$cadenaSql .= " WHERE id_encargado='" . $variable . "' AND estado=TRUE";
 				
 				break;
-// 				____________________________________update___________________________________________
+			// ____________________________________update___________________________________________
 			
 			case "actualizarSolicitante" :
 				
@@ -454,14 +413,28 @@ class Sql extends \Sql {
 				
 				break;
 			
+			case "dependecia_solicitante" :
+				$cadenaSql = " SELECT DEP_DEPENDENCIA  ";
+				$cadenaSql .= " FROM DEPENDENCIAS  ";
+				$cadenaSql .= " WHERE DEP_IDENTIFICADOR='" . $variable . "' ";
+				
+				break;
+			
+			case "identificacion_contratista" :
+				$cadenaSql = " SELECT CON_IDENTIFICACION  ";
+				$cadenaSql .= " FROM CONTRATISTAS  ";
+				$cadenaSql .= " WHERE CON_IDENTIFICADOR='" . $variable . "' ";
+				
+				break;
+			
 			case "consultarOrden" :
 				
 				$cadenaSql = "SELECT DISTINCT ";
 				$cadenaSql .= "id_orden_servicio, fecha_registro,  ";
-				$cadenaSql .= "identificacion, nombre  ";
+				$cadenaSql .= "id_contratista_encargado , dependencia_solicitante  ";
 				$cadenaSql .= "FROM orden_servicio ";
-				$cadenaSql .= "JOIN dependencia ON dependencia.id_dependencia = orden_servicio.dependencia_solicitante ";
-				$cadenaSql .= "JOIN contratista_servicios ON contratista_servicios.id_contratista = orden_servicio.id_contratista ";
+				// $cadenaSql .= "JOIN dependencia ON dependencia.id_dependencia = orden_servicio.dependencia_solicitante ";
+				// $cadenaSql .= "JOIN contratista_servicios ON contratista_servicios.id_contratista = orden_servicio.id_contratista ";
 				$cadenaSql .= "WHERE 1=1 AND estado='TRUE' ";
 				
 				if ($variable [0] != '') {

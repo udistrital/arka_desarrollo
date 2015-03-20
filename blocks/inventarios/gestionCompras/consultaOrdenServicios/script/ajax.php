@@ -105,7 +105,34 @@ function valorLetras(elem, request, response){
 			                    
 		   });
 		};
-	
+
+
+		function datosCargoDe(elem, request, response){
+			  $.ajax({
+				    url: "<?php echo $urlFinal7?>",
+				    dataType: "json",
+				    data: { cargo:$("#<?php echo $this->campoSeguro('dependencia_supervisor')?>").val()},
+				    success: function(data){ 
+
+				    		if(data[0]!='null'){
+
+				    			$("#<?php echo $this->campoSeguro('nombre_supervisor')?>").val(data[0]);
+				    			
+				    			
+										    			
+					    		}else{
+
+							
+
+
+						    		
+					    		}
+
+				    }
+					                    
+				   });
+			};
+		
 
 	
 	function datosOrdenador(elem, request, response){
@@ -176,6 +203,21 @@ $(function() {
 				datosCargo();
 			}else{
 				$("#<?php echo $this->campoSeguro('nombreJefeSeccion')?>").val('');
+				}
+
+
+		      });
+
+
+
+
+	    $("#<?php echo $this->campoSeguro('dependencia_supervisor')?>").change(function(){
+
+
+			if($("#<?php echo $this->campoSeguro('dependencia_supervisor')?>").val()!=''){
+				datosCargoDe();
+			}else{
+				$("#<?php echo $this->campoSeguro('nombre_supervisor')?>").val('');
 				}
 
 
