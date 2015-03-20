@@ -149,6 +149,13 @@ class Sql extends \Sql {
 			 * Clausulas Del Caso Uso.
 			 */
 			
+			case "funcionarios" :
+				
+				$cadenaSql = "SELECT JEF_IDENTIFICADOR,JEF_INDENTIFICACION ||' - '|| JEF_NOMBRE ";
+				$cadenaSql .= "FROM JEFES_DE_SECCION ";
+				
+				break;
+			
 			case "seleccion_funcionario" :
 				
 				$cadenaSql = "SELECT id_funcionario, identificacion ||'-'||nombre AS funcionario  ";
@@ -182,7 +189,6 @@ class Sql extends \Sql {
 				
 				break;
 			
-
 			case "seleccion_funcionario_anterior" :
 				
 				$cadenaSql = "SELECT id_elemento_ind,identificacion ||'  -  '||nombre AS funcionario ,id_funcionario ";
@@ -211,7 +217,7 @@ class Sql extends \Sql {
 				$cadenaSql = " UPDATE salida ";
 				$cadenaSql .= "SET funcionario='" . $variable [1] . "',";
 				$cadenaSql .= " observaciones='" . $variable [2] . "' ";
-				$cadenaSql .= " WHERE id_salida=(SELECT id_salida FROM elemento_individual WHERE id_elemento_ind='" . $variable[0] . "' ) ;";
+				$cadenaSql .= " WHERE id_salida=(SELECT id_salida FROM elemento_individual WHERE id_elemento_ind='" . $variable [0] . "' ) ;";
 				
 				break;
 		}
