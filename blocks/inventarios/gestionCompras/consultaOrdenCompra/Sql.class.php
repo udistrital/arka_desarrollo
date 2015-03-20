@@ -523,14 +523,31 @@ class Sql extends \Sql {
 				
 				break;
 			
+			// SELECT PRO_NIT
+			// FROM PROVEEDORES
+			// WHERE PRO_IDENTIFICADOR='3'
+			
+			case "nit_proveedor" :
+				$cadenaSql = "SELECT PRO_NIT ";
+				$cadenaSql .= " FROM PROVEEDORES  ";
+				$cadenaSql .= " WHERE PRO_IDENTIFICADOR='" . $variable . "' ";
+				break;
+			
+			case "dependecia_solicitante" :
+				$cadenaSql = " SELECT DEP_DEPENDENCIA  ";
+				$cadenaSql .= " FROM DEPENDENCIAS  ";
+				$cadenaSql .= " WHERE DEP_IDENTIFICADOR='" . $variable . "' ";
+				
+				break;
+			
 			case "consultarOrden1" :
 				
 				$cadenaSql = "SELECT DISTINCT ";
-				$cadenaSql .= "id_orden_compra, fecha_registro,  ";
-				$cadenaSql .= "nit_proveedor, nombre  ";
+				$cadenaSql .= "id_orden_compra, fecha_registro, id_proveedor , id_dependencia ";
+				// $cadenaSql .= "nit_proveedor, nombre ";
 				$cadenaSql .= "FROM orden_compra ";
-				$cadenaSql .= "JOIN proveedor ON proveedor.id_proveedor = orden_compra.id_proveedor ";
-				$cadenaSql .= "JOIN dependencia ON dependencia.id_dependencia = orden_compra.id_dependencia ";
+				// $cadenaSql .= "JOIN proveedor ON proveedor.id_proveedor = orden_compra.id_proveedor ";
+				// $cadenaSql .= "JOIN dependencia ON dependencia.id_dependencia = orden_compra.id_dependencia ";
 				$cadenaSql .= "WHERE 1=1 AND estado=TRUE  ";
 				
 				if ($variable [0] != '') {
