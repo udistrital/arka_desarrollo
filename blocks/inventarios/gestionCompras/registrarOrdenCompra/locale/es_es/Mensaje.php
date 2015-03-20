@@ -13,8 +13,8 @@ $this->idioma ["total_preliminar"] = "SubTotal  ($):";
 $this->idioma ["total"] = "Total ($):";
 $this->idioma ["totalTitulo"] = "Ingrese Total: ";
 
-$this->idioma ["iva"] = "Aplicar Iva 16% :";
-$this->idioma ["ivaTitulo"] = "Aplicar Iva 16%";
+$this->idioma ["iva"] = "Aplicar Iva :";
+$this->idioma ["ivaTitulo"] = "Aplicar Iva ";
 
 
 $this->idioma ["total_iva"] = "Total Iva ($):"; 
