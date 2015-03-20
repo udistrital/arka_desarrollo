@@ -10,7 +10,7 @@ $this->idioma ["dependenciaTitulo"] ="Seleccione Dependencia Solicitante";
 $this->idioma ["ubicacion"] ="Ubicación Específica : ";
 $this->idioma ["dependenciaTitulo"] ="Seleccione Ubicación Específica";
 
-$this->idioma ["funcionarioP"] ="&nbspFuncionario o Contratista : ";
+$this->idioma ["funcionarioP"] ="&nbspIdentificación :<br>Y/O Funcionario";
 $this->idioma ["funcionarioPTitulo"] ="Funcionario o Contratista";
 
 $this->idioma ["identificacion"] ="&nbspCedula : ";

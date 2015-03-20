@@ -29,6 +29,11 @@
                 "sPaginationType": "full_numbers"
                  } );
 
+                     
+                 $("#<?php echo $this->campoSeguro('funcionarioP')?>").select2({
+             	 placeholder: "Search for a repository",
+              	 minimumInputLength: 3,
+              	 });
 
              
  $('#<?php echo $this->campoSeguro('numero_entrada_c')?>').attr('disabled','');

@@ -24,6 +24,8 @@ class RegistradorOrden {
 		$this->miFuncion = $funcion;
 	}
 	function procesarFormulario() {
+		
+		
 		$conexion = "inventarios";
 		$esteRecursoDB = $this->miConfigurador->fabricaConexiones->getRecursoDB ( $conexion );
 		
@@ -38,22 +40,23 @@ class RegistradorOrden {
 		
 		
 		
-		$arreglo = array (
-				$_REQUEST ['funcionarioP'],
-				$_REQUEST ['identificacion'],
-				$_REQUEST ['id_funcionario'] 
-		);
+// 		$arreglo = array (
+// 				$_REQUEST ['funcionarioP'],
+// 				$_REQUEST ['identificacion'],
+// 				$_REQUEST ['id_funcionario'] 
+// 		);
 		
-		$cadenaSql = $this->miSql->getCadenaSql ( 'actualizar_funcionario', $arreglo );
+// 		$cadenaSql = $this->miSql->getCadenaSql ( 'actualizar_funcionario', $arreglo );
 		
-		$id_funcionario = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "acceso" );
+// 		$id_funcionario = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "acceso" );
 		
 		$arreglo = array (
 				
 				$_REQUEST ['dependencia'],
 				$_REQUEST ['ubicacion'],
 				$_REQUEST ['observaciones'],
-				$_REQUEST ['numero_salida'] 
+				$_REQUEST ['numero_salida'], 
+				$_REQUEST ['funcionarioP']
 		);
 		
 		$cadenaSql = $this->miSql->getCadenaSql ( 'actualizar_salida', $arreglo );

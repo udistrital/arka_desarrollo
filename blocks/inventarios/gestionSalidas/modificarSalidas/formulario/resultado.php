@@ -49,6 +49,11 @@ class registrarForm {
 		$conexion = "inventarios";
 		$esteRecursoDB = $this->miConfigurador->fabricaConexiones->getRecursoDB ( $conexion );
 		
+
+		$conexion = "sicapital";
+		$esteRecursoDBO = $this->miConfigurador->fabricaConexiones->getRecursoDB ( $conexion );
+		
+		
 		if (isset ( $_REQUEST ['anio'] ) && $_REQUEST ['anio'] != '') {
 			$anio = $_REQUEST ['anio'];
 		} else {
@@ -97,6 +102,7 @@ class registrarForm {
 		$cadenaSql = $this->miSql->getCadenaSql ( 'consultarSalida', $arreglo );
 		
 		$salidas = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
+		
 		
 		// ---------------- SECCION: Parámetros Generales del Formulario ----------------------------------
 		$esteCampo = $esteBloque ['nombre'];
@@ -183,13 +189,18 @@ class registrarForm {
 				$variable .= "&numero_entrada=" . $salidas [$i] [2];
 				$variable = $this->miConfigurador->fabricaConexiones->crypto->codificar_url ( $variable, $directorio );
 				
+				$cadenaSql = $this->miSql->getCadenaSql ( 'funcionario_informacion', $salidas [$i] [4] );
+				
+				$funcionario = $esteRecursoDBO->ejecutarAcceso ( $cadenaSql, "busqueda" );
+				 
+				
 				$mostrarHtml = "<tr>
                     <td><center>" . $salidas [$i] [0] . "</center></td>
                     <td><center>" . $salidas [$i] [1] . "</center></td>
                     <td><center>" . $salidas [$i] [2] . "</center></td>
                     <td><center>" . $salidas [$i] [3] . "</center></td>
-                    <td><center>" . $salidas [$i] [4] . "</center></td>
-                    <td><center>" . $salidas [$i] [5] . "</center></td>
+                    <td><center>" . $funcionario[0][0] . "</center></td>
+                    <td><center>" . $funcionario[0][1] . "</center></td>
                     <td><center>
                     	<a href='" . $variable . "'>
                             <img src='" . $rutaBloque . "/css/images/edit.png' width='15px'>

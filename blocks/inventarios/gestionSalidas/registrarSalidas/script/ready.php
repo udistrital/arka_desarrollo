@@ -50,6 +50,12 @@
               	 minimumInputLength: 3,
               	 });
  
+     $("#<?php echo $this->campoSeguro('funcionario')?>").select2({
+             	 placeholder: "Search for a repository",
+              	 minimumInputLength: 3,
+              	 });
+ 
+ 
  
                   
      
@@ -154,6 +160,8 @@
         
         
         
+        
+
                 
          
         

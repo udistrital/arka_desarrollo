@@ -57,41 +57,41 @@ class registrarForm {
 					$_REQUEST ['entrada'] 
 			);
 			
-			$ids = unserialize ( $_REQUEST ['salidaSA'] );
+// 			$ids = unserialize ( $_REQUEST ['salidaSA'] );
 			
 					
-			
+// 			var_dump($_REQUEST);
 				
-			if ($ids != 0) {
-				$ids = unserialize ( $_REQUEST ['salidaSA'] );
-				$Semaforo2 = 1;
+// 			if ($ids != 0) {
+// 				$ids = unserialize ( $_REQUEST ['salidaSA'] );
+// 				$Semaforo2 = 1;
 				
 				
-			}
+// 			}
 			
 			
 			
-			if ($ids!=0 && $elementos==false ) {
+// 			if ($ids!=0 && $elementos==false ) {
 				
-				foreach ($ids as $i){
+// 				foreach ($ids as $i){
 					
 
 					
-					$cadenaSql = $this->miSql->getCadenaSql ( 'EliminarSalidasSinElementos', $i );
+// 					$cadenaSql = $this->miSql->getCadenaSql ( 'EliminarSalidasSinElementos', $i );
 					
 						
-					$elementos = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "acceso" );
+// 					$elementos = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "acceso" );
 					
 					
 					
 					
 					
-				}
+// 				}
 			
 			
 			
 			
-			}
+// 			}
 			
 			
 		}
@@ -287,7 +287,7 @@ class registrarForm {
 			$valorCodificado .= "&opcion=modificando";
 			$valorCodificado .= "&numero_salida=" . $ids [0];
 			$valorCodificado .= "&numero_entrada=" . $_REQUEST ['entrada'];
-			$valorCodificado .= "&salidasAS=" . $_REQUEST ['salidaSA'];
+// 			$valorCodificado .= "&salidasAS=" . $_REQUEST ['salidaSA'];
 		} else if ($semaforo == 0) {
 			
 			$valorCodificado .= "&opcion=continuar";

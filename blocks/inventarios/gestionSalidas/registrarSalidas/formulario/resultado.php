@@ -49,6 +49,13 @@ class registrarForm {
 		$conexion = "inventarios";
 		$esteRecursoDB = $this->miConfigurador->fabricaConexiones->getRecursoDB ( $conexion );
 		
+		
+
+
+		$conexion = "sicapital";
+		$esteRecursoDBO = $this->miConfigurador->fabricaConexiones->getRecursoDB ( $conexion );
+		
+		
 		if (isset ( $_REQUEST ['fecha_inicio'] ) && $_REQUEST ['fecha_inicio'] != '') {
 			$fechaInicio = $_REQUEST ['fecha_inicio'];
 		} else {
@@ -78,8 +85,6 @@ class registrarForm {
 		} else {
 			$proveedor = '';
 		}
-		
-		
 		
 		$arreglo = array (
 				$numeroEntrada,
@@ -184,12 +189,16 @@ class registrarForm {
 						$variable .= "&numero_entrada=" . $entrada [$i] [0];
 						$variable = $this->miConfigurador->fabricaConexiones->crypto->codificar_url ( $variable, $directorio );
 						
+						$cadenaSql = $this->miSql->getCadenaSql ( 'proveedor_informacion', $entrada [$i] [3] );
+						
+						$proveedor = $esteRecursoDBO->ejecutarAcceso ( $cadenaSql, "busqueda" );
+						
 						$mostrarHtml = "<tr>
                     <td><center>" . $entrada [$i] [0] . "</center></td>
                     <td><center>" . $entrada [$i] [1] . "</center></td>
                     <td><center>" . $entrada [$i] [2] . "</center></td>
-                    <td><center>" . $entrada [$i] [3] . "</center></td>
-                    <td><center>" . $entrada [$i] [4] . "</center></td>
+                    <td><center>" . $proveedor [0] [0] . "</center></td>
+                    <td><center>" . $proveedor [0] [1] . "</center></td>
                     <td><center>
                     	<a href='" . $variable . "'>
                             <img src='" . $rutaBloque . "/css/images/salida2.png' width='15px'>
@@ -205,7 +214,6 @@ class registrarForm {
 					echo "</tbody>";
 					
 					echo "</table>";
-				
 				} else {
 					
 					$mensaje = "No Se Encontraron<br>Registros de Entradas";

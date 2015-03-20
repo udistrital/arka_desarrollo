@@ -27,6 +27,8 @@ class RegistradorOrden {
 		
 		
 		
+			
+		
 		
 		
 		
@@ -37,19 +39,10 @@ class RegistradorOrden {
 		$esteRecursoDB = $this->miConfigurador->fabricaConexiones->getRecursoDB ( $conexion );
 		
 		$arreglo = array (
-				$_REQUEST ['funcionario'],
-				$_REQUEST ['identificacion'] 
-		);
-		
-		$cadenaSql = $this->miSql->getCadenaSql ( 'insertar_funcionario', $arreglo );
-		
-		$id_funcionario = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
-		
-		$arreglo = array (
 				$fechaActual,
 				$_REQUEST ['dependencia'],
 				$_REQUEST ['ubicacion'],
-				$id_funcionario [0] [0],
+				$_REQUEST['funcionario'],
 				$_REQUEST ['observaciones'],
 				$_REQUEST ['numero_entrada'] 
 		);

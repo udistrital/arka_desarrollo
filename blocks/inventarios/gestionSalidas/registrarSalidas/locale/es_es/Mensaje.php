@@ -49,7 +49,7 @@ $this->idioma ["dependenciaTitulo"] ="Seleccione Dependencia Solicitante";
 $this->idioma ["ubicacion"] ="Ubicación Específica : ";
 $this->idioma ["dependenciaTitulo"] ="Seleccione Ubicación Específica";
 
-$this->idioma ["funcionario"] ="&nbspFuncionario o Contratista : ";
+$this->idioma ["funcionario"] ="&nbspIdentificación :<br>Y/O Funcionario";
 $this->idioma ["funcionarioTitulo"] ="Funcionario o Contratista";
 
 $this->idioma ["identificacion"] ="&nbspCedula : ";
