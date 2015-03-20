@@ -44,6 +44,12 @@ class registrarForm {
 		
 		$esteRecursoDB = $this->miConfigurador->fabricaConexiones->getRecursoDB ( $conexion );
 		
+		$conexion = "sicapital";
+		
+		$esteRecursoDBO = $this->miConfigurador->fabricaConexiones->getRecursoDB ( $conexion );
+		
+		
+		
 		// Limpia Items Tabla temporal
 		$cadenaSql = $this->miSql->getCadenaSql ( 'limpiar_tabla_items' );
 		
@@ -53,6 +59,8 @@ class registrarForm {
 		$cadenaSql = $this->miSql->getCadenaSql ( 'consultarOrdenCompra', $_REQUEST ['numero_orden'] );
 		
 		$OrdenCompra = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
+		
+// 		var_dump($OrdenCompra);
 		
 		if ($OrdenCompra [0] [25] !=0) {
 			
@@ -87,13 +95,14 @@ class registrarForm {
 				'total_preliminar' => $OrdenCompra [0] [24],
 				'total_iva' => $OrdenCompra [0] [25],
 				'total' => $OrdenCompra [0] [26],
+				'asignacionOrdenador'=>$OrdenCompra [0] [23],
 				'valorLetras_registro' => $OrdenCompra [0] [27],
 				'iva'=>$iva
 		);
 		
 		$cadenaSql = $this->miSql->getCadenaSql ( 'consultarProveedor', $OrdenCompra [0] [17] );
 		
-		$proveedor = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
+		$proveedor = $esteRecursoDBO->ejecutarAcceso ( $cadenaSql, "busqueda" );
 		
 		$datosProveedor = array (
 				'proveedor' => $proveedor [0] [0],
@@ -104,7 +113,7 @@ class registrarForm {
 		
 		$cadenaSql = $this->miSql->getCadenaSql ( 'consultarDependencia', $OrdenCompra [0] [20] );
 		
-		$dependecia = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
+		$dependecia = $esteRecursoDBO->ejecutarAcceso ( $cadenaSql, "busqueda" );
 		
 		$datosDependencia = array (
 				'dependencia' => $dependecia [0] [0],
@@ -112,13 +121,13 @@ class registrarForm {
 				'telefonoDependencia' => $dependecia [0] [2] 
 		);
 		
-		$cadenaSql = $this->miSql->getCadenaSql ( 'consultarEncargado', $OrdenCompra [0] [22] );
+		$cadenaSql = $this->miSql->getCadenaSql ( 'informacion_cargo_jefe', $OrdenCompra [0] [22] );
 		
-		$jefe = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
+		$jefe = $esteRecursoDBO->ejecutarAcceso ( $cadenaSql, "busqueda" );
 		
-		$cadenaSql = $this->miSql->getCadenaSql ( 'consultarEncargado', $OrdenCompra [0] [23] );
+		$cadenaSql = $this->miSql->getCadenaSql ( 'informacion_ordenador', $OrdenCompra [0] [23] );
 		
-		$ordenador = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
+		$ordenador = $esteRecursoDBO->ejecutarAcceso ( $cadenaSql, "busqueda" );
 		
 		$datosJefe = array (
 				'nombreJefeSeccion' => $jefe [0] [0],
@@ -127,7 +136,7 @@ class registrarForm {
 		
 		$datosOrdenador = array (
 				'nombreOrdenador' => $ordenador [0] [0],
-				'asignacionOrdenador' => $ordenador [0] [2] 
+				 
 		);
 		
 		$_REQUEST = array_merge ( $_REQUEST, $datos, $datosDependencia, $datosProveedor, $datosJefe, $datosOrdenador );
@@ -446,14 +455,14 @@ class registrarForm {
 						$atributos ['limitar'] = true;
 						$atributos ['anchoCaja'] = 37;
 						$atributos ['miEvento'] = '';
-						$atributos ['cadena_sql'] = $this->miSql->getCadenaSql ( "proveedor" );
+						$atributos ['cadena_sql'] = $this->miSql->getCadenaSql ( "proveedores" );
 						$matrizItems = array (
 								array (
 										0,
 										' ' 
 								) 
 						);
-						$matrizItems = $esteRecursoDB->ejecutarAcceso ( $atributos ['cadena_sql'], "busqueda" );
+						$matrizItems = $esteRecursoDBO->ejecutarAcceso ( $atributos ['cadena_sql'], "busqueda" );
 						$atributos ['matrizItems'] = $matrizItems;
 						// $atributos['miniRegistro']=;
 						$atributos ['baseDatos'] = "inventarios";
@@ -622,8 +631,8 @@ class registrarForm {
 				$atributos ['ajax_control'] = $esteCampo;
 				$atributos ['estilo'] = "jqueryui";
 				$atributos ['validar'] = "required";
-				$atributos ['limitar'] = 1;
-				$atributos ['anchoCaja'] = 100;
+				$atributos ['limitar'] = true;
+				$atributos ['anchoCaja'] = 70;
 				$atributos ['miEvento'] = '';
 				$atributos ['cadena_sql'] = $this->miSql->getCadenaSql ( "rubros" );
 				$matrizItems = array (
@@ -632,7 +641,7 @@ class registrarForm {
 								' ' 
 						) 
 				);
-				$matrizItems = $esteRecursoDB->ejecutarAcceso ( $atributos ['cadena_sql'], "busqueda" );
+				$matrizItems = $esteRecursoDBO->ejecutarAcceso ( $atributos ['cadena_sql'], "busqueda" );
 				$atributos ['matrizItems'] = $matrizItems;
 				// $atributos['miniRegistro']=;
 				$atributos ['baseDatos'] = "inventarios";
@@ -679,7 +688,7 @@ class registrarForm {
 									' ' 
 							) 
 					);
-					$matrizItems = $esteRecursoDB->ejecutarAcceso ( $atributos ['cadena_sql'], "busqueda" );
+					$matrizItems = $esteRecursoDBO->ejecutarAcceso ( $atributos ['cadena_sql'], "busqueda" );
 					$atributos ['matrizItems'] = $matrizItems;
 					// $atributos['miniRegistro']=;
 					$atributos ['baseDatos'] = "inventarios";
@@ -827,7 +836,7 @@ class registrarForm {
 						if (isset ( $_REQUEST [$esteCampo] )) {
 							$atributos ['seleccion'] = $_REQUEST [$esteCampo];
 						} else {
-							$atributos ['seleccion'] = 0;
+							$atributos ['seleccion'] = -1;
 						}
 						$atributos ['deshabilitado'] = false;
 						$atributos ['columnas'] = 2;
@@ -839,19 +848,19 @@ class registrarForm {
 						$atributos ['limitar'] = 0;
 						$atributos ['anchoCaja'] = 30;
 						$atributos ['miEvento'] = '';
-						$atributos ['cadena_sql'] = $this->miSql->getCadenaSql ( "dependencia" );
-						$matrizItems = array (
-								array (
-										0,
-										'NO' 
-								),
-								
-								array (
-										1,
-										'SI' 
-								) 
-						);
-						// $matrizItems = $esteRecursoDB->ejecutarAcceso ( $atributos ['cadena_sql'], "busqueda" );
+						$atributos ['cadena_sql'] = $this->miSql->getCadenaSql ( "seleccionar_iva" );
+						// $matrizItems = array (
+						// array (
+						// 0,
+						// 'NO'
+						// ),
+						
+						// array (
+						// 1,
+						// 'SI'
+						// )
+						// );
+						$matrizItems = $esteRecursoDB->ejecutarAcceso ( $atributos ['cadena_sql'], "busqueda" );
 						$atributos ['matrizItems'] = $matrizItems;
 						// $atributos['miniRegistro']=;
 						$atributos ['baseDatos'] = "inventarios";
@@ -1083,7 +1092,7 @@ class registrarForm {
 					$atributos ['marco'] = true;
 					$atributos ['estiloMarco'] = '';
 					$atributos ["etiquetaObligatorio"] = true;
-					$atributos ['columnas'] = 1;
+					$atributos ['columnas'] = 2;
 					$atributos ['dobleLinea'] = 0;
 					$atributos ['tabIndex'] = $tab;
 					$atributos ['etiqueta'] = $this->lenguaje->getCadena ( $esteCampo );
@@ -1115,7 +1124,7 @@ class registrarForm {
 					$atributos ['marco'] = true;
 					$atributos ['estiloMarco'] = '';
 					$atributos ["etiquetaObligatorio"] = true;
-					$atributos ['columnas'] = 1;
+					$atributos ['columnas'] = 2;
 					$atributos ['dobleLinea'] = 0;
 					$atributos ['tabIndex'] = $tab;
 					$atributos ['etiqueta'] = $this->lenguaje->getCadena ( $esteCampo );
@@ -1147,7 +1156,7 @@ class registrarForm {
 					$atributos ['marco'] = true;
 					$atributos ['estiloMarco'] = '';
 					$atributos ["etiquetaObligatorio"] = true;
-					$atributos ['columnas'] = 1;
+					$atributos ['columnas'] = 2;
 					$atributos ['dobleLinea'] = 0;
 					$atributos ['tabIndex'] = $tab;
 					$atributos ['etiqueta'] = $this->lenguaje->getCadena ( $esteCampo );
@@ -1179,7 +1188,7 @@ class registrarForm {
 					$atributos ['marco'] = true;
 					$atributos ['estiloMarco'] = '';
 					$atributos ["etiquetaObligatorio"] = true;
-					$atributos ['columnas'] = 1;
+					$atributos ['columnas'] = 2;
 					$atributos ['dobleLinea'] = 0;
 					$atributos ['tabIndex'] = $tab;
 					$atributos ['etiqueta'] = $this->lenguaje->getCadena ( $esteCampo );
@@ -1211,7 +1220,7 @@ class registrarForm {
 					$atributos ['marco'] = true;
 					$atributos ['estiloMarco'] = '';
 					$atributos ["etiquetaObligatorio"] = true;
-					$atributos ['columnas'] = 1;
+					$atributos ['columnas'] = 2;
 					$atributos ['dobleLinea'] = 0;
 					$atributos ['tabIndex'] = $tab;
 					$atributos ['etiqueta'] = $this->lenguaje->getCadena ( $esteCampo );
@@ -1243,7 +1252,7 @@ class registrarForm {
 					$atributos ['marco'] = true;
 					$atributos ['estiloMarco'] = '';
 					$atributos ["etiquetaObligatorio"] = true;
-					$atributos ['columnas'] = 1;
+					$atributos ['columnas'] = 2;
 					$atributos ['dobleLinea'] = 0;
 					$atributos ['tabIndex'] = $tab;
 					$atributos ['etiqueta'] = $this->lenguaje->getCadena ( $esteCampo );
@@ -1312,7 +1321,7 @@ class registrarForm {
 										' ' 
 								) 
 						);
-						$matrizItems = $esteRecursoDB->ejecutarAcceso ( $atributos ['cadena_sql'], "busqueda" );
+						$matrizItems = $esteRecursoDBO->ejecutarAcceso ( $atributos ['cadena_sql'], "busqueda" );
 						$atributos ['matrizItems'] = $matrizItems;
 						// $atributos['miniRegistro']=;
 						$atributos ['baseDatos'] = "inventarios";
@@ -1413,7 +1422,7 @@ class registrarForm {
 									' ' 
 							) 
 					);
-					$matrizItems = $esteRecursoDB->ejecutarAcceso ( $atributos ['cadena_sql'], "busqueda" );
+					$matrizItems = $esteRecursoDBO->ejecutarAcceso ( $atributos ['cadena_sql'], "busqueda" );
 					$atributos ['matrizItems'] = $matrizItems;
 					// $atributos['miniRegistro']=;
 					$atributos ['baseDatos'] = "inventarios";
@@ -1506,7 +1515,7 @@ class registrarForm {
 					$atributos ['estilo'] = "jqueryui";
 					$atributos ['validar'] = "required";
 					$atributos ['limitar'] = true;
-					$atributos ['anchoCaja'] = 100;
+					$atributos ['anchoCaja'] = 70;
 					$atributos ['miEvento'] = '';
 					$atributos ['cadena_sql'] = $this->miSql->getCadenaSql ( "constratistas" );
 					$matrizItems = array (
@@ -1515,7 +1524,7 @@ class registrarForm {
 									' ' 
 							) 
 					);
-					$matrizItems = $esteRecursoDB->ejecutarAcceso ( $atributos ['cadena_sql'], "busqueda" );
+					$matrizItems = $esteRecursoDBO->ejecutarAcceso ( $atributos ['cadena_sql'], "busqueda" );
 					$atributos ['matrizItems'] = $matrizItems;
 					// $atributos['miniRegistro']=;
 					$atributos ['baseDatos'] = "inventarios";

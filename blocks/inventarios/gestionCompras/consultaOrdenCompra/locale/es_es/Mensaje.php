@@ -23,8 +23,8 @@ $this->idioma ["total_preliminar"] = "SubTotal  ($):";
 $this->idioma ["total"] = "Total ($):";
 $this->idioma ["totalTitulo"] = "Ingrese Total: ";
 
-$this->idioma ["iva"] = "Aplicar Iva 16% :";
-$this->idioma ["ivaTitulo"] = "Aplicar Iva 16%";
+$this->idioma ["iva"] = "Aplicar Iva :";
+$this->idioma ["ivaTitulo"] = "Aplicar Iva ";
 
 
 $this->idioma ["total_iva"] = "Total Iva ($):";
@@ -134,7 +134,7 @@ $this->idioma ["tiempoEntregaTitulo"] ="Ingrese Tiempo de Entrega";
 $this->idioma ["formaPago"] ="&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspForma de Pago : ";
 $this->idioma ["formaPagoTitulo"] ="Ingrese Forma de Pago";
 
-$this->idioma ["supervision"] ="&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspSupervisado Por : ";
+$this->idioma ["supervision"] ="&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspSupervisor : ";
 $this->idioma ["supervisionTitulo"] ="Ingrese Supervisador";
 
 
