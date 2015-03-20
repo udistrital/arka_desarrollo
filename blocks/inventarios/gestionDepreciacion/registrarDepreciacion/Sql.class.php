@@ -245,6 +245,12 @@ class Sql extends \Sql {
                 $cadenaSql.= "'".$variable['fregistro']."') ";
                 $cadenaSql.= " ;";
                 break;
+            
+            case "oracle_prueba":
+                $cadenaSql= "SELECT CON_IDENTIFICADOR, CON_NOMBRE ";
+                $cadenaSql.= "FROM CONTRATISTAS ";
+                $cadenaSql.= "WHERE CON_IDENTIFICADOR = '43542' ";
+                break;
             /*             * ***************** */
         }
         return $cadenaSql;
