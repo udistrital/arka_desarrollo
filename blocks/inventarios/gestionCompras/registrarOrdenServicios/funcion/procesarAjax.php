@@ -274,10 +274,11 @@ if ($_REQUEST ['funcion'] == 'letrasNumeros') {
 
 
 if ($_REQUEST ['funcion'] == 'SeleccionOrdenador') {
-
+	$conexion = "sicapital";
+	$esteRecursoDBO = $this->miConfigurador->fabricaConexiones->getRecursoDB ( $conexion );
+	
 	$cadenaSql = $this->sql->getCadenaSql ( 'informacion_ordenador', $_REQUEST ['ordenador'] );
-	$resultadoItems = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
-
+	$resultadoItems = $esteRecursoDBO->ejecutarAcceso ( $cadenaSql, "busqueda" );
 	$resultado =json_encode($resultadoItems [0])  ;
 
 	echo $resultado;
@@ -286,10 +287,13 @@ if ($_REQUEST ['funcion'] == 'SeleccionOrdenador') {
 
 
 if ($_REQUEST ['funcion'] == 'SeleccionCargo') {
-
+	$conexion = "sicapital";
+	$esteRecursoDBO = $this->miConfigurador->fabricaConexiones->getRecursoDB ( $conexion );
+	
 	$cadenaSql = $this->sql->getCadenaSql ( 'informacion_cargo_jefe', $_REQUEST ['cargo'] );
-	$resultadoItems = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
-
+	
+	$resultadoItems = $esteRecursoDBO->ejecutarAcceso ( $cadenaSql, "busqueda" );
+	
 	$resultado =json_encode($resultadoItems [0])  ;
 
 	echo $resultado;

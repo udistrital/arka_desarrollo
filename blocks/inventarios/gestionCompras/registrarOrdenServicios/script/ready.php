@@ -145,9 +145,12 @@
 		$('#<?php echo $this->campoSeguro('duracion')?>').attr('disabled',''); 
 		$('#<?php echo $this->campoSeguro('total_iva')?>').attr('disabled',''); 
 		$('#<?php echo $this->campoSeguro('total')?>').attr('disabled','');    
+		
 		$('#<?php echo $this->campoSeguro('nombreOrdenador')?>').attr('disabled',''); 
 		$('#<?php echo $this->campoSeguro('nombreJefeSeccion')?>').attr('disabled',''); 
 		
+		
+		$('#<?php echo $this->campoSeguro('nombre_supervisor')?>').attr('disabled','');    
 		
 		
 		
@@ -205,9 +208,17 @@
 		    
 		    $("#<?php echo $this->campoSeguro('dependencia_solicitante')?>").select2();
 		    $("#<?php echo $this->campoSeguro('dependencia_supervisor')?>").select2();
-		    $("#<?php echo $this->campoSeguro('rubro')?>").select2();
+		    $("#<?php echo $this->campoSeguro('rubro')?>").select2({
+			   	 placeholder: "Search for a repository",
+			   	 minimumInputLength: 5,
+			
+			       });
           $("#<?php echo $this->campoSeguro('cargoJefeSeccion')?>").select2();
-	      $("#<?php echo $this->campoSeguro('nombreContratista')?>").select2();
+	      $("#<?php echo $this->campoSeguro('nombreContratista')?>").select2({
+			   	 placeholder: "Search for a repository",
+			   	 minimumInputLength: 3,
+			
+			       });
           $("#<?php echo $this->campoSeguro('asignacionOrdenador')?>").select2();
 		    
         

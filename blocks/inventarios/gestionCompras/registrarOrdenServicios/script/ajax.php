@@ -82,31 +82,59 @@ function valorLetras(elem, request, response){
 
 	function datosCargo(elem, request, response){
 		  $.ajax({
-		    url: "<?php echo $urlFinal7?>",
-		    dataType: "json",
-		    data: { cargo:$("#<?php echo $this->campoSeguro('cargoJefeSeccion')?>").val()},
-		    success: function(data){ 
+			    url: "<?php echo $urlFinal7?>",
+			    dataType: "json",
+			    data: { cargo:$("#<?php echo $this->campoSeguro('cargoJefeSeccion')?>").val()},
+			    success: function(data){ 
 
-		    		if(data[0]!='null'){
+			    		if(data[0]!='null'){
 
-		    			$("#<?php echo $this->campoSeguro('nombreJefeSeccion')?>").val(data[0]);
-		    			$("#<?php echo $this->campoSeguro('id_jefe')?>").val(data[1]);
-		    			
-								    			
-			    		}else{
+			    			$("#<?php echo $this->campoSeguro('nombreJefeSeccion')?>").val(data[0]);
+			    			$("#<?php echo $this->campoSeguro('id_jefe')?>").val(data[1]);
+			    			
+									    			
+				    		}else{
 
-					
+						
 
 
-				    		
-			    		}
+					    		
+				    		}
 
-		    }
-			                    
-		   });
+			    }
+				                    
+			   });
+
+		
 		};
 	
 
+		function datosCargoDe(elem, request, response){
+			  $.ajax({
+				    url: "<?php echo $urlFinal7?>",
+				    dataType: "json",
+				    data: { cargo:$("#<?php echo $this->campoSeguro('dependencia_supervisor')?>").val()},
+				    success: function(data){ 
+
+				    		if(data[0]!='null'){
+
+				    			$("#<?php echo $this->campoSeguro('nombre_supervisor')?>").val(data[0]);
+				    			
+				    			
+										    			
+					    		}else{
+
+							
+
+
+						    		
+					    		}
+
+				    }
+					                    
+				   });
+			};
+		
 	
 	function datosOrdenador(elem, request, response){
 		  $.ajax({
@@ -169,6 +197,11 @@ $(function() {
 
 		      });
 
+
+	    
+	    
+
+	    
 	    $("#<?php echo $this->campoSeguro('cargoJefeSeccion')?>").change(function(){
 
 
@@ -181,6 +214,21 @@ $(function() {
 
 		      });
 
+	    
+	    $("#<?php echo $this->campoSeguro('dependencia_supervisor')?>").change(function(){
+
+
+			if($("#<?php echo $this->campoSeguro('dependencia_supervisor')?>").val()!=''){
+				datosCargoDe();
+			}else{
+				$("#<?php echo $this->campoSeguro('nombre_supervisor')?>").val('');
+				}
+
+
+		      });
+
+	
+	    
 	
   
     
