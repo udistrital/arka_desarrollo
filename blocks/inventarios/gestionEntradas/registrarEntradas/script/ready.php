@@ -287,6 +287,12 @@
         
         
         
+        
+           $("#<?php echo $this->campoSeguro('proveedor')?>").select2({
+      	 placeholder: "Search for a repository",
+      	 minimumInputLength: 4,
+
+          });
                 
          
         

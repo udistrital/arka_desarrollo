@@ -151,7 +151,12 @@ class Sql extends \Sql {
 			
 			// _________________________________________________
 			
-
+			case "proveedores" :
+				$cadenaSql = " SELECT PRO_IDENTIFICADOR,PRO_NIT||' - '||PRO_RAZON_SOCIAL AS proveedor ";
+				$cadenaSql .= " FROM PROVEEDORES ";
+				
+				break;
+			
 			case "insertarInformación" :
 				$cadenaSql = " INSERT INTO info_clase_entrada(  ";
 				$cadenaSql .= " observacion, id_entrada, id_salida, id_hurto,";
@@ -166,7 +171,6 @@ class Sql extends \Sql {
 				$cadenaSql .= "'" . $variable [6] . "',";
 				$cadenaSql .= "'" . $variable [7] . "') ";
 				$cadenaSql .= "RETURNING  id_info_clase; ";
-				
 				
 				break;
 			
@@ -299,8 +303,6 @@ class Sql extends \Sql {
 				$cadenaSql .= "RETURNING  id_recuperacion; ";
 				
 				break;
-
-				
 			
 			case "insertarEntrada" :
 				$cadenaSql = " INSERT INTO ";
@@ -322,7 +324,6 @@ class Sql extends \Sql {
 				$cadenaSql .= "'" . $variable [10] . "',";
 				$cadenaSql .= "'" . $variable [11] . "') ";
 				$cadenaSql .= "RETURNING  id_entrada; ";
-				
 				
 				break;
 			

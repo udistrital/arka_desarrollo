@@ -42,6 +42,11 @@ class registrarForm {
 		$conexion = "inventarios";
 		$esteRecursoDB = $this->miConfigurador->fabricaConexiones->getRecursoDB ( $conexion );
 		
+		
+		$conexion = "sicapital";
+		
+		$esteRecursoDBO = $this->miConfigurador->fabricaConexiones->getRecursoDB ( $conexion );
+		
 		// Limpia Items Tabla temporal
 		
 		// ---------------- SECCION: Parámetros Generales del Formulario ----------------------------------
@@ -135,14 +140,14 @@ class registrarForm {
 			$atributos ['limitar'] = true;
 			$atributos ['anchoCaja'] = 10;
 			$atributos ['miEvento'] = '';
-			$atributos ['cadena_sql'] = $this->miSql->getCadenaSql ( "seleccion_proveedor" );
+			$atributos ['cadena_sql'] = $this->miSql->getCadenaSql ( "proveedores" );
 			$matrizItems = array (
 					array (
 							0,
 							' ' 
 					) 
 			);
-			$matrizItems = $esteRecursoDB->ejecutarAcceso ( $atributos ['cadena_sql'], "busqueda" );
+			$matrizItems = $esteRecursoDBO->ejecutarAcceso ( $atributos ['cadena_sql'], "busqueda" );
 			$atributos ['matrizItems'] = $matrizItems;
 			// $atributos['miniRegistro']=;
 			$atributos ['baseDatos'] = "inventarios";
