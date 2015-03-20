@@ -48,6 +48,10 @@ class registrarForm {
 		// -------------------------------------------------------------------------------------------------
 		$conexion = "inventarios";
 		$esteRecursoDB = $this->miConfigurador->fabricaConexiones->getRecursoDB ( $conexion );
+		
+		$conexion = "sicapital";
+		$esteRecursoDBO = $this->miConfigurador->fabricaConexiones->getRecursoDB ( $conexion );
+		
 		$cadenaSql = $this->miSql->getCadenaSql ( 'polizas' );
 		$resultado_polizas = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
 		$resultado_polizas = $resultado_polizas [0];
@@ -92,6 +96,8 @@ class registrarForm {
 		
 		$cadenaSql = $this->miSql->getCadenaSql ( 'consultarOrden', $arreglo );
 		$ordenCompra = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
+		
+		
 		
 		// ---------------- SECCION: Parámetros Generales del Formulario ----------------------------------
 		$esteCampo = $esteBloque ['nombre'];
@@ -161,7 +167,7 @@ class registrarForm {
                 <tr>
                    <th>Fecha Orden Servicios</th>
                     <th>Número Orden Servicios </th>
-                    <th>Identificacion o Nit<br>Contratista</th>
+                 	<th>Identificacion<br>Contratista</th>
 					<th>Dependencia Solicitante</th>
 			        <th>Modificar</th>
                 </tr>
@@ -172,14 +178,23 @@ class registrarForm {
 				$variable = "pagina=" . $miPaginaActual; // pendiente la pagina para modificar parametro
 				$variable .= "&opcion=modificar";
 				// $variable .= "&usuario=" . $miSesion->getSesionUsuarioId ();
+				
 				$variable .= "&numero_orden=" . $ordenCompra [$i] [0];
 				$variable = $this->miConfigurador->fabricaConexiones->crypto->codificar_url ( $variable, $directorio );
+				
+				$cadenaSql = $this->miSql->getCadenaSql ( 'identificacion_contratista', $ordenCompra [$i] [2] );
+				
+				$identificacion = $esteRecursoDBO->ejecutarAcceso ( $cadenaSql, "busqueda" );
+				
+				$cadenaSql = $this->miSql->getCadenaSql ( 'dependecia_solicitante', $ordenCompra [$i] [3] );
+				
+				$dependencia = $esteRecursoDBO->ejecutarAcceso ( $cadenaSql, "busqueda" );
 				
 				$mostrarHtml = "<tr>
                     <td><center>" . $ordenCompra [$i] [1] . "</center></td>
                     <td><center>" . $ordenCompra [$i] [0] . "</center></td>
-                    <td><center>" . $ordenCompra [$i] [2] . "</center></td>
-                    <td><center>" . $ordenCompra [$i] [3] . "</center></td>
+                    <td><center>" . $identificacion [0] [0] . "</center></td>
+                    <td><center>" . $dependencia [0] [0] . "</center></td>
                     <td><center>
                     	<a href='" . $variable . "'>
                             <img src='" . $rutaBloque . "/css/images/edit.png' width='15px'>
