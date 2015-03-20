@@ -92,8 +92,7 @@ class registrarForm {
         $cadenaSql = $this->miSql->getCadenaSql('consultarActa', $arreglo);
         $Acta = $esteRecursoDB->ejecutarAcceso($cadenaSql, "busqueda");
 
-       
-        // ---------------- SECCION: Parámetros Generales del Formulario ----------------------------------
+// ---------------- SECCION: Parámetros Generales del Formulario ----------------------------------
         $esteCampo = $esteBloque ['nombre'];
         $atributos ['id'] = $esteCampo;
         $atributos ['nombre'] = $esteCampo;
@@ -166,11 +165,6 @@ class registrarForm {
                                 <th>Nit Proveedor</th>
                                 <th>Proveedor</th>
 				<th>Número Factura</th>
-                                <th>Fecha Factura</th>
-                                <th>Comprador</th>
-                                <th>Acción</th>
-                                <th>Fecha Revisión</th>
-                                <th>Revisor</th>
                                 <th>Observaciones</th>
 			        <th>Modificar</th>
                                 <th>Eliminar</th>
@@ -183,27 +177,22 @@ class registrarForm {
                 $variable .= "&opcion=modificar";
                 $variable .= "&numero_acta=" . $Acta [$i] [0];
                 $variable = $this->miConfigurador->fabricaConexiones->crypto->codificar_url($variable, $directorio);
-                
-                
-                $variable1= "pagina=" . $miPaginaActual; // pendiente la pagina para modificar parametro
+
+
+                $variable1 = "pagina=" . $miPaginaActual; // pendiente la pagina para modificar parametro
                 $variable1.= "&opcion=eliminarActa";
                 $variable1.= "&numero_acta=" . $Acta [$i] [0];
-                $variable1= $this->miConfigurador->fabricaConexiones->crypto->codificar_url($variable1, $directorio);
+                $variable1 = $this->miConfigurador->fabricaConexiones->crypto->codificar_url($variable1, $directorio);
 
                 $mostrarHtml = "<tr>
-                    <td><center>" . $Acta [$i] [0] . "</center></td>
-                    <td><center>" . $Acta [$i] [1] . "</center></td>
-                    <td><center>" . $Acta [$i] [2] . "</center></td>
-                    <td><center>" . $Acta [$i] [3] . "</center></td>
-                    <td><center>" . $Acta [$i] [4] . "</center></td>
-                    <td><center>" . $Acta [$i] [5] . "</center></td>
-                    <td><center>" . $Acta [$i] [6] . "</center></td>
-                    <td><center>" . $Acta [$i] [7] . "</center></td>
-                    <td><center>" . $Acta [$i] [8] . "</center></td>
-                    <td><center>" . $Acta [$i] [9] . "</center></td>
-                    <td><center>" . $Acta [$i] [10] . "</center></td>
-                    <td><center>" . $Acta [$i] [11] . "</center></td>
-                    <td><center>" . $Acta [$i] [12] . "</center></td>
+                    <td><center>" . $Acta [$i] ['id_actarecibido'] . "</center></td>
+                    <td><center>" . $Acta [$i] ['dependencia'] . "</center></td>
+                    <td><center>" . $Acta [$i] ['fecha_recibido'] . "</center></td>
+                    <td><center>" . $Acta [$i] ['tb_descripcion'] . "</center></td>
+                    <td><center>" . $Acta [$i] ['nitproveedor'] . "</center></td>
+                    <td><center>" . $Acta [$i] ['proveedor'] . "</center></td>
+                    <td><center>" . $Acta [$i] ['numfactura'] . "</center></td>
+                    <td><center>" . $Acta [$i] ['observacionesacta'] . "</center></td>
                     <td><center>
                     	<a href='" . $variable . "'>
                             <img src='" . $rutaBloque . "/css/images/edit.png' width='15px'>

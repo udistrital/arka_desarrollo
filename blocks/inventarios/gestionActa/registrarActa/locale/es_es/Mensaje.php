@@ -44,8 +44,8 @@ $this->idioma ["revisorTitulo"] ="Ingrese Nombre de Quien Revisó";
 $this->idioma ["proveedor"] ="&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspNombre o Razón Social:";
 $this->idioma ["proveedorTitulo"] ="Ingrese Nombre Proveedor";
 
-$this->idioma ["nitProveedor"] ="&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspNIT Proveedor :";
-$this->idioma ["nitProveedorTitulo"] ="Ingrese NIT Proveedor";
+$this->idioma ["nitproveedor"] ="&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspNIT Proveedor :";
+$this->idioma ["nitproveedorTitulo"] ="Ingrese NIT Proveedor";
 
 $this->idioma ["numFactura"] ="&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspNúmero Factura :";
 $this->idioma ["numFacturaTitulo"] ="Ingrese Número Factura";

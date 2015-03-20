@@ -247,8 +247,8 @@ class Sql extends \Sql {
                 $cadenaSql .= " arka_inventarios.items_actarecibido ";
                 $cadenaSql .= " SET ";
                 $cadenaSql .= " estado_registro='0',";
-                $cadenaSql .= " fecha_registro='".date('Y-m-d')."'";
-                $cadenaSql .= " WHERE id_acta='".$variable."'";
+                $cadenaSql .= " fecha_registro='" . date('Y-m-d') . "'";
+                $cadenaSql .= " WHERE id_acta='" . $variable . "'";
                 break;
 
             case "insertarItemTemporal" :
@@ -314,10 +314,9 @@ class Sql extends \Sql {
 
                 $cadenaSql = "SELECT DISTINCT ";
                 $cadenaSql .= " id_actarecibido, dependencia, fecha_recibido, tb_descripcion, nitproveedor, ";
-                $cadenaSql .= " proveedor, numfactura, fecha_factura, tc_descripcion, ta_descripcion, ";
+                $cadenaSql .= " proveedor, numfactura, fecha_factura, tc_descripcion, ";
                 $cadenaSql .= " fecha_revision, revisor, observacionesacta ";
                 $cadenaSql .= "FROM registro_actarecibido ";
-                $cadenaSql .= "JOIN tipo_accion ON tipo_accion.ta_idaccion = registro_actarecibido.tipoaccion ";
                 $cadenaSql .= "JOIN tipo_bien ON tipo_bien.tb_idbien = registro_actarecibido.tipo_bien ";
                 $cadenaSql .= "JOIN tipo_comprador ON tipo_comprador.tc_idcomprador = registro_actarecibido.tipocomprador ";
                 $cadenaSql .= "WHERE 1 = 1";
@@ -342,10 +341,9 @@ class Sql extends \Sql {
 
                 $cadenaSql = "SELECT DISTINCT ";
                 $cadenaSql .= " id_actarecibido, dependencia, fecha_recibido, tipo_bien, nitproveedor, ";
-                $cadenaSql .= " proveedor, numfactura, fecha_factura, tipocomprador, tipoaccion, ";
+                $cadenaSql .= " proveedor, numfactura, fecha_factura, tipocomprador,  ";
                 $cadenaSql .= " fecha_revision, revisor, observacionesacta, estado_registro ";
                 $cadenaSql .= " FROM registro_actarecibido ";
-                $cadenaSql .= " JOIN tipo_accion ON tipo_accion.ta_idaccion = registro_actarecibido.tipoaccion ";
                 $cadenaSql .= " JOIN tipo_bien ON tipo_bien.tb_idbien = registro_actarecibido.tipo_bien ";
                 $cadenaSql .= " JOIN tipo_comprador ON tipo_comprador.tc_idcomprador = registro_actarecibido.tipocomprador ";
                 $cadenaSql .= " WHERE 1 = 1 ";
@@ -403,6 +401,34 @@ class Sql extends \Sql {
                 $cadenaSql .= " FROM ";
                 $cadenaSql .= " arka_inventarios.tipo_bien ";
                 $cadenaSql .= " WHERE tb_estado = '1';                      ";
+                break;
+
+
+            // Consultas de Oracle para rescate de información de Sicapital
+            case "dependencias":
+                $cadenaSql = "SELECT DEP_IDENTIFICADOR, ";
+                $cadenaSql.= " DEP_IDENTIFICADOR ||' '|| DEP_DEPENDENCIA ";
+                //$cadenaSql .= " DEP_DIRECCION,DEP_TELEFONO ";F
+                $cadenaSql.= " FROM DEPENDENCIAS ";
+                break;
+
+            case "proveedores":
+                $cadenaSql = "SELECT PRO_NIT,PRO_NIT ||' '|| PRO_RAZON_SOCIAL";
+                $cadenaSql .= " FROM PROVEEDORES ";
+                break;
+
+            case "select_proveedor":
+                $cadenaSql = "SELECT PRO_RAZON_SOCIAL";
+                $cadenaSql .= " FROM PROVEEDORES ";
+                $cadenaSql .= " WHERE PRO_NIT='" . $variable . "' ";
+                break;
+
+            case "contratistas":
+                $cadenaSql = "SELECT CON_IDENTIFICACION ||' '|| CON_NOMBRE, ";
+                /* $cadenaSql .= " CON_CARGO, ";
+                  $cadenaSql .= " CON_DIRECCION, ";
+                  $cadenaSql .= " CON_TELEFONO "; */
+                $cadenaSql .= " FROM CONTRATISTAS ";
                 break;
         }
 

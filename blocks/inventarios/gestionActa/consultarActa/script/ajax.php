@@ -57,8 +57,23 @@ $cadena3 = $this->miConfigurador->fabricaConexiones->crypto->codificar_url ( $ca
 // URL definitiva
 $urlFinal3 = $url . $cadena3;
 
+// Variables
 
+// Variables
+$cadenaACodificar4 = "pagina=" . $this->miConfigurador->getVariableConfiguracion ( "pagina" );
+$cadenaACodificar4 .= "&procesarAjax=true";
+$cadenaACodificar4 .= "&action=index.php";
+$cadenaACodificar4 .= "&bloqueNombre=" . $esteBloque ["nombre"];
+$cadenaACodificar4 .= "&bloqueGrupo=" . $esteBloque ["grupo"];
+$cadenaACodificar4 .= $cadenaACodificar . "&funcion=proveedor";
+$cadenaACodificar4 .="&tiempo=".$_REQUEST['tiempo'];
 
+// Codificar las variables
+$enlace4 = $this->miConfigurador->getVariableConfiguracion ( "enlace" );
+$cadena4 = $this->miConfigurador->fabricaConexiones->crypto->codificar_url ( $cadenaACodificar4, $enlace4 );
+
+// URL definitiva
+$urlFinal4 = $url . $cadena4;
 
 // echo $urlFinal;exit;
 // echo $urlFinal2;
@@ -211,6 +226,39 @@ $(function() {
    	);
     
 });
+
+    function datosInfo(elem, request, response) {
+        
+            $("#<?php echo $this->campoSeguro('proveedor') ?>").val();
+        
+        $.ajax({
+            url: "<?php echo $urlFinal4 ?>",
+            dataType: "json",
+            data: {proveedor: $("#<?php echo $this->campoSeguro('nitproveedor') ?>").val()},
+        
+                    success: function (data) {
+
+                        if (data[0] != 'null') {
+
+                            $("#<?php echo $this->campoSeguro('proveedor') ?>").val(data[0]);
+                        } else {
+                            $("#<?php echo $this->campoSeguro('proveedor') ?>").val();
+                        }
+                    }
+        });
+    }
+    ;
+
+    $("#<?php echo $this->campoSeguro('nitproveedor') ?>").select2({
+        placeholder: "Search for a repository",
+        minimumInputLength: 1,
+    });
+    
+    $("#<?php echo $this->campoSeguro('dependencia') ?>").select2({
+        placeholder: "Search for a repository",
+        minimumInputLength: 1,
+    });
+
 
 </script>
 
