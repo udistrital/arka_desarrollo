@@ -424,7 +424,7 @@ class Sql extends \Sql {
                 break;
 
             case "contratistas":
-                $cadenaSql = "SELECT CON_IDENTIFICACION ||' '|| CON_NOMBRE, ";
+                $cadenaSql = "SELECT CON_IDENTIFICACION,CON_IDENTIFICACION ||' '|| CON_NOMBRE ";
                 /* $cadenaSql .= " CON_CARGO, ";
                   $cadenaSql .= " CON_DIRECCION, ";
                   $cadenaSql .= " CON_TELEFONO "; */

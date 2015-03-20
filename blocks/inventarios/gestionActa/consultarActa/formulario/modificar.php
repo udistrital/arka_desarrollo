@@ -72,9 +72,6 @@ class registrarForm {
         }
 
 
-        $conexion = "inventarios";
-        $esteRecursoDB = $this->miConfigurador->fabricaConexiones->getRecursoDB($conexion);
-
         $cadenaSql = $this->miSql->getCadenaSql('tipoBien');
         $tipoBien = $esteRecursoDB->ejecutarAcceso($cadenaSql, "busqueda");
 
