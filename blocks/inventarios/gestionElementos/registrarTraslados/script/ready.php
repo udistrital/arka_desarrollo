@@ -27,7 +27,11 @@
 
               
 
- $("#<?php echo $this->campoSeguro('responsable')?>").select2();
+ $("#<?php echo $this->campoSeguro('responsable')?>").select2({
+             	 placeholder: "Search for a repository",
+              	 minimumInputLength: 3,
+              	 });
+ 
 $("#<?php echo $this->campoSeguro('responsable_reci')?>").select2();
 
 

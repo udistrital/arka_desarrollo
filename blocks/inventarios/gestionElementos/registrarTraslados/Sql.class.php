@@ -165,13 +165,13 @@ class Sql extends \Sql {
 			case "consultarElemento" :
 				
 				$cadenaSql = "SELECT ";
-				$cadenaSql .= "id_elemento_ind, elemento_individual.placa, elemento_individual.serie,nombre,identificacion, id_elemento_gen, ";
-				$cadenaSql .= "elemento_individual.id_salida ,tipo_bien.tb_descripcion ";
+				$cadenaSql .= "id_elemento_ind, elemento_individual.placa, elemento_individual.serie, funcionario, id_elemento_gen, ";
+				$cadenaSql .= "elemento_individual.id_salida ,tipo_bien.descripcion ";
 				$cadenaSql .= "FROM elemento_individual ";
 				$cadenaSql .= "JOIN elemento ON elemento.id_elemento = elemento_individual.id_elemento_gen ";
 				$cadenaSql .= "JOIN salida ON salida.id_salida = elemento_individual.id_salida ";
-				$cadenaSql .= "JOIN tipo_bien ON tipo_bien.tb_idbien = elemento.tipo_bien ";
-				$cadenaSql .= "JOIN funcionario  ON funcionario.id_funcionario = salida.funcionario ";
+				$cadenaSql .= "JOIN tipo_bien ON tipo_bien.id_tipo_bien = elemento.tipo_bien ";
+				// $cadenaSql .= "JOIN funcionario ON funcionario.id_funcionario = salida.funcionario ";
 				$cadenaSql .= "WHERE 1=1 ";
 				$cadenaSql .= "AND elemento.tipo_bien <> 1 ";
 				
@@ -186,7 +186,6 @@ class Sql extends \Sql {
 				}
 				
 				$cadenaSql .= " ; ";
-				
 				break;
 			
 			case "seleccion_funcionario_anterior" :
@@ -218,6 +217,14 @@ class Sql extends \Sql {
 				$cadenaSql .= "SET funcionario='" . $variable [1] . "',";
 				$cadenaSql .= " observaciones='" . $variable [2] . "' ";
 				$cadenaSql .= " WHERE id_salida=(SELECT id_salida FROM elemento_individual WHERE id_elemento_ind='" . $variable [0] . "' ) ;";
+				
+				break;
+			
+			case "funcionario_informacion" :
+				
+				$cadenaSql = "SELECT JEF_INDENTIFICACION,  JEF_NOMBRE ";
+				$cadenaSql .= "FROM JEFES_DE_SECCION ";
+				$cadenaSql .= "WHERE JEF_IDENTIFICADOR='" . $variable . "' ";
 				
 				break;
 		}

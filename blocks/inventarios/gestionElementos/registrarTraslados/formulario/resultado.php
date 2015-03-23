@@ -80,7 +80,7 @@ class registrarForm {
 		
 		$elemento = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
 
-		var_dump($elemento);
+		
 		
 		// ---------------- SECCION: Parámetros Generales del Formulario ----------------------------------
 		$esteCampo = $esteBloque ['nombre'];
@@ -169,12 +169,20 @@ class registrarForm {
 				$variable .= "&id_elemento_ind=" . $elemento [$i] [0];
 				$variable = $this->miConfigurador->fabricaConexiones->crypto->codificar_url ( $variable, $directorio );
 				
+				
+				$cadenaSql = $this->miSql->getCadenaSql ( 'funcionario_informacion', $elemento [$i] [3] );
+				
+				$funcionario = $esteRecursoDBO->ejecutarAcceso ( $cadenaSql, "busqueda" );
+				
+				
+					
+				
 				$mostrarHtml = "<tr>
                     <td><center>" . $elemento [$i] [1] . "</center></td>
                     <td><center>" . $elemento [$i] [2] . "</center></td>
-                    <td><center>" . $elemento [$i] [3] . "</center></td>
-                    <td><center>" . $elemento [$i] [4] . "</center></td>
-                    <td><center>" . $elemento [$i] [7] . "</center></td>
+                    <td><center>" . $funcionario[0][1] . "</center></td>
+                    <td><center>" . $funcionario[0][0] . "</center></td>
+                    <td><center>" . $elemento [$i] [6] . "</center></td>
                     <td><center>
                     	<a href='" . $variable . "'>
                             <img src='" . $rutaBloque . "/css/images/trasladar.png' width='15px'>
