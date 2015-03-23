@@ -149,12 +149,11 @@ class Sql extends \Sql {
 			 * Clausulas Del Caso Uso.
 			 */
 			
-
 			case "actualizacion_estado_elemento" :
 				
 				$cadenaSql = " UPDATE elemento_individual ";
 				$cadenaSql .= "SET estado_elemento='" . $variable [1] . "' ";
-				$cadenaSql .= " WHERE id_elemento_ind='".$variable[0]."';";
+				$cadenaSql .= " WHERE id_elemento_ind='" . $variable [0] . "';";
 				
 				break;
 			
@@ -177,7 +176,6 @@ class Sql extends \Sql {
 				$cadenaSql .= "'" . $variable [10] . "') ";
 				$cadenaSql .= "RETURNING  id_faltante,id_sobrante,id_hurto,id_estado_elemento; ";
 				
-				
 				break;
 			
 			case "id_sobrante" :
@@ -199,12 +197,18 @@ class Sql extends \Sql {
 				$cadenaSql .= " FROM tipo_falt_sobr;";
 				break;
 			
+			case "funcionarios" :
+				
+				$cadenaSql = "SELECT JEF_IDENTIFICADOR,JEF_INDENTIFICACION ||' - '|| JEF_NOMBRE ";
+				$cadenaSql .= "FROM JEFES_DE_SECCION ";
+				
+				break;
+			
 			case "dependencia" :
-				$cadenaSql = " SELECT ";
-				$cadenaSql .= " id_dependencia,";
-				$cadenaSql .= " cod_dependencia  ||' - '|| nombre as dependencia ";
-				$cadenaSql .= " FROM";
-				$cadenaSql .= " dependencia ; ";
+				
+				$cadenaSql = " SELECT JEF_IDENTIFICADOR,JEF_DEPENDENCIA_PERTENECIENTE ";
+				$cadenaSql .= " FROM JEFES_DE_SECCION ";
+				
 				break;
 			
 			case "seleccion_funcionario" :
@@ -234,14 +238,14 @@ class Sql extends \Sql {
 			case "consultarElemento" :
 				
 				$cadenaSql = "SELECT ";
-				$cadenaSql .= "id_elemento_ind, elemento_individual.placa, elemento_individual.serie,funcionario.nombre,funcionario.identificacion, id_elemento_gen, ";
-				$cadenaSql .= "elemento_individual.id_salida ,tipo_bien.tb_descripcion , dependencia.nombre AS dependencia ,salida.id_salida as salida ";
+				$cadenaSql .= "id_elemento_ind, elemento_individual.placa, elemento_individual.serie,funcionario, id_elemento_gen, ";
+				$cadenaSql .= "elemento_individual.id_salida ,tipo_bien.descripcion ,dependencia ,salida.id_salida as salida ";
 				$cadenaSql .= "FROM elemento_individual ";
 				$cadenaSql .= "JOIN elemento ON elemento.id_elemento = elemento_individual.id_elemento_gen ";
 				$cadenaSql .= "JOIN salida ON salida.id_salida = elemento_individual.id_salida ";
-				$cadenaSql .= "JOIN tipo_bien ON tipo_bien.tb_idbien = elemento.tipo_bien ";
-				$cadenaSql .= "JOIN funcionario  ON funcionario.id_funcionario = salida.funcionario ";
-				$cadenaSql .= "left JOIN dependencia  ON dependencia.id_dependencia = funcionario.dependencia ";
+				$cadenaSql .= "JOIN tipo_bien ON tipo_bien.id_tipo_bien = elemento.tipo_bien ";
+				// $cadenaSql .= "JOIN funcionario ON funcionario.id_funcionario = salida.funcionario ";
+				// $cadenaSql .= "left JOIN dependencia ON dependencia.id_dependencia = funcionario.dependencia ";
 				$cadenaSql .= "WHERE 1=1 ";
 				$cadenaSql .= "AND elemento.tipo_bien <> 1 ";
 				
@@ -291,6 +295,14 @@ class Sql extends \Sql {
 				$cadenaSql .= "SET funcionario='" . $variable [1] . "',";
 				$cadenaSql .= " observaciones='" . $variable [2] . "' ";
 				$cadenaSql .= " WHERE id_salida=(SELECT id_salida FROM elemento_individual WHERE id_elemento_ind='" . $variable [0] . "' ) ;";
+				
+				break;
+			
+			case "funcionario_informacion" :
+				
+				$cadenaSql = "SELECT JEF_INDENTIFICACION,  JEF_NOMBRE ,JEF_DEPENDENCIA_PERTENECIENTE ";
+				$cadenaSql .= "FROM JEFES_DE_SECCION ";
+				$cadenaSql .= "WHERE JEF_IDENTIFICADOR='" . $variable . "' ";
 				
 				break;
 		}

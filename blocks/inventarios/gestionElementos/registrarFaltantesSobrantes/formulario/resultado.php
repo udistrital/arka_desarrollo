@@ -20,22 +20,18 @@ class registrarForm {
 		$this->miSql = $sql;
 	}
 	function miForm() {
-	
 		
-
 		// Rescatar los datos de este bloque
 		$esteBloque = $this->miConfigurador->getVariableConfiguracion ( "esteBloque" );
-		$miPaginaActual=$this->miConfigurador->getVariableConfiguracion ( 'pagina' );
-		
+		$miPaginaActual = $this->miConfigurador->getVariableConfiguracion ( 'pagina' );
 		
 		$directorio = $this->miConfigurador->getVariableConfiguracion ( "host" );
 		$directorio .= $this->miConfigurador->getVariableConfiguracion ( "site" ) . "/index.php?";
 		$directorio .= $this->miConfigurador->getVariableConfiguracion ( "enlace" );
 		
-		
 		$rutaBloque = $this->miConfigurador->getVariableConfiguracion ( "host" );
 		$rutaBloque .= $this->miConfigurador->getVariableConfiguracion ( "site" ) . "/blocks/";
-		$rutaBloque .= $esteBloque ['grupo']  . $esteBloque ['nombre'];
+		$rutaBloque .= $esteBloque ['grupo'] . $esteBloque ['nombre'];
 		
 		// ---------------- SECCION: Parámetros Globales del Formulario ----------------------------------
 		/**
@@ -49,13 +45,12 @@ class registrarForm {
 		
 		$atributosGlobales ['campoSeguro'] = 'true';
 		
-		
 		// -------------------------------------------------------------------------------------------------
 		$conexion = "inventarios";
 		$esteRecursoDB = $this->miConfigurador->fabricaConexiones->getRecursoDB ( $conexion );
 		
-		
-
+		$conexion = "sicapital";
+		$esteRecursoDBO = $this->miConfigurador->fabricaConexiones->getRecursoDB ( $conexion );
 		
 		if (isset ( $_REQUEST ['responsable'] ) && $_REQUEST ['responsable'] != '') {
 			$funcionario = $_REQUEST ['responsable'];
@@ -63,8 +58,7 @@ class registrarForm {
 			$funcionario = '';
 		}
 		
-		
-		if(isset ( $_REQUEST ['placa'] ) && $_REQUEST ['placa'] != '') {
+		if (isset ( $_REQUEST ['placa'] ) && $_REQUEST ['placa'] != '') {
 			$placa = $_REQUEST ['placa'];
 		} else {
 			$placa = '';
@@ -82,22 +76,16 @@ class registrarForm {
 			$dependencia = '';
 		}
 		
-	
-		
-		
 		$arreglo = array (
 				$funcionario,
 				$serial,
 				$placa,
-				$dependencia
+				$dependencia 
 		);
 		
-	 
-		$cadenaSql = $this->miSql->getCadenaSql ( 'consultarElemento',$arreglo );
-		 
+		$cadenaSql = $this->miSql->getCadenaSql ( 'consultarElemento', $arreglo );
 		
 		$elemento = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
-
 		
 		// ---------------- SECCION: Parámetros Generales del Formulario ----------------------------------
 		$esteCampo = $esteBloque ['nombre'];
@@ -121,15 +109,12 @@ class registrarForm {
 		echo $this->miFormulario->formulario ( $atributos );
 		// ---------------- SECCION: Controles del Formulario -----------------------------------------------
 		
-		
-			
 		$esteCampo = "marcoDatosBasicos";
 		$atributos ['id'] = $esteCampo;
 		$atributos ["estilo"] = "jqueryui";
 		$atributos ['tipoEtiqueta'] = 'inicio';
 		$atributos ["leyenda"] = "Consultar Elementos";
 		echo $this->miFormulario->marcoAgrupacion ( 'inicio', $atributos );
-		
 		
 		// ------------------Division para los botones-------------------------
 		$atributos ["id"] = "botones";
@@ -162,16 +147,16 @@ class registrarForm {
 		// ------------------Fin Division para los botones-------------------------
 		echo $this->miFormulario->division ( "fin" );
 		
-
+		
 		$esteCampo = "AgrupacionInformacion";
 		$atributos ['id'] = $esteCampo;
 		$atributos ['leyenda'] = "Información Referente a Elementos";
 		echo $this->miFormulario->agrupacion ( 'inicio', $atributos );
 		
 		if ($elemento) {
-		
+			
 			echo "<table id='tablaTitulos'>";
-		
+			
 			echo "<thead>
                 <tr>
 				  	<th># ID Salida </th>	
@@ -185,23 +170,29 @@ class registrarForm {
                 </tr>
             </thead>
             <tbody>";
-		
+			
 			for($i = 0; $i < count ( $elemento ); $i ++) {
 				$variable = "pagina=" . $miPaginaActual; // pendiente la pagina para modificar parametro
 				$variable .= "&opcion=trasladarElemento";
 				$variable .= "&id_elemento_ind=" . $elemento [$i] [0];
-			    $variable = $this->miConfigurador->fabricaConexiones->crypto->codificar_url ( $variable, $directorio);
-		
+				$variable = $this->miConfigurador->fabricaConexiones->crypto->codificar_url ( $variable, $directorio );
+				
+				$cadenaSql = $this->miSql->getCadenaSql ( 'funcionario_informacion', $elemento [$i] [3] );
+				
+				$funcionario = $esteRecursoDBO->ejecutarAcceso ( $cadenaSql, "busqueda" );
+				
+				
+				
 				$mostrarHtml = "<tr>
-					<td><center>" . $elemento [$i] [9] . "</center></td>
-                    <td><center>" . $elemento [$i] [5] . "</center></td>
+					<td><center>" . $elemento [$i] [8] . "</center></td>
+                    <td><center>" . $elemento [$i] [4] . "</center></td>
 					<td><center>" . $elemento [$i] [1] . "</center></td>
                     <td><center>" . $elemento [$i] [2] . "</center></td>
-                    <td><center>" . $elemento [$i] [3] . "</center></td>
-                    <td><center>" . $elemento [$i] [4] . "</center></td>
-                    <td><center>" . $elemento [$i] [7] . "</center></td>
+                    <td><center>" . $funcionario [0] [1] . "</center></td>
+                    <td><center>" . $funcionario [0] [0] . "</center></td>
+                    <td><center>" . $elemento [$i] [6] . "</center></td>
                     <td><center>
-                    	<a href='".$variable."'>
+                    	<a href='" . $variable . "'>
                             <img src='" . $rutaBloque . "/css/images/faltsobra.png' width='15px'>
                         </a>
                   	</center> </td>
@@ -211,31 +202,27 @@ class registrarForm {
 				unset ( $mostrarHtml );
 				unset ( $variable );
 			}
-		
+			
 			echo "</tbody>";
-		
+			
 			echo "</table>";
-
-		
 		} else {
 			
 			$mensaje = "No Se Encontraron<br>Elementos Asociados.";
-				
+			
 			// ---------------- CONTROL: Cuadro de Texto --------------------------------------------------------
 			$esteCampo = 'mensajeRegistro';
 			$atributos ['id'] = $esteCampo;
 			$atributos ['tipo'] = 'error';
 			$atributos ['estilo'] = 'textoCentrar';
 			$atributos ['mensaje'] = $mensaje;
-				
+			
 			$tab ++;
-				
+			
 			// Aplica atributos globales al control
 			$atributos = array_merge ( $atributos, $atributosGlobales );
 			echo $this->miFormulario->cuadroMensaje ( $atributos );
 			// --------------- FIN CONTROL : Cuadro de Texto --------------------------------------------------
-			
-			
 		}
 		
 		echo $this->miFormulario->agrupacion ( 'fin' );
