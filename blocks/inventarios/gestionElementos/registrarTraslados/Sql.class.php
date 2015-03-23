@@ -190,10 +190,10 @@ class Sql extends \Sql {
 			
 			case "seleccion_funcionario_anterior" :
 				
-				$cadenaSql = "SELECT id_elemento_ind,identificacion ||'  -  '||nombre AS funcionario ,id_funcionario ";
+				$cadenaSql = "SELECT id_elemento_ind,funcionario ";
 				$cadenaSql .= "FROM elemento_individual ";
 				$cadenaSql .= "JOIN salida ON salida.id_salida = elemento_individual.id_salida ";
-				$cadenaSql .= "JOIN funcionario  ON funcionario.id_funcionario = salida.funcionario ";
+				// $cadenaSql .= "JOIN funcionario ON funcionario.id_funcionario = salida.funcionario ";
 				$cadenaSql .= "WHERE  id_elemento_ind='" . $variable . "';";
 				
 				break;
@@ -223,6 +223,14 @@ class Sql extends \Sql {
 			case "funcionario_informacion" :
 				
 				$cadenaSql = "SELECT JEF_INDENTIFICACION,  JEF_NOMBRE ";
+				$cadenaSql .= "FROM JEFES_DE_SECCION ";
+				$cadenaSql .= "WHERE JEF_IDENTIFICADOR='" . $variable . "' ";
+				
+				break;
+			
+			case "funcionario_informacion_fn" :
+				
+				$cadenaSql = "SELECT JEF_INDENTIFICACION ||' - '|| JEF_NOMBRE ";
 				$cadenaSql .= "FROM JEFES_DE_SECCION ";
 				$cadenaSql .= "WHERE JEF_IDENTIFICADOR='" . $variable . "' ";
 				
