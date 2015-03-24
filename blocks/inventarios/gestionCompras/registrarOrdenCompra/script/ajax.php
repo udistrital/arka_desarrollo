@@ -359,7 +359,7 @@ $(function() {
         height: 200,
         width: 930,
         mtype: "GET",
-        colNames: [ "Nombre Item", "Unidad de Medida", "Cantidad", "Descripción", "($)Valor Unitario","($)Valor Total"],
+        colNames: [ "Nombre Item", "Unidad de Medida", "Cantidad", "Descripción", "($)Valor Unitario","($)Valor Total","($)Descuento"],
         colModel: [
             
             { name: "item", width: 90,align: "center", editable:true },
@@ -368,6 +368,7 @@ $(function() {
             { name: "descripcion", width: 80, align: "center",editable:true },
             { name: "valor_unitario", width: 80, align: "center",editable:true,editrules:{number:true},sorttype:'number',formatter:'number' },
             { name: "valor_total", width: 80, align: "center",editable:false,editrules:{number:true},sorttype:'number',formatter:'number' },
+            { name: "descuento", width: 80, align: "center",editable:true,editrules:{number:true},sorttype:'number',formatter:'number' },
             ],
 
         pager: "#barraNavegacion",

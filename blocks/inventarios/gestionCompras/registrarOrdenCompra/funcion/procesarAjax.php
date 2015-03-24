@@ -311,7 +311,8 @@ if ($_REQUEST ['funcion'] == 'tablaItems') {
 					$row ['cantidad'],
 					$row ['descripcion'],
 					$row ['valor_unitario'],
-					$row ['valor_total'] 
+					$row ['valor_total'],
+					$row ['descuento'],
 			);
 			$i ++;
 		}
@@ -333,6 +334,7 @@ if ($_REQUEST ['funcion'] == 'tablaItems') {
 				' ',
 				'0.00',
 				' ',
+				'0.00',
 				'0.00',
 				'0.00' 
 		);
@@ -358,6 +360,7 @@ if ($_REQUEST ['funcion'] == 'AgregarItem') {
 				$_GET ['descripcion'],
 				$_GET ['valor_unitario'],
 				$_GET ['cantidad'] * $_GET ['valor_unitario'],
+				$_GET ['descuento'],
 				$_REQUEST ['tiempo'] 
 		);
 	} else {
@@ -369,6 +372,7 @@ if ($_REQUEST ['funcion'] == 'AgregarItem') {
 				$_GET ['descripcion'],
 				$_GET ['valor_unitario'],
 				$_GET ['cantidad'] * $_GET ['valor_unitario'],
+				$_GET ['descuento'],
 				$_REQUEST ['tiempo'] 
 		);
 	}

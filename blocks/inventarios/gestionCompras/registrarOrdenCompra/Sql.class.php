@@ -264,7 +264,8 @@ class Sql extends \Sql {
 				$cadenaSql .= " cantidad, ";
 				$cadenaSql .= " descripcion, ";
 				$cadenaSql .= " valor_unitario, ";
-				$cadenaSql .= " valor_total";
+				$cadenaSql .= " valor_total,";
+				$cadenaSql .= " descuento ";
 				$cadenaSql .= " FROM ";
 				$cadenaSql .= " arka_inventarios.items_orden_compra_temp ";
 				$cadenaSql .= " WHERE seccion='" . $variable . "';";
@@ -282,7 +283,7 @@ class Sql extends \Sql {
 				$cadenaSql = " INSERT INTO ";
 				$cadenaSql .= " arka_inventarios.items_orden_compra_temp(";
 				$cadenaSql .= " id_items,item, unidad_medida, cantidad, ";
-				$cadenaSql .= " descripcion, valor_unitario,valor_total,seccion)";
+				$cadenaSql .= " descripcion, valor_unitario,valor_total,descuento,seccion)";
 				$cadenaSql .= " VALUES (";
 				$cadenaSql .= "'" . $variable [0] . "',";
 				$cadenaSql .= "'" . $variable [1] . "',";
@@ -291,7 +292,8 @@ class Sql extends \Sql {
 				$cadenaSql .= "'" . $variable [4] . "',";
 				$cadenaSql .= "'" . $variable [5] . "',";
 				$cadenaSql .= "'" . $variable [6] . "',";
-				$cadenaSql .= "'" . $variable [7] . "');";
+				$cadenaSql .= "'" . $variable [7] . "',";
+				$cadenaSql .= "'" . $variable [8] . "');";
 				break;
 			
 			case "eliminarItem" :
