@@ -42,19 +42,34 @@ class registrarForm {
 		
 		// lineas para conectar base de d atos-------------------------------------------------------------------------------------------------
 		$conexion = "inventarios";
-		
 		$esteRecursoDB = $this->miConfigurador->fabricaConexiones->getRecursoDB ( $conexion );
+		
+		
+
+		$conexion = "sicapital";
+		$esteRecursoDBO = $this->miConfigurador->fabricaConexiones->getRecursoDB ( $conexion );
+		
 		
 		$cadenaSql = $this->miSql->getCadenaSql ( "seleccion_info_elemento", $_REQUEST ['id_elemento_ind'] );
 		$elemento = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
 		
+		
+		
+		$cadenaSql = $this->miSql->getCadenaSql ( 'funcionario_informacion', $elemento [0] [3] );
+		
+		$funcionario = $esteRecursoDBO->ejecutarAcceso ( $cadenaSql, "busqueda" );
+		
+		
+
+		
 		$elemento = $elemento [0];
 		
 		
-		$leyenda = '# ID Elemento : ' . $elemento [9] . '<br>';
-		$leyenda .= '# ID Salida : ' . $elemento [6] . '&nbsp&nbsp&nbsp<br>';
-		$leyenda .= 'Funcionario a Cargo : ' . $elemento [3] . '<br>';
-		$leyenda .= 'Dependencia  : ' . $elemento [8] . '<br>';
+		
+		$leyenda = '# ID Elemento : ' . $elemento [4] . '<br>';
+		$leyenda .= '# ID Salida : ' . $elemento [5] . '&nbsp&nbsp&nbsp<br>';
+		$leyenda .= 'Funcionario a Cargo : ' . $funcionario [0][0]." - ".$funcionario[0][1] . '<br>';
+		$leyenda .= 'Dependencia  : ' . $funcionario[0][2] . '<br>';
 		
 		// $funcionario = array (
 		// "responsable_ante" => $funcionario [0] [1],
