@@ -34,6 +34,11 @@
         	
         
             $("#<?php echo $this->campoSeguro('reg_prov')?>").select2();
+            $("#<?php echo $this->campoSeguro('destino')?>").select2();
+                        $("#<?php echo $this->campoSeguro('formaPago')?>").select2();
+            
+            
+            
         
 
         $('#<?php echo $this->campoSeguro('fecha_diponibilidad')?>').datepicker({
