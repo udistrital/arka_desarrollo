@@ -15,7 +15,21 @@ $this->idioma ["selec_dependencia"] ="Dependencia : ";
 $this->idioma ["selec_dependenciaTitulo"] ="Seleccione Dependencia";
 
 
+$this->idioma ["informacion_numero"] ="Número de Orden de Compra Actual : #   ";
+$this->idioma ["informacion_numero"] ="Fecha de Registro de Orden de Compra Actual :    ";
+
+
+
+$this->idioma ["informacion_numero"] ="Número de Orden de Compra Actual : #&nbsp&nbsp&nbsp&nbsp";
+$this->idioma ["informacion_fecha"] ="Fecha de Registro de Orden de Compra Actual :&nbsp&nbsp&nbsp&nbsp";
+$this->idioma ["informacion_ordenador"] ="Nombre de Ordenador Gasto Encargado Actual :&nbsp&nbsp&nbsp&nbsp";
+$this->idioma ["informacion_contratista"] ="Nombre Contratista Encargado Actual :&nbsp&nbsp&nbsp&nbsp";
+
+
 $this->idioma ["informacion_destino"] ="&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspNota: En la entrega de bienes muebles se debe coordinar con el Jefe de Almacén y el Supervisor del Contrato. ";
+
+
+$this->idioma ["informacion_tiempo"] ="&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspNota: Tiempo de Entrega en dias a partir de la firma del contrato.";
 
 $this->idioma ["valorLetras_registro"] = "Valor en Letras:";
 

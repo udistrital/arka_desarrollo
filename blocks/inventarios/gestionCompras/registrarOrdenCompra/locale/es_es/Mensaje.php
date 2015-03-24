@@ -110,6 +110,9 @@ $this->idioma ["inhabilidadesTitulo"] ="Ingrese Inhabilidades y/o Incompatibilid
 
 $this->idioma ["informacion_destino"] ="&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspNota: En la entrega de bienes muebles se debe coordinar con el Jefe de Almacén y el Supervisor del Contrato. ";
 
+$this->idioma ["informacion_tiempo"] ="&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspNota: Tiempo de Entrega en dias a partir de la firma del contrato.";
+
+
 
 
 

@@ -343,6 +343,12 @@ class Sql extends \Sql {
 				
 				break;
 			
+			case "consultarContratista" :
+				$cadenaSql = "SELECT CON_IDENTIFICADOR,CON_NOMBRE  ";
+				$cadenaSql .= " FROM CONTRATISTAS  ";
+				$cadenaSql .= " WHERE CON_IDENTIFICADOR='" . $variable . "' ";
+				
+				break;
 			case "consultarProveedor" :
 				$cadenaSql = " SELECT PRO_RAZON_SOCIAL,PRO_NIT,PRO_DIRECCION,PRO_TELEFONO  ";
 				$cadenaSql .= " FROM PROVEEDORES  ";
