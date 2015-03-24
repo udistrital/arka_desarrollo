@@ -288,7 +288,8 @@ class Sql extends \Sql {
 				$cadenaSql .= " cantidad, ";
 				$cadenaSql .= " descripcion, ";
 				$cadenaSql .= " valor_unitario, ";
-				$cadenaSql .= " valor_total";
+				$cadenaSql .= " valor_total, ";
+				$cadenaSql .= " descuento ";
 				$cadenaSql .= " FROM ";
 				$cadenaSql .= " arka_inventarios.items_orden_compra_temp ";
 				$cadenaSql .= " WHERE seccion='" . $variable . "';";
@@ -367,7 +368,7 @@ class Sql extends \Sql {
 			case "consultarItems" :
 				$cadenaSql = " SELECT ";
 				$cadenaSql .= " item, unidad_medida, cantidad, descripcion,";
-				$cadenaSql .= " valor_unitario, valor_total ";
+				$cadenaSql .= " valor_unitario, valor_total, descuento ";
 				$cadenaSql .= " FROM items_orden_compra ";
 				$cadenaSql .= " WHERE id_orden='" . $variable . "'";
 				
@@ -378,7 +379,7 @@ class Sql extends \Sql {
 				$cadenaSql = " INSERT INTO ";
 				$cadenaSql .= " items_orden_compra_temp(";
 				$cadenaSql .= " item, unidad_medida, cantidad, ";
-				$cadenaSql .= " descripcion, valor_unitario,valor_total,seccion)";
+				$cadenaSql .= " descripcion, valor_unitario,valor_total,descuento,seccion)";
 				$cadenaSql .= " VALUES (";
 				$cadenaSql .= "'" . $variable [0] . "',";
 				$cadenaSql .= "'" . $variable [1] . "',";
@@ -386,6 +387,7 @@ class Sql extends \Sql {
 				$cadenaSql .= "'" . $variable [3] . "',";
 				$cadenaSql .= "'" . $variable [4] . "',";
 				$cadenaSql .= "'" . $variable [5] . "',";
+				$cadenaSql .= "'" . $variable [6] . "',";
 				$cadenaSql .= "'" . $variable ['tiempo'] . "');";
 				
 				break;
@@ -491,7 +493,7 @@ class Sql extends \Sql {
 				$cadenaSql = " INSERT INTO ";
 				$cadenaSql .= " items_orden_compra(";
 				$cadenaSql .= " id_orden, item, unidad_medida, cantidad, descripcion, ";
-				$cadenaSql .= " valor_unitario, valor_total)";
+				$cadenaSql .= " valor_unitario, valor_total,descuento)";
 				$cadenaSql .= " VALUES (";
 				$cadenaSql .= "'" . $variable [0] . "',";
 				$cadenaSql .= "'" . $variable [1] . "',";
@@ -499,7 +501,8 @@ class Sql extends \Sql {
 				$cadenaSql .= "'" . $variable [3] . "',";
 				$cadenaSql .= "'" . $variable [4] . "',";
 				$cadenaSql .= "'" . $variable [5] . "',";
-				$cadenaSql .= "'" . $variable [6] . "');";
+				$cadenaSql .= "'" . $variable [6] . "',";
+				$cadenaSql .= "'" . $variable [7] . "');";
 				
 				break;
 			
