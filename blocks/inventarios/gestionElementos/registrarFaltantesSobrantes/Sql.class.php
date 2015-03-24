@@ -221,11 +221,11 @@ class Sql extends \Sql {
 				
 				$cadenaSql = "SELECT ";
 				$cadenaSql .= "id_elemento_ind, elemento_individual.placa, elemento_individual.serie,funcionario, id_elemento_gen, ";
-				$cadenaSql .= "elemento_individual.id_salida ,tipo_bien.descripcion ,salida.id_salida as salida ";
+				$cadenaSql .= "elemento_individual.id_salida ,tipo_bien.tb_descripcion ,salida.id_salida as salida ";
 				$cadenaSql .= "FROM elemento_individual ";
 				$cadenaSql .= "JOIN elemento ON elemento.id_elemento = elemento_individual.id_elemento_gen ";
 				$cadenaSql .= "JOIN salida ON salida.id_salida = elemento_individual.id_salida ";
-				$cadenaSql .= "JOIN tipo_bien ON tipo_bien.id_tipo_bien = elemento.tipo_bien ";
+				$cadenaSql .= "JOIN tipo_bien ON tipo_bien.tb_idbien = elemento.tipo_bien ";
 // 				$cadenaSql .= "JOIN funcionario  ON funcionario.id_funcionario = salida.funcionario ";
 // 				$cadenaSql .= "left JOIN dependencia  ON dependencia.id_dependencia = funcionario.dependencia ";
 				$cadenaSql .= "WHERE 1=1 ";
@@ -239,11 +239,11 @@ class Sql extends \Sql {
 				
 				$cadenaSql = "SELECT ";
 				$cadenaSql .= "id_elemento_ind, elemento_individual.placa, elemento_individual.serie,funcionario, id_elemento_gen, ";
-				$cadenaSql .= "elemento_individual.id_salida ,tipo_bien.descripcion ,dependencia ,salida.id_salida as salida ";
+				$cadenaSql .= "elemento_individual.id_salida ,tipo_bien.tb_descripcion ,dependencia ,salida.id_salida as salida ";
 				$cadenaSql .= "FROM elemento_individual ";
 				$cadenaSql .= "JOIN elemento ON elemento.id_elemento = elemento_individual.id_elemento_gen ";
 				$cadenaSql .= "JOIN salida ON salida.id_salida = elemento_individual.id_salida ";
-				$cadenaSql .= "JOIN tipo_bien ON tipo_bien.id_tipo_bien = elemento.tipo_bien ";
+				$cadenaSql .= "JOIN tipo_bien ON tipo_bien.tb_idbien = elemento.tipo_bien ";
 				// $cadenaSql .= "JOIN funcionario ON funcionario.id_funcionario = salida.funcionario ";
 				// $cadenaSql .= "left JOIN dependencia ON dependencia.id_dependencia = funcionario.dependencia ";
 				$cadenaSql .= "WHERE 1=1 ";
