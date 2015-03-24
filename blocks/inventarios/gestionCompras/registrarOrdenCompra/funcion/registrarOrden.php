@@ -159,7 +159,8 @@ class RegistradorOrden {
 					$contenido ['cantidad'],
 					$contenido ['descripcion'],
 					$contenido ['valor_unitario'],
-					$contenido ['valor_total'] 
+					$contenido ['valor_total'],
+					$contenido ['descuento']
 			);
 			
 			$cadenaSql = $this->miSql->getCadenaSql ( 'insertarItems', $datosItems );
