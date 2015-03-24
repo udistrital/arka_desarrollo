@@ -387,7 +387,7 @@ $(function() {
         caption:"Añadir Item",
         addCaption: "Adicionar Item",
         width: 425, 
-        height: 310,
+        height: 325,
         mtype:'GET',
         url:'<?php echo $urlFinal2?>',
         bSubmit: "Agregar",
