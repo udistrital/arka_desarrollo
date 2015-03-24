@@ -104,8 +104,12 @@ $this->idioma ["supervision"] ="&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspSupervis
 $this->idioma ["supervisionTitulo"] ="Ingrese Supervisador";
 
 
-$this->idioma ["inhabilidades"] ="&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspInhabilidades y/o Incompatibilidades : ";
+$this->idioma ["inhabilidades"] ="Inhabilidades y/o Incompatibilidades : ";
 $this->idioma ["inhabilidadesTitulo"] ="Ingrese Inhabilidades y/o Incompatibilidades";
+
+
+$this->idioma ["informacion_destino"] ="&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspNota: En la entrega de bienes muebles se debe coordinar con el Jefe de Almacén y el Supervisor del Contrato. ";
+
 
 
 

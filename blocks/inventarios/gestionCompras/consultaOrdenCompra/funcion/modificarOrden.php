@@ -161,7 +161,6 @@ class RegistradorOrden {
 				$archivo1,
 				$_REQUEST ['selec_dependencia'],
 				$_REQUEST ['nombreContratista'],
-				$_REQUEST ['id_jefe_oculto'],
 				$_REQUEST ['id_ordenador_oculto'],
 				$Subtotal,
 				$iva,

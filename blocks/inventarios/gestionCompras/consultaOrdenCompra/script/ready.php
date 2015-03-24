@@ -38,6 +38,10 @@
           $("#<?php echo $this->campoSeguro('cargoJefeSeccion')?>").select2();
 	      $("#<?php echo $this->campoSeguro('nombreContratista')?>").select2();
           $("#<?php echo $this->campoSeguro('asignacionOrdenador')?>").select2();
+          
+                 $("#<?php echo $this->campoSeguro('destino')?>").select2();
+                 $("#<?php echo $this->campoSeguro('formaPago')?>").select2();
+            
          
 	    	  $('#<?php echo $this->campoSeguro('nombreJefeSeccion')?>').attr('disabled','');
 	          $('#<?php echo $this->campoSeguro('nombreOrdenador')?>').attr('disabled','');     
