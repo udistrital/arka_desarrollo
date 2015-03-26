@@ -134,6 +134,15 @@ $enlaceSobranteFlatanteElementos ['nombre'] = "Faltantes y Sobrantes Elementos";
 
 
 
+// Bajas Elementos
+$enlaceBajasElementos ['enlace'] = "pagina=registrarBajas";
+$enlaceBajasElementos ['enlace'] .= "&usuario=" . $miSesion->getSesionUsuarioId();
+
+$enlaceBajasElementos ['urlCodificada'] = $this->miConfigurador->fabricaConexiones->crypto->codificar_url($enlaceBajasElementos ['enlace'], $directorio);
+$enlaceBajasElementos ['nombre'] = "Bajas Elementos";
+
+
+
 
 
 // Consultar y Modificar Salidas
@@ -257,6 +266,7 @@ $enlaceFinSesion['nombre'] = "Cerrar Sesión";
             <ul class="dl-submenu">
                 <li><a href="<?php echo $enlaceTrasladosElementos['urlCodificada'] ?>"><?php echo $enlaceTrasladosElementos['nombre'] ?></a></li>
                 <li><a href="<?php echo $enlaceSobranteFlatanteElementos['urlCodificada'] ?>"><?php echo $enlaceSobranteFlatanteElementos['nombre'] ?></a></li>
+                <li><a href="<?php echo $enlaceBajasElementos['urlCodificada'] ?>"><?php echo $enlaceBajasElementos['nombre'] ?></a></li>
                 
             </ul>
         </li>
