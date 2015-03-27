@@ -3,7 +3,7 @@
 ?>
 
 // Asociar el widget de validación al formulario
-              $("#registrarFaltantesSobrantes").validationEngine({
+              $("#registrarBajas").validationEngine({
             promptPosition : "centerRight", 
             scroll: false,
             autoHidePrompt: true,
@@ -12,8 +12,8 @@
 	
         
         $(function() {
-            $("#registrarFaltantesSobrantes").submit(function() {
-                $resultado=$("#registrarFaltantesSobrantes").validationEngine("validate");
+            $("#registrarBajas").submit(function() {
+                $resultado=$("#registrarBajas").validationEngine("validate");
                    
                    
                    
@@ -30,6 +30,11 @@ $("#<?php echo $this->campoSeguro('inexistencia')?>").select2();
  $("#<?php echo $this->campoSeguro('responsable')?>").select2();
 $("#<?php echo $this->campoSeguro('dependencia')?>").select2(); 
 $("#<?php echo $this->campoSeguro('responsable_reci')?>").select2();
+
+$("#<?php echo $this->campoSeguro('dependencia_baja')?>").select2();
+ $("#<?php echo $this->campoSeguro('estado_baja')?>").select2();
+$("#<?php echo $this->campoSeguro('tramite_baja')?>").select2(); 
+$("#<?php echo $this->campoSeguro('tipo_mueble')?>").select2();
 
 
 
@@ -70,47 +75,37 @@ $("#<?php echo $this->campoSeguro('responsable_reci')?>").select2();
 
 
 
- $("#<?php echo $this->campoSeguro('tipo_bien')?>").select2();
- $("#<?php echo $this->campoSeguro('iva')?>").select2();
- $("#<?php echo $this->campoSeguro('bodega')?>").select2();
- <!--$("#<?php echo $this->campoSeguro('tipo_poliza')?>").select2();  -->
-                  
      
-     $( "#<?php echo $this->campoSeguro('inexistencia')?>" ).change(function() {
+     
+     $( "#<?php echo $this->campoSeguro('estado_baja')?>" ).change(function() {
         
-            switch($("#<?php echo $this->campoSeguro('inexistencia')?>").val())
+            switch($("#<?php echo $this->campoSeguro('estado_baja')?>").val())
             {
                            
                 case '1':
                     
                    
-                    $("#<?php echo $this->campoSeguro('hurto')?>").css('display','none');
+                    $("#<?php echo $this->campoSeguro('tramite_servible')?>").css('display','block');
                    
-
-                   
+	
+                   $("#<?php echo $this->campoSeguro('tramite_baja')?>").select2(); 
 
                 break;
                 
                 
                 case '2':
                     
-                    $("#<?php echo $this->campoSeguro('hurto')?>").css('display','block');
+                    $("#<?php echo $this->campoSeguro('tramite_servible')?>").css('display','none');
                     
        
                 break;
                 
                 
-                case '3':
-                    
-                    $("#<?php echo $this->campoSeguro('hurto')?>").css('display','none');
-                    
-       
-                break;
-                
+            
 
                 default:
                 
-                $("#<?php echo $this->campoSeguro('hurto')?>").css('display','none');
+                $("#<?php echo $this->campoSeguro('tramite_servible')?>").css('display','none');
                    
                    break;
                 

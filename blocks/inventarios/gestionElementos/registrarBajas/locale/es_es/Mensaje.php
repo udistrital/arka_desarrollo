@@ -21,6 +21,8 @@ $this->idioma ["fecha_hurtoTitulo"] ="Seleccione Fecha Hurto";
 $this->idioma ["fecha_denuncia"] ="Fecha Denuncia: ";
 $this->idioma ["fecha_denunciaTitulo"] ="Seleccione Fecha Denuncia";
 
+$this->idioma ["informacion_mueble"] ="&nbsp&nbsp&nbsp&nbsp&nbsp&nbspArchivo de radicado de bajas y en caso de electrónico concepto de la red datos.";
+
 
 
 $this->idioma ["placa"] ="Número de Placa: ";
@@ -35,6 +37,14 @@ $this->idioma ["responsableTitulo"] ="Seleccione Funcionario Responsable";
 
 
 
+$this->idioma ["tipo_mueble"] ="Tipo Mueble: ";
+$this->idioma ["responsableTitulo"] ="Seleccione Tipo de Mueble";
+
+
+$this->idioma ["radicacion"] ="Cargue Radicación: ";
+$this->idioma ["radicacionTitulo"] ="Seleccione Acrhivpo de Radicación";
+
+
 $this->idioma ["responsable_ante"] ="Indentificación y Nombre del Funcionario Actual: ";
 
 $this->idioma ["responsable_reci"] ="Indentificación y Nombre del Funcionario Recibe: ";
@@ -44,8 +54,27 @@ $this->idioma ["dependencia"] ="Dependencia : ";
 $this->idioma ["dependenciaTitulo"] ="Seleccione Dependencia";
 
 
+$this->idioma ["dependencia_baja"] ="Dependencia : ";
+$this->idioma ["dependencia_bajaTitulo"] ="Seleccione dependencia donde se va alojar <br> el elementos dado de baja. ";
+
+
+$this->idioma ["informacion_destino"] ="&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspDependencia donde se va alojar el elementos dado de baja. ";
+
+
 $this->idioma ["inexistencia"] ="Tipo Inexistencia : ";
 $this->idioma ["inexistenciaTitulo"] ="Seleccione Tipo Inexistencia";
+
+
+
+$this->idioma ["estado_baja"] ="Estado : ";
+$this->idioma ["estado_bajaTitulo"] ="Seleccione Estado Baja";
+
+
+$this->idioma ["tramite_baja"] ="Tramite de Baja : ";
+$this->idioma ["tramite_bajaTitulo"] ="Seleccione Tramite Baja";
+
+
+
 
 
 

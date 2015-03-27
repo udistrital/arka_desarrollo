@@ -149,11 +149,26 @@ class Sql extends \Sql {
 			 * Clausulas Del Caso Uso.
 			 */
 			
-			case "actualizacion_estado_elemento" :
+			case "seleccionar_muebles" :
 				
-				$cadenaSql = " UPDATE elemento_individual ";
-				$cadenaSql .= "SET estado_elemento='" . $variable [1] . "' ";
-				$cadenaSql .= " WHERE id_elemento_ind='" . $variable [0] . "';";
+				$cadenaSql = "SELECT id_tipo_mueble, descripcion ";
+				$cadenaSql .= "FROM tipo_mueble;  ";
+				
+				break;
+			
+			case "seleccionar_estado_baja" :
+				
+				$cadenaSql = " SELECT id_estado, descripcion ";
+				$cadenaSql .= "FROM estado_baja  ";
+				$cadenaSql .= " WHERE id_estado <=2;";
+				
+				break;
+			
+			case "seleccionar_estado_servible" :
+				
+				$cadenaSql = "SELECT id_estado, descripcion ";
+				$cadenaSql .= "FROM estado_baja  ";
+				$cadenaSql .= " WHERE id_estado >2;";
 				
 				break;
 			
@@ -211,6 +226,11 @@ class Sql extends \Sql {
 				
 				break;
 			
+			case "dependencia_dep" :
+				$cadenaSql = " SELECT DEP_IDENTIFICADOR, DEP_IDENTIFICADOR ||' - ' ||DEP_DEPENDENCIA  ";
+				$cadenaSql .= "FROM DEPENDENCIAS ";
+				break;
+			
 			case "seleccion_funcionario" :
 				
 				$cadenaSql = "SELECT id_funcionario, identificacion ||'-'||nombre AS funcionario  ";
@@ -226,8 +246,8 @@ class Sql extends \Sql {
 				$cadenaSql .= "JOIN elemento ON elemento.id_elemento = elemento_individual.id_elemento_gen ";
 				$cadenaSql .= "JOIN salida ON salida.id_salida = elemento_individual.id_salida ";
 				$cadenaSql .= "JOIN tipo_bien ON tipo_bien.tb_idbien = elemento.tipo_bien ";
-// 				$cadenaSql .= "JOIN funcionario  ON funcionario.id_funcionario = salida.funcionario ";
-// 				$cadenaSql .= "left JOIN dependencia  ON dependencia.id_dependencia = funcionario.dependencia ";
+				// $cadenaSql .= "JOIN funcionario ON funcionario.id_funcionario = salida.funcionario ";
+				// $cadenaSql .= "left JOIN dependencia ON dependencia.id_dependencia = funcionario.dependencia ";
 				$cadenaSql .= "WHERE 1=1 ";
 				$cadenaSql .= "AND elemento.tipo_bien <> 1 ";
 				$cadenaSql .= " AND  id_elemento_ind= '" . $variable . "'";

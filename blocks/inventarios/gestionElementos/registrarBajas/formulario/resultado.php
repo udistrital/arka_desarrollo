@@ -166,7 +166,7 @@ class registrarForm {
                     <th>Nombre Funcionario</th>
 					<th>Identificación<br>Funcionario</th>
 					<th>Tipo Bien</th>
-			        <th>Generar  Faltante<br>Sobrante</th>
+			        <th>Generar Baja<br>Elemento</th>
                 </tr>
             </thead>
             <tbody>";
@@ -193,7 +193,7 @@ class registrarForm {
                     <td><center>" . $elemento [$i] [6] . "</center></td>
                     <td><center>
                     	<a href='" . $variable . "'>
-                            <img src='" . $rutaBloque . "/css/images/faltsobra.png' width='15px'>
+                            <img src='" . $rutaBloque . "/css/images/baja.png' width='15px'>
                         </a>
                   	</center> </td>
            
