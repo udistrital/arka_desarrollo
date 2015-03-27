@@ -45,6 +45,8 @@ class registrarForm {
 		$conexion = "inventarios";
 		$esteRecursoDB = $this->miConfigurador->fabricaConexiones->getRecursoDB ( $conexion );
 		
+		
+		$fechaActual = date ( 'Y-m-d' );
 		// Limpia Items Tabla temporal
 		
 		// $cadenaSql = $this->miSql->getCadenaSql ( 'limpiar_tabla_items' );
@@ -85,21 +87,11 @@ class registrarForm {
 				if (isset ( $_REQUEST ['mensaje'] ) && $_REQUEST ['mensaje'] == 'confirma') {
 					
 					$variable=$_REQUEST['registro'];
-					$variable=unserialize($variable);
 			
-					if($variable[0]<>'0'){
+					
 						
-						$mensaje = "Se Registro Faltante <br> # ID Faltante : ".$variable[0].".";
+						$mensaje = "Se Registro la Baja del Elemento <br> # ID Baja : ".$variable[0].".<br>Fecha :".$fechaActual;
 						
-					}else if($variable[1]<>'0'){
-						
-						$mensaje = "Se Registro Sobrante <br> # ID Sobante : ".$variable[1].".";
-						
-					}else if($variable[2]<>'0'){
-						
-						$mensaje = "Se Registro Hurto <br> # ID Hurto : ".$variable[2].".";
-						
-					}
 					
 					
 					
@@ -122,7 +114,7 @@ class registrarForm {
 				
 				if (isset ( $_REQUEST ['mensaje'] ) && $_REQUEST ['mensaje'] == 'error') {
 					
-					$mensaje = "No Se Pudo Hacer la  Traslado del Elemento";
+					$mensaje = "No Se Pudo Hacer la  Registro de la Baja del Elemento";
 					
 					// ---------------- CONTROL: Cuadro de Texto --------------------------------------------------------
 					$esteCampo = 'mensajeRegistro';

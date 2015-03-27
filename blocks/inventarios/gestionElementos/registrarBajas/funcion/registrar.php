@@ -45,148 +45,77 @@ class RegistradorOrden {
 		
 		$fechaActual = date ( 'Y-m-d' );
 		
-		switch ($_REQUEST ['inexistencia']) {
+		
+		
+		
+		$i=0;
+		foreach ( $_FILES as $key => $values ) {
+				
+			$archivo [$i] = $_FILES [$key];
+			$i ++;
+		}
+		$archivo=$archivo[0];
+		
 			
-			case '1' :
+		if (isset ( $archivo )) {
+			// obtenemos los datos del archivo
+			$tamano = $archivo ['size'];
+			$tipo = $archivo ['type'];
+			$archivo1 = $archivo ['name'];
+			$prefijo = substr ( md5 ( uniqid ( rand () ) ), 0, 6 );
 				
-				$cadenaSql = $this->miSql->getCadenaSql ( 'id_sobrante' );
-				$sobrante = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
-				
-				$id_sobrante = $sobrante [0] [0] + 1;
-				
-				$arreglo = array (
-						$_REQUEST['elemento_ind'],
-						0,
-						$id_sobrante,
-						0,
-						$_REQUEST ['observaciones'],
-						'NULL',
-						'NULL',
-						'0001-01-01',
-						'0001-01-01',
-						$fechaActual,
-						$_REQUEST ['inexistencia']
-						 
-				);
-				
-				break;
-			
-			case '2' :
-				
-				$cadenaSql = $this->miSql->getCadenaSql ( 'id_hurto' );
-				$hurto = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
-				
-				$id_hurto = $hurto [0] [0] + 1;
-				
-				$i=0;
-				foreach ( $_FILES as $key => $values ) {
-					
-					$archivo [$i] = $_FILES [$key];
-					$i ++;
+			if ($archivo1 != "") {
+				// guardamos el archivo a la carpeta files
+				$destino1 = $rutaBloque . "/documento_radicacion/" . $prefijo . "_" . $archivo1;
+				if (copy ( $archivo ['tmp_name'], $destino1 )) {
+					$status = "Archivo subido: <b>" . $archivo1 . "</b>";
+					$destino1 = $host . "/documento_radicacion/" . $prefijo . "_" . $archivo1;
+				} else {
+					$status = "Error al subir el archivo";
+					echo $status;
 				}
-				$archivo=$archivo[0];
-
-							
-				if (isset ( $archivo )) {
-					// obtenemos los datos del archivo
-					$tamano = $archivo ['size'];
-					$tipo = $archivo ['type'];
-					$archivo1 = $archivo ['name'];
-					$prefijo = substr ( md5 ( uniqid ( rand () ) ), 0, 6 );
-					
-					if ($archivo1 != "") {
-						// guardamos el archivo a la carpeta files
-						$destino1 = $rutaBloque . "/documento_denuncia/" . $prefijo . "_" . $archivo1;
-						if (copy ( $archivo ['tmp_name'], $destino1 )) {
-							$status = "Archivo subido: <b>" . $archivo1 . "</b>";
-							$destino1 = $host . "/documento_denuncia/" . $prefijo . "_" . $archivo1;
-						} else {
-							$status = "Error al subir el archivo";
-							echo $status;
-						}
-					} else {
-						$status = "Error al subir archivo";
-						echo $status."2";
-					}
-					
-					$arreglo = array (
-							$destino1,
-							$archivo1 
-					);
-				}
+			} else {
+				$status = "Error al subir archivo";
+				echo $status."2";
+			}
 				
-				$arreglo = array (
-						$_REQUEST['elemento_ind'],
-						0,
-						0,
-						$id_hurto,
-						$_REQUEST ['observaciones'],
-						$destino1,
-						$archivo1,
-						$_REQUEST ['fecha_denuncia'],
-						$_REQUEST ['fecha_hurto'],
-						$fechaActual ,
-						$_REQUEST ['inexistencia']
-				);
-				
-				break;
-			
-			case '3' :
-				
-				$cadenaSql = $this->miSql->getCadenaSql ( 'id_faltante' );
-				$faltante = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
-				
-				$id_faltante = $faltante [0] [0] + 1;
-				
-				$arreglo = array (
-						$_REQUEST['elemento_ind'],
-						$id_faltante,
-						0,
-						0,
-						$_REQUEST ['observaciones'],
-						'NULL',
-						'NULL',
-						'0001-01-01',
-						'0001-01-01',
-						$fechaActual,
-						$_REQUEST ['inexistencia'] 
-				);
-				
-				break;
+			$arreglo = array (
+					$destino1,
+					$archivo1
+			);
 		}
 		
+			
+		
+		$arreglo = array (
+				$_REQUEST['dependencia_baja'],
+				$_REQUEST['estado_baja'],
+				($_REQUEST['tramite_baja']<>'')?$_REQUEST['tramite_baja']:0,
+				$_REQUEST['tipo_mueble'],
+				$destino1,
+				$archivo1,
+				$_REQUEST['observaciones'],
+				$_REQUEST['elemento_ind'],
+				$fechaActual	
+		);
 		
 		
 		
-		$cadenaSql = $this->miSql->getCadenaSql ( 'insertar_faltante_sobrante', $arreglo );
+		
+		
+		
+	
+		$cadenaSql = $this->miSql->getCadenaSql ( 'insertar_baja', $arreglo );
+		
 		$registro = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
 		
-		
-		$arreglo=array(
-				$_REQUEST['elemento_ind'],
-				$registro[0][3],
-					
-				
-		);
-		$cadenaSql = $this->miSql->getCadenaSql ( 'actualizacion_estado_elemento', $arreglo );
-	    $actualizacion = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "acceso" );
 
-	    
-		
-		
+        		
 	
 		if ($registro) {
 			
-					
-			$arreglo=array(
-				$registro[0][0],
-					$registro[0][1],
-					$registro[0][2]	
-			);
-	
-			$registro=serialize($arreglo);
 			
-			redireccion::redireccionar ( 'inserto', $registro);
+			redireccion::redireccionar ( 'inserto', $registro[0][0]);
 		} else {
 			
 			redireccion::redireccionar ( 'noInserto' );
