@@ -154,6 +154,27 @@ $cadena9 = $this->miConfigurador->fabricaConexiones->crypto->codificar_url ( $ca
 $urlFinal9 = $url . $cadena9;
 
 
+
+// Variables
+$cadenaACodificar10 = "pagina=" . $this->miConfigurador->getVariableConfiguracion ( "pagina" );
+$cadenaACodificar10 .= "&procesarAjax=true";
+$cadenaACodificar10 .= "&action=index.php";
+$cadenaACodificar10 .= "&bloqueNombre=" . $esteBloque ["nombre"];
+$cadenaACodificar10 .= "&bloqueGrupo=" . $esteBloque ["grupo"];
+$cadenaACodificar10 .= $cadenaACodificar10 . "&funcion=disponibilidades";
+$cadenaACodificar10 .= "&tiempo=" . $_REQUEST ['tiempo'];
+
+// Codificar las variables
+$enlace = $this->miConfigurador->getVariableConfiguracion ( "enlace" );
+$cadena10 = $this->miConfigurador->fabricaConexiones->crypto->codificar_url ( $cadenaACodificar10, $enlace );
+
+// URL definitiva
+$urlFinal10 = $url . $cadena10;
+
+
+
+
+
 ?>
 <script type='text/javascript'>
 
@@ -520,6 +541,21 @@ $(function() {
 
            });
 
+
+
+    $("#<?php echo $this->campoSeguro('vigencia_disponibilidad')?>").change(function() {
+	
+				if($("#<?php echo $this->campoSeguro('vigencia_disponibilidad')?>").val()!=''){
+
+					disponibilidades();	
+		
+				}else{}
+
+	
+         });
+
+
+    
     $("#<?php echo $this->campoSeguro('iva')?>").select2();
 
     $("#<?php echo $this->campoSeguro('selec_proveedor')?>").change(function() {datosInfo(); });
@@ -641,6 +677,43 @@ $(function() {
 
     
 });
+
+function disponibilidades(elem, request, response){
+	  $.ajax({
+	    url: "<?php echo $urlFinal10?>",
+	    dataType: "json",
+	    data: { vigencia:$("#<?php echo $this->campoSeguro('vigencia_disponibilidad')?>").val()},
+	    success: function(data){ 
+	        if(data[0]!=" "){
+
+	            $("#<?php echo $this->campoSeguro('diponibilidad')?>").html('');
+	            $("<option value=''>Seleccione  ....</option>").appendTo("#<?php echo $this->campoSeguro('diponibilidad')?>");
+	            $.each(data , function(indice,valor){
+
+	            	$("<option value='"+data[ indice ].IDENTIFICADOR+"'>"+data[ indice ].NUMERO+"</option>").appendTo("#<?php echo $this->campoSeguro('diponibilidad')?>");
+	            	
+	            });
+	            $("#<?php echo $this->campoSeguro('diponibilidad')?>").removeAttr('disabled');
+	            $("#<?php echo $this->campoSeguro('diponibilidad')?>").select2({
+	          		 placeholder: "Search for a repository",
+	           		 minimumInputLength: 2	,
+	               });
+	            
+	            
+		        }
+
+	        
+
+
+		     }
+		                    
+	   });
+	};
+
+
+
+
+
 
 
 

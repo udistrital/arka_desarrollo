@@ -21,6 +21,13 @@
         });
 
         
+                
+         
+        
+        
+        
+        
+        
         	$('#<?php echo $this->campoSeguro('proveedor')?>').attr('disabled','');
         	$('#<?php echo $this->campoSeguro('nitProveedor')?>').attr('disabled','');
         	$('#<?php echo $this->campoSeguro('direccionProveedor')?>').attr('disabled','');
@@ -120,6 +127,15 @@
         });
    
         
+ 
+ 
+$("#<?php echo $this->campoSeguro('vigencia_disponibilidad')?>").select2();
+$("#<?php echo $this->campoSeguro('diponibilidad')?>").select2();
+$("#<?php echo $this->campoSeguro('vigencia_registro')?>").select2();
+$("#<?php echo $this->campoSeguro('registro')?>").select2();      
+
+
+
  
         
 

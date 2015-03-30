@@ -496,4 +496,21 @@ if ($_REQUEST ['funcion'] == 'letrasNumeros') {
 }
 
 
+if ($_REQUEST ['funcion'] == 'disponibilidades') {
+
+	
+	$conexion = "sicapital";
+	$esteRecursoDBO = $this->miConfigurador->fabricaConexiones->getRecursoDB ( $conexion );
+	
+	$cadenaSql = $this->sql->getCadenaSql ( 'buscar_disponibilidad', $_REQUEST ['vigencia'] );
+	$resultadoItems = $esteRecursoDBO->ejecutarAcceso ( $cadenaSql, "busqueda" );
+	
+	
+	$resultado = json_encode ( $resultadoItems);
+	
+	echo $resultado;
+}
+	
+
+
 ?>

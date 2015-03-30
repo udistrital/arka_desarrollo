@@ -149,6 +149,33 @@ class Sql extends \Sql {
 			 * Clausulas Del Caso Uso.
 			 */
 			
+			case "vigencia_disponibilidad" :
+				$cadenaSql = "SELECT DIS_VIGENCIA AS valor, DIS_VIGENCIA AS vigencia  ";
+				$cadenaSql .= "FROM DISPONIBILIDAD ";
+				$cadenaSql .= "GROUP BY DIS_VIGENCIA";
+				break;
+				
+
+			case "buscar_disponibilidad" :
+				$cadenaSql = "SELECT DISTINCT DIS_IDENTIFICADOR AS identificador,DIS_NUMERO_DISPONIBILIDAD AS numero ";
+				$cadenaSql .= "FROM DISPONIBILIDAD ";
+				$cadenaSql .= "WHERE DIS_VIGENCIA='".$variable."'";
+				
+				
+				break;
+			case "vigencia_registro" :
+				$cadenaSql = "SELECT id_forma_pago, descripcion ";
+				$cadenaSql .= "FROM forma_pago_orden; ";
+				
+				break;
+			case "numero_registro" :
+				$cadenaSql = "SELECT id_forma_pago, descripcion ";
+				$cadenaSql .= "FROM forma_pago_orden; ";
+				
+				break;
+			
+			// ------------------
+			
 			case "seleccionar_forma_pago" :
 				$cadenaSql = "SELECT id_forma_pago, descripcion ";
 				$cadenaSql .= "FROM forma_pago_orden; ";
