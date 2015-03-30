@@ -86,7 +86,7 @@ class registrarForm {
 				'selec_proveedor' => $OrdenCompra [0] [16],
 				'selec_dependencia' => $OrdenCompra [0] [19],
 				'nombreContratista' => $OrdenCompra [0] [21],
-				'nombreCotizacion' => $OrdenCompra [0] [18],
+				'nombreCotizacion' => $OrdenCompra [0] [17],
 				'id_ordenador_oculto' => $OrdenCompra [0] [21],
 				'total_preliminar' => $OrdenCompra [0] [22],
 				'total_iva' => $OrdenCompra [0] [23],
@@ -96,6 +96,7 @@ class registrarForm {
 				'iva' => $iva,
 				'vigencia_contratista'=>$OrdenCompra[0][26]
 		);
+		
 		
 		
 		$cadenaSql = $this->miSql->getCadenaSql ( 'consultarContratista', $OrdenCompra [0] ['id_contratista'] );
