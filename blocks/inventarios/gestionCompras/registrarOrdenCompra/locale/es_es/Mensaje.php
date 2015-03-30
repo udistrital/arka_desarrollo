@@ -1,6 +1,52 @@
 <?php
 $this->idioma ["noDefinido"] = "Etiqueta no esta definida en locale/es_es/Mensaje.php";
 
+
+//________________
+$this->idioma ["vigencia_registro"] ="Vigencia Registro : ";
+$this->idioma ["vigencia_registroTitulo"] ="Seleccione Vigencia Registro";
+
+$this->idioma ["registro"] ="Número Registro : ";
+$this->idioma ["registroTitulo"] ="Seleccione Número Registro";
+
+$this->idioma ["valor_registro"] ="Valor  Registro ($): ";
+$this->idioma ["valor_registroTitulo"] ="Valor Registro Presupuestal";
+
+
+$this->idioma ["fecha_registro"] ="Fecha Registro : ";
+$this->idioma ["fecha_registroTitulo"] ="Fecha de Registro Presupuestal";
+
+
+$this->idioma ["valorL_registro"] ="Valor en Letras : ";
+$this->idioma ["valorL_registroTitulo"] ="Valor en Letras  Registro Presupuestal";
+
+
+
+//_______________________________________
+
+
+$this->idioma ["vigencia_disponibilidad"] ="Vigencia Disponibilidad : ";
+$this->idioma ["vigencia_disponibilidadTitulo"] ="Seleccione Vigencia";
+
+$this->idioma ["diponibilidad"] ="Número Disponibilidad : ";
+$this->idioma ["diponibilidadTitulo"] ="Seleccione Número Disponibilidad";
+
+
+$this->idioma ["valorLetras_disponibilidad"] ="Valor en Letras: ";
+$this->idioma ["valorLetras_disponibilidadTitulo"] ="Valor en Letras Disponibilidad Presupuestal";
+
+
+$this->idioma ["valor_disponibilidad"] ="Valor Disponibilidad ($): ";
+$this->idioma ["valor_disponibilidadTitulo"] ="Valor Disponibilidad Presupuestal";
+
+$this->idioma ["fecha_diponibilidad"] ="Fecha Disponibilidad : ";
+$this->idioma ["fecha_diponibilidadTitulo"] ="Ingrese Fecha Disponibilidad Presupuestal (YYYY-MM-DD)";
+
+
+//____________________________________________________________________________________
+
+
+
 $this->idioma ["selec_dependencia"] ="Dependencia : ";
 $this->idioma ["selec_dependenciaTitulo"] ="Seleccione Dependencia";
 
@@ -23,15 +69,11 @@ $this->idioma ["total_iva"] = "Total Iva ($):";
 $this->idioma ["reg_proveedor"] ="Registrar Proveedor: ";
 $this->idioma ["reg_proveedorTitulo"] ="Seleccione Proveedor";
 
-$this->idioma ["diponibilidad"] ="Disponibilidad Presupuestal : ";
-$this->idioma ["diponibilidadTitulo"] ="Ingrese Disponibilidad Presupuestal";
 
 $this->idioma ["selec_proveedor"] ="&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspProveedor : ";
 $this->idioma ["selec_proveedorTitulo"] ="Seleccione Proveedor";
 
 
-$this->idioma ["fecha_diponibilidad"] ="Fecha Disponibilidad : ";
-$this->idioma ["fecha_diponibilidadTitulo"] ="Ingrese Fecha Disponibilidad Presupuestal (YYYY-MM-DD)";
 
 $this->idioma ["proveedor"] ="&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspRepresentante Legal:";
 $this->idioma ["proveedorTitulo"] ="Ingrese Representante Legal";
