@@ -557,4 +557,23 @@ if ($_REQUEST ['funcion'] == 'Inforegistro') {
 }
 
 
+
+if ($_REQUEST ['funcion'] == 'consultarContratistas') {
+
+	$conexion = "sicapital";
+
+	$esteRecursoDBO = $this->miConfigurador->fabricaConexiones->getRecursoDB ( $conexion );
+
+
+	$cadenaSql = $this->sql->getCadenaSql ( 'buscar_contratista', $_REQUEST['vigencia'] );
+	$resultadoItems = $esteRecursoDBO->ejecutarAcceso ( $cadenaSql, "busqueda" );
+
+
+	$resultado = json_encode ( $resultadoItems);
+
+	echo $resultado;
+}
+
+
+
 ?>

@@ -25,6 +25,10 @@ $this->idioma ["valorL_registroTitulo"] ="Valor en Letras  Registro Presupuestal
 //_______________________________________
 
 
+
+
+
+
 $this->idioma ["vigencia_disponibilidad"] ="Vigencia Disponibilidad : ";
 $this->idioma ["vigencia_disponibilidadTitulo"] ="Seleccione Vigencia";
 
@@ -44,6 +48,12 @@ $this->idioma ["fecha_diponibilidadTitulo"] ="Ingrese Fecha Disponibilidad Presu
 
 
 //____________________________________________________________________________________
+
+
+
+
+$this->idioma ["vigencia_contratista"] ="&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspVigencia Contratista: ";
+$this->idioma ["vigencia_contratistaTitulo"] ="Seleccione Vigencia Contratista";
 
 
 

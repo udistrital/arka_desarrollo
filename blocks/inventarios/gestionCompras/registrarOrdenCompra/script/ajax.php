@@ -221,6 +221,21 @@ $cadena14 = $this->miConfigurador->fabricaConexiones->crypto->codificar_url ( $c
 $urlFinal14 = $url . $cadena14;
 
 
+// Variables
+$cadenaACodificar15 = "pagina=" . $this->miConfigurador->getVariableConfiguracion ( "pagina" );
+$cadenaACodificar15 .= "&procesarAjax=true";
+$cadenaACodificar15 .= "&action=index.php";
+$cadenaACodificar15 .= "&bloqueNombre=" . $esteBloque ["nombre"];
+$cadenaACodificar15 .= "&bloqueGrupo=" . $esteBloque ["grupo"];
+$cadenaACodificar15 .= $cadenaACodificar15 . "&funcion=consultarContratistas";
+$cadenaACodificar15 .= "&tiempo=" . $_REQUEST ['tiempo'];
+
+// Codificar las variables
+$enlace = $this->miConfigurador->getVariableConfiguracion ( "enlace" );
+$cadena15 = $this->miConfigurador->fabricaConexiones->crypto->codificar_url ( $cadenaACodificar15, $enlace );
+
+// URL definitiva
+$urlFinal15 = $url . $cadena15;
 
 
 ?>
@@ -633,6 +648,18 @@ $(function() {
 
 
 
+
+    $("#<?php echo $this->campoSeguro('vigencia_contratista')?>").change(function() {
+    	
+		if($("#<?php echo $this->campoSeguro('vigencia_contratista')?>").val()!=''){
+
+			contratistasC();	
+
+		}else{}
+
+
+ 		});
+    
     $("#<?php echo $this->campoSeguro('vigencia_disponibilidad')?>").change(function() {
 	
 				if($("#<?php echo $this->campoSeguro('vigencia_disponibilidad')?>").val()!=''){
@@ -935,7 +962,43 @@ function disponibilidades(elem, request, response){
 				};
 
 		
-		
+				function contratistasC(elem, request, response){
+					
+					  $.ajax({
+					    url: "<?php echo $urlFinal15?>",
+					    dataType: "json",
+					    data: { vigencia:$("#<?php echo $this->campoSeguro('vigencia_contratista')?>").val()},
+					    success: function(data){ 
+					        if(data[0]!=" "){
+
+					            $("#<?php echo $this->campoSeguro('nombreContratista')?>").html('');
+					            $("<option value=''>Seleccione  ....</option>").appendTo("#<?php echo $this->campoSeguro('nombreContratista')?>");
+					            $.each(data , function(indice,valor){
+
+					            	$("<option value='"+data[ indice ].IDENTIFICADOR+"'>"+data[ indice ].CONTRATISTA+"</option>").appendTo("#<?php echo $this->campoSeguro('nombreContratista')?>");
+					            	
+					            });
+					            
+					            $("#<?php echo $this->campoSeguro('nombreContratista')?>").removeAttr('disabled');
+					            $('#<?php echo $this->campoSeguro('nombreContratista')?>').attr("class", "  validate[required]");
+					            $('#<?php echo $this->campoSeguro('nombreContratista')?>').attr("style", "width: 60px '");
+
+					            					            
+					            $("#<?php echo $this->campoSeguro('nombreContratista')?>").select2({
+					          		 placeholder: "Search for a repository",
+					           		 minimumInputLength: 3	,
+					               });
+					          
+					            
+						        }
+
+					        
+
+
+						     }
+						                    
+					   });
+					};
 
 
 

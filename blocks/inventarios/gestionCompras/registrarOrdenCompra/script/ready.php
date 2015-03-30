@@ -121,6 +121,7 @@ $('#<?php echo $this->campoSeguro('diponibilidad')?>').attr('disabled','');
 $("#<?php echo $this->campoSeguro('vigencia_registro')?>").select2();
 $("#<?php echo $this->campoSeguro('registro')?>").attr('disabled',''); 
 
+$("#<?php echo $this->campoSeguro('vigencia_contratista')?>").select2();
 
 
  

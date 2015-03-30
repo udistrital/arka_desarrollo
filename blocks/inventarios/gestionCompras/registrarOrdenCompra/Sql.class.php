@@ -149,6 +149,18 @@ class Sql extends \Sql {
 			 * Clausulas Del Caso Uso.
 			 */
 			
+			case "buscar_contratista" :
+				$cadenaSql = "SELECT CON_IDENTIFICADOR AS IDENTIFICADOR , CON_IDENTIFICACION ||'  -  '||CON_NOMBRE AS CONTRATISTA ";
+				$cadenaSql .= "FROM CONTRATISTAS ";
+				$cadenaSql .= "WHERE CON_VIGENCIA ='" . $variable . "' ";
+				break;
+			
+			case "vigencia_contratista" :
+				$cadenaSql = "SELECT CON_VIGENCIA AS VALOR , CON_VIGENCIA AS VIGENCIA  ";
+				$cadenaSql .= "FROM CONTRATISTAS ";
+				$cadenaSql .= "GROUP BY CON_VIGENCIA ";
+				break;
+			
 			case "vigencia_disponibilidad" :
 				$cadenaSql = "SELECT DIS_VIGENCIA AS valor, DIS_VIGENCIA AS vigencia  ";
 				$cadenaSql .= "FROM DISPONIBILIDAD ";
