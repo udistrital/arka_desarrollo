@@ -86,6 +86,18 @@ class Sql extends \Sql {
 			 * que utilicen esta plantilla
 			 */
 			
+			case "registrarEvento" :
+				$cadena_sql = "INSERT INTO ";
+				$cadena_sql .= $prefijo . "logger( ";
+				$cadena_sql .= "id_usuario, ";
+				$cadena_sql .= "evento, ";
+				$cadena_sql .= "fecha) ";
+				$cadena_sql .= "VALUES( ";
+				$cadena_sql .= $variable [0] . ", ";
+				$cadena_sql .= "'" . $variable [1] . "', ";
+				$cadena_sql .= "'" . time () . "') ";
+				break;
+			
 			case "iniciarTransaccion" :
 				$cadenaSql = "START TRANSACTION";
 				break;
@@ -423,22 +435,54 @@ class Sql extends \Sql {
 				$cadenaSql .= "'" . $variable [4] . "') ";
 				$cadenaSql .= "RETURNING  id_encargado; ";
 				break;
+			// ---sdfsfsf
+			
+			// INSERT
+			// informacion_presupuestal_orden(
+			// id_informacion, vigencia_dispo, numero_dispo, valor_disp, fecha_dip,
+			// letras_dispo, vigencia_regis, numero_regis, valor_regis, fecha_regis,
+			// letras_regis, fecha_registro, estado_registro)
+			// ;
+			
+			case "insertarInformacionPresupuestal" :
+				$cadenaSql = " INSERT INTO informacion_presupuestal_orden( ";
+				$cadenaSql .= " vigencia_dispo, numero_dispo, valor_disp, fecha_dip,
+								letras_dispo, vigencia_regis, numero_regis, valor_regis, fecha_regis,
+								letras_regis, fecha_registro)";
+				$cadenaSql .= " VALUES (";
+				$cadenaSql .= "'" . $variable [1] . "',";
+				$cadenaSql .= "'" . $variable [2] . "',";
+				$cadenaSql .= "'" . $variable [3] . "',";
+				$cadenaSql .= "'" . $variable [4] . "',";
+				$cadenaSql .= "'" . $variable [5] . "',";
+				$cadenaSql .= "'" . $variable [6] . "',";
+				$cadenaSql .= "'" . $variable [7] . "',";
+				$cadenaSql .= "'" . $variable [8] . "',";
+				$cadenaSql .= "'" . $variable [9] . "',";
+				$cadenaSql .= "'" . $variable [10] . "',";
+				$cadenaSql .= "'" . $variable [0] . "') ";
+				$cadenaSql .= "RETURNING  id_informacion; ";
+				break;
 			
 			case "insertarOrden" :
 				$cadenaSql = " INSERT INTO ";
 				$cadenaSql .= " arka_inventarios.orden_compra(";
-				$cadenaSql .= " fecha_registro, disponibilidad_presupuestal, ";
-				$cadenaSql .= " fecha_disponibilidad, rubro, obligaciones_proveedor, obligaciones_contratista, ";
+				$cadenaSql .= " fecha_registro,info_presupuestal,  ";
+				$cadenaSql .= " rubro, obligaciones_proveedor, obligaciones_contratista, ";
 				$cadenaSql .= " poliza1, poliza2, poliza3, poliza4, poliza5, lugar_entrega, destino, ";
 				$cadenaSql .= " tiempo_entrega, forma_pago, supervision, inhabilidades, id_proveedor,ruta_cotizacion,nombre_cotizacion,";
-				$cadenaSql .= " id_dependencia, id_contratista, id_ordenador,subtotal, iva, total,valor_letras,estado)";
+				$cadenaSql .= " id_dependencia, id_contratista, id_ordenador,subtotal, iva, total,valor_letras,vig_contratista,estado)";
 				$cadenaSql .= " VALUES (";
 				$cadenaSql .= "'" . $variable [0] . "',";
 				$cadenaSql .= "'" . $variable [1] . "',";
 				$cadenaSql .= "'" . $variable [2] . "',";
 				$cadenaSql .= "'" . $variable [3] . "',";
 				$cadenaSql .= "'" . $variable [4] . "',";
-				$cadenaSql .= "'" . $variable [5] . "',";
+				if ($variable [5] != '') {
+					$cadenaSql .= "'" . $variable [5] . "',";
+				} else {
+					$cadenaSql .= "'0',";
+				}
 				if ($variable [6] != '') {
 					$cadenaSql .= "'" . $variable [6] . "',";
 				} else {
@@ -459,12 +503,8 @@ class Sql extends \Sql {
 				} else {
 					$cadenaSql .= "'0',";
 				}
-				if ($variable [10] != '') {
-					$cadenaSql .= "'" . $variable [10] . "',";
-				} else {
-					$cadenaSql .= "'0',";
-				}
 				
+				$cadenaSql .= "'" . $variable [10] . "',";
 				$cadenaSql .= "'" . $variable [11] . "',";
 				$cadenaSql .= "'" . $variable [12] . "',";
 				$cadenaSql .= "'" . $variable [13] . "',";

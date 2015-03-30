@@ -640,11 +640,6 @@ $(function() {
    	 minimumInputLength: 5,
 
        });
-    $("#<?php echo $this->campoSeguro('nombreContratista')?>").select2({
-      	 placeholder: "Search for a repository",
-       	 minimumInputLength: 3,
-
-           });
 
 
 
@@ -981,8 +976,8 @@ function disponibilidades(elem, request, response){
 					            
 					            $("#<?php echo $this->campoSeguro('nombreContratista')?>").removeAttr('disabled');
 					            $('#<?php echo $this->campoSeguro('nombreContratista')?>').attr("class", "  validate[required]");
-					            $('#<?php echo $this->campoSeguro('nombreContratista')?>').attr("style", "width: 60px '");
-
+					            
+					            $('#<?php echo $this->campoSeguro('nombreContratista')?>').attr("style", "width: 70 ; '");
 					            					            
 					            $("#<?php echo $this->campoSeguro('nombreContratista')?>").select2({
 					          		 placeholder: "Search for a repository",
@@ -991,6 +986,7 @@ function disponibilidades(elem, request, response){
 					          
 					            
 						        }
+					        
 
 					        
 

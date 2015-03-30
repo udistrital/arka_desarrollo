@@ -98,7 +98,7 @@ class registrarForm {
 			echo $this->miFormulario->marcoAgrupacion ( 'inicio', $atributos );
 			unset ( $atributos );
 			{
-				/*
+				
 				$esteCampo = "AgrupacionDisponibilidad";
 				$atributos ['id'] = $esteCampo;
 				$atributos ['leyenda'] = "Información Respaldo Presupuestal";
@@ -1503,7 +1503,7 @@ class registrarForm {
 				}
 				echo $this->miFormulario->agrupacion ( 'fin' );
 				unset ( $atributos );
-				*/
+				
 				$esteCampo = "Encargados";
 				$atributos ['id'] = $esteCampo;
 				$atributos ['leyenda'] = $this->lenguaje->getCadena ( $esteCampo );
@@ -1524,7 +1524,7 @@ class registrarForm {
 						$atributos ["etiquetaObligatorio"] = true;
 						$atributos ['tab'] = $tab ++;
 						$atributos ['seleccion'] = - 1;
-						$atributos ['anchoEtiqueta'] = 190;
+						$atributos ['anchoEtiqueta'] = 180;
 						$atributos ['evento'] = '';
 						if (isset ( $_REQUEST [$esteCampo] )) {
 							$atributos ['valor'] = $_REQUEST [$esteCampo];
@@ -1538,8 +1538,8 @@ class registrarForm {
 						$atributos ['ajax_control'] = $esteCampo;
 						$atributos ['estilo'] = "jqueryui";
 						$atributos ['validar'] = "required";
-						$atributos ['limitar'] = 1;
-						$atributos ['anchoCaja'] = 40;
+						$atributos ['limitar'] = true;
+						$atributos ['anchoCaja'] = 25;
 						$atributos ['miEvento'] = '';
 						$atributos ['cadena_sql'] = $this->miSql->getCadenaSql ( "ordenador_gasto" );
 						$matrizItems = array (
@@ -1581,7 +1581,7 @@ class registrarForm {
 						}
 						$atributos ['titulo'] = $this->lenguaje->getCadena ( $esteCampo . 'Titulo' );
 						$atributos ['deshabilitado'] = false;
-						$atributos ['tamanno'] = 28;
+						$atributos ['tamanno'] = 25;
 						$atributos ['maximoTamanno'] = '';
 						$atributos ['anchoEtiqueta'] = 190;
 						$tab ++;
@@ -1629,7 +1629,7 @@ class registrarForm {
 							$atributos ['valor'] = '';
 						}
 						$atributos ['deshabilitado'] = false;
-						$atributos ['columnas'] = 2;
+						$atributos ['columnas'] = 1;
 						$atributos ['tamanno'] = 1;
 						$atributos ['ajax_function'] = "";
 						$atributos ['ajax_control'] = $esteCampo;
@@ -1673,7 +1673,7 @@ class registrarForm {
 						} else {
 							$atributos ['valor'] = '';
 						}
-						$atributos ['deshabilitado'] = false;
+						$atributos ['deshabilitado'] = true;
 						$atributos ['columnas'] = 1;
 						$atributos ['tamanno'] = 1;
 						$atributos ['ajax_function'] = "";
@@ -1681,7 +1681,7 @@ class registrarForm {
 						$atributos ['estilo'] = "jqueryui";
 						$atributos ['validar'] = "required";
 						$atributos ['limitar'] = true;
-						$atributos ['anchoCaja'] = 70;
+						$atributos ['anchoCaja'] = 100;
 						$atributos ['miEvento'] = '';
 // 						$atributos ['cadena_sql'] = $this->miSql->getCadenaSql ( "constratistas" );
 						$matrizItems = array (

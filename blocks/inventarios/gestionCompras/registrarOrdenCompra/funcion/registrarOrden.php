@@ -31,6 +31,8 @@ class RegistradorOrden {
 		
 		$fechaActual = date ( 'Y-m-d' );
 		
+		$miSesion = \Sesion::singleton ();
+		
 		$esteBloque = $this->miConfigurador->getVariableConfiguracion ( "esteBloque" );
 		
 		$rutaBloque = $this->miConfigurador->getVariableConfiguracion ( "raizDocumento" ) . "/blocks/inventarios/gestionCompras/";
@@ -115,10 +117,26 @@ class RegistradorOrden {
 		
 		// Registro Orden
 		
+		$arreglo = array (
+				$fechaActual,
+				$_REQUEST ['vigencia_disponibilidad'],
+				$_REQUEST ['diponibilidad'],
+				$_REQUEST ['valor_disponibilidad'],
+				$_REQUEST ['fecha_diponibilidad'],
+				$_REQUEST ['valorLetras_disponibilidad'],
+				$_REQUEST ['vigencia_registro'],
+				$_REQUEST ['registro'],
+				$_REQUEST ['valor_registro'],
+				$_REQUEST ['fecha_registro'],
+				$_REQUEST ['valorL_registro'] 
+		);
+		
+		$cadenaSql = $this->miSql->getCadenaSql ( 'insertarInformacionPresupuestal', $arreglo );
+		$info_presupuestal = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
+		
 		$datosOrden = array (
 				$fechaActual,
-				$_REQUEST ['diponibilidad'],
-				$_REQUEST ['fecha_diponibilidad'],
+				$info_presupuestal [0] [0],
 				$_REQUEST ['rubro'],
 				$_REQUEST ['obligacionesProveedor'],
 				$_REQUEST ['obligacionesContratista'],
@@ -142,11 +160,16 @@ class RegistradorOrden {
 				$Subtotal,
 				$iva,
 				$total,
-				$_REQUEST['valorLetras_registro'],
+				$_REQUEST ['valorLetras_registro'],
+				$_REQUEST['vigencia_contratista'],
 				'TRUE' 
 		);
 		
+
 		$cadenaSql = $this->miSql->getCadenaSql ( 'insertarOrden', $datosOrden );
+		
+		
+		
 		$id_orden = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
 		
 		foreach ( $items as $contenido ) {
@@ -159,7 +182,7 @@ class RegistradorOrden {
 					$contenido ['descripcion'],
 					$contenido ['valor_unitario'],
 					$contenido ['valor_total'],
-					$contenido ['descuento']
+					$contenido ['descuento'] 
 			);
 			
 			$cadenaSql = $this->miSql->getCadenaSql ( 'insertarItems', $datosItems );
@@ -173,6 +196,28 @@ class RegistradorOrden {
 				$id_orden [0] [0],
 				$fechaActual 
 		);
+		
+		
+		
+// 		//----- Registrar Evento 
+		
+// 		$arregloLogEvento = array (
+// 				'insertar_orden_compra',
+// 				$datosOrden,
+// 				$miSesion->getSesionUsuarioId (),
+// 				$_SERVER ['REMOTE_ADDR'],
+// 				$_SERVER ['HTTP_USER_AGENT']
+// 		);
+// 		$argumento = json_encode ( $arregloLogEvento );
+// 		$arregloFinalLogEvento = array (
+// 				$miSesion->getSesionUsuarioId (),
+// 				$argumento
+// 		);
+// 		$cadena_sql = $this->sql->cadena_sql ( "registrarEvento", $arregloFinalLogEvento );
+// 		$registroAcceso = $esteRecursoDB->ejecutarAcceso ( $cadena_sql, "acceso" );
+		
+		
+// 		//---------
 		
 		if ($items == 1) {
 			
