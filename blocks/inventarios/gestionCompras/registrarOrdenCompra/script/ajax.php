@@ -174,6 +174,27 @@ $urlFinal10 = $url . $cadena10;
 
 
 
+// Variables
+$cadenaACodificar12 = "pagina=" . $this->miConfigurador->getVariableConfiguracion ( "pagina" );
+$cadenaACodificar12 .= "&procesarAjax=true";
+$cadenaACodificar12 .= "&action=index.php";
+$cadenaACodificar12 .= "&bloqueNombre=" . $esteBloque ["nombre"];
+$cadenaACodificar12 .= "&bloqueGrupo=" . $esteBloque ["grupo"];
+$cadenaACodificar12 .= $cadenaACodificar12 . "&funcion=Infodisponibilidades";
+$cadenaACodificar12 .= "&tiempo=" . $_REQUEST ['tiempo'];
+
+// Codificar las variables
+$enlace = $this->miConfigurador->getVariableConfiguracion ( "enlace" );
+$cadena12 = $this->miConfigurador->fabricaConexiones->crypto->codificar_url ( $cadenaACodificar12, $enlace );
+
+// URL definitiva
+$urlFinal12 = $url . $cadena12;
+
+
+
+
+
+
 
 ?>
 <script type='text/javascript'>
@@ -193,6 +214,48 @@ function valorLetras(elem, request, response){
 		                    
 	   });
 	};
+
+
+
+
+
+	function valorLetrasDis(elem, request, response){
+		  $.ajax({
+		    url: "<?php echo $urlFinal9?>",
+		    dataType: "json",
+		    data: { valor:$("#<?php echo $this->campoSeguro('valor_disponibilidad')?>").val()},
+		    success: function(data){ 
+
+
+		    			$("#<?php echo $this->campoSeguro('valorLetras_disponibilidad')?>").val(data);
+
+		    }
+			                    
+		   });
+		};
+
+
+
+
+		function valorLetrasReg(elem, request, response){
+			  $.ajax({
+			    url: "<?php echo $urlFinal9?>",
+			    dataType: "json",
+			    data: { valor:$("#<?php echo $this->campoSeguro('valor_registro')?>").val()},
+			    success: function(data){ 
+
+
+			    			$("#<?php echo $this->campoSeguro('valorL_registro')?>").val(data);
+
+			    }
+				                    
+			   });
+			};
+
+
+		
+
+	
 
 function CalItem(elem, request, response){
 	  $.ajax({
@@ -555,6 +618,19 @@ $(function() {
          });
 
 
+    $("#<?php echo $this->campoSeguro('diponibilidad')?>").change(function() {
+    	
+		if($("#<?php echo $this->campoSeguro('diponibilidad')?>").val()!=''){
+
+			infodisponibilidades();	
+
+		}else{}
+
+
+ });
+    
+
+
     
     $("#<?php echo $this->campoSeguro('iva')?>").select2();
 
@@ -709,6 +785,32 @@ function disponibilidades(elem, request, response){
 		                    
 	   });
 	};
+
+
+	function infodisponibilidades(elem, request, response){
+		  $.ajax({
+		    url: "<?php echo $urlFinal12?>",
+		    dataType: "json",
+		    data: { vigencia:$("#<?php echo $this->campoSeguro('vigencia_disponibilidad')?>").val(),
+			    disponibilidad:$("#<?php echo $this->campoSeguro('diponibilidad')?>").val()},
+		    success: function(data){ 
+			    
+		        if(data[0]!="null"){
+		        	$("#<?php echo $this->campoSeguro('fecha_diponibilidad')?>").val(data[0]);
+			    	$("#<?php echo $this->campoSeguro('valor_disponibilidad')?>").val(data[1]);
+				
+			    	valorLetrasDis();
+	
+		            
+			        }
+
+		        
+
+
+			     }
+			                    
+		   });
+		};
 
 
 

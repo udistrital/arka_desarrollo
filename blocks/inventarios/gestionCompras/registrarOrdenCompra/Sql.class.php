@@ -154,15 +154,27 @@ class Sql extends \Sql {
 				$cadenaSql .= "FROM DISPONIBILIDAD ";
 				$cadenaSql .= "GROUP BY DIS_VIGENCIA";
 				break;
-				
-
+			
 			case "buscar_disponibilidad" :
 				$cadenaSql = "SELECT DISTINCT DIS_IDENTIFICADOR AS identificador,DIS_NUMERO_DISPONIBILIDAD AS numero ";
 				$cadenaSql .= "FROM DISPONIBILIDAD ";
-				$cadenaSql .= "WHERE DIS_VIGENCIA='".$variable."'";
-				
+				$cadenaSql .= "WHERE DIS_VIGENCIA='" . $variable . "'";
 				
 				break;
+			
+			// FROM DISPONIBILIDAD
+			// WHERE DIS_IDENTIFICADOR='1'AND DIS_VIGENCIA='2015'
+			// AND ROWNUM = 1
+			
+			case "info_disponibilidad" :
+				$cadenaSql = "SELECT DISTINCT TO_CHAR(DIS_FECHA_REGISTRO,'yyyy-mm-dd') AS FECHA,  DIS_VALOR ";
+				$cadenaSql .= "FROM DISPONIBILIDAD  ";
+				$cadenaSql .= "WHERE DIS_VIGENCIA='" . $variable [1] . "' ";
+				$cadenaSql .= "AND  DIS_IDENTIFICADOR='" . $variable [0] . "' ";
+				$cadenaSql.="AND ROWNUM = 1 ";
+				
+				break;
+			
 			case "vigencia_registro" :
 				$cadenaSql = "SELECT id_forma_pago, descripcion ";
 				$cadenaSql .= "FROM forma_pago_orden; ";
