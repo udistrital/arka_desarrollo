@@ -20,8 +20,6 @@ include_once ("core/connection/Sql.class.php");
  * poder realizar rollbacks gestionados por el aplicativo.
 */
 
-
-
 class Sql extends \Sql {
 
     var $miConfigurador;
