@@ -133,7 +133,28 @@ class RegistradorOrden {
 			$_REQUEST ['selec_proveedor']=$_REQUEST ['selec_proveedor'];
 				
 				
+			
+			
+			
 		}
+		$arreglo = array (
+				$_REQUEST ['vigencia_disponibilidad'],
+				$_REQUEST ['diponibilidad'],
+				$_REQUEST ['valor_disponibilidad'],
+				$_REQUEST ['fecha_diponibilidad'],
+				$_REQUEST ['valorLetras_disponibilidad'],
+				$_REQUEST ['vigencia_registro'],
+				$_REQUEST ['registro'],
+				$_REQUEST ['valor_registro'],
+				$_REQUEST ['fecha_registro'],
+				$_REQUEST ['valorL_registro'],
+				$_REQUEST ['']
+		);
+		
+		
+		
+		
+		
 		
 		
 

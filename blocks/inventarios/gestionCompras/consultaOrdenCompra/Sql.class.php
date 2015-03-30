@@ -149,6 +149,74 @@ class Sql extends \Sql {
 			 * Clausulas Del Caso Uso.
 			 */
 			
+			case "informacionPresupuestal" :
+				$cadenaSql = "SELECT  vigencia_dispo, numero_dispo, valor_disp, fecha_dip,
+									letras_dispo, vigencia_regis, numero_regis, valor_regis, fecha_regis,
+									letras_regis  ";
+				$cadenaSql .= "FROM informacion_presupuestal_orden ";
+				$cadenaSql .= "WHERE id_informacion ='" . $variable . "' ";
+				
+				break;
+			
+			case "buscar_contratista" :
+				$cadenaSql = "SELECT CON_IDENTIFICADOR AS IDENTIFICADOR , CON_IDENTIFICACION ||'  -  '||CON_NOMBRE AS CONTRATISTA ";
+				$cadenaSql .= "FROM CONTRATISTAS ";
+				$cadenaSql .= "WHERE CON_VIGENCIA ='" . $variable . "' ";
+				break;
+			
+			case "vigencia_contratista" :
+				$cadenaSql = "SELECT CON_VIGENCIA AS VALOR , CON_VIGENCIA AS VIGENCIA  ";
+				$cadenaSql .= "FROM CONTRATISTAS ";
+				$cadenaSql .= "GROUP BY CON_VIGENCIA ";
+				break;
+			
+			case "vigencia_disponibilidad" :
+				$cadenaSql = "SELECT DIS_VIGENCIA AS valor, DIS_VIGENCIA AS vigencia  ";
+				$cadenaSql .= "FROM DISPONIBILIDAD ";
+				$cadenaSql .= "GROUP BY DIS_VIGENCIA";
+				break;
+			
+			case "buscar_disponibilidad" :
+				$cadenaSql = "SELECT DISTINCT DIS_IDENTIFICADOR AS identificador,DIS_NUMERO_DISPONIBILIDAD AS numero ";
+				$cadenaSql .= "FROM DISPONIBILIDAD ";
+				$cadenaSql .= "WHERE DIS_VIGENCIA='" . $variable . "'";
+				
+				break;
+			
+			case "info_disponibilidad" :
+				$cadenaSql = "SELECT DISTINCT TO_CHAR(DIS_FECHA_REGISTRO,'yyyy-mm-dd') AS FECHA,  DIS_VALOR ";
+				$cadenaSql .= "FROM DISPONIBILIDAD  ";
+				$cadenaSql .= "WHERE DIS_VIGENCIA='" . $variable [1] . "' ";
+				$cadenaSql .= "AND  DIS_IDENTIFICADOR='" . $variable [0] . "' ";
+				$cadenaSql .= "AND ROWNUM = 1 ";
+				
+				break;
+			
+			case "vigencia_registro" :
+				$cadenaSql = "SELECT REP_VIGENCIA AS VALOR,REP_VIGENCIA AS VIGENCIA ";
+				$cadenaSql .= "FROM REGISTRO_PRESUPUESTAL ";
+				$cadenaSql .= "GROUP BY REP_VIGENCIA ";
+				
+				break;
+			
+			case "buscar_registro" :
+				$cadenaSql = "SELECT DISTINCT REP_IDENTIFICADOR AS IDENTIFICADOR,REP_NUMERO_DISPONIBILIDAD AS NUMERO ";
+				$cadenaSql .= "FROM REGISTRO_PRESUPUESTAL ";
+				$cadenaSql .= "WHERE REP_VIGENCIA='" . $variable . "'";
+				
+				break;
+			
+			case "info_registro" :
+				$cadenaSql = "SELECT TO_CHAR(REP_FECHA_REGISTRO,'yyyy-mm-dd') AS fecha,  REP_VALOR ";
+				$cadenaSql .= "FROM REGISTRO_PRESUPUESTAL ";
+				$cadenaSql .= "WHERE REP_VIGENCIA='" . $variable [1] . "' ";
+				$cadenaSql .= "AND  REP_IDENTIFICADOR='" . $variable [0] . "' ";
+				$cadenaSql .= "AND ROWNUM = 1 ";
+				
+				break;
+			
+			// ----
+			
 			case "seleccionar_forma_pago" :
 				$cadenaSql = "SELECT id_forma_pago, descripcion ";
 				$cadenaSql .= "FROM forma_pago_orden; ";
@@ -333,11 +401,11 @@ class Sql extends \Sql {
 			
 			case "consultarOrdenCompra" :
 				$cadenaSql = " SELECT ";
-				$cadenaSql .= " fecha_registro, disponibilidad_presupuestal,";
-				$cadenaSql .= " fecha_disponibilidad, rubro, obligaciones_proveedor, obligaciones_contratista,";
+				$cadenaSql .= " fecha_registro, ";
+				$cadenaSql .= " info_presupuestal, rubro, obligaciones_proveedor, obligaciones_contratista,";
 				$cadenaSql .= " poliza1, poliza2, poliza3, poliza4, poliza5, lugar_entrega, destino,";
 				$cadenaSql .= " tiempo_entrega, forma_pago, supervision, inhabilidades, id_proveedor,";
-				$cadenaSql .= " ruta_cotizacion, nombre_cotizacion, id_dependencia, id_contratista, id_ordenador,subtotal, iva, total, valor_letras ";
+				$cadenaSql .= " ruta_cotizacion, nombre_cotizacion, id_dependencia, id_contratista, id_ordenador,subtotal, iva, total, valor_letras ,vig_contratista ";
 				$cadenaSql .= " FROM orden_compra ";
 				$cadenaSql .= " WHERE id_orden_compra='" . $variable . "' AND estado='TRUE'";
 				
