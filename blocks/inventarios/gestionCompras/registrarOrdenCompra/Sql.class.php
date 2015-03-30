@@ -162,27 +162,35 @@ class Sql extends \Sql {
 				
 				break;
 			
-			// FROM DISPONIBILIDAD
-			// WHERE DIS_IDENTIFICADOR='1'AND DIS_VIGENCIA='2015'
-			// AND ROWNUM = 1
-			
 			case "info_disponibilidad" :
 				$cadenaSql = "SELECT DISTINCT TO_CHAR(DIS_FECHA_REGISTRO,'yyyy-mm-dd') AS FECHA,  DIS_VALOR ";
 				$cadenaSql .= "FROM DISPONIBILIDAD  ";
 				$cadenaSql .= "WHERE DIS_VIGENCIA='" . $variable [1] . "' ";
 				$cadenaSql .= "AND  DIS_IDENTIFICADOR='" . $variable [0] . "' ";
-				$cadenaSql.="AND ROWNUM = 1 ";
+				$cadenaSql .= "AND ROWNUM = 1 ";
 				
 				break;
 			
 			case "vigencia_registro" :
-				$cadenaSql = "SELECT id_forma_pago, descripcion ";
-				$cadenaSql .= "FROM forma_pago_orden; ";
+				$cadenaSql = "SELECT REP_VIGENCIA AS VALOR,REP_VIGENCIA AS VIGENCIA ";
+				$cadenaSql .= "FROM REGISTRO_PRESUPUESTAL ";
+				$cadenaSql .= "GROUP BY REP_VIGENCIA ";
 				
 				break;
-			case "numero_registro" :
-				$cadenaSql = "SELECT id_forma_pago, descripcion ";
-				$cadenaSql .= "FROM forma_pago_orden; ";
+			
+			case "buscar_registro" :
+				$cadenaSql = "SELECT DISTINCT REP_IDENTIFICADOR AS IDENTIFICADOR,REP_NUMERO_DISPONIBILIDAD AS NUMERO ";
+				$cadenaSql .= "FROM REGISTRO_PRESUPUESTAL ";
+				$cadenaSql .= "WHERE REP_VIGENCIA='" . $variable . "'";
+				
+				break;
+			
+			case "info_registro" :
+				$cadenaSql = "SELECT TO_CHAR(REP_FECHA_REGISTRO,'yyyy-mm-dd') AS fecha,  REP_VALOR ";
+				$cadenaSql .= "FROM REGISTRO_PRESUPUESTAL ";
+				$cadenaSql .= "WHERE REP_VIGENCIA='" . $variable [1] . "' ";
+				$cadenaSql .= "AND  REP_IDENTIFICADOR='" . $variable [0] . "' ";
+				$cadenaSql .= "AND ROWNUM = 1 ";
 				
 				break;
 			
