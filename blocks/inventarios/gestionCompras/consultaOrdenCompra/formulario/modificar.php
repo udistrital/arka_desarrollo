@@ -142,6 +142,8 @@ class registrarForm {
 		
 		$items = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
 		
+		
+		
 		$seccion ['tiempo'] = $tiempo;
 		
 		foreach ( $items as $valor => $key ) {
@@ -2123,6 +2125,7 @@ class registrarForm {
 		$valorCodificado .= "&numero_orden=" . $_REQUEST ['numero_orden'];
 		$valorCodificado .= "&directorio=" . $OrdenCompra [0] [18];
 		$valorCodificado .= "&nombreArchivo=" . $OrdenCompra [0] [19];
+		$valorCodificado .= "&infoPresupuestal=" . $OrdenCompra [0] [1];
 		$valorCodificado .= "&seccion=" . $tiempo;
 		/**
 		 * SARA permite que los nombres de los campos sean dinámicos.

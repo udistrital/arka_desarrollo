@@ -148,11 +148,15 @@ class RegistradorOrden {
 				$_REQUEST ['valor_registro'],
 				$_REQUEST ['fecha_registro'],
 				$_REQUEST ['valorL_registro'],
-				$_REQUEST ['']
+				$_REQUEST ['infoPresupuestal']
 		);
 		
 		
 		
+		
+		$cadenaSql = $this->miSql->getCadenaSql ( 'actualizarPresupuestal', $arreglo );
+		
+		$inf_pre = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "acceso" );
 		
 		
 		
@@ -161,8 +165,6 @@ class RegistradorOrden {
 				// Actualizar Orden
 		
 		$datosOrden = array (
-				$_REQUEST ['diponibilidad'],
-				$_REQUEST ['fecha_diponibilidad'],
 				$_REQUEST ['rubro'],
 				$_REQUEST ['obligacionesProveedor'],
 				$_REQUEST ['obligacionesContratista'],
@@ -187,6 +189,7 @@ class RegistradorOrden {
 				$iva,
 				$total,
 				$_REQUEST['valorLetras_registro'],
+				$_REQUEST['vigencia_contratista'],
 				$_REQUEST ['numero_orden'] 
 		);
 		
@@ -195,6 +198,8 @@ class RegistradorOrden {
 		$cadenaSql = $this->miSql->getCadenaSql ( 'actualizarOrden', $datosOrden );
 		
 		$id_orden = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
+		
+		
 		
 				
 		

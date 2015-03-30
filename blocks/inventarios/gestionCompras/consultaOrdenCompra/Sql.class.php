@@ -491,6 +491,22 @@ class Sql extends \Sql {
 				
 				break;
 			
+			case "actualizarPresupuestal" :
+				$cadenaSql = " UPDATE informacion_presupuestal_orden ";
+				$cadenaSql .= " SET vigencia_dispo='" . $variable [0] . "', ";
+				$cadenaSql .= " numero_dispo='" . $variable [1] . "', ";
+				$cadenaSql .= " valor_disp='" . $variable [2] . "', ";
+				$cadenaSql .= " fecha_dip='" . $variable [3] . "', ";
+				$cadenaSql .= " letras_dispo='" . $variable [4] . "', ";
+				$cadenaSql .= " vigencia_regis='" . $variable [5] . "', ";
+				$cadenaSql .= " numero_regis='" . $variable [6] . "', ";
+				$cadenaSql .= " valor_regis='" . $variable [7] . "', ";
+				$cadenaSql .= " fecha_regis='" . $variable [8] . "', ";
+				$cadenaSql .= " letras_regis='" . $variable [9] . "' ";
+				$cadenaSql .= "  WHERE id_informacion='" . $variable [10] . "';";
+				
+				break;
+			
 			case "actualizarEncargado" :
 				$cadenaSql = " UPDATE encargado ";
 				$cadenaSql .= " SET id_tipo_encargado='" . $variable [0] . "', ";
@@ -506,53 +522,54 @@ class Sql extends \Sql {
 				$cadenaSql = " UPDATE ";
 				$cadenaSql .= " orden_compra ";
 				$cadenaSql .= " SET ";
-				$cadenaSql .= " disponibilidad_presupuestal='" . $variable [0] . "', ";
-				$cadenaSql .= " fecha_disponibilidad='" . $variable [1] . "', ";
-				$cadenaSql .= " rubro='" . $variable [2] . "', ";
-				$cadenaSql .= " obligaciones_proveedor='" . $variable [3] . "', ";
-				$cadenaSql .= " obligaciones_contratista='" . $variable [4] . "', ";
-				if ($variable [5] != '') {
-					$cadenaSql .= " poliza1='" . $variable [5] . "', ";
+				
+				
+				$cadenaSql .= " rubro='" . $variable [0] . "', ";
+				$cadenaSql .= " obligaciones_proveedor='" . $variable [1] . "', ";
+				$cadenaSql .= " obligaciones_contratista='" . $variable [2] . "', ";
+				if ($variable [3] != '') {
+					$cadenaSql .= " poliza1='" . $variable [3] . "', ";
 				} else {
 					$cadenaSql .= " poliza1='0', ";
 				}
-				if ($variable [6] != '') {
-					$cadenaSql .= " poliza2='" . $variable [6] . "', ";
+				if ($variable [4] != '') {
+					$cadenaSql .= " poliza2='" . $variable [4] . "', ";
 				} else {
 					$cadenaSql .= " poliza2='0', ";
 				}
-				if ($variable [7] != '') {
-					$cadenaSql .= " poliza3='" . $variable [7] . "', ";
+				if ($variable [5] != '') {
+					$cadenaSql .= " poliza3='" . $variable [5] . "', ";
 				} else {
 					$cadenaSql .= " poliza3='0', ";
 				}
-				if ($variable [8] != '') {
-					$cadenaSql .= " poliza4='" . $variable [8] . "', ";
+				if ($variable [6] != '') {
+					$cadenaSql .= " poliza4='" . $variable [6] . "', ";
 				} else {
 					$cadenaSql .= " poliza4='0', ";
 				}
-				if ($variable [9] != '') {
-					$cadenaSql .= " poliza5='" . $variable [9] . "', ";
+				if ($variable [7] != '') {
+					$cadenaSql .= " poliza5='" . $variable [7] . "', ";
 				} else {
 					$cadenaSql .= " poliza5='0', ";
 				}
-				$cadenaSql .= " lugar_entrega='" . $variable [10] . "', ";
-				$cadenaSql .= " destino='" . $variable [11] . "', ";
-				$cadenaSql .= " tiempo_entrega='" . $variable [12] . "', ";
-				$cadenaSql .= " forma_pago='" . $variable [13] . "', ";
-				$cadenaSql .= " supervision='" . $variable [14] . "', ";
-				$cadenaSql .= " inhabilidades='" . $variable [15] . "', ";
-				$cadenaSql .= " id_proveedor='" . $variable [16] . "', ";
-				$cadenaSql .= " ruta_cotizacion='" . $variable [17] . "', ";
-				$cadenaSql .= " nombre_cotizacion='" . $variable [18] . "', ";
-				$cadenaSql .= " id_dependencia='" . $variable [19] . "', ";
-				$cadenaSql .= " id_contratista='" . $variable [20] . "', ";
-				$cadenaSql .= " id_ordenador='" . $variable [21] . "',  ";
-				$cadenaSql .= " subtotal='" . $variable [22] . "',  ";
-				$cadenaSql .= " iva='" . $variable [23] . "',  ";
-				$cadenaSql .= " total='" . $variable [24] . "',  ";
-				$cadenaSql .= " valor_letras='" . $variable [25] . "'  ";
-				$cadenaSql .= "  WHERE id_orden_compra='" . $variable [26] . "';";
+				$cadenaSql .= " lugar_entrega='" . $variable [8] . "', ";
+				$cadenaSql .= " destino='" . $variable [9] . "', ";
+				$cadenaSql .= " tiempo_entrega='" . $variable [10] . "', ";
+				$cadenaSql .= " forma_pago='" . $variable [11] . "', ";
+				$cadenaSql .= " supervision='" . $variable [12] . "', ";
+				$cadenaSql .= " inhabilidades='" . $variable [13] . "', ";
+				$cadenaSql .= " id_proveedor='" . $variable [14] . "', ";
+				$cadenaSql .= " ruta_cotizacion='" . $variable [15] . "', ";
+				$cadenaSql .= " nombre_cotizacion='" . $variable [16] . "', ";
+				$cadenaSql .= " id_dependencia='" . $variable [17] . "', ";
+				$cadenaSql .= " id_contratista='" . $variable [18] . "', ";
+				$cadenaSql .= " id_ordenador='" . $variable [19] . "',  ";
+				$cadenaSql .= " subtotal='" . $variable [20] . "',  ";
+				$cadenaSql .= " iva='" . $variable [21] . "',  ";
+				$cadenaSql .= " total='" . $variable [22] . "',  ";
+				$cadenaSql .= " valor_letras='" . $variable [23] . "' , ";
+				$cadenaSql .= " vig_contratista='" . $variable [24] . "'  ";
+				$cadenaSql .= "  WHERE id_orden_compra='" . $variable [25] . "';";
 				
 				break;
 			
