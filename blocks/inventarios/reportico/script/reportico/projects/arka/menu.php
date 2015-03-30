@@ -49,6 +49,7 @@ $dropdown_menu = array(
             array("reportfile" => "consultar_hurtos.xml", "title" => "Consulta Faltantes por Hurto"),
             array("reportfile" => "consultar_faltante.xml", "title" => "Consulta Faltantes Dependencia"),
             array("reportfile" => "consultar_sobrante.xml", "title" => "Consulta Sobrantes"),
+            array("reportfile" => "consultar_baja.xml", "title" => "Consulta Bajas"),
         )
     ),
 );
