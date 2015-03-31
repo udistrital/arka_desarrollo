@@ -80,7 +80,7 @@ class registrarForm {
 		
 		$esteCampo = "AgrupacionSolicitante";
 		$atributos ['id'] = $esteCampo;
-		$atributos ['leyenda'] = "Consultas Actas Recibido";
+		$atributos ['leyenda'] = "Consultar Actas Recibido";
 		echo $this->miFormulario->agrupacion ( 'inicio', $atributos );
 		{
 			
