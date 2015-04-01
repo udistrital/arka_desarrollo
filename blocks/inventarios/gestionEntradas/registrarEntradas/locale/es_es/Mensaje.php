@@ -1,6 +1,18 @@
 <?php
 $this->idioma ["noDefinido"] = "Etiqueta no esta definida en locale/es_es/Mensaje.php";
 
+$this->idioma ["informacion_numero"] =" # Número de Acta de Recibido : ";
+
+$this->idioma ["informacion_fecha"] ="Fecha de Acta de Recibido : ";
+
+$this->idioma ["informacion_nit"] ="Nit de Proveedor : ";
+
+$this->idioma ["informacion_nit"] ="Nit de Proveedor : ";
+
+$this->idioma ["informacion_proveedor"] ="Nombre y/o Razón Social Proveedor : ";
+
+
+
 
 $this->idioma ["fecha_inicio"] ="Fecha Inicial : ";
 $this->idioma ["fecha_inicioTitulo"] ="Seleccione Fecha Inicial";
