@@ -30,11 +30,13 @@
                  } );
 
 
-             $("#<?php echo $this->campoSeguro('clase')?>").select2();
+      $("#<?php echo $this->campoSeguro('numero_entrada')?>").select2();
+      
+       $("#<?php echo $this->campoSeguro('clase')?>").select2();
                                
       $("#<?php echo $this->campoSeguro('tipo_contrato')?>").select2();
              
-                  $('#<?php echo $this->campoSeguro('nombreCotizacion')?>').attr('disabled','');
+      $('#<?php echo $this->campoSeguro('nombreCotizacion')?>').attr('disabled','');
                   
       $("#<?php echo $this->campoSeguro('proveedor')?>").select2({
              	 placeholder: "Search for a repository",
