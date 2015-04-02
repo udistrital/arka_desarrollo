@@ -42,22 +42,15 @@ class registrarForm {
         $_REQUEST ['tiempo'] = time();
         $tiempo = $_REQUEST['tiempo'];
 
-     // -------------------------------------------------------------------------------------------------
+        // -------------------------------------------------------------------------------------------------
         $conexion = "inventarios";
         $esteRecursoDB = $this->miConfigurador->fabricaConexiones->getRecursoDB($conexion);
 
         $conexion2 = "sicapital";
         $esteRecursoDB2 = $this->miConfigurador->fabricaConexiones->getRecursoDB($conexion2);
 
-        $cadenaSql = $this->miSql->getCadenaSql('tipoBien');
-        $tipoBien = $esteRecursoDB->ejecutarAcceso($cadenaSql, "busqueda");
-
-        $cadenaSql1 = $this->miSql->getCadenaSql('tipoComprador');
-        $tipoComprador = $esteRecursoDB->ejecutarAcceso($cadenaSql1, "busqueda");
-
-        $cadenaSql2 = $this->miSql->getCadenaSql('tipoAccion');
-        $tipoAccion = $esteRecursoDB->ejecutarAcceso($cadenaSql2, "busqueda");
-
+        $cadenaSql = $this->miSql->getCadenaSql('tipoOrden_nombre', $_REQUEST['tipo_orden']);
+        $tipoOrden = $esteRecursoDB->ejecutarAcceso($cadenaSql, "busqueda");
 
 // ---------------- SECCION: Parámetros Generales del Formulario ----------------------------------
         $esteCampo = $esteBloque ['nombre'];
@@ -77,20 +70,23 @@ class registrarForm {
 // ---------------- FIN SECCION: de Parámetros Generales del Formulario ----------------------------
 // ----------------INICIAR EL FORMULARIO ------------------------------------------------------------
         $atributos ['tipoEtiqueta'] = 'inicio';
-        echo $this->miFormulario->formulario($atributos); {
+        echo $this->miFormulario->formulario($atributos);
+        {
 // ---------------- SECCION: Controles del Formulario -----------------------------------------------
 
             $esteCampo = "marcoDatosBasicos";
             $atributos ['id'] = $esteCampo;
             $atributos ["estilo"] = "jqueryui";
             $atributos ['tipoEtiqueta'] = 'inicio';
-            $atributos ["leyenda"] = "Relacionar Acta de Recibido";
+            $atributos ["leyenda"] = "Relacionar Acta de Recibido - ".$tipoOrden[0]['to_nombre']." No.". $_REQUEST['numero_orden'];
             echo $this->miFormulario->marcoAgrupacion('inicio', $atributos);
-            unset($atributos); {
+            unset($atributos);
+            {
                 $esteCampo = "AgrupacionActa";
                 $atributos ['id'] = $esteCampo;
                 $atributos ['leyenda'] = "Datos Iniciales";
-                echo $this->miFormulario->agrupacion('inicio', $atributos); {
+                echo $this->miFormulario->agrupacion('inicio', $atributos);
+                {
 
 // ---------------- CONTROL: Cuadro de Texto --------------------------------------------------------
                     $esteCampo = 'dependencia';
@@ -116,7 +112,7 @@ class registrarForm {
                     }
 
                     $atributos ['cadena_sql'] = $this->miSql->getCadenaSql("dependencias");
-                    $matrizItems = $esteRecursoDB2->ejecutarAcceso($atributos ['cadena_sql'], "busqueda");
+                    $matrizItems = $esteRecursoDB->ejecutarAcceso($atributos ['cadena_sql'], "busqueda");
                     $atributos ['matrizItems'] = $matrizItems;
 
                     // Utilizar lo siguiente cuando no se pase un arreglo:
@@ -160,38 +156,39 @@ class registrarForm {
                     unset($atributos);
 // --------------- FIN CONTROL : Cuadro de Texto --------------------------------------------------
 ///------------------CONTROL: Lista desplegable -----------------------------------------------------
-
-                    $matrizItems = $tipoBien;
-
-                    $esteCampo = "tipoBien";
-                    $atributos['nombre'] = $esteCampo;
-                    $atributos['id'] = $esteCampo;
-                    $atributos['etiqueta'] = $this->lenguaje->getCadena($esteCampo);
+                    $esteCampo = 'tipoBien';
+                    $atributos ['columnas'] = 1;
+                    $atributos ['nombre'] = $esteCampo;
+                    $atributos ['id'] = $esteCampo;
+                    $atributos ['seleccion'] = - 1;
+                    $atributos ['evento'] = '';
+                    $atributos ['deshabilitado'] = false;
                     $atributos ["etiquetaObligatorio"] = true;
-                    $atributos['tab'] = $tab ++;
-                    $atributos['seleccion'] = -1;
-                    $atributos['evento'] = '';
-                    if (isset($_REQUEST [$esteCampo])) {
-                        $atributos ['valor'] = $_REQUEST [$esteCampo];
+                    $atributos ['tab'] = $tab;
+                    $atributos ['tamanno'] = 1;
+                    $atributos ['estilo'] = 'jqueryui';
+                    $atributos ['validar'] = 'required, minSize[1],maxSize[15],custom[onlyNumberSp]';
+                    $atributos ['limitar'] = false;
+                    $atributos ['etiqueta'] = $this->lenguaje->getCadena($esteCampo);
+                    $atributos ['anchoEtiqueta'] = 213;
+
+                    if (isset($Acta[0][$esteCampo])) {
+                        $atributos ['valor'] = $Acta[0][$esteCampo];
                     } else {
                         $atributos ['valor'] = '';
                     }
-                    $atributos['deshabilitado'] = false;
-                    $atributos['columnas'] = "1";
-                    $atributos['tamanno'] = 1;
-                    $atributos['ajax_function'] = "";
-                    $atributos['ajax_control'] = $esteCampo;
-                    $atributos['estilo'] = "jqueryui";
-                    $atributos['validar'] = "required";
-                    $atributos['limitar'] = false;
-                    $atributos['matrizItems'] = $matrizItems;
-//$atributos['miniRegistro']=;
-                    $atributos['baseDatos'] = "inventarios";
-                    $atributos['cadena_sql'] = $this->miSql->getCadenaSql("tipoOrden");
 
-// Aplica atributos globales al control
+                    $atributos ['cadena_sql'] = $this->miSql->getCadenaSql('tipoBien');
+                    $matrizItems = $esteRecursoDB->ejecutarAcceso($atributos ['cadena_sql'], "busqueda");
+                    $atributos ['matrizItems'] = $matrizItems;
+
+                    // Utilizar lo siguiente cuando no se pase un arreglo:
+                    // $atributos['baseDatos']='ponerAquiElNombreDeLaConexión';
+                    // $atributos ['cadena_sql']='ponerLaCadenaSqlAEjecutar';
+                    $tab ++;
                     $atributos = array_merge($atributos, $atributosGlobales);
                     echo $this->miFormulario->campoCuadroLista($atributos);
+                    unset($atributos);
 
 // ---------------- CONTROL: Cuadro de Texto --------------------------------------------------------
                     $esteCampo = 'nitproveedor';
@@ -267,7 +264,8 @@ class registrarForm {
                     $esteCampo = "descripcionFactura";
                     $atributos ['id'] = $esteCampo;
                     $atributos ['leyenda'] = $this->lenguaje->getCadena($esteCampo);
-                    echo $this->miFormulario->agrupacion('inicio', $atributos); {
+                    echo $this->miFormulario->agrupacion('inicio', $atributos);
+                    {
                         ?>
                         <center>
                             <table id="tablaContenido">
@@ -288,40 +286,43 @@ class registrarForm {
                 $esteCampo = "AgrupacionActa";
                 $atributos ['id'] = $esteCampo;
                 $atributos ['leyenda'] = "Información General";
-                echo $this->miFormulario->agrupacion('inicio', $atributos); {
+                echo $this->miFormulario->agrupacion('inicio', $atributos);
+                {
 ///------------------CONTROL: Lista desplegable -----------------------------------------------------
 
-                    $matrizItems = $tipoComprador;
-
-                    $esteCampo = "tipoComprador";
-                    $atributos['nombre'] = $esteCampo;
-                    $atributos['id'] = $esteCampo;
-                    $atributos['etiqueta'] = $this->lenguaje->getCadena($esteCampo);
+                    $esteCampo = 'tipoComprador';
+                    $atributos ['columnas'] = 1;
+                    $atributos ['nombre'] = $esteCampo;
+                    $atributos ['id'] = $esteCampo;
+                    $atributos ['seleccion'] = - 1;
+                    $atributos ['evento'] = '';
+                    $atributos ['deshabilitado'] = false;
                     $atributos ["etiquetaObligatorio"] = true;
-                    $atributos['tab'] = $tab ++;
-                    $atributos['seleccion'] = -1;
-                    $atributos['evento'] = 2;
-                    if (isset($_REQUEST [$esteCampo])) {
-                        $atributos ['valor'] = $_REQUEST [$esteCampo];
+                    $atributos ['tab'] = $tab;
+                    $atributos ['tamanno'] = 1;
+                    $atributos ['estilo'] = 'jqueryui';
+                    $atributos ['validar'] = 'required, minSize[1],maxSize[15],custom[onlyNumberSp]';
+                    $atributos ['limitar'] = false;
+                    $atributos ['etiqueta'] = $this->lenguaje->getCadena($esteCampo);
+                    $atributos ['anchoEtiqueta'] = 213;
+
+                    if (isset($Acta[0][$esteCampo])) {
+                        $atributos ['valor'] = $Acta[0][$esteCampo];
                     } else {
                         $atributos ['valor'] = '';
                     }
-                    $atributos['deshabilitado'] = false;
-                    $atributos['columnas'] = "1";
-                    $atributos['tamanno'] = 1;
-                    $atributos['ajax_function'] = "";
-                    $atributos['ajax_control'] = $esteCampo;
-                    $atributos['estilo'] = "jqueryui";
-                    $atributos['validar'] = 'required';
-                    $atributos['limitar'] = false;
-                    $atributos['matrizItems'] = $matrizItems;
-//$atributos['miniRegistro']=;
-                    $atributos['baseDatos'] = "inventarios";
-                    $atributos['cadena_sql'] = $this->miSql->getCadenaSql("tipoOrden");
 
-// Aplica atributos globales al control
+                    $atributos ['cadena_sql'] = $this->miSql->getCadenaSql("tipoComprador");
+                    $matrizItems = $esteRecursoDB->ejecutarAcceso($atributos ['cadena_sql'], "busqueda");
+                    $atributos ['matrizItems'] = $matrizItems;
+
+                    // Utilizar lo siguiente cuando no se pase un arreglo:
+                    // $atributos['baseDatos']='ponerAquiElNombreDeLaConexión';
+                    // $atributos ['cadena_sql']='ponerLaCadenaSqlAEjecutar';
+                    $tab ++;
                     $atributos = array_merge($atributos, $atributosGlobales);
                     echo $this->miFormulario->campoCuadroLista($atributos);
+                    unset($atributos);
 // -------------------- FIN CONTROL Lista Desplegable ---------------------------------------------//
 
                     echo $this->miFormulario->agrupacion('fin');
@@ -332,7 +333,8 @@ class registrarForm {
                 $esteCampo = "AgrupacionActa";
                 $atributos ['id'] = $esteCampo;
                 $atributos ['leyenda'] = "Validación de la Información";
-                echo $this->miFormulario->agrupacion('inicio', $atributos); {
+                echo $this->miFormulario->agrupacion('inicio', $atributos);
+                {
 ///------------------CONTROL: Lista desplegable -----------------------------------------------------
 // ---------------- CONTROL: Cuadro de Texto --------------------------------------------------------
                     $esteCampo = 'fecha_revision';
@@ -550,7 +552,7 @@ class registrarForm {
             $valorCodificado .= "&opcion=registrarActa";
             $valorCodificado .= "&seccion=" . $tiempo;
             $valorCodificado .= "&tipoOrden=" . $_REQUEST['tipo_orden'];
-            $valorCodificado .= "&numeroOrden=" . $_REQUEST['numero_orden'];
+            $valorCodificado .= "&numero_orden=" . $_REQUEST['numero_orden'];
             /**
              * SARA permite que los nombres de los campos sean dinámicos.
              * Para ello utiliza la hora en que es creado el formulario para

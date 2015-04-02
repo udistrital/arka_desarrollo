@@ -209,6 +209,15 @@ class Sql extends \Sql {
                 $cadenaSql .= " WHERE to_estado='1';";
                 break;
 
+            case "tipoOrden_nombre":
+                $cadenaSql = " SELECT ";
+                $cadenaSql .= " to_nombre ";
+                $cadenaSql .= " FROM ";
+                $cadenaSql .= " arka_inventarios.tipo_orden ";
+                $cadenaSql .= " WHERE to_estado='1' ";
+                $cadenaSql .= " AND to_id='" . $variable . "' ";
+                break;
+
             case "tipoComprador":
                 $cadenaSql = " SELECT ";
                 $cadenaSql .= " tc_idcomprador,";
@@ -286,22 +295,23 @@ class Sql extends \Sql {
             /*             * ***************** */
             case "insertarActa" :
                 $cadenaSql = " INSERT INTO registro_actarecibido( ";
+                $cadenaSql .= "tipo_orden,  ";
+                $cadenaSql .= "numero_orden,  ";
                 $cadenaSql .= "dependencia,  ";
                 $cadenaSql .= "fecha_recibido,  ";
                 $cadenaSql .= "tipo_bien,  ";
                 $cadenaSql .= "nitproveedor,  ";
                 $cadenaSql .= "proveedor,  ";
-                $cadenaSql .= "numfactura,  ";
-                $cadenaSql .= "fecha_factura,  ";
                 $cadenaSql .= "tipocomprador,  ";
-                $cadenaSql .= "tipoaccion,  ";
                 $cadenaSql .= "fecha_revision,  ";
                 $cadenaSql .= "revisor,  ";
                 $cadenaSql .= "observacionesacta,  ";
                 $cadenaSql .= "estado_registro,  ";
                 $cadenaSql .= "fecha_registro)";
                 $cadenaSql .= " VALUES (";
-                $cadenaSql .= "'" . $variable [0] . "',";
+                $cadenaSql .= "'" . $variable ['tipo_orden'] . "',";
+                $cadenaSql .= "'" . $variable ['numero_orden'] . "',";
+                $cadenaSql .= "'" . $variable ['dependencia'] . "',";
                 $cadenaSql .= "'" . $variable [1] . "',";
                 $cadenaSql .= "'" . $variable [2] . "',";
                 $cadenaSql .= "'" . $variable [3] . "',";
@@ -333,14 +343,19 @@ class Sql extends \Sql {
                 $cadenaSql .= "'1',";
                 $cadenaSql .= "'" . date('Y-m-d') . "');";
                 break;
-            
-            
+
+
             // Consultas de Oracle para rescate de información de Sicapital
+            /* case "dependencias":
+              $cadenaSql = "SELECT DEP_IDENTIFICADOR, ";
+              $cadenaSql.= " DEP_IDENTIFICADOR ||' '|| DEP_DEPENDENCIA ";
+              //$cadenaSql .= " DEP_DIRECCION,DEP_TELEFONO ";F
+              $cadenaSql.= " FROM DEPENDENCIAS ";
+              break; */
+
             case "dependencias":
-                $cadenaSql = "SELECT DEP_IDENTIFICADOR, ";
-                $cadenaSql.= " DEP_IDENTIFICADOR ||' '|| DEP_DEPENDENCIA ";
-                //$cadenaSql .= " DEP_DIRECCION,DEP_TELEFONO ";F
-                $cadenaSql.= " FROM DEPENDENCIAS ";
+                $cadenaSql = "SELECT elemento_codigo, elemento_codigo || ' -  ' || elemento_nombre ";
+                $cadenaSql .= "FROM dependencia.catalogo_elemento; ";
                 break;
 
             case "proveedores":

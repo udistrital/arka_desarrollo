@@ -244,12 +244,22 @@ $urlFinal4 = $url . $cadena4;
         placeholder: "Search for a repository",
         minimumInputLength: 1,
     });
-    
-      $("#<?php echo $this->campoSeguro('tipoOrden') ?>").select2({
+
+    $("#<?php echo $this->campoSeguro('tipoOrden') ?>").select2({
         placeholder: "Search for a repository",
         minimumInputLength: 1,
     });
 
+
+$("#<?php echo $this->campoSeguro('tipoBien') ?>").select2({
+        placeholder: "Search for a repository",
+        minimumInputLength: 1,
+    });
+
+    $("#<?php echo $this->campoSeguro('tipoComprador') ?>").select2({
+        placeholder: "Search for a repository",
+        minimumInputLength: 1,
+    });
 
 </script>
 
