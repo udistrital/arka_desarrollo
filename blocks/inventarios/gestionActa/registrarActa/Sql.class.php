@@ -181,7 +181,7 @@ class Sql extends \Sql {
                 $cadenaSql .= "id_orden_servicio, fecha_registro,  ";
                 $cadenaSql .= "identificacion, dependencia  ";
                 $cadenaSql .= "FROM orden_servicio ";
-                $cadenaSql .= "JOIN solicitante_servicios ON solicitante_servicios.id_solicitante = orden_servicio.id_solicitante ";
+                $cadenaSql .= "JOIN solicitante_servicios ON solicitante_servicios.id_solicitante = orden_servicio.dependencia_solicitante ";
                 $cadenaSql .= "JOIN contratista_servicios ON contratista_servicios.id_contratista = orden_servicio.id_contratista ";
                 $cadenaSql .= "WHERE 1=1";
                 if ($variable [0] != '') {

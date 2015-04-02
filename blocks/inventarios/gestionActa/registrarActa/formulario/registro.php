@@ -42,9 +42,7 @@ class registrarForm {
         $_REQUEST ['tiempo'] = time();
         $tiempo = $_REQUEST['tiempo'];
 
-
-
-// -------------------------------------------------------------------------------------------------
+     // -------------------------------------------------------------------------------------------------
         $conexion = "inventarios";
         $esteRecursoDB = $this->miConfigurador->fabricaConexiones->getRecursoDB($conexion);
 
@@ -551,6 +549,8 @@ class registrarForm {
             $valorCodificado .= "&bloqueGrupo=" . $esteBloque ["grupo"];
             $valorCodificado .= "&opcion=registrarActa";
             $valorCodificado .= "&seccion=" . $tiempo;
+            $valorCodificado .= "&tipoOrden=" . $_REQUEST['tipo_orden'];
+            $valorCodificado .= "&numeroOrden=" . $_REQUEST['numero_orden'];
             /**
              * SARA permite que los nombres de los campos sean dinámicos.
              * Para ello utiliza la hora en que es creado el formulario para

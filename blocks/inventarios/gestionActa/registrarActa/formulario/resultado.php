@@ -99,25 +99,25 @@ class registrarForm {
             case 1:
                 $cadenaSql = $this->miSql->getCadenaSql('consultarOrdenServicios', $arreglo);
                 $resultado_orden = $esteRecursoDB->ejecutarAcceso($cadenaSql, "busqueda");
-                $titulo="Consultar y Modificar Orden de Servicios";
+                $titulo="Orden de Servicios";
                 break;
 
             case 2:
                 $cadenaSql = $this->miSql->getCadenaSql('consultarOrdenCompra', $arreglo);
                 $resultado_orden = $esteRecursoDB->ejecutarAcceso($cadenaSql, "busqueda");
-                $titulo="Consultar y Modificar Orden de Compra";
+                $titulo="Orden de Compra";
                 break;
 
             case 3:
                 $datos='';
                 redireccion::redireccionar('registrar', $datos);
-                $titulo="Consultar y Modificar Otros";
+                $titulo="Otros";
                 break;
 
             default:
                 break;
         }
-
+        
         // ---------------- SECCION: Parámetros Generales del Formulario ----------------------------------
         $esteCampo = $esteBloque ['nombre'];
         $atributos ['id'] = $esteCampo;
@@ -145,7 +145,7 @@ class registrarForm {
         $atributos ['id'] = $esteCampo;
         $atributos ["estilo"] = "jqueryui";
         $atributos ['tipoEtiqueta'] = 'inicio';
-        $atributos ["leyenda"] = 'Registrar Acta de Recibido';
+        $atributos ["leyenda"] = 'Registrar Acta de Recibido - '.$titulo;
         echo $this->miFormulario->marcoAgrupacion('inicio', $atributos);
 
 
@@ -184,8 +184,8 @@ class registrarForm {
 
             echo "<thead>
                 <tr>
-                <th>Fecha Orden Compra</th>
-                <th>Número Orden Compra </th>
+                <th>Fecha Orden</th>
+                <th>Número Orden </th>
 		<th>Seleccionar</th>
                 </tr>
             </thead>
