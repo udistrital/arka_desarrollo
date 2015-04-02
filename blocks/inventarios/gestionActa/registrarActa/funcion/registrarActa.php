@@ -50,23 +50,22 @@ class RegistradorActa {
 
         //Registro del Acta de Recibido
 
-        var_dump($_REQUEST);
         $datosActa = array(
-            'dependencia'=>$_REQUEST ['dependencia'],
-            'fecha_registro'=>$fechaActual,
-            'tipo_bien'=>$_REQUEST ['tipoBien'],
-            'nitproveedor'=>$_REQUEST ['nitproveedor'],
-            'razon_social'=>$_REQUEST ['proveedor'],
-            'tipo_comprador'=>$_REQUEST ['tipoComprador'],
-            'fecha_revision'=>$_REQUEST ['fecha_revision'],
-            'revisor'=>$_REQUEST ['revisor'],
-            'observacion'=>$_REQUEST ['observacionesActa'],
-            'estado'=>1,
-            'tipo_orden'=>$_REQUEST ['tipoOrden'],
-            'numero_orden'=>$_REQUEST ['numero_orden'],
+            'dependencia' => $_REQUEST ['dependencia'],
+            'fecha_registro' => $fechaActual,
+            'tipo_bien' => $_REQUEST ['tipoBien'],
+            'nitproveedor' => $_REQUEST ['nitproveedor'],
+            'razon_social' => $_REQUEST ['proveedor'],
+            'tipo_comprador' => $_REQUEST ['tipoComprador'],
+            'fecha_revision' => $_REQUEST ['fecha_revision'],
+            'revisor' => $_REQUEST ['revisor'],
+            'observacion' => $_REQUEST ['observacionesActa'],
+            'estado' => 1,
+            'tipo_orden' => $_REQUEST ['tipoOrden'],
+            'numero_orden' => $_REQUEST ['numero_orden'],
         );
 
-        $cadenaSql = $this->miSql->getCadenaSql('insertarActa', $datosActa);
+       $cadenaSql = $this->miSql->getCadenaSql('insertarActa', $datosActa);
         $id_acta = $esteRecursoDB->ejecutarAcceso($cadenaSql, "busqueda");
 
         // Registro de Items
@@ -83,7 +82,6 @@ class RegistradorActa {
 
             $cadenaSql = $this->miSql->getCadenaSql('insertarItems', $datosItems);
             $items = $esteRecursoDB->ejecutarAcceso($cadenaSql, "acceso");
-      
         }
 
         $cadenaSql = $this->miSql->getCadenaSql('limpiar_tabla_items', $_REQUEST['seccion']);
@@ -94,7 +92,6 @@ class RegistradorActa {
             $fechaActual
         );
 
-        exit;
         if ($items == 1) {
             redireccion::redireccionar('inserto', $datos);
         } else {
