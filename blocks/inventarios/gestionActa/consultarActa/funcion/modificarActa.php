@@ -50,24 +50,21 @@ class RegistradorOrden {
         //Actualizar Acta de Recibido
 
         $datosActa = array(
-            $_REQUEST ['dependencia'],
-            $fechaActual,
-            $_REQUEST ['tipo_bien'],
-            $_REQUEST ['nitproveedor'],
-            $_REQUEST ['proveedor'],
-            $_REQUEST ['numfactura'],
-            $_REQUEST ['fecha_factura'],
-            $_REQUEST ['tipocomprador'],
-            $_REQUEST ['tipoaccion'],
-            $_REQUEST ['fecha_revision'],
-            $_REQUEST ['revisor'],
-            $_REQUEST ['observacionesacta'],
-            1,
-            $_REQUEST ['id_acta'],
+            'dependencia'=>$_REQUEST ['dependencia'],
+            'fecha_registro'=>$fechaActual,
+            'tipo_bien'=>$_REQUEST ['tipobien'],
+            'nit_proveedor'=>$_REQUEST ['nitproveedor'],
+            'razon_social'=>$_REQUEST ['proveedor'],
+            'tipo_comprador'=>$_REQUEST ['tipocomprador'],
+            'fecha_revision'=>$_REQUEST ['fecha_revision'],
+            'revisor'=>$_REQUEST ['revisor'],
+            'observaciones'=>$_REQUEST ['observacionesacta'],
+            'estado'=>1,
+            'id_acta'=>$_REQUEST ['id_acta'],
         );
 
         $cadenaSql = $this->miSql->getCadenaSql('actualizarActa', $datosActa);
-        $id_acta = $esteRecursoDB->ejecutarAcceso($cadenaSql, "busqueda");
+        $id_acta = $esteRecursoDB->ejecutarAcceso($cadenaSql, "acceso");
 
         $cadenaSql = $this->miSql->getCadenaSql('limpiarItems', $_REQUEST ['id_acta']);
         $limpiar = $esteRecursoDB->ejecutarAcceso($cadenaSql, "busqueda");
@@ -95,8 +92,7 @@ class RegistradorOrden {
             $fechaActual,
         );
    
-        if ($items == true) {
-
+        if ($items == true && isset($id_acta)) {
             redireccion::redireccionar('inserto', $datos);
         } else {
 

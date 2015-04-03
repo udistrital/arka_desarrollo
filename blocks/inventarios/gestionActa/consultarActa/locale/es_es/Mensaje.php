@@ -22,8 +22,8 @@ $this->idioma ["numero_actaTitulo"] ="Ingrese Número Acta Recibido";
 $this->idioma ["tipoOrden"] ="Tipo de Orden: ";
 $this->idioma ["tipoOrdenTitulo"] ="Seleccione Tipo Orden";
 
-$this->idioma ["tipoBien"] ="&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspTipo de Bien: ";
-$this->idioma ["tipoBienTitulo"] ="Seleccione Tipo de Bien";
+$this->idioma ["tipobien"] ="&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspTipo de Bien: ";
+$this->idioma ["tipobienTitulo"] ="Seleccione Tipo de Bien";
 
 $this->idioma ["tipo_bien"] ="&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspTipo de Bien: ";
 $this->idioma ["tipo_bienTitulo"] ="Seleccione Tipo de Bien";
@@ -31,8 +31,8 @@ $this->idioma ["tipo_bienTitulo"] ="Seleccione Tipo de Bien";
 $this->idioma ["tipoAccion"] ="&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspTipo Acción: ";
 $this->idioma ["tipoAccionTitulo"] ="Seleccione Tipo Acción";
 
-$this->idioma ["tipoComprador"] ="&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspComprador: ";
-$this->idioma ["tipoCompradorTitulo"] ="Seleccione Quien Compra";
+$this->idioma ["tipocomprador"] ="&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspComprador: ";
+$this->idioma ["tipocompradorTitulo"] ="Seleccione Quien Compra";
 
 $this->idioma ["tipoaccion"] ="&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspTipo Acción: ";
 $this->idioma ["tipoaccionTitulo"] ="Seleccione Tipo Acción";

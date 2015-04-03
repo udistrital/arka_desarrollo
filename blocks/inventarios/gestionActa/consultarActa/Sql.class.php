@@ -292,28 +292,25 @@ class Sql extends \Sql {
                 $cadenaSql = " UPDATE ";
                 $cadenaSql .= " registro_actarecibido ";
                 $cadenaSql .= " SET ";
-                $cadenaSql .= "dependencia='" . $variable [0] . "',";
-                $cadenaSql .= "fecha_recibido='" . $variable [1] . "',";
-                $cadenaSql .= "tipo_bien='" . $variable [2] . "',";
-                $cadenaSql .= "nitproveedor='" . $variable [3] . "',";
-                $cadenaSql .= "proveedor='" . $variable [4] . "',";
-                $cadenaSql .= "numfactura='" . $variable [5] . "',";
-                $cadenaSql .= "fecha_factura='" . $variable [6] . "',";
-                $cadenaSql .= "tipocomprador='" . $variable [7] . "',";
-                $cadenaSql .= "tipoaccion='" . $variable [8] . "',";
-                $cadenaSql .= "fecha_revision='" . $variable [9] . "',";
-                $cadenaSql .= "revisor='" . $variable [10] . "',";
-                $cadenaSql .= "observacionesacta='" . $variable [11] . "',";
-                $cadenaSql .= "estado_registro='" . $variable [12] . "',";
-                $cadenaSql .= "fecha_registro='" . $variable [1] . "' ";
-                $cadenaSql .= " WHERE id_actarecibido = '" . $variable [13] . "' ";
+                $cadenaSql .= "dependencia='" . $variable ['dependencia'] . "',";
+                $cadenaSql .= "fecha_recibido='" . $variable ['fecha_registro'] . "',";
+                $cadenaSql .= "tipo_bien='" . $variable ['tipo_bien'] . "',";
+                $cadenaSql .= "nitproveedor='" . $variable ['nit_proveedor'] . "',";
+                $cadenaSql .= "proveedor='" . $variable ['razon_social'] . "',";
+                $cadenaSql .= "tipocomprador='" . $variable ['tipo_comprador'] . "',";
+                $cadenaSql .= "fecha_revision='" . $variable ['fecha_revision'] . "',";
+                $cadenaSql .= "revisor='" . $variable ['revisor'] . "',";
+                $cadenaSql .= "observacionesacta='" . $variable ['observaciones'] . "',";
+                $cadenaSql .= "estado_registro='" . $variable ['estado'] . "',";
+                $cadenaSql .= "fecha_registro='" . $variable ['fecha_registro'] . "' ";
+                $cadenaSql .= " WHERE id_actarecibido = '" . $variable ['id_acta'] . "' ";
                 $cadenaSql .= "RETURNING id_actarecibido";
                 break;
 
             case "consultarActa" :
 
                 $cadenaSql = "SELECT DISTINCT ";
-                $cadenaSql .= " id_actarecibido, dependencia, fecha_recibido, tb_descripcion, nitproveedor, ";
+                $cadenaSql .= " id_actarecibido, dependencia, fecha_recibido, tb_descripcion , nitproveedor, ";
                 $cadenaSql .= " proveedor, tc_descripcion, ";
                 $cadenaSql .= " fecha_revision, revisor, observacionesacta ";
                 $cadenaSql .= "FROM registro_actarecibido ";
@@ -341,7 +338,7 @@ class Sql extends \Sql {
 
                 $cadenaSql = "SELECT DISTINCT ";
                 $cadenaSql .= " id_actarecibido, dependencia, fecha_recibido, tipo_bien as tipoBien, nitproveedor, ";
-                $cadenaSql .= " proveedor, tipocomprador,  ";
+                $cadenaSql .= " proveedor, tipocomprador as tipoComprador,  ";
                 $cadenaSql .= " fecha_revision, revisor, observacionesacta, estado_registro ";
                 $cadenaSql .= " FROM registro_actarecibido ";
                 $cadenaSql .= " JOIN tipo_bien ON tipo_bien.tb_idbien = registro_actarecibido.tipo_bien ";
