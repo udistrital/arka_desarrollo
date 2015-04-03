@@ -314,25 +314,25 @@ class Sql extends \Sql {
 
                 $cadenaSql = "SELECT DISTINCT ";
                 $cadenaSql .= " id_actarecibido, dependencia, fecha_recibido, tb_descripcion, nitproveedor, ";
-                $cadenaSql .= " proveedor, numfactura, fecha_factura, tc_descripcion, ";
+                $cadenaSql .= " proveedor, tc_descripcion, ";
                 $cadenaSql .= " fecha_revision, revisor, observacionesacta ";
                 $cadenaSql .= "FROM registro_actarecibido ";
                 $cadenaSql .= "JOIN tipo_bien ON tipo_bien.tb_idbien = registro_actarecibido.tipo_bien ";
                 $cadenaSql .= "JOIN tipo_comprador ON tipo_comprador.tc_idcomprador = registro_actarecibido.tipocomprador ";
-                $cadenaSql .= "WHERE 1 = 1";
+                $cadenaSql .= "WHERE 1 = 1 ";
                 $cadenaSql .= "AND estado_registro = 1";
-                if ($variable [0] != '') {
-                    $cadenaSql .= " AND id_actarecibido = '" . $variable [0] . "'";
+                if ($variable ['numero_acta'] != '') {
+                    $cadenaSql .= " AND id_actarecibido = '" . $variable ['numero_acta'] . "' ";
                 }
-                if ($variable [1] != '') {
-                    $cadenaSql .= " AND fecha_recibido = '" . $variable [1] . "'";
+                if ($variable ['fecha'] != '') {
+                    $cadenaSql .= " AND fecha_recibido = '" . $variable ['fecha'] . "' ";
                 }
-                if ($variable [2] != '') {
-                    $cadenaSql .= " AND nitproveedor = '" . $variable [2] . "'";
+                if ($variable ['nit'] != '') {
+                    $cadenaSql .= " AND nitproveedor = '" . $variable ['nit'] . "' ";
                 }
-                if ($variable [3] != '') {
-                    $cadenaSql .= " AND numfactura = '" . $variable [3] . "'";
-                }
+                /*   if ($variable [3] != '') {
+                  $cadenaSql .= " AND numfactura = '" . $variable [3] . "'";
+                  } */
 
                 // echo $cadenaSql;exit;
                 break;
@@ -340,8 +340,8 @@ class Sql extends \Sql {
             case "consultarActaM" :
 
                 $cadenaSql = "SELECT DISTINCT ";
-                $cadenaSql .= " id_actarecibido, dependencia, fecha_recibido, tipo_bien, nitproveedor, ";
-                $cadenaSql .= " proveedor, numfactura, fecha_factura, tipocomprador,  ";
+                $cadenaSql .= " id_actarecibido, dependencia, fecha_recibido, tipo_bien as tipoBien, nitproveedor, ";
+                $cadenaSql .= " proveedor, tipocomprador,  ";
                 $cadenaSql .= " fecha_revision, revisor, observacionesacta, estado_registro ";
                 $cadenaSql .= " FROM registro_actarecibido ";
                 $cadenaSql .= " JOIN tipo_bien ON tipo_bien.tb_idbien = registro_actarecibido.tipo_bien ";
@@ -351,6 +351,11 @@ class Sql extends \Sql {
                 $cadenaSql .= " AND id_actarecibido = '" . $variable . "' ";
 
                 // echo $cadenaSql;exit;
+                break;
+
+            case "consultar_id_acta":
+                $cadenaSql = " SELECT id_actarecibido, id_actarecibido as acta_serial";
+                $cadenaSql .= " FROM registro_actarecibido; ";
                 break;
 
             case "inactivarActa" :
@@ -405,11 +410,16 @@ class Sql extends \Sql {
 
 
             // Consultas de Oracle para rescate de información de Sicapital
+            /* case "dependencias":
+              $cadenaSql = "SELECT DEP_IDENTIFICADOR, ";
+              $cadenaSql.= " DEP_IDENTIFICADOR ||' '|| DEP_DEPENDENCIA ";
+              //$cadenaSql .= " DEP_DIRECCION,DEP_TELEFONO ";F
+              $cadenaSql.= " FROM DEPENDENCIAS ";
+              break; */
+
             case "dependencias":
-                $cadenaSql = "SELECT DEP_IDENTIFICADOR, ";
-                $cadenaSql.= " DEP_IDENTIFICADOR ||' '|| DEP_DEPENDENCIA ";
-                //$cadenaSql .= " DEP_DIRECCION,DEP_TELEFONO ";F
-                $cadenaSql.= " FROM DEPENDENCIAS ";
+                $cadenaSql = "SELECT elemento_codigo, elemento_codigo || ' -  ' || elemento_nombre ";
+                $cadenaSql .= "FROM dependencia.catalogo_elemento; ";
                 break;
 
             case "proveedores":

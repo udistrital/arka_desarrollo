@@ -82,16 +82,15 @@ class registrarForm {
         }
 
         $arreglo = array(
-            $numeroActa,
-            $fechaRecibido,
-            $nit,
-            $factura
+            'numero_acta' => $numeroActa,
+            'fecha' => $fechaRecibido,
+            'nit' => $nit,
+                /* $factura */
         );
-
 
         $cadenaSql = $this->miSql->getCadenaSql('consultarActa', $arreglo);
         $Acta = $esteRecursoDB->ejecutarAcceso($cadenaSql, "busqueda");
-
+ 
 // ---------------- SECCION: Parámetros Generales del Formulario ----------------------------------
         $esteCampo = $esteBloque ['nombre'];
         $atributos ['id'] = $esteCampo;
@@ -164,7 +163,6 @@ class registrarForm {
                                 <th>Tipo de Bien</th>
                                 <th>Nit Proveedor</th>
                                 <th>Proveedor</th>
-				<th>Número Factura</th>
                                 <th>Observaciones</th>
 			        <th>Modificar</th>
                                 <th>Eliminar</th>
@@ -191,7 +189,6 @@ class registrarForm {
                     <td><center>" . $Acta [$i] ['tb_descripcion'] . "</center></td>
                     <td><center>" . $Acta [$i] ['nitproveedor'] . "</center></td>
                     <td><center>" . $Acta [$i] ['proveedor'] . "</center></td>
-                    <td><center>" . $Acta [$i] ['numfactura'] . "</center></td>
                     <td><center>" . $Acta [$i] ['observacionesacta'] . "</center></td>
                     <td><center>
                     	<a href='" . $variable . "'>

@@ -44,6 +44,7 @@
         
         $("#<?php echo $this->campoSeguro('nitproveedor') ?>").select2();
         $("#<?php echo $this->campoSeguro('dependencia') ?>").select2();
+        $("#<?php echo $this->campoSeguro('numero_acta') ?>").select2();
         
         $("#<?php echo $this->campoSeguro('nitproveedor') ?>").change(function () {
 datosInfo();
