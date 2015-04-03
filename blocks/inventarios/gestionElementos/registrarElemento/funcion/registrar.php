@@ -182,27 +182,69 @@ class RegistradorOrden {
 					$elemento = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
 				}
 				
-				
 				$placa = date ( 'Ymd' ) . "00000";
 				
-				for($i = 0; $i < $_REQUEST ['cantidad']; $i ++) {
-					$arregloElementosInv = array (
-							$fechaActual,
-							$placa + $i,
-							$_REQUEST ['serie'],
-							$elemento [0] [0] 
-					);
+				$cadenaSql = $this->miSql->getCadenaSql ( 'buscar_repetida_placa', $placa );
+				
+				$num_placa = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
+				
+				if ($num_placa [0] [0] == 0) {
 					
-					$cadenaSql = $this->miSql->getCadenaSql ( 'ingresar_elemento_individual', $arregloElementosInv );
+					for($i = 0; $i < $_REQUEST ['cantidad']; $i ++) {
+						$arregloElementosInv = array (
+								$fechaActual,
+								$placa + $i,
+								$_REQUEST ['serie'],
+								$elemento [0] [0] 
+						);
+						
+						$cadenaSql = $this->miSql->getCadenaSql ( 'ingresar_elemento_individual', $arregloElementosInv );
+						
+						$elemento_id [$i] = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
+					}
+				} else if ($num_placa [0] [0] != 0) {
 					
-					$elemento_id[$i] = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
+					$cadenaSql = $this->miSql->getCadenaSql ( 'buscar_placa_maxima', $placa );
+					
+					$num_placa = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
+					
+					$placa=$num_placa[0][0];
+					
+					
+					
+					
+					for($i = 0; $i < $_REQUEST ['cantidad']; $i ++) {
+						$arregloElementosInv = array (
+								$fechaActual,
+								$placa + $i,
+								$_REQUEST ['serie'],
+								$elemento [0] [0]
+						);
+					
+						
+						var_dump($arregloElementosInv);exit;
+						
+						$cadenaSql = $this->miSql->getCadenaSql ( 'ingresar_elemento_individual', $arregloElementosInv );
+					
+						$elemento_id [$i] = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
+					}
+					
+					
+					
+					
+					
+					
 					
 				}
-	
+				
+				
+				
+				exit ();
+				
 				$datos = array (
 						$elemento [0] [0],
-						$fechaActual ,
-						$_REQUEST['entrada']
+						$fechaActual,
+						$_REQUEST ['entrada'] 
 				);
 				
 				if ($elemento) {

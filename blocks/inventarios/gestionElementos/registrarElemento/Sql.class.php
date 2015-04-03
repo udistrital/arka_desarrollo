@@ -149,6 +149,17 @@ class Sql extends \Sql {
 			 * Clausulas Del Caso Uso.
 			 */
 			
+			case "buscar_placa_maxima" :
+				$cadenaSql = " SELECT  MAX(placa) placa_max ";
+				$cadenaSql .= " FROM elemento_individual ";
+				break;
+			
+			case "buscar_repetida_placa" :
+				$cadenaSql = " SELECT  count (placa) ";
+				$cadenaSql .= " FROM elemento_individual ";
+				$cadenaSql .= " WHERE placa ='" . $variable . "';";
+				break;
+			
 			case "buscar_entradas" :
 				$cadenaSql = " SELECT id_entrada valor,id_entrada descripcion  ";
 				$cadenaSql .= " FROM entrada; ";
