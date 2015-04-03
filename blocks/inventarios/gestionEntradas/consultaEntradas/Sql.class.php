@@ -149,16 +149,9 @@ class Sql extends \Sql {
 			 * Clausulas Del Caso Uso.
 			 */
 			
-				
-				
-				 
-				
-				
 			case "buscar_entradas" :
 				$cadenaSql = " SELECT id_entrada valor,id_entrada descripcion  ";
 				$cadenaSql .= " FROM entrada; ";
-				
-				
 				break;
 			
 			case "proveedor_informacion" :
