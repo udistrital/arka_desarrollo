@@ -29,7 +29,7 @@ class registrarForm {
     function miForm() {
 
         var_dump($_REQUEST);
-    
+
         // Rescatar los datos de este bloque
         $esteBloque = $this->miConfigurador->getVariableConfiguracion("esteBloque");
         $miPaginaActual = $this->miConfigurador->getVariableConfiguracion('pagina');
@@ -68,16 +68,16 @@ class registrarForm {
             $docContratista = '';
         }
 
-        $supervisor = $_REQUEST['usuario'];
+        $supervisor = 4;
 
         $variables = array(
-            4,
+            $supervisor,
             $docContratista);
 
 
-       echo  $cadenaSql = $this->miSql->getCadenaSql('consultarElementosSupervisor', $variables);
+        $cadenaSql = $this->miSql->getCadenaSql('consultarElementosSupervisor', $variables);
         $elementos_supervisor = $esteRecursoDB->ejecutarAcceso($cadenaSql, "busqueda");
-exit;
+
         // ---------------- SECCION: Parámetros Generales del Formulario ----------------------------------
         $esteCampo = $esteBloque ['nombre'];
         $atributos ['id'] = $esteCampo;
@@ -112,10 +112,10 @@ exit;
 
             echo "<thead>
                 <tr>
+                <th>ID Elemento</th>
                 <th>Nivel de Inventario</th>
-                <th>Unidad de Medida</th>
-                <th>Cantidad</th>
                 <th>Marca Elementos</th>
+                <th>Placa Elementos</th>
                 <th>Serie Elemento</th>
                 <th>Valor Unitario</th>
                 <th>Subtotal</th>
@@ -129,15 +129,15 @@ exit;
             for ($i = 0; $i < count($elementos_supervisor); $i ++) {
 
                 $mostrarHtml = "<tr>
-                    <td><center>" . $elementos_supervisor [$i][1] . "</center></td>
-                    <td><center>" . $elementos_supervisor [$i][0] . "</center></td>
-                    <td><center>" . $elementos_supervisor [$i][2] . "</center></td>
-                    <td><center>" . $elementos_supervisor [$i][3] . "</center></td>
-                    <td><center>" . $elementos_supervisor [$i][4] . "</center></td>
-                    <td><center>" . $elementos_supervisor [$i][5] . "</center></td>
-                    <td><center>" . $elementos_supervisor [$i][6] . "</center></td>
-                    <td><center>" . $elementos_supervisor [$i][7] . "</center></td>
-                    <td><center>" . $elementos_supervisor [$i][8] . "</center></td>
+                    <td><center>" . $elementos_supervisor [$i]['id_elemento'] . "</center></td>
+                    <td><center>" . $elementos_supervisor [$i]['nivel'] . "</center></td>
+                    <td><center>" . $elementos_supervisor [$i]['marca'] . "</center></td>
+                    <td><center>" . $elementos_supervisor [$i]['placa'] . "</center></td>
+                    <td><center>" . $elementos_supervisor [$i]['serie'] . "</center></td>
+                    <td><center>" . $elementos_supervisor [$i]['valor'] . "</center></td>
+                    <td><center>" . $elementos_supervisor [$i]['subtotal_sin_iva'] . "</center></td>
+                    <td><center>" . $elementos_supervisor [$i]['total_iva'] . "</center></td>
+                    <td><center>" . $elementos_supervisor [$i]['total_iva_con'] . "</center></td>
                         
                     <td><center>";
                 // ---------------- CONTROL: Cuadro de Texto --------------------------------------------------------
@@ -154,7 +154,7 @@ exit;
                 if (isset($_REQUEST [$esteCampo])) {
                     $atributos ['valor'] = $_REQUEST [$esteCampo];
                 } else {
-                    $atributos ['valor'] = $elementos_supervisor [$i] [0];
+                    $atributos ['valor'] = $elementos_supervisor [$i] ['id_elemento'];
                 }
 
                 $atributos ['deshabilitado'] = false;
