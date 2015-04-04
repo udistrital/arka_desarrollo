@@ -168,7 +168,6 @@ class RegistradorActa {
                     $cadenaSql2 = $this->miSql->getCadenaSql('inactivarAsignacion', $datosInactivar);
                     $inactivar_cont = $esteRecursoDB->ejecutarAcceso($cadenaSql2, "insertar");
                 }
-
                 $valor = 0;
             }
         }

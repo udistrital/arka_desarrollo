@@ -117,7 +117,7 @@ class registrarForm {
                 <th>Serie Elemento</th>
                 <th>Valor Unitario</th>
                 <th>Subtotal</th>
-                <th>Total con IVA</th>
+                <th>Total IVA</th>
                 <th>Total Ajustado</th>
 		<th>Seleccionar</th>
                 </tr>
