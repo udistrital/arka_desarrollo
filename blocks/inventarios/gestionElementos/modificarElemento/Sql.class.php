@@ -149,6 +149,18 @@ class Sql extends \Sql {
 			 * Clausulas Del Caso Uso.
 			 */
 			
+			case "buscar_placa" :
+				$cadenaSql = " SELECT DISTINCT id_elemento_gen, placa ";
+				$cadenaSql .= "FROM elemento_individual ";
+				$cadenaSql .= "ORDER BY placa DESC ";
+				break;
+			
+			case "buscar_serie" :
+				$cadenaSql = " SELECT DISTINCT id_elemento_gen, serie ";
+				$cadenaSql .= "FROM elemento_individual ";
+				$cadenaSql .= "ORDER BY serie DESC ";
+				break;
+			
 			case "consultarElemento" :
 				
 				$cadenaSql = "SELECT DISTINCT ";
