@@ -40,11 +40,8 @@ class RegistradorActa {
         $conexion = "inventarios";
         $esteRecursoDB = $this->miConfigurador->fabricaConexiones->getRecursoDB($conexion);
 
-        //recuperar datos de la asignacion
-        $supervisor = $_REQUEST ['supervisor'];
-        $cadenaSql = $this->miSql->getCadenaSql('consultarID', $supervisor);
-        $supervisor_id1 = $esteRecursoDB->ejecutarAcceso($cadenaSql, "busqueda");
-        $supervisor_id = $supervisor_id1[0][0];
+      
+        $supervisor_id = $_REQUEST ['supervisor'];
 
         // asociar super-cont-item
 
@@ -55,12 +52,13 @@ class RegistradorActa {
 
                 $elemento = $items_contratista[$i]['elemento'];
                 //Consultar Elementos Asignados al contratista
-                $cadenaSql = $this->miSql->getCadenaSql('consultarAsignacion', $elemento);
+                echo $cadenaSql = $this->miSql->getCadenaSql('consultarAsignacion', $elemento);
                 $elementos_contratista = $esteRecursoDB->ejecutarAcceso($cadenaSql, "busqueda");
                 $items_contratista [$i]['id_asignacion'] = $elementos_contratista[0][0];
             }
         }
 
+        exit;
         for ($i = 0; $i <= 200; $i ++) {
             if (isset($_REQUEST ['elementoSupervisor_' . $i])) {
                 $items_supervisor[$i]['identificacion'] = $_REQUEST ['elementoSupervisor_' . $i];

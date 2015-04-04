@@ -168,6 +168,8 @@ class RegistradorActa {
                 $valor = 0;
             }
         }
+        
+        exit;
         //inactivar item para asignar
         if (isset($asignar_cont) == true && isset($asignar_sup) == true || isset($inactivar_cont) == true || isset($inactivar_sup) == true) {
             redireccion::redireccionar('inserto', $datos);

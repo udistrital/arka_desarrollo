@@ -204,11 +204,11 @@ class Sql extends \Sql {
                 break;
 
             case "inactivarElemento" :
-                $cadenaSql = "UPDATE elemento";
+                $cadenaSql = "UPDATE elemento_individual";
                 $cadenaSql.= " SET ";
                 $cadenaSql.= " estado_asignacion= '" . $variable[1] . "', ";
                 $cadenaSql.= " fecha_asignacion = '" . $variable[2] . "'";
-                $cadenaSql.= " WHERE id_elemento = '" . $variable[0] . "'; ";
+                $cadenaSql.= " WHERE id_elemento_ind = '" . $variable[0] . "'; ";
                 break;
 
             case "asignarElemento_sup" :
@@ -220,19 +220,19 @@ class Sql extends \Sql {
                 break;
 
             case "inactivarElemento_sup" :
-                $cadenaSql = "UPDATE elemento";
+                $cadenaSql = "UPDATE elemento_individual";
                 $cadenaSql.= " SET ";
                 $cadenaSql.= " estado_asignacion= '" . $variable[1] . "', ";
                 $cadenaSql.= " fecha_asignacion = '" . $variable[2] . "'";
-                $cadenaSql.= " WHERE id_elemento = '" . $variable[0] . "'; ";
+                $cadenaSql.= " WHERE id_elemento_ind = '" . $variable[0] . "'; ";
                 break;
 
             case "activarElemento" :
-                $cadenaSql = "UPDATE elemento";
+                $cadenaSql = "UPDATE elemento_individual ";
                 $cadenaSql.= " SET ";
                 $cadenaSql.= " estado_asignacion= '" . $variable[1] . "', ";
                 $cadenaSql.= " fecha_asignacion = '" . $variable[2] . "'";
-                $cadenaSql.= " WHERE id_elemento = '" . $variable[0] . "'; ";
+                $cadenaSql.= " WHERE id_elemento_ind = '" . $variable[0] . "'; ";
                 break;
 
             case "inactivarAsignacion" :

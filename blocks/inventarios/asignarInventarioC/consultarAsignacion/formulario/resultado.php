@@ -158,7 +158,7 @@ class registrarForm {
                     if (isset($_REQUEST [$esteCampo])) {
                         $atributos ['valor'] = $_REQUEST [$esteCampo];
                     } else {
-                        $atributos ['valor'] = $elementos_supervisor [$i] ['id_elemento'];
+                        $atributos ['valor'] = $elementos_supervisor [$i] ['id_elemento_ind'];
                     }
 
                     $atributos ['deshabilitado'] = false;
@@ -181,10 +181,10 @@ class registrarForm {
 
                     $mostrarHtml = "
                     <tr>
+                    <td><center>" . $elementos_contratista [$i]['id_elemento_ind'] . "</center></td>
                     <td><center>" . $elementos_contratista [$i]['nivel'] . "</center></td>
-                    <td><center>" . $elementos_contratista [$i]['unidad'] . "</center></td>
-                    <td><center>" . $elementos_contratista [$i]['cantidad'] . "</center></td>
                     <td><center>" . $elementos_contratista [$i]['marca'] . "</center></td>
+                    <td><center>" . $elementos_contratista [$i]['placa'] . "</center></td>
                     <td><center>" . $elementos_contratista [$i]['serie'] . "</center></td>
                     <td><center>" . $elementos_contratista [$i]['valor'] . "</center></td>
                     <td><center>" . $elementos_contratista [$i]['subtotal_sin_iva'] . "</center></td>
@@ -205,7 +205,7 @@ class registrarForm {
                     if (isset($_REQUEST [$esteCampo])) {
                         $atributos ['valor'] = $_REQUEST [$esteCampo];
                     } else {
-                        $atributos ['valor'] = $elementos_contratista [$i] ['id_elemento'];
+                        $atributos ['valor'] = $elementos_contratista [$i] ['id_elemento_ind'];
                     }
                     $atributos ['seleccionado'] = true;
                     $atributos ['deshabilitado'] = false;
