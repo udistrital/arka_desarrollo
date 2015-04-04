@@ -107,7 +107,7 @@
         } );
         
         
-                $("#<?php echo $this->campoSeguro('documentoContratista') ?>").select2();
+$("#<?php echo $this->campoSeguro('documentoContratista') ?>").select2();
         
         
         
