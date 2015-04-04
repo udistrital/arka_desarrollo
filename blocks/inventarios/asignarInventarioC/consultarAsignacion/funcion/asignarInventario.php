@@ -48,6 +48,7 @@ class RegistradorActa {
         $cadenaSql = $this->miSql->getCadenaSql('consultarElementosSupervisor', $variables);
         $elementos_supervisor = $esteRecursoDB->ejecutarAcceso($cadenaSql, "busqueda");
 
+        
         //Consultar Elementos Asignados al contratista
         $cadenaSql = $this->miSql->getCadenaSql('consultarElementosContratista', $variables);
         $elementos_contratista = $esteRecursoDB->ejecutarAcceso($cadenaSql, "busqueda");
@@ -59,6 +60,9 @@ class RegistradorActa {
         );
         // asociar super-cont-item
 
+        $items_sup[]=0;
+        $items_cont[]=0;
+        
         $valor = 0;
 
         for ($i = 0; $i <= 200; $i ++) {
@@ -70,7 +74,7 @@ class RegistradorActa {
         if ($elementos_supervisor !== false) {
             foreach ($elementos_supervisor as $key => $values) {
                 foreach ($items_sup as $cont => $values) {
-                    if ($items_sup[$cont] == $elementos_supervisor[$key][0]) {
+                    if ($items_sup[$cont] == $elementos_supervisor[$key]['id_elemento_ind']) {
                         $valor = 1;
                     } else {
                         $valor = $valor;
@@ -82,13 +86,13 @@ class RegistradorActa {
                         $datosAsignacion = array(
                             $_REQUEST ['supervisor'],
                             $_REQUEST ['contratista'],
-                            $elementos_supervisor[$key][0],
+                            $elementos_supervisor[$key]['id_elemento_ind'],
                             1,
                             $fechaActual,
                         );
 
                         $datosInactivar = array(
-                            $elementos_supervisor[$key][0],
+                            $elementos_supervisor[$key]['id_elemento_ind'],
                             't',
                             $fechaActual,
                         );
@@ -102,13 +106,13 @@ class RegistradorActa {
                         //si son diferentes, significa que los demas elementos pertenecen al supervisor
                         // activar asignación a supervisor
                         $datosAsignacion = array(
-                            $elementos_supervisor[$key][0],
+                            $elementos_supervisor[$key]['id_elemento_ind'],
                             0,
                             $fechaActual,
                         );
 
                         $datosInactivar = array(
-                            $elementos_supervisor[$key][0],
+                            $elementos_supervisor[$key]['id_elemento_ind'],
                             'f',
                             $fechaActual,
                         );
@@ -137,7 +141,7 @@ class RegistradorActa {
 
             foreach ($elementos_contratista as $key => $values) {
                 foreach ($items_cont as $cont => $values) {
-                    if ($items_cont[$cont] == $elementos_contratista[$key][10]) {
+                    if ($items_cont[$cont] == $elementos_contratista[$key]['id_elemento_ind']) {
                         //si son iguales, significa que un elemento del contratista esta asignado aún al contratista
                         $valor = 1;
                     } else {
@@ -149,13 +153,13 @@ class RegistradorActa {
                 if ($valor == 0) {
                     //inactivar asignación
                     $datosInactivar = array(
-                        $elementos_contratista[$key][10],
+                        $elementos_contratista[$key]['id_elemento_ind'],
                         0,
                         $fechaActual,
                     );
 
                     $datosActivar = array(
-                        $elementos_contratista[$key][10],
+                        $elementos_contratista[$key]['id_elemento_ind'],
                         'f',
                         $fechaActual,
                     );
@@ -169,7 +173,6 @@ class RegistradorActa {
             }
         }
         
-        exit;
         //inactivar item para asignar
         if (isset($asignar_cont) == true && isset($asignar_sup) == true || isset($inactivar_cont) == true || isset($inactivar_sup) == true) {
             redireccion::redireccionar('inserto', $datos);
