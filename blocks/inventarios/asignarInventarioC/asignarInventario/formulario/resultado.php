@@ -28,8 +28,8 @@ class registrarForm {
 
     function miForm() {
 
-// 		var_dump ( $_REQUEST );
-// 		exit ();
+        var_dump($_REQUEST);
+    
         // Rescatar los datos de este bloque
         $esteBloque = $this->miConfigurador->getVariableConfiguracion("esteBloque");
         $miPaginaActual = $this->miConfigurador->getVariableConfiguracion('pagina');
@@ -68,19 +68,16 @@ class registrarForm {
             $docContratista = '';
         }
 
-        $supervisor=$_REQUEST['usuario'];
-
-        $cadenaSql = $this->miSql->getCadenaSql('consultarContratista', $docContratista);
-        $contratista = $esteRecursoDB->ejecutarAcceso($cadenaSql, "busqueda");
+        $supervisor = $_REQUEST['usuario'];
 
         $variables = array(
-            $supervisor,
+            4,
             $docContratista);
 
 
-        $cadenaSql = $this->miSql->getCadenaSql('consultarElementosSupervisor', $variables);
+       echo  $cadenaSql = $this->miSql->getCadenaSql('consultarElementosSupervisor', $variables);
         $elementos_supervisor = $esteRecursoDB->ejecutarAcceso($cadenaSql, "busqueda");
-
+exit;
         // ---------------- SECCION: Parámetros Generales del Formulario ----------------------------------
         $esteCampo = $esteBloque ['nombre'];
         $atributos ['id'] = $esteCampo;
@@ -213,8 +210,6 @@ class registrarForm {
             // Se debe declarar el mismo atributo de marco con que se inició el formulario.
             // -----------------FIN CONTROL: Botón -----------------------------------------------------------
             // ------------------Fin Division para los botones-------------------------
- 
-
             // ------------------- SECCION: Paso de variables ------------------------------------------------
 
             /**
@@ -235,8 +230,8 @@ class registrarForm {
             $valorCodificado .= "&bloque=" . $esteBloque ['nombre'];
             $valorCodificado .= "&bloqueGrupo=" . $esteBloque ["grupo"];
             $valorCodificado .= "&opcion=asignar";
-            $valorCodificado .= "&contratista=".$docContratista;
-            $valorCodificado .= "&supervisor=".$supervisor;
+            $valorCodificado .= "&contratista=" . $docContratista;
+            $valorCodificado .= "&supervisor=" . $supervisor;
 
             /**
              * SARA permite que los nombres de los campos sean dinámicos.
