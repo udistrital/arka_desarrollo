@@ -230,12 +230,17 @@ class RegistradorOrden {
 						$elemento [0] [0],
 						$fechaActual,
 						$_REQUEST ['entrada'],
-						$_REQUEST['datosGenerales'] 
+						
 				);
+				
+				
+				
+				
+				
 				
 				if ($elemento) {
 					
-					redireccion::redireccionar ( 'inserto', $datos );
+					redireccion::redireccionar ( 'inserto', $datos, $_REQUEST['datosGenerales'] );
 				} else {
 					
 					redireccion::redireccionar ( 'noInserto', $datos );
