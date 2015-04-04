@@ -285,7 +285,8 @@ class Sql extends \Sql {
 				$cadenaSql .= "'" . $variable [11] . "',";
 				$cadenaSql .= "'" . $variable [12] . "',";
 				$cadenaSql .= "'" . $variable [13] . "',";
-				$cadenaSql .= "'" . $variable [14] . "') ";
+				$cadenaSql .= "'" . $variable [14] . "',";
+				$cadenaSql .= "'" . $variable [15] . "') ";
 				$cadenaSql .= "RETURNING  id_elemento; ";
 				
 				break;
@@ -295,7 +296,7 @@ class Sql extends \Sql {
 				$cadenaSql .= " elemento(";
 				$cadenaSql .= "fecha_registro,nivel,tipo_bien, descripcion, cantidad, ";
 				$cadenaSql .= "unidad, valor, iva, ajuste, bodega, subtotal_sin_iva, total_iva, ";
-				$cadenaSql .= "total_iva_con, placa,tipo_poliza, fecha_inicio_pol, fecha_final_pol,marca,serie,id_entrada) ";
+				$cadenaSql .= "total_iva_con,tipo_poliza, fecha_inicio_pol, fecha_final_pol,marca,serie,id_entrada) ";
 				$cadenaSql .= " VALUES (";
 				$cadenaSql .= "'" . $variable [0] . "',";
 				$cadenaSql .= "'" . $variable [1] . "',";

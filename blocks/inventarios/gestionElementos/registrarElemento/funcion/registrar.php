@@ -91,7 +91,9 @@ class RegistradorOrden {
 							$_REQUEST ['entrada'] 
 					);
 					
+					
 					$cadenaSql = $this->miSql->getCadenaSql ( 'ingresar_elemento_tipo_1', $arreglo );
+					
 					
 					$elemento = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
 				} else if ($_REQUEST ['tipo_bien'] == 2) {
@@ -229,7 +231,7 @@ class RegistradorOrden {
 				);
 				
 				
-				
+				exit;
 				if ($elemento) {
 					
 					redireccion::redireccionar ( 'inserto', $datos, $_REQUEST['datosGenerales'] );
