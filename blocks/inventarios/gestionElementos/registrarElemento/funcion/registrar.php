@@ -208,43 +208,29 @@ class RegistradorOrden {
 					
 					$num_placa = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
 					
-					$placa=$num_placa[0][0];
+					$placa = $num_placa [0] [0];
 					
-					
-					
-					
-					for($i = 0; $i < $_REQUEST ['cantidad']; $i ++) {
+					for($i = 1; $i < $_REQUEST ['cantidad']; $i ++) {
 						$arregloElementosInv = array (
 								$fechaActual,
 								$placa + $i,
 								$_REQUEST ['serie'],
-								$elemento [0] [0]
+								$elemento [0] [0] 
 						);
-					
-						
-						var_dump($arregloElementosInv);exit;
 						
 						$cadenaSql = $this->miSql->getCadenaSql ( 'ingresar_elemento_individual', $arregloElementosInv );
-					
+						
 						$elemento_id [$i] = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
 					}
-					
-					
-					
-					
-					
-					
-					
 				}
 				
 				
 				
-				exit ();
-				
 				$datos = array (
 						$elemento [0] [0],
 						$fechaActual,
-						$_REQUEST ['entrada'] 
+						$_REQUEST ['entrada'],
+						$_REQUEST['datosGenerales'] 
 				);
 				
 				if ($elemento) {

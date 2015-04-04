@@ -82,6 +82,7 @@ class registrarForm {
 			// ---------------- SECCION: Controles del Formulario -----------------------------------------------
 			
 			
+			
 			$esteCampo = "AgrupacionGeneral";
 			$atributos ['id'] = $esteCampo;
 			$atributos ['leyenda'] = "Información General de la Entrada a Cargar Elementos ";
@@ -1056,6 +1057,7 @@ class registrarForm {
 			$valorCodificado .= "&bloqueGrupo=" . $esteBloque ["grupo"];
 			$valorCodificado .= "&opcion=registrar";
 			$valorCodificado .= "&entrada=" . $_REQUEST ['numero_entrada'];
+			$valorCodificado .= "&datosGenerales=" . $_REQUEST ['datosGenerales'];
 			
 			/**
 			 * SARA permite que los nombres de los campos sean dinámicos.
