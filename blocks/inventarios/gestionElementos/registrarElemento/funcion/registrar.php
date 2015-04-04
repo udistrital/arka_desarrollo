@@ -71,14 +71,7 @@ class RegistradorOrden {
 					
 					$cadenaSql = $this->miSql->getCadenaSql ( 'consultar_placa', '1' );
 					$placa = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
-					
-					if ($placa [0] [0] == NULL) {
-						
-						$placa = 1000001;
-					} else {
-						$placa = $placa [0] [0] + 1;
-					}
-					
+		
 					$arreglo = array (
 							$fechaActual,
 							$_REQUEST ['nivel'],
@@ -93,7 +86,6 @@ class RegistradorOrden {
 							$_REQUEST ['subtotal_sin_iva'],
 							$_REQUEST ['total_iva'],
 							$_REQUEST ['total_iva_con'],
-							$placa,
 							$_REQUEST ['marca'],
 							$_REQUEST ['serie'],
 							$_REQUEST ['entrada'] 
@@ -118,7 +110,6 @@ class RegistradorOrden {
 							$_REQUEST ['subtotal_sin_iva'],
 							$_REQUEST ['total_iva'],
 							$_REQUEST ['total_iva_con'],
-							$_REQUEST ['placa_cc'],
 							$_REQUEST ['marca'],
 							$_REQUEST ['serie'],
 							$_REQUEST ['entrada'] 
@@ -145,7 +136,6 @@ class RegistradorOrden {
 								$_REQUEST ['subtotal_sin_iva'],
 								$_REQUEST ['total_iva'],
 								$_REQUEST ['total_iva_con'],
-								$_REQUEST ['placa_dev'],
 								$_REQUEST ['tipo_poliza'],
 								'0001-01-01',
 								'0001-01-01',
@@ -168,7 +158,6 @@ class RegistradorOrden {
 								$_REQUEST ['subtotal_sin_iva'],
 								$_REQUEST ['total_iva'],
 								$_REQUEST ['total_iva_con'],
-								$_REQUEST ['placa_dev'],
 								$_REQUEST ['tipo_poliza'],
 								$_REQUEST ['fecha_inicio'],
 								$_REQUEST ['fecha_final'],
