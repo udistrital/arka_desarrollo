@@ -28,8 +28,6 @@ class registrarForm {
 
     function miForm() {
 
-        var_dump($_REQUEST);
-
         // Rescatar los datos de este bloque
         $esteBloque = $this->miConfigurador->getVariableConfiguracion("esteBloque");
         $miPaginaActual = $this->miConfigurador->getVariableConfiguracion('pagina');
@@ -129,7 +127,7 @@ class registrarForm {
             for ($i = 0; $i < count($elementos_supervisor); $i ++) {
 
                 $mostrarHtml = "<tr>
-                    <td><center>" . $elementos_supervisor [$i]['id_elemento'] . "</center></td>
+                    <td><center>" . $elementos_supervisor [$i]['id_elemento_ind'] . "</center></td>
                     <td><center>" . $elementos_supervisor [$i]['nivel'] . "</center></td>
                     <td><center>" . $elementos_supervisor [$i]['marca'] . "</center></td>
                     <td><center>" . $elementos_supervisor [$i]['placa'] . "</center></td>
@@ -154,7 +152,7 @@ class registrarForm {
                 if (isset($_REQUEST [$esteCampo])) {
                     $atributos ['valor'] = $_REQUEST [$esteCampo];
                 } else {
-                    $atributos ['valor'] = $elementos_supervisor [$i] ['id_elemento'];
+                    $atributos ['valor'] = $elementos_supervisor [$i] ['id_elemento_ind'];
                 }
 
                 $atributos ['deshabilitado'] = false;
