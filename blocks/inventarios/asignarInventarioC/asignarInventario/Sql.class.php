@@ -165,6 +165,7 @@ class Sql extends \Sql {
                 $cadenaSql.= " AND salida.id_entrada=elemento.id_entrada ";
                 $cadenaSql.= " AND elemento_individual.estado_asignacion=FALSE  ";
                 $cadenaSql.= " AND funcionario='" . $variable[0] . "' ORDER BY nivel ASC ";
+
                 break;
 
             case "consultarID":

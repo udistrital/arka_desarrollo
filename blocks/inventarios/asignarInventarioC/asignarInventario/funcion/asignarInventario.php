@@ -69,13 +69,12 @@ class RegistradorActa {
             );
 
             $cadenaSql = $this->miSql->getCadenaSql('asignarElemento', $datosAsignacion);
-            $asignar = $esteRecursoDB->ejecutarAcceso($cadenaSql, "insertar");
-            
+            $asignar = $esteRecursoDB->ejecutarAcceso($cadenaSql, "acceso");
+
             $cadenaSql2 = $this->miSql->getCadenaSql('inactivarElemento', $datosInactivar);
-            $inactivar = $esteRecursoDB->ejecutarAcceso($cadenaSql2, "insertar");
+            $inactivar = $esteRecursoDB->ejecutarAcceso($cadenaSql2, "acceso");
          
         }
-
 
         //inactivar item para asignar
         if ($inactivar == true && $asignar ==true) {
