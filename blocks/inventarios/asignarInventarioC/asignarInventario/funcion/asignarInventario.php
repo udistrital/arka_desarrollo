@@ -45,16 +45,7 @@ class RegistradorActa {
             $_REQUEST ['contratista'],
             $_REQUEST ['supervisor'],
         );
-
-        $cadenaSql = $this->miSql->getCadenaSql('consultarID', $_REQUEST['supervisor']);
-        $supervisor_id1 = $esteRecursoDB->ejecutarAcceso($cadenaSql, "busqueda");
-        $supervisor_id = $supervisor_id1[0][0];
-        
-        $cadenaSql = $this->miSql->getCadenaSql('consultarID', $_REQUEST['contratista']);
-        $contratista_id1 = $esteRecursoDB->ejecutarAcceso($cadenaSql, "busqueda");
-        $contratista_id = $contratista_id1[0][0];
         // asociar super-cont-item
-
 
         for ($i = 0; $i <= 200; $i ++) {
             if (isset($_REQUEST ['item' . $i])) {
@@ -63,7 +54,6 @@ class RegistradorActa {
         };
 
         foreach ($items as $key => $values) {
-
             $datosAsignacion = array(
                 $_REQUEST ['contratista'],
                 $_REQUEST ['supervisor'],
@@ -80,13 +70,15 @@ class RegistradorActa {
 
             $cadenaSql = $this->miSql->getCadenaSql('asignarElemento', $datosAsignacion);
             $asignar = $esteRecursoDB->ejecutarAcceso($cadenaSql, "insertar");
-
+            
             $cadenaSql2 = $this->miSql->getCadenaSql('inactivarElemento', $datosInactivar);
             $inactivar = $esteRecursoDB->ejecutarAcceso($cadenaSql2, "insertar");
+         
         }
 
+
         //inactivar item para asignar
-        if ($inactivar == true) {
+        if ($inactivar == true && $asignar ==true) {
             redireccion::redireccionar('inserto', $datos);
         } else {
             redireccion::redireccionar('noInserto', $datos);

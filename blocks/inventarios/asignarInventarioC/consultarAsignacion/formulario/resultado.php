@@ -68,10 +68,8 @@ class registrarForm {
             $docContratista = '';
         }
 
-        $supervisor = $_REQUEST['usuario'];
+        $supervisor = 4;
 
-        $cadenaSql = $this->miSql->getCadenaSql('consultarContratista', $docContratista);
-        $contratista = $esteRecursoDB->ejecutarAcceso($cadenaSql, "busqueda");
 
         $variables = array(
             $supervisor,
@@ -80,7 +78,6 @@ class registrarForm {
         //COnsultar Elementos Activos del supervisor para asignarlos al contratista
         $cadenaSql = $this->miSql->getCadenaSql('consultarElementosSupervisor', $variables);
         $elementos_supervisor = $esteRecursoDB->ejecutarAcceso($cadenaSql, "busqueda");
-
         //Consultar Elementos Asignados al contratista
         $cadenaSql = $this->miSql->getCadenaSql('consultarElementosContratista', $variables);
         $elementos_contratista = $esteRecursoDB->ejecutarAcceso($cadenaSql, "busqueda");
@@ -119,16 +116,16 @@ class registrarForm {
 
             echo "<thead>
                 <tr>
+                <th>ID Elemento</th>
                 <th>Nivel de Inventario</th>
-                <th>Unidad de Medida</th>
-                <th>Cantidad</th>
                 <th>Marca Elementos</th>
+                <th>Placa Elementos</th>
                 <th>Serie Elemento</th>
                 <th>Valor Unitario</th>
                 <th>Subtotal</th>
-                <th>Total IVA</th>
+                <th>Total con IVA</th>
                 <th>Total Ajustado</th>
-		<th>Estado Asignación</th>
+		<th>Seleccionar</th>
                 </tr>
             </thead>
             <tbody>";
@@ -137,10 +134,10 @@ class registrarForm {
                 for ($i = 0; $i < count($elementos_supervisor); $i ++) {
 
                     $mostrarHtml = "<tr>
+                    <td><center>" . $elementos_supervisor [$i]['id_elemento_ind'] . "</center></td>
                     <td><center>" . $elementos_supervisor [$i]['nivel'] . "</center></td>
-                    <td><center>" . $elementos_supervisor [$i]['unidad'] . "</center></td>
-                    <td><center>" . $elementos_supervisor [$i]['cantidad'] . "</center></td>
                     <td><center>" . $elementos_supervisor [$i]['marca'] . "</center></td>
+                    <td><center>" . $elementos_supervisor [$i]['placa'] . "</center></td>
                     <td><center>" . $elementos_supervisor [$i]['serie'] . "</center></td>
                     <td><center>" . $elementos_supervisor [$i]['valor'] . "</center></td>
                     <td><center>" . $elementos_supervisor [$i]['subtotal_sin_iva'] . "</center></td>

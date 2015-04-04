@@ -161,49 +161,30 @@ class Sql extends \Sql {
                 break;
 
             case "consultarElementosSupervisor" :
-                $cadenaSql = "SELECT  ";
-                $cadenaSql.= " id_elemento,  ";
-                $cadenaSql.= " nivel,  ";
-                $cadenaSql.= " unidad, ";
-                $cadenaSql.= " cantidad,  ";
-                $cadenaSql.= " marca,  ";
-                $cadenaSql.= " serie, ";
-                $cadenaSql.= " valor, ";
-                $cadenaSql.= " subtotal_sin_iva,  ";
-                $cadenaSql.= " total_iva, ";
-                $cadenaSql.= " total_iva_con, ";
-                $cadenaSql.= " identificacion ";
-                $cadenaSql.= " FROM elemento, salida ";
-                $cadenaSql.= " JOIN funcionario ON funcionario.id_funcionario = salida.funcionario ";
-                $cadenaSql.= " WHERE elemento.estado=TRUE ";
-                $cadenaSql.= " AND elemento.estado_asignacion=FALSE ";
+                $cadenaSql = "SELECT id_elemento_ind, nivel, marca, elemento_individual.placa,elemento_individual.serie, valor, subtotal_sin_iva, ";
+                $cadenaSql.= " total_iva, total_iva_con ";
+                $cadenaSql.= " FROM salida , elemento ";
+                $cadenaSql.= " JOIN elemento_individual ON elemento.id_elemento=elemento_individual.id_elemento_gen  ";
+                $cadenaSql.= " WHERE  ";
+                $cadenaSql.= " elemento_individual.estado_registro=TRUE  ";
+                $cadenaSql.= " AND salida.id_salida=elemento_individual.id_salida ";
                 $cadenaSql.= " AND salida.id_entrada=elemento.id_entrada ";
-                $cadenaSql.= " AND identificacion='" . $variable[0] . "' ";
-                $cadenaSql.= " ORDER BY nivel ASC ";
+                $cadenaSql.= " AND elemento_individual.estado_asignacion=FALSE  ";
+                $cadenaSql.= " AND funcionario='" . $variable[0] . "' ORDER BY nivel ASC ";
                 break;
 
             case "consultarElementosContratista" :
-                $cadenaSql = "SELECT ";
-                $cadenaSql.= " nivel,  ";
-                $cadenaSql.= " unidad, ";
-                $cadenaSql.= " cantidad,  ";
-                $cadenaSql.= " marca,  ";
-                $cadenaSql.= " serie, ";
-                $cadenaSql.= " valor, ";
-                $cadenaSql.= " subtotal_sin_iva,  ";
-                $cadenaSql.= " total_iva, ";
-                $cadenaSql.= " total_iva_con, ";
-                $cadenaSql.= " identificacion, ";
-                $cadenaSql.= " elemento.id_elemento,contratista ";
-                $cadenaSql.= " FROM elemento, asignar_elementos, salida ";
-                $cadenaSql.= " JOIN funcionario ON funcionario.id_funcionario = salida.funcionario ";
-                $cadenaSql.= " WHERE elemento.estado=TRUE ";
-                $cadenaSql.= " AND elemento.id_elemento=asignar_elementos.id_elemento ";
-                $cadenaSql.= " AND elemento.estado_asignacion=TRUE ";
+                $cadenaSql = " SELECT id_elemento_ind,nivel, marca, ";
+                $cadenaSql.= " elemento_individual.placa,elemento_individual.serie, valor, subtotal_sin_iva, ";
+                $cadenaSql.= " total_iva, total_iva_con ";
+                $cadenaSql.= " FROM asignar_elementos, salida, elemento ";
+                $cadenaSql.= " JOIN elemento_individual ON elemento.id_elemento=elemento_individual.id_elemento_gen ";
+                $cadenaSql.= " WHERE elemento_individual.estado_registro=TRUE  ";
+                $cadenaSql.= " AND elemento_individual.id_elemento_ind=asignar_elementos.id_elemento  ";
+                $cadenaSql.= " AND elemento_individual.estado_asignacion=TRUE  ";
                 $cadenaSql.= " AND salida.id_entrada=elemento.id_entrada ";
-                $cadenaSql.= " AND supervisor='" . $variable[0] . "' ";
-                $cadenaSql.= " AND contratista='" . $variable[1] . "' ";
-                $cadenaSql.= " ORDER BY nivel ASC ";
+                $cadenaSql.= " AND supervisor='" . $variable[0] . "'  ";
+                $cadenaSql.= " AND contratista='" . $variable[1] . "' ORDER BY nivel ASC ";
                 break;
 
             case "asignarElemento" :
@@ -261,8 +242,8 @@ class Sql extends \Sql {
                 //$cadenaSql.= " fecha_registro='" . $variable[2] . "', ";
                 $cadenaSql.= " WHERE id_elemento= '" . $variable[0] . "'; ";
                 break;
-            
-            
+
+
             // Consultas de Oracle para rescate de información de Sicapital
             case "dependencias":
                 $cadenaSql = "SELECT DEP_IDENTIFICADOR, ";
@@ -283,13 +264,12 @@ class Sql extends \Sql {
                 break;
 
             case "contratistas":
-                $cadenaSql = "SELECT CON_IDENTIFICACION,CON_IDENTIFICACION ||' '|| CON_NOMBRE ";
+                $cadenaSql = "SELECT DISTINCT CON_IDENTIFICACION,CON_IDENTIFICACION ||' '|| CON_NOMBRE ";
                 /* $cadenaSql .= " CON_CARGO, ";
                   $cadenaSql .= " CON_DIRECCION, ";
                   $cadenaSql .= " CON_TELEFONO "; */
                 $cadenaSql .= " FROM CONTRATISTAS ";
                 break;
-            
         }
         return $cadenaSql;
     }
