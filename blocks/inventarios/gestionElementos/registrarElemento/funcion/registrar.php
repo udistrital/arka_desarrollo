@@ -129,6 +129,7 @@ class RegistradorOrden {
 					$elemento = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
 				} else if ($_REQUEST ['tipo_bien'] == 3) {
 					
+					
 					if ($_REQUEST ['tipo_poliza'] == 1) {
 						$arreglo = array (
 								$fechaActual,
@@ -200,9 +201,11 @@ class RegistradorOrden {
 						
 						$cadenaSql = $this->miSql->getCadenaSql ( 'ingresar_elemento_individual', $arregloElementosInv );
 						
+						
 						$elemento_id [$i] = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
 					}
 				} else if ($num_placa [0] [0] != 0) {
+					
 					
 					$cadenaSql = $this->miSql->getCadenaSql ( 'buscar_placa_maxima', $placa );
 					
@@ -210,7 +213,7 @@ class RegistradorOrden {
 					
 					$placa = $num_placa [0] [0];
 					
-					for($i = 1; $i < $_REQUEST ['cantidad']; $i ++) {
+					for($i = 1; $i <= $_REQUEST ['cantidad']; $i ++) {
 						$arregloElementosInv = array (
 								$fechaActual,
 								$placa + $i,
@@ -218,7 +221,10 @@ class RegistradorOrden {
 								$elemento [0] [0] 
 						);
 						
+						
+						
 						$cadenaSql = $this->miSql->getCadenaSql ( 'ingresar_elemento_individual', $arregloElementosInv );
+						
 						
 						$elemento_id [$i] = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
 					}
@@ -232,9 +238,6 @@ class RegistradorOrden {
 						$_REQUEST ['entrada'],
 						
 				);
-				
-				
-				
 				
 				
 				
