@@ -187,7 +187,7 @@ class Sql extends \Sql {
 				$cadenaSql = " SELECT ";
 				$cadenaSql .= "nivel,tipo_bien, descripcion, cantidad, ";
 				$cadenaSql .= "unidad, valor, iva, ajuste, bodega, subtotal_sin_iva, total_iva,";
-				$cadenaSql .= "total_iva_con, placa, tipo_poliza, fecha_inicio_pol, fecha_final_pol, ";
+				$cadenaSql .= "total_iva_con, tipo_poliza, fecha_inicio_pol, fecha_final_pol, ";
 				$cadenaSql .= "marca, serie ";
 				$cadenaSql .= " FROM elemento ";
 				$cadenaSql .= " WHERE id_elemento='" . $variable . "'";

@@ -48,6 +48,8 @@ class registrarForm {
 		// ___________________________________________________________________________________
 		// -------------------------------------------------------------------------------------------------
 		
+		
+		
 		$cadenaSql = $this->miSql->getCadenaSql ( 'consultarElementoParticular', $_REQUEST ['id_elemento'] );
 		$elemento = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
 		

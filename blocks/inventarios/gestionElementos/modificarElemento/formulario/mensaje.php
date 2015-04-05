@@ -78,7 +78,7 @@ class registrarForm {
 				
 				if ($_REQUEST ['mensaje'] == 'actualizo') {
 					
-					$mensaje = "Se Actualizo Elemento <br> Número de Placa: " . $_REQUEST ['placa'] . "";
+					$mensaje = "Se Actualizo Elemento <br> Número de Elemento: " . $_REQUEST ['placa'] . "";
 					
 					// ---------------- CONTROL: Cuadro de Texto --------------------------------------------------------
 					$esteCampo = 'mensajeRegistro';
