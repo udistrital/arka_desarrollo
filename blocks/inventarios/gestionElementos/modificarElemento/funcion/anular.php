@@ -26,7 +26,7 @@ class RegistradorOrden {
 	}
 	function procesarFormulario() {
 		
-var_dump($_REQUEST);			
+			
 		$conexion = "inventarios";
 		$esteRecursoDB = $this->miConfigurador->fabricaConexiones->getRecursoDB ( $conexion );
 
