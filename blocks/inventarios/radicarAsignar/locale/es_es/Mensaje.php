@@ -34,16 +34,8 @@ $this->idioma ["valorFacturasTitulo"] ="Ingrese Valor Total de las Facturas";
 $this->idioma ["proveedor"] ="Nombre o Razón Social:";
 $this->idioma ["proveedorTitulo"] ="Ingrese Nombre Proveedor";
 
-$this->idioma ["nitProveedor"] ="NIT Proveedor :";
-$this->idioma ["nitProveedorTitulo"] ="Ingrese NIT Proveedor";
-
-
-
-
-
-
-
-
+$this->idioma ["nitproveedor"] ="NIT Proveedor :";
+$this->idioma ["nitproveedorTitulo"] ="Ingrese NIT Proveedor";
 
 
 

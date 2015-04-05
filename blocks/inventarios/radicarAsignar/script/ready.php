@@ -107,6 +107,9 @@
         } );
         
         
+                
+   $("#<?php echo $this->campoSeguro('nitproveedor') ?>").select2();
+   $("#<?php echo $this->campoSeguro('tipoCargue') ?>").select2();
         
         
           
