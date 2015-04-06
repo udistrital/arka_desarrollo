@@ -147,6 +147,16 @@ class Sql extends \Sql {
 			/**
 			 * Clausulas Del Caso Uso.
 			 */
+			case "buscar_entradas" :
+				$cadenaSql = " SELECT id_entrada valor,id_entrada descripcion  ";
+				$cadenaSql .= " FROM entrada; ";
+				break;
+				
+				case "buscar_salidas" :
+					$cadenaSql = " SELECT id_salida valor,id_salida descripcion  ";
+					$cadenaSql .= " FROM salida; ";
+					break;
+				
 			
 			case "dependencia" :
 				$cadenaSql = " SELECT DEP_IDENTIFICADOR, DEP_IDENTIFICADOR ||' - ' ||DEP_DEPENDENCIA  ";

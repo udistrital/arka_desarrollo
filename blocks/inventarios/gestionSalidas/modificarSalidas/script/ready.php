@@ -45,6 +45,8 @@
  $('#<?php echo $this->campoSeguro('fecha_factura')?>').attr('disabled','');
  
  
+ $("#<?php echo $this->campoSeguro('numero_salida')?>").select2();
+ $("#<?php echo $this->campoSeguro('numero_entrada')?>").select2();
  $("#<?php echo $this->campoSeguro('dependencia')?>").select2();
  $("#<?php echo $this->campoSeguro('funcionario')?>").select2();
  
