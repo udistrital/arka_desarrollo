@@ -180,7 +180,7 @@ class registrarForm {
 				// $variable .= "&usuario=" . $miSesion->getSesionUsuarioId ();
 				
 				$variable .= "&numero_orden=" . $ordenCompra [$i] [0];
-				$variable = $this->miConfigurador->fabricaConexiones->crypto->codificar_url ( $variable, $directorio );
+				
 				
 				$cadenaSql = $this->miSql->getCadenaSql ( 'identificacion_contratista', $ordenCompra [$i] [2] );
 				
@@ -189,6 +189,17 @@ class registrarForm {
 				$cadenaSql = $this->miSql->getCadenaSql ( 'dependecia_solicitante', $ordenCompra [$i] [3] );
 				
 				$dependencia = $esteRecursoDBO->ejecutarAcceso ( $cadenaSql, "busqueda" );
+				$arreglo=array(
+						$ordenCompra[$i][1],
+						$ordenCompra[$i][0],
+						$identificacion[0][0],
+						$dependencia[0][0]
+				);
+				$arreglo=serialize($arreglo);
+				
+				$variable .= "&informacionGeneral=" .$arreglo;
+				
+				$variable = $this->miConfigurador->fabricaConexiones->crypto->codificar_url ( $variable, $directorio );
 				
 				$mostrarHtml = "<tr>
                     <td><center>" . $ordenCompra [$i] [1] . "</center></td>

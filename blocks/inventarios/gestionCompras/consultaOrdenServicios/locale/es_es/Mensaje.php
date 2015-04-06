@@ -1,6 +1,16 @@
 <?php
 $this->idioma ["noDefinido"] = "Etiqueta no esta definida en locale/es_es/Mensaje.php";
 
+$this->idioma ["informacion_numero"] ="# Número de Orden de Servicios :";
+
+$this->idioma ["informacion_fecha"] ="Fecha de Registro De Orden :";
+
+$this->idioma ["informacion_contratista"] ="Identificación de Contratista :";
+
+$this->idioma ["informacion_dependencia"] ="Dependencia Solicitante :";
+
+
+
 $this->idioma ["contratista_consulta"] ="Nit y/o Identificación Contratista :";
 $this->idioma ["contratista_consultaTitulo"] ="Ingrese Nit";
 
