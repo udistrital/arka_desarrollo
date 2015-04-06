@@ -259,6 +259,5 @@ $urlFinal4 = $url . $cadena4;
         minimumInputLength: 1,
     });
 
-
 </script>
 
