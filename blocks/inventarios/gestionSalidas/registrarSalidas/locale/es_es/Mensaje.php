@@ -1,6 +1,20 @@
 <?php
 $this->idioma ["noDefinido"] = "Etiqueta no esta definida en locale/es_es/Mensaje.php";
 
+$this->idioma ["informacion_numero"] =" # Número de Entrada : ";
+
+$this->idioma ["informacion_fecha"] ="Fecha de Entrada : ";
+
+$this->idioma ["informacion_nit"] ="Nit de Proveedor : ";
+
+$this->idioma ["informacion_estado"] ="Clase de Entrada : ";
+
+$this->idioma ["informacion_proveedor"] ="Nombre y/o Razón Social Proveedor : ";
+
+
+
+
+
 $this->idioma ["numero_entrada"] ="(ID)Número de Entrada : ";
 $this->idioma ["numero_entradaTitulo"] ="Ingrese Número de Entrada";
 

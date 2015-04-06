@@ -79,6 +79,7 @@ class registrarForm {
 				'clase' => $entrada [0] [3] 
 		);
 		
+		
 		$_REQUEST = array_merge ( $_REQUEST, $entrada );
 		// ---------------- SECCION: Parámetros Generales del Formulario ----------------------------------
 		$esteCampo = $esteBloque ['nombre'];
@@ -263,7 +264,7 @@ class registrarForm {
 							$mostrarHtml.=$this->miFormulario->division ( 'fin' );
 							$mostrarHtml .= "</center></td>
 			     							 <td><center>" . $elementos [$i] [3] . "</center></td>
-				   		|					<td><center>";	
+				   							<td><center>";	
 							
 							// ---------------- CONTROL: Cuadro de Texto --------------------------------------------------------
 							$nombre = 'item' . $i;
@@ -290,7 +291,7 @@ class registrarForm {
 							$mostrarHtml .= $this->miFormulario->campoCuadroSeleccion ( $atributos );
 							
 							$mostrarHtml .= "</center></td>
-                    </tr>";
+                    						</tr>";
 							echo $mostrarHtml;
 							unset ( $mostrarHtml );
 							unset ( $variable );
@@ -358,6 +359,7 @@ class registrarForm {
 			 */
 			
 			// En este formulario se utiliza el mecanismo (b) para pasar las siguientes variables:
+
 			
 			$valorCodificado = "actionBloque=" . $esteBloque ["nombre"];
 			$valorCodificado .= "&pagina=" . $this->miConfigurador->getVariableConfiguracion ( 'pagina' );
@@ -365,6 +367,7 @@ class registrarForm {
 			$valorCodificado .= "&bloqueGrupo=" . $esteBloque ["grupo"];
 			$valorCodificado .= "&opcion=Registrar";
 			$valorCodificado .= "&numero_entrada=" . $_REQUEST ['numero_entrada'];
+			$valorCodificado .= "&datosGenerales=" . $_REQUEST['datosGenerales'];
 			
 			/**
 			 * SARA permite que los nombres de los campos sean dinámicos.
