@@ -187,12 +187,27 @@ class registrarForm {
 				// $variable .= "&usuario=" . $miSesion->getSesionUsuarioId ();
 				$variable .= "&numero_salida=" . $salidas [$i] [1];
 				$variable .= "&numero_entrada=" . $salidas [$i] [2];
-				$variable = $this->miConfigurador->fabricaConexiones->crypto->codificar_url ( $variable, $directorio );
+				
 				
 				$cadenaSql = $this->miSql->getCadenaSql ( 'funcionario_informacion', $salidas [$i] [4] );
 				
 				$funcionario = $esteRecursoDBO->ejecutarAcceso ( $cadenaSql, "busqueda" );
-				 
+				
+				
+				$arreglo=array(
+						$salidas[$i][0],
+						$salidas[$i][1],
+						$salidas[$i][2],
+						$funcionario[0][0],
+						$funcionario[0][1]	
+				);
+				
+				
+				$arreglo=serialize($arreglo);
+				$variable .= "&datosGenerales=" . $arreglo;
+				
+				
+				$variable = $this->miConfigurador->fabricaConexiones->crypto->codificar_url ( $variable, $directorio );
 				
 				$mostrarHtml = "<tr>
                     <td><center>" . $salidas [$i] [0] . "</center></td>
