@@ -79,7 +79,7 @@ class registrarForm {
             unset($atributos); {
 
 
-                //------------------------------ Nueva Agrupación -------------------------------------------------//
+   /*             //------------------------------ Nueva Agrupación -------------------------------------------------//
                 $esteCampo = "AgrupacionActa";
                 $atributos ['id'] = $esteCampo;
                 $atributos ['leyenda'] = "Selección Contrato";
@@ -117,7 +117,7 @@ class registrarForm {
                     echo $this->miFormulario->agrupacion('fin');
                 }
 
-
+*/
 
                 $esteCampo = "AgrupacionActa";
                 $atributos ['id'] = $esteCampo;

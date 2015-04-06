@@ -154,7 +154,7 @@ class Sql extends \Sql {
                 $cadenaSql .= " descripcion ";
                 $cadenaSql .= " FROM ";
                 $cadenaSql .= " arka_inventarios.tipo_contrato ";
-                $cadenaSql .= " WHERE 1=1;";
+                $cadenaSql .= " WHERE descripcion in('Avances', 'Contratos(ViceRectoria)', 'Orden Compras');";
                 break;
 
 
