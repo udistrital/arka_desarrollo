@@ -284,7 +284,7 @@ class registrarForm {
 			$atributos ['id'] = $esteCampo;
 			$atributos ["estilo"] = "jqueryui";
 			$atributos ['tipoEtiqueta'] = 'inicio';
-			$atributos ["leyenda"] = "Registrar Salida";
+			$atributos ["leyenda"] = "Registrar Salida para la Entrada No. ".$datos[0];
 			echo $this->miFormulario->marcoAgrupacion ( 'inicio', $atributos );
 			unset ( $atributos );
 			{
