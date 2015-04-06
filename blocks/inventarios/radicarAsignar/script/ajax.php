@@ -197,7 +197,12 @@ $urlFinal3 = $url . $cadena3;
         minimumInputLength: 1,
     });
 
-      $("#<?php echo $this->campoSeguro('nitproveedor') ?>").select2({
+    $("#<?php echo $this->campoSeguro('nitproveedor') ?>").select2({
+        placeholder: "Search for a repository",
+        minimumInputLength: 1,
+    });
+
+    $("#<?php echo $this->campoSeguro('id_contrato') ?>").select2({
         placeholder: "Search for a repository",
         minimumInputLength: 1,
     });

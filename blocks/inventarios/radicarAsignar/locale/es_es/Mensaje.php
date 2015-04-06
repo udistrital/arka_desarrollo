@@ -77,7 +77,8 @@ $this->idioma ["dependenciaTitulo"] ="Ingrese Nombre Dependencia";
 $this->idioma ["revisor"] ="&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspNombre Revisor :";
 $this->idioma ["revisorTitulo"] ="Ingrese Nombre de Quien Revisó";
 
-
+$this->idioma ["id_contrato"] ="ID Contrato:";
+$this->idioma ["id_contratoTitulo"] ="Seleccione el contrato";
 
 
 

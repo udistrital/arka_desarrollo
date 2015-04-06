@@ -63,8 +63,6 @@ class Frontera {
                     include_once ($this->ruta . "/formulario/mensaje.php");
                     break;
 
-                    var_dump($_REQUEST);
-                    exit;
                 case "registroCargue" :
                     switch ($_REQUEST['tipoCargue']) {
                         case 1:
@@ -85,9 +83,7 @@ class Frontera {
                         
                         case 5:
                             include_once ($this->ruta . "/formulario/registrarAseguradora.php");
-                            break;
-
-                        
+                            break;                        
                     }
 
                     break;

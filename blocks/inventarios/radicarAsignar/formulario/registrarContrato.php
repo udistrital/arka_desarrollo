@@ -45,7 +45,7 @@ class registrarForm {
 // -------------------------------------------------------------------------------------------------
         $conexion = "inventarios";
         $esteRecursoDB = $this->miConfigurador->fabricaConexiones->getRecursoDB($conexion);
-        
+
         $conexion2 = "sicapital";
         $esteRecursoDB2 = $this->miConfigurador->fabricaConexiones->getRecursoDB($conexion2);
 
@@ -77,6 +77,46 @@ class registrarForm {
             $atributos ["leyenda"] = "Entradas por Contratos ";
             echo $this->miFormulario->marcoAgrupacion('inicio', $atributos);
             unset($atributos); {
+
+
+                //------------------------------ Nueva Agrupación -------------------------------------------------//
+                $esteCampo = "AgrupacionActa";
+                $atributos ['id'] = $esteCampo;
+                $atributos ['leyenda'] = "Selección Contrato";
+                echo $this->miFormulario->agrupacion('inicio', $atributos); {
+
+                    //------------------- Inicio Lista Desplegable ----------------//
+                    $esteCampo = 'id_contrato';
+                    $atributos ['columnas'] = 1;
+                    $atributos ['nombre'] = $esteCampo;
+                    $atributos ['id'] = $esteCampo;
+                    $atributos ['seleccion'] = - 1;
+                    $atributos ['evento'] = '';
+                    $atributos ['deshabilitado'] = false;
+                    $atributos ["etiquetaObligatorio"] = true;
+                    $atributos ['tab'] = $tab;
+                    $atributos ['tamanno'] = 1;
+                    $atributos ['estilo'] = 'jqueryui';
+                    $atributos ['validar'] = '';
+                    $atributos ['limitar'] = false;
+                    $atributos ['etiqueta'] = $this->lenguaje->getCadena($esteCampo);
+                    $atributos ['anchoEtiqueta'] = 213;
+                    $atributos ['cadena_sql'] = $this->miSql->getCadenaSql("id_contrato");
+                    $matrizItems = $esteRecursoDB->ejecutarAcceso($atributos ['cadena_sql'], "busqueda");
+                    $atributos ['matrizItems'] = $matrizItems;
+
+                    // Utilizar lo siguiente cuando no se pase un arreglo:
+                    // $atributos['baseDatos']='ponerAquiElNombreDeLaConexión';
+                    // $atributos ['cadena_sql']='ponerLaCadenaSqlAEjecutar';
+                    $tab ++;
+                    $atributos = array_merge($atributos, $atributosGlobales);
+                    echo $this->miFormulario->campoCuadroLista($atributos);
+                    unset($atributos);
+// --------------- FIN CONTROL : Lista Desplegable --------------------------------------------------
+
+                    echo $this->miFormulario->agrupacion('fin');
+                }
+
 
 
                 $esteCampo = "AgrupacionActa";
