@@ -1,6 +1,41 @@
 <?php
 $this->idioma ["noDefinido"] = "Etiqueta no esta definida en locale/es_es/Mensaje.php";
 
+// --
+$this->idioma ["vigencia_registro"] = "Vigencia Registro : ";
+$this->idioma ["vigencia_registroTitulo"] = "Seleccione Vigencia Registro";
+
+$this->idioma ["registro"] = "Número Registro : ";
+$this->idioma ["registroTitulo"] = "Seleccione Número Registro";
+
+$this->idioma ["valor_registro"] = "Valor  Registro ($): ";
+$this->idioma ["valor_registroTitulo"] = "Valor Registro Presupuestal";
+
+$this->idioma ["fecha_registro"] = "Fecha Registro : ";
+$this->idioma ["fecha_registroTitulo"] = "Fecha de Registro Presupuestal";
+
+$this->idioma ["valorL_registro"] = "Valor en Letras : ";
+$this->idioma ["valorL_registroTitulo"] = "Valor en Letras  Registro Presupuestal";
+
+// --
+
+$this->idioma ["vigencia_disponibilidad"] = "Vigencia Disponibilidad : ";
+$this->idioma ["vigencia_disponibilidadTitulo"] = "Seleccione Vigencia";
+
+$this->idioma ["diponibilidad"] = "Número Disponibilidad : ";
+$this->idioma ["diponibilidadTitulo"] = "Seleccione Número Disponibilidad";
+
+$this->idioma ["valorLetras_disponibilidad"] = "Valor en Letras: ";
+$this->idioma ["valorLetras_disponibilidadTitulo"] = "Valor en Letras Disponibilidad Presupuestal";
+
+$this->idioma ["valor_disponibilidad"] = "Valor Disponibilidad ($): ";
+$this->idioma ["valor_disponibilidadTitulo"] = "Valor Disponibilidad Presupuestal";
+
+$this->idioma ["fecha_diponibilidad"] = "Fecha Disponibilidad : ";
+$this->idioma ["fecha_diponibilidadTitulo"] = "Ingrese Fecha Disponibilidad Presupuestal (YYYY-MM-DD)";
+
+// --
+
 $this->idioma ["dependencia_solicitante"] = "Dependencia :";
 $this->idioma ["dependencia_solicitanteTitulo"] = "Seleccione Dependencia";
 
@@ -54,7 +89,6 @@ $this->idioma ["totalTitulo"] = "Ingrese Total: ";
 $this->idioma ["iva"] = "Aplicar Iva 16% :";
 $this->idioma ["ivaTitulo"] = "Aplicar Iva 16%";
 
-
 $this->idioma ["total_iva"] = "Total Iva ($):";
 // $this->idioma ["total_ivaTitulo"] = ;
 
@@ -87,8 +121,8 @@ $this->idioma ["nombreJefeSeccionTitulo"] = "Ingrese Nombre y Apellidos ";
 $this->idioma ["cargoJefeSeccion"] = "&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspCargo : ";
 $this->idioma ["cargoJefeSeccionTitulo"] = "Ingrese Cargo ";
 
-$this->idioma ["nombreContratista"] ="&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspIdentificación y/o Nombre Apellidos  : ";
-$this->idioma ["nombreContratistaTitulo"] ="Seleccione Identificación y/o Nombre Apellidos ";
+$this->idioma ["nombreContratista"] = "&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspIdentificación y/o Nombre Apellidos  : ";
+$this->idioma ["nombreContratistaTitulo"] = "Seleccione Identificación y/o Nombre Apellidos ";
 
 $this->idioma ["identificacionContratista"] = "&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspIdentificación : ";
 $this->idioma ["nombreContratistaTitulo"] = "Ingrese Identificación del Contratista ";
@@ -104,7 +138,7 @@ $this->idioma ["jefeSeccion"] = "Jefe de Sección";
 $this->idioma ["contratista"] = "Contratista";
 
 $this->idioma ["ordenadorGasto"] = "Ordenador Gasto";
-//________________________________________________
+// ________________________________________________
 $this->idioma ["botonAceptar"] = "Guardar";
 $this->idioma ["botonCancelar"] = "Cancelar";
 $this->idioma ["botonContinuar"] = "Continuar";
