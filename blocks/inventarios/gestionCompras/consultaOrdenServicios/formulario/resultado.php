@@ -74,11 +74,20 @@ class registrarForm {
 			$numeroOrden = '';
 		}
 		
-		if (isset ( $_REQUEST ['contratista_consulta'] ) && $_REQUEST ['contratista_consulta'] != '') {
-			$contratista = $_REQUEST ['contratista_consulta'];
+		if (isset ( $_REQUEST ['nombreContratista'] ) && $_REQUEST ['nombreContratista'] != '') {
+			$contratista = $_REQUEST ['nombreContratista'];
 		} else {
 			$contratista = '';
 		}
+		
+		if (isset ( $_REQUEST ['vigencia_contratista'] ) && $_REQUEST ['vigencia_contratista'] != '') {
+			$vigencia = $_REQUEST ['vigencia_contratista'];
+		} else {
+			$vigencia = '';
+		}
+		
+		
+		
 		
 		if (isset ( $_REQUEST ['selec_dependencia_Sol'] ) && $_REQUEST ['selec_dependencia_Sol'] != '') {
 			$dependencia = $_REQUEST ['selec_dependencia_Sol'];
@@ -91,7 +100,8 @@ class registrarForm {
 				$contratista,
 				$dependencia,
 				$fechaInicio,
-				$fechaFinal 
+				$fechaFinal,
+				$vigencia
 		);
 		
 		$cadenaSql = $this->miSql->getCadenaSql ( 'consultarOrden', $arreglo );

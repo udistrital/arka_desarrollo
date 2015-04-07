@@ -174,7 +174,7 @@ class registrarForm {
 			// ---------------- SECCION: Controles del Formulario -----------------------------------------------
 			
 			$datos=unserialize($_REQUEST['informacionGeneral']);
-			var_dump($datos);
+			
 			$esteCampo = "AgrupacionGeneral";
 			$atributos ['id'] = $esteCampo;
 			$atributos ['leyenda'] = "Información General Orden de Servicios";

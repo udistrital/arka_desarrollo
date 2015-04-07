@@ -149,15 +149,77 @@ class Sql extends \Sql {
 			 * Clausulas Del Caso Uso.
 			 */
 			
+			case "informacionPresupuestal" :
+				$cadenaSql = "SELECT  vigencia_dispo, numero_dispo, valor_disp, fecha_dip,
+									letras_dispo, vigencia_regis, numero_regis, valor_regis, fecha_regis,
+									letras_regis  ";
+				$cadenaSql .= "FROM informacion_presupuestal_orden ";
+				$cadenaSql .= "WHERE id_informacion ='" . $variable . "' ";
+				
+				break;
 			
+			case "buscar_contratista" :
+				$cadenaSql = "SELECT CON_IDENTIFICADOR AS IDENTIFICADOR , CON_IDENTIFICACION ||'  -  '||CON_NOMBRE AS CONTRATISTA ";
+				$cadenaSql .= "FROM CONTRATISTAS ";
+				$cadenaSql .= "WHERE CON_VIGENCIA ='" . $variable . "' ";
+				break;
+			
+			case "vigencia_contratista" :
+				$cadenaSql = "SELECT CON_VIGENCIA AS VALOR , CON_VIGENCIA AS VIGENCIA  ";
+				$cadenaSql .= "FROM CONTRATISTAS ";
+				$cadenaSql .= "GROUP BY CON_VIGENCIA ";
+				break;
+			
+			case "vigencia_disponibilidad" :
+				$cadenaSql = "SELECT DIS_VIGENCIA AS valor, DIS_VIGENCIA AS vigencia  ";
+				$cadenaSql .= "FROM DISPONIBILIDAD ";
+				$cadenaSql .= "GROUP BY DIS_VIGENCIA";
+				break;
+			
+			case "buscar_disponibilidad" :
+				$cadenaSql = "SELECT DISTINCT DIS_IDENTIFICADOR AS identificador,DIS_NUMERO_DISPONIBILIDAD AS numero ";
+				$cadenaSql .= "FROM DISPONIBILIDAD ";
+				$cadenaSql .= "WHERE DIS_VIGENCIA='" . $variable . "'";
 				
-	
-				case "informacion_supervisor" :
-					$cadenaSql = " SELECT JEF_NOMBRE,JEF_IDENTIFICADOR ";
-					$cadenaSql .= " FROM JEFES_DE_SECCION ";
-					$cadenaSql .= " WHERE  JEF_IDENTIFICADOR='" . $variable . "' ";
-					break;
+				break;
+			
+			case "info_disponibilidad" :
+				$cadenaSql = "SELECT DISTINCT TO_CHAR(DIS_FECHA_REGISTRO,'yyyy-mm-dd') AS FECHA,  DIS_VALOR ";
+				$cadenaSql .= "FROM DISPONIBILIDAD  ";
+				$cadenaSql .= "WHERE DIS_VIGENCIA='" . $variable [1] . "' ";
+				$cadenaSql .= "AND  DIS_IDENTIFICADOR='" . $variable [0] . "' ";
+				$cadenaSql .= "AND ROWNUM = 1 ";
 				
+				break;
+			
+			case "vigencia_registro" :
+				$cadenaSql = "SELECT REP_VIGENCIA AS VALOR,REP_VIGENCIA AS VIGENCIA ";
+				$cadenaSql .= "FROM REGISTRO_PRESUPUESTAL ";
+				$cadenaSql .= "GROUP BY REP_VIGENCIA ";
+				
+				break;
+			
+			case "buscar_registro" :
+				$cadenaSql = "SELECT DISTINCT REP_IDENTIFICADOR AS IDENTIFICADOR,REP_NUMERO_DISPONIBILIDAD AS NUMERO ";
+				$cadenaSql .= "FROM REGISTRO_PRESUPUESTAL ";
+				$cadenaSql .= "WHERE REP_VIGENCIA='" . $variable . "'";
+				
+				break;
+			
+			case "info_registro" :
+				$cadenaSql = "SELECT TO_CHAR(REP_FECHA_REGISTRO,'yyyy-mm-dd') AS fecha,  REP_VALOR ";
+				$cadenaSql .= "FROM REGISTRO_PRESUPUESTAL ";
+				$cadenaSql .= "WHERE REP_VIGENCIA='" . $variable [1] . "' ";
+				$cadenaSql .= "AND  REP_IDENTIFICADOR='" . $variable [0] . "' ";
+				$cadenaSql .= "AND ROWNUM = 1 ";
+				
+				break;
+			
+			case "informacion_supervisor" :
+				$cadenaSql = " SELECT JEF_NOMBRE,JEF_IDENTIFICADOR ";
+				$cadenaSql .= " FROM JEFES_DE_SECCION ";
+				$cadenaSql .= " WHERE  JEF_IDENTIFICADOR='" . $variable . "' ";
+				break;
 			
 			case "informacion_cargo_jefe" :
 				$cadenaSql = " SELECT JEF_NOMBRE,JEF_IDENTIFICADOR ";
@@ -182,8 +244,7 @@ class Sql extends \Sql {
 				$cadenaSql = " SELECT JEF_IDENTIFICADOR,JEF_DEPENDENCIA_PERTENECIENTE ";
 				$cadenaSql .= " FROM JEFES_DE_SECCION ";
 				break;
-		
-		
+			
 			case "ordenador_gasto" :
 				$cadenaSql = " 	SELECT ORG_IDENTIFICADOR, ORG_ORDENADOR_GASTO ";
 				$cadenaSql .= " FROM ORDENADORES_GASTO ";
@@ -431,7 +492,7 @@ class Sql extends \Sql {
 				
 				$cadenaSql = "SELECT DISTINCT ";
 				$cadenaSql .= "id_orden_servicio, fecha_registro,  ";
-				$cadenaSql .= "id_contratista_encargado , dependencia_solicitante  ";
+				$cadenaSql .= "id_contratista_encargado , dependencia_solicitante   ";
 				$cadenaSql .= "FROM orden_servicio ";
 				// $cadenaSql .= "JOIN dependencia ON dependencia.id_dependencia = orden_servicio.dependencia_solicitante ";
 				// $cadenaSql .= "JOIN contratista_servicios ON contratista_servicios.id_contratista = orden_servicio.id_contratista ";
@@ -451,6 +512,12 @@ class Sql extends \Sql {
 					$cadenaSql .= " AND fecha_registro BETWEEN CAST ( '" . $variable [3] . "' AS DATE) ";
 					$cadenaSql .= " AND  CAST ( '" . $variable [4] . "' AS DATE)  ";
 				}
+				
+				if ($variable [5] != '') {
+					$cadenaSql .= " AND  vig_contratista= '" . $variable [5] . "'";
+				}
+				
+				
 				
 				break;
 		}

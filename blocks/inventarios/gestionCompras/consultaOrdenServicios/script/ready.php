@@ -30,7 +30,17 @@
                  } );
 
 
-   
+         $("#<?php echo $this->campoSeguro('vigencia_disponibilidad')?>").select2();
+		$('#<?php echo $this->campoSeguro('diponibilidad')?>').select2();
+		
+		$("#<?php echo $this->campoSeguro('vigencia_registro')?>").select2();
+		$("#<?php echo $this->campoSeguro('registro')?>").select2(); 
+		
+		$("#<?php echo $this->campoSeguro('vigencia_contratista')?>").select2();
+		$('#<?php echo $this->campoSeguro('nombreContratista')?>').attr("style", "width: 60px '");
+
+        
+        
                  
                  
         $('#<?php echo $this->campoSeguro('fecha_inicio')?>').datepicker({

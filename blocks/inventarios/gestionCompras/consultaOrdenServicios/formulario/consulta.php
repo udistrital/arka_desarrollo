@@ -106,7 +106,7 @@ class registrarForm {
 		$atributos ['deshabilitado'] = false;
 		$atributos ['tamanno'] = 20;
 		$atributos ['maximoTamanno'] = '';
-		$atributos ['anchoEtiqueta'] = 235;
+		$atributos ['anchoEtiqueta'] = 310;
 		$tab ++;
 		
 		// Aplica atributos globales al control
@@ -114,19 +114,20 @@ class registrarForm {
 		echo $this->miFormulario->campoCuadroTexto ( $atributos );
 		
 		// ---------------- CONTROL: Cuadro de Texto --------------------------------------------------------
-		$esteCampo = 'contratista_consulta';
+		
+		$esteCampo = "vigencia_contratista";
 		$atributos ['nombre'] = $esteCampo;
 		$atributos ['id'] = $esteCampo;
 		$atributos ['etiqueta'] = $this->lenguaje->getCadena ( $esteCampo );
 		$atributos ["etiquetaObligatorio"] = false;
 		$atributos ['tab'] = $tab ++;
-		$atributos ['seleccion'] = - 1;
-		$atributos ['anchoEtiqueta'] = 235;
+			
+		$atributos ['anchoEtiqueta'] = 310;
 		$atributos ['evento'] = '';
 		if (isset ( $_REQUEST [$esteCampo] )) {
-			$atributos ['valor'] = $_REQUEST [$esteCampo];
+			$atributos ['seleccion'] = $_REQUEST [$esteCampo];
 		} else {
-			$atributos ['valor'] = '';
+			$atributos ['seleccion'] = '';
 		}
 		$atributos ['deshabilitado'] = false;
 		$atributos ['columnas'] = 1;
@@ -134,9 +135,53 @@ class registrarForm {
 		$atributos ['ajax_function'] = "";
 		$atributos ['ajax_control'] = $esteCampo;
 		$atributos ['estilo'] = "jqueryui";
+		$atributos ['validar'] = "";
+		$atributos ['limitar'] = 1;
+		$atributos ['anchoCaja'] = 27;
+		$atributos ['miEvento'] = '';
+		$atributos ['cadena_sql'] = $this->miSql->getCadenaSql ( "vigencia_contratista" );
+		$matrizItems1 = array (
+				array (
+						'',
+						'Seleccione ...'
+				)
+		);
+		$matrizItems = $esteRecursoDBO->ejecutarAcceso ( $atributos ['cadena_sql'], "busqueda" );
+		$atributos ['matrizItems'] = array_merge($matrizItems1,$matrizItems);
+		// $atributos['miniRegistro']=;
+		$atributos ['baseDatos'] = "sicapital";
+		// $atributos ['baseDatos'] = "inventarios";
+			
+		// $atributos ['cadena_sql'] = $this->miSql->getCadenaSql ( "clase_entrada" );
+			
+		// Aplica atributos globales al control
+		$atributos = array_merge ( $atributos, $atributosGlobales );
+		echo $this->miFormulario->campoCuadroLista ( $atributos );
+		unset ( $atributos );
+		
+		
+		$esteCampo = 'nombreContratista';
+		$atributos ['nombre'] = $esteCampo;
+		$atributos ['id'] = $esteCampo;
+		$atributos ['etiqueta'] = $this->lenguaje->getCadena ( $esteCampo );
+		$atributos ["etiquetaObligatorio"] = false;
+		$atributos ['tab'] = $tab ++;
+		$atributos ['anchoEtiqueta'] = 310;
+		$atributos ['evento'] = '';
+		if (isset ( $_REQUEST [$esteCampo] )) {
+			$atributos ['seleccion'] = $_REQUEST [$esteCampo];
+		} else {
+			$atributos ['seleccion'] = - 1;
+		}
+		$atributos ['deshabilitado'] = true;
+		$atributos ['columnas'] = 1;
+		$atributos ['tamanno'] = 1;
+		$atributos ['ajax_function'] = "";
+		$atributos ['ajax_control'] = $esteCampo;
+		$atributos ['estilo'] = "jqueryui";
 		$atributos ['validar'] = " ";
 		$atributos ['limitar'] = true;
-		$atributos ['anchoCaja'] = 51;
+		$atributos ['anchoCaja'] = 70;
 		$atributos ['miEvento'] = '';
 		$atributos ['cadena_sql'] = $this->miSql->getCadenaSql ( "constratistas" );
 		$matrizItems = array (
@@ -163,7 +208,7 @@ class registrarForm {
 		$atributos ["etiquetaObligatorio"] = false;
 		$atributos ['tab'] = $tab ++;
 		$atributos ['seleccion'] = - 1;
-		$atributos ['anchoEtiqueta'] = 235;
+		$atributos ['anchoEtiqueta'] = 310;
 		$atributos ['evento'] = '';
 		if (isset ( $_REQUEST [$esteCampo] )) {
 			$atributos ['valor'] = $_REQUEST [$esteCampo];
@@ -222,7 +267,7 @@ class registrarForm {
 		$atributos ['deshabilitado'] = false;
 		$atributos ['tamanno'] = 8;
 		$atributos ['maximoTamanno'] = '';
-		$atributos ['anchoEtiqueta'] = 235;
+		$atributos ['anchoEtiqueta'] = 310;
 		$tab ++;
 		
 		// Aplica atributos globales al control
