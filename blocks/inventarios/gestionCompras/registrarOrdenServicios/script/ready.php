@@ -150,7 +150,7 @@
 		$('#<?php echo $this->campoSeguro('nombreJefeSeccion')?>').attr('disabled',''); 
 		
 		
-		$('#<?php echo $this->campoSeguro('nombre_supervisor')?>').attr('disabled','');    
+		
 		
 		
 		

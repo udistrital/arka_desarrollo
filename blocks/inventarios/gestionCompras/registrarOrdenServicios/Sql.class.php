@@ -323,39 +323,30 @@ class Sql extends \Sql {
 				break;
 			
 			// INSERT INTO orden_servicio(
-			// id_orden_servicio, fecha_registro, dependencia_solicitante, rubro,
-			// objeto_contrato, poliza1, poliza2, poliza3, poliza4, duracion_pago,
+			// fecha_registro, , dependencia_solicitante,
+			// rubro, objeto_contrato, poliza1, poliza2, poliza3, poliza4, duracion_pago,
 			// fecha_inicio_pago, fecha_final_pago, forma_pago, total_preliminar,
-			// iva, total, fecha_diponibilidad, numero_disponibilidad, valor_disponibilidad,
-			// fecha_registrop, numero_registrop, valor_registrop, letra_registrop,
-			// id_contratista, id_contratista_encargado, id_jefe_encargado,
+			// iva, total, id_contratista, id_contratista_encargado, vig_contratista,
 			// id_ordenador_encargado, id_supervisor, estado)
 			// VALUES (?, ?, ?, ?,
-			// ?, ?, ?, ?, ?, ?,
+			// ?, ?, ?, ?, ?, ?, ?,
 			// ?, ?, ?, ?,
 			// ?, ?, ?, ?, ?,
-			// ?, ?, ?, ?,
-			// ?, ?, ?,
 			// ?, ?, ?);
+			
 			case "insertarOrden" :
 				$cadenaSql = " INSERT INTO ";
 				$cadenaSql .= " orden_servicio(";
-				$cadenaSql .= "  fecha_registro,dependencia_solicitante, rubro, objeto_contrato, poliza1, ";
+				$cadenaSql .= "  fecha_registro,info_presupuestal,dependencia_solicitante, rubro, objeto_contrato, poliza1, ";
 				$cadenaSql .= " poliza2, poliza3, poliza4, duracion_pago, fecha_inicio_pago, ";
-				$cadenaSql .= " fecha_final_pago, forma_pago, total_preliminar, iva, total, fecha_diponibilidad,";
-				$cadenaSql .= " numero_disponibilidad, valor_disponibilidad, fecha_registrop,  ";
-				$cadenaSql .= " numero_registrop, valor_registrop, letra_registrop, id_contratista,id_contratista_encargado, id_jefe_encargado, id_ordenador_encargado,id_supervisor, estado)";
+				$cadenaSql .= " fecha_final_pago, forma_pago, total_preliminar, iva, total, id_contratista,id_contratista_encargado, vig_contratista,id_ordenador_encargado,id_supervisor, estado)";
 				$cadenaSql .= " VALUES (";
 				$cadenaSql .= "'" . $variable [0] . "',";
 				$cadenaSql .= "'" . $variable [1] . "',";
 				$cadenaSql .= "'" . $variable [2] . "',";
 				$cadenaSql .= "'" . $variable [3] . "',";
+				$cadenaSql .= "'" . $variable [4] . "',";
 				
-				if ($variable [4] != '') {
-					$cadenaSql .= "'" . $variable [4] . "',";
-				} else {
-					$cadenaSql .= "'0',";
-				}
 				if ($variable [5] != '') {
 					$cadenaSql .= "'" . $variable [5] . "',";
 				} else {
@@ -372,7 +363,12 @@ class Sql extends \Sql {
 				} else {
 					$cadenaSql .= "'0',";
 				}
-				$cadenaSql .= "'" . $variable [8] . "',";
+				if ($variable [8] != '') {
+					$cadenaSql .= "'" . $variable [8] . "',";
+				} else {
+					$cadenaSql .= "'0',";
+				}
+				
 				$cadenaSql .= "'" . $variable [9] . "',";
 				$cadenaSql .= "'" . $variable [10] . "',";
 				$cadenaSql .= "'" . $variable [11] . "',";
@@ -385,15 +381,29 @@ class Sql extends \Sql {
 				$cadenaSql .= "'" . $variable [18] . "',";
 				$cadenaSql .= "'" . $variable [19] . "',";
 				$cadenaSql .= "'" . $variable [20] . "',";
-				$cadenaSql .= "'" . $variable [21] . "',";
-				$cadenaSql .= "'" . $variable [22] . "',";
-				$cadenaSql .= "'" . $variable [23] . "',";
-				$cadenaSql .= "'" . $variable [24] . "',";
-				$cadenaSql .= "'" . $variable [25] . "',";
-				$cadenaSql .= "'" . $variable [26] . "',";
-				$cadenaSql .= "'" . $variable [27] . "') ";
+				$cadenaSql .= "'" . $variable [21] . "') ";
 				$cadenaSql .= "RETURNING  id_orden_servicio; ";
 				
+				break;
+			
+			case "insertarInformacionPresupuestal" :
+				$cadenaSql = " INSERT INTO informacion_presupuestal_orden( ";
+				$cadenaSql .= " vigencia_dispo, numero_dispo, valor_disp, fecha_dip,
+								letras_dispo, vigencia_regis, numero_regis, valor_regis, fecha_regis,
+								letras_regis, fecha_registro)";
+				$cadenaSql .= " VALUES (";
+				$cadenaSql .= "'" . $variable [1] . "',";
+				$cadenaSql .= "'" . $variable [2] . "',";
+				$cadenaSql .= "'" . $variable [3] . "',";
+				$cadenaSql .= "'" . $variable [4] . "',";
+				$cadenaSql .= "'" . $variable [5] . "',";
+				$cadenaSql .= "'" . $variable [6] . "',";
+				$cadenaSql .= "'" . $variable [7] . "',";
+				$cadenaSql .= "'" . $variable [8] . "',";
+				$cadenaSql .= "'" . $variable [9] . "',";
+				$cadenaSql .= "'" . $variable [10] . "',";
+				$cadenaSql .= "'" . $variable [0] . "') ";
+				$cadenaSql .= "RETURNING  id_informacion; ";
 				break;
 		}
 		return $cadenaSql;

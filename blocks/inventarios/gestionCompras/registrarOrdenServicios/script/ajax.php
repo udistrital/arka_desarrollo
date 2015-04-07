@@ -578,9 +578,11 @@ function disponibilidades(elem, request, response){
 					            	$("<option value='"+data[ indice ].IDENTIFICADOR+"'>"+data[ indice ].CONTRATISTA+"</option>").appendTo("#<?php echo $this->campoSeguro('nombreContratista')?>");
 					            	
 					            });
+
+					            
 					            
 					            $("#<?php echo $this->campoSeguro('nombreContratista')?>").removeAttr('disabled');
-					            $('#<?php echo $this->campoSeguro('nombreContratista')?>').attr("class", "  validate[required]");
+					            
 					            
 					            $('#<?php echo $this->campoSeguro('nombreContratista')?>').attr("style", "width: 25 ; '");
 					            					            

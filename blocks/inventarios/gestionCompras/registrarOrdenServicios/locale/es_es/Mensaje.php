@@ -133,7 +133,7 @@ $this->idioma ["nombreContratistaTitulo"] = "Seleccione Identificación y/o Nomb
 $this->idioma ["identificacionContratista"] = "&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspIdentificación : ";
 $this->idioma ["nombreContratistaTitulo"] = "Ingrese Identificación del Contratista ";
 
-$this->idioma ["nombreOrdenador"] = "&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspNombre y Apellidos : ";
+$this->idioma ["nombreOrdenador"] = "&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspNombre:<br> &nbsp&nbspApellidos";
 $this->idioma ["nombreOrdenadorTitulo"] = "Ingrese Nombre y Apellidos ";
 
 $this->idioma ["asignacionOrdenador"] = "&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspAsignación : ";
