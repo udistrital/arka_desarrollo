@@ -318,11 +318,9 @@ class Sql extends \Sql {
 				$cadenaSql = " SELECT ";
 				$cadenaSql .= " dependencia_solicitante,rubro,objeto_contrato, poliza1,";
 				$cadenaSql .= "poliza2, poliza3, poliza4, duracion_pago, fecha_inicio_pago,";
-				$cadenaSql .= "fecha_final_pago, forma_pago, total_preliminar, iva, total, fecha_diponibilidad,";
-				$cadenaSql .= "numero_disponibilidad, valor_disponibilidad, fecha_registrop,";
-				$cadenaSql .= " numero_registrop, valor_registrop, letra_registrop, id_contratista,";
-				$cadenaSql .= "id_contratista_encargado, id_jefe_encargado, id_ordenador_encargado,";
-				$cadenaSql .= "id_supervisor ";
+				$cadenaSql .= "fecha_final_pago, forma_pago, total_preliminar, iva, total,id_contratista,";
+				$cadenaSql .= "id_contratista_encargado, vig_contratista, id_ordenador_encargado,";
+				$cadenaSql .= "id_supervisor ,info_presupuestal ";
 				$cadenaSql .= " FROM orden_servicio ";
 				$cadenaSql .= " WHERE id_orden_servicio='" . $variable . "' AND estado='TRUE';";
 				break;
