@@ -582,7 +582,7 @@ function disponibilidades(elem, request, response){
 					            $("#<?php echo $this->campoSeguro('nombreContratista')?>").removeAttr('disabled');
 					            $('#<?php echo $this->campoSeguro('nombreContratista')?>').attr("class", "  validate[required]");
 					            
-					            $('#<?php echo $this->campoSeguro('nombreContratista')?>').attr("style", "width: 70 ; '");
+					            $('#<?php echo $this->campoSeguro('nombreContratista')?>').attr("style", "width: 25 ; '");
 					            					            
 					            $("#<?php echo $this->campoSeguro('nombreContratista')?>").select2({
 					          		 placeholder: "Search for a repository",

@@ -36,6 +36,12 @@ $this->idioma ["fecha_diponibilidadTitulo"] = "Ingrese Fecha Disponibilidad Pres
 
 // --
 
+
+$this->idioma ["vigencia_contratista"] ="&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspVigencia Contratista: ";
+$this->idioma ["vigencia_contratistaTitulo"] ="Seleccione Vigencia Contratista";
+
+
+
 $this->idioma ["dependencia_solicitante"] = "Dependencia :";
 $this->idioma ["dependencia_solicitanteTitulo"] = "Seleccione Dependencia";
 
@@ -121,7 +127,7 @@ $this->idioma ["nombreJefeSeccionTitulo"] = "Ingrese Nombre y Apellidos ";
 $this->idioma ["cargoJefeSeccion"] = "&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspCargo : ";
 $this->idioma ["cargoJefeSeccionTitulo"] = "Ingrese Cargo ";
 
-$this->idioma ["nombreContratista"] = "&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspIdentificación y/o Nombre Apellidos  : ";
+$this->idioma ["nombreContratista"] = "&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspIdentificación y/o : <br>&nbsp&nbsp&nbsp&nbsp&nbspNombre Apellidos ";
 $this->idioma ["nombreContratistaTitulo"] = "Seleccione Identificación y/o Nombre Apellidos ";
 
 $this->idioma ["identificacionContratista"] = "&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspIdentificación : ";
