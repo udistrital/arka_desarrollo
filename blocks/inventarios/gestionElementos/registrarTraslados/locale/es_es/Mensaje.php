@@ -2,6 +2,20 @@
 <?php
 $this->idioma ["noDefinido"] = "Etiqueta no esta definida en locale/es_es/Mensaje.php";
 
+
+$this->idioma ["informacion_placa"] ="Número de Placa Elemento: ";
+
+$this->idioma ["informacion_serial"] ="Serial Elemento: ";
+
+$this->idioma ["informacion_identificacion"] ="Identificacón Funcionario a Cargo : ";
+
+$this->idioma ["informacion_funcionario"] ="Nombre de Funcionario a Cargo : ";
+
+$this->idioma ["informacion_tipo"] ="Tipo de Elemento : ";
+
+
+//---
+
 $this->idioma ["placa"] ="Número de Placa: ";
 $this->idioma ["placaTitulo"] ="Ingrese Número Placa";
 

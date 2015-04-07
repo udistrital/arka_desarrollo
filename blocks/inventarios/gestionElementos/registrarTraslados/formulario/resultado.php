@@ -167,15 +167,25 @@ class registrarForm {
 				$variable = "pagina=" . $miPaginaActual; // pendiente la pagina para modificar parametro
 				$variable .= "&opcion=trasladarElemento";
 				$variable .= "&id_elemento_ind=" . $elemento [$i] [0];
-				$variable = $this->miConfigurador->fabricaConexiones->crypto->codificar_url ( $variable, $directorio );
+				
 				
 				
 				$cadenaSql = $this->miSql->getCadenaSql ( 'funcionario_informacion', $elemento [$i] [3] );
 				
 				$funcionario = $esteRecursoDBO->ejecutarAcceso ( $cadenaSql, "busqueda" );
 				
+				$arreglo=array(
+						$elemento[$i][1],
+						$elemento[$i][2],
+						$elemento[$i][6],
+						$funcionario[0][0],
+						$funcionario[0][1]
+				);
+				$arreglo= serialize($arreglo);
 				
-					
+				$variable .= "&datosGenerales=" . $arreglo;
+				
+				$variable = $this->miConfigurador->fabricaConexiones->crypto->codificar_url ( $variable, $directorio );
 				
 				$mostrarHtml = "<tr>
                     <td><center>" . $elemento [$i] [1] . "</center></td>

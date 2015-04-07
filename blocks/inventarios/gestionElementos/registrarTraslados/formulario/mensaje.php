@@ -68,6 +68,8 @@ class registrarForm {
 		{
 			// ---------------- SECCION: Controles del Formulario -----------------------------------------------
 			
+			$datos = unserialize ( $_REQUEST ['informacion'] );
+			
 			$esteCampo = "marcoDatosBasicos";
 			$atributos ['id'] = $esteCampo;
 			$atributos ["estilo"] = "jqueryui";
@@ -79,7 +81,7 @@ class registrarForm {
 				
 				if (isset ( $_REQUEST ['mensaje'] ) && $_REQUEST ['mensaje'] == 'confirma') {
 					
-					$mensaje = "Se Traslado el Elemento del Funcionario Responsable con Exito. ";
+					$mensaje = "Se Traslado con Exito el Elemento con Placa No. ".$datos[0]." y Serial:".$datos[1]."<br> al Funcionario Responsable : ".$datos[2];
 					
 					// ---------------- CONTROL: Cuadro de Texto --------------------------------------------------------
 					$esteCampo = 'mensajeRegistro';

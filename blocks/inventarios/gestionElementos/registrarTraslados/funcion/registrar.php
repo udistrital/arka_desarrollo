@@ -31,58 +31,58 @@ class RegistradorOrden {
 		$this->miFuncion = $funcion;
 	}
 	function procesarFormulario() {
-		
-		
 		$conexion = "inventarios";
 		$esteRecursoDB = $this->miConfigurador->fabricaConexiones->getRecursoDB ( $conexion );
 		
+		$conexion = "sicapital";
+		$esteRecursoDBO = $this->miConfigurador->fabricaConexiones->getRecursoDB ( $conexion );
+		
+		$cadenaSql = $this->miSql->getCadenaSql ( 'funcionario_informacion_fn', $_REQUEST ['responsable_reci'] );
+		
+		$funcionario_enviar = $esteRecursoDBO->ejecutarAcceso ( $cadenaSql, "busqueda" );
 		
 		$fechaActual = date ( 'Y-m-d' );
 		
+		$datos = array (
+				
+				$fechaActual,
+				$_REQUEST ['elemento_ind'],
+				$_REQUEST ['idfuncionario'],
+				$_REQUEST ['funcionario'] 
+		)
+		;
 		
-	
-		$datos=array(
+		$cadenaSql = $this->miSql->getCadenaSql ( 'insertar_historico', $datos );
+		$historico = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
+		
+		$arreglo_datos = array (
 				
-			$fechaActual,
-			$_REQUEST['elemento_ind'],
-			$_REQUEST['idfuncionario'],
-			$_REQUEST['funcionario']
-				
+				$_REQUEST ['elemento_ind'],
+				$_REQUEST ['responsable_reci'],
+				$_REQUEST ['observaciones'] 
+		)
+		;
+		
+		$datos = unserialize ( $_REQUEST ['informacion'] );
+		
+		$cadenaSql = $this->miSql->getCadenaSql ( 'actualizar_salida', $arreglo_datos );
+		$traslado = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "acceso" );
+		
+		$array = array (
+				$datos [0],
+				$datos [1],
+				$funcionario_enviar [0] [0] 
 		);
 		
-		$cadenaSql = $this->miSql->getCadenaSql ( 'insertar_historico',$datos );
-		$historico= $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
+		$array = serialize ( $array );
 		
-		
-		
-		
-		
-		
-		
-		$arreglo_datos=array(
-				
-				$_REQUEST['elemento_ind'],
-				$_REQUEST['responsable_reci'],
-				$_REQUEST['observaciones']				
-
-		);
-		
-		
-		
-		$cadenaSql = $this->miSql->getCadenaSql ( 'actualizar_salida',$arreglo_datos );
-		$traslado= $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "acceso" );
-
-
-				if ($traslado) {
-					
-					redireccion::redireccionar ( 'inserto' );
-				} else {
-					
-					redireccion::redireccionar ( 'noInserto');
-				}
+		if ($traslado) {
 			
-		
-	
+			redireccion::redireccionar ( 'inserto' ,$array);
+		} else {
+			
+			redireccion::redireccionar ( 'noInserto' );
+		}
 	}
 	function resetForm() {
 		foreach ( $_REQUEST as $clave => $valor ) {
