@@ -399,6 +399,8 @@ class Sql extends \Sql {
 				
 				break;
 			
+	
+				
 			case "actualizarOrden" :
 				$cadenaSql = " UPDATE ";
 				$cadenaSql .= " orden_servicio ";
@@ -436,24 +438,28 @@ class Sql extends \Sql {
 				$cadenaSql .= " total_preliminar='" . $variable [11] . "', ";
 				$cadenaSql .= " iva='" . $variable [12] . "', ";
 				$cadenaSql .= " total='" . $variable [13] . "', ";
-				$cadenaSql .= " fecha_diponibilidad='" . $variable [14] . "', ";
-				$cadenaSql .= " numero_disponibilidad='" . $variable [15] . "', ";
-				$cadenaSql .= " valor_disponibilidad='" . $variable [16] . "', ";
-				$cadenaSql .= " fecha_registrop='" . $variable [17] . "', ";
-				$cadenaSql .= " numero_registrop='" . $variable [18] . "', ";
-				$cadenaSql .= " valor_registrop='" . $variable [19] . "', ";
-				$cadenaSql .= " letra_registrop='" . $variable [20] . "',  ";
-				$cadenaSql .= " id_ordenador_encargado='" . $variable [21] . "', ";
-				$cadenaSql .= " id_jefe_encargado='" . $variable [22] . "', ";
-				$cadenaSql .= " id_contratista_encargado='" . $variable [23] . "' ";
-				$cadenaSql .= "  WHERE id_orden_servicio='" . $variable [24] . "';";
+				$cadenaSql .= " id_ordenador_encargado='" . $variable [14] . "', ";
+				$cadenaSql .= " vig_contratista='" . $variable [15] . "', ";
+				$cadenaSql .= " id_contratista_encargado='" . $variable [16] . "' ";
+				$cadenaSql .= "  WHERE id_orden_servicio='" . $variable [17] . "';";
+				
 				
 				break;
 			
-			case "limpiarItems" :
-				$cadenaSql = " DELETE FROM ";
-				$cadenaSql .= " items_orden_compra ";
-				$cadenaSql .= " WHERE id_orden='" . $variable . "';";
+			case "actualizarPresupuestal" :
+				$cadenaSql = " UPDATE informacion_presupuestal_orden ";
+				$cadenaSql .= " SET vigencia_dispo='" . $variable [0] . "', ";
+				$cadenaSql .= " numero_dispo='" . $variable [1] . "', ";
+				$cadenaSql .= " valor_disp='" . $variable [2] . "', ";
+				$cadenaSql .= " fecha_dip='" . $variable [3] . "', ";
+				$cadenaSql .= " letras_dispo='" . $variable [4] . "', ";
+				$cadenaSql .= " vigencia_regis='" . $variable [5] . "', ";
+				$cadenaSql .= " numero_regis='" . $variable [6] . "', ";
+				$cadenaSql .= " valor_regis='" . $variable [7] . "', ";
+				$cadenaSql .= " fecha_regis='" . $variable [8] . "', ";
+				$cadenaSql .= " letras_regis='" . $variable [9] . "' ";
+				$cadenaSql .= "  WHERE id_informacion='" . $variable [10] . "';";
+				
 				break;
 			
 			case "insertarItems" :
@@ -514,8 +520,6 @@ class Sql extends \Sql {
 				if ($variable [5] != '') {
 					$cadenaSql .= " AND  vig_contratista= '" . $variable [5] . "'";
 				}
-				
-				
 				
 				break;
 		}

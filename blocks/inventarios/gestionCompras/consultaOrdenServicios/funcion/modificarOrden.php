@@ -54,7 +54,7 @@ class RegistradorOrden {
 				$_REQUEST ['nombre_supervisor'],
 				$_REQUEST ['cargo_supervisor'],
 				$_REQUEST ['dependencia_supervisor'],
-				$orden[0][25] 
+				$orden[0]['id_supervisor'] 
 		);
 		
 		// Actualizar Supervisor
@@ -67,7 +67,7 @@ class RegistradorOrden {
 				$_REQUEST ['direccion_contratista'],
 				$_REQUEST ['telefono_contratista'],
 				$_REQUEST ['cargo_contratista'],
-				$orden[0][21]
+				$orden[0]['id_contratista']
 		);
 		
 		// Actualizar Contratista
@@ -75,7 +75,30 @@ class RegistradorOrden {
 		$id_ContratistaC = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
 		
 		
-// var_dump($_REQUEST);
+		$arreglo = array (
+				$_REQUEST ['vigencia_disponibilidad'],
+				$_REQUEST ['diponibilidad'],
+				$_REQUEST ['valor_disponibilidad'],
+				$_REQUEST ['fecha_diponibilidad'],
+				$_REQUEST ['valorLetras_disponibilidad'],
+				$_REQUEST ['vigencia_registro'],
+				$_REQUEST ['registro'],
+				$_REQUEST ['valor_registro'],
+				$_REQUEST ['fecha_registro'],
+				$_REQUEST ['valorL_registro'],
+				$orden [0]['info_presupuestal']
+		);
+		
+		
+		
+		
+		$cadenaSql = $this->miSql->getCadenaSql ( 'actualizarPresupuestal', $arreglo );
+		
+		$inf_pre = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "acceso" );
+		
+		
+		
+// 
 			// Actualizar Orden
 		
 		$datosOrden = array (
@@ -93,26 +116,20 @@ class RegistradorOrden {
 				$_REQUEST ['total_preliminar'],
 				$_REQUEST ['iva'],
 				$_REQUEST ['total'],
-				$_REQUEST ['fecha_disponibilidad'],
-				$_REQUEST ['numero_disponibilidad'],
-				$_REQUEST ['valor_disponibilidad'],
-				$_REQUEST ['fecha_registro'],
-				$_REQUEST ['numero_registro'],
-				$_REQUEST ['valor_registro'],
-				$_REQUEST ['valorLetras_registro'],
 				$_REQUEST['id_ordenador'],
-				$_REQUEST['id_jefe'],
+				$_REQUEST['vigencia_contratista'],
 				$_REQUEST['nombreContratista'],
 				$_REQUEST['numero_orden']
 		);
 		
 	
-// var_dump($datosOrden);
+
+
 		$cadenaSql = $this->miSql->getCadenaSql ( 'actualizarOrden', $datosOrden );
 
   
 		$id_orden = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "acceso" );
-// 		exit;		
+
 
 		$datos = array (
 				$_REQUEST ['numero_orden'] 
