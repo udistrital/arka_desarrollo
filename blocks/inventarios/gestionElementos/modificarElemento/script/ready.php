@@ -40,12 +40,18 @@
  $('#<?php echo $this->campoSeguro('numero_factura')?>').attr('disabled','');
  $('#<?php echo $this->campoSeguro('fecha_factura')?>').attr('disabled','');
  
+ 
+ $("#<?php echo $this->campoSeguro('placa')?>").select2({
+             	 placeholder: "Search for a repository",
+              	 minimumInputLength: 5,
+              	 });
+ $("#<?php echo $this->campoSeguro('serie1')?>").select2();
  $("#<?php echo $this->campoSeguro('nivel')?>").select2();
  $("#<?php echo $this->campoSeguro('tipo_registro')?>").select2();
  $("#<?php echo $this->campoSeguro('tipo_bien')?>").select2();
  $("#<?php echo $this->campoSeguro('iva')?>").select2();
  $("#<?php echo $this->campoSeguro('bodega')?>").select2();
- <!--$("#<?php echo $this->campoSeguro('tipo_poliza')?>").select2();  -->
+ 
                   
      
      $( "#<?php echo $this->campoSeguro('tipo_registro')?>" ).change(function() {

@@ -48,26 +48,24 @@ class RegistradorActa {
             redireccion::redireccionar('noItems');
         }
 
-
         //Registro del Acta de Recibido
 
         $datosActa = array(
-            $_REQUEST ['dependencia'],
-            $fechaActual,
-            $_REQUEST ['tipoBien'],
-            $_REQUEST ['nitProveedor'],
-            $_REQUEST ['proveedor'],
-            $_REQUEST ['numFactura'],
-            $_REQUEST ['fecha_factura'],
-            $_REQUEST ['tipoComprador'],
-            $_REQUEST ['tipoAccion'],
-            $_REQUEST ['fecha_revision'],
-            $_REQUEST ['revisor'],
-            $_REQUEST ['observacionesActa'],
-            1,
+            'dependencia' => $_REQUEST ['dependencia'],
+            'fecha_registro' => $fechaActual,
+            'tipo_bien' => $_REQUEST ['tipoBien'],
+            'nitproveedor' => $_REQUEST ['nitproveedor'],
+            'razon_social' => $_REQUEST ['proveedor'],
+            'tipo_comprador' => $_REQUEST ['tipoComprador'],
+            'fecha_revision' => $_REQUEST ['fecha_revision'],
+            'revisor' => $_REQUEST ['revisor'],
+            'observacion' => $_REQUEST ['observacionesActa'],
+            'estado' => 1,
+            'tipo_orden' => $_REQUEST ['tipoOrden'],
+            'numero_orden' => $_REQUEST ['numero_orden'],
         );
 
-        $cadenaSql = $this->miSql->getCadenaSql('insertarActa', $datosActa);
+       $cadenaSql = $this->miSql->getCadenaSql('insertarActa', $datosActa);
         $id_acta = $esteRecursoDB->ejecutarAcceso($cadenaSql, "busqueda");
 
         // Registro de Items
@@ -84,7 +82,6 @@ class RegistradorActa {
 
             $cadenaSql = $this->miSql->getCadenaSql('insertarItems', $datosItems);
             $items = $esteRecursoDB->ejecutarAcceso($cadenaSql, "acceso");
-      
         }
 
         $cadenaSql = $this->miSql->getCadenaSql('limpiar_tabla_items', $_REQUEST['seccion']);

@@ -24,31 +24,31 @@ class RegistradorOrden {
 		$this->miFuncion = $funcion;
 	}
 	function procesarFormulario() {
+		
+		
+		
+			
+		
+		
+		
+		
+		
 		$fechaActual = date ( 'Y-m-d' );
 		
 		$conexion = "inventarios";
 		$esteRecursoDB = $this->miConfigurador->fabricaConexiones->getRecursoDB ( $conexion );
 		
 		$arreglo = array (
-				$_REQUEST ['funcionario'],
-				$_REQUEST ['identificacion'] 
-		);
-		
-		$cadenaSql = $this->miSql->getCadenaSql ( 'insertar_funcionario', $arreglo );
-		echo $cadenaSql;
-		$id_funcionario = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
-		
-		$arreglo = array (
 				$fechaActual,
 				$_REQUEST ['dependencia'],
 				$_REQUEST ['ubicacion'],
-				$id_funcionario [0] [0],
+				$_REQUEST['funcionario'],
 				$_REQUEST ['observaciones'],
 				$_REQUEST ['numero_entrada'] 
 		);
 		
 		$cadenaSql = $this->miSql->getCadenaSql ( 'insertar_salida', $arreglo );
-		echo $cadenaSql;
+		
 		$id_salida = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
 		
 		$items = unserialize ( $_REQUEST ['items'] );
@@ -61,12 +61,11 @@ class RegistradorOrden {
 			);
 			
 			$cadenaSql = $this->miSql->getCadenaSql ( 'insertar_salida_item', $arreglo );
-			echo $cadenaSql;
+			
 			$inserto = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "acceso" );
 		}
 		
-		var_dump ( $inserto );
-// 		exit ();
+	
 		$arreglo = array (
 				"salida" => $id_salida [0] [0],
 				"entrada" => $_REQUEST ['numero_entrada'],

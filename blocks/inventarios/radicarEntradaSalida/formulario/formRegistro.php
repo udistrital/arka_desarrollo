@@ -158,7 +158,7 @@ class registrarForm {
                     $atributos ['dobleLinea'] = 0;
                     $atributos ['tabIndex'] = $tab;
                     $atributos ['etiqueta'] = $this->lenguaje->getCadena($esteCampo);
-                    $atributos ['validar'] = 'required,minSize[1],maxSize[50]';
+                    $atributos ['validar'] = 'required';
 
                     if (isset($_REQUEST [$esteCampo])) {
                         $atributos ['valor'] = $_REQUEST [$esteCampo];
@@ -177,10 +177,14 @@ class registrarForm {
                     echo $this->miFormulario->campoCuadroTexto($atributos);
                     unset($atributos);
 // --------------- FIN CONTROL : Cuadro de Texto --------------------------------------------------
+
+
                     echo $this->miFormulario->agrupacion('fin');
                 }
+
 // --------------- FIN CONTROL : Cuadro Lista --------------------------------------------------
             }
+
 // ------------------Division para los botones-------------------------
             $atributos ["id"] = "botones";
             $atributos ["estilo"] = "marcoBotones";

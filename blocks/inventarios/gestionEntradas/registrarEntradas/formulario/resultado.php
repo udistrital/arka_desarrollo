@@ -67,12 +67,6 @@ class registrarForm {
 			$numeroActa = '';
 		}
 		
-		if (isset ( $_REQUEST ['nit'] ) && $_REQUEST ['nit'] != '') {
-			$nit = $_REQUEST ['nit'];
-		} else {
-			$nit = '';
-		}
-		
 		if (isset ( $_REQUEST ['proveedor'] ) && $_REQUEST ['proveedor'] != '') {
 			$proveedor = $_REQUEST ['proveedor'];
 		} else {
@@ -81,7 +75,6 @@ class registrarForm {
 		
 		$arreglo = array (
 				$numeroActa,
-				$nit,
 				$proveedor,
 				$fechaInicio,
 				$fechaFinal 
@@ -177,6 +170,16 @@ class registrarForm {
 					$variable .= "&opcion=Entrada";
 					// $variable .= "&usuario=" . $miSesion->getSesionUsuarioId ();
 					$variable .= "&numero_acta=" . $actas [$i] [0];
+					
+					$arreglo = array (
+							$actas [$i] [0],
+							$actas [$i] [1],
+							$actas [$i] [2],
+							$actas [$i] [3] 
+					);
+					$arreglo=serialize($arreglo);
+					$variable .= "&datosGenerales=" .$arreglo;
+					
 					$variable = $this->miConfigurador->fabricaConexiones->crypto->codificar_url ( $variable, $directorio );
 					
 					$mostrarHtml = "<tr>

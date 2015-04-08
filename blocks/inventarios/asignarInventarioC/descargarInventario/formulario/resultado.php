@@ -67,14 +67,12 @@ class registrarForm {
 
         $supervisor = $_REQUEST['usuario'];
 
-        $cadenaSql = $this->miSql->getCadenaSql('consultarContratista', $docContratista);
-        $contratista = $esteRecursoDB->ejecutarAcceso($cadenaSql, "busqueda");
-
-        $cadenaSql = $this->miSql->getCadenaSql('consultarElementosContratista', $docContratista);
+      $cadenaSql = $this->miSql->getCadenaSql('consultarElementosContratista', $docContratista);
         $elementos_contratista = $esteRecursoDB->ejecutarAcceso($cadenaSql, "busqueda");
-        $total_elementos=count($elementos_contratista);
+        $total_elementos = count($elementos_contratista);
         
-            // ---------------- SECCION: Parámetros Generales del Formulario ----------------------------------
+
+        // ---------------- SECCION: Parámetros Generales del Formulario ----------------------------------
         $esteCampo = $esteBloque ['nombre'];
         $atributos ['id'] = $esteCampo;
         $atributos ['nombre'] = $esteCampo;
@@ -108,14 +106,14 @@ class registrarForm {
 
             echo "<thead>
                 <tr>
+                 <th>ID Elemento</th>
                 <th>Nivel de Inventario</th>
-                <th>Unidad de Medida</th>
-                <th>Cantidad</th>
                 <th>Marca Elementos</th>
+                <th>Placa Elementos</th>
                 <th>Serie Elemento</th>
                 <th>Valor Unitario</th>
                 <th>Subtotal</th>
-                <th>Total con IVA</th>
+                <th>Total IVA</th>
                 <th>Total Ajustado</th>
 		<th>Seleccionar</th>
                 </tr>
@@ -125,15 +123,15 @@ class registrarForm {
             for ($i = 0; $i < count($elementos_contratista); $i ++) {
 
                 $mostrarHtml = "<tr>
-                    <td><center>" . $elementos_contratista [$i][1] . "</center></td>
-                    <td><center>" . $elementos_contratista [$i][0] . "</center></td>
-                    <td><center>" . $elementos_contratista [$i][2] . "</center></td>
-                    <td><center>" . $elementos_contratista [$i][3] . "</center></td>
-                    <td><center>" . $elementos_contratista [$i][4] . "</center></td>
-                    <td><center>" . $elementos_contratista [$i][5] . "</center></td>
-                    <td><center>" . $elementos_contratista [$i][6] . "</center></td>
-                    <td><center>" . $elementos_contratista [$i][7] . "</center></td>
-                    <td><center>" . $elementos_contratista [$i][8] . "</center></td>
+                   <td><center>" . $elementos_contratista [$i]['id_elemento_ind'] . "</center></td>
+                    <td><center>" . $elementos_contratista [$i]['nivel'] . "</center></td>
+                    <td><center>" . $elementos_contratista [$i]['marca'] . "</center></td>
+                    <td><center>" . $elementos_contratista [$i]['placa'] . "</center></td>
+                    <td><center>" . $elementos_contratista [$i]['serie'] . "</center></td>
+                    <td><center>" . $elementos_contratista [$i]['valor'] . "</center></td>
+                    <td><center>" . $elementos_contratista [$i]['subtotal_sin_iva'] . "</center></td>
+                    <td><center>" . $elementos_contratista [$i]['total_iva'] . "</center></td>
+                    <td><center>" . $elementos_contratista [$i]['total_iva_con'] . "</center></td>
                         
                     <td><center>";
                 // ---------------- CONTROL: Cuadro de Texto --------------------------------------------------------
@@ -150,7 +148,7 @@ class registrarForm {
                 if (isset($_REQUEST [$esteCampo])) {
                     $atributos ['valor'] = $_REQUEST [$esteCampo];
                 } else {
-                    $atributos ['valor'] = $elementos_contratista [$i] [10];
+                    $atributos ['valor'] = $elementos_contratista [$i] ['id_elemento_ind'];
                 }
 
                 $atributos ['deshabilitado'] = false;

@@ -42,5 +42,15 @@ $dropdown_menu = array(
             array("reportfile" => "consultarDepreciacion_elemento.xml", "title" => "Consulta Depreciación por Elemento"),
         )
     ),
+        array(
+        "project" => "arka",
+        "title" => "Gestión Movimientos",
+        "items" => array(
+            array("reportfile" => "consultar_hurtos.xml", "title" => "Consulta Faltantes por Hurto"),
+            array("reportfile" => "consultar_faltante.xml", "title" => "Consulta Faltantes Dependencia"),
+            array("reportfile" => "consultar_sobrante.xml", "title" => "Consulta Sobrantes"),
+            array("reportfile" => "consultar_baja.xml", "title" => "Consulta Bajas"),
+        )
+    ),
 );
 ?>

@@ -154,7 +154,7 @@ class Sql extends \Sql {
                 $cadenaSql .= " descripcion ";
                 $cadenaSql .= " FROM ";
                 $cadenaSql .= " arka_inventarios.tipo_contrato ";
-                $cadenaSql .= " WHERE 1=1;";
+                $cadenaSql .= " WHERE descripcion in('Avances', 'Contratos(ViceRectoria)', 'Orden Compras');";
                 break;
 
 
@@ -193,7 +193,7 @@ class Sql extends \Sql {
                 $cadenaSql .= "'" . $variable [4] . "') ";
                 $cadenaSql .= "RETURNING  compra_idcompra; ";
                 break;
-            
+
             //----------  Para registrar los items de la factura ------------//
             case "items" :
                 $cadenaSql = " SELECT ";
@@ -243,9 +243,9 @@ class Sql extends \Sql {
                 $cadenaSql .= "'1',";
                 $cadenaSql .= "'" . date('Y-m-d') . "');";
                 break;
-          
+
             //************** Para contratos ***************//
-              case "registroDocumento_Contrato":
+            case "registroDocumento_Contrato":
                 $cadenaSql = " INSERT INTO documento_radicarasignar_contrato( ";
                 $cadenaSql .=" contrato_idunico, ";
                 $cadenaSql .=" contrato_idcontrato, ";
@@ -279,9 +279,9 @@ class Sql extends \Sql {
                 $cadenaSql .= "'" . $variable [4] . "') ";
                 $cadenaSql .= "RETURNING  contrato_idcontrato; ";
                 break;
-            
-             //----------  Para registrar los items de la factura ------------//
-    
+
+            //----------  Para registrar los items de la factura ------------//
+
             case "insertarItems_contrato" :
                 $cadenaSql = " INSERT INTO ";
                 $cadenaSql .= " arka_inventarios.items_radfacturacontrato(";
@@ -293,9 +293,9 @@ class Sql extends \Sql {
                 $cadenaSql .= "'1',";
                 $cadenaSql .= "'" . date('Y-m-d') . "');";
                 break;
-            
-              //************** Para Avances***************//
-              case "registroDocumento_Avance":
+
+            //************** Para Avances***************//
+            case "registroDocumento_Avance":
                 $cadenaSql = " INSERT INTO documento_radicarasignar_avance( ";
                 $cadenaSql .=" avance_idunico, ";
                 $cadenaSql .=" avance_idavance, ";
@@ -329,9 +329,9 @@ class Sql extends \Sql {
                 $cadenaSql .= "'" . $variable [4] . "') ";
                 $cadenaSql .= "RETURNING  avance_idavance; ";
                 break;
-            
-             //----------  Para registrar los items de la factura ------------//
-        
+
+            //----------  Para registrar los items de la factura ------------//
+
             case "insertarItems_avance" :
                 $cadenaSql = " INSERT INTO ";
                 $cadenaSql .= " arka_inventarios.items_radfacturaavance(";
@@ -342,6 +342,43 @@ class Sql extends \Sql {
                 $cadenaSql .= "'" . $variable [2] . "',";
                 $cadenaSql .= "'1',";
                 $cadenaSql .= "'" . date('Y-m-d') . "');";
+                break;
+
+            // Consultas de Oracle para rescate de información de Sicapital
+            /* case "dependencias":
+              $cadenaSql = "SELECT DEP_IDENTIFICADOR, ";
+              $cadenaSql.= " DEP_IDENTIFICADOR ||' '|| DEP_DEPENDENCIA ";
+              //$cadenaSql .= " DEP_DIRECCION,DEP_TELEFONO ";F
+              $cadenaSql.= " FROM DEPENDENCIAS ";
+              break; */
+
+            case "dependencias":
+                $cadenaSql = "SELECT elemento_codigo, elemento_codigo || ' -  ' || elemento_nombre ";
+                $cadenaSql .= "FROM dependencia.catalogo_elemento; ";
+                break;
+
+            case "proveedores":
+                $cadenaSql = "SELECT PRO_NIT,PRO_NIT ||' '|| PRO_RAZON_SOCIAL";
+                $cadenaSql .= " FROM PROVEEDORES ";
+                break;
+
+            case "select_proveedor":
+                $cadenaSql = "SELECT PRO_RAZON_SOCIAL";
+                $cadenaSql .= " FROM PROVEEDORES ";
+                $cadenaSql .= " WHERE PRO_NIT='" . $variable . "' ";
+                break;
+
+            case "contratistas":
+                $cadenaSql = "SELECT CON_IDENTIFICACION,CON_IDENTIFICACION ||' '|| CON_NOMBRE ";
+                /* $cadenaSql .= " CON_CARGO, ";
+                  $cadenaSql .= " CON_DIRECCION, ";
+                  $cadenaSql .= " CON_TELEFONO "; */
+                $cadenaSql .= " FROM CONTRATISTAS ";
+                break;
+
+            case "id_contrato":
+                $cadenaSql = " SELECT id_contrato, id_contrato || ' - '|| numero_contrato ";
+                $cadenaSql.= " FROM contratos; ";
                 break;
         }
         return $cadenaSql;

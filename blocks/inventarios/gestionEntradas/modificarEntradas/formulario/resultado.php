@@ -54,6 +54,9 @@ class registrarForm {
 		$conexion = "inventarios";
 		$esteRecursoDB = $this->miConfigurador->fabricaConexiones->getRecursoDB ( $conexion );
 		
+		$conexion = "sicapital";
+		$esteRecursoDBO = $this->miConfigurador->fabricaConexiones->getRecursoDB ( $conexion );
+		
 		
 
 		
@@ -76,11 +79,13 @@ class registrarForm {
 			$numeroEntrada = '';
 		}
 		
-		if (isset ( $_REQUEST ['nit'] ) && $_REQUEST ['nit'] != '') {
-			$nit = $_REQUEST ['nit'];
+		if (isset ( $_REQUEST ['clase'] ) && $_REQUEST ['clase'] != '') {
+			$clase = $_REQUEST ['clase'];
 		} else {
-			$nit = '';
+			$clase = '';
 		}
+		
+
 		
 		if (isset ( $_REQUEST ['proveedor'] ) && $_REQUEST ['proveedor'] != '') {
 			$proveedor = $_REQUEST ['proveedor'];
@@ -90,17 +95,19 @@ class registrarForm {
 		
 		
 		
+		
 		$arreglo = array (
 				$numeroEntrada,
-				$nit,
-				$proveedor,
 				$fechaInicio,
-				$fechaFinal
+				$fechaFinal,
+				$clase,
+				$proveedor
 			
 		);
 		
 	 
 		$cadenaSql = $this->miSql->getCadenaSql ( 'consultarEntrada',$arreglo );
+		
 		
 		$entrada = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
 		 
@@ -178,10 +185,11 @@ class registrarForm {
                 <tr>
                    <th># Número Entrada</th>
                     <th>Fecha Registro </th>
-                    <th>Nit</th>
-					<th>Proveedor</th>
-			        <th>Modificar Entrada</th>
-                </tr>
+                    <th>Clase Entrada</th>
+					<th>Nit<br>Proveedor</th>
+					<th>Razon Social<br>Proveedor</th>
+					<th>Modificar Entrada</th>
+				</tr>
             </thead>
             <tbody>";
 		
@@ -190,13 +198,35 @@ class registrarForm {
 				$variable .= "&opcion=modificar";
 // 				$variable .= "&usuario=" . $miSesion->getSesionUsuarioId ();
 				$variable .= "&numero_entrada=" . $entrada [$i] [0];
-				$variable = $this->miConfigurador->fabricaConexiones->crypto->codificar_url ( $variable, $directorio);
+				
 		
+				
+				$cadenaSql = $this->miSql->getCadenaSql ( 'proveedor_informacion', $entrada [$i] [3] );
+				
+				$proveedor = $esteRecursoDBO->ejecutarAcceso ( $cadenaSql, "busqueda" );
+				
+				
+				$arreglo=array(
+				   		$entrada[$i][0],
+						$entrada[$i][1],
+						$entrada[$i][2],
+						$proveedor[0][0],
+						$proveedor[0][1]
+						);
+				
+				
+				
+				$arreglo=serialize($arreglo);
+				$variable .= "&datosGenerales=" . $arreglo;
+				
+				$variable = $this->miConfigurador->fabricaConexiones->crypto->codificar_url ( $variable, $directorio);
+				
 				$mostrarHtml = "<tr>
                     <td><center>" . $entrada [$i] [0] . "</center></td>
                     <td><center>" . $entrada [$i] [1] . "</center></td>
                     <td><center>" . $entrada [$i] [2] . "</center></td>
-                    <td><center>" . $entrada [$i] [3] . "</center></td>
+                    <td><center>" . $proveedor [0] [0] . "</center></td>
+                    <td><center>" . $proveedor[0][1]. "</center></td>
                     <td><center>
                     	<a href='".$variable."'>
                             <img src='" . $rutaBloque . "/css/images/edit.png' width='15px'>
@@ -212,40 +242,7 @@ class registrarForm {
 			echo "</tbody>";
 		
 			echo "</table>";
-// 			// ------------------Division para los botones-------------------------
-// 			$atributos ["id"] = "botones";
-// 			$atributos ["estilo"] = "marcoBotones";
-// 			echo $this->miFormulario->division ( "inicio", $atributos );
-			
-// 			// -----------------CONTROL: Botón ----------------------------------------------------------------
-// 			$esteCampo = 'botonReporte';
-// 			$atributos ["id"] = $esteCampo;
-// 			$atributos ["tabIndex"] = $tab;
-// 			$atributos ["tipo"] = 'boton';
-// 			// submit: no se coloca si se desea un tipo button genérico
-// 			$atributos ['submit'] = true;
-// 			$atributos ["estiloMarco"] = '';
-// 			$atributos ["estiloBoton"] = 'jqueryui';
-// 			// verificar: true para verificar el formulario antes de pasarlo al servidor.
-// 			$atributos ["verificar"] = '';
-// 			$atributos ["tipoSubmit"] = 'jquery'; // Dejar vacio para un submit normal, en este caso se ejecuta la función submit declarada en ready.js
-// 			$atributos ["valor"] = $this->lenguaje->getCadena ( $esteCampo );
-// 			$atributos ['nombreFormulario'] = $esteBloque ['nombre'];
-// 			$tab ++;
-			
-// 			// Aplica atributos globales al control
-// 			$atributos = array_merge ( $atributos, $atributosGlobales );
-// 			echo $this->miFormulario->campoBoton ( $atributos );
-			// -----------------FIN CONTROL: Botón -----------------------------------------------------------
-			
-			// ---------------------------------------------------------
-			
-			// ------------------Fin Division para los botones-------------------------
-// 			echo $this->miFormulario->division ( "fin" );
-			
-		
-			// Fin de Conjunto de Controles
-			// echo $this->miFormulario->marcoAgrupacion("fin");
+
 		} else {
 			
 			$mensaje = "No Se Encontraron<br>Registros de Entradas";

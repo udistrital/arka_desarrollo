@@ -19,6 +19,9 @@ $this->idioma ["serie"] ="Serie : ";
 $this->idioma ["serieTitulo"] ="Ingrese Serie del Elemento";
 
 
+$this->idioma ["serie1"] ="Serie : ";
+$this->idioma ["serie1Titulo"] ="Ingrese Serie del Elemento";
+
 $this->idioma ["nivel"] ="Nivel de Inventarios : ";
 $this->idioma ["nivelTitulo"] ="Seleccione Nivel de Inventarios";
 

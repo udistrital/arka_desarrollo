@@ -28,8 +28,6 @@ class registrarForm {
 
     function miForm() {
 
-// 		var_dump ( $_REQUEST );
-// 		exit ();
         // Rescatar los datos de este bloque
         $esteBloque = $this->miConfigurador->getVariableConfiguracion("esteBloque");
         $miPaginaActual = $this->miConfigurador->getVariableConfiguracion('pagina');
@@ -68,10 +66,7 @@ class registrarForm {
             $docContratista = '';
         }
 
-        $supervisor=$_REQUEST['usuario'];
-
-        $cadenaSql = $this->miSql->getCadenaSql('consultarContratista', $docContratista);
-        $contratista = $esteRecursoDB->ejecutarAcceso($cadenaSql, "busqueda");
+        $supervisor = 4;
 
         $variables = array(
             $supervisor,
@@ -115,14 +110,14 @@ class registrarForm {
 
             echo "<thead>
                 <tr>
+                <th>ID Elemento</th>
                 <th>Nivel de Inventario</th>
-                <th>Unidad de Medida</th>
-                <th>Cantidad</th>
                 <th>Marca Elementos</th>
+                <th>Placa Elementos</th>
                 <th>Serie Elemento</th>
                 <th>Valor Unitario</th>
                 <th>Subtotal</th>
-                <th>Total con IVA</th>
+                <th>Total IVA</th>
                 <th>Total Ajustado</th>
 		<th>Seleccionar</th>
                 </tr>
@@ -132,15 +127,15 @@ class registrarForm {
             for ($i = 0; $i < count($elementos_supervisor); $i ++) {
 
                 $mostrarHtml = "<tr>
-                    <td><center>" . $elementos_supervisor [$i][1] . "</center></td>
-                    <td><center>" . $elementos_supervisor [$i][0] . "</center></td>
-                    <td><center>" . $elementos_supervisor [$i][2] . "</center></td>
-                    <td><center>" . $elementos_supervisor [$i][3] . "</center></td>
-                    <td><center>" . $elementos_supervisor [$i][4] . "</center></td>
-                    <td><center>" . $elementos_supervisor [$i][5] . "</center></td>
-                    <td><center>" . $elementos_supervisor [$i][6] . "</center></td>
-                    <td><center>" . $elementos_supervisor [$i][7] . "</center></td>
-                    <td><center>" . $elementos_supervisor [$i][8] . "</center></td>
+                    <td><center>" . $elementos_supervisor [$i]['id_elemento_ind'] . "</center></td>
+                    <td><center>" . $elementos_supervisor [$i]['nivel'] . "</center></td>
+                    <td><center>" . $elementos_supervisor [$i]['marca'] . "</center></td>
+                    <td><center>" . $elementos_supervisor [$i]['placa'] . "</center></td>
+                    <td><center>" . $elementos_supervisor [$i]['serie'] . "</center></td>
+                    <td><center>" . $elementos_supervisor [$i]['valor'] . "</center></td>
+                    <td><center>" . $elementos_supervisor [$i]['subtotal_sin_iva'] . "</center></td>
+                    <td><center>" . $elementos_supervisor [$i]['total_iva'] . "</center></td>
+                    <td><center>" . $elementos_supervisor [$i]['total_iva_con'] . "</center></td>
                         
                     <td><center>";
                 // ---------------- CONTROL: Cuadro de Texto --------------------------------------------------------
@@ -157,7 +152,7 @@ class registrarForm {
                 if (isset($_REQUEST [$esteCampo])) {
                     $atributos ['valor'] = $_REQUEST [$esteCampo];
                 } else {
-                    $atributos ['valor'] = $elementos_supervisor [$i] [0];
+                    $atributos ['valor'] = $elementos_supervisor [$i] ['id_elemento_ind'];
                 }
 
                 $atributos ['deshabilitado'] = false;
@@ -213,8 +208,6 @@ class registrarForm {
             // Se debe declarar el mismo atributo de marco con que se inició el formulario.
             // -----------------FIN CONTROL: Botón -----------------------------------------------------------
             // ------------------Fin Division para los botones-------------------------
- 
-
             // ------------------- SECCION: Paso de variables ------------------------------------------------
 
             /**
@@ -235,8 +228,8 @@ class registrarForm {
             $valorCodificado .= "&bloque=" . $esteBloque ['nombre'];
             $valorCodificado .= "&bloqueGrupo=" . $esteBloque ["grupo"];
             $valorCodificado .= "&opcion=asignar";
-            $valorCodificado .= "&contratista=".$docContratista;
-            $valorCodificado .= "&supervisor=".$supervisor;
+            $valorCodificado .= "&contratista=" . $docContratista;
+            $valorCodificado .= "&supervisor=" . $supervisor;
 
             /**
              * SARA permite que los nombres de los campos sean dinámicos.

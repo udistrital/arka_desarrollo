@@ -34,16 +34,8 @@ $this->idioma ["valorFacturasTitulo"] ="Ingrese Valor Total de las Facturas";
 $this->idioma ["proveedor"] ="Nombre o Razón Social:";
 $this->idioma ["proveedorTitulo"] ="Ingrese Nombre Proveedor";
 
-$this->idioma ["nitProveedor"] ="NIT Proveedor :";
-$this->idioma ["nitProveedorTitulo"] ="Ingrese NIT Proveedor";
-
-
-
-
-
-
-
-
+$this->idioma ["nitproveedor"] ="NIT Proveedor :";
+$this->idioma ["nitproveedorTitulo"] ="Ingrese NIT Proveedor";
 
 
 
@@ -85,7 +77,8 @@ $this->idioma ["dependenciaTitulo"] ="Ingrese Nombre Dependencia";
 $this->idioma ["revisor"] ="&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspNombre Revisor :";
 $this->idioma ["revisorTitulo"] ="Ingrese Nombre de Quien Revisó";
 
-
+$this->idioma ["id_contrato"] ="ID Contrato:";
+$this->idioma ["id_contratoTitulo"] ="Seleccione el contrato";
 
 
 

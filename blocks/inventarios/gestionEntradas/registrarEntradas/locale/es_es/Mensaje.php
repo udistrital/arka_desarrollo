@@ -1,6 +1,18 @@
 <?php
 $this->idioma ["noDefinido"] = "Etiqueta no esta definida en locale/es_es/Mensaje.php";
 
+$this->idioma ["informacion_numero"] =" # Número de Acta de Recibido : ";
+
+$this->idioma ["informacion_fecha"] ="Fecha de Acta de Recibido : ";
+
+$this->idioma ["informacion_nit"] ="Nit de Proveedor : ";
+
+$this->idioma ["informacion_nit"] ="Nit de Proveedor : ";
+
+$this->idioma ["informacion_proveedor"] ="Nombre y/o Razón Social Proveedor : ";
+
+
+
 
 $this->idioma ["fecha_inicio"] ="Fecha Inicial : ";
 $this->idioma ["fecha_inicioTitulo"] ="Seleccione Fecha Inicial";
@@ -13,11 +25,8 @@ $this->idioma ["numero_acta"] ="Número de Acta de Recibido : ";
 $this->idioma ["numero_actaTitulo"] ="Ingrese Número Acta de Recibido";
 
 
-$this->idioma ["nit"] ="Nit : ";
-$this->idioma ["nitTitulo"] ="Ingrese Nit";
-
-$this->idioma ["proveedor"] ="Proveedor : ";
-$this->idioma ["proveedorTitulo"] ="Ingrese Proveedor";
+$this->idioma ["proveedor"] ="Proveedor y/o Nit : ";
+$this->idioma ["proveedorTitulo"] ="Seleccione Nit y/o Proveedor";
 
 
 $this->idioma ["vigencia"] ="Vigencia : ";
@@ -30,11 +39,14 @@ $this->idioma ["claseTitulo"] ="Seleccione Clase de Entrada";
 $this->idioma ["id_entradaR"] ="(ID)Número Entrada : ";
 $this->idioma ["id_entradaRTitulo"] ="Ingrese Id de Entrada";
 
-$this->idioma ["id_salida"] ="(ID)Número Salida : ";
-$this->idioma ["id_salidaTitulo"] ="Ingrese Id de Salida";
+$this->idioma ["id_salidaS"] ="(ID)Número Salida : ";
+$this->idioma ["id_salidaSTitulo"] ="Ingrese Id de Salida";
 
-$this->idioma ["id_hurto"] ="(ID)Número Hurto : ";
-$this->idioma ["id_hurtoTitulo"] ="Ingrese Id de Hurto	";
+$this->idioma ["id_salidaR"] ="(ID)Número Salida : ";
+$this->idioma ["id_salidaRTitulo"] ="Ingrese Id de Salida";
+
+$this->idioma ["id_hurtoR"] ="(ID)Número Hurto : ";
+$this->idioma ["id_hurtoRTitulo"] ="Ingrese Id de Hurto	";
 
 $this->idioma ["actoAdministrativo"] ="Acto Administrativo : ";
 $this->idioma ["actoAdministrativoTitulo"] ="Carge Acto Administraivo de la Donación";
@@ -42,21 +54,40 @@ $this->idioma ["actoAdministrativoTitulo"] ="Carge Acto Administraivo de la Dona
 $this->idioma ["observaciones_sobrante"] ="Observaciones : ";
 $this->idioma ["observaciones_sobranteTitulo"] ="Ingrese Observaciones";
 
+$this->idioma ["observaciones_donacion"] ="Observaciones : ";
+$this->idioma ["observaciones_donacionTitulo"] ="Ingrese Observaciones";
+
+
 $this->idioma ["acta_sobrante"] ="Acta : ";
 $this->idioma ["acta_sobranteTitulo"] ="Carge Archivo Acta";
 
 $this->idioma ["observaciones_produccion"] ="Observaciones : ";
 $this->idioma ["observaciones_produccionTitulo"] ="Ingrese Observaciones";
 
-$this->idioma ["acta_produccion"] ="Acta : ";
-$this->idioma ["acta_produccionTitulo"] ="Carge Archivo Acta";
+
+$this->idioma ["observaciones_reposicion"] ="Observaciones : ";
+$this->idioma ["observaciones_reposicionTitulo"] ="Ingrese Observaciones";
+
+$this->idioma ["id_entradaS"] ="(ID)Número Entrada: ";
+$this->idioma ["id_entradaSTitulo"] ="Ingrese (ID)Número Entrada";
+
+$this->idioma ["num_placa"] ="Número Placa: ";
+$this->idioma ["num_placaTitulo"] ="Ingrese Número Placa";
+
+
+$this->idioma ["valor_sobrante"] ="Valor ($) : ";
+$this->idioma ["valor_sobranteTitulo"] ="Ingrese Valor Sobrante";
+
+
+$this->idioma ["acta_produccion"] ="Acta Producción Propia: ";
+$this->idioma ["acta_produccionTitulo"] ="Seleccione Archivo de Acta";
 
 
 
 $this->idioma ["observaciones_recuperacion"] ="Observaciones : ";
 $this->idioma ["observaciones_recuperacionTitulo"] ="Ingrese Observaciones";
 
-$this->idioma ["acta_recuperacion"] ="Acta : ";
+$this->idioma ["acta_recuperacion"] ="Acta Recuperación : ";
 $this->idioma ["acta_recuperacionTitulo"] ="Carge Archivo Acta";
 
 $this->idioma ["tipo_contrato"] ="Tipo Contrato : ";

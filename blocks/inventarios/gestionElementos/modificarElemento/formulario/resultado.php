@@ -67,8 +67,8 @@ class registrarForm {
 			$placa = '';
 		}
 		
-		if (isset ( $_REQUEST ['serie'] ) && $_REQUEST ['serie'] != '') {
-			$serie = $_REQUEST ['serie'];
+		if (isset ( $_REQUEST ['serie1'] ) && $_REQUEST ['serie1'] != '') {
+			$serie = $_REQUEST ['serie1'];
 		} else {
 			$serie = '';
 		}
@@ -82,7 +82,11 @@ class registrarForm {
 		;
 		
 		$cadenaSql = $this->miSql->getCadenaSql ( 'consultarElemento', $arreglo );
+		
+		
+		
 		$elementos = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
+		
 		
 		// ---------------- SECCION: Parámetros Generales del Formulario ----------------------------------
 		$esteCampo = $esteBloque ['nombre'];

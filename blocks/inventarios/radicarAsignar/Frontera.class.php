@@ -79,7 +79,6 @@ class Frontera {
                     }
 
                     break;
-
             }
         } else {
             $_REQUEST ['opcion'] = "mostrar";

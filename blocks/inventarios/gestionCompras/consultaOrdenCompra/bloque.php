@@ -7,7 +7,7 @@ if (! isset ( $GLOBALS ["autorizado"] )) {
 	include ("../index.php");
 	exit ();
 }
-//
+
 // Todo bloque debe implementar la interfaz Bloque
 include_once ("core/builder/Bloque.interface.php");
 
@@ -121,5 +121,4 @@ if (isset ( $lenguaje )) {
 }
 
 $esteBloque->bloque ();
-
 ?>

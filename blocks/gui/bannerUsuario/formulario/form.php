@@ -51,6 +51,10 @@ class Formulario {
             $atributos['alto'] = '5%';
             echo $this->miFormulario->campoImagen($atributos);
             unset($atributos);
+
+    
+
+            // ------------------- Inicio División -------------------------------
         }
 
         // ---------------------Fin Division -----------------------------------

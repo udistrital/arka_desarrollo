@@ -48,6 +48,8 @@ class registrarForm {
 		// ___________________________________________________________________________________
 		// -------------------------------------------------------------------------------------------------
 		
+		
+		
 		$cadenaSql = $this->miSql->getCadenaSql ( 'consultarElementoParticular', $_REQUEST ['id_elemento'] );
 		$elemento = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
 		
@@ -83,11 +85,12 @@ class registrarForm {
 		{
 			// ---------------- SECCION: Controles del Formulario -----------------------------------------------
 			
+			
 			$esteCampo = "marcoDatosBasicos";
 			$atributos ['id'] = $esteCampo;
 			$atributos ["estilo"] = "jqueryui";
 			$atributos ['tipoEtiqueta'] = 'inicio';
-			$atributos ["leyenda"] = "Registrar Elemento";
+			$atributos ["leyenda"] = "Modificar Elemento No. ".$_REQUEST['id_elemento'];
 			echo $this->miFormulario->marcoAgrupacion ( 'inicio', $atributos );
 			unset ( $atributos );
 			{

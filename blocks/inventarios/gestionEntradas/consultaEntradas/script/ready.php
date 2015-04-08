@@ -30,109 +30,22 @@
                  } );
 
 
-             
-                  $('#<?php echo $this->campoSeguro('nombreCotizacion')?>').attr('disabled','');
-                  
-        $( "#<?php echo $this->campoSeguro('clase')?>" ).change(function() {
-        
-            switch($("#<?php echo $this->campoSeguro('clase')?>").val())
-            {
-                           
-                case '1':
-                    
-                   $("#<?php echo $this->campoSeguro('reposicion')?>").css('display','block');
-                   $("#<?php echo $this->campoSeguro('donacion')?>").css('display','none');
-                   $("#<?php echo $this->campoSeguro('sobrante')?>").css('display','none');
-                   $("#<?php echo $this->campoSeguro('produccion')?>").css('display','none');
-                   $("#<?php echo $this->campoSeguro('recuperacion')?>").css('display','none');
-                   
-
-                break;
-                
-                
-                       case '2':
-                    
-                    $("#<?php echo $this->campoSeguro('reposicion')?>").css('display','none');
-                   $("#<?php echo $this->campoSeguro('donacion')?>").css('display','block');
-                   $("#<?php echo $this->campoSeguro('sobrante')?>").css('display','none');
-                   $("#<?php echo $this->campoSeguro('produccion')?>").css('display','none');
-                   $("#<?php echo $this->campoSeguro('recuperacion')?>").css('display','none');
-                break;
-                
-                        case '3':
-                    
-           $("#<?php echo $this->campoSeguro('reposicion')?>").css('display','none');
-                   $("#<?php echo $this->campoSeguro('donacion')?>").css('display','none');
-                   $("#<?php echo $this->campoSeguro('sobrante')?>").css('display','block');
-                   $("#<?php echo $this->campoSeguro('produccion')?>").css('display','none');
-                   $("#<?php echo $this->campoSeguro('recuperacion')?>").css('display','none');
-
-                break;
-                
-                        case '4':
-                    
-         $("#<?php echo $this->campoSeguro('reposicion')?>").css('display','none');
-                   $("#<?php echo $this->campoSeguro('donacion')?>").css('display','none');
-                   $("#<?php echo $this->campoSeguro('sobrante')?>").css('display','none');
-                   $("#<?php echo $this->campoSeguro('produccion')?>").css('display','block');
-                   $("#<?php echo $this->campoSeguro('recuperacion')?>").css('display','none');
-
-                break;
-                
-                        case '5':
-                    
-                        $("#<?php echo $this->campoSeguro('reposicion')?>").css('display','none');
-                   $("#<?php echo $this->campoSeguro('donacion')?>").css('display','none');
-                   $("#<?php echo $this->campoSeguro('sobrante')?>").css('display','none');
-                   $("#<?php echo $this->campoSeguro('produccion')?>").css('display','none');
-                   $("#<?php echo $this->campoSeguro('recuperacion')?>").css('display','block');
-                break;
-                
-                
-                default:
-                
-                         $("#<?php echo $this->campoSeguro('reposicion')?>").css('display','none');
-                   $("#<?php echo $this->campoSeguro('donacion')?>").css('display','none');
-                   $("#<?php echo $this->campoSeguro('sobrante')?>").css('display','none');
-                   $("#<?php echo $this->campoSeguro('produccion')?>").css('display','none');
-                   $("#<?php echo $this->campoSeguro('recuperacion')?>").css('display','none');
-                   
-                   break;
-                
-                
-             }
-          });  
+             	$("#<?php echo $this->campoSeguro('estado')?>").select2();
+             	$("#<?php echo $this->campoSeguro('numero_entrada')?>").select2();
                  
-             $('#<?php echo $this->campoSeguro('fecha_contrato')?>').datepicker({
-		dateFormat: 'yy-mm-dd',
-		maxDate: 0,
-		changeYear: true,
-		changeMonth: true,
-		monthNames: ['Enero','Febrero','Marzo','Abril','Mayo','Junio',
-		    'Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'],
-		    monthNamesShort: ['Ene','Feb','Mar','Abr','May','Jun','Jul','Ago','Sep','Oct','Nov','Dic'],
-		    dayNames: ['Domingo','Lunes','Martes','Miercoles','Jueves','Viernes','Sabado'],
-		    dayNamesShort: ['Dom','Lun','Mar','Mie','Jue','Vie','Sab'],
-		    dayNamesMin: ['Do','Lu','Ma','Mi','Ju','Vi','Sa'],
-			
-			
-		});
-		
-		
-		   $('#<?php echo $this->campoSeguro('fecha_factura')?>').datepicker({
-		dateFormat: 'yy-mm-dd',
-		maxDate: 0,
-		changeYear: true,
-		changeMonth: true,
-		monthNames: ['Enero','Febrero','Marzo','Abril','Mayo','Junio',
-		    'Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'],
-		    monthNamesShort: ['Ene','Feb','Mar','Abr','May','Jun','Jul','Ago','Sep','Oct','Nov','Dic'],
-		    dayNames: ['Domingo','Lunes','Martes','Miercoles','Jueves','Viernes','Sabado'],
-		    dayNamesShort: ['Dom','Lun','Mar','Mie','Jue','Vie','Sab'],
-		    dayNamesMin: ['Do','Lu','Ma','Mi','Ju','Vi','Sa'],
-			
-			
-		});
+			  $("#<?php echo $this->campoSeguro('proveedor')?>").select2({
+			             	 placeholder: "Search for a repository",
+			              	 minimumInputLength: 3,
+			              	 });
+              	 
+                  $('#<?php echo $this->campoSeguro('numero_entradaM')?>').attr('disabled','');
+                  $('#<?php echo $this->campoSeguro('fecha_registroM')?>').attr('disabled','');
+                  $('#<?php echo $this->campoSeguro('clase')?>').attr('disabled','');
+                  
+                  
+                  
+       
+         
              
              
                  

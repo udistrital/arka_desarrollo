@@ -149,13 +149,26 @@ class Sql extends \Sql {
 			 * Clausulas Del Caso Uso.
 			 */
 			
+			case "buscar_placa" :
+				$cadenaSql = " SELECT DISTINCT id_elemento_gen, placa ";
+				$cadenaSql .= "FROM elemento_individual ";
+				$cadenaSql .= "ORDER BY placa DESC ";
+				break;
+			
+			case "buscar_serie" :
+				$cadenaSql = " SELECT DISTINCT id_elemento_gen, serie ";
+				$cadenaSql .= "FROM elemento_individual ";
+				$cadenaSql .= "ORDER BY serie DESC ";
+				break;
+			
 			case "consultarElemento" :
 				
 				$cadenaSql = "SELECT DISTINCT ";
 				$cadenaSql .= "id_elemento, placa,  ";
-				$cadenaSql .= "serie, fecha_registro,tipo_bienes.descripcion  ";
+				$cadenaSql .= "elemento.serie, elemento.fecha_registro,tipo_bienes.descripcion  ";
 				$cadenaSql .= "FROM elemento ";
 				$cadenaSql .= "JOIN tipo_bienes ON tipo_bienes.id_tipo_bienes = elemento.tipo_bien ";
+				$cadenaSql .= "JOIN elemento_individual ON elemento_individual.id_elemento_gen = elemento.id_elemento ";
 				$cadenaSql .= "WHERE 1=1 AND estado='TRUE' ";
 				if ($variable [0] != '') {
 					$cadenaSql .= " AND fecha_registro BETWEEN CAST ( '" . $variable [0] . "' AS DATE) ";
@@ -165,7 +178,7 @@ class Sql extends \Sql {
 					$cadenaSql .= " AND placa = '" . $variable [2] . "'";
 				}
 				if ($variable [3] != '') {
-					$cadenaSql .= " AND  serie= '" . $variable [3] . "'";
+					$cadenaSql .= " AND  elemento.serie= '" . $variable [3] . "'";
 				}
 				
 				break;
@@ -174,7 +187,7 @@ class Sql extends \Sql {
 				$cadenaSql = " SELECT ";
 				$cadenaSql .= "nivel,tipo_bien, descripcion, cantidad, ";
 				$cadenaSql .= "unidad, valor, iva, ajuste, bodega, subtotal_sin_iva, total_iva,";
-				$cadenaSql .= "total_iva_con, placa, tipo_poliza, fecha_inicio_pol, fecha_final_pol, ";
+				$cadenaSql .= "total_iva_con, tipo_poliza, fecha_inicio_pol, fecha_final_pol, ";
 				$cadenaSql .= "marca, serie ";
 				$cadenaSql .= " FROM elemento ";
 				$cadenaSql .= " WHERE id_elemento='" . $variable . "'";

@@ -47,8 +47,7 @@ class registrarForm {
         // -------------------------------------------------------------------------------------------------
         $conexion = "inventarios";
         $esteRecursoDB = $this->miConfigurador->fabricaConexiones->getRecursoDB($conexion);
-        $cadenaSql = $this->miSql->getCadenaSql('tipoCargue');
-        $tipoCargue = $esteRecursoDB->ejecutarAcceso($cadenaSql, "busqueda");
+
 
         // Limpia Items Tabla temporal
         // ---------------- SECCION: Parámetros Generales del Formulario ----------------------------------
@@ -76,41 +75,38 @@ class registrarForm {
         $atributos ['id'] = $esteCampo;
         $atributos ["estilo"] = "jqueryui";
         $atributos ['tipoEtiqueta'] = 'inicio';
-        $atributos ["leyenda"] = "Registrar Acta de Recibido";
+        $atributos ["leyenda"] = "Radicación de Movimientos - Asignar Entrada";
         echo $this->miFormulario->marcoAgrupacion('inicio', $atributos);
 
 //------------------CONTROL: Lista desplegable -----------------------------------------------------
 
-        $matrizItems = $tipoCargue;
+        $esteCampo = 'tipoCargue';
+        $atributos ['columnas'] = 1;
+        $atributos ['nombre'] = $esteCampo;
+        $atributos ['id'] = $esteCampo;
+        $atributos ['seleccion'] = - 1;
+        $atributos ['evento'] = '';
+        $atributos ['deshabilitado'] = false;
+        $atributos ["etiquetaObligatorio"] = true;
+        $atributos ['tab'] = $tab;
+        $atributos ['tamanno'] = 1;
+        $atributos ['estilo'] = 'jqueryui';
+        $atributos ['validar'] = '';
+        $atributos ['limitar'] = false;
+        $atributos ['etiqueta'] = $this->lenguaje->getCadena($esteCampo);
+        $atributos ['anchoEtiqueta'] = 213;
 
-        $esteCampo = "tipoCargue";
-        $atributos['nombre'] = $esteCampo;
-        $atributos['id'] = $esteCampo;
-        $atributos['etiqueta'] = $this->lenguaje->getCadena($esteCampo);
-        $atributos['tab'] = $tab ++;
-        $atributos['seleccion']=-1;
-        $atributos['evento'] = 2;
-        if (isset($_REQUEST [$esteCampo])) {
-            $atributos ['valor'] = $_REQUEST [$esteCampo];
-        } else {
-            $atributos ['valor'] = '';
-        }
-        $atributos['deshabilitado'] = false;
-        $atributos['columnas'] = "1";
-        $atributos['tamanno'] = 1;
-        $atributos['ajax_function'] = "";
-        $atributos['ajax_control'] = $esteCampo;
-        $atributos['estilo'] = "jqueryui";
-        $atributos['validar'] = "required";
-        $atributos['limitar'] = false;
-        $atributos['matrizItems'] = $matrizItems;
-        //$atributos['miniRegistro']=;
-        $atributos['baseDatos'] = "inventarios";
-        $atributos['cadena_sql'] = $this->miSql->getCadenaSql("tipoCargue");
+        $atributos ['cadena_sql'] = $this->miSql->getCadenaSql("tipoCargue");
+        $matrizItems = $esteRecursoDB->ejecutarAcceso($atributos ['cadena_sql'], "busqueda");
+        $atributos ['matrizItems'] = $matrizItems;
 
-        // Aplica atributos globales al control
+        // Utilizar lo siguiente cuando no se pase un arreglo:
+        // $atributos['baseDatos']='ponerAquiElNombreDeLaConexión';
+        // $atributos ['cadena_sql']='ponerLaCadenaSqlAEjecutar';
+        $tab ++;
         $atributos = array_merge($atributos, $atributosGlobales);
         echo $this->miFormulario->campoCuadroLista($atributos);
+        unset($atributos);
 
         // ------------------Division para los botones-------------------------
         $atributos ["id"] = "botones";
@@ -157,7 +153,6 @@ class registrarForm {
          */
         // En este formulario se utiliza el mecanismo (b) para pasar las siguientes variables:
         // Paso 1: crear el listado de variables
-
         //$valorCodificado = "actionBloque=" . $esteBloque ["nombre"];
         $valorCodificado = "&pagina=" . $this->miConfigurador->getVariableConfiguracion('pagina');
         $valorCodificado .= "&bloque=" . $esteBloque ['nombre'];

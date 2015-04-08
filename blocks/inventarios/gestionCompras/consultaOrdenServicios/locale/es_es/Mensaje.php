@@ -1,24 +1,90 @@
 <?php
 $this->idioma ["noDefinido"] = "Etiqueta no esta definida en locale/es_es/Mensaje.php";
 
+$this->idioma ["informacion_numero"] ="# Número de Orden de Servicios :";
+
+$this->idioma ["informacion_fecha"] ="Fecha de Registro De Orden :";
+
+$this->idioma ["informacion_contratista"] ="Identificación de Contratista :";
+
+$this->idioma ["informacion_dependencia"] ="Dependencia Solicitante :";
+
+
+
+//________________
+$this->idioma ["vigencia_registro"] ="Vigencia Registro : ";
+$this->idioma ["vigencia_registroTitulo"] ="Seleccione Vigencia Registro";
+
+$this->idioma ["registro"] ="Número Registro : ";
+$this->idioma ["registroTitulo"] ="Seleccione Número Registro";
+
+$this->idioma ["valor_registro"] ="Valor  Registro ($): ";
+$this->idioma ["valor_registroTitulo"] ="Valor Registro Presupuestal";
+
+
+$this->idioma ["fecha_registro"] ="Fecha Registro : ";
+$this->idioma ["fecha_registroTitulo"] ="Fecha de Registro Presupuestal";
+
+
+$this->idioma ["valorL_registro"] ="Valor en Letras : ";
+$this->idioma ["valorL_registroTitulo"] ="Valor en Letras  Registro Presupuestal";
+
+
+
+//_______________________________________
+
+
+
+
+
+
+$this->idioma ["vigencia_disponibilidad"] ="Vigencia Disponibilidad : ";
+$this->idioma ["vigencia_disponibilidadTitulo"] ="Seleccione Vigencia";
+
+$this->idioma ["diponibilidad"] ="Número Disponibilidad : ";
+$this->idioma ["diponibilidadTitulo"] ="Seleccione Número Disponibilidad";
+
+
+$this->idioma ["valorLetras_disponibilidad"] ="Valor en Letras: ";
+$this->idioma ["valorLetras_disponibilidadTitulo"] ="Valor en Letras Disponibilidad Presupuestal";
+
+
+$this->idioma ["valor_disponibilidad"] ="Valor Disponibilidad ($): ";
+$this->idioma ["valor_disponibilidadTitulo"] ="Valor Disponibilidad Presupuestal";
+
+$this->idioma ["fecha_diponibilidad"] ="Fecha Disponibilidad : ";
+$this->idioma ["fecha_diponibilidadTitulo"] ="Ingrese Fecha Disponibilidad Presupuestal (YYYY-MM-DD)";
+
+
+//____________________________________________________________________________________
+
+
+
+
+$this->idioma ["vigencia_contratista"] ="&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspVigencia Contratista: ";
+$this->idioma ["vigencia_contratistaTitulo"] ="Seleccione Vigencia Contratista";
+
+
+
+
 $this->idioma ["contratista_consulta"] ="Nit y/o Identificación Contratista :";
 $this->idioma ["contratista_consultaTitulo"] ="Ingrese Nit";
 
-$this->idioma ["fecha_inicio"] ="Fecha Inicial : ";
+$this->idioma ["fecha_inicio"] ="&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspFecha Inicial : ";
 $this->idioma ["fecha_inicioTitulo"] ="Seleccione Fecha Inicial";
 
 $this->idioma ["fecha_final"] ="Fecha Final : ";
 $this->idioma ["fecha_finalTitulo"] ="Seleccione Fecha Final";
 
 
-$this->idioma ["numero_orden"] ="Número de Orden Servicio : ";
+$this->idioma ["numero_orden"] ="&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspNúmero de Orden Servicio : ";
 $this->idioma ["numero_ordenTitulo"] ="Ingrese Número Orden Servicio";
 
 
 $this->idioma ["nit"] ="Nit o Identificación : ";
 $this->idioma ["nitTitulo"] ="Ingrese Nit";
 
-$this->idioma ["selec_dependencia_Sol"] ="Dependencia Solicitante : ";
+$this->idioma ["selec_dependencia_Sol"] ="&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspDependencia Solicitante : ";
 $this->idioma ["selec_dependencia_SolTitulo"] ="Seleccione Dependecia Solicitante";
 
 $this->idioma ["dependencia_solicitante"] = "Dependencia :";
@@ -106,7 +172,8 @@ $this->idioma ["nombreJefeSeccionTitulo"] = "Ingrese Nombre y Apellidos ";
 $this->idioma ["cargoJefeSeccion"] = "&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspCargo : ";
 $this->idioma ["cargoJefeSeccionTitulo"] = "Ingrese Cargo ";
 
-$this->idioma ["nombreContratista"] ="&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspIdentificación y/o Nombre Apellidos  : ";
+
+$this->idioma ["nombreContratista"] = "&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspIdentificación y/o Nombre Apellidos:<br>Contratista";
 $this->idioma ["nombreContratistaTitulo"] ="Seleccione Identificación y/o Nombre Apellidos ";
 
 $this->idioma ["identificacionContratista"] = "&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspIdentificación : ";

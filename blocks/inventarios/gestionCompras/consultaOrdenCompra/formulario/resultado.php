@@ -48,6 +48,10 @@ class registrarForm {
 		// -------------------------------------------------------------------------------------------------
 		$conexion = "inventarios";
 		$esteRecursoDB = $this->miConfigurador->fabricaConexiones->getRecursoDB ( $conexion );
+		
+		$conexion = "sicapital";
+		$esteRecursoDBO = $this->miConfigurador->fabricaConexiones->getRecursoDB ( $conexion );
+		
 		$cadenaSql = $this->miSql->getCadenaSql ( 'polizas' );
 		$resultado_polizas = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
 		$resultado_polizas = $resultado_polizas [0];
@@ -91,25 +95,26 @@ class registrarForm {
 		);
 		
 		$cadenaSql = $this->miSql->getCadenaSql ( 'consultarOrden1', $arreglo );
-		$ordenCompra1 = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
-// 		var_dump ( $ordenCompra1 );
 		
-		$cadenaSql = $this->miSql->getCadenaSql ( 'consultarOrden2', $arreglo );
-		$ordenCompra2 = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
+		$ordenCompra = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
+		// var_dump ( $ordenCompra1 );
 		
-// 		var_dump ( $ordenCompra2 );
+
 		
+// 		$cadenaSql = $this->miSql->getCadenaSql ( 'consultarOrden2', $arreglo );
+// 		$ordenCompra2 = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
 		
+		// var_dump ( $ordenCompra2 );
 		
-		if ($ordenCompra1 == false) {
+// 		if ($ordenCompra1 == false) {
 			
-			$ordenCompra = $ordenCompra2;
-		}else if ($ordenCompra2 == false) {
-				
-			$ordenCompra = $ordenCompra1;
-		}else{
-			$ordenCompra = array_merge ( $ordenCompra1, $ordenCompra2 );
-		}
+// 			$ordenCompra = $ordenCompra2;
+// 		} else if ($ordenCompra2 == false) {
+			
+// 			$ordenCompra = $ordenCompra1;
+// 		} else {
+// 			$ordenCompra = array_merge ( $ordenCompra1, $ordenCompra2 );
+// 		}
 		
 		$arreglo = serialize ( $arreglo );
 		
@@ -189,17 +194,31 @@ class registrarForm {
             <tbody>";
 			
 			for($i = 0; $i < count ( $ordenCompra ); $i ++) {
+			
 				$variable = "pagina=" . $miPaginaActual; // pendiente la pagina para modificar parametro
 				$variable .= "&opcion=modificar";
 				// $variable .= "&usuario=" . $miSesion->getSesionUsuarioId ();
 				$variable .= "&numero_orden=" . $ordenCompra [$i] [0];
 				$variable = $this->miConfigurador->fabricaConexiones->crypto->codificar_url ( $variable, $directorio );
 				
+				$cadenaSql = $this->miSql->getCadenaSql ( 'nit_proveedor', $ordenCompra[$i][2] );
+				$nit = $esteRecursoDBO->ejecutarAcceso ( $cadenaSql, "busqueda" );
+				
+				
+				
+				
+				$cadenaSql = $this->miSql->getCadenaSql ( 'dependecia_solicitante',  $ordenCompra[$i][3]);
+				
+				
+				$dependencia = $esteRecursoDBO->ejecutarAcceso ( $cadenaSql, "busqueda" );
+				
+				
+				
 				$mostrarHtml = "<tr>
                     <td><center>" . $ordenCompra [$i] [1] . "</center></td>
                     <td><center>" . $ordenCompra [$i] [0] . "</center></td>
-                    <td><center>" . $ordenCompra [$i] [2] . "</center></td>
-                    <td><center>" . $ordenCompra [$i] [3] . "</center></td>
+                    <td><center>" . $nit[0][0] . "</center></td>
+                    <td><center>" . $dependencia [0] [0] . "</center></td>
                     <td><center>
                     	<a href='" . $variable . "'>
                             <img src='" . $rutaBloque . "/css/images/edit.png' width='15px'>
@@ -216,29 +235,29 @@ class registrarForm {
 			
 			echo "</table>";
 			// ------------------Division para los botones-------------------------
-			// $atributos ["id"] = "botones";
-			// $atributos ["estilo"] = "marcoBotones";
-			// echo $this->miFormulario->division ( "inicio", $atributos );
+			$atributos ["id"] = "botones";
+			$atributos ["estilo"] = "marcoBotones";
+			echo $this->miFormulario->division ( "inicio", $atributos );
 			
-			// // -----------------CONTROL: Botón ----------------------------------------------------------------
-			// $esteCampo = 'botonReporte';
-			// $atributos ["id"] = $esteCampo;
-			// $atributos ["tabIndex"] = $tab;
-			// $atributos ["tipo"] = 'boton';
-			// // submit: no se coloca si se desea un tipo button genérico
-			// $atributos ['submit'] = true;
-			// $atributos ["estiloMarco"] = '';
-			// $atributos ["estiloBoton"] = 'jqueryui';
-			// // verificar: true para verificar el formulario antes de pasarlo al servidor.
-			// $atributos ["verificar"] = '';
-			// $atributos ["tipoSubmit"] = 'jquery'; // Dejar vacio para un submit normal, en este caso se ejecuta la función submit declarada en ready.js
-			// $atributos ["valor"] = $this->lenguaje->getCadena ( $esteCampo );
-			// $atributos ['nombreFormulario'] = $esteBloque ['nombre'];
-			// $tab ++;
+			// -----------------CONTROL: Botón ----------------------------------------------------------------
+			$esteCampo = 'botonReporte';
+			$atributos ["id"] = $esteCampo;
+			$atributos ["tabIndex"] = $tab;
+			$atributos ["tipo"] = 'boton';
+			// submit: no se coloca si se desea un tipo button genérico
+			$atributos ['submit'] = true;
+			$atributos ["estiloMarco"] = '';
+			$atributos ["estiloBoton"] = 'jqueryui';
+			// verificar: true para verificar el formulario antes de pasarlo al servidor.
+			$atributos ["verificar"] = '';
+			$atributos ["tipoSubmit"] = 'jquery'; // Dejar vacio para un submit normal, en este caso se ejecuta la función submit declarada en ready.js
+			$atributos ["valor"] = $this->lenguaje->getCadena ( $esteCampo );
+			$atributos ['nombreFormulario'] = $esteBloque ['nombre'];
+			$tab ++;
 			
-			// // Aplica atributos globales al control
-			// $atributos = array_merge ( $atributos, $atributosGlobales );
-			// echo $this->miFormulario->campoBoton ( $atributos );
+			// Aplica atributos globales al control
+			$atributos = array_merge ( $atributos, $atributosGlobales );
+			echo $this->miFormulario->campoBoton ( $atributos );
 			// -----------------FIN CONTROL: Botón -----------------------------------------------------------
 			
 			// ---------------------------------------------------------
@@ -286,7 +305,7 @@ class registrarForm {
 		
 		// Paso 1: crear el listado de variables
 		
-		$valorCodificado = "actionBloque=" . $esteBloque ["nombre"];
+		$valorCodificado = "action=" . $esteBloque ["nombre"];
 		$valorCodificado .= "&pagina=" . $this->miConfigurador->getVariableConfiguracion ( 'pagina' );
 		$valorCodificado .= "&bloque=" . $esteBloque ['nombre'];
 		$valorCodificado .= "&bloqueGrupo=" . $esteBloque ["grupo"];

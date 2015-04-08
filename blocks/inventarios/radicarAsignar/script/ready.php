@@ -107,6 +107,11 @@
         } );
         
         
+                
+   $("#<?php echo $this->campoSeguro('nitproveedor') ?>").select2();
+   $("#<?php echo $this->campoSeguro('tipoCargue') ?>").select2();
+   
+   $("#<?php echo $this->campoSeguro('id_contrato') ?>").select2();
         
         
           

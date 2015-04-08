@@ -1,5 +1,4 @@
 <?php
-
 ?>
 
 // Asociar el widget de validación al formulario
@@ -25,15 +24,24 @@
             });
         });
 
-                     $('#tablaTitulos').dataTable( {
+                $('#tablaTitulos').dataTable( {
                 "sPaginationType": "full_numbers"
                  } );
-
-
+                 
+         $("#<?php echo $this->campoSeguro('clase')?>").select2();
              
-                  $('#<?php echo $this->campoSeguro('nombreCotizacion')?>').attr('disabled','');
+                		$("#<?php echo $this->campoSeguro('proveedor')?>").select2({
+             	 placeholder: "Search for a repository",
+              	 minimumInputLength: 3,
+              	 });
+
+
+        $('#<?php echo $this->campoSeguro('nombreCotizacion')?>').attr('disabled','');
+        
                   
         $( "#<?php echo $this->campoSeguro('clase')?>" ).change(function() {
+        
+        
         
             switch($("#<?php echo $this->campoSeguro('clase')?>").val())
             {
@@ -45,58 +53,108 @@
                    $("#<?php echo $this->campoSeguro('sobrante')?>").css('display','none');
                    $("#<?php echo $this->campoSeguro('produccion')?>").css('display','none');
                    $("#<?php echo $this->campoSeguro('recuperacion')?>").css('display','none');
+                   $("#<?php echo $this->campoSeguro('tipo_cotr')?>").css('display','block');
+                   $("#<?php echo $this->campoSeguro('inf_contr')?>").css('display',' none');
+                   $("#<?php echo $this->campoSeguro('inf_provee')?>").css('display','block');
+          		   		$("#<?php echo $this->campoSeguro('proveedor')?>").select2({
+             	 placeholder: "Search for a repository",
+              	 minimumInputLength: 3,
+              	 });
+             
+                     
+                   estado();
                    
 
                 break;
                 
                 
-                       case '2':
+                 case '2':
                     
-                    $("#<?php echo $this->campoSeguro('reposicion')?>").css('display','none');
+                   $("#<?php echo $this->campoSeguro('reposicion')?>").css('display','none');
                    $("#<?php echo $this->campoSeguro('donacion')?>").css('display','block');
                    $("#<?php echo $this->campoSeguro('sobrante')?>").css('display','none');
                    $("#<?php echo $this->campoSeguro('produccion')?>").css('display','none');
                    $("#<?php echo $this->campoSeguro('recuperacion')?>").css('display','none');
+                   $("#<?php echo $this->campoSeguro('tipo_cotr')?>").css('display','none');
+                   $("#<?php echo $this->campoSeguro('inf_contr')?>").css('display',' none');
+                   $("#<?php echo $this->campoSeguro('inf_provee')?>").css('display','block');
+		$("#<?php echo $this->campoSeguro('proveedor')?>").select2({
+             	 placeholder: "Search for a repository",
+              	 minimumInputLength: 3,
+              	 });
+             
+                   estado();
                 break;
                 
-                        case '3':
+                case '3':
                     
-           $("#<?php echo $this->campoSeguro('reposicion')?>").css('display','none');
+           		   $("#<?php echo $this->campoSeguro('reposicion')?>").css('display','none');
                    $("#<?php echo $this->campoSeguro('donacion')?>").css('display','none');
                    $("#<?php echo $this->campoSeguro('sobrante')?>").css('display','block');
                    $("#<?php echo $this->campoSeguro('produccion')?>").css('display','none');
                    $("#<?php echo $this->campoSeguro('recuperacion')?>").css('display','none');
+                   $("#<?php echo $this->campoSeguro('tipo_cotr')?>").css('display','none');
+                   $("#<?php echo $this->campoSeguro('inf_contr')?>").css('display',' none');
+                   $("#<?php echo $this->campoSeguro('inf_provee')?>").css('display','none');
+                   		$("#<?php echo $this->campoSeguro('proveedor')?>").select2({
+             	 placeholder: "Search for a repository",
+              	 minimumInputLength: 3,
+              	 });
+             
+                   estado();
 
                 break;
                 
-                        case '4':
+                case '4':
                     
-         $("#<?php echo $this->campoSeguro('reposicion')?>").css('display','none');
+        		   $("#<?php echo $this->campoSeguro('reposicion')?>").css('display','none');
                    $("#<?php echo $this->campoSeguro('donacion')?>").css('display','none');
                    $("#<?php echo $this->campoSeguro('sobrante')?>").css('display','none');
                    $("#<?php echo $this->campoSeguro('produccion')?>").css('display','block');
                    $("#<?php echo $this->campoSeguro('recuperacion')?>").css('display','none');
+                   $("#<?php echo $this->campoSeguro('tipo_cotr')?>").css('display','none');
+                   $("#<?php echo $this->campoSeguro('inf_contr')?>").css('display',' none');
+                   $("#<?php echo $this->campoSeguro('inf_provee')?>").css('display','none');
+      		$("#<?php echo $this->campoSeguro('proveedor')?>").select2({
+             	 placeholder: "Search for a repository",
+              	 minimumInputLength: 3,
+              	 });
+             
+                   estado();
 
                 break;
                 
-                        case '5':
+                case '5':
                     
-                        $("#<?php echo $this->campoSeguro('reposicion')?>").css('display','none');
+                   $("#<?php echo $this->campoSeguro('reposicion')?>").css('display','none');
                    $("#<?php echo $this->campoSeguro('donacion')?>").css('display','none');
                    $("#<?php echo $this->campoSeguro('sobrante')?>").css('display','none');
                    $("#<?php echo $this->campoSeguro('produccion')?>").css('display','none');
                    $("#<?php echo $this->campoSeguro('recuperacion')?>").css('display','block');
+                   $("#<?php echo $this->campoSeguro('tipo_cotr')?>").css('display',' block');
+                   $("#<?php echo $this->campoSeguro('inf_contr')?>").css('display',' block');
+                   $("#<?php echo $this->campoSeguro('inf_provee')?>").css('display','block');
+				   $("#<?php echo $this->campoSeguro('proveedor')?>").select2({
+             	 	placeholder: "Search for a repository",
+              	 	minimumInputLength: 3,
+              	 	});
+             
+                   
+                   estado();
                 break;
                 
                 
-                default:
-                
-                         $("#<?php echo $this->campoSeguro('reposicion')?>").css('display','none');
+               default:
+
+                   $("#<?php echo $this->campoSeguro('reposicion')?>").css('display','none');
                    $("#<?php echo $this->campoSeguro('donacion')?>").css('display','none');
                    $("#<?php echo $this->campoSeguro('sobrante')?>").css('display','none');
                    $("#<?php echo $this->campoSeguro('produccion')?>").css('display','none');
                    $("#<?php echo $this->campoSeguro('recuperacion')?>").css('display','none');
-                   
+                   $("#<?php echo $this->campoSeguro('tipo_cotr')?>").css('display','none');
+                   $('#<?php echo $this->campoSeguro('numero_contrato')?>').removeAttr('disabled');
+                   $('#<?php echo $this->campoSeguro('fecha_contrato')?>').removeAttr('disabled');
+                   $("#<?php echo $this->campoSeguro('tipo_cotr')?>").css('display','none');
                    break;
                 
                 
@@ -117,6 +175,32 @@
 			
 			
 		});
+		
+		
+       $('#<?php echo $this->campoSeguro('vigencia')?>').datepicker({
+		
+			changeYear: true,
+			maxDate:0,
+			monthNames: ['Enero','Febrero','Marzo','Abril','Mayo','Junio',
+			'Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'],
+			dateFormat: 'yy',
+			onClose: function(dateText, inst) {
+			//lockDate.setDate(lockDate.getDate() + 1);
+			var year = $("#ui-datepicker-div .ui-datepicker-year :selected").val();
+			$(this).datepicker('setDate', new Date(year, 1, 1));
+			
+			}
+		});
+		$('#<?php echo $this->campoSeguro('vigencia')?>').focus(function () {
+			$(".ui-datepicker-calendar").hide();
+			$("#ui-datepicker-div").position({
+			my: "center top",
+			at: "center bottom",
+			of: $(this)
+				});
+			}); 
+		
+		
 		
 		
 		   $('#<?php echo $this->campoSeguro('fecha_factura')?>').datepicker({
@@ -203,6 +287,12 @@
         
         
         
+        
+           $("#<?php echo $this->campoSeguro('proveedor')?>").select2({
+      	 placeholder: "Search for a repository",
+      	 minimumInputLength: 4,
+
+          });
                 
          
         

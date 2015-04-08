@@ -155,59 +155,80 @@ class Sql extends \Sql {
                 break;
 
             case "consultarElementosSupervisor" :
-                $cadenaSql = "SELECT  ";
-                $cadenaSql.= " id_elemento,  ";
-                $cadenaSql.= " nivel,  ";
-                $cadenaSql.= " unidad, ";
-                $cadenaSql.= " cantidad,  ";
-                $cadenaSql.= " marca,  ";
-                $cadenaSql.= " serie, ";
-                $cadenaSql.= " valor, ";
-                $cadenaSql.= " subtotal_sin_iva,  ";
-                $cadenaSql.= " total_iva, ";
-                $cadenaSql.= " total_iva_con, ";
-                $cadenaSql.= " identificacion ";
-                $cadenaSql.= " FROM elemento, salida ";
-                $cadenaSql.= " JOIN funcionario ON funcionario.id_funcionario = salida.funcionario ";
-                $cadenaSql.= " WHERE elemento.estado=TRUE ";
-                $cadenaSql.= " AND elemento.estado_asignacion=FALSE ";
+                $cadenaSql = "SELECT id_elemento_ind, nivel, marca, elemento_individual.placa,elemento_individual.serie, valor, subtotal_sin_iva, ";
+                $cadenaSql.= " total_iva, total_iva_con ";
+                $cadenaSql.= " FROM salida , elemento ";
+                $cadenaSql.= " JOIN elemento_individual ON elemento.id_elemento=elemento_individual.id_elemento_gen  ";
+                $cadenaSql.= " WHERE  ";
+                $cadenaSql.= " elemento_individual.estado_registro=TRUE  ";
+                $cadenaSql.= " AND salida.id_salida=elemento_individual.id_salida ";
                 $cadenaSql.= " AND salida.id_entrada=elemento.id_entrada ";
-                $cadenaSql.= " AND identificacion='" . $variable[0] . "' ";
-                $cadenaSql.= " ORDER BY nivel ASC ";
-                //$cadenaSql.= " AND documento_contratista = '" . $variable[1] . "' "; corregir si se va a activar
+                $cadenaSql.= " AND elemento_individual.estado_asignacion=FALSE  ";
+                $cadenaSql.= " AND funcionario='" . $variable[0] . "' ORDER BY nivel ASC ";
+
                 break;
 
             case "consultarID":
                 $cadenaSql = " SELECT id_contratista ";
                 $cadenaSql.= " FROM contratista_servicios ";
-                $cadenaSql.= " WHERE identificacion='" . $variable . "' ";
+                $cadenaSql.= " WHERE identificacion = '" . $variable . "' ";
                 break;
 
             case "asignarElemento" :
                 $cadenaSql = "INSERT INTO asignar_elementos( ";
-                $cadenaSql.= " contratista,  ";
-                $cadenaSql.= " supervisor,  ";
-                $cadenaSql.= " id_elemento,  ";
-                $cadenaSql.= " estado,  ";
+                $cadenaSql.= " contratista, ";
+                $cadenaSql.= " supervisor, ";
+                $cadenaSql.= " id_elemento, ";
+                $cadenaSql.= " estado, ";
                 $cadenaSql.= " fecha_registro) ";
                 $cadenaSql.= " VALUES ( ";
-                $cadenaSql.= " '" . $variable[0] . "',";
-                $cadenaSql.= " '" . $variable[1] . "',";
-                $cadenaSql.= " '" . $variable[2] . "',";
-                $cadenaSql.= " '" . $variable[3] . "',";
+                $cadenaSql.= " '" . $variable[0] . "', ";
+                $cadenaSql.= " '" . $variable[1] . "', ";
+                $cadenaSql.= " '" . $variable[2] . "', ";
+                $cadenaSql.= " '" . $variable[3] . "', ";
                 $cadenaSql.= " '" . $variable[4] . "'";
-                $cadenaSql.= " ); ";
+                $cadenaSql.= " );
+";
                 break;
 
             case "inactivarElemento" :
-                $cadenaSql = "UPDATE elemento ";
+                $cadenaSql = "UPDATE elemento_individual ";
                 $cadenaSql.= " SET ";
                 $cadenaSql.= " estado_asignacion = '" . $variable[1] . "', ";
-                $cadenaSql.= " fecha_asignacion ='" . $variable[2] . "'";
-                $cadenaSql.= " WHERE id_elemento = '" . $variable[0] . "'; ";
+                $cadenaSql.= " fecha_asignacion = '" . $variable[2] . "'";
+                $cadenaSql.= " WHERE id_elemento_ind = '" . $variable[0] . "';
+";
                 break;
 
             /*             * ***************** */
+
+
+            // Consultas de Oracle para rescate de información de Sicapital
+            case "dependencias":
+                $cadenaSql = "SELECT DEP_IDENTIFICADOR, ";
+                $cadenaSql.= " DEP_IDENTIFICADOR ||' '|| DEP_DEPENDENCIA ";
+                //$cadenaSql .= " DEP_DIRECCION, DEP_TELEFONO ";F
+                $cadenaSql.= " FROM DEPENDENCIAS ";
+                break;
+
+            case "proveedores":
+                $cadenaSql = "SELECT PRO_NIT, PRO_NIT ||' '|| PRO_RAZON_SOCIAL";
+                $cadenaSql .= " FROM PROVEEDORES ";
+                break;
+
+            case "select_proveedor":
+                $cadenaSql = "SELECT PRO_RAZON_SOCIAL";
+                $cadenaSql .= " FROM PROVEEDORES ";
+                $cadenaSql .= " WHERE PRO_NIT = '" . $variable . "' ";
+                break;
+
+            case "contratistas":
+                $cadenaSql = "SELECT DISTINCT CON_IDENTIFICACION, CON_IDENTIFICACION ||' '|| CON_NOMBRE ";
+                /* $cadenaSql .= " CON_CARGO, ";
+                  $cadenaSql .= " CON_DIRECCION, ";
+                  $cadenaSql .= " CON_TELEFONO "; */
+                $cadenaSql .= " FROM CONTRATISTAS ";
+                break;
         }
         return $cadenaSql;
     }

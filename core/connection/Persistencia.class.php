@@ -409,7 +409,7 @@ class Persistencia {
     		$query = "SELECT column_name, data_type , is_nullable ";
     		$query .=" FROM information_schema.columns ";
     		$query .=" WHERE table_schema = '".$this->esquema."' ";
-    		$query .=" AND table_name   = '".$tabla."' ";
+    		$query .=" AND table_name   = '".strtolower($tabla)."' ";
     		$query .=" AND column_name   = '".$columna."' ";
     	
     		
@@ -436,7 +436,7 @@ class Persistencia {
     		$query = "SELECT column_name, data_type , is_nullable ";
     		$query .=" FROM information_schema.columns ";
     		$query .=" WHERE table_schema = '".$this->esquema."' ";
-    		$query .=" AND table_name   = '".$this->tablaNombre."' ";
+    		$query .=" AND table_name   = '".strtolower($this->tablaNombre)."' ";
     		
     		if(!is_null($excluidos)&&is_array($excluidos)){
     			$query .=" AND column_name not in (".implode(",",$excluidos).") ";

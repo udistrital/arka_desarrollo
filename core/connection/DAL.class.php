@@ -355,7 +355,7 @@ class DAL{
 		$listado = $this->objetos;
 		$nombre = $this->selectTipo($prefijo,$tipo);
 		$nombreS = $this->selectTipo($prefijo,$seleccion);
-	
+	    if(!is_array($listado)) return false;
 		foreach($listado as $lista){
 			if(strtolower ($var)==strtolower ($lista[$nombre]))
 				return $lista[$nombreS];

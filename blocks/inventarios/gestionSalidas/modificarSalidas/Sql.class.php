@@ -147,6 +147,36 @@ class Sql extends \Sql {
 			/**
 			 * Clausulas Del Caso Uso.
 			 */
+			case "buscar_entradas" :
+				$cadenaSql = " SELECT id_entrada valor,id_entrada descripcion  ";
+				$cadenaSql .= " FROM entrada; ";
+				break;
+				
+				case "buscar_salidas" :
+					$cadenaSql = " SELECT id_salida valor,id_salida descripcion  ";
+					$cadenaSql .= " FROM salida; ";
+					break;
+				
+			
+			case "dependencia" :
+				$cadenaSql = " SELECT DEP_IDENTIFICADOR, DEP_IDENTIFICADOR ||' - ' ||DEP_DEPENDENCIA  ";
+				$cadenaSql .= "FROM DEPENDENCIAS ";
+				break;
+			
+			case "funcionario_informacion" :
+				
+				$cadenaSql = "SELECT JEF_INDENTIFICACION,  JEF_NOMBRE ";
+				$cadenaSql .= "FROM JEFES_DE_SECCION ";
+				$cadenaSql .= "WHERE JEF_IDENTIFICADOR='" . $variable . "' ";
+				
+				break;
+			
+			case "funcionarios" :
+				
+				$cadenaSql = "SELECT JEF_IDENTIFICADOR,JEF_INDENTIFICACION ||' - '|| JEF_NOMBRE ";
+				$cadenaSql .= "FROM JEFES_DE_SECCION ";
+				
+				break;
 			
 			case "consultar_funcionario" :
 				
@@ -159,10 +189,10 @@ class Sql extends \Sql {
 			case "consultarSalida" :
 				
 				$cadenaSql = "SELECT DISTINCT ";
-				$cadenaSql .= "vigencia,salida.id_salida,salida.id_entrada,fecha_registro,identificacion,nombre  ";
+				$cadenaSql .= "vigencia,salida.id_salida,salida.id_entrada,fecha_registro,funcionario  ";
 				$cadenaSql .= "FROM salida ";
 				$cadenaSql .= "JOIN entrada ON entrada.id_entrada = salida.id_entrada ";
-				$cadenaSql .= "JOIN funcionario ON funcionario.id_funcionario = salida.funcionario ";
+				// $cadenaSql .= "JOIN funcionario ON funcionario.id_funcionario = salida.funcionario ";
 				$cadenaSql .= "WHERE 1=1";
 				if ($variable [0] != '') {
 					$cadenaSql .= " AND vigencia = '" . $variable [0] . "'";
@@ -189,8 +219,8 @@ class Sql extends \Sql {
 			
 			case "consultar_dependencia" :
 				
-				$cadenaSql = "SELECT id_dependecia, (id_dependecia||' - '|| nombre) AS Dependencia ";
-				$cadenaSql .= "FROM dependecia ;";
+				$cadenaSql = "SELECT id_dependencia, (id_dependencia||' - '|| nombre) AS Dependencia ";
+				$cadenaSql .= "FROM dependencia ;";
 				
 				break;
 			
@@ -269,7 +299,8 @@ class Sql extends \Sql {
 				$cadenaSql = " UPDATE salida ";
 				$cadenaSql .= " SET dependencia='" . $variable [0] . "', ";
 				$cadenaSql .= "  ubicacion='" . $variable [1] . "' , ";
-				$cadenaSql .= "  observaciones='" . $variable [2] . "'  ";
+				$cadenaSql .= "  observaciones='" . $variable [2] . "',  ";
+				$cadenaSql .= "  funcionario='" . $variable [4] . "'  ";
 				$cadenaSql .= "  WHERE id_salida='" . $variable [3] . "' ;";
 				
 				break;
@@ -438,7 +469,21 @@ class Sql extends \Sql {
 				$cadenaSql .= "  RETURNING  id_recuperacion ";
 				
 				break;
+			
+			case "EliminarSalidasSinElementos" :
+				$cadenaSql = " UPDATE recuperacion_entrada ";
+				$cadenaSql .= " SET observaciones='" . $variable [2] . "' ";
+				if ($variable [0] == 1) {
+					
+					$cadenaSql .= " , ruta_acta='" . $variable [3] . "' , ";
+					$cadenaSql .= "  nombre_acta='" . $variable [4] . "'  ";
+				}
+				$cadenaSql .= "  WHERE id_recuperacion='" . $variable [1] . "' ";
+				$cadenaSql .= "  RETURNING  id_recuperacion ";
+				
+				break;
 		}
+		
 		return $cadenaSql;
 	}
 }

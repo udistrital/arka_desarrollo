@@ -24,25 +24,39 @@ class RegistradorOrden {
 		$this->miFuncion = $funcion;
 	}
 	function procesarFormulario() {
+		
+		
 		$conexion = "inventarios";
 		$esteRecursoDB = $this->miConfigurador->fabricaConexiones->getRecursoDB ( $conexion );
 		
-		$arreglo = array (
-				$_REQUEST ['funcionarioP'],
-				$_REQUEST ['identificacion'],
-				$_REQUEST ['id_funcionario'] 
-		);
+		for($i = 0; $i <= 200; $i ++) {
 		
-		$cadenaSql = $this->miSql->getCadenaSql ( 'actualizar_funcionario', $arreglo );
+			if (isset ( $_REQUEST ['item' . $i] )) {
+					
+				$items [] = $_REQUEST ['item' . $i];
+			}
+		}
 		
-		$id_funcionario = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "acceso" );
+		
+		
+		
+// 		$arreglo = array (
+// 				$_REQUEST ['funcionarioP'],
+// 				$_REQUEST ['identificacion'],
+// 				$_REQUEST ['id_funcionario'] 
+// 		);
+		
+// 		$cadenaSql = $this->miSql->getCadenaSql ( 'actualizar_funcionario', $arreglo );
+		
+// 		$id_funcionario = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "acceso" );
 		
 		$arreglo = array (
 				
 				$_REQUEST ['dependencia'],
 				$_REQUEST ['ubicacion'],
 				$_REQUEST ['observaciones'],
-				$_REQUEST ['numero_salida'] 
+				$_REQUEST ['numero_salida'], 
+				$_REQUEST ['funcionarioP']
 		);
 		
 		$cadenaSql = $this->miSql->getCadenaSql ( 'actualizar_salida', $arreglo );
@@ -77,14 +91,7 @@ class RegistradorOrden {
 			
 			
 			
-			for($i = 0; $i <= 200; $i ++) {
-				
-				if (isset ( $_REQUEST ['item' . $i] )) {
-					
-					$items [] = $_REQUEST ['item' . $i];
-				}
-			}
-			
+		
 			foreach ( $items as $i ) {
 				
 				$arreglo = array (
@@ -102,6 +109,11 @@ class RegistradorOrden {
 					"salidasAS" => $salidasSA 
 			);
 		}else if ($_REQUEST ['actualizar'] == '1') {
+			
+			if (! isset ( $items )) {
+			
+				redireccion::redireccionar('noitems');
+			}
 			
 			$cadenaSql = $this->miSql->getCadenaSql ( 'consultarEntradaParticular', $_REQUEST ['numero_entrada'] );
 			

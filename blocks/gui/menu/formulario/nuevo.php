@@ -118,6 +118,32 @@ $enlaceModificarSalidas ['urlCodificada'] = $this->miConfigurador->fabricaConexi
 $enlaceModificarSalidas ['nombre'] = "Consultar y Modificar Salidas";
 
 
+// Traslado Elementos
+$enlaceTrasladosElementos ['enlace'] = "pagina=registrarTraslados";
+$enlaceTrasladosElementos ['enlace'] .= "&usuario=" . $miSesion->getSesionUsuarioId();
+
+$enlaceTrasladosElementos ['urlCodificada'] = $this->miConfigurador->fabricaConexiones->crypto->codificar_url($enlaceTrasladosElementos ['enlace'], $directorio);
+$enlaceTrasladosElementos ['nombre'] = "Traslados Elementos";
+
+
+// Sobrantes Y faltantes
+$enlaceSobranteFlatanteElementos ['enlace'] = "pagina=registrarFaltantesSobrantes";
+$enlaceSobranteFlatanteElementos ['enlace'] .= "&usuario=" . $miSesion->getSesionUsuarioId();
+
+$enlaceSobranteFlatanteElementos ['urlCodificada'] = $this->miConfigurador->fabricaConexiones->crypto->codificar_url($enlaceSobranteFlatanteElementos ['enlace'], $directorio);
+$enlaceSobranteFlatanteElementos ['nombre'] = "Faltantes y Sobrantes Elementos";
+
+
+// Bajas Elementos
+$enlaceBajasElementos ['enlace'] = "pagina=registrarBajas";
+$enlaceBajasElementos ['enlace'] .= "&usuario=" . $miSesion->getSesionUsuarioId();
+
+$enlaceBajasElementos ['urlCodificada'] = $this->miConfigurador->fabricaConexiones->crypto->codificar_url($enlaceBajasElementos ['enlace'], $directorio);
+$enlaceBajasElementos ['nombre'] = "Bajas Elementos";
+
+
+
+
 
 // Gestionar Catalogo
 
@@ -184,6 +210,7 @@ $enlacegenerarPazSalvo ['enlace'] .= "&usuario=" . $miSesion->getSesionUsuarioId
 $enlacegenerarPazSalvo ['urlCodificada'] = $this->miConfigurador->fabricaConexiones->crypto->codificar_url($enlacegenerarPazSalvo ['enlace'], $directorio);
 $enlacegenerarPazSalvo ['nombre'] = "Generar Paz y Salvo Contratista";
 
+
 //generar paz y salvo
 $enlacegenerarPazSalvo ['enlace'] = "pagina=generarPazSalvo";
 $enlacegenerarPazSalvo ['enlace'] .= "&usuario=" . $miSesion->getSesionUsuarioId();
@@ -191,19 +218,34 @@ $enlacegenerarPazSalvo ['enlace'] .= "&usuario=" . $miSesion->getSesionUsuarioId
 $enlacegenerarPazSalvo ['urlCodificada'] = $this->miConfigurador->fabricaConexiones->crypto->codificar_url($enlacegenerarPazSalvo ['enlace'], $directorio);
 $enlacegenerarPazSalvo ['nombre'] = "Generar Paz y Salvo Contratista";
 
-//gestión depreciación
+//gestión depreciación - registro
 $enlacegestionDepreciacion ['enlace'] = "pagina=registrarDepreciacion";
 $enlacegestionDepreciacion ['enlace'] .= "&usuario=" . $miSesion->getSesionUsuarioId();
 
 $enlacegestionDepreciacion ['urlCodificada'] = $this->miConfigurador->fabricaConexiones->crypto->codificar_url($enlacegestionDepreciacion ['enlace'], $directorio);
 $enlacegestionDepreciacion ['nombre'] = "Generar Depreciación";
 
-//gestión depreciación
+//gestión depreciación - modificación
 $enlacemodificarDepreciacion ['enlace'] = "pagina=modificarDepreciacion";
-$enlacemodificarDepreciacion['enlace'] .= "&usuario=" . $miSesion->getSesionUsuarioId();
+$enlacemodificarDepreciacion ['enlace'] .= "&usuario=" . $miSesion->getSesionUsuarioId();
 
-$enlacemodificarDepreciacion['urlCodificada'] = $this->miConfigurador->fabricaConexiones->crypto->codificar_url($enlacegestionDepreciacion ['enlace'], $directorio);
-$enlacemodificarDepreciacion['nombre'] = "Modificar Depreciación";
+$enlacemodificarDepreciacion ['urlCodificada'] = $this->miConfigurador->fabricaConexiones->crypto->codificar_url($enlacemodificarDepreciacion ['enlace'], $directorio);
+$enlacemodificarDepreciacion ['nombre'] = "Modificar Depreciación";
+
+
+// gestion usuarios
+$enlaceUsuarios ['enlace'] = "pagina=gestionUsuarios";
+$enlaceUsuarios ['enlace'] .= "&usuario=" . $miSesion->getSesionUsuarioId();
+
+$enlaceUsuarios ['urlCodificada'] = $this->miConfigurador->fabricaConexiones->crypto->codificar_url($enlaceUsuarios ['enlace'], $directorio);
+$enlaceUsuarios ['nombre'] = "Gestión Usuarios";
+
+//Administración Dependencias
+$enlaceregistrarDependencia ['enlace'] = "pagina=agregarDependencia";
+$enlaceregistrarDependencia['enlace'] .= "&usuario=" . $miSesion->getSesionUsuarioId();
+
+$enlaceregistrarDependencia['urlCodificada'] = $this->miConfigurador->fabricaConexiones->crypto->codificar_url($enlaceregistrarDependencia['enlace'], $directorio);
+$enlaceregistrarDependencia['nombre'] = "Registrar Dependencia";
 
 // Fin de la sesión
 $enlaceFinSesion['enlace'] = "pagina=index";
@@ -252,14 +294,15 @@ $enlaceFinSesion['nombre'] = "Cerrar Sesión";
                 <li><a href="<?php echo $enlaceModificarSalidas['urlCodificada'] ?>"><?php echo $enlaceModificarSalidas['nombre'] ?></a></li>   
             </ul>
         </li>
-
-        <li>
-            <a href="#">Catálogo</a>
+    <li>
+            <a href="#">Movimientos</a>
             <ul class="dl-submenu">
-                <li><a href="<?php echo $enlaceGestionarCatalogo['urlCodificada'] ?>"><?php echo $enlaceGestionarCatalogo['nombre'] ?></a></li>
+                <li><a href="<?php echo $enlaceTrasladosElementos['urlCodificada'] ?>"><?php echo $enlaceTrasladosElementos['nombre'] ?></a></li>
+                <li><a href="<?php echo $enlaceSobranteFlatanteElementos['urlCodificada'] ?>"><?php echo $enlaceSobranteFlatanteElementos['nombre'] ?></a></li>
+                <li><a href="<?php echo $enlaceBajasElementos['urlCodificada'] ?>"><?php echo $enlaceBajasElementos['nombre'] ?></a></li>
             </ul>
         </li>
-        <li>
+         <li>
             <a href="#">Radicación Documentos</a>
             <ul class="dl-submenu">
                 <li><a href="<?php echo $enlaceRadicarAsignar['urlCodificada'] ?>"><?php echo $enlaceRadicarAsignar['nombre'] ?></a></li>
@@ -293,10 +336,27 @@ $enlaceFinSesion['nombre'] = "Cerrar Sesión";
                 <li><a href="<?php echo $enlacegenerarPazSalvo['urlCodificada'] ?>"><?php echo $enlacegenerarPazSalvo['nombre'] ?></a></li>
             </ul>
         </li>
+         <li>
+            <a href="#">Administración Datos Básicos</a>
+            <ul class="dl-submenu">
+                <li><a href="<?php echo $enlaceGestionarCatalogo['urlCodificada'] ?>"><?php echo $enlaceGestionarCatalogo['nombre'] ?></a></li>
+                <li><a href="<?php echo $enlaceregistrarDependencia['urlCodificada'] ?>"><?php echo $enlaceregistrarDependencia['nombre'] ?></a></li>
+            </ul>
+        </li>
+
+                <li>
+            <a href="#">Usuarios</a>
+            <ul class="dl-submenu">
+                <li><a href="<?php echo $enlaceUsuarios['urlCodificada'] ?>"><?php echo ($enlaceUsuarios['nombre']) ?></a></li>
+            </ul>
+        </li>
+
 
         <li>
             <a href="<?php echo$enlaceFinSesion['urlCodificada'] ?>">Cerrar Sesión</a>
         </li>
+        
+        
 
 
         <!--li>

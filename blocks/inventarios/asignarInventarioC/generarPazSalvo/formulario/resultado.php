@@ -70,9 +70,6 @@ class registrarForm {
 
         $supervisor = $_REQUEST['usuario'];
 
-        $cadenaSql = $this->miSql->getCadenaSql('consultarID', $docContratista);
-        $contratista = $esteRecursoDB->ejecutarAcceso($cadenaSql, "busqueda");
-
         $variables = array(
             $supervisor,
             $docContratista);
@@ -109,17 +106,16 @@ class registrarForm {
         $atributos ["leyenda"] = "Elementos Asignados Actualmente al Contratista " . $docContratista;
         echo $this->miFormulario->marcoAgrupacion('inicio', $atributos);
 
-        if (!empty($contratista)) {
             if ($elementos_contratista !== false) {
 
                 echo "<table id='tablaTitulos'>";
 
                 echo "<thead>
                 <tr>
+                <th>ID Elemento</th>
                 <th>Nivel de Inventario</th>
-                <th>Unidad de Medida</th>
-                <th>Cantidad</th>
                 <th>Marca Elementos</th>
+                <th>Placa Elementos</th>
                 <th>Serie Elemento</th>
                 <th>Valor Unitario</th>
                 <th>Subtotal</th>
@@ -135,10 +131,10 @@ class registrarForm {
 
                         $mostrarHtml = "
                     <tr>
+                    <td><center>" . $elementos_contratista [$i]['id_elemento_ind'] . "</center></td>
                     <td><center>" . $elementos_contratista [$i]['nivel'] . "</center></td>
-                    <td><center>" . $elementos_contratista [$i]['unidad'] . "</center></td>
-                    <td><center>" . $elementos_contratista [$i]['cantidad'] . "</center></td>
                     <td><center>" . $elementos_contratista [$i]['marca'] . "</center></td>
+                    <td><center>" . $elementos_contratista [$i]['placa'] . "</center></td>
                     <td><center>" . $elementos_contratista [$i]['serie'] . "</center></td>
                     <td><center>" . $elementos_contratista [$i]['valor'] . "</center></td>
                     <td><center>" . $elementos_contratista [$i]['subtotal_sin_iva'] . "</center></td>
@@ -215,24 +211,7 @@ class registrarForm {
                 echo $this->miFormulario->campoBoton($atributos);
 // -----------------FIN CONTROL: Botón -----------------------------------------------------------
             }
-        } else {
-
-            $mensaje = "No existe contratista " . $docContratista . " registrado en el sistema.";
-
-            // ---------------- CONTROL: Cuadro de Texto --------------------------------------------------------
-            $esteCampo = 'mensajeRegistro';
-            $atributos ['id'] = $esteCampo;
-            $atributos ['tipo'] = 'error';
-            $atributos ['estilo'] = 'textoCentrar';
-            $atributos ['mensaje'] = $mensaje;
-
-            $tab ++;
-
-            // Aplica atributos globales al control
-            $atributos = array_merge($atributos, $atributosGlobales);
-            echo $this->miFormulario->cuadroMensaje($atributos);
-            // --------------- FIN CONTROL : Cuadro de Texto --------------------------------------------------
-        }
+  
 
         $valorCodificado = "action=" . $esteBloque ["nombre"];
         $valorCodificado .= "&pagina=" . $this->miConfigurador->getVariableConfiguracion('pagina');

@@ -38,6 +38,10 @@
           $("#<?php echo $this->campoSeguro('cargoJefeSeccion')?>").select2();
 	      $("#<?php echo $this->campoSeguro('nombreContratista')?>").select2();
           $("#<?php echo $this->campoSeguro('asignacionOrdenador')?>").select2();
+          
+                 $("#<?php echo $this->campoSeguro('destino')?>").select2();
+                 $("#<?php echo $this->campoSeguro('formaPago')?>").select2();
+            
          
 	    	  $('#<?php echo $this->campoSeguro('nombreJefeSeccion')?>').attr('disabled','');
 	          $('#<?php echo $this->campoSeguro('nombreOrdenador')?>').attr('disabled','');     
@@ -176,28 +180,28 @@
         
         
         $('#<?php echo $this->campoSeguro('proveedorDiv')?>').css('display','none');
-        
- 		$('#<?php echo $this->campoSeguro('proveedor')?>').val('');
+        $('#<?php echo $this->campoSeguro('proveedor')?>').val('');
         $('#<?php echo $this->campoSeguro('nitProveedor')?>').val('');
         $('#<?php echo $this->campoSeguro('direccionProveedor')?>').val('');
         $('#<?php echo $this->campoSeguro('telefonoProveedor')?>').val('');
-        	
         $('#<?php echo $this->campoSeguro('proveedor')?>').removeAttr('disabled');
         $('#<?php echo $this->campoSeguro('nitProveedor')?>').removeAttr('disabled');
         $('#<?php echo $this->campoSeguro('direccionProveedor')?>').removeAttr('disabled');
         $('#<?php echo $this->campoSeguro('telefonoProveedor')?>').removeAttr('disabled');
-        	
-
         
         }
+       
+        }); 
         
         
-        });
+        $("#<?php echo $this->campoSeguro('vigencia_disponibilidad')?>").select2();
+		$('#<?php echo $this->campoSeguro('diponibilidad')?>').select2();
+		
+		$("#<?php echo $this->campoSeguro('vigencia_registro')?>").select2();
+		$("#<?php echo $this->campoSeguro('registro')?>").select2(); 
+		
+		$("#<?php echo $this->campoSeguro('vigencia_contratista')?>").select2();
+		$('#<?php echo $this->campoSeguro('nombreContratista')?>').attr("style", "width: 60px '");
+
         
-          
-
-
-
-
-
-
+        

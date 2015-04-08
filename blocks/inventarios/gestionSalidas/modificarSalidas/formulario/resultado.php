@@ -49,6 +49,11 @@ class registrarForm {
 		$conexion = "inventarios";
 		$esteRecursoDB = $this->miConfigurador->fabricaConexiones->getRecursoDB ( $conexion );
 		
+
+		$conexion = "sicapital";
+		$esteRecursoDBO = $this->miConfigurador->fabricaConexiones->getRecursoDB ( $conexion );
+		
+		
 		if (isset ( $_REQUEST ['anio'] ) && $_REQUEST ['anio'] != '') {
 			$anio = $_REQUEST ['anio'];
 		} else {
@@ -97,6 +102,7 @@ class registrarForm {
 		$cadenaSql = $this->miSql->getCadenaSql ( 'consultarSalida', $arreglo );
 		
 		$salidas = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
+		
 		
 		// ---------------- SECCION: Parámetros Generales del Formulario ----------------------------------
 		$esteCampo = $esteBloque ['nombre'];
@@ -181,6 +187,26 @@ class registrarForm {
 				// $variable .= "&usuario=" . $miSesion->getSesionUsuarioId ();
 				$variable .= "&numero_salida=" . $salidas [$i] [1];
 				$variable .= "&numero_entrada=" . $salidas [$i] [2];
+				
+				
+				$cadenaSql = $this->miSql->getCadenaSql ( 'funcionario_informacion', $salidas [$i] [4] );
+				
+				$funcionario = $esteRecursoDBO->ejecutarAcceso ( $cadenaSql, "busqueda" );
+				
+				
+				$arreglo=array(
+						$salidas[$i][0],
+						$salidas[$i][1],
+						$salidas[$i][2],
+						$funcionario[0][0],
+						$funcionario[0][1]	
+				);
+				
+				
+				$arreglo=serialize($arreglo);
+				$variable .= "&datosGenerales=" . $arreglo;
+				
+				
 				$variable = $this->miConfigurador->fabricaConexiones->crypto->codificar_url ( $variable, $directorio );
 				
 				$mostrarHtml = "<tr>
@@ -188,8 +214,8 @@ class registrarForm {
                     <td><center>" . $salidas [$i] [1] . "</center></td>
                     <td><center>" . $salidas [$i] [2] . "</center></td>
                     <td><center>" . $salidas [$i] [3] . "</center></td>
-                    <td><center>" . $salidas [$i] [4] . "</center></td>
-                    <td><center>" . $salidas [$i] [5] . "</center></td>
+                    <td><center>" . $funcionario[0][0] . "</center></td>
+                    <td><center>" . $funcionario[0][1] . "</center></td>
                     <td><center>
                     	<a href='" . $variable . "'>
                             <img src='" . $rutaBloque . "/css/images/edit.png' width='15px'>

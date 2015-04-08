@@ -64,7 +64,7 @@ $urlFinal3 = $url . $cadena3;
 // echo $urlFinal3;
 ?>
 <script type='text/javascript'>
-    $(function() {
+    $(function () {
 
         $("#tablaContenido").jqGrid({
             url: "<?php echo $urlFinal ?>",
@@ -114,19 +114,19 @@ $urlFinal3 = $url . $cadena3;
                     bExit: "Salir",
                     closeOnEscape: true,
                     closeAfterAdd: true,
-                    onclickSubmit: function(params, postdata) {
+                    onclickSubmit: function (params, postdata) {
                         //save add
                         var p = params;
                         var pt = postdata;
                     },
-                    beforeSubmit: function(postdata, formid) {
+                    beforeSubmit: function (postdata, formid) {
                         var p = postdata;
                         var id = id;
                         var success = true;
                         var message = "continue";
                         return[success, message];
                     },
-                    afterSubmit: function(response, postdata)
+                    afterSubmit: function (response, postdata)
                     {
                         var r = response;
                         var p = postdata;
@@ -135,7 +135,7 @@ $urlFinal3 = $url . $cadena3;
                         var message = "continue";
                         return [success, message]
                     },
-                    afterComplete: function(response, postdata, formid) {
+                    afterComplete: function (response, postdata, formid) {
                         var responseText = jQuery.jgrid.parse(response.responseText);
                         var r = response;
                         var p = postdata;
@@ -157,19 +157,19 @@ $urlFinal3 = $url . $cadena3;
             closeOnEscape: true,
             closeAfterAdd: true,
             refresh: true,
-            onclickSubmit: function(params, postdata, id_items) {
+            onclickSubmit: function (params, postdata, id_items) {
                 //save add
                 var p = params;
                 var pt = postdata;
             },
-            beforeSubmit: function(postdata, formid) {
+            beforeSubmit: function (postdata, formid) {
                 var p = postdata;
                 var id = formid;
                 var success = true;
                 var message = "continue";
                 return[success, message];
             },
-            afterSubmit: function(response, postdata)
+            afterSubmit: function (response, postdata)
             {
                 var r = response;
                 var p = postdata;
@@ -178,7 +178,7 @@ $urlFinal3 = $url . $cadena3;
                 var message = "continue";
                 return [success, message]
             },
-            afterComplete: function(response, postdata, formid) {
+            afterComplete: function (response, postdata, formid) {
                 var responseText = jQuery.jgrid.parse(response.responseText);
                 var r = response;
                 var p = postdata;
@@ -192,5 +192,19 @@ $urlFinal3 = $url . $cadena3;
 
     });
 
+    $("#<?php echo $this->campoSeguro('tipoCargue') ?>").select2({
+        placeholder: "Search for a repository",
+        minimumInputLength: 1,
+    });
+
+    $("#<?php echo $this->campoSeguro('nitproveedor') ?>").select2({
+        placeholder: "Search for a repository",
+        minimumInputLength: 1,
+    });
+
+    $("#<?php echo $this->campoSeguro('id_contrato') ?>").select2({
+        placeholder: "Search for a repository",
+        minimumInputLength: 1,
+    });
 </script>
 
