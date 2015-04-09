@@ -67,8 +67,8 @@ class registrarForm {
 			$placa = '';
 		}
 		
-		if (isset ( $_REQUEST ['serie'] ) && $_REQUEST ['serie'] != '') {
-			$serie = $_REQUEST ['serie'];
+		if (isset ( $_REQUEST ['serie1'] ) && $_REQUEST ['serie1'] != '') {
+			$serie = $_REQUEST ['serie1'];
 		} else {
 			$serie = '';
 		}

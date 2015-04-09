@@ -119,7 +119,7 @@ class registrarForm {
 		echo $this->miFormulario->campoCuadroLista ( $atributos );
 		unset ( $atributos );
 		// ---------------- CONTROL: Cuadro de Texto --------------------------------------------------------
-		$esteCampo = 'serie';
+		$esteCampo = 'serie1';
 		$atributos ['nombre'] = $esteCampo;
 		$atributos ['id'] = $esteCampo;
 		$atributos ['etiqueta'] = $this->lenguaje->getCadena ( $esteCampo );
