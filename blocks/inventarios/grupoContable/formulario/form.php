@@ -27,7 +27,7 @@ class Formulario {
 
         $this->sql = $sql;
 
-        $conexion = "inventarios";
+        $conexion="inventarios";
         $this->esteRecursoDB = $this->miConfigurador->fabricaConexiones->getRecursoDB($conexion);
         if (!$this->esteRecursoDB) {
 //Este se considera un error fatal
@@ -49,20 +49,20 @@ class Formulario {
         $textos[9] = $this->lenguaje->getCadena("listaMostrar");
         $textos[10] = $this->lenguaje->getCadena("listaEdicion");
         $textos[11] = $this->lenguaje->getCadena("listaEliminacion");
-        $cadena_sql = $this->sql->getCadenaSql("listarGrupos", '');
+        $cadena_sql = $this->sql->getCadenaSql("listarCatalogos", '');
         $registros = $this->esteRecursoDB->ejecutarAcceso($cadena_sql, "busqueda");
 
         $cadena1 = "<div id='seccionAmplia'><br>";
         $cadena1.= "<div id='marcoDatosBasicos'>";
         $cadena1.= "<fieldset class='ui-widget ui-widget-content'> ";
-        $cadena1.= "<legend class = 'ui-state-default ui-corner-all'>Módulo Gestión de Catálogo Grupos Contables</legend><br>";
+        $cadena1.= "<legend class = 'ui-state-default ui-corner-all'>Módulo Gestión Registro Grupo Contable</legend><br>";
 
         $cadena1.= "<div id = 'espacioTrabajo'>";
         //menu 
         $cadena1.= "<div id = 'marcoMenu'>";
         $cadena1.= '<div  id="menu"  class="ui-widget-header ui-corner-all">';
         $cadena1.= '<button id="irACasa"  class="botonMenu" >Paǵina Principal</button>';
-        $cadena1.= '<button id="agregarElemento" class="botonMenu" >+ Nuevo Catálogo Contable</button>';
+        $cadena1.= '<button id="agregarElemento" class="botonMenu" >+ Nuevo Catálogo de Cuentas</button>';
 
         //</div>';
         //$cadena .='</div>';
@@ -157,7 +157,7 @@ class Formulario {
         $cadena .= "</div>";
         $cadena .= "</table>";
         $cadena .= "<br>";
-        $cadena .='<div id="contenidoGrupoListas">';
+        $cadena .='<div id="contenidoCatalogoListas">';
         $cadena .='</div>';
         $cadena .= "</div>";
 

@@ -13,6 +13,11 @@ include_once ("core/builder/Mensaje.class.php");
 include_once ("core/crypto/Encriptador.class.php");
 
 
+
+
+
+
+
 // Esta clase contiene la logica de negocio del bloque y extiende a la clase funcion general la cual encapsula los
 // metodos mas utilizados en la aplicacion
 
@@ -48,39 +53,39 @@ class Funcion {
     	include_once ($this->ruta . "formulario/form.php");
     }
     
-    private function crearGrupo(){
+    private function crearCatalogo(){
     	 
-    	include_once ($this->ruta . "funcion/crearGrupo.php");
+    	include_once ($this->ruta . "funcion/crearCatalogo.php");
     }
     
-    private function eliminarGrupo(){
+    private function eliminarCatalogo(){
     
-    	include_once ($this->ruta . "funcion/eliminarGrupo.php");
+    	include_once ($this->ruta . "funcion/eliminarCatalogo.php");
     }
     
-    function editarGrupo(){
+    function editarCatalogo(){
     
-    	include_once ($this->ruta . "formulario/editarGrupo.php");
+    	include_once ($this->ruta . "formulario/editarCatalogo.php");
     }
     
-    private function agregarElementoGrupo(){
-    	include_once ($this->ruta . "funcion/agregarElementoGrupo.php");
+    private function agregarElementoCatalogo(){
+    	include_once ($this->ruta . "funcion/agregarElementoCatalogo.php");
     }
     
-    private function guardarEdicionElementoGrupo(){
-    	include_once ($this->ruta . "funcion/guardarEdicionElementoGrupo.php");
+    private function guardarEdicionElementoCatalogo(){
+    	include_once ($this->ruta . "funcion/guardarEdicionElementoCatalogo.php");
     }
     
-    public function dibujarGrupo(){
-    	include_once ($this->ruta . "formulario/dibujarGrupo.php");
+    public function dibujarCatalogo(){
+    	include_once ($this->ruta . "formulario/dibujarCatalogo.php");
     }
     
-    private function cambiarNombreGrupo(){
-    	include_once ($this->ruta . "funcion/cambiarNombreGrupo.php");
+    private function cambiarNombreCatalogo(){
+    	include_once ($this->ruta . "funcion/cambiarNombreCatalogo.php");
     }
     
-    private function eliminarElementoGrupo(){
-    	include_once ($this->ruta . "funcion/eliminarElementoGrupo.php");
+    private function eliminarElementoCatalogo(){
+    	include_once ($this->ruta . "funcion/eliminarElementoCatalogo.php");
     }
     
     private function autocompletar(){
@@ -106,34 +111,34 @@ class Funcion {
 					
 					
 					break;
-				case "crearGrupo":
-					$this->crearGrupo();
-				case "eliminarGrupo":
-					$this->eliminarGrupo();
+				case "crearCatalogo":
+					$this->crearCatalogo();
+				case "eliminarCatalogo":
+					$this->eliminarCatalogo();
 					break;
-				case "eliminarElementoGrupo":
+				case "eliminarElementoCatalogo":
 					
-					$this->eliminarElementoGrupo();
+					$this->eliminarElementoCatalogo();
 					break;
-				case "editarGrupo":
+				case "editarCatalogo":
 					$_REQUEST['editar']=true;
-					$this->editarGrupo();
+					$this->editarCatalogo();
 					break;
 					
-				case "mostrarGrupo":
+				case "mostrarCatalogo":
 					
-						$this->dibujarGrupo();
+						$this->dibujarCatalogo();
 						break;
-				case "agregarElementoGrupo":
-					$this->agregarElementoGrupo();
+				case "agregarElementoCatalogo":
+					$this->agregarElementoCatalogo();
 					break;
 					
-				case "guardarEdicionElementoGrupo":
-					$this->guardarEdicionElementoGrupo();
+				case "guardarEdicionElementoCatalogo":
+					$this->guardarEdicionElementoCatalogo();
 					break;
 					
-				case "cambiarNombreGrupo":
-					$this->cambiarNombreGrupo();
+				case "cambiarNombreCatalogo":
+					$this->cambiarNombreCatalogo();
 					break;
 					
 				case "autocompletar":

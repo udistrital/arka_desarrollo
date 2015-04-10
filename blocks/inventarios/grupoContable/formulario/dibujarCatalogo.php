@@ -1,6 +1,6 @@
 <?php
 
-namespace arka\grupoContable\dibujarGrupo;
+namespace arka\grupoContable\dibujarCatalogo;
 
 if (!isset($GLOBALS["autorizado"])) {
     include("../index.php");
@@ -35,7 +35,7 @@ class Formulario {
 
         $this->conteoListas = 0;
 
-        $conexion = "inventarios";
+        $conexion="inventarios";
         $this->esteRecursoDB = $this->miConfigurador->fabricaConexiones->getRecursoDB($conexion);
         if (!$this->esteRecursoDB) {
             //Este se considera un error fatal
@@ -45,26 +45,26 @@ class Formulario {
 
     private function consultarElementos() {
 
-        $cadena_sql = $this->sql->getCadenaSql("listarElementos", $_REQUEST['idGrupo']);
+        $cadena_sql = $this->sql->getCadenaSql("listarElementos", $_REQUEST['idCatalogo']);
         $registros = $this->esteRecursoDB->ejecutarAcceso($cadena_sql, "busqueda");
 
 
         if (!$registros) {
-            $this->miConfigurador->setVariableConfiguracion('mostrarMensaje', 'grupoVacio');
+            $this->miConfigurador->setVariableConfiguracion('mostrarMensaje', 'catalogoVacio');
             $this->mensaje();
         }
 
         $this->arrayElementos = $registros;
     }
 
-    private function consultarDatosGrupo() {
+    private function consultarDatosCatalogo() {
 
-        $cadena_sql = $this->sql->getCadenaSql("buscarGrupoId", $_REQUEST['idGrupo']);
+        $cadena_sql = $this->sql->getCadenaSql("buscarCatalogoId", $_REQUEST['idCatalogo']);
         $registros = $this->esteRecursoDB->ejecutarAcceso($cadena_sql, "busqueda");
 
 
         if (!$registros) {
-            $this->miConfigurador->setVariableConfiguracion('mostrarMensaje', 'grupoVacio');
+            $this->miConfigurador->setVariableConfiguracion('mostrarMensaje', 'catalogoVacio');
             $this->mensaje();
             exit;
         }
@@ -72,14 +72,14 @@ class Formulario {
         $this->arrayDatos = $registros;
     }
 
-    public function dibujarGrupo() {
+    public function dibujarCatalogo() {
 
         //consultar elementos 
 
 
         $base = $this->consultarElementosNivel(0);
 
-        $this->consultarDatosGrupo();
+        $this->consultarDatosCatalogo();
 
         //Inicio Lista
         echo "<br>";
@@ -88,7 +88,7 @@ class Formulario {
         echo '<legend>' . $this->arrayDatos[0]['lista_nombre'] . '</legend>';
 
         if (!$base) {
-            $this->miConfigurador->setVariableConfiguracion('mostrarMensaje', 'grupoVacio');
+            $this->miConfigurador->setVariableConfiguracion('mostrarMensaje', 'catalogoVacio');
 
             $this->mensaje();
         } else {
@@ -166,11 +166,11 @@ class Formulario {
                     echo '<div class="posiscion">';
 
                     //eliminar
-                    echo '<button title="Click para Eliminar" class="eliminar" onclick="eliminarElementoGrupo(' . $b['elemento_id'] . ',' . $b['elemento_padre'] . ',' . $b['elemento_codigo'] . ',' . $b['elemento_grupo'] . ')">';
+                    echo '<button title="Click para Eliminar" class="eliminar" onclick="eliminarElementoCatalogo(' . $b['elemento_id'] . ',' . $b['elemento_padre'] . ',' . $b['elemento_codigo'] . ',' . $b['elemento_catalogo'] . ')">';
                     echo "</button>";
 
                     //editar
-                    echo '<button title="Click para Editar" class="editar" onclick="editarElementoGrupo(' . $b['elemento_id'] . ',' . $b['elemento_padre'] . ',' . $b['elemento_codigo'] . ',\'' . $b['elemento_nombre'] . '\',' . $b['elemento_grupo'] . ')">';
+                    echo '<button title="Click para Editar" class="editar" onclick="editarElementoCatalogo(' . $b['elemento_id'] . ',' . $b['elemento_padre'] . ',' . $b['elemento_codigo'] . ',\'' . $b['elemento_nombre'] . '\',' . $b['elemento_catalogo'] . ')">';
                     echo "</button>";
 
 
@@ -194,7 +194,7 @@ class Formulario {
     }
 
     private function consultarElementosNivel($nivel) {
-        $cadena_sql = $this->sql->getCadenaSql("elementosNivel", array($_REQUEST['idGrupo'], $nivel));
+        $cadena_sql = $this->sql->getCadenaSql("elementosNivel", array($_REQUEST['idCatalogo'], $nivel));
         $registros = $this->esteRecursoDB->ejecutarAcceso($cadena_sql, "busqueda");
         return $registros;
     }
@@ -241,7 +241,7 @@ class Formulario {
 $miFormulario = new Formulario($this->lenguaje, $this->miFormulario, $this->sql, $this);
 
 
-$miFormulario->dibujarGrupo();
+$miFormulario->dibujarCatalogo();
 
 //$miFormulario->mensaje ();
 ?>

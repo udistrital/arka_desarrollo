@@ -1,7 +1,5 @@
 <?php 
-namespace arka\grupoContable\cambiarNombreGrupo;
-
-
+namespace arka\grupoContable\crearCatalogo;
 
 
 
@@ -19,7 +17,6 @@ class Formulario {
     var $sql;
     var $esteRecursoDB;
     var $funcion;
-    var $editar;
 
     function __construct($lenguaje, $formulario , $sql , $funcion) {
 
@@ -35,11 +32,7 @@ class Formulario {
         
         $this->funcion = $funcion;
         
-
-        
-        
-        
-        $conexion = "inventarios";
+        $conexion="inventarios";
         $this->esteRecursoDB = $this->miConfigurador->fabricaConexiones->getRecursoDB($conexion);
         if (!$this->esteRecursoDB) {
         	//Este se considera un error fatal
@@ -48,19 +41,17 @@ class Formulario {
 
     }
 
-    function cambiarNombre() {
+    function crear() {
 		
-    	
-    	
     	//validar request nombre
-    	if(!isset($_REQUEST['nombreGrupo'])){
+    	if(!isset($_REQUEST['nombre'])){
     		$this->miConfigurador->setVariableConfiguracion ( 'mostrarMensaje', 'errorNombre' );
     		$this->miConfigurador->setVariableConfiguracion ( 'tipoMensaje','error' );
     		$this->mensaje();
     		exit;
     	}
     	
-    	if(strlen($_REQUEST['nombreGrupo'])>50){
+    	if(strlen($_REQUEST['nombre'])>50){
     		$this->miConfigurador->setVariableConfiguracion ( 'mostrarMensaje', 'errorLargoNombre' );
     		$this->miConfigurador->setVariableConfiguracion ( 'tipoMensaje','error' );
     		$this->mensaje();
@@ -68,32 +59,46 @@ class Formulario {
     	}
     	
     	//validar nombre existente
-    	$cadena_sql = $this->sql->getCadenaSql("buscarGrupo",$_REQUEST['nombreGrupo']);
+    	$cadena_sql = $this->sql->getCadenaSql("buscarCatalogo",$_REQUEST['nombre']);
     	$registros = $this->esteRecursoDB->ejecutarAcceso($cadena_sql,"busqueda");
     	
-    	if( is_array($registros)){
+    	if(is_array($registros)){
     		$this->miConfigurador->setVariableConfiguracion ( 'mostrarMensaje', 'errorNombreExiste' );
     		$this->miConfigurador->setVariableConfiguracion ( 'tipoMensaje','error' );
     		$this->mensaje();
     		exit;
     	}
     	
-    	$cadena_sql = $this->sql->getCadenaSql("cambiarNombreGrupo",array($_REQUEST['nombreGrupo'],$_REQUEST['idGrupo']));
+    	$cadena_sql = $this->sql->getCadenaSql("crearCatalogo",$_REQUEST['nombre']);
     	
     	$registros = $this->esteRecursoDB->ejecutarAcceso($cadena_sql);
     	
     	if(!$registros){
-    		$this->miConfigurador->setVariableConfiguracion ( 'mostrarMensaje', 'errorCambioNombre' );
+    		$this->miConfigurador->setVariableConfiguracion ( 'mostrarMensaje', 'errorCreacion' );
     		$this->miConfigurador->setVariableConfiguracion ( 'tipoMensaje','error' );
     		$this->mensaje();
     		exit;
     	}
 
+    	//$this->miConfigurador->setVariableConfiguracion ( 'mostrarMensaje', 'creacionExitosa' );
+    	//$this->mensaje2('creacionExitosa');
     	
-		 $this->mensaje2('cambioNombre');
+    	//Obtener ultimo id creado catalogo
+
+    	$cadena_sql = $this->sql->getCadenaSql("buscarUltimoIdCatalogo","");
+    	 
+    	$registros = $this->esteRecursoDB->ejecutarAcceso($cadena_sql,"busqueda");
+    	 
+    	if(!$registros){
+    		$this->miConfigurador->setVariableConfiguracion ( 'mostrarMensaje', 'errorCreacion' );
+    		$this->mensaje();
+    		exit;
+    	}
     	
-    	 //$this->funcion->dibujarGrupo();
-    	
+    	 
+    	$_REQUEST['idCatalogo'] = $registros[0][0];
+    	//llamar al formulario de edicion
+    	$this->funcion->editarCatalogo();
     	exit;
     	
     	 
@@ -121,8 +126,7 @@ class Formulario {
             $esteCampo = 'divMensaje';
             $atributos ['id'] = $esteCampo;
             $atributos ["tamanno"] = '';
-            if( $tipoMensaje)  $atributos ["estilo"] = $tipoMensaje;
-            else $atributos ["estilo"] = 'information';
+            $atributos ["estilo"] = 'information';
             $atributos ["etiqueta"] = '';
             $atributos ["columnas"] = ''; // El control ocupa 47% del tamaño del formulario
             echo $this->miFormulario->campoMensaje ( $atributos );
@@ -139,14 +143,15 @@ class Formulario {
     
     	
     	
-    	$atributos = array();
+    
     				$atributos ['mensaje'] = $this->lenguaje->getCadena ( $mensaje );
     	
     		// -------------Control texto-----------------------
     		$esteCampo = 'divMensaje';
     		$atributos ['id'] = $esteCampo;
     		$atributos ["tamanno"] = '';
-    		$atributos ["estilo"] = 'information';
+    		if( $tipoMensaje)  $atributos ["estilo"] = $tipoMensaje;
+            else $atributos ["estilo"] = 'information';
     		$atributos ["etiqueta"] = '';
     		$atributos ["columnas"] = ''; // El control ocupa 47% del tamaño del formulario
     		echo $this->miFormulario->campoMensaje ( $atributos );
@@ -166,14 +171,7 @@ class Formulario {
 $miFormulario = new Formulario ( $this->lenguaje, $this->miFormulario,$this->sql , $this);
 
 
-$miFormulario->cambiarNombre ();
-//$miFormulario->mensaje ();
-
-
-
-
-
-
-
+$miFormulario->crear ();
+$miFormulario->mensaje ();
 
 ?>

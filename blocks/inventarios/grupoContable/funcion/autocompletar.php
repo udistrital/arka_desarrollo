@@ -1,5 +1,5 @@
 <?php 
-namespace arka\grupoContable\eliminarGrupo;
+namespace arka\grupoContable\eliminarCatalogo;
 
 
 
@@ -32,7 +32,7 @@ class Formulario {
         
         //$this->miFuncion = $funcion;
         
-        $conexion = "inventarios";
+        $conexion="inventarios";
         $this->esteRecursoDB = $this->miConfigurador->fabricaConexiones->getRecursoDB($conexion);
         if (!$this->esteRecursoDB) {
         	//Este se considera un error fatal
@@ -45,34 +45,34 @@ class Formulario {
 		
     	
     	
-    	//validar request idGrupo
-    	if(!isset($_REQUEST['idGrupo'])){
+    	//validar request idCatalogo
+    	if(!isset($_REQUEST['idCatalogo'])){
     		$this->miConfigurador->setVariableConfiguracion ( 'mostrarMensaje', 'errorId' );
     		$this->miConfigurador->setVariableConfiguracion ( 'tipoMensaje','error' );
     		$this->mensaje();
     		exit;
     	}
     	
-    	if(strlen($_REQUEST['idGrupo'])>50||!is_numeric($_REQUEST['idGrupo'])){
+    	if(strlen($_REQUEST['idCatalogo'])>50||!is_numeric($_REQUEST['idCatalogo'])){
     		$this->miConfigurador->setVariableConfiguracion ( 'mostrarMensaje', 'errorValId' );
     		$this->miConfigurador->setVariableConfiguracion ( 'tipoMensaje','error' );
     		$this->mensaje();
     		exit;
     	}
     	
-    	//validar Grupo existente
-    	$cadena_sql = $this->sql->getCadenaSql("buscarGrupoId",$_REQUEST['idGrupo']);
+    	//validar catalogo existente
+    	$cadena_sql = $this->sql->getCadenaSql("buscarCatalogoId",$_REQUEST['idCatalogo']);
     	$registros = $this->esteRecursoDB->ejecutarAcceso($cadena_sql,"busqueda");
     	 
     	if(!$registros){
-    		$this->miConfigurador->setVariableConfiguracion ( 'mostrarMensaje', 'errorGrupoExiste' );
+    		$this->miConfigurador->setVariableConfiguracion ( 'mostrarMensaje', 'errorCatalogoExiste' );
     		$this->miConfigurador->setVariableConfiguracion ( 'tipoMensaje','error' );
     		$this->mensaje();
     		exit;
     	}
     	
     	
-    	$cadena_sql = $this->sql->getCadenaSql("listarElementosID",$_REQUEST['idGrupo']);
+    	$cadena_sql = $this->sql->getCadenaSql("listarElementosID",$_REQUEST['idCatalogo']);
     	
     	$registros = $this->esteRecursoDB->ejecutarAcceso($cadena_sql,"busqueda");
     	

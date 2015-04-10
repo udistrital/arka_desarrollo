@@ -29,7 +29,7 @@ class Formulario {
         
         $this->sql = $sql;
         
-        $conexion = "grupo";
+        $conexion="inventarios";
         $this->esteRecursoDB = $this->miConfigurador->fabricaConexiones->getRecursoDB($conexion);
         if (!$this->esteRecursoDB) {
         	//Este se considera un error fatal
@@ -39,13 +39,13 @@ class Formulario {
     }
     
     function formulario(){
-    	$nombre =  $this->lenguaje->getCadena ( 'nombreGrupo' );
+    	$nombre =  $this->lenguaje->getCadena ( 'nombreCatalogo' );
     	$nombreTitulo =  $this->lenguaje->getCadena ( 'nombreTitulo' );
     	$crear =  $this->lenguaje->getCadena ( 'crear' );
     	$crearTitulo =  $this->lenguaje->getCadena ( 'crearTitulo' );
     	$crearLabel =  $this->lenguaje->getCadena ( 'crearLabel' );
     	
-    	echo '<form name="grupo" action="index.php" method="post" id="grupo">';
+    	echo '<form name="catalogo" action="index.php" method="post" id="catalogo">';
     	echo '<div id="agregar" class="marcoBotones">';
     	echo '<fieldset class="ui-corner-all ui-widget ui-widget-content ui-corner-all">';
     	
@@ -58,7 +58,7 @@ class Formulario {
     	
     	echo '<div id="botones"  class="marcoBotones">';
     	echo '<div class="campoBoton">';
-    	echo '<button  onclick=" crearGrupo()" type="button" tabindex="2" id="crearA" value="'.$crear.'" class="ui-button-text ui-state-default ui-corner-all ui-button-text-only">'.$crear.'</button>';
+    	echo '<button  onclick=" crearCatalogo()" type="button" tabindex="2" id="crearA" value="'.$crear.'" class="ui-button-text ui-state-default ui-corner-all ui-button-text-only">'.$crear.'</button>';
         echo '<input type="hidden" value="false" id="crear" name="crear">';
     	echo '</div>';
     	echo '</div>';
@@ -160,7 +160,7 @@ class Formulario {
     	//$atributos ["tipoSubmit"] = 'jquery'; // Dejar vacio para un submit normal, en este caso se ejecuta la función submit declarada en ready.js
     	$atributos ["valor"] = $this->lenguaje->getCadena ( $esteCampo );
     	$atributos ['nombreFormulario'] = $esteBloque ['nombre'];
-    	$atributos ['onClick'] = 'crearGrupo()';
+    	$atributos ['onClick'] = 'crearCatalogo()';
     	$tab ++;
     	
     	// Aplica atributos globales al control

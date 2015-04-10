@@ -1,5 +1,5 @@
 <?php 
-namespace arka\grupoContable\crearGrupo;
+namespace arka\grupoContable\eliminarCatalogo;
 
 
 
@@ -16,7 +16,7 @@ class Formulario {
     var $miFormulario;
     var $sql;
     var $esteRecursoDB;
-    var $funcion;
+    var $miFuncion;
 
     function __construct($lenguaje, $formulario , $sql , $funcion) {
 
@@ -30,9 +30,9 @@ class Formulario {
         
         $this->sql = $sql;
         
-        $this->funcion = $funcion;
+        //$this->miFuncion = $funcion;
         
-        $conexion = "inventarios";
+        $conexion="inventarios";
         $this->esteRecursoDB = $this->miConfigurador->fabricaConexiones->getRecursoDB($conexion);
         if (!$this->esteRecursoDB) {
         	//Este se considera un error fatal
@@ -41,64 +41,50 @@ class Formulario {
 
     }
 
-    function crear() {
+    function eliminar() {
 		
-    	//validar request nombre
-    	if(!isset($_REQUEST['nombre'])){
-    		$this->miConfigurador->setVariableConfiguracion ( 'mostrarMensaje', 'errorNombre' );
+    	//validar request idCatalogo
+    	if(!isset($_REQUEST['idCatalogo'])){
+    		$this->miConfigurador->setVariableConfiguracion ( 'mostrarMensaje', 'errorId' );
     		$this->miConfigurador->setVariableConfiguracion ( 'tipoMensaje','error' );
     		$this->mensaje();
     		exit;
     	}
     	
-    	if(strlen($_REQUEST['nombre'])>50){
-    		$this->miConfigurador->setVariableConfiguracion ( 'mostrarMensaje', 'errorLargoNombre' );
+    	if(strlen($_REQUEST['idCatalogo'])>50||!is_numeric($_REQUEST['idCatalogo'])){
+    		$this->miConfigurador->setVariableConfiguracion ( 'mostrarMensaje', 'errorValId' );
     		$this->miConfigurador->setVariableConfiguracion ( 'tipoMensaje','error' );
     		$this->mensaje();
     		exit;
     	}
     	
-    	//validar nombre existente
-    	$cadena_sql = $this->sql->getCadenaSql("buscarGrupo",$_REQUEST['nombre']);
+    	//validar catalogo existente
+    	$cadena_sql = $this->sql->getCadenaSql("buscarCatalogoId",$_REQUEST['idCatalogo']);
     	$registros = $this->esteRecursoDB->ejecutarAcceso($cadena_sql,"busqueda");
-    	
-    	if(is_array($registros)){
-    		$this->miConfigurador->setVariableConfiguracion ( 'mostrarMensaje', 'errorNombreExiste' );
+    	 
+    	if(!$registros){
+    		$this->miConfigurador->setVariableConfiguracion ( 'mostrarMensaje', 'errorCatalogoExiste' );
     		$this->miConfigurador->setVariableConfiguracion ( 'tipoMensaje','error' );
     		$this->mensaje();
     		exit;
     	}
     	
-    	$cadena_sql = $this->sql->getCadenaSql("crearGrupo",$_REQUEST['nombre']);
+    	
+    	$cadena_sql = $this->sql->getCadenaSql("eliminarCatalogo",$_REQUEST['idCatalogo']);
     	
     	$registros = $this->esteRecursoDB->ejecutarAcceso($cadena_sql);
     	
     	if(!$registros){
-    		$this->miConfigurador->setVariableConfiguracion ( 'mostrarMensaje', 'errorCreacion' );
+    		$this->miConfigurador->setVariableConfiguracion ( 'mostrarMensaje', 'errorEliminar' );
     		$this->miConfigurador->setVariableConfiguracion ( 'tipoMensaje','error' );
     		$this->mensaje();
     		exit;
     	}
 
-    	//$this->miConfigurador->setVariableConfiguracion ( 'mostrarMensaje', 'creacionExitosa' );
-    	//$this->mensaje2('creacionExitosa');
+    	$this->miConfigurador->setVariableConfiguracion ( 'mostrarMensaje', 'operacionExitosa' );
+    	$this->mensaje();
     	
-    	//Obtener ultimo id creado Grupo
-
-    	$cadena_sql = $this->sql->getCadenaSql("buscarUltimoIdGrupo","");
-    	 
-    	$registros = $this->esteRecursoDB->ejecutarAcceso($cadena_sql,"busqueda");
-    	 
-    	if(!$registros){
-    		$this->miConfigurador->setVariableConfiguracion ( 'mostrarMensaje', 'errorCreacion' );
-    		$this->mensaje();
-    		exit;
-    	}
     	
-    	 
-    	$_REQUEST['idGrupo'] = $registros[0][0];
-    	//llamar al formulario de edicion
-    	$this->funcion->editarGrupo();
     	exit;
     	
     	 
@@ -126,7 +112,8 @@ class Formulario {
             $esteCampo = 'divMensaje';
             $atributos ['id'] = $esteCampo;
             $atributos ["tamanno"] = '';
-            $atributos ["estilo"] = 'information';
+            if( $tipoMensaje)  $atributos ["estilo"] = $tipoMensaje;
+            else $atributos ["estilo"] = 'information';
             $atributos ["etiqueta"] = '';
             $atributos ["columnas"] = ''; // El control ocupa 47% del tamaño del formulario
             echo $this->miFormulario->campoMensaje ( $atributos );
@@ -139,39 +126,13 @@ class Formulario {
 
     }
     
-    function mensaje2($mensaje) {
-    
-    	
-    	
-    
-    				$atributos ['mensaje'] = $this->lenguaje->getCadena ( $mensaje );
-    	
-    		// -------------Control texto-----------------------
-    		$esteCampo = 'divMensaje';
-    		$atributos ['id'] = $esteCampo;
-    		$atributos ["tamanno"] = '';
-    		if( $tipoMensaje)  $atributos ["estilo"] = $tipoMensaje;
-            else $atributos ["estilo"] = 'information';
-    		$atributos ["etiqueta"] = '';
-    		$atributos ["columnas"] = ''; // El control ocupa 47% del tamaño del formulario
-    		echo $this->miFormulario->campoMensaje ( $atributos );
-    		unset ( $atributos );
-    
-    		 
-    	
-    
-    	return true;
-    
-    }
-    
-    
 
 }
 
-$miFormulario = new Formulario ( $this->lenguaje, $this->miFormulario,$this->sql , $this);
+$miFormulario = new Formulario ( $this->lenguaje, $this->miFormulario,$this->sql,$this );
 
 
-$miFormulario->crear ();
+$miFormulario->eliminar ();
 $miFormulario->mensaje ();
 
 ?>
