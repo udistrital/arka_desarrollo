@@ -1,5 +1,5 @@
 <?php 
-namespace arka\catalogo\eliminarElementoCatalogo;
+namespace arka\grupoContable\\eliminarElementoGrupo;
 
 
 
@@ -29,7 +29,7 @@ class Formulario {
         
         $this->sql = $sql;
         
-        $conexion = "catalogo";
+        $conexion = "inventarios";
         $this->esteRecursoDB = $this->miConfigurador->fabricaConexiones->getRecursoDB($conexion);
         if (!$this->esteRecursoDB) {
         	//Este se considera un error fatal

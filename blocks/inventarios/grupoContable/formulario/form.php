@@ -27,7 +27,7 @@ class Formulario {
 
         $this->sql = $sql;
 
-        $conexion = "grupo";
+        $conexion = "inventarios";
         $this->esteRecursoDB = $this->miConfigurador->fabricaConexiones->getRecursoDB($conexion);
         if (!$this->esteRecursoDB) {
 //Este se considera un error fatal
@@ -55,7 +55,7 @@ class Formulario {
         $cadena1 = "<div id='seccionAmplia'><br>";
         $cadena1.= "<div id='marcoDatosBasicos'>";
         $cadena1.= "<fieldset class='ui-widget ui-widget-content'> ";
-        $cadena1.= "<legend class = 'ui-state-default ui-corner-all'>Módulo Gestión de Catálogo</legend><br>";
+        $cadena1.= "<legend class = 'ui-state-default ui-corner-all'>Módulo Gestión de Catálogo Grupos Contables</legend><br>";
 
         $cadena1.= "<div id = 'espacioTrabajo'>";
         //menu 

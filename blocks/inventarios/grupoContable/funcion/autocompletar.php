@@ -1,5 +1,5 @@
 <?php 
-namespace arka\catalogo\eliminarCatalogo;
+namespace arka\grupoContable\eliminarGrupo;
 
 
 

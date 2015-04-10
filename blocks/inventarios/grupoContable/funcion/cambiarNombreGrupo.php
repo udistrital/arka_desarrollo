@@ -1,5 +1,5 @@
 <?php 
-namespace arka\catalogo\cambiarNombreCatalogo;
+namespace arka\grupoContable\cambiarNombreGrupo;
 
 
 
@@ -39,7 +39,7 @@ class Formulario {
         
         
         
-        $conexion = "catalogo";
+        $conexion = "inventarios";
         $this->esteRecursoDB = $this->miConfigurador->fabricaConexiones->getRecursoDB($conexion);
         if (!$this->esteRecursoDB) {
         	//Este se considera un error fatal

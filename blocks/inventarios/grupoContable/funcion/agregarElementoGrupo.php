@@ -1,5 +1,5 @@
 <?php 
-namespace arka\catalogo\agregarElementoCatalogo;
+namespace arka\grupoContable\agregarElementoGrupo;
 
 
 
