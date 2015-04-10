@@ -29,7 +29,7 @@ $this->idioma['errorCreacion']="Error en la creación";
 $this->idioma['errorNombreExiste']="Error, el nombre ya existe";
 $this->idioma['errorId']="Error. Identificador  No Definido";
 $this->idioma['errorEliminar']="Hubo un Error Eliminando lo seleccionado";
-$this->idioma["errorGrupoExiste"]="Error. El catálogo de cuentas NO existe";
+$this->idioma["errorCatalogoExiste"]="Error. El catálogo de cuentas NO existe";
 $this->idioma["errorIdE"]="Error. Identificador No Definido";
 $this->idioma["errorIdP"]="Error. Identificador Padre No definido";
 $this->idioma["errorLista"]="No se encuentran elementos registrados";
@@ -65,13 +65,13 @@ $this->idioma["reiniciarTitulo"]="Reiniciar valores";
 
 $this->idioma["agregar"]="Agregar Elemento";
 $this->idioma["agregarTitulo"]="Agregar Elemento";
-$this->idioma["grupoVacio"]="El Catálogo de cuentas se encuentra vacío";
+$this->idioma["catalogoVacio"]="El Catálogo de cuentas se encuentra vacío";
 
 $this->idioma["nombreElemento"]="Nombre Elemento";
 $this->idioma["nombreElementoTitulo"]=" Ingrese el Nombre del Elemento";
 
-$this->idioma["nombreGrupo"]="Nombre Catálogo de cuentas";
-$this->idioma["nombreGrupoTitulo"]="Modifique el nombre del Catálogo de cuentas";
+$this->idioma["nombreCatalogo"]="Nombre Catálogo de cuentas";
+$this->idioma["nombreCatalogoTitulo"]="Modifique el nombre del Catálogo de cuentas";
 
 $this->idioma["cambiarNombre"]=" Cambiar Nombre del Catálogo de cuentas";
 $this->idioma["cambiarNombreTitulo"]=" Cambiar Nombre";
@@ -95,6 +95,6 @@ $this->idioma["listaAdicion"]="Agregar Catálogo de cuentas";
 
 
 
-$this->idioma['grupo']="Catálogo de cuentas";
+$this->idioma['catalogo']="Catálogo de cuentas";
 $this->idioma['elementos']="Elementos";
 ?>
