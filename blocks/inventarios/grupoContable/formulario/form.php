@@ -1,6 +1,6 @@
 <?php
 
-namespace arka\catalogo\formulario;
+namespace arka\grupoContable\formulario;
 
 if (!isset($GLOBALS["autorizado"])) {
     include("../index.php");
@@ -27,7 +27,7 @@ class Formulario {
 
         $this->sql = $sql;
 
-        $conexion = "catalogo";
+        $conexion = "grupo";
         $this->esteRecursoDB = $this->miConfigurador->fabricaConexiones->getRecursoDB($conexion);
         if (!$this->esteRecursoDB) {
 //Este se considera un error fatal
@@ -49,7 +49,7 @@ class Formulario {
         $textos[9] = $this->lenguaje->getCadena("listaMostrar");
         $textos[10] = $this->lenguaje->getCadena("listaEdicion");
         $textos[11] = $this->lenguaje->getCadena("listaEliminacion");
-        $cadena_sql = $this->sql->getCadenaSql("listarCatalogos", '');
+        $cadena_sql = $this->sql->getCadenaSql("listarGrupos", '');
         $registros = $this->esteRecursoDB->ejecutarAcceso($cadena_sql, "busqueda");
 
         $cadena1 = "<div id='seccionAmplia'><br>";
@@ -62,7 +62,7 @@ class Formulario {
         $cadena1.= "<div id = 'marcoMenu'>";
         $cadena1.= '<div  id="menu"  class="ui-widget-header ui-corner-all">';
         $cadena1.= '<button id="irACasa"  class="botonMenu" >Paǵina Principal</button>';
-        $cadena1.= '<button id="agregarElemento" class="botonMenu" >+ Nuevo Catálogo</button>';
+        $cadena1.= '<button id="agregarElemento" class="botonMenu" >+ Nuevo Catálogo Contable</button>';
 
         //</div>';
         //$cadena .='</div>';
@@ -157,7 +157,7 @@ class Formulario {
         $cadena .= "</div>";
         $cadena .= "</table>";
         $cadena .= "<br>";
-        $cadena .='<div id="contenidoCatalogoListas">';
+        $cadena .='<div id="contenidoGrupoListas">';
         $cadena .='</div>';
         $cadena .= "</div>";
 

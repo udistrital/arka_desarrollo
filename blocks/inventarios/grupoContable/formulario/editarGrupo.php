@@ -1,6 +1,6 @@
 <?php
 
-namespace arka\catalogo\editarCatalogo;
+namespace arka\grupoContable\editarGrupo;
 
 if (!isset($GLOBALS["autorizado"])) {
     include("../index.php");
@@ -32,7 +32,7 @@ class Formulario {
 
         $this->funcion = $funcion;
 
-        $conexion = "catalogo";
+        $conexion = "grupo";
         $this->esteRecursoDB = $this->miConfigurador->fabricaConexiones->getRecursoDB($conexion);
         if (!$this->esteRecursoDB) {
             //Este se considera un error fatal
@@ -42,8 +42,8 @@ class Formulario {
 
     function formulario() {
 
-        //validar request idCatalogo
-        if (!isset($_REQUEST['idCatalogo'])) {
+        //validar request idGrupo
+        if (!isset($_REQUEST['idGrupo'])) {
             $this->miConfigurador->setVariableConfiguracion('mostrarMensaje', 'errorId');
             $this->mensaje();
             exit;
@@ -51,23 +51,23 @@ class Formulario {
 
 
 
-        $this->consultarDatosCatalogo();
+        $this->consultarDatosGrupo();
         $this->principal();
         //$this->consultarElementos();
         //echo '<div id="arbol">';
-        $this->funcion->dibujarCatalogo();
+        $this->funcion->dibujarGrupo();
         //echo '</div>';
         exit;
     }
 
     private function consultarElementos() {
 
-        $cadena_sql = $this->sql->getCadenaSql("listarElementos", $_REQUEST['idCatalogo']);
+        $cadena_sql = $this->sql->getCadenaSql("listarElementos", $_REQUEST['idGrupo']);
         $registros = $this->esteRecursoDB->ejecutarAcceso($cadena_sql, "busqueda");
 
 
         if (!$registros) {
-            $this->miConfigurador->setVariableConfiguracion('mostrarMensaje', 'catalogoVacio');
+            $this->miConfigurador->setVariableConfiguracion('mostrarMensaje', 'grupoVacio');
             $this->mensaje();
             exit;
         }
@@ -75,14 +75,14 @@ class Formulario {
         $this->arrayElementos = $registros;
     }
 
-    private function consultarDatosCatalogo() {
+    private function consultarDatosGrupo() {
 
-        $cadena_sql = $this->sql->getCadenaSql("buscarCatalogoId", $_REQUEST['idCatalogo']);
+        $cadena_sql = $this->sql->getCadenaSql("buscarGrupoId", $_REQUEST['idGrupo']);
         $registros = $this->esteRecursoDB->ejecutarAcceso($cadena_sql, "busqueda");
 
 
         if (!$registros) {
-            $this->miConfigurador->setVariableConfiguracion('mostrarMensaje', 'catalogoVacio');
+            $this->miConfigurador->setVariableConfiguracion('mostrarMensaje', 'grupoVacio');
             $this->mensaje();
             exit;
         }
@@ -90,18 +90,18 @@ class Formulario {
         $this->arrayDatos = $registros;
     }
 
-    private function edicionNombreCatalogo() {
+    private function edicionNombreGrupo() {
 
-        $nombre = $this->lenguaje->getCadena('nombreCatalogo');
+        $nombre = $this->lenguaje->getCadena('nombreGrupo');
         $nombreTitulo = $this->lenguaje->getCadena('nombreTitulo');
 
         $crearTitulo = $this->lenguaje->getCadena('cambiarNombreTitulo');
-        echo '<form id="catalogo_1" name="catalogo" action="index.php" method="post">';
+        echo '<form id="grupo_1" name="grupo" action="index.php" method="post">';
         //echo '<div id="agregar" class="marcoBotones">';
         echo '<fieldset class="ui-corner-all ui-widget ui-widget-content ui-corner-all">';
-        echo '<legend>' . $this->lenguaje->getCadena('catalogo') . '</legend>';
+        echo '<legend>' . $this->lenguaje->getCadena('grupo') . '</legend>';
         echo '<div style="float:left; width:200px"><label for="nombre">' . $nombre . '</label><span style="white-space:pre;"> </span></div>';
-        echo '<input type="text" maxlength="" size="50" value="' . $this->arrayDatos[0][1] . '" class="ui-widget ui-widget-content ui-corner-all  validate[required] " tabindex="1" name="nombreCatalogo" id="nombreCatalogo" title="' . $nombreTitulo . '">';
+        echo '<input type="text" maxlength="" size="50" value="' . $this->arrayDatos[0][1] . '" class="ui-widget ui-widget-content ui-corner-all  validate[required] " tabindex="1" name="nombreGrupo" id="nombreGrupo" title="' . $nombreTitulo . '">';
         echo '</fieldset>';
         echo '</form>';
     }
@@ -112,15 +112,15 @@ class Formulario {
         echo '<div id="botones"  class="marcoBotones">';
 
         echo '<div class="campoBoton">';
-        echo '<button  onclick="cambiarNombreCatalogo()" type="button" tabindex="2" id="crearA" value="' . $crear . '" class="ui-button-text ui-state-default ui-corner-all ui-button-text-only">' . $crear . '</button>';
+        echo '<button  onclick="cambiarNombreGrupo()" type="button" tabindex="2" id="crearA" value="' . $crear . '" class="ui-button-text ui-state-default ui-corner-all ui-button-text-only">' . $crear . '</button>';
 
         echo '</div>';
 
         echo '<div class="campoBoton">';
-        echo '<button "="" onclick=" agregarElementoCatalogo()" type="button" tabindex="2" id="agregarA"';
+        echo '<button "="" onclick=" agregarElementoGrupo()" type="button" tabindex="2" id="agregarA"';
         echo 'value="Agregar Elemento" class="ui-button-text ui-state-default ui-corner-all ui-button-text-only">Agregar Elemento</button>';
         echo '</div><div class="campoBoton">';
-        echo '<button "="" onclick=" reiniciarEdicion(' . $_REQUEST['idCatalogo'] . ')" type="button" tabindex="3" id="reiniciarA"';
+        echo '<button "="" onclick=" reiniciarEdicion(' . $_REQUEST['idGrupo'] . ')" type="button" tabindex="3" id="reiniciarA"';
         echo 'value="Reiniciar" class="ui-button-text ui-state-default ui-corner-all ui-button-text-only">Reiniciar</button>';
         echo '</div>';
         echo '</div>';
@@ -167,9 +167,9 @@ class Formulario {
 
         $tab = 0;
         $this->notaUso();
-        $this->edicionNombreCatalogo();
+        $this->edicionNombreGrupo();
 
-        echo '<form id="catalogo" name="catalogo" action="index.php" method="post">';
+        echo '<form id="grupo" name="grupo" action="index.php" method="post">';
         echo '<fieldset class="ui-corner-all ui-widget ui-widget-content ui-corner-all">';
         echo '<legend>' . $this->lenguaje->getCadena('elementos') . '</legend>';
 
@@ -177,7 +177,7 @@ class Formulario {
         $this->campoId();
         $this->campoNombre();
 
-        echo '<input id="idCatalogo" type="hidden" value="' . $_REQUEST['idCatalogo'] . '" name="idCatalogo">';
+        echo '<input id="idGrupo" type="hidden" value="' . $_REQUEST['idGrupo'] . '" name="idGrupo">';
         echo '<input id="idReg" type="hidden" value="0" name="idReg">';
         echo '<input id="idPadre" type="hidden" value="0" name="idPadre">';
         echo '</fieldset>';

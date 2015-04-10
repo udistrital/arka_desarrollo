@@ -20,45 +20,45 @@ $cadenaACodificar.="&bloqueGrupo=".$esteBloque["grupo"];
 //Codificar las variables
 $enlace=$this->miConfigurador->getVariableConfiguracion("enlace");
 
-//Cadena codificada para listar Catalogos
+//Cadena codificada para listar Grupos
 
 $cadena0=$this->miConfigurador->fabricaConexiones->crypto->codificar_url($pagina,$enlace);
 
-//Cadena codificada para listar Catalogos
+//Cadena codificada para listar Grupos
 $cadenaACodificar1=$cadenaACodificar."&funcion=agregar";
 $cadena1=$this->miConfigurador->fabricaConexiones->crypto->codificar_url($cadenaACodificar1,$enlace);
 
-//Cadena codificada para listar Catalogos
-$cadenaACodificar2=$cadenaACodificar."&funcion=crearCatalogo";
+//Cadena codificada para listar Grupos
+$cadenaACodificar2=$cadenaACodificar."&funcion=crearGrupo";
 $cadena2=$this->miConfigurador->fabricaConexiones->crypto->codificar_url($cadenaACodificar2,$enlace);
 
-//Cadena codificada para listar Catalogos
-$cadenaACodificar3=$cadenaACodificar."&funcion=eliminarCatalogo";
+//Cadena codificada para listar Grupos
+$cadenaACodificar3=$cadenaACodificar."&funcion=eliminarGrupo";
 $cadena3=$this->miConfigurador->fabricaConexiones->crypto->codificar_url($cadenaACodificar3,$enlace);
 
-//Cadena codificada para listar Catalogos
-$cadenaACodificar4=$cadenaACodificar."&funcion=editarCatalogo";
+//Cadena codificada para listar Grupos
+$cadenaACodificar4=$cadenaACodificar."&funcion=editarGrupo";
 $cadena4=$this->miConfigurador->fabricaConexiones->crypto->codificar_url($cadenaACodificar4,$enlace);
 
 
-$cadenaACodificar5=$cadenaACodificar."&funcion=agregarElementoCatalogo";
+$cadenaACodificar5=$cadenaACodificar."&funcion=agregarElementoGrupo";
 $cadena5=$this->miConfigurador->fabricaConexiones->crypto->codificar_url($cadenaACodificar5,$enlace);
 
 
-$cadenaACodificar6=$cadenaACodificar."&funcion=guardarEdicionElementoCatalogo";
+$cadenaACodificar6=$cadenaACodificar."&funcion=guardarEdicionElementoGrupo";
 $cadena6=$this->miConfigurador->fabricaConexiones->crypto->codificar_url($cadenaACodificar6,$enlace);
 
 
-$cadenaACodificar7=$cadenaACodificar."&funcion=cambiarNombreCatalogo";
+$cadenaACodificar7=$cadenaACodificar."&funcion=cambiarNombreGrupo";
 $cadena7=$this->miConfigurador->fabricaConexiones->crypto->codificar_url($cadenaACodificar7,$enlace);
 
 
 
-$cadenaACodificar8=$cadenaACodificar."&funcion=mostrarCatalogo";
+$cadenaACodificar8=$cadenaACodificar."&funcion=mostrarGrupo";
 $cadena8=$this->miConfigurador->fabricaConexiones->crypto->codificar_url($cadenaACodificar8,$enlace);
 
 
-$cadenaACodificar9=$cadenaACodificar."&funcion=eliminarElementoCatalogo";
+$cadenaACodificar9=$cadenaACodificar."&funcion=eliminarElementoGrupo";
 $cadena9=$this->miConfigurador->fabricaConexiones->crypto->codificar_url($cadenaACodificar9,$enlace);
 
 
@@ -68,7 +68,7 @@ $cadena10=$this->miConfigurador->fabricaConexiones->crypto->codificar_url($caden
 
 //URL definitiva
 $addLista=$url.$cadena1;
-$crearCatalogo=$url.$cadena2;
+$crearGrupo=$url.$cadena2;
 $delLista=$url.$cadena3;
 $ediLista=$url.$cadena4;
 $addCatal=$url.$cadena5;
@@ -112,7 +112,7 @@ var listaAlias = [];
 				$(this).html('');
 		    });
 			$.ajax({
-	            url: "<?php echo $mosLista;?>"+"&idCatalogo="+id,
+	            url: "<?php echo $mosLista;?>"+"&idGrupo="+id,
 	            type:"post",
 	            dataType: "html",
 	            success: function(jresp){
@@ -139,11 +139,11 @@ var listaAlias = [];
 			$(document).tooltip();
 		}
 
-		function eliminarElementoCatalogo(id,idPadre,codigo,idCatalogo){
+		function eliminarElementoGrupo(id,idPadre,codigo,idGrupo){
 			var r = confirm("¿Está seguro de eliminar el Elemento?");
 			if (r == true) {
 				$(document).tooltip('destroy');
-				var str = "&idCatalogo="+idCatalogo+"&id="+codigo+"&idPadre="+idPadre+"&idReg="+id;
+				var str = "&idGrupo="+idGrupo+"&id="+codigo+"&idPadre="+idPadre+"&idReg="+id;
 				$.ajax({
 		            url: "<?php echo $delCatal;?>"+str,
 		            type:"post",
@@ -167,11 +167,11 @@ var listaAlias = [];
 
 		
 		
-	function agregarElementoCatalogo(){
+	function agregarElementoGrupo(){
 		$(document).tooltip('destroy');
-		if($("#catalogo").validationEngine('validate')!=false){
+		if($("#grupo").validationEngine('validate')!=false){
 			$.ajax({
-	            url: "<?php echo $addCatal;?>"+"&"+$( "#catalogo" ).serialize(),
+	            url: "<?php echo $addCatal;?>"+"&"+$( "#grupo" ).serialize(),
 	            type:"post",
 	            dataType: "html",
 	            success: function(jresp){
@@ -200,9 +200,9 @@ var listaAlias = [];
 
 	function guardarEdicionElementos(idd){
 		$(document).tooltip('destroy');
-		if($("#catalogo").validationEngine('validate')!=false){
+		if($("#grupo").validationEngine('validate')!=false){
 			$.ajax({
-	            url: "<?php echo $ediCatal;?>"+"&idElementoEd="+idd+"&"+$( "#catalogo" ).serialize(),
+	            url: "<?php echo $ediCatal;?>"+"&idElementoEd="+idd+"&"+$( "#grupo" ).serialize(),
 	            type:"post",
 	            dataType: "html",
 	            success: function(jresp){
@@ -231,12 +231,12 @@ var listaAlias = [];
 		$(document).tooltip();
 	}
 
-	function cambiarNombreCatalogo(){
+	function cambiarNombreGrupo(){
 		$(document).tooltip('destroy');
-		if($("#catalogo_1").validationEngine('validate')!=false){
+		if($("#grupo_1").validationEngine('validate')!=false){
 			
 			$.ajax({
-	            url: "<?php echo $nomCatal;?>"+"&idCatalogo="+$('#idCatalogo').val()+"&"+$( "#catalogo_1" ).serialize(),
+	            url: "<?php echo $nomCatal;?>"+"&idGrupo="+$('#idGrupo').val()+"&"+$( "#grupo_1" ).serialize(),
 	            type:"post",
 	            dataType: "html",
 	            success: function(jresp){
@@ -268,7 +268,7 @@ var listaAlias = [];
 				
 					$(document).tooltip('destroy');
 					$.ajax({
-			            url: "<?php echo $delLista;?>"+"&idCatalogo="+id,
+			            url: "<?php echo $delLista;?>"+"&idGrupo="+id,
 			            type:"post",
 			            dataType: "html",
 			            success: function(jresp){
@@ -343,7 +343,7 @@ var listaAlias = [];
     	listaNombres['lidPadre'] = [];
     	listaAlias['lidPadre'] = [];       	
 
-        data = "idCatalogo="+$("#idCatalogo").val();
+        data = "idGrupo="+$("#idGrupo").val();
     	
     	
     	$.ajax({
@@ -414,11 +414,11 @@ var listaAlias = [];
      	return listaNombres['lidPadre'].indexOf(String(valor))<0?false:true;
     }
 
-	function editarElementoCatalogo(id,padre,codigo,nombre,idCatalogo){
+	function editarElementoGrupo(id,padre,codigo,nombre,idGrupo){
 		$('#idPadre').val(padre);
 		$('#id').val(codigo);
 		$('#nombreElemento').val(nombre);
-		$('#idCatalogo').val(idCatalogo);
+		$('#idGrupo').val(idGrupo);
 		$('#lidPadre').val(padre);
 		$('#idReg').val(id);
 		$("#agregarA").html("Guardar Cambios sobre el elemento "+codigo+" con Padre "+padre+"")
@@ -426,15 +426,15 @@ var listaAlias = [];
 		$("#agregarA").attr("onclick","guardarEdicionElementos("+id+")");
 	}
 
-	function reiniciarEdicion(idCatalogo){
+	function reiniciarEdicion(idGrupo){
 		$("#agregarA").html("Agregar elemento");
 		$("#agregarA").val("Agregar elemento");
-		$("#agregarA").attr("onclick","agregarElementoCatalogo()");
+		$("#agregarA").attr("onclick","agregarElementoGrupo()");
 		$('#idReg').val(0);
 		$('#lidPadre').val(0);
-		$('#catalogo')[0].reset();
+		$('#grupo')[0].reset();
 		a = document.createElement("div");
-			a.id = "el"+idCatalogo;	
+			a.id = "el"+idGrupo;	
     	editarElementoLista(a);
 	}
 		
@@ -444,7 +444,7 @@ var listaAlias = [];
 		var id =  el.id.substring(2);
 		
 		$.ajax({
-            url: "<?php echo $ediLista;?>"+"&idCatalogo="+id,
+            url: "<?php echo $ediLista;?>"+"&idGrupo="+id,
             type:"post",
             dataType: "html",
             success: function(jresp){
@@ -495,12 +495,12 @@ var listaAlias = [];
 	
 		
 
-	function crearCatalogo(){
+	function crearGrupo(){
 		$(document).tooltip('destroy');
-		if($("#catalogo").validationEngine('validate')!=false){
+		if($("#grupo").validationEngine('validate')!=false){
 			
 			$.ajax({
-	            url: "<?php echo $crearCatalogo;?>"+"&"+$( "#catalogo" ).serialize(),
+	            url: "<?php echo $crearGrupo;?>"+"&"+$( "#grupo" ).serialize(),
 	            type:"post",
 	            dataType: "html",
 	            success: function(jresp){
