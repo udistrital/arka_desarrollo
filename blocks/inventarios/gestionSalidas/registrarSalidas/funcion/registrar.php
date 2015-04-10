@@ -63,10 +63,9 @@ class RegistradorOrden {
 		
 		foreach ( $id_elem_ind as $i => $e ) {
 			
-			echo count ( $i ) . "<br>";
-			echo count ( $e ) . "<br>";
 			
-			// var_dump($e);
+			
+
 			if (count ( $e ) > 1) {
 				
 				for($i = 0; $i < $contador_ele_ind; $i ++) {
@@ -114,6 +113,9 @@ class RegistradorOrden {
 				"entrada" => $_REQUEST ['numero_entrada'],
 				"fecha" => $fechaActual 
 		);
+		
+		
+		
 		
 		if ($inserto) {
 			

@@ -69,7 +69,14 @@ class registrarForm {
 		$elementos = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
 		
 		
+		$cadenaSql = $this->miSql->getCadenaSql ( 'consulta_elementos_validar', $_REQUEST ['numero_entrada'] );
 		
+		$elementos_validacion = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
+		
+		
+		
+		
+// 		var_dump($elementos);
 		$entrada = array (
 				'numero_entrada_c' => $_REQUEST ['numero_entrada'],
 				'fecha_entrada' => $entrada [0] [0],
@@ -107,7 +114,7 @@ class registrarForm {
 			$atributos ["leyenda"] = "Registrar Salida";
 			echo $this->miFormulario->marcoAgrupacion ( 'inicio', $atributos );
 			
-			if ($elementos == false) {
+			if ($elementos_validacion[0][0]== false) {
 				
 				$mensaje = "No Existen Elementos Asociados a la Entrada";
 				

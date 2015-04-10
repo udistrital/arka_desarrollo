@@ -274,8 +274,9 @@ class Sql extends \Sql {
 				$cadenaSql = "SELECT id_elemento, (codigo||' - '||nombre) AS item, cantidad, descripcion ";
 				$cadenaSql .= "FROM elemento ";
 				$cadenaSql .= "JOIN catalogo_elemento ON id_catalogo = nivel ";
+				// $cadenaSql .= "JOIN elemento_individual ei ON id_elemento_gen = id_elemento ";
 				$cadenaSql .= "WHERE id_entrada='" . $variable . "' ";
-				$cadenaSql .= "AND id_salida IS NULL ";
+				// $cadenaSql .= "AND ei.id_salida IS NULL GROUP BY id_elemento ";
 				
 				break;
 			
@@ -337,7 +338,7 @@ class Sql extends \Sql {
 				$cadenaSql .= "FROM elemento_individual  ";
 				$cadenaSql .= "WHERE id_elemento_gen ='" . $variable . "' ";
 				$cadenaSql .= "AND  id_salida IS  NUll ";
-				$cadenaSql .= "ORDER BY id ASC;"; 
+				$cadenaSql .= "ORDER BY id ASC;";
 				break;
 			
 			case "busqueda_elementos_individuales_cantidad_restante" :
@@ -353,6 +354,17 @@ class Sql extends \Sql {
 				$cadenaSql = "UPDATE elemento_individual ";
 				$cadenaSql .= "SET id_salida='" . $variable [1] . "' ";
 				$cadenaSql .= "WHERE id_elemento_ind ='" . $variable [0] . "';";
+				
+				break;
+				
+		
+			case "consulta_elementos_validar" :
+				$cadenaSql = "SELECT COUNT(id_elemento_ind) ";
+				$cadenaSql .= " FROM elemento_individual  ";
+				$cadenaSql .= "JOIN elemento el on id_elemento=id_elemento_gen  ";
+				$cadenaSql .= "WHERE id_salida IS NULL ";
+     			$cadenaSql .= "AND el.id_entrada='" . $variable. "' ";
+				
 				
 				break;
 			

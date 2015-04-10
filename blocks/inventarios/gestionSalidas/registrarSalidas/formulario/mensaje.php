@@ -54,6 +54,12 @@ class registrarForm {
 					$_REQUEST ['entrada'] 
 			);
 		}
+		
+		$cadenaSql = $this->miSql->getCadenaSql ( 'consulta_elementos_validar', $_REQUEST ['entrada'] );
+		
+		$elementos_validacion = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
+		
+		
 		// Limpia Items Tabla temporal
 		
 		// $cadenaSql = $this->miSql->getCadenaSql ( 'limpiar_tabla_items' );
@@ -76,6 +82,7 @@ class registrarForm {
 		$tab = 1;
 		// ---------------- FIN SECCION: de Parámetros Generales del Formulario ----------------------------
 		
+		
 		// ----------------INICIAR EL FORMULARIO ------------------------------------------------------------
 		$atributos ['tipoEtiqueta'] = 'inicio';
 		echo $this->miFormulario->formulario ( $atributos );
@@ -91,7 +98,7 @@ class registrarForm {
 			
 			{
 				
-				if ($_REQUEST ['mensaje'] == 'inserto' && $elementos) {
+				if ($_REQUEST ['mensaje'] == 'inserto' && $elementos_validacion[0][0]!=0) {
 					
 					$mensaje = "Se Registro Salida <br> Número de Salida: " . $_REQUEST ['salida'] . "<br>Fecha Registro:" . date ( 'Y-m-d' );
 					$mensaje .= "<br>Existen Elementos de la Entrada Sin Haber Generado Salidas ";
@@ -109,7 +116,7 @@ class registrarForm {
 					$atributos = array_merge ( $atributos, $atributosGlobales );
 					echo $this->miFormulario->cuadroMensaje ( $atributos );
 					// --------------- FIN CONTROL : Cuadro de Texto --------------------------------------------------
-				} else if($_REQUEST ['mensaje'] == 'inserto') {
+				} else if($_REQUEST ['mensaje'] == 'inserto' && $elementos_validacion[0][0]==0) {
 					
 					$cadenaSql = $this->miSql->getCadenaSql ( 'actualizar_entrada', $arreglo );
 					$inserto = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "acceso" );

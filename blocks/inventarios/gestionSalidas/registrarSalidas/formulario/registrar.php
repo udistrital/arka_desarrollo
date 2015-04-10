@@ -36,6 +36,7 @@ class registrarForm {
 		 * $atributos= array_merge($atributos,$atributosGlobales);
 		 */
 		
+		
 		for($i = 0; $i <= $_REQUEST ['cantidadItems']; $i ++) {
 			
 			if (isset ( $_REQUEST ['item' . $i] )) {
@@ -49,6 +50,11 @@ class registrarForm {
 			if (isset ( $_REQUEST ['cantidadAsignar' . $i] )) {
 				
 				$cantidad [$i] = $_REQUEST ['cantidadAsignar' . $i];
+			}else{
+				
+				$cantidad[0]=1;
+				
+				
 			}
 			
 			if (isset ( $items [$i] ) && isset ( $cantidad [$i] )) {
@@ -56,6 +62,11 @@ class registrarForm {
 				($cantidad [$i] != '') ? '' : redireccion::redireccionar ( "noCantidad" );
 			}
 		}
+		
+		
+		
+		
+		
 		
 		if (! isset ( $items )) {
 			
