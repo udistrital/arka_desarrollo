@@ -74,8 +74,8 @@ class registrarForm {
 			$numeroEntrada = '';
 		}
 		
-		if (isset ( $_REQUEST ['clase'] ) && $_REQUEST ['clase'] != '') {
-			$clase = $_REQUEST ['clase'];
+		if (isset ( $_REQUEST ['clase_entrada_consulta'] ) && $_REQUEST ['clase_entrada_consulta'] != '') {
+			$clase = $_REQUEST ['clase_entrada_consulta'];
 		} else {
 			$clase = '';
 		}
