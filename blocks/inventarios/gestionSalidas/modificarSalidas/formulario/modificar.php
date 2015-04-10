@@ -51,6 +51,9 @@ class registrarForm {
 		
 		$seccion ['tiempo'] = $tiempo;
 		
+		
+		
+		
 		if (isset ( $_REQUEST ['salidasAS'] )) {
 			
 			$motrar = 'block';
@@ -75,11 +78,15 @@ class registrarForm {
 				
 				$entrada = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
 				
-				$cadenaSql = $this->miSql->getCadenaSql ( 'consulta_elementos', $entrada [0] [12] );
+				$cadenaSql = $this->miSql->getCadenaSql ( 'consulta_elementos', $_REQUEST['numero_entrada'] );
 				
 				$elementos = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
 			}
 		}
+		
+		
+		$cantidaditems=count($elementos);
+		
 		
 		// // ___________________________________________________________________________________
 		
@@ -531,72 +538,186 @@ class registrarForm {
 				unset ( $atributos );
 				{
 					
+					
+					
+					
 					$esteCampo = "Agrupacion";
 					$atributos ['id'] = $esteCampo;
 					$atributos ['leyenda'] = "Elementos Referentes a las Entrada";
 					echo $this->miFormulario->agrupacion ( 'inicio', $atributos );
-					
-					{
 						
+					{
+						$cantidaditems = count ( $elementos );
+					
 						if ($elementos) {
-							
+								
 							echo "<table id='tablaTitulos'>";
-							
+								
 							echo "<thead>
-                <tr>
-                   <th>Item</th>
-                    <th>Cantidad</th>
-                    <th>Descripción</th>
-					<th>Selección Items</th>
-			    </tr>
-            </thead>
-            <tbody>";
-							
+				                <tr>
+				                   <th>Item</th>
+				                    <th>Cantidad</th>
+									<th>Cantidad Asignar</th>
+				                    <th>Descripción</th>
+									<th>Selección Items</th>
+							    </tr>
+					            </thead>
+					            <tbody>";
+								
 							for($i = 0; $i < count ( $elementos ); $i ++) {
-								
-								$mostrarHtml = "<tr>
-                    <td><center>" . $elementos [$i] [1] . "</center></td>
-                    <td><center>" . $elementos [$i] [2] . "</center></td>
-                    <td><center>" . $elementos [$i] [3] . "</center></td>
-					<td><center>";
-								
-								// ---------------- CONTROL: Cuadro de Texto --------------------------------------------------------
-								$nombre = 'item' . $i;
-								$atributos ['id'] = $nombre;
-								$atributos ['nombre'] = $nombre;
-								$atributos ['marco'] = true;
-								$atributos ['estiloMarco'] = true;
-								$atributos ["etiquetaObligatorio"] = true;
-								$atributos ['columnas'] = 1;
-								$atributos ['dobleLinea'] = 1;
-								$atributos ['tabIndex'] = $tab;
-								$atributos ['etiqueta'] = '';
-								if (isset ( $_REQUEST [$esteCampo] )) {
-									$atributos ['valor'] = $_REQUEST [$esteCampo];
-								} else {
-									$atributos ['valor'] = $elementos [$i] [0];
+					
+								$cadenaSql = $this->miSql->getCadenaSql ( 'busqueda_elementos_individuales_cantidad_restante', $elementos [$i] [0] );
+					
+								$elementos_restantes = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
+					
+								$cantidad_sobrante = count ( $elementos_restantes );
+					
+								if ($elementos_restantes) {
+									$mostrarHtml = "<tr>
+						                    <td><center>" . $elementos [$i] [1] . "</center></td>
+						                    <td><center>" . $cantidad_sobrante . "</center></td>
+						                    <td><center>";
+										
+									$atributos ["id"] = "botones";
+									$atributos ["estilo"] = "marcoBotones";
+									$mostrarHtml .= $this->miFormulario->division ( "inicio", $atributos );
+										
+									$esteCampo = "cantidadAsignar" . $i;
+									$atributos ['id'] = $esteCampo;
+									$atributos ['nombre'] = $esteCampo;
+									$atributos ['tipo'] = 'text';
+									$atributos ['estilo'] = 'center';
+									$atributos ['marco'] = true;
+									$atributos ['estiloMarco'] = '';
+									$atributos ['columnas'] = 1;
+									$atributos ['textoFondo'] = "Cantidad";
+									$atributos ['dobleLinea'] = 0;
+									$atributos ['tabIndex'] = $tab;
+									$atributos ['validar'] = 'custom[onlyNumberSp]';
+									if (isset ( $_REQUEST [$esteCampo] )) {
+										$atributos ['valor'] = $_REQUEST [$esteCampo];
+									} else {
+										$atributos ['valor'] = '';
+									}
+									$atributos ['deshabilitado'] = false;
+									$atributos ['tamanno'] = 10;
+									$atributos ['maximoTamanno'] = '';
+									$atributos ['anchoEtiqueta'] = 0;
+									$tab ++;
+										
+									// Aplica atributos globales al control
+									$atributos = array_merge ( $atributos, $atributosGlobales );
+									$mostrarHtml .= ($cantidad_sobrante == 1) ? ' ' : $this->miFormulario->campoCuadroTexto ( $atributos );
+										
+									$mostrarHtml .= $this->miFormulario->division ( 'fin' );
+									$mostrarHtml .= "</center></td>
+			     							 <td><center>" . $elementos [$i] [3] . "</center></td>
+				   							<td><center>";
+										
+									// ---------------- CONTROL: Cuadro de Texto --------------------------------------------------------
+									$nombre = 'item' . $i;
+									$atributos ['id'] = $nombre;
+									$atributos ['nombre'] = $nombre;
+									$atributos ['marco'] = true;
+									$atributos ['estiloMarco'] = true;
+									$atributos ["etiquetaObligatorio"] = true;
+									$atributos ['columnas'] = 1;
+									$atributos ['dobleLinea'] = 1;
+									$atributos ['tabIndex'] = $tab;
+									$atributos ['etiqueta'] = '';
+									if (isset ( $_REQUEST [$esteCampo] )) {
+										$atributos ['valor'] = $_REQUEST [$esteCampo];
+									} else {
+										$atributos ['valor'] = $elementos [$i] [0];
+									}
+										
+									$atributos ['deshabilitado'] = false;
+									$tab ++;
+										
+									// Aplica atributos globales al control
+									$atributos = array_merge ( $atributos, $atributosGlobales );
+									$mostrarHtml .= $this->miFormulario->campoCuadroSeleccion ( $atributos );
+										
+									$mostrarHtml .= "</center></td>
+                    						</tr>";
+									echo $mostrarHtml;
+									unset ( $mostrarHtml );
+									unset ( $variable );
 								}
-								
-								$atributos ['deshabilitado'] = false;
-								$tab ++;
-								
-								// Aplica atributos globales al control
-								$atributos = array_merge ( $atributos, $atributosGlobales );
-								$mostrarHtml .= $this->miFormulario->campoCuadroSeleccion ( $atributos );
-								
-								$mostrarHtml .= "</center></td>
-                    </tr>";
-								echo $mostrarHtml;
-								unset ( $mostrarHtml );
-								unset ( $variable );
 							}
-							
+								
 							echo "</tbody>";
-							
+								
 							echo "</table>";
 						}
 					}
 					echo $this->miFormulario->agrupacion ( 'fin' );
+// 					$esteCampo = "Agrupacion";
+// 					$atributos ['id'] = $esteCampo;
+// 					$atributos ['leyenda'] = "Elementos Referentes a las Entrada";
+// 					echo $this->miFormulario->agrupacion ( 'inicio', $atributos );
+					
+// 					{
+						
+// 						if ($elementos) {
+							
+// 							echo "<table id='tablaTitulos'>";
+							
+// 							echo "<thead>
+//                 <tr>
+//                    <th>Item</th>
+//                     <th>Cantidad</th>
+//                     <th>Descripción</th>
+// 					<th>Selección Items</th>
+// 			    </tr>
+//             </thead>
+//             <tbody>";
+							
+// 							for($i = 0; $i < count ( $elementos ); $i ++) {
+								
+// 								$mostrarHtml = "<tr>
+//                     <td><center>" . $elementos [$i] [1] . "</center></td>
+//                     <td><center>" . $elementos [$i] [2] . "</center></td>
+//                     <td><center>" . $elementos [$i] [3] . "</center></td>
+// 					<td><center>";
+								
+// 								// ---------------- CONTROL: Cuadro de Texto --------------------------------------------------------
+// 								$nombre = 'item' . $i;
+// 								$atributos ['id'] = $nombre;
+// 								$atributos ['nombre'] = $nombre;
+// 								$atributos ['marco'] = true;
+// 								$atributos ['estiloMarco'] = true;
+// 								$atributos ["etiquetaObligatorio"] = true;
+// 								$atributos ['columnas'] = 1;
+// 								$atributos ['dobleLinea'] = 1;
+// 								$atributos ['tabIndex'] = $tab;
+// 								$atributos ['etiqueta'] = '';
+// 								if (isset ( $_REQUEST [$esteCampo] )) {
+// 									$atributos ['valor'] = $_REQUEST [$esteCampo];
+// 								} else {
+// 									$atributos ['valor'] = $elementos [$i] [0];
+// 								}
+								
+// 								$atributos ['deshabilitado'] = false;
+// 								$tab ++;
+								
+// 								// Aplica atributos globales al control
+// 								$atributos = array_merge ( $atributos, $atributosGlobales );
+// 								$mostrarHtml .= $this->miFormulario->campoCuadroSeleccion ( $atributos );
+								
+// 								$mostrarHtml .= "</center></td>
+//                     </tr>";
+// 								echo $mostrarHtml;
+// 								unset ( $mostrarHtml );
+// 								unset ( $variable );
+// 							}
+							
+// 							echo "</tbody>";
+							
+// 							echo "</table>";
+// 						}
+// 					}
+// 					echo $this->miFormulario->agrupacion ( 'fin' );
 				}
 				echo $this->miFormulario->division ( "fin" );
 				// ------------------Division para los botones-------------------------
@@ -663,6 +784,7 @@ class registrarForm {
 			$valorCodificado .= "&numero_entrada=" . $_REQUEST ['numero_entrada'];
 			$valorCodificado .= "&numero_salida=" . $_REQUEST ['numero_salida'];
 			$valorCodificado .= "&id_funcionario=" . $id_funcionario;
+			$valorCodificado .= "&cantidadItems=" . $cantidaditems;
 			if (isset ( $_REQUEST ['salidasAS'] )) {
 				$valorCodificado .= "&Re_Actualizacion=1";
 			}

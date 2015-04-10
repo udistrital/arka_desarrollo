@@ -274,9 +274,8 @@ class Sql extends \Sql {
 				$cadenaSql = "SELECT id_elemento, (codigo||' - '||nombre) AS item, cantidad, descripcion ";
 				$cadenaSql .= "FROM elemento ";
 				$cadenaSql .= "JOIN catalogo_elemento ON id_catalogo = nivel ";
-				// $cadenaSql .= "JOIN elemento_individual ei ON id_elemento_gen = id_elemento ";
 				$cadenaSql .= "WHERE id_entrada='" . $variable . "' ";
-				// $cadenaSql .= "AND ei.id_salida IS NULL GROUP BY id_elemento ";
+				
 				
 				break;
 			
