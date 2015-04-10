@@ -36,7 +36,8 @@ class registrarForm {
 		 * $atributos= array_merge($atributos,$atributosGlobales);
 		 */
 		
-		for($i = 0; $i <= 200; $i ++) {
+			
+		for($i = 0; $i <= $_REQUEST['cantidadItems']; $i ++) {
 			
 			if (isset ( $_REQUEST ['item' . $i] )) {
 				
@@ -44,7 +45,7 @@ class registrarForm {
 			}
 		}
 		
-		for($i = 0; $i <= 200; $i ++) {
+		for($i = 0; $i <= $_REQUEST['cantidadItems']; $i ++) {
 			
 			if (isset ( $_REQUEST ['cantidadAsignar' . $i] )) {
 				
@@ -56,6 +57,12 @@ class registrarForm {
 			
 			redireccion::redireccionar ( "noitems" );
 		}
+		
+		
+
+	
+		
+		
 		
 		$atributosGlobales ['campoSeguro'] = 'true';
 		
