@@ -24,15 +24,6 @@ class RegistradorOrden {
 		$this->miFuncion = $funcion;
 	}
 	function procesarFormulario() {
-		
-		
-		
-			
-		
-		
-		
-		
-		
 		$fechaActual = date ( 'Y-m-d' );
 		
 		$conexion = "inventarios";
@@ -42,7 +33,7 @@ class RegistradorOrden {
 				$fechaActual,
 				$_REQUEST ['dependencia'],
 				$_REQUEST ['ubicacion'],
-				$_REQUEST['funcionario'],
+				$_REQUEST ['funcionario'],
 				$_REQUEST ['observaciones'],
 				$_REQUEST ['numero_entrada'] 
 		);
@@ -52,6 +43,59 @@ class RegistradorOrden {
 		$id_salida = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
 		
 		$items = unserialize ( $_REQUEST ['items'] );
+		$cantidad = unserialize ( $_REQUEST ['cantidad'] );
+		
+		foreach ( $items as $i ) {
+			$cadenaSql = $this->miSql->getCadenaSql ( 'busqueda_elementos_individuales', $i );
+			
+			$id_elem_ind [$i] = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
+		}
+		
+		
+
+		
+		foreach ( $cantidad as $i ) {
+			
+			if ($i != '') {
+				$contador_ele_ind = $i;
+			}
+		}
+		
+		foreach ( $id_elem_ind as $i => $e ) {
+			
+			echo count ( $i ) . "<br>";
+			echo count ( $e ) . "<br>";
+			
+			// var_dump($e);
+			if (count ( $e ) > 1) {
+				
+				for($i = 0; $i < $contador_ele_ind; $i ++) {
+					
+					$arreglo = array (
+							$e [$i] [0],
+							$id_salida [0] [0] 
+					);
+					
+					$cadenaSql = $this->miSql->getCadenaSql ( 'actualizar_elementos_individuales', $arreglo );
+					
+					$actualizo_elem = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "acceso" );
+				
+				}
+				
+			}
+			if (count ( $e ) == 1) {
+				$arreglo = array (
+						$e [0] [0],
+						$id_salida [0] [0] 
+				);
+				
+				
+				$cadenaSql = $this->miSql->getCadenaSql ( 'actualizar_elementos_individuales', $arreglo );
+				
+				$actualizo_elem = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "acceso" );
+			}
+		}
+		
 		
 		foreach ( $items as $i ) {
 			
@@ -65,7 +109,6 @@ class RegistradorOrden {
 			$inserto = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "acceso" );
 		}
 		
-	
 		$arreglo = array (
 				"salida" => $id_salida [0] [0],
 				"entrada" => $_REQUEST ['numero_entrada'],

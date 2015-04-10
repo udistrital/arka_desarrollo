@@ -150,7 +150,7 @@ class registrarForm {
 				
 				if ($_REQUEST ['mensaje'] == 'noitems') {
 					
-					$mensaje = "No Selecciono Items<br>Error Generar Salida";
+					$mensaje = "No Selecciono Items<br>Error paraGenerar Salida";
 					
 					// ---------------- CONTROL: Cuadro de Texto --------------------------------------------------------
 					$esteCampo = 'mensajeRegistro';
@@ -161,6 +161,25 @@ class registrarForm {
 					
 					$tab ++;
 					
+					// Aplica atributos globales al control
+					$atributos = array_merge ( $atributos, $atributosGlobales );
+					echo $this->miFormulario->cuadroMensaje ( $atributos );
+					// --------------- FIN CONTROL : Cuadro de Texto --------------------------------------------------
+				}
+				
+				if ($_REQUEST ['mensaje'] == 'noCantidad') {
+						
+					$mensaje = "No Ingreso Cantidad Correspondiente del Item <br>Error para Generar Salida";
+						
+					// ---------------- CONTROL: Cuadro de Texto --------------------------------------------------------
+					$esteCampo = 'mensajeRegistro';
+					$atributos ['id'] = $esteCampo;
+					$atributos ['tipo'] = 'error';
+					$atributos ['estilo'] = 'textoCentrar';
+					$atributos ['mensaje'] = $mensaje;
+						
+					$tab ++;
+						
 					// Aplica atributos globales al control
 					$atributos = array_merge ( $atributos, $atributosGlobales );
 					echo $this->miFormulario->cuadroMensaje ( $atributos );

@@ -30,6 +30,9 @@
                  } );
 
 
+                     
+                     
+                     
              
  $('#<?php echo $this->campoSeguro('numero_entrada_c')?>').attr('disabled','');
  $('#<?php echo $this->campoSeguro('fecha_entrada')?>').attr('disabled','');

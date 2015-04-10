@@ -275,6 +275,7 @@ class Sql extends \Sql {
 				$cadenaSql .= "FROM elemento ";
 				$cadenaSql .= "JOIN catalogo_elemento ON id_catalogo = nivel ";
 				$cadenaSql .= "WHERE id_entrada='" . $variable . "' ";
+				$cadenaSql .= "AND id_salida IS NULL ";
 				
 				break;
 			
@@ -324,11 +325,34 @@ class Sql extends \Sql {
 				$cadenaSql .= "WHERE id_items='" . $variable [0] . "';";
 				
 				break;
-			
 			case "actualizar_entrada" :
 				$cadenaSql = "UPDATE entrada ";
 				$cadenaSql .= "SET id_salida ='TRUE'  ";
 				$cadenaSql .= "WHERE id_entrada='" . $variable [1] . "';";
+				
+				break;
+			
+			case "busqueda_elementos_individuales" :
+				$cadenaSql = "SELECT id_elemento_ind  id ";
+				$cadenaSql .= "FROM elemento_individual  ";
+				$cadenaSql .= "WHERE id_elemento_gen ='" . $variable . "' ";
+				$cadenaSql .= "AND  id_salida IS  NUll ";
+				$cadenaSql .= "ORDER BY id ASC;"; 
+				break;
+			
+			case "busqueda_elementos_individuales_cantidad_restante" :
+				$cadenaSql = "SELECT id_elemento_ind  id ";
+				$cadenaSql .= "FROM elemento_individual  ";
+				$cadenaSql .= "WHERE id_elemento_gen ='" . $variable . "'";
+				$cadenaSql .= "AND  id_salida IS  NUll ";
+				$cadenaSql .= "ORDER BY id ASC;";
+				
+				break;
+			
+			case "actualizar_elementos_individuales" :
+				$cadenaSql = "UPDATE elemento_individual ";
+				$cadenaSql .= "SET id_salida='" . $variable [1] . "' ";
+				$cadenaSql .= "WHERE id_elemento_ind ='" . $variable [0] . "';";
 				
 				break;
 			
