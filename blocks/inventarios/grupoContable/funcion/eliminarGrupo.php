@@ -43,34 +43,34 @@ class Formulario {
 
     function eliminar() {
 		
-    	//validar request idCatalogo
-    	if(!isset($_REQUEST['idCatalogo'])){
+    	//validar request idGrupo
+    	if(!isset($_REQUEST['idGrupo'])){
     		$this->miConfigurador->setVariableConfiguracion ( 'mostrarMensaje', 'errorId' );
     		$this->miConfigurador->setVariableConfiguracion ( 'tipoMensaje','error' );
     		$this->mensaje();
     		exit;
     	}
     	
-    	if(strlen($_REQUEST['idCatalogo'])>50||!is_numeric($_REQUEST['idCatalogo'])){
+    	if(strlen($_REQUEST['idGrupo'])>50||!is_numeric($_REQUEST['idGrupo'])){
     		$this->miConfigurador->setVariableConfiguracion ( 'mostrarMensaje', 'errorValId' );
     		$this->miConfigurador->setVariableConfiguracion ( 'tipoMensaje','error' );
     		$this->mensaje();
     		exit;
     	}
     	
-    	//validar catalogo existente
-    	$cadena_sql = $this->sql->getCadenaSql("buscarCatalogoId",$_REQUEST['idCatalogo']);
+    	//validar Grupo existente
+    	$cadena_sql = $this->sql->getCadenaSql("buscarGrupoId",$_REQUEST['idGrupo']);
     	$registros = $this->esteRecursoDB->ejecutarAcceso($cadena_sql,"busqueda");
     	 
     	if(!$registros){
-    		$this->miConfigurador->setVariableConfiguracion ( 'mostrarMensaje', 'errorCatalogoExiste' );
+    		$this->miConfigurador->setVariableConfiguracion ( 'mostrarMensaje', 'errorGrupoExiste' );
     		$this->miConfigurador->setVariableConfiguracion ( 'tipoMensaje','error' );
     		$this->mensaje();
     		exit;
     	}
     	
     	
-    	$cadena_sql = $this->sql->getCadenaSql("eliminarCatalogo",$_REQUEST['idCatalogo']);
+    	$cadena_sql = $this->sql->getCadenaSql("eliminarGrupo",$_REQUEST['idGrupo']);
     	
     	$registros = $this->esteRecursoDB->ejecutarAcceso($cadena_sql);
     	

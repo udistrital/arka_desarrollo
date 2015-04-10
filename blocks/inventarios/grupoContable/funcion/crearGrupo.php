@@ -59,7 +59,7 @@ class Formulario {
     	}
     	
     	//validar nombre existente
-    	$cadena_sql = $this->sql->getCadenaSql("buscarCatalogo",$_REQUEST['nombre']);
+    	$cadena_sql = $this->sql->getCadenaSql("buscarGrupo",$_REQUEST['nombre']);
     	$registros = $this->esteRecursoDB->ejecutarAcceso($cadena_sql,"busqueda");
     	
     	if(is_array($registros)){
@@ -69,7 +69,7 @@ class Formulario {
     		exit;
     	}
     	
-    	$cadena_sql = $this->sql->getCadenaSql("crearCatalogo",$_REQUEST['nombre']);
+    	$cadena_sql = $this->sql->getCadenaSql("crearGrupo",$_REQUEST['nombre']);
     	
     	$registros = $this->esteRecursoDB->ejecutarAcceso($cadena_sql);
     	
@@ -83,9 +83,9 @@ class Formulario {
     	//$this->miConfigurador->setVariableConfiguracion ( 'mostrarMensaje', 'creacionExitosa' );
     	//$this->mensaje2('creacionExitosa');
     	
-    	//Obtener ultimo id creado catalogo
+    	//Obtener ultimo id creado Grupo
 
-    	$cadena_sql = $this->sql->getCadenaSql("buscarUltimoIdCatalogo","");
+    	$cadena_sql = $this->sql->getCadenaSql("buscarUltimoIdGrupo","");
     	 
     	$registros = $this->esteRecursoDB->ejecutarAcceso($cadena_sql,"busqueda");
     	 
@@ -96,9 +96,9 @@ class Formulario {
     	}
     	
     	 
-    	$_REQUEST['idCatalogo'] = $registros[0][0];
+    	$_REQUEST['idGrupo'] = $registros[0][0];
     	//llamar al formulario de edicion
-    	$this->funcion->editarCatalogo();
+    	$this->funcion->editarGrupo();
     	exit;
     	
     	 

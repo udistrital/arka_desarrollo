@@ -29,7 +29,7 @@ class Formulario {
         
         $this->sql = $sql;
         
-        $conexion = "catalogo";
+        $conexion = "inventarios";
         $this->esteRecursoDB = $this->miConfigurador->fabricaConexiones->getRecursoDB($conexion);
         if (!$this->esteRecursoDB) {
         	//Este se considera un error fatal
@@ -56,15 +56,15 @@ class Formulario {
     		exit;
     	}
     	
-    	//validar request idCatalogo
-    	if(!isset($_REQUEST['idCatalogo'])){
+    	//validar request idGrupo
+    	if(!isset($_REQUEST['idGrupo'])){
     		$this->miConfigurador->setVariableConfiguracion ( 'mostrarMensaje', 'errorId' );
     		$this->miConfigurador->setVariableConfiguracion ( 'tipoMensaje','error' );
     		$this->mensaje();
     		exit;
     	}
     	
-    	if(strlen($_REQUEST['idCatalogo'])>50||!is_numeric($_REQUEST['idCatalogo'])){
+    	if(strlen($_REQUEST['idGrupo'])>50||!is_numeric($_REQUEST['idGrupo'])){
     		$this->miConfigurador->setVariableConfiguracion ( 'mostrarMensaje', 'errorValId' );
     		$this->miConfigurador->setVariableConfiguracion ( 'tipoMensaje','error' );
     		$this->mensaje();
@@ -113,19 +113,19 @@ class Formulario {
     		exit;
     	}
     	
-    	//validar catalogo existente
-    	$cadena_sql = $this->sql->getCadenaSql("buscarCatalogoId",$_REQUEST['idCatalogo']);
+    	//validar Grupo existente
+    	$cadena_sql = $this->sql->getCadenaSql("buscarGrupoId",$_REQUEST['idGrupo']);
     	$registros = $this->esteRecursoDB->ejecutarAcceso($cadena_sql,"busqueda");
     	 
     	if(!$registros){
-    		$this->miConfigurador->setVariableConfiguracion ( 'mostrarMensaje', 'errorCatalogoExiste' );
+    		$this->miConfigurador->setVariableConfiguracion ( 'mostrarMensaje', 'errorGrupoExiste' );
     		$this->miConfigurador->setVariableConfiguracion ( 'tipoMensaje','error' );
     		$this->mensaje();
     		exit;
     	}
     	
     	//id padre existe
-    	$cadena_sql = $this->sql->getCadenaSql("buscarIdPadre",array($_REQUEST['idPadre'],$_REQUEST['idCatalogo']));
+    	$cadena_sql = $this->sql->getCadenaSql("buscarIdPadre",array($_REQUEST['idPadre'],$_REQUEST['idGrupo']));
     	$registros = $this->esteRecursoDB->ejecutarAcceso($cadena_sql,"busqueda");
     	
     	if(is_array($registros)&&$_REQUEST['idPadre']!=0){
@@ -136,7 +136,7 @@ class Formulario {
     	}
     	
     	//id elemento no existe
-    	$cadena_sql = $this->sql->getCadenaSql("buscarIdElemento",array($_REQUEST['id'],$_REQUEST['idPadre'],$_REQUEST['idCatalogo']));
+    	$cadena_sql = $this->sql->getCadenaSql("buscarIdElemento",array($_REQUEST['id'],$_REQUEST['idPadre'],$_REQUEST['idGrupo']));
     	$registros = $this->esteRecursoDB->ejecutarAcceso($cadena_sql,"busqueda");
     	 
     	 
@@ -148,7 +148,7 @@ class Formulario {
     	}
     	
     	//nombre existe en nivel
-    	$cadena_sql = $this->sql->getCadenaSql("buscarNombreElementoNivel",array($_REQUEST['id'],$_REQUEST['idPadre'],$_REQUEST['idCatalogo'],$_REQUEST['nombreElemento']));
+    	$cadena_sql = $this->sql->getCadenaSql("buscarNombreElementoNivel",array($_REQUEST['id'],$_REQUEST['idPadre'],$_REQUEST['idGrupo'],$_REQUEST['nombreElemento']));
     	$registros = $this->esteRecursoDB->ejecutarAcceso($cadena_sql,"busqueda");
     	
     	
@@ -164,11 +164,11 @@ class Formulario {
     	
     }
 
-    function agregarElementoCatalogo() {
+    function agregarElementoGrupo() {
 		
     	
 
-    	$cadena_sql = $this->sql->getCadenaSql("crearElementoCatalogo",array($_REQUEST['idPadre'],$_REQUEST['id'],$_REQUEST['idCatalogo'],$_REQUEST['nombreElemento']));
+    	$cadena_sql = $this->sql->getCadenaSql("crearElementoGrupo",array($_REQUEST['idPadre'],$_REQUEST['id'],$_REQUEST['idGrupo'],$_REQUEST['nombreElemento']));
     	$registros = $this->esteRecursoDB->ejecutarAcceso($cadena_sql);
     	
     	if(!$registros){
@@ -178,7 +178,7 @@ class Formulario {
     	}
     	
     	
-    	echo $_REQUEST['idCatalogo'];  	
+    	echo $_REQUEST['idGrupo'];  	
     	 
 		    	 
     }
@@ -249,7 +249,7 @@ class Formulario {
 $miFormulario = new Formulario ( $this->lenguaje, $this->miFormulario,$this->sql );
 
 $miFormulario->validarEntrada();
-$miFormulario->agregarElementoCatalogo ();
+$miFormulario->agregarElementoGrupo ();
 $miFormulario->mensaje ();
 
 ?>

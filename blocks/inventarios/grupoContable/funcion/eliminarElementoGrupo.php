@@ -1,5 +1,5 @@
 <?php 
-namespace arka\grupoContable\\eliminarElementoGrupo;
+namespace arka\grupoContable\eliminarElementoGrupo;
 
 
 
@@ -42,14 +42,14 @@ class Formulario {
     	
     	
     	 
-    	//validar request idCatalogo
-    	if(!isset($_REQUEST['idCatalogo'])){
+    	//validar request idGrupo
+    	if(!isset($_REQUEST['idGrupo'])){
     		$this->miConfigurador->setVariableConfiguracion ( 'mostrarMensaje', 'errorId' );
     		$this->mensaje();
     		exit;
     	}
     	
-    	if(strlen($_REQUEST['idCatalogo'])>50||!is_numeric($_REQUEST['idCatalogo'])){
+    	if(strlen($_REQUEST['idGrupo'])>50||!is_numeric($_REQUEST['idGrupo'])){
     		$this->miConfigurador->setVariableConfiguracion ( 'mostrarMensaje', 'errorValId' );
     		$this->mensaje();
     		exit;
@@ -83,12 +83,12 @@ class Formulario {
     	 
     	
     	
-    	//validar catalogo existente
-    	$cadena_sql = $this->sql->getCadenaSql("buscarCatalogoId",$_REQUEST['idCatalogo']);
+    	//validar Grupo existente
+    	$cadena_sql = $this->sql->getCadenaSql("buscarGrupoId",$_REQUEST['idGrupo']);
     	$registros = $this->esteRecursoDB->ejecutarAcceso($cadena_sql,"busqueda");
     	 
     	if(!$registros){
-    		$this->miConfigurador->setVariableConfiguracion ( 'mostrarMensaje', 'errorCatalogoExiste' );
+    		$this->miConfigurador->setVariableConfiguracion ( 'mostrarMensaje', 'errorGrupoExiste' );
     		$this->mensaje();
     		exit;
     	}
@@ -103,7 +103,7 @@ class Formulario {
     }
     
     private function consultarElementosNivel($nivel){
-    	$cadena_sql = $this->sql->getCadenaSql("elementosNivel",array($_REQUEST['idCatalogo'],$nivel));
+    	$cadena_sql = $this->sql->getCadenaSql("elementosNivel",array($_REQUEST['idGrupo'],$nivel));
     	$registros = $this->esteRecursoDB->ejecutarAcceso($cadena_sql,"busqueda");
     	  
     	 
@@ -111,7 +111,7 @@ class Formulario {
     	return $registros;
     }
 
-    function eliminarElementoCatalogo() {
+    function eliminarElementoGrupo() {
 		
 		//tiene hijos
     	
@@ -132,7 +132,7 @@ class Formulario {
     
     	foreach($valores as $val){
 
-    		$cadena_sql = $this->sql->getCadenaSql("eliminarElementoCatalogo",$val);
+    		$cadena_sql = $this->sql->getCadenaSql("eliminarElementoGrupo",$val);
     		$registros = $this->esteRecursoDB->ejecutarAcceso($cadena_sql);
     		 
     		if(!$registros){
@@ -145,7 +145,7 @@ class Formulario {
     	
     	
     	
-    	echo $_REQUEST['idCatalogo'];  	
+    	echo $_REQUEST['idGrupo'];  	
     	 
 		    	 
     }
@@ -216,7 +216,7 @@ class Formulario {
 $miFormulario = new Formulario ( $this->lenguaje, $this->miFormulario,$this->sql );
 
 $miFormulario->validarEntrada();
-$miFormulario->eliminarElementoCatalogo ();
+$miFormulario->eliminarElementoGrupo ();
 $miFormulario->mensaje ();
 
 ?>

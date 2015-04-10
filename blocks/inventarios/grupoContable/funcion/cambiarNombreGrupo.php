@@ -53,14 +53,14 @@ class Formulario {
     	
     	
     	//validar request nombre
-    	if(!isset($_REQUEST['nombreCatalogo'])){
+    	if(!isset($_REQUEST['nombreGrupo'])){
     		$this->miConfigurador->setVariableConfiguracion ( 'mostrarMensaje', 'errorNombre' );
     		$this->miConfigurador->setVariableConfiguracion ( 'tipoMensaje','error' );
     		$this->mensaje();
     		exit;
     	}
     	
-    	if(strlen($_REQUEST['nombreCatalogo'])>50){
+    	if(strlen($_REQUEST['nombreGrupo'])>50){
     		$this->miConfigurador->setVariableConfiguracion ( 'mostrarMensaje', 'errorLargoNombre' );
     		$this->miConfigurador->setVariableConfiguracion ( 'tipoMensaje','error' );
     		$this->mensaje();
@@ -68,7 +68,7 @@ class Formulario {
     	}
     	
     	//validar nombre existente
-    	$cadena_sql = $this->sql->getCadenaSql("buscarCatalogo",$_REQUEST['nombreCatalogo']);
+    	$cadena_sql = $this->sql->getCadenaSql("buscarGrupo",$_REQUEST['nombreGrupo']);
     	$registros = $this->esteRecursoDB->ejecutarAcceso($cadena_sql,"busqueda");
     	
     	if( is_array($registros)){
@@ -78,7 +78,7 @@ class Formulario {
     		exit;
     	}
     	
-    	$cadena_sql = $this->sql->getCadenaSql("cambiarNombreCatalogo",array($_REQUEST['nombreCatalogo'],$_REQUEST['idCatalogo']));
+    	$cadena_sql = $this->sql->getCadenaSql("cambiarNombreGrupo",array($_REQUEST['nombreGrupo'],$_REQUEST['idGrupo']));
     	
     	$registros = $this->esteRecursoDB->ejecutarAcceso($cadena_sql);
     	
@@ -92,7 +92,7 @@ class Formulario {
     	
 		 $this->mensaje2('cambioNombre');
     	
-    	 //$this->funcion->dibujarCatalogo();
+    	 //$this->funcion->dibujarGrupo();
     	
     	exit;
     	
