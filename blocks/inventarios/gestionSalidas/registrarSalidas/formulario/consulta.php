@@ -164,7 +164,7 @@ class registrarForm {
 				echo $this->miFormulario->campoCuadroLista ( $atributos );
 				unset ( $atributos );
 				
-				$esteCampo = "clase";
+				$esteCampo = "clase_entrada_consulta";
 				$atributos ['nombre'] = $esteCampo;
 				$atributos ['id'] = $esteCampo;
 				$atributos ['etiqueta'] = $this->lenguaje->getCadena ( $esteCampo );

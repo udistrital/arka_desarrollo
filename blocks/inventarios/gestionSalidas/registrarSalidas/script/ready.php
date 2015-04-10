@@ -42,6 +42,7 @@
  
  $("#<?php echo $this->campoSeguro('numero_entrada')?>").select2();
  $("#<?php echo $this->campoSeguro('dependencia')?>").select2();
+ $("#<?php echo $this->campoSeguro('clase_entrada_consulta')?>").select2();
  $("#<?php echo $this->campoSeguro('ubicacion')?>").select2();
  
  
