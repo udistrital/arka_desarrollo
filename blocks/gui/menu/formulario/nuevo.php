@@ -332,8 +332,6 @@ $enlaceFinSesion['nombre'] = "Cerrar Sesión";
                             <li><a href="<?php echo $enlaceModificarElementos['urlCodificada'] ?>"><?php echo $enlaceModificarElementos['nombre'] ?></a></li> 
                         </ul>
                     </div>
-
-
                     <div>
                         <h4>Movimientos</h4>
                         <ul>
@@ -398,9 +396,6 @@ $enlaceFinSesion['nombre'] = "Cerrar Sesión";
                             <li><a href="<?php echo $enlaceGestionarGrupoC['urlCodificada'] ?>"><?php echo $enlaceGestionarGrupoC['nombre'] ?></a></li>
                         </ul>
                     </div>
-
-
-
                 </div><!-- /cbp-hrsub-inner -->
             </div><!-- /cbp-hrsub -->
         </li>
@@ -418,7 +413,10 @@ $enlaceFinSesion['nombre'] = "Cerrar Sesión";
                 </div><!-- /cbp-hrsub-inner -->
             </div><!-- /cbp-hrsub -->
         </li>
-        <li><a href="<?php echo$enlaceFinSesion['urlCodificada'] ?>">Cerrar Sesión</a></li>
+        
+        <li>
+            <a href="<?php echo$enlaceFinSesion['urlCodificada'] ?>">Cerrar Sesión</a>
+        </li>
     </ul>
 </nav>
 
