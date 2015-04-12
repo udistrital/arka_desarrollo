@@ -1,6 +1,6 @@
 .cbp-hrmenu {
 	width: 100%;
-	margin-top: 2em;
+	margin-top: 0;
 	border-bottom: 4px solid #47a3da;
 }
 
@@ -16,8 +16,7 @@
 .cbp-hrmenu .cbp-hrsub-inner {
 	width: 90%;
 	max-width: 70em;
-	margin: 0 auto;
-	padding: 0 1.875em;
+	margin: 0 0;
 }
 
 .cbp-hrmenu > ul > li {
@@ -26,7 +25,7 @@
 
 .cbp-hrmenu > ul > li > a {
 	font-weight: 700;
-	padding: 1em 2em;
+	padding: 0.5em;
 	color: #999;
 	display: inline-block;
 }
