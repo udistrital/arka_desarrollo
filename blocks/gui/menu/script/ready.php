@@ -1,5 +1,9 @@
 <?php
 ?>
+
+$(function() {
+				cbpHorizontalMenu.init();
+			});
   
   var cbpHorizontalMenu = (function() {
 

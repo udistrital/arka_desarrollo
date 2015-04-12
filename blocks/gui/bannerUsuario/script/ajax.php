@@ -20,6 +20,7 @@ $url .= "/index.php?" . $this->miConfigurador->getVariableConfiguracion ( "enlac
 // Codificar las variables y asociarlas a la url
 $cadena = $this->miConfigurador->fabricaConexiones->crypto->codificar_url ( $cadenaACodificar, $url );
 
+$urlFinal = $url . $cadena;
 // Registra la función javascript suponiendo que existe un control de texto cuyo id es entrada
 ?>
 <script type='text/javascript'>
