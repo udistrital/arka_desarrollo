@@ -38,6 +38,7 @@
 .cbp-hrmenu > ul > li.cbp-hropen > a:hover {
 	color: #fff;
 	background: #47a3da;
+        z-index: 1000;
 }
 
 /* sub-menu */
@@ -51,7 +52,8 @@
 
 .cbp-hropen .cbp-hrsub {
 	display: block;
-	padding-bottom: 3em;
+	padding-bottom: 1.5em;
+        z-index: 1000;
 }
 
 .cbp-hrmenu .cbp-hrsub-inner > div {
@@ -76,9 +78,9 @@
 
 .cbp-hrsub h4 {
 	color: #afdefa;
-	padding: 2em 0 0.6em;
+	padding: 1em 0 0.6em;
 	margin: 0;
-	font-size: 160%;
+	font-size: 150%;
 	font-weight: 300;
 }
 
