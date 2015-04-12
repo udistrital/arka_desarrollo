@@ -164,7 +164,7 @@ class Sql extends \Sql {
                 break;
 
             case "consultarElementos" :
-                $cadenaSql = "SELECT  ";
+                $cadenaSql = "SELECT DISTINCT  ";
                 $cadenaSql.= " id_elemento,  ";
                 $cadenaSql.= " nivel,  ";
                 $cadenaSql.= " unidad, ";

@@ -32,7 +32,7 @@ class registrarForm {
         $conexion = "inventarios";
         $esteRecursoDB = $this->miConfigurador->fabricaConexiones->getRecursoDB($conexion);
 
-        $cadenaSql = $this->miSql->getCadenaSql('consultarElemento_especifico', $_REQUEST['item0']);
+        $cadenaSql = $this->miSql->getCadenaSql('consultarElemento_especifico', $_REQUEST['item']);
         $datos_elemento = $esteRecursoDB->ejecutarAcceso($cadenaSql, "busqueda");
 
         // ---------------- SECCION: Parámetros Globales del Formulario ----------------------------------
@@ -76,7 +76,7 @@ class registrarForm {
             $atributos ['id'] = $esteCampo;
             $atributos ["estilo"] = "jqueryui";
             $atributos ['tipoEtiqueta'] = 'inicio';
-            $atributos ["leyenda"] = "Calcular Depreciación";
+            $atributos ["leyenda"] = "Calcular Depreciación para el Conjunto de Elementos ID. ".$_REQUEST['item'];
             echo $this->miFormulario->marcoAgrupacion('inicio', $atributos);
             unset($atributos); {
                 $esteCampo = "Formular Depreciación";
@@ -704,7 +704,7 @@ class registrarForm {
             $valorCodificado .= "&bloqueGrupo=" . $esteBloque ["grupo"];
             $valorCodificado .= "&opcion=registrarDepreciacion";
             $valorCodificado .= "&seccion=" . $tiempo;
-            $valorCodificado .= "&elemento_general=" . $_REQUEST['item0'];
+            $valorCodificado .= "&elemento_general=" . $_REQUEST['item'];
             /**
              * SARA permite que los nombres de los campos sean dinámicos.
              * Para ello utiliza la hora en que es creado el formulario para

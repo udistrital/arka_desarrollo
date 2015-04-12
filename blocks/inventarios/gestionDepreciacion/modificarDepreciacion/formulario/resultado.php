@@ -122,7 +122,7 @@ class registrarForm {
                     <td><center>" . $elementos [$i]['dep_libros'] . "</center></td>
                     <td><center>";
                 // ---------------- CONTROL: Cuadro de Texto --------------------------------------------------------
-                $nombre = 'item' . $i;
+                $nombre = 'item';
                 $atributos ['id'] = $nombre;
                 $atributos ['nombre'] = $nombre;
                 $atributos ['marco'] = true;
@@ -135,7 +135,7 @@ class registrarForm {
                 if (isset($_REQUEST [$esteCampo])) {
                     $atributos ['valor'] = $_REQUEST [$esteCampo];
                 } else {
-                    $atributos ['valor'] = $elementos[$i] [0];
+                    $atributos ['valor'] = $elementos[$i] ['dep_idelementogen'];
                 }
 
                 $atributos ['deshabilitado'] = false;
