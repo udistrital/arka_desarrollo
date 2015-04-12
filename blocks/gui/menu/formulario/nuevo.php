@@ -280,7 +280,7 @@ $enlaceFinSesion['nombre'] = "Cerrar Sesión";
                 </div><!-- /cbp-hrsub-inner -->
             </div><!-- /cbp-hrsub -->
         </li>
-        
+
         <li>
             <a href="#">Gestión de Elementos</a>
             <div class="cbp-hrsub">
@@ -321,114 +321,81 @@ $enlaceFinSesion['nombre'] = "Cerrar Sesión";
                             <li><a href="<?php echo $enlaceSobranteFlatanteElementos['urlCodificada'] ?>"><?php echo $enlaceSobranteFlatanteElementos['nombre'] ?></a></li>
                         </ul>
                     </div>
+                    <div>
+                        <h4>Asignación Inventarios a Contratistas</h4>
+                        <ul >
+                            <li><a href="<?php echo $enlaceasignarInventarioC['urlCodificada'] ?>"><?php echo $enlaceasignarInventarioC['nombre'] ?></a></li>
+                            <li><a href="<?php echo $enlaceconsultarAsignacion['urlCodificada'] ?>"><?php echo $enlaceconsultarAsignacion['nombre'] ?></a></li>
+                            <li><a href="<?php echo $enlacedescargarInventario['urlCodificada'] ?>"><?php echo $enlacedescargarInventario['nombre'] ?></a></li>
+                        </ul>
+                    </div>
                 </div><!-- /cbp-hrsub-inner -->
             </div><!-- /cbp-hrsub -->
         </li>
-        
+
         <li>
-            <a href="#">Administración</a>
+            <a href="#">Administración Datos Básicos</a>
             <div class="cbp-hrsub">
                 <div class="cbp-hrsub-inner"> 
                     <div>
-                        <h4>Acta de Recibido</h4>
+                        <h4>Gestión Dependencias</h4>
                         <ul>
                             <li><a href="<?php echo $enlacegestionActa['urlCodificada'] ?>"><?php echo $enlacegestionActa['nombre'] ?></a></li>
                             <li><a href="<?php echo$enlaceconsultaActa['urlCodificada'] ?>"><?php echo $enlaceconsultaActa['nombre'] ?></a></li>
                         </ul>
                     </div>
+
                     <div>
-                        <h4>Entrada de Elementos</h4>
+                        <h4>Gestión Depreciación</h4>
                         <ul>
-                            <li><a href="<?php echo $enlaceRegistroEntradas['urlCodificada'] ?>"><?php echo $enlaceRegistroEntradas['nombre'] ?></a></li>
-                            <li><a href="<?php echo $enlaceConsultaEntradas['urlCodificada'] ?>"><?php echo $enlaceConsultaEntradas['nombre'] ?></a></li>
-                            <li><a href="<?php echo $enlaceModificarEntradas['urlCodificada'] ?>"><?php echo $enlaceModificarEntradas['nombre'] ?></a></li>  
+                            <li><a href="<?php echo $enlacegestionActa['urlCodificada'] ?>"><?php echo $enlacegestionActa['nombre'] ?></a></li>
+                            <li><a href="<?php echo$enlaceconsultaActa['urlCodificada'] ?>"><?php echo $enlaceconsultaActa['nombre'] ?></a></li>
                         </ul>
                     </div>
+
                     <div>
-                        <h4>Salida de Elementos</h4>
+                        <h4>Radicación Documentos</h4>
                         <ul>
-                            <li><a href="<?php echo $enlaceRegistroSalidas['urlCodificada'] ?>"><?php echo $enlaceRegistroSalidas['nombre'] ?></a></li>
-                            <li><a href="<?php echo $enlaceModificarSalidas['urlCodificada'] ?>"><?php echo $enlaceModificarSalidas['nombre'] ?></a></li>  
+                            <li><a href="<?php echo $enlaceRadicarAsignar['urlCodificada'] ?>"><?php echo $enlaceRadicarAsignar['nombre'] ?></a></li>
+                                    <!--li><a href="<?php echo $enlaceradicarEntradaSalida['urlCodificada'] ?>"><?php echo $enlaceradicarEntradaSalida['nombre'] ?></a></li-->
                         </ul>
                     </div>
+
                     <div>
-                        <h4>Cargue de Elementos</h4>
+                        <h4>Gestión Depreciación</h4>
                         <ul>
-                            <li><a href="<?php echo $enlaceRegistroElementos['urlCodificada'] ?>"><?php echo $enlaceRegistroElementos['nombre'] ?></a></li>
-                            <li><a href="<?php echo $enlaceModificarElementos['urlCodificada'] ?>"><?php echo $enlaceModificarElementos['nombre'] ?></a></li> 
+                            <li><a href="<?php echo$enlacegestionDepreciacion['urlCodificada'] ?>"><?php echo$enlacegestionDepreciacion['nombre'] ?></a></li>
+                            <li><a href="<?php echo$enlacemodificarDepreciacion['urlCodificada'] ?>"><?php echo$enlacemodificarDepreciacion['nombre'] ?></a></li>
                         </ul>
                     </div>
+
                     <div>
-                        <h4>Movimientos</h4>
+                        <h4>Gestor Reportes</h4>
                         <ul>
-                            <li><a href="<?php echo $enlaceTrasladosElementos['urlCodificada'] ?>"><?php echo $enlaceTrasladosElementos['nombre'] ?></a></li>
-                            <li><a href="<?php echo $enlaceSobranteFlatanteElementos['urlCodificada'] ?>"><?php echo $enlaceSobranteFlatanteElementos['nombre'] ?></a></li>
+                            <li><a href="<?php echo$enlaceReportico['urlCodificada'] ?>"><?php echo $enlaceReportico['nombre'] ?></a></li>
+                            <li><a href="<?php echo $enlacegenerarPazSalvo['urlCodificada'] ?>"><?php echo $enlacegenerarPazSalvo['nombre'] ?></a></li>
                         </ul>
                     </div>
+
+                    <div>
+                        <h4>Administración Datos Básicos</h4>
+                        <ul>
+                            <li><a href="<?php echo $enlaceGestionarCatalogo['urlCodificada'] ?>"><?php echo $enlaceGestionarCatalogo['nombre'] ?></a></li>
+                            <li><a href="<?php echo $enlaceregistrarDependencia['urlCodificada'] ?>"><?php echo $enlaceregistrarDependencia['nombre'] ?></a></li>
+                            <li><a href="<?php echo $enlaceGestionarGrupoC['urlCodificada'] ?>"><?php echo $enlaceGestionarGrupoC['nombre'] ?></a></li>
+                            <li><a href="<?php echo $enlaceUsuarios['urlCodificada'] ?>"><?php echo ($enlaceUsuarios['nombre']) ?></a></li>
+                        </ul>
+                    </div>
+
+
+
                 </div><!-- /cbp-hrsub-inner -->
             </div><!-- /cbp-hrsub -->
         </li>
-        
-        <li><!-- ... --></li>
+
+        <li><a href="<?php echo$enlaceFinSesion['urlCodificada'] ?>">Cerrar Sesión</a></li>
         <li><!-- ... --></li>
         <!-- ... -->
     </ul>
 </nav>
-
-
-<li>
-    <a href="#">Radicación Documentos</a>
-    <ul class="dl-submenu">
-        <li><a href="<?php echo $enlaceRadicarAsignar['urlCodificada'] ?>"><?php echo $enlaceRadicarAsignar['nombre'] ?></a></li>
-        <!--li><a href="">Entrada y Salida de Elementos</a></li>
-        <li><a href="">Movimientos</a></li-->
-        <!--li><a href="<?php echo $enlaceradicarEntradaSalida['urlCodificada'] ?>"><?php echo $enlaceradicarEntradaSalida['nombre'] ?></a></li-->
-    </ul>
-</li>
-
-<li>
-    <a href="#">Asignación Inventarios a Contratistas</a>
-    <ul class="dl-submenu">
-        <li><a href="<?php echo $enlaceasignarInventarioC['urlCodificada'] ?>"><?php echo $enlaceasignarInventarioC['nombre'] ?></a></li>
-        <li><a href="<?php echo $enlaceconsultarAsignacion['urlCodificada'] ?>"><?php echo $enlaceconsultarAsignacion['nombre'] ?></a></li>
-        <li><a href="<?php echo $enlacedescargarInventario['urlCodificada'] ?>"><?php echo $enlacedescargarInventario['nombre'] ?></a></li>
-    </ul>
-</li>
-
-<li>
-    <a href="#">Gestión Depreciación</a>
-    <ul class="dl-submenu">
-        <li><a href="<?php echo$enlacegestionDepreciacion['urlCodificada'] ?>"><?php echo$enlacegestionDepreciacion['nombre'] ?></a></li>
-        <li><a href="<?php echo$enlacemodificarDepreciacion['urlCodificada'] ?>"><?php echo$enlacemodificarDepreciacion['nombre'] ?></a></li>
-    </ul>
-</li>
-
-<li>
-    <a href="#">Gestor de Reportes</a>
-    <ul class="dl-submenu">
-        <li><a href="<?php echo$enlaceReportico['urlCodificada'] ?>"><?php echo $enlaceReportico['nombre'] ?></a></li>
-        <li><a href="<?php echo $enlacegenerarPazSalvo['urlCodificada'] ?>"><?php echo $enlacegenerarPazSalvo['nombre'] ?></a></li>
-    </ul>
-</li>
-<li>
-    <a href="#">Administración Datos Básicos</a>
-    <ul class="dl-submenu">
-        <li><a href="<?php echo $enlaceGestionarCatalogo['urlCodificada'] ?>"><?php echo $enlaceGestionarCatalogo['nombre'] ?></a></li>
-        <li><a href="<?php echo $enlaceregistrarDependencia['urlCodificada'] ?>"><?php echo $enlaceregistrarDependencia['nombre'] ?></a></li>
-        <li><a href="<?php echo $enlaceGestionarGrupoC['urlCodificada'] ?>"><?php echo $enlaceGestionarGrupoC['nombre'] ?></a></li>
-    </ul>
-</li>
-
-<li>
-    <a href="#">Usuarios</a>
-    <ul class="dl-submenu">
-        <li><a href="<?php echo $enlaceUsuarios['urlCodificada'] ?>"><?php echo ($enlaceUsuarios['nombre']) ?></a></li>
-    </ul>
-</li>
-
-
-<li>
-    <a href="<?php echo$enlaceFinSesion['urlCodificada'] ?>">Cerrar Sesión</a>
-</li>
-
 
