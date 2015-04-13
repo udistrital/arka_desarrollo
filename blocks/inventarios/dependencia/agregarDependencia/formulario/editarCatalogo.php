@@ -32,7 +32,7 @@ class Formulario {
 
         $this->funcion = $funcion;
 
-        $conexion="inventarios";
+        $conexion = "inventarios";
         $this->esteRecursoDB = $this->miConfigurador->fabricaConexiones->getRecursoDB($conexion);
         if (!$this->esteRecursoDB) {
             //Este se considera un error fatal
@@ -129,9 +129,9 @@ class Formulario {
     private function campoId() {
 
         echo '<div class= "jqueryui  anchoColumna1">';
-        echo '<div style="float:left; width:200px"><label for="id">Identificador Elemento</label><span style="white-space:pre;"> </span></div>';
+        echo '<div style="float:left; width:200px"><label for="id">ID Dependencia Hijo</label><span style="white-space:pre;"> </span></div>';
         echo '<input type="text" maxlength="" size="50" value="" class="ui-widget ui-widget-content ui-corner-all';
-        echo ' validate[required,number] " tabindex="2" name="id" id="id" title="Ingrese Identificador Elemento">';
+        echo ' validate[required,number] " tabindex="2" name="id" id="id" title="Ingrese ID Dependencia Hijo">';
         echo '</div>';
     }
 
@@ -144,12 +144,32 @@ class Formulario {
         echo '</div>';
     }
 
+    private function direccion() {
+        $direccionTitulo = $this->lenguaje->getCadena('direccionTitulo');
+        $direccion = $this->lenguaje->getCadena('direccion');
+        echo '<div class="jqueryui  anchoColumna1">';
+        echo '<div style="float:left;display:inline; width:200px"><label for="direccion">' . $direccion . '</label></div>';
+        echo '<input type="text" class="ui-widget ui-widget-content ui-corner-all validate[required]"  tabindex="3" size="50" value="" name="ldireccion" id="ldireccion" title="' . $direccionTitulo . '" class="ui-widget ui-widget-content ui-corner-all"></input>';
+        echo '</div>';
+    }
+
+    private function telefono() {
+        $telefonoTitulo = $this->lenguaje->getCadena('telefonoTitulo');
+        $telefono = $this->lenguaje->getCadena('telefono');
+        echo '<div class="jqueryui  anchoColumna1">';
+        echo '<div style="float:left;display:inline; width:200px"><label for="telefono">' . $telefono . '</label></div>';
+        echo '<input type="text" class="ui-widget ui-widget-content ui-corner-all validate[required]"  tabindex="3" size="25" value="" name="ltelefono" id="ltelefono" title="' . $telefonoTitulo . '" class="ui-widget ui-widget-content ui-corner-all"></input>';
+        echo '</div>';
+    }
+
     private function campoNombre() {
 
+        $nombreTitulo = $this->lenguaje->getCadena('nombreElementoTitulo');
+        $nombre = $this->lenguaje->getCadena('nombreElemento');
         echo ' <div class="jqueryui  anchoColumna1">';
-        echo ' <div style="float:left; width:200px"><label for="nombreElemento">Nombre Elemento</label><span style="white-space:pre;"> </span></div>';
+        echo ' <div style="float:left; width:200px"><label for="nombreElemento">'.$nombre.'</label><span style="white-space:pre;"> </span></div>';
         echo ' <input type="text" maxlength="" size="50" value="" class="ui-widget ui-widget-content';
-        echo ' ui-corner-all  validate[required,onlyLetterNumber] " tabindex="4" name="nombreElemento" id="nombreElemento" title=" Ingrese el Nombre del Elemento">';
+        echo ' ui-corner-all  validate[required,onlyLetterNumber] " tabindex="4" name="nombreElemento" id="nombreElemento" title=" '.$nombreTitulo.'">';
         echo ' </div>';
     }
 
@@ -176,6 +196,8 @@ class Formulario {
         $this->campoPadre();
         $this->campoId();
         $this->campoNombre();
+        $this->direccion();
+        $this->telefono();
 
         echo '<input id="idCatalogo" type="hidden" value="' . $_REQUEST['idCatalogo'] . '" name="idCatalogo">';
         echo '<input id="idReg" type="hidden" value="0" name="idReg">';
