@@ -102,7 +102,10 @@ class Oci8 extends ConectorDb {
     function conectar_db() {
 
     	
+    	
         $this->enlace = oci_connect($this->usuario, $this->clave, $this->db);
+        
+        
 
         if ($this->enlace) {
         	
