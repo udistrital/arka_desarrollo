@@ -435,7 +435,6 @@ class Sql extends \Sql {
 				$cadenaSql .= "'" . $variable [4] . "') ";
 				$cadenaSql .= "RETURNING  id_encargado; ";
 				break;
-			// ---sdfsfsf
 			
 			// INSERT
 			// informacion_presupuestal_orden(
