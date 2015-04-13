@@ -194,7 +194,8 @@ class Sql extends \Sql {
 				break;
 			case "tipo_faltante" :
 				$cadenaSql = " SELECT id_tipo_falt_sobr, descripcion ";
-				$cadenaSql .= " FROM tipo_falt_sobr;";
+				$cadenaSql .= " FROM tipo_falt_sobr ";
+				$cadenaSql .= " WHERE  id_tipo_falt_sobr < 4";
 				break;
 			
 			case "funcionarios" :
