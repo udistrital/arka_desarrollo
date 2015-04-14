@@ -32,7 +32,6 @@ $enlaceRegistroOrdenServicios ['enlace'] .= "&usuario=" . $miSesion->getSesionUs
 $enlaceRegistroOrdenServicios ['urlCodificada'] = $this->miConfigurador->fabricaConexiones->crypto->codificar_url($enlaceRegistroOrdenServicios ['enlace'], $directorio);
 $enlaceRegistroOrdenServicios ['nombre'] = "Registrar Orden de Servicios";
 
-
 // Consultar y Modificar Orden Servicios
 $enlaceConsultaOrdenServicios ['enlace'] = "pagina=consultaOrdenServicios";
 $enlaceConsultaOrdenServicios ['enlace'] .= "&usuario=" . $miSesion->getSesionUsuarioId();
@@ -40,9 +39,7 @@ $enlaceConsultaOrdenServicios ['enlace'] .= "&usuario=" . $miSesion->getSesionUs
 $enlaceConsultaOrdenServicios ['urlCodificada'] = $this->miConfigurador->fabricaConexiones->crypto->codificar_url($enlaceConsultaOrdenServicios ['enlace'], $directorio);
 $enlaceConsultaOrdenServicios ['nombre'] = "Consultar y Modificar Orden de Servicios";
 
-
 // Registro de Contrato
-
 $enlacegestionContrato['enlace'] = "pagina=gestionContrato";
 $enlacegestionContrato['enlace'] .= "&usuario=" . $miSesion->getSesionUsuarioId();
 
@@ -50,7 +47,6 @@ $enlacegestionContrato['urlCodificada'] = $this->miConfigurador->fabricaConexion
 $enlacegestionContrato['nombre'] = "Contratos Vicerrectoría";
 
 // Gestionar Acta de Recibido
-
 $enlacegestionActa['enlace'] = "pagina=registrarActa";
 $enlacegestionActa['enlace'] .= "&usuario=" . $miSesion->getSesionUsuarioId();
 
@@ -58,13 +54,11 @@ $enlacegestionActa['urlCodificada'] = $this->miConfigurador->fabricaConexiones->
 $enlacegestionActa['nombre'] = "Registrar Acta de Recibido";
 
 // Gestionar Acta de Recibido
-
 $enlaceconsultaActa['enlace'] = "pagina=consultarActa";
 $enlaceconsultaActa['enlace'] .= "&usuario=" . $miSesion->getSesionUsuarioId();
 
 $enlaceconsultaActa['urlCodificada'] = $this->miConfigurador->fabricaConexiones->crypto->codificar_url($enlaceconsultaActa['enlace'], $directorio);
 $enlaceconsultaActa['nombre'] = "Consultar y Modificar Acta de Recibido";
-
 
 // Registro Entradas
 $enlaceRegistroEntradas ['enlace'] = "pagina=registrarEntradas";
@@ -81,7 +75,6 @@ $enlaceConsultaEntradas ['urlCodificada'] = $this->miConfigurador->fabricaConexi
 $enlaceConsultaEntradas ['nombre'] = "Consultar y Modificar Estado Entrada";
 
 // Modificar Entradas
-
 $enlaceModificarEntradas ['enlace'] = "pagina=modificarEntradas";
 $enlaceModificarEntradas ['enlace'] .= "&usuario=" . $miSesion->getSesionUsuarioId();
 
@@ -110,13 +103,11 @@ $enlaceRegistroSalidas ['urlCodificada'] = $this->miConfigurador->fabricaConexio
 $enlaceRegistroSalidas ['nombre'] = "Registrar Salida";
 
 // Consultar y Modificar Salidas
-
 $enlaceModificarSalidas ['enlace'] = "pagina=modificarSalidas";
 $enlaceModificarSalidas ['enlace'] .= "&usuario=" . $miSesion->getSesionUsuarioId();
 
 $enlaceModificarSalidas ['urlCodificada'] = $this->miConfigurador->fabricaConexiones->crypto->codificar_url($enlaceModificarSalidas ['enlace'], $directorio);
 $enlaceModificarSalidas ['nombre'] = "Consultar y Modificar Salidas";
-
 
 // Traslado Elementos
 $enlaceTrasladosElementos ['enlace'] = "pagina=registrarTraslados";
@@ -125,7 +116,6 @@ $enlaceTrasladosElementos ['enlace'] .= "&usuario=" . $miSesion->getSesionUsuari
 $enlaceTrasladosElementos ['urlCodificada'] = $this->miConfigurador->fabricaConexiones->crypto->codificar_url($enlaceTrasladosElementos ['enlace'], $directorio);
 $enlaceTrasladosElementos ['nombre'] = "Traslados Elementos";
 
-
 // Sobrantes Y faltantes
 $enlaceSobranteFlatanteElementos ['enlace'] = "pagina=registrarFaltantesSobrantes";
 $enlaceSobranteFlatanteElementos ['enlace'] .= "&usuario=" . $miSesion->getSesionUsuarioId();
@@ -133,9 +123,7 @@ $enlaceSobranteFlatanteElementos ['enlace'] .= "&usuario=" . $miSesion->getSesio
 $enlaceSobranteFlatanteElementos ['urlCodificada'] = $this->miConfigurador->fabricaConexiones->crypto->codificar_url($enlaceSobranteFlatanteElementos ['enlace'], $directorio);
 $enlaceSobranteFlatanteElementos ['nombre'] = "Faltantes y Sobrantes Elementos";
 
-
 // Gestionar Catalogo
-
 $enlaceGestionarCatalogo ['enlace'] = "pagina=catalogo";
 $enlaceGestionarCatalogo ['enlace'] .= "&usuario=" . $miSesion->getSesionUsuarioId();
 
@@ -143,7 +131,6 @@ $enlaceGestionarCatalogo ['urlCodificada'] = $this->miConfigurador->fabricaConex
 $enlaceGestionarCatalogo ['nombre'] = "Nivel de Inventarios";
 
 // Gestionar GrupoC
-
 $enlaceGestionarGrupoC ['enlace'] = "pagina=grupoContable";
 $enlaceGestionarGrupoC ['enlace'] .= "&usuario=" . $miSesion->getSesionUsuarioId();
 
@@ -151,7 +138,6 @@ $enlaceGestionarGrupoC ['urlCodificada'] = $this->miConfigurador->fabricaConexio
 $enlaceGestionarGrupoC ['nombre'] = "Grupos Contables";
 
 // Radicar ASignar
-
 $enlaceRadicarAsignar ['enlace'] = "pagina=radicarAsignar";
 $enlaceRadicarAsignar ['enlace'] .= "&usuario=" . $miSesion->getSesionUsuarioId();
 
@@ -160,7 +146,6 @@ $enlaceRadicarAsignar ['nombre'] = "Asignar Entrada";
 
 
 // Radicar entrada y salida de elementos
-
 $enlaceradicarEntradaSalida ['enlace'] = "pagina=radicarEntradaSalida";
 $enlaceradicarEntradaSalida ['enlace'] .= "&usuario=" . $miSesion->getSesionUsuarioId();
 
@@ -169,7 +154,6 @@ $enlaceradicarEntradaSalida ['nombre'] = "Entrada y Salida de Elementos";
 
 
 //Asignar inventarios a Contratistas
-
 $enlaceasignarInventarioC ['enlace'] = "pagina=asignarInventarioC";
 $enlaceasignarInventarioC ['enlace'] .= "&usuario=" . $miSesion->getSesionUsuarioId();
 
@@ -177,7 +161,6 @@ $enlaceasignarInventarioC ['urlCodificada'] = $this->miConfigurador->fabricaCone
 $enlaceasignarInventarioC ['nombre'] = "Asignación de  Elementos a Contratistas";
 
 //modificar inventarios a Contratistas
-
 $enlaceconsultarAsignacion ['enlace'] = "pagina=consultarAsignacion";
 $enlaceconsultarAsignacion ['enlace'] .= "&usuario=" . $miSesion->getSesionUsuarioId();
 
@@ -185,7 +168,6 @@ $enlaceconsultarAsignacion ['urlCodificada'] = $this->miConfigurador->fabricaCon
 $enlaceconsultarAsignacion ['nombre'] = "Modificar Asignación de  Elementos a Contratistas";
 
 //descargar inventarios a Contratistas
-
 $enlacedescargarInventario ['enlace'] = "pagina=descargarInventario";
 $enlacedescargarInventario ['enlace'] .= "&usuario=" . $miSesion->getSesionUsuarioId();
 
@@ -382,8 +364,6 @@ $enlaceFinSesion['nombre'] = "Cerrar Sesión";
                 </div><!-- /cbp-hrsub-inner -->
             </div><!-- /cbp-hrsub -->
         </li>
-
-
         <li>
             <a href="#">Admin. Datos Básicos</a>
             <div class="cbp-hrsub">
