@@ -3,7 +3,9 @@
  font-family:Arial;
  font-size:11px;
  margin:0 auto;
- text-align:center; 
+ text-align:left; 
+ height:1000%;
+ width: 100%;
  background-image: url(../imagen/cubos_2.jpg);
  
  }
