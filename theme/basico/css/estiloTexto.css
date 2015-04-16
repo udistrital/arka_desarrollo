@@ -41,6 +41,17 @@
 	text-align: left;
 }
 
+.textoSubtituloCursivaDerecha {
+	text-align: right;
+	border-width: 0px;
+	font-size: 12px;
+	font-style: italic;
+	}
+
+
+
+
+
 .textoElegante {
 	border-width: 0px;
 	font-size: 14px;
