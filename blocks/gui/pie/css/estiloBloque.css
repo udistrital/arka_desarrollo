@@ -1,32 +1,39 @@
- #pie{
- 
- font-family:Arial;
- font-size:11px;
- margin:0 auto;
- text-align:left; 
- height:1000%;
- width: 100%;
- background-image: url(../imagen/cubos_2.jpg);
- 
- }
 
 
-
-
- 
- #escudo{
-    clear:both;
-    width: 50px;
-    height: 85px;
-    display: block;
-    margin: auto;
-    background: url(../imagen/escudo.jpg) no-repeat; 
-} 
-
-<style type="text/css">
-.bgimg {
-    background-image: url(../imagen/cubos_2.jpg);
-     width:2040px;
-     height:400px;
+#footerLeft { 
+    width: 47%; 
+    float: left; 
+    display: block; 
+    height: 50px;
+    
+    left: 0;
 }
-</style>
+
+#footerRight {
+	width: 50%;
+	float: right;
+	display: block;
+	margin: 0%;
+	right: 0;
+}
+
+
+
+#marcoDatosBasicos{
+	width: 50%;
+	float: right;
+	display: block;
+	margin: 0%;
+	right: 0;
+}
+
+
+#escudo {
+	clear: both;
+	width: 50px;
+	height: 85px;
+	display: block;
+	margin: auto;
+	background: url(../imagen/escudo.jpg) no-repeat;
+	background-image: url(../imagen/wall.png);
+}
