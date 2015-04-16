@@ -37,7 +37,8 @@ class registrarForm {
 		$tiempo = $_REQUEST ['tiempo'];
 		
 		// ---------------- SECCION: Parámetros Generales del Formulario ----------------------------------
-		$esteCampo = $esteBloque ['nombre'];
+		$esteCampo = 'pie';
+		
 		$atributos ['id'] = $esteCampo;
 		$atributos ['nombre'] = $esteCampo;
 		// Si no se coloca, entonces toma el valor predeterminado 'application/x-www-form-urlencoded'
@@ -59,10 +60,11 @@ class registrarForm {
 		{
 			// ---------------- SECCION: Controles del Formulario -----------------------------------------------
 			
-			$esteCampo = "marcoDatosBasicos";
+			$esteCampo = "marcoDatosBasicosPie";
 			$atributos ['id'] = $esteCampo;
-			$atributos ["estilo"] = "jqueryui";
+			$atributos ["estilo"] = "";
 			$atributos ['tipoEtiqueta'] = 'inicio';
+			$atributos ['marco'] = false;
 			echo $this->miFormulario->marcoAgrupacion ( 'inicio', $atributos );
 			unset ( $atributos );
 			{
@@ -71,15 +73,38 @@ class registrarForm {
 				// ------------------Division-------------------------
 				
 				$atributos ["id"] = "footerLeft";
-				$atributos ["estilo"] = "textoIzquierda";
+				// $atributos ["estilo"] = "textoIzquierda";
 				echo $this->miFormulario->division ( "inicio", $atributos );
 				unset ( $atributos );
 				{
+					$esteCampo = 'mensajeResolucion ';
+					$atributos ["id"] = $esteCampo;
+					$atributos ["estilo"] = $esteCampo;
+					$atributos ['columnas'] = 1;
+					$atributos ["estilo"] = "textoSubtituloCursiva";
+					$atributos ['texto'] = $this->lenguaje->getCadena ( $esteCampo );
+					$tab ++;
+					echo $this->miFormulario->campoTexto ( $atributos );
+					unset ( $atributos );
+					
+					// ---------------- CONTROL: Cuadro de Texto --------------------------------------------------------
+					$esteCampo = 'link_reso';
+					
+					$atributos ['id'] = $esteCampo;
+					$atributos ['enlace'] = $this->miConfigurador->getVariableConfiguracion ( 'rutaUrlBloque' ) . 'imagen/escudo.png';
+					$atributos ['tabIndex'] = 1;
+					$atributos ['estilo'] = 'textoSubtitulo';
+					$atributos ['enlaceTexto'] = $this->lenguaje->getCadena ( $esteCampo );
+					$atributos ['ancho'] = '10%';
+					$atributos ['alto'] = '10%';
+					echo $this->miFormulario->enlace ( $atributos );
+					
+					unset ( $atributos );
 					
 					$esteCampo = 'mensajePie';
 					$atributos ["id"] = $esteCampo;
 					$atributos ["estilo"] = $esteCampo;
-					$atributos ['columnas'] = 2;
+					$atributos ['columnas'] = 1;
 					$atributos ["estilo"] = "textoSubtituloCursiva";
 					$atributos ['texto'] = $this->lenguaje->getCadena ( $esteCampo );
 					$tab ++;
@@ -90,32 +115,50 @@ class registrarForm {
 				echo $this->miFormulario->division ( "fin" );
 				
 				$atributos ["id"] = "footerRight";
-				$atributos ["estilo"] = "textoIzquierda";
+				$atributos ["estilo"] = "textoDerecha";
 				echo $this->miFormulario->division ( "inicio", $atributos );
 				unset ( $atributos );
 				{
+					setlocale(LC_ALL,"es_ES");
+					$fecha = strftime("%A %d de %B del %Y");
 					
-
-// 					$esteCampo = 'mensajePie';
-// 					$atributos ["id"] = $esteCampo;
-// 					$atributos ["estilo"] = $esteCampo;
-// 					$atributos ['columnas'] = 1;
-// 					$atributos ["estilo"] = "textoSubtituloCursiva";
-// 					$atributos ['texto'] = $this->lenguaje->getCadena ( $esteCampo );
-// 					$tab ++;
-// 					echo $this->miFormulario->campoTexto ( $atributos );
+					
+					$esteCampo = 'fecha';
+					$atributos ["id"] = $esteCampo;
+					$atributos ["estilo"] = $esteCampo;
+					$atributos ['columnas'] = 1;
+					$atributos ["estilo"] = "textoSubtituloCursivaDerecha";
+					$atributos ['texto'] = $fecha;
+					$tab ++;
+					echo $this->miFormulario->campoTexto ( $atributos );
+					unset ( $atributos );
+		
+// 					// ---------------- CONTROL: Cuadro de Texto --------------------------------------------------------
+// 					$esteCampo = 'link_facebook';
+					
+// 					$atributos ['id'] = $esteCampo;
+// 					$atributos ['enlace'] = "https://www.google.com/";
+// 					$atributos ['tabIndex'] = 1;
+// 					// $atributos ['estilo'] = 'jquery';
+// 					$atributos ['enlaceImagen'] = $this->miConfigurador->getVariableConfiguracion ( 'rutaUrlBloque' ) . 'imagen/escudo.png';
+// 					$atributos ['ancho'] = '10%';
+// 					$atributos ['alto'] = '10%';
+// 					$atributos ['saltoLinea'] = true;
+// 					echo $this->miFormulario->enlace ( $atributos );
+					
 // 					unset ( $atributos );
 					
-					// ------------------- Inicio División -------------------------------
-					$esteCampo = 'divLogoNotificador';
+					$esteCampo = 'link_facebook';
+					
 					$atributos ['id'] = $esteCampo;
-					$atributos ['imagen'] = $this->miConfigurador->getVariableConfiguracion ( 'rutaUrlBloque' ) . 'imagen/escudo.jpg';
-					$atributos ["estilo"] = "jquery";
+					$atributos ['enlace'] = "https://www.google.com/";
+					$atributos ['tabIndex'] = 1;
+					// $atributos ['estilo'] = 'jquery';
+					$atributos ['enlaceImagen'] = $this->miConfigurador->getVariableConfiguracion ( 'rutaUrlBloque' ) . 'imagen/escudo.png';
 					$atributos ['ancho'] = '10%';
-					$atributos ['alto'] = '2%';
-					$atributos ['columnas'] = 1;
-					$tab ++;
-					echo $this->miFormulario->campoImagen ( $atributos );
+					$atributos ['alto'] = '10%';
+					echo $this->miFormulario->enlace ( $atributos );
+					
 					unset ( $atributos );
 				}
 				
