@@ -85,9 +85,6 @@ class registrarForm {
 					$tab ++;
 					echo $this->miFormulario->campoTexto ( $atributos );
 					unset ( $atributos );
-					
-				
-					
 				}
 				
 				echo $this->miFormulario->division ( "fin" );
@@ -98,19 +95,28 @@ class registrarForm {
 				unset ( $atributos );
 				{
 					
-										// ------------------- Inicio División -------------------------------
-										$esteCampo = 'divLogoNotificador';
-										$atributos ['id'] = $esteCampo;
-										$atributos ['imagen'] = $this->miConfigurador->getVariableConfiguracion ( 'rutaUrlBloque' ) . 'imagen/escudo.jpg';
-										$atributos ["estilo"] = "jquery";
-										$atributos ['ancho'] = '8%';
-										$atributos ['alto'] = '2%';
-										$atributos ['columnas'] = 2;
-										$tab ++;
-										echo $this->miFormulario->campoImagen ( $atributos );
-										unset ( $atributos );
+
+// 					$esteCampo = 'mensajePie';
+// 					$atributos ["id"] = $esteCampo;
+// 					$atributos ["estilo"] = $esteCampo;
+// 					$atributos ['columnas'] = 1;
+// 					$atributos ["estilo"] = "textoSubtituloCursiva";
+// 					$atributos ['texto'] = $this->lenguaje->getCadena ( $esteCampo );
+// 					$tab ++;
+// 					echo $this->miFormulario->campoTexto ( $atributos );
+// 					unset ( $atributos );
 					
-			
+					// ------------------- Inicio División -------------------------------
+					$esteCampo = 'divLogoNotificador';
+					$atributos ['id'] = $esteCampo;
+					$atributos ['imagen'] = $this->miConfigurador->getVariableConfiguracion ( 'rutaUrlBloque' ) . 'imagen/escudo.jpg';
+					$atributos ["estilo"] = "jquery";
+					$atributos ['ancho'] = '10%';
+					$atributos ['alto'] = '2%';
+					$atributos ['columnas'] = 1;
+					$tab ++;
+					echo $this->miFormulario->campoImagen ( $atributos );
+					unset ( $atributos );
 				}
 				
 				echo $this->miFormulario->division ( "fin" );

@@ -1,13 +1,15 @@
 
 
-#footerLeft { 
-    width: 47%; 
-    float: left; 
-    display: block; 
-    height: 50px;
-    
-    left: 0;
+
+
+#marcoDatosBasicos{
+	width: 100%;
+	height: 100%;
+	float: left;
+	display: block;
+	
 }
+
 
 #footerRight {
 	width: 50%;
@@ -18,13 +20,12 @@
 }
 
 
-
-#marcoDatosBasicos{
-	width: 50%;
-	float: right;
-	display: block;
-	margin: 0%;
-	right: 0;
+#footerLeft { 
+    width: 47%; 
+    float: left; 
+    display: block; 
+    height: 50px;
+    left: 0;
 }
 
 
