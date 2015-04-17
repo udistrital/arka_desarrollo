@@ -1,7 +1,8 @@
 <?php
 $indice = 0;
 
-// $funcion [$indice ++] = "jqueryui.js";
+$funcion [$indice ++] = "css-clocks_1.js";
+// $funcion [$indice ++] = "jquery.min.js";
 
 $rutaBloque = $this->miConfigurador->getVariableConfiguracion ( "host" );
 $rutaBloque .= $this->miConfigurador->getVariableConfiguracion ( "site" );

@@ -72,8 +72,7 @@ class registrarForm {
 				$tab = 1;
 				// ------------------Division-------------------------
 				
-				$atributos ["id"] = "footerLeft";
-				// $atributos ["estilo"] = "textoIzquierda";
+				$atributos ["id"] = "colm1";
 				echo $this->miFormulario->division ( "inicio", $atributos );
 				unset ( $atributos );
 				{
@@ -114,14 +113,33 @@ class registrarForm {
 				
 				echo $this->miFormulario->division ( "fin" );
 				
-				$atributos ["id"] = "footerRight";
+				$atributos ["id"] = "colm2";
+				echo $this->miFormulario->division ( "inicio", $atributos );
+				unset ( $atributos );
+				{
+					
+					$esteCampo = 'link_facebook';
+					
+					$atributos ['id'] = $esteCampo;
+					$atributos ['enlace'] = "https://www.google.com/";
+					$atributos ['tabIndex'] = 1;
+					// $atributos ['estilo'] = 'jquery';
+					$atributos ['enlaceImagen'] = $this->miConfigurador->getVariableConfiguracion ( 'rutaUrlBloque' ) . 'imagen/escudo.png';
+					$atributos ['ancho'] = '60px';
+					$atributos ['alto'] = '80px';
+					echo $this->miFormulario->enlace ( $atributos );
+					unset ( $atributos );
+				}
+				
+				echo $this->miFormulario->division ( "fin" );
+				
+				$atributos ["id"] = "colm3";
 				$atributos ["estilo"] = "textoDerecha";
 				echo $this->miFormulario->division ( "inicio", $atributos );
 				unset ( $atributos );
 				{
-					setlocale(LC_ALL,"es_ES");
-					$fecha = strftime("%A %d de %B del %Y");
-					
+					setlocale ( LC_ALL, "es_ES" );
+					$fecha = strftime ( "%A %d de %B del %Y" );
 					
 					$esteCampo = 'fecha';
 					$atributos ["id"] = $esteCampo;
@@ -132,34 +150,74 @@ class registrarForm {
 					$tab ++;
 					echo $this->miFormulario->campoTexto ( $atributos );
 					unset ( $atributos );
-		
-// 					// ---------------- CONTROL: Cuadro de Texto --------------------------------------------------------
-// 					$esteCampo = 'link_facebook';
 					
-// 					$atributos ['id'] = $esteCampo;
-// 					$atributos ['enlace'] = "https://www.google.com/";
-// 					$atributos ['tabIndex'] = 1;
-// 					// $atributos ['estilo'] = 'jquery';
-// 					$atributos ['enlaceImagen'] = $this->miConfigurador->getVariableConfiguracion ( 'rutaUrlBloque' ) . 'imagen/escudo.png';
-// 					$atributos ['ancho'] = '10%';
-// 					$atributos ['alto'] = '10%';
-// 					$atributos ['saltoLinea'] = true;
-// 					echo $this->miFormulario->enlace ( $atributos );
-					
-// 					unset ( $atributos );
-					
-					$esteCampo = 'link_facebook';
-					
-					$atributos ['id'] = $esteCampo;
-					$atributos ['enlace'] = "https://www.google.com/";
-					$atributos ['tabIndex'] = 1;
-					// $atributos ['estilo'] = 'jquery';
-					$atributos ['enlaceImagen'] = $this->miConfigurador->getVariableConfiguracion ( 'rutaUrlBloque' ) . 'imagen/escudo.png';
-					$atributos ['ancho'] = '10%';
-					$atributos ['alto'] = '10%';
-					echo $this->miFormulario->enlace ( $atributos );
-					
+					$atributos ["id"] = "cssclock";
+					echo $this->miFormulario->division ( "inicio", $atributos );
 					unset ( $atributos );
+					{
+						
+						$atributos ["id"] = "clockdigital";
+						
+						echo $this->miFormulario->division ( "inicio", $atributos );
+						unset ( $atributos );
+						{
+							
+							$esteCampo = 'digitalhour';
+							$atributos ['id'] = $esteCampo;
+							$atributos ['enlace'] = "https://www.google.com/";
+							$atributos ['tabIndex'] = 1;
+							// $atributos ['estilo'] = 'jquery';
+							$atributos ['imagen'] = $this->miConfigurador->getVariableConfiguracion ( 'rutaUrlBloque' ) . 'imagen/digitalhours.gif';
+							// $atributos ['ancho'] = '60px';
+							// $atributos ['alto'] = '80px';
+							$atributos ['etiqueta'] = 'Clocks hours';
+							$atributos ['saltoLinea'] = true;
+							echo $this->miFormulario->grafico ( $atributos );
+							unset ( $atributos );
+							
+							$esteCampo = 'digitalminute';
+							$atributos ['id'] = $esteCampo;
+							$atributos ['enlace'] = "https://www.google.com/";
+							$atributos ['tabIndex'] = 1;
+							$atributos ['imagen'] = $this->miConfigurador->getVariableConfiguracion ( 'rutaUrlBloque' ) . 'imagen/digitalminutes.gif';
+							// $atributos ['ancho'] = '60px';
+							// $atributos ['alto'] = '80px';
+							$atributos ['etiqueta'] = 'Clocks minutes';
+							$atributos ['saltoLinea'] = true;
+							echo $this->miFormulario->grafico ( $atributos );
+							unset ( $atributos );
+							
+							$esteCampo = 'digitalsecond';
+							$atributos ['id'] = $esteCampo;
+							$atributos ['enlace'] = "https://www.google.com/";
+							$atributos ['tabIndex'] = 1;
+							$atributos ['imagen'] = $this->miConfigurador->getVariableConfiguracion ( 'rutaUrlBloque' ) . 'imagen/digitalseconds.gif';
+							// $atributos ['ancho'] = '60px';
+							// $atributos ['alto'] = '80px';
+							$atributos ['etiqueta'] = 'Clocks seconds';
+							$atributos ['saltoLinea'] = true;
+							echo $this->miFormulario->grafico ( $atributos );
+							unset ( $atributos );
+							
+							$atributos ["id"] = "ventana1";
+							echo $this->miFormulario->division ( "inicio", $atributos );
+							unset ( $atributos );
+							{
+							}
+							echo $this->miFormulario->division ( "fin" );
+							
+							$atributos ["id"] = "ventana2";
+							echo $this->miFormulario->division ( "inicio", $atributos );
+							unset ( $atributos );
+							{
+							}
+							echo $this->miFormulario->division ( "fin" );
+						}
+						
+						echo $this->miFormulario->division ( "fin" );
+					}
+					
+					echo $this->miFormulario->division ( "fin" );
 				}
 				
 				echo $this->miFormulario->division ( "fin" );

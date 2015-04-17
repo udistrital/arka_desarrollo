@@ -16,13 +16,69 @@
 }
 
 
+#cssclock{
+	
+	height:270px;
+	
+	
+}
+
+
+#ventana1{
+	
+opacity: 0.8;	
+	
+}
 
 
 
 
+#ventana2{
+	
+opacity: 0.8;	
+	
+}
 
-#footerRight {
-width: 46%; 
+
+#clockdigital img {
+    border: 0 none;
+    display: block;
+    height: 500px;
+    left: -385px;
+    margin: 0;
+    padding: 0;
+    position: absolute;
+    top: -215px;
+    width: 500px;
+}	
+
+
+
+ #clockdigital {
+    background: url(../imagen/digital2.gif) no-repeat scroll 44px 26px #012345;
+    background-size:32% 20%;
+    float: right;
+    height: 62px;
+    margin: 0;
+    overflow: hidden;
+    padding: 0;
+    position: relative;
+    width: 121px;
+}
+
+#clockdigital div {
+    background: none repeat scroll 0 0 #012345;
+    
+    position: float;
+    
+}
+#clockdigital div:last-child {
+    bottom: 0;
+}
+
+
+#colm3 {
+width: 35%; 
 float: right;
 display: block;
 margin: auto;
@@ -31,9 +87,9 @@ margin: auto;
 }
 
 
-#footerLeft { 
+#colm1 { 
 	
-    width: 46%; 
+    width: 35%; 
     float: left; 
     display: block; 
     height: 50px;
@@ -43,6 +99,21 @@ margin: auto;
 
 
 }
+
+
+#colm2{ 
+	
+    width: 35%; 
+    float: left; 
+    display: block; 
+    height: 50px;
+    left: 0;
+    margin: 0%;
+
+
+
+}
+
 
 
 #escudo {

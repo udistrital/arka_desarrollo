@@ -25,3 +25,20 @@ $cadena = $this->miConfigurador->fabricaConexiones->crypto->codificar_url ( $cad
 // URL definitiva
 $urlFinal = $url . $cadena;
 
+?>
+<script type='text/javascript'>
+
+
+
+var bScriptLoaded = false;
+var bDOMLoaded = false;
+var bClocksInitialised = false;
+function ClockInit() {
+			if ((bClocksInitialised != true) && (bDOMLoaded == true) && (bScriptLoaded == true)) {
+					bClocksInitialised = true;
+					oClockDigital.fInit();
+			}
+} 
+ 
+
+</script>
