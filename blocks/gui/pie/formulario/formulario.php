@@ -3,7 +3,7 @@ if (! isset ( $GLOBALS ["autorizado"] )) {
 	include ("../index.php");
 	exit ();
 }
-class registrarForm {
+class pie {
 	var $miConfigurador;
 	var $lenguaje;
 	var $miFormulario;
@@ -88,7 +88,6 @@ class registrarForm {
 					
 					// ---------------- CONTROL: Cuadro de Texto --------------------------------------------------------
 					$esteCampo = 'link_reso';
-					
 					$atributos ['id'] = $esteCampo;
 					$atributos ['enlace'] = $this->miConfigurador->getVariableConfiguracion ( 'rutaUrlBloque' ) . 'imagen/escudo.png';
 					$atributos ['tabIndex'] = 1;
@@ -118,10 +117,19 @@ class registrarForm {
 				unset ( $atributos );
 				{
 					
-					$esteCampo = 'link_facebook';
+					$esteCampo = 'otrasRedes ';
+					$atributos ["id"] = $esteCampo;
+					$atributos ["estilo"] = $esteCampo;
+					$atributos ['columnas'] = 1;
+					$atributos ["estilo"] = "textoSubtituloCursiva";
+					$atributos ['texto'] = $this->lenguaje->getCadena ( $esteCampo );
+					$tab ++;
+					echo $this->miFormulario->campoTexto ( $atributos );
+					unset ( $atributos );
 					
+					$esteCampo = 'enlaceDistrital';
 					$atributos ['id'] = $esteCampo;
-					$atributos ['enlace'] = "https://www.google.com/";
+					$atributos ['enlace'] = $this->lenguaje->getCadena ( $esteCampo );
 					$atributos ['tabIndex'] = 1;
 					// $atributos ['estilo'] = 'jquery';
 					$atributos ['enlaceImagen'] = $this->miConfigurador->getVariableConfiguracion ( 'rutaUrlBloque' ) . 'imagen/escudo.png';
@@ -129,6 +137,32 @@ class registrarForm {
 					$atributos ['alto'] = '80px';
 					echo $this->miFormulario->enlace ( $atributos );
 					unset ( $atributos );
+					
+					$esteCampo = 'enlaceCondor';
+					$atributos ['id'] = $esteCampo;
+					$atributos ['enlace'] = $this->lenguaje->getCadena ( $esteCampo );
+					$atributos ['tabIndex'] = 1;
+					// $atributos ['estilo'] = 'jquery';
+					$atributos ['enlaceImagen'] = $this->miConfigurador->getVariableConfiguracion ( 'rutaUrlBloque' ) . 'imagen/condor.png';
+					$atributos ['ancho'] = '120px';
+					$atributos ['alto'] = '80px';
+					$atributos ['saltoLinea'] =false;
+					echo $this->miFormulario->enlace ( $atributos );
+					unset ( $atributos );
+					
+					
+					$esteCampo = 'enlaceProveedores';
+					$atributos ['id'] = $esteCampo;
+					$atributos ['enlace'] = $this->lenguaje->getCadena ( $esteCampo );
+					$atributos ['tabIndex'] = 1;
+					// $atributos ['estilo'] = 'jquery';
+					$atributos ['enlaceImagen'] = $this->miConfigurador->getVariableConfiguracion ( 'rutaUrlBloque' ) . 'imagen/provee.png';
+					$atributos ['ancho'] = '80px';
+					$atributos ['alto'] = '90px';
+					echo $this->miFormulario->enlace ( $atributos );
+					unset ( $atributos );
+					
+					
 				}
 				
 				echo $this->miFormulario->division ( "fin" );
@@ -138,6 +172,73 @@ class registrarForm {
 				echo $this->miFormulario->division ( "inicio", $atributos );
 				unset ( $atributos );
 				{
+					
+					$atributos ["id"] = "clockdigital";
+					echo $this->miFormulario->division ( "inicio", $atributos );
+					unset ( $atributos );
+					{
+						
+						?>
+
+<img id="digitalhour" alt="Clocks hours"
+	src="<?php echo $this->miConfigurador->getVariableConfiguracion ( 'rutaUrlBloque' ) . 'imagen/digitalhours.gif';?>">
+<img id="digitalminute" alt="Clocks minutes"
+	src="<?php echo$this->miConfigurador->getVariableConfiguracion ( 'rutaUrlBloque' ) . 'imagen/digitalminutes.gif'; ?>">
+<img id="digitalsecond" alt="Clocks seconds"
+	src="<?php echo $this->miConfigurador->getVariableConfiguracion ( 'rutaUrlBloque' ) . 'imagen/digitalseconds.gif';?>">
+
+
+<div></div>
+<div></div>
+
+<?php
+						
+						// $atributos ["id"] = "ventana1";
+						// echo $this->miFormulario->division ( "inicio", $atributos );
+						// unset ( $atributos );
+						// {
+						// }
+						
+						// $esteCampo = 'digitalsecond';
+						// $atributos ['id'] = $esteCampo;
+						// $atributos ['imagen'] = $this->miConfigurador->getVariableConfiguracion ( 'rutaUrlBloque' ) . 'imagen/digitalseconds.gif';
+						// // $atributos ['ancho'] = '60px';
+						// // $atributos ['alto'] = '80px';
+						// // $atributos ['etiqueta'] = 'Clocks seconds';
+						// $atributos ['saltoLinea'] = true;
+						// echo $this->miFormulario->grafico ( $atributos );
+						// unset ( $atributos );
+						
+						// $esteCampo = 'digitalminute';
+						// $atributos ['id'] = $esteCampo;
+						// $atributos ['imagen'] = $this->miConfigurador->getVariableConfiguracion ( 'rutaUrlBloque' ) . 'imagen/digitalminutes.gif';
+						// // $atributos ['ancho'] = '60px';
+						// // $atributos ['alto'] = '80px';
+						// // $atributos ['etiqueta'] = 'Clocks minutes';
+						// $atributos ['saltoLinea'] = true;
+						// echo $this->miFormulario->grafico ( $atributos );
+						// unset ( $atributos );
+						
+						// $esteCampo = 'digitalhour';
+						// $atributos ['id'] = $esteCampo;
+						// $atributos ['imagen'] = $this->miConfigurador->getVariableConfiguracion ( 'rutaUrlBloque' ) . 'imagen/digitalhours.gif';
+						// // $atributos ['etiqueta'] = 'Clocks hours';
+						// $atributos ['saltoLinea'] = true;
+						// echo $this->miFormulario->grafico ( $atributos );
+						// unset ( $atributos );
+						
+						// echo $this->miFormulario->division ( "fin" );
+						
+						// $atributos ["id"] = "ventana2";
+						// echo $this->miFormulario->division ( "inicio", $atributos );
+						// unset ( $atributos );
+						// {
+						// }
+						// echo $this->miFormulario->division ( "fin" );
+					}
+					
+					echo $this->miFormulario->division ( "fin" );
+					
 					setlocale ( LC_ALL, "es_ES" );
 					$fecha = strftime ( "%A %d de %B del %Y" );
 					
@@ -155,66 +256,6 @@ class registrarForm {
 					echo $this->miFormulario->division ( "inicio", $atributos );
 					unset ( $atributos );
 					{
-						
-						$atributos ["id"] = "clockdigital";
-						
-						echo $this->miFormulario->division ( "inicio", $atributos );
-						unset ( $atributos );
-						{
-							
-							$esteCampo = 'digitalhour';
-							$atributos ['id'] = $esteCampo;
-							$atributos ['enlace'] = "https://www.google.com/";
-							$atributos ['tabIndex'] = 1;
-							// $atributos ['estilo'] = 'jquery';
-							$atributos ['imagen'] = $this->miConfigurador->getVariableConfiguracion ( 'rutaUrlBloque' ) . 'imagen/digitalhours.gif';
-							// $atributos ['ancho'] = '60px';
-							// $atributos ['alto'] = '80px';
-							$atributos ['etiqueta'] = 'Clocks hours';
-							$atributos ['saltoLinea'] = true;
-							echo $this->miFormulario->grafico ( $atributos );
-							unset ( $atributos );
-							
-							$esteCampo = 'digitalminute';
-							$atributos ['id'] = $esteCampo;
-							$atributos ['enlace'] = "https://www.google.com/";
-							$atributos ['tabIndex'] = 1;
-							$atributos ['imagen'] = $this->miConfigurador->getVariableConfiguracion ( 'rutaUrlBloque' ) . 'imagen/digitalminutes.gif';
-							// $atributos ['ancho'] = '60px';
-							// $atributos ['alto'] = '80px';
-							$atributos ['etiqueta'] = 'Clocks minutes';
-							$atributos ['saltoLinea'] = true;
-							echo $this->miFormulario->grafico ( $atributos );
-							unset ( $atributos );
-							
-							$esteCampo = 'digitalsecond';
-							$atributos ['id'] = $esteCampo;
-							$atributos ['enlace'] = "https://www.google.com/";
-							$atributos ['tabIndex'] = 1;
-							$atributos ['imagen'] = $this->miConfigurador->getVariableConfiguracion ( 'rutaUrlBloque' ) . 'imagen/digitalseconds.gif';
-							// $atributos ['ancho'] = '60px';
-							// $atributos ['alto'] = '80px';
-							$atributos ['etiqueta'] = 'Clocks seconds';
-							$atributos ['saltoLinea'] = true;
-							echo $this->miFormulario->grafico ( $atributos );
-							unset ( $atributos );
-							
-							$atributos ["id"] = "ventana1";
-							echo $this->miFormulario->division ( "inicio", $atributos );
-							unset ( $atributos );
-							{
-							}
-							echo $this->miFormulario->division ( "fin" );
-							
-							$atributos ["id"] = "ventana2";
-							echo $this->miFormulario->division ( "inicio", $atributos );
-							unset ( $atributos );
-							{
-							}
-							echo $this->miFormulario->division ( "fin" );
-						}
-						
-						echo $this->miFormulario->division ( "fin" );
 					}
 					
 					echo $this->miFormulario->division ( "fin" );
@@ -233,7 +274,7 @@ class registrarForm {
 		return true;
 	}
 }
-$miSeleccionador = new registrarForm ( $this->lenguaje, $this->miFormulario );
+$miSeleccionador = new pie ( $this->lenguaje, $this->miFormulario );
 
 $miSeleccionador->miForm ();
 ?>

@@ -8,12 +8,15 @@ $this->idioma["mensajePie"]="
 $this->idioma["mensajeResolucion"]="Si desea consultar la Resolución No.001 de 2001.
 		 Dirijase al Siguiente link :";
 
+$this->idioma["otrasRedes"]="Otros Sistemas :";
 
 
 $this->idioma["link_reso"]="&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspResolución No.001 de 2001";
 
 
-$this->idioma['enlaceDistrital']='Portal Universidad Distrital|http://www.udistrital.edu.co/';
-$this->idioma['enlaceCondor']='Sistema de Información Institucional|https://condor.udistrital.edu.co/appserv/';
+$this->idioma['enlaceDistrital']='http://www.udistrital.edu.co/';
+$this->idioma['enlaceCondor']='https://condor.udistrital.edu.co/appserv/';
+$this->idioma['enlaceProveedores']='https://portalws.udistrital.edu.co/proveedor/';
+
 
 ?>

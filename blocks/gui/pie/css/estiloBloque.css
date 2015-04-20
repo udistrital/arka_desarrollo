@@ -2,8 +2,7 @@
 #pie{
 	border: 0;
 	width: 20;
-	
-	display: block;
+	isplay: block;
     background-image: url(../imagen/wall.png);
     background-size: 35% ;	
     
@@ -26,7 +25,7 @@
 
 #ventana1{
 	
-opacity: 0.5;	
+opacity: 1;	
 	
 }
 
@@ -35,7 +34,7 @@ opacity: 0.5;
 
 #ventana2{
 	
-opacity: 0.5;	
+opacity: 0.8;	
 	
 }
 
@@ -52,23 +51,6 @@ opacity: 0.5;
     width: 500px;
 }	
 
-
-
-#ventana1{
-    background: none repeat scroll 0 0 #012345;
-    height: 22px;
-    position: absolute;
-    width: 120px;
- }
-
-
-
-#ventana2{
-    background: none repeat scroll 0 0 #012345;
-    height: 18px;
-    position: absolute;
-    width: 119px;
- }
 
 
 
@@ -88,12 +70,18 @@ opacity: 0.5;
 
 #clockdigital div {
     background: none repeat scroll 0 0 #012345;
-    
-    position: float;
-    
+    height: 21px;
+    position: absolute;
+    width: 121px;
+    opacity: 0.8;	
 }
 #clockdigital div:last-child {
     bottom: 0;
+}
+
+
+element.style {
+    opacity: 0.8;
 }
 
 
