@@ -1679,7 +1679,7 @@ class registrarForm {
 						$atributos ['ajax_function'] = "";
 						$atributos ['ajax_control'] = $esteCampo;
 						$atributos ['estilo'] = "jqueryui";
-						$atributos ['validar'] = "required";
+						$atributos ['validar'] = "";
 						$atributos ['limitar'] = true;
 						$atributos ['anchoCaja'] = 100;
 						$atributos ['miEvento'] = '';

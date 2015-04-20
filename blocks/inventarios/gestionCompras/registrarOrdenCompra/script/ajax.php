@@ -241,7 +241,6 @@ $urlFinal15 = $url . $cadena15;
 ?>
 <script type='text/javascript'>
 
-
 function valorLetras(elem, request, response){
 	  $.ajax({
 	    url: "<?php echo $urlFinal9?>",
