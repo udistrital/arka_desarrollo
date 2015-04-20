@@ -1,7 +1,7 @@
 <?
 
 namespace inventarios\gestionCompras\registrarOrdenCompra\funcion;
-// var_dump($_REQUEST);
+
 use inventarios\gestionCompras\registrarOrdenCompra\funcion\redireccion;
 
 $ruta = $this->miConfigurador->getVariableConfiguracion ( "raizDocumento" );
@@ -10,7 +10,6 @@ $host = $this->miConfigurador->getVariableConfiguracion ( "host" ) . $this->miCo
 
 include ($ruta . "/plugin/html2pdf/html2pdf.class.php");
 
-// ob_end_clean();
 if (! isset ( $GLOBALS ["autorizado"] )) {
 	include ("../index.php");
 	exit ();
@@ -30,17 +29,31 @@ class RegistradorOrden {
 		$this->miFuncion = $funcion;
 	}
 	function documento() {
+		$conexion = "sicapital";
+		$esteRecursoDBO = $this->miConfigurador->fabricaConexiones->getRecursoDB ( $conexion );
+		
 		$conexion = "inventarios";
 		$esteRecursoDB = $this->miConfigurador->fabricaConexiones->getRecursoDB ( $conexion );
 		
 		$directorio = $this->miConfigurador->getVariableConfiguracion ( 'rutaUrlBloque' );
-		var_dump($_REQUEST);
 		
-		$cadenaSql = $this->miSql->getCadenaSql ( 'consultarOrdenCompra', $_REQUEST['numero_orden'] );
+		$cadenaSql = $this->miSql->getCadenaSql ( 'consultarOrdenCompra', $_REQUEST ['numero_orden'] );
 		$ordenCompra = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
-		var_dump($ordenCompra);
+		$ordenCompra = $ordenCompra [0];
 		
-		$contenidoPagina = "<page backtop='1mm' backbottom='1mm' backleft='1mm' backright='1mm'>";
+		$cadenaSql = $this->miSql->getCadenaSql ( 'informacionPresupuestal', $ordenCompra ['info_presupuestal'] );
+		$info_presupuestal = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
+		$info_presupuestal = $info_presupuestal [0];
+		var_dump($info_presupuestal);
+		
+		
+		var_dump ( $ordenCompra );
+		
+		$cadenaSql = $this->miSql->getCadenaSql ( 'informacion_proveedor', $ordenCompra ['id_proveedor'] );
+		$proveedor = $esteRecursoDBO->ejecutarAcceso ( $cadenaSql, "busqueda" );
+		$proveedor=$proveedor[0];
+		
+		$contenidoPagina = "<page backtop='20mm' backbottom='20mm' backleft='20mm' backright='20mm'>";
 		$contenidoPagina .= "<page_header>
 		
         <table align='center' style='width: 100%;'>
@@ -52,6 +65,8 @@ class RegistradorOrden {
                     <font size='9px'><b>UNIVERSIDAD DISTRITAL FRANCISCO JOSÉ DE CALDAS </b></font>
                     <br>
                     <font size='7px'><b>NIT: 899.999.230-7</b></font>
+                    <br>
+                    <font size='3px'>CARRERA 7 No. 40-53 PISO 7. TELEFONO 3239300 EXT. 2609 -2605</font>
                     <br>		
                     <font size='5px'>www.udistrital.edu.co</font>
                     <br>
@@ -61,17 +76,33 @@ class RegistradorOrden {
                     <img src='" . $directorio . "/css/images/sabio.jpg' width='80' height='100'>
                 </td>
             </tr>
+                    		<br>
+                    		<br>
         </table>
+           		<table align='center' style='width: 100%;'>    		
+		                 <tr> 
+		                 	<td align='left'>
+		                    	<b>ORDEN DE COMPRA Nro." . $_REQUEST ['numero_orden'] . "</b></td>
+		                	<td align='right'>
+		                    	<b>FECHA :" . $ordenCompra ['fecha_registro'] . "</b><td>
+				           </tr>
+               </table>
+		                    			
+			  <table align='center' style='width: 100%;'>    		
+		                 <tr> 
+		                 	<td align='left'>
+		                    	<b>Disponibilidad:  Nro." . $info_presupuestal ['numero_dispo'] . "</b></td>
+		                	<td align='right'>
+		                    	<b>Vigencia :" . $info_presupuestal ['fecha_registro'] . "</b><td>
+				           </tr>
+               </table>		                    			
+		                    			
+		                    			
+	         <br>
+             <br>   
+				
+             		
     </page_header>
-                    		
-                    		<body>
-                    		
-                    		
-                    			
-                    		
-                    		</body>
-                    		
-                    		
                     		
     <page_footer>
         <table align='center' width = '100%'>
@@ -138,28 +169,25 @@ td{
 	
 ";
 		
-// 		$contenidoPagina .= $contenidoDatos;
-		
 		$contenidoPagina .= "   	  </table>";
 		
 		$contenidoPagina .= "</page> ";
 		echo $contenidoPagina;
+		exit ();
 		return $contenidoPagina;
-		exit;
-		
 	}
 }
 
 $miRegistrador = new RegistradorOrden ( $this->lenguaje, $this->sql, $this->funcion );
 
-$textos=$miRegistrador->documento ();
+$textos = $miRegistrador->documento ();
 
-// ob_start ();
-// $html2pdf = new \HTML2PDF ( 'L', 'LETTER', 'es' );
+ob_start ();
+$html2pdf = new \HTML2PDF ( 'P', 'LETTER', 'es' );
 
-// $html2pdf->WriteHTML ( $textos );
+$html2pdf->WriteHTML ( $textos );
 
-// $html2pdf->Output ( 'Compra.pdf', 'D' );
+$html2pdf->Output ( 'Compra.pdf', 'D' );
 
 ?>
 

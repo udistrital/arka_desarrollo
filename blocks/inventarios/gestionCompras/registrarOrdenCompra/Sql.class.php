@@ -542,16 +542,10 @@ class Sql extends \Sql {
 				
 				break;
 			
-			// SELECT id_orden_compra, fecha_registro, info_presupuestal, rubro, obligaciones_proveedor,
-			// obligaciones_contratista, poliza1, poliza2, poliza3, poliza4,
-			// poliza5, lugar_entrega, destino, tiempo_entrega, forma_pago,
-			// supervision, inhabilidades, id_proveedor, ruta_cotizacion, nombre_cotizacion,
-			// id_dependencia, id_contratista, id_ordenador, subtotal, iva,
-			// total, valor_letras, vig_contratista, estado
-			
+
 			case 'consultarOrdenCompra' :
 				
-				$cadenaSql = " SELECT info_presupuestal, rubro, obligaciones_proveedor,  ";
+				$cadenaSql = " SELECT info_presupuestal,fecha_registro, rubro, obligaciones_proveedor,  ";
 				$cadenaSql .= " obligaciones_contratista, poliza1, poliza2, poliza3, poliza4,";
 				$cadenaSql .= " poliza5, lugar_entrega, destino, tiempo_entrega, forma_pago,";
 				$cadenaSql .= " supervision, inhabilidades, id_proveedor, ruta_cotizacion, nombre_cotizacion, ";
@@ -560,6 +554,18 @@ class Sql extends \Sql {
 				$cadenaSql .= " FROM orden_compra ";
 				$cadenaSql .= " WHERE  id_orden_compra='".$variable."';";
 				break;
+				
+				
+
+				case "informacionPresupuestal" :
+					$cadenaSql = "SELECT  vigencia_dispo, numero_dispo, valor_disp, fecha_dip,
+									letras_dispo, vigencia_regis, numero_regis, valor_regis, fecha_regis,
+									letras_regis  ";
+					$cadenaSql .= "FROM informacion_presupuestal_orden ";
+					$cadenaSql .= "WHERE id_informacion ='" . $variable . "' ";
+				
+					break;
+				
 		}
 		return $cadenaSql;
 	}
