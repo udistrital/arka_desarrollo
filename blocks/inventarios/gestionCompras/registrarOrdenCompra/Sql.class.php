@@ -541,6 +541,25 @@ class Sql extends \Sql {
 				$cadenaSql .= "'" . $variable [7] . "');";
 				
 				break;
+			
+			// SELECT id_orden_compra, fecha_registro, info_presupuestal, rubro, obligaciones_proveedor,
+			// obligaciones_contratista, poliza1, poliza2, poliza3, poliza4,
+			// poliza5, lugar_entrega, destino, tiempo_entrega, forma_pago,
+			// supervision, inhabilidades, id_proveedor, ruta_cotizacion, nombre_cotizacion,
+			// id_dependencia, id_contratista, id_ordenador, subtotal, iva,
+			// total, valor_letras, vig_contratista, estado
+			
+			case 'consultarOrdenCompra' :
+				
+				$cadenaSql = " SELECT info_presupuestal, rubro, obligaciones_proveedor,  ";
+				$cadenaSql .= " obligaciones_contratista, poliza1, poliza2, poliza3, poliza4,";
+				$cadenaSql .= " poliza5, lugar_entrega, destino, tiempo_entrega, forma_pago,";
+				$cadenaSql .= " supervision, inhabilidades, id_proveedor, ruta_cotizacion, nombre_cotizacion, ";
+				$cadenaSql .= " id_dependencia, id_contratista, id_ordenador, subtotal, iva,";
+				$cadenaSql .= " total, valor_letras, vig_contratista";
+				$cadenaSql .= " FROM orden_compra ";
+				$cadenaSql .= " WHERE  id_orden_compra='".$variable."';";
+				break;
 		}
 		return $cadenaSql;
 	}
