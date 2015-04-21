@@ -582,6 +582,32 @@ class Sql extends \Sql {
 				$cadenaSql .= " FROM items_orden_compra ";
 				$cadenaSql .= " WHERE id_orden='" . $variable . "'";
 				break;
+			case "consultarDestino" :
+				$cadenaSql = "SELECT descripcion ";
+				$cadenaSql .= "FROM destino_orden ";
+				$cadenaSql .= "WHERE id_destino='" . $variable . "'";
+				
+				break;
+			case "consultar_forma_pago" :
+				$cadenaSql = "SELECT  descripcion ";
+				$cadenaSql .= "FROM forma_pago_orden  ";
+				$cadenaSql .= "WHERE  id_forma_pago='" . $variable . "';";
+				
+				break;
+			
+			case "consultarContratista" :
+				$cadenaSql = "SELECT CON_IDENTIFICACION , CON_NOMBRE AS CONTRATISTA ";
+				$cadenaSql .= "FROM CONTRATISTAS ";
+				$cadenaSql .= "WHERE CON_VIGENCIA ='" . $variable [1]. "' ";
+				$cadenaSql .= "AND  CON_IDENTIFICADOR ='" . $variable [0]. "' ";
+				break;
+
+				case "consultarOrdenador_gasto" :
+					$cadenaSql = " 	SELECT ORG_ORDENADOR_GASTO,ORG_NOMBRE ";
+					$cadenaSql .= " FROM ORDENADORES_GASTO ";
+					$cadenaSql .= " WHERE ORG_IDENTIFICADOR ='".$variable."'";
+					break;
+				
 		}
 		return $cadenaSql;
 	}

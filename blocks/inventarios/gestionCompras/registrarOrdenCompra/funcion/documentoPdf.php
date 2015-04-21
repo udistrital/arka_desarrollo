@@ -341,7 +341,28 @@ class RegistradorOrden {
 			<td style='width:50%;text-align:left;background:#FFFFFF ; border: 0px  #FFFFFF;'>C.C: " . $contratista[0]. "</td>
 			<td style='width:50%;text-align:left;background:#FFFFFF ; border: 0px  #FFFFFF;'>" . $ordenador[0]. "</td>
 			</tr>							
-			</table>						
+			</table>
+<page_footer  backleft='10mm' backright='10mm'>
+			<table style='width:100%;'>		
+			<tr>
+			<td style='width:100%;text-align:left;'><font size='1px'>Para el respectivo pago deberá radicar en la sección de compras la factura o cuenta de cobro, pago de aportes para fiscales o planilla de pago si es el caso, certificación bancaria indicando tipo y numero de cuenta y el cumplido a satisfacción del bien debidamente firmado por el supervisor del contrato o el funcionario quien recibe el bien.</font></td>	
+			</tr>
+			</table>
+			<table style='width:100%;'>		
+			<tr>
+			<td style='width:50%;text-align:left;'>Proveedor : </td>
+			<td style='width:50%;text-align:left;'>Nombre de quien recibe : </td>			
+			</tr>
+			</table>
+			<table style='width:100%;'>		
+			<tr>
+			<td style='width:33.31%;'>Firma : </td>
+			<td style='width:33.31%;'>Fecha : </td>
+			<td style='width:33.31%;'>Sello : </td>			
+			</tr>
+			</table>		
+</page_footer> 
+					
 					
 				";
 		
