@@ -44,24 +44,66 @@ class RegistradorOrden {
 		$cadenaSql = $this->miSql->getCadenaSql ( 'informacionPresupuestal', $ordenCompra ['info_presupuestal'] );
 		$info_presupuestal = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
 		$info_presupuestal = $info_presupuestal [0];
-		var_dump($info_presupuestal);
-		
-		
-		var_dump ( $ordenCompra );
 		
 		$cadenaSql = $this->miSql->getCadenaSql ( 'informacion_proveedor', $ordenCompra ['id_proveedor'] );
 		$proveedor = $esteRecursoDBO->ejecutarAcceso ( $cadenaSql, "busqueda" );
 		$proveedor=$proveedor[0];
 		
-		$contenidoPagina = "<page backtop='20mm' backbottom='20mm' backleft='20mm' backright='20mm'>";
-		$contenidoPagina .= "<page_header>
 		
-        <table align='center' style='width: 100%;'>
+		$cotizacion=($ordenCompra['nombre_cotizacion']!='')?'SI':'NO';
+		
+		
+		$cadenaSql = $this->miSql->getCadenaSql ( 'consultarRubro', $ordenCompra ['rubro'] );
+		$rubro = $esteRecursoDBO->ejecutarAcceso ( $cadenaSql, "busqueda" );
+		$rubro=$rubro[0];
+		
+		
+// 		var_dump ( $ordenCompra );
+// 		var_dump($info_presupuestal);
+// 		var_dump($proveedor);
+		$contenidoPagina = "
+<style type=\"text/css\">
+    table { 
+        color:#333; /* Lighten up font color */
+        font-family:Helvetica, Arial, sans-serif; /* Nicer font */
+		
+        border-collapse:collapse; border-spacing: 3px; 
+    }
+
+    td, th { 
+        border: 1px solid #CCC; 
+        height: 13px;
+    } /* Make cells a bit taller */
+
+	col{
+	width=50%;
+	
+	}			
+				
+    th {
+        background: #F3F3F3; /* Light grey background */
+        font-weight: bold; /* Make sure they're bold */
+        text-align: center;
+        font-size:10px
+    }
+
+    td {
+        background: #FAFAFA; /* Lighter grey background */
+        text-align: left;
+        font-size:10px
+    }
+</style>				
+				
+				
+<page backtop='10mm' backbottom='10mm' backleft='10mm' backright='10mm'>
+	
+
+        <table align='left' style='width:100%;' >
             <tr>
                 <td align='center' >
                     <img src='" . $directorio . "/css/images/escudo.png'  width='80' height='100'>
                 </td>
-                <td align='center' >
+                <td align='center' style='width:88%;' >
                     <font size='9px'><b>UNIVERSIDAD DISTRITAL FRANCISCO JOSÉ DE CALDAS </b></font>
                     <br>
                     <font size='7px'><b>NIT: 899.999.230-7</b></font>
@@ -72,108 +114,43 @@ class RegistradorOrden {
                     <br>
                     <font size='4px'>" . date ( "Y-m-d" ) . "</font>
                 </td>
-                <td align='center' >
-                    <img src='" . $directorio . "/css/images/sabio.jpg' width='80' height='100'>
-                </td>
             </tr>
-                    		<br>
-                    		<br>
         </table>
-           		<table align='center' style='width: 100%;'>    		
-		                 <tr> 
-		                 	<td align='left'>
-		                    	<b>ORDEN DE COMPRA Nro." . $_REQUEST ['numero_orden'] . "</b></td>
-		                	<td align='right'>
-		                    	<b>FECHA :" . $ordenCompra ['fecha_registro'] . "</b><td>
-				           </tr>
-               </table>
-		                    			
-			  <table align='center' style='width: 100%;'>    		
-		                 <tr> 
-		                 	<td align='left'>
-		                    	<b>Disponibilidad:  Nro." . $info_presupuestal ['numero_dispo'] . "</b></td>
-		                	<td align='right'>
-		                    	<b>Vigencia :" . $info_presupuestal ['fecha_registro'] . "</b><td>
-				           </tr>
-               </table>		                    			
-		                    			
-		                    			
-	         <br>
-             <br>   
-				
-             		
-    </page_header>
+	
+
                     		
-    <page_footer>
-        <table align='center' width = '100%'>
- 
-            <tr>
-                <td align='center'>
-                    Universidad Distrital Francisco José de Caldas
-                    <br>
-                    Todos los derechos reservados.
-                    <br>
-                    Carrera 8 N. 40-78 Piso 1 / PBX 3238400 - 3239300
-                    <br>
-              
-                </td>
-            </tr>
-        </table>
-    </page_footer>";
+       		<table style='width:100%;'>
+            <tr> 
+			<td style='width:50%;'>ORDEN DE COMPRA Nro.  " . $_REQUEST ['numero_orden'] . "</td>
+			<td style='width:50%;text-aling=right;'>FECHA DE ORDEN :  " . $ordenCompra ['fecha_registro'] . "</td> 			
+ 		 	</tr>
+			<tr> 
+			<td >Disponibilidad Presupuestal : Nro. " . $info_presupuestal ['numero_dispo'] . "</td>
+			<td>Vigencia Disponibilidad :  " . $info_presupuestal ['vigencia_dispo'] . "</td> 			
+ 		 	</tr>	
+		 	<tr> 
+			<td >Proveedor : " . $proveedor [0] . "</td>
+			<td>Nit :  " . $info_presupuestal ['1'] . "</td> 			
+ 		 	</tr>
+		    </table>	
+					                 		
+		    <table style='width:100%;'>
+			<tr> 
+			<td style='width:33.31%;'>Dirección : " . $proveedor [2] . "</td>
+			<td style='width:33.31%;'>Telefono :  " . $proveedor[3] . "</td>
+			<td style='width:33.31%;'>Cotización Adjunta:  " . $cotizacion. "</td> 			
+ 		 	</tr> 		          		
+ 			</table>	    
+					             		
+			<table style='width:100%;'>
+			<tr> 
+			<td style='width:100%;'>Rubro :  " . $rubro [0] . "</td>
+			</tr> 		          		
+ 			</table>		
+					
+		</page>";
 		
-		$contenidoPagina .= "
-     <table>
-            <tr>
-                <td>
-<br><br><br><br>
-                <p><h5>&nbsp; &nbsp; &nbsp; Este Documento en lista las Ordenes de Compra Segun la Consulta. </h5></p>
-	
-         
-                </td>
-            </tr>
-        </table>
-    <style>
-td{
-  font-size: 13px;
-}
-</style>
-	
-                		";
-		
-		$contenidoPagina .= "<table width=\"30%\" border=\"1\" cellpadding=\"0\" cellspacing=\"0\" class='bordered' align=\"center \">
-	
-	
-	
-						<thead>
-				<tr role='row'>
-					<th aria-label='Documento' aria-sort='ascending'
-						style='width: 100px;' colspan='1' rowspan='1'
-						aria-controls='example' tabindex='0' role='columnheader'
-						class='sorting_asc'>#Número Orden Compra</th>
-					<th aria-label='nombres' aria-sort='ascending'
-						style='width: 230px;' colspan='1' rowspan='1'
-						aria-controls='example' tabindex='0' role='columnheader'
-						class='sorting_asc'>Fecha Orden</th>
-					<th aria-label='Descripciont' aria-sort='ascending'
-						style='width: 200px;' colspan='1' rowspan='1'
-						aria-controls='example' tabindex='0' role='columnheader'
-						class='sorting_asc'>Nit Proveedor</th>
-					<th aria-label='Descripciont' aria-sort='ascending'
-						style='width: 180px;' colspan='1' rowspan='1'
-						aria-controls='example' tabindex='0' role='columnheader'
-						class='sorting_asc'>Dependencia Solicitante</th>
-					 
-				</tr>
-			</thead>
-	
-	
-";
-		
-		$contenidoPagina .= "   	  </table>";
-		
-		$contenidoPagina .= "</page> ";
-		echo $contenidoPagina;
-		exit ();
+// echo $contenidoPagina;exit;
 		return $contenidoPagina;
 	}
 }
@@ -183,8 +160,8 @@ $miRegistrador = new RegistradorOrden ( $this->lenguaje, $this->sql, $this->func
 $textos = $miRegistrador->documento ();
 
 ob_start ();
-$html2pdf = new \HTML2PDF ( 'P', 'LETTER', 'es' );
-
+$html2pdf = new \HTML2PDF ( 'P', 'LETTER', 'es' ,true,'UTF-8');
+$html2pdf->pdf->SetDisplayMode('fullpage');
 $html2pdf->WriteHTML ( $textos );
 
 $html2pdf->Output ( 'Compra.pdf', 'D' );
