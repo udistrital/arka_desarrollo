@@ -289,18 +289,7 @@ class RegistradorOrden {
 			<td style='width:10%;text-align:center;'>" . $poliza5 . "</td>		
 			</tr>					
 			</table>	
-			 
-			<table style='width:100%;'>		
-			<tr>
-			<td style='width:50%;text-align:left;'>Lugar Entrega : " . $ordenCompra ['lugar_entrega'] . "</td>	
-			<td style='width:50%;text-align:left;'>Destino :  " . $destino [0] . "</td>				
-			</tr>
-			<tr>
-			<td style='width:50%;text-align:left;'>Tiempo Entrega : " . $ordenCompra ['tiempo_entrega'] . " dias </td>	
-			<td style='width:50%;text-align:left;'>Forma de Pago :  " . $forma_pago [0] . "</td>				
-			</tr>							
-			</table>
-
+			
 			<table style='width:100%;'>		
 			<tr>
 			<td style='width:50%;text-align:left;'>Lugar Entrega : " . $ordenCompra ['lugar_entrega'] . "</td>	
