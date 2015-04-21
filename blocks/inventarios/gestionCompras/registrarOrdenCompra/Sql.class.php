@@ -542,7 +542,6 @@ class Sql extends \Sql {
 				
 				break;
 			
-
 			case 'consultarOrdenCompra' :
 				
 				$cadenaSql = " SELECT info_presupuestal,fecha_registro, rubro, obligaciones_proveedor,  ";
@@ -552,20 +551,37 @@ class Sql extends \Sql {
 				$cadenaSql .= " id_dependencia, id_contratista, id_ordenador, subtotal, iva,";
 				$cadenaSql .= " total, valor_letras, vig_contratista";
 				$cadenaSql .= " FROM orden_compra ";
-				$cadenaSql .= " WHERE  id_orden_compra='".$variable."';";
+				$cadenaSql .= " WHERE  id_orden_compra='" . $variable . "';";
 				break;
-				
-				
-
-				case "informacionPresupuestal" :
-					$cadenaSql = "SELECT  vigencia_dispo, numero_dispo, valor_disp, fecha_dip,
+			
+			case "informacionPresupuestal" :
+				$cadenaSql = "SELECT  vigencia_dispo, numero_dispo, valor_disp, fecha_dip,
 									letras_dispo, vigencia_regis, numero_regis, valor_regis, fecha_regis,
 									letras_regis  ";
-					$cadenaSql .= "FROM informacion_presupuestal_orden ";
-					$cadenaSql .= "WHERE id_informacion ='" . $variable . "' ";
+				$cadenaSql .= "FROM informacion_presupuestal_orden ";
+				$cadenaSql .= "WHERE id_informacion ='" . $variable . "' ";
 				
-					break;
+				break;
+			
+			case "consultarRubro" :
+				$cadenaSql = " SELECT RUB_NOMBRE_RUBRO ";
+				$cadenaSql .= " FROM RUBROS ";
+				$cadenaSql .= " WHERE  RUB_IDENTIFICADOR='" . $variable . "'";
 				
+				break;
+			
+			case "consultarDependencia" :
+				$cadenaSql = " SELECT *  ";
+				$cadenaSql .= "FROM DEPENDENCIAS ";
+				$cadenaSql .= "WHERE DEP_IDENTIFICADOR='" . $variable . "'";
+				break;
+			
+			case "consultarItems" :
+				$cadenaSql = " SELECT item, unidad_medida, cantidad, descripcion,
+				                   valor_unitario, valor_total, descuento ";
+				$cadenaSql .= " FROM items_orden_compra ";
+				$cadenaSql .= " WHERE id_orden='" . $variable . "'";
+				break;
 		}
 		return $cadenaSql;
 	}

@@ -57,10 +57,21 @@ class RegistradorOrden {
 		$rubro = $esteRecursoDBO->ejecutarAcceso ( $cadenaSql, "busqueda" );
 		$rubro=$rubro[0];
 		
+
+		$cadenaSql = $this->miSql->getCadenaSql ( 'consultarDependencia', $ordenCompra ['id_dependencia'] );
+		$dependencia = $esteRecursoDBO->ejecutarAcceso ( $cadenaSql, "busqueda" );
+		$dependencia=$dependencia[0];
 		
+		
+		$cadenaSql = $this->miSql->getCadenaSql ( 'consultarItems', $_REQUEST ['numero_orden'] );
+		$items = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
+
+		
+// 		var_dump($items);		
 // 		var_dump ( $ordenCompra );
 // 		var_dump($info_presupuestal);
 // 		var_dump($proveedor);
+// 		var_dump($dependencia);exit;
 		$contenidoPagina = "
 <style type=\"text/css\">
     table { 
@@ -116,8 +127,8 @@ class RegistradorOrden {
                 </td>
             </tr>
         </table>
-	
-
+	<br>
+	<br>
                     		
        		<table style='width:100%;'>
             <tr> 
@@ -146,9 +157,90 @@ class RegistradorOrden {
 			<tr> 
 			<td style='width:100%;'>Rubro :  " . $rubro [0] . "</td>
 			</tr> 		          		
+ 			</table>
+			<table style='width:100%;'>
+			<tr> 
+			<td style='width:100%;'>Dependencia Solicitante :  " . $dependencia [1] . "</td>
+			</tr> 		          		
+ 			</table>	
+			<table style='width:100%;'>
+			<tr> 
+			<td style='width:50%;'>Dirección :  " . $dependencia [2] . "</td>
+			<td style='width:50%;'>Telefono :  " . $dependencia [3] . "</td>
+			</tr> 		          		
+ 			</table>	
+			<br>		
+			<table style='width:100%;'>
+			<tr> 
+			<td style='width:100%;'>Descripción Solicitante : </td>
+			</tr> 		          		
  			</table>		
+			<table style='width:100%;'>
+			<tr> 
+			<td style='width:10%;text-align=center;'>Item</td>
+			<td style='width:15%;text-align=center;'>Unidad/Medida</td>
+			<td style='width:20%;text-align=center;'>Cantidad</td>
+			<td style='width:30%;text-align=center;'>Descripción</td>
+			<td style='width:8.3%;text-align=center;'>Valor<br>Unitario($)</td>
+			<td style='width:8.3%;text-align=center;'>Valor<br>Total($)</td>
+			<td style='width:8.3%;text-align=center;'>Descuento</td>
+			</tr> 		          		
+ 			</table>		
+			<table style='width:100%;'>";
+		
+		foreach ($items as $it){
+			$contenidoPagina.="<tr>";
+			$contenidoPagina.="<td style='width:10%;text-align=center;'>".$it[0]."</td>";
+			$contenidoPagina.="<td style='width:15%;text-align=center;'>".$it[1]."</td>";
+			$contenidoPagina.="<td style='width:20%;text-align=center;'>".$it[2]."</td>";
+			$contenidoPagina.="<td style='width:30%;text-align=justify;'>".$it[3]."</td>";
+			$contenidoPagina.="<td style='width:8.3%;text-align=center;'>$ ".$it[4]."</td>";
+			$contenidoPagina.="<td style='width:8.3%;text-align=center;'>$ ".$it[5]."</td>";
+			$contenidoPagina.="<td style='width:8.3%;text-align=center;'>$ ".$it[6]."</td>";
+			$contenidoPagina.="</tr>";
+		}
+		
+		$contenidoPagina .= "</table>
+			<table style='width:100%;'>
+			<tr> 
+			<td style='width:50%;text-align=left;'><b>SUBTOTAL</b></td>
+			<td style='width:50%;text-align=center;'>$ ".$ordenCompra['subtotal']."</td>	
+			</tr>
+			<tr> 
+			<td style='width:50%;text-align=left;'><b>APLICA IVA</b></td>
+			<td style='width:50%;text-align=center;'>$ ".$ordenCompra['iva']."</td>	
+			</tr>
+			<tr> 
+			<td style='width:50%;text-align=left;'><b>TOTAL</b></td>
+			<td style='width:50%;text-align=center;'>$ ".$ordenCompra['total']."</td>	
+			</tr>
+			</table>
+
+			<table style='width:100%;'>		
+			<tr> 
+			<td style='width:100%;text-align:center;text-transform:uppercase;'><b>".$ordenCompra['valor_letras']."</b></td>	
+			</tr>	
+			</table>	
+			<br>	
+			<table style='width:100%;'>		
+			<tr> 
+			<td style='width:100%;text-align:left;'>Obligaciones Proveedor : </td>	
+			</tr>
+			<tr> 
+			<td style='width:100%;text-align:left;'>".$ordenCompra['obligaciones_proveedor']."</td>	
+			</tr>
+			<tr> 
+			<td style='width:100%;text-align:left;'>Obligaciones Constratista : </td>	
+			</tr>
+			<tr> 
+			<td style='width:100%;text-align:left;'>".$ordenCompra['obligaciones_contratista']."</td>	
+			</tr>					
+			</table>	
+				
+				
+				";
 					
-		</page>";
+		$contenidoPagina .= "</page>";
 		
 // echo $contenidoPagina;exit;
 		return $contenidoPagina;
