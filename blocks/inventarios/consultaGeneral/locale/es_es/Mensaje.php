@@ -9,8 +9,44 @@ $this->idioma ["nombreFuncionarioTitulo"] = "Ingrese Nombre Funcionario";
 
 $this->idioma ["selec_sede"] = "&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspSede :";
 
-$this->idioma ["selec_tipoConsulta"] = "&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspConsultar :";
-$this->idioma ["selec_tipoConsultaTitulo"] = "Seleccione el criterio de búsqueda :";
+$this->idioma ["selec_tipoConsulta"] = "&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspConsultar:";
+$this->idioma ["selec_tipoConsultaTitulo"] = "Seleccione el criterio de búsqueda";
+
+
+
+//Entrada
+$this->idioma ["numero_entrada"] = "&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspID Entrada :";
+$this->idioma ["numero_salida"] = "&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspID Salida :";
+$this->idioma ["proveedor"] = "NIT/Razón Social:";
+$this->idioma ["fecha_inicio"] ="&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspFecha Inicial: ";
+$this->idioma ["fecha_inicioTitulo"] ="Seleccione Fecha Inicial";
+$this->idioma ["fecha_final"] ="&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspFecha Final: ";
+$this->idioma ["fecha_finalTitulo"] ="Seleccione Fecha Final";
+$this->idioma ["vigencia_entrada"] ="Vigencia Entrada: ";
+$this->idioma ["vigencia_entradaTitulo"] ="Seleccione Vigencia";
+
+
+//Salida
+$this->idioma ["vigencia_salida"] ="Vigencia Salida: ";
+$this->idioma ["vigencia_salidaTitulo"] ="Seleccione Vigencia";
+
+//Elemento
+$this->idioma ["numero_placa"] = "&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspPlaca Elemento :";
+$this->idioma ["numero_serie"] = "Serie Elemento :";
+
+//Traslados
+$this->idioma ["IDtraslado"] ="&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspID Traslado: ";
+
+//Bajas
+$this->idioma ["IDbaja"] ="&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspID Baja: ";
+$this->idioma ["estado_b"] ="Estado: ";
+$this->idioma ["estado_bTitulo"] ="Seleccione Estado";
+
+//Faltante o Hurto
+//Traslados
+$this->idioma ["IDfaltante"] ="&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspID Faltante/Sobrante: ";
+$this->idioma ["IDhurto"] ="ID Hurto: ";
+
 
 
 $this->idioma ["botonAceptar"] ="Actualizar Orden de Servicios";

@@ -278,6 +278,11 @@ class Sql extends \Sql {
                 $cadenaSql .= "FROM DEPENDENCIAS ";
                 break;
 
+            case "clase_entrada";
+                $cadenaSql = " SELECT id_clase, descripcion ";
+                $cadenaSql .= "FROM clase_entrada; ";
+                break;
+            
             case "sede":
                 $cadenaSql = " SELECT DISTINCT ESF_COD_SEDE,ESF_COD_SEDE || ' - ' ||ESF_SEDE ";
                 $cadenaSql.="FROM ESPACIOS_FISICOS ";
@@ -293,12 +298,103 @@ class Sql extends \Sql {
                 $cadenaSql = " SELECT FUN_IDENTIFICACION, FUN_IDENTIFICACION ||' - '|| FUN_NOMBRE ";
                 $cadenaSql .= "FROM FUNCIONARIOS ";
                 break;
-            
+
             case "tipoConsulta":
                 $cadenaSql = " SELECT id_tipo_consulta, descripcion ";
                 $cadenaSql .= " FROM tipo_consulta ";
                 $cadenaSql .= " WHERE estado_consulta='TRUE' ";
                 break;
+
+            case "buscar_entradas":
+                $cadenaSql = " SELECT id_entrada valor,id_entrada descripcion  ";
+                $cadenaSql.= " FROM entrada; ";
+                break;
+
+            case "vigencia_entrada" :
+                $cadenaSql = " SELECT DISTINCT vigencia, vigencia ";
+                $cadenaSql.= " FROM entrada ";
+                break;
+
+            case "buscar_salidas":
+                $cadenaSql = " SELECT id_salida valor,id_salida descripcion  ";
+                $cadenaSql.= " FROM salida; ";
+                break;
+
+            case "vigencia_salida" :
+                $cadenaSql = " SELECT DISTINCT fecha, fecha ";
+                $cadenaSql.= " FROM salida ";
+                break;
+
+            case "buscar_placa":
+                $cadenaSql = " SELECT id_salida valor,id_salida descripcion  ";
+                $cadenaSql.= " FROM salida; ";
+                break;
+
+
+            case "buscar_serie":
+                $cadenaSql = " SELECT id_salida valor,id_salida descripcion  ";
+                $cadenaSql.= " FROM salida; ";
+                break;
+
+
+            case "proveedor_informacion" :
+                $cadenaSql = " SELECT PRO_NIT,PRO_RAZON_SOCIAL  ";
+                $cadenaSql .= " FROM PROVEEDORES ";
+                $cadenaSql .= " WHERE PRO_IDENTIFICADOR='" . $variable . "'";
+
+                break;
+
+            case "proveedores" :
+                $cadenaSql = " SELECT PRO_IDENTIFICADOR,PRO_NIT||' - '||PRO_RAZON_SOCIAL AS proveedor ";
+                $cadenaSql .= " FROM PROVEEDORES ";
+
+                break;
+
+            case "consultarEntrada" :
+                $cadenaSql = "SELECT DISTINCT ";
+                $cadenaSql .= "id_entrada, fecha_registro,  ";
+                $cadenaSql .= " descripcion,proveedor   ";
+                $cadenaSql .= "FROM entrada ";
+                $cadenaSql .= "JOIN clase_entrada ON clase_entrada.id_clase = entrada.clase_entrada ";
+                // $cadenaSql .= "JOIN proveedor ON proveedor.id_proveedor = entrada.proveedor ";
+                $cadenaSql .= "WHERE 1=1 ";
+                if ($variable [0] != '') {
+                    $cadenaSql .= " AND id_entrada = '" . $variable [0] . "'";
+                }
+
+                if ($variable [1] != '') {
+                    $cadenaSql .= " AND fecha_registro BETWEEN CAST ( '" . $variable [1] . "' AS DATE) ";
+                    $cadenaSql .= " AND  CAST ( '" . $variable [2] . "' AS DATE)  ";
+                }
+
+                if ($variable [3] != '') {
+                    $cadenaSql .= " AND clase_entrada = '" . $variable [3] . "'";
+                }
+                if ($variable [4] != '') {
+                    $cadenaSql .= " AND entrada.proveedor = '" . $variable [4] . "'";
+                }
+
+                break;
+
+            case "estado_entrada" :
+                $cadenaSql = " SELECT id_estado, descripcion ";
+                $cadenaSql .= "FROM estado_entrada;";
+
+                break;
+
+            case "consultarEstadoEntradas" :
+
+                $cadenaSql = "SELECT DISTINCT ";
+                $cadenaSql .= "id_entrada, fecha_registro,descripcion ";
+                $cadenaSql .= ",estado_entrada ";
+                $cadenaSql .= "FROM entrada ";
+                $cadenaSql .= "JOIN clase_entrada ON clase_entrada.id_clase = entrada.clase_entrada ";
+                $cadenaSql .= "WHERE ";
+                $cadenaSql .= " id_entrada = '" . $variable . "';";
+
+                break;
+
+
 
             // _________________________________________________
 
