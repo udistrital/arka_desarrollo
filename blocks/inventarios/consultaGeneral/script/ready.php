@@ -33,7 +33,6 @@ $('#<?php echo $this->campoSeguro('sede') ?>').select2();
 $('#<?php echo $this->campoSeguro('nombreFuncionario') ?>').select2();
 $('#<?php echo $this->campoSeguro('selec_tipoConsulta') ?>').select2();
 $("#<?php echo $this->campoSeguro('selec_dependencia_Sol') ?>").select2();
-$("#<?php echo $this->campoSeguro('dependencia_solicitante') ?>").select2();
 
 
 
@@ -49,6 +48,7 @@ $("#<?php echo $this->campoSeguro('IDbaja') ?>").css('display','none');
 $("#<?php echo $this->campoSeguro('estado_b') ?>").css('display','none');
 $("#<?php echo $this->campoSeguro('IDfaltante') ?>").css('display','none');
 $("#<?php echo $this->campoSeguro('IDhurto') ?>").css('display','none');
+$("#<?php echo $this->campoSeguro('tipo_entrada') ?>").css('display','none');
 $("#<?php echo $this->campoSeguro('agrupacionCriterios') ?>").css('display','none');
 
 
@@ -73,9 +73,15 @@ $("#<?php echo $this->campoSeguro('estado_b') ?>").css('display','none');
 $("#<?php echo $this->campoSeguro('IDfaltante') ?>").css('display','none');
 $("#<?php echo $this->campoSeguro('IDhurto') ?>").css('display','none');
 $("#<?php echo $this->campoSeguro('agrupacionCriterios') ?>").css('display','block');
+$("#<?php echo $this->campoSeguro('tipo_entrada') ?>").css('display','block');
 
 
 $("#<?php echo $this->campoSeguro('numero_entrada') ?>").select2({
+placeholder: "Search for a repository",
+minimumInputLength: 1,
+});
+
+$("#<?php echo $this->campoSeguro('tipo_entrada') ?>").select2({
 placeholder: "Search for a repository",
 minimumInputLength: 1,
 });
@@ -153,6 +159,7 @@ $("#<?php echo $this->campoSeguro('IDbaja') ?>").css('display','none');
 $("#<?php echo $this->campoSeguro('estado_b') ?>").css('display','none');
 $("#<?php echo $this->campoSeguro('IDfaltante') ?>").css('display','none');
 $("#<?php echo $this->campoSeguro('IDhurto') ?>").css('display','none');
+$("#<?php echo $this->campoSeguro('tipo_entrada') ?>").css('display','none');
 $("#<?php echo $this->campoSeguro('agrupacionCriterios') ?>").css('display','block');
 
 $("#<?php echo $this->campoSeguro('numero_entrada') ?>").select2({
@@ -164,6 +171,12 @@ $("#<?php echo $this->campoSeguro('vigencia_entrada') ?>").select2({
 placeholder: "Search for a repository",
 minimumInputLength: 2,
 });
+
+$("#<?php echo $this->campoSeguro('tipo_entrada') ?>").select2({
+placeholder: "Search for a repository",
+minimumInputLength: 1,
+});
+
 
 $("#<?php echo $this->campoSeguro('numero_salida') ?>").select2({
 placeholder: "Search for a repository",
@@ -233,9 +246,15 @@ $("#<?php echo $this->campoSeguro('IDbaja') ?>").css('display','none');
 $("#<?php echo $this->campoSeguro('estado_b') ?>").css('display','none');
 $("#<?php echo $this->campoSeguro('IDfaltante') ?>").css('display','none');
 $("#<?php echo $this->campoSeguro('IDhurto') ?>").css('display','none');
+$("#<?php echo $this->campoSeguro('tipo_entrada') ?>").css('display','none');
 $("#<?php echo $this->campoSeguro('agrupacionCriterios') ?>").css('display','block');
 
 $("#<?php echo $this->campoSeguro('numero_entrada') ?>").select2({
+placeholder: "Search for a repository",
+minimumInputLength: 1,
+});
+
+$("#<?php echo $this->campoSeguro('tipo_entrada') ?>").select2({
 placeholder: "Search for a repository",
 minimumInputLength: 1,
 });
@@ -312,6 +331,7 @@ $("#<?php echo $this->campoSeguro('IDbaja') ?>").css('display','none');
 $("#<?php echo $this->campoSeguro('estado_b') ?>").css('display','none');
 $("#<?php echo $this->campoSeguro('IDfaltante') ?>").css('display','none');
 $("#<?php echo $this->campoSeguro('IDhurto') ?>").css('display','none');
+$("#<?php echo $this->campoSeguro('tipo_entrada') ?>").css('display','none');
 $("#<?php echo $this->campoSeguro('agrupacionCriterios') ?>").css('display','block');
 
 
@@ -319,6 +339,12 @@ $("#<?php echo $this->campoSeguro('numero_entrada') ?>").select2({
 placeholder: "Search for a repository",
 minimumInputLength: 1,
 });
+
+$("#<?php echo $this->campoSeguro('tipo_entrada') ?>").select2({
+placeholder: "Search for a repository",
+minimumInputLength: 1,
+});
+
 
 $("#<?php echo $this->campoSeguro('vigencia_entrada') ?>").select2({
 placeholder: "Search for a repository",
@@ -393,6 +419,7 @@ $("#<?php echo $this->campoSeguro('IDbaja') ?>").css('display','block');
 $("#<?php echo $this->campoSeguro('estado_b') ?>").css('display','block');
 $("#<?php echo $this->campoSeguro('IDfaltante') ?>").css('display','none');
 $("#<?php echo $this->campoSeguro('IDhurto') ?>").css('display','none');
+$("#<?php echo $this->campoSeguro('tipo_entrada') ?>").css('display','none');
 $("#<?php echo $this->campoSeguro('agrupacionCriterios') ?>").css('display','block');
 
 
@@ -407,6 +434,11 @@ minimumInputLength: 2,
 });
 
 $("#<?php echo $this->campoSeguro('numero_salida') ?>").select2({
+placeholder: "Search for a repository",
+minimumInputLength: 1,
+});
+
+$("#<?php echo $this->campoSeguro('tipo_entrada') ?>").select2({
 placeholder: "Search for a repository",
 minimumInputLength: 1,
 });
@@ -473,10 +505,16 @@ $("#<?php echo $this->campoSeguro('IDbaja') ?>").css('display','none');
 $("#<?php echo $this->campoSeguro('estado_b') ?>").css('display','none');
 $("#<?php echo $this->campoSeguro('IDfaltante') ?>").css('display','block');
 $("#<?php echo $this->campoSeguro('IDhurto') ?>").css('display','block');
+$("#<?php echo $this->campoSeguro('tipo_entrada') ?>").css('display','none');
 $("#<?php echo $this->campoSeguro('agrupacionCriterios') ?>").css('display','block');
 
 
 $("#<?php echo $this->campoSeguro('numero_entrada') ?>").select2({
+placeholder: "Search for a repository",
+minimumInputLength: 1,
+});
+
+$("#<?php echo $this->campoSeguro('tipo_entrada') ?>").select2({
 placeholder: "Search for a repository",
 minimumInputLength: 1,
 });
@@ -552,9 +590,15 @@ $("#<?php echo $this->campoSeguro('IDbaja') ?>").css('display','none');
 $("#<?php echo $this->campoSeguro('estado_b') ?>").css('display','none');
 $("#<?php echo $this->campoSeguro('IDfaltante') ?>").css('display','none');
 $("#<?php echo $this->campoSeguro('IDhurto') ?>").css('display','none');
+$("#<?php echo $this->campoSeguro('tipo_entrada') ?>").css('display','none');
 $("#<?php echo $this->campoSeguro('agrupacionCriterios') ?>").css('display','none');
 
 $("#<?php echo $this->campoSeguro('numero_entrada') ?>").select2({
+placeholder: "Search for a repository",
+minimumInputLength: 1,
+});
+
+$("#<?php echo $this->campoSeguro('tipo_entrada') ?>").select2({
 placeholder: "Search for a repository",
 minimumInputLength: 1,
 });
@@ -631,12 +675,149 @@ $("#<?php echo $this->campoSeguro('IDbaja') ?>").css('display','none');
 $("#<?php echo $this->campoSeguro('estado_b') ?>").css('display','none');
 $("#<?php echo $this->campoSeguro('IDfaltante') ?>").css('display','none');
 $("#<?php echo $this->campoSeguro('IDhurto') ?>").css('display','none');
+$("#<?php echo $this->campoSeguro('tipo_entrada') ?>").css('display','none');
+
+
+$("#<?php echo $this->campoSeguro('numero_entrada') ?>").select2({
+placeholder: "Search for a repository",
+minimumInputLength: 1,
+});
+
+$("#<?php echo $this->campoSeguro('tipo_entrada') ?>").select2({
+placeholder: "Search for a repository",
+minimumInputLength: 1,
+});
+
+$("#<?php echo $this->campoSeguro('vigencia_entrada') ?>").select2({
+placeholder: "Search for a repository",
+minimumInputLength: 2,
+});
+
+$("#<?php echo $this->campoSeguro('numero_salida') ?>").select2({
+placeholder: "Search for a repository",
+minimumInputLength: 1,
+});
+
+$("#<?php echo $this->campoSeguro('vigencia_salida') ?>").select2({
+placeholder: "Search for a repository",
+minimumInputLength: 2,
+});
+
+$("#<?php echo $this->campoSeguro('proveedor') ?>").select2({
+placeholder: "Search for a repository",
+minimumInputLength: 1,
+});
+
+
+$("#<?php echo $this->campoSeguro('numero_placa') ?>").select2({
+placeholder: "Search for a repository",
+minimumInputLength: 1,
+});
+
+$("#<?php echo $this->campoSeguro('numero_serie') ?>").select2({
+placeholder: "Search for a repository",
+minimumInputLength: 1,
+});
+
+$("#<?php echo $this->campoSeguro('IDfaltante') ?>").select2({
+placeholder: "Search for a repository",
+minimumInputLength: 1,
+});
+
+$("#<?php echo $this->campoSeguro('IDhurto') ?>").select2({
+placeholder: "Search for a repository",
+minimumInputLength: 1,
+});
+
+$("#<?php echo $this->campoSeguro('IDbaja') ?>").select2({
+placeholder: "Search for a repository",
+minimumInputLength: 1,
+});
+
+$("#<?php echo $this->campoSeguro('IDtraslado') ?>").select2({
+placeholder: "Search for a repository",
+minimumInputLength: 1,
+});
+
+$("#<?php echo $this->campoSeguro('estado_b') ?>").select2({
+placeholder: "Search for a repository",
+minimumInputLength: 1,
+});
 
 break;
 
-
 }
 });  
+
+
+           
+$("#<?php echo $this->campoSeguro('numero_entrada') ?>").select2({
+placeholder: "Search for a repository",
+minimumInputLength: 1,
+});
+
+$("#<?php echo $this->campoSeguro('tipo_entrada') ?>").select2({
+placeholder: "Search for a repository",
+minimumInputLength: 1,
+});
+
+$("#<?php echo $this->campoSeguro('vigencia_entrada') ?>").select2({
+placeholder: "Search for a repository",
+minimumInputLength: 2,
+});
+
+$("#<?php echo $this->campoSeguro('numero_salida') ?>").select2({
+placeholder: "Search for a repository",
+minimumInputLength: 1,
+});
+
+$("#<?php echo $this->campoSeguro('vigencia_salida') ?>").select2({
+placeholder: "Search for a repository",
+minimumInputLength: 2,
+});
+
+$("#<?php echo $this->campoSeguro('proveedor') ?>").select2({
+placeholder: "Search for a repository",
+minimumInputLength: 1,
+});
+
+
+$("#<?php echo $this->campoSeguro('numero_placa') ?>").select2({
+placeholder: "Search for a repository",
+minimumInputLength: 1,
+});
+
+$("#<?php echo $this->campoSeguro('numero_serie') ?>").select2({
+placeholder: "Search for a repository",
+minimumInputLength: 1,
+});
+
+$("#<?php echo $this->campoSeguro('IDfaltante') ?>").select2({
+placeholder: "Search for a repository",
+minimumInputLength: 1,
+});
+
+$("#<?php echo $this->campoSeguro('IDhurto') ?>").select2({
+placeholder: "Search for a repository",
+minimumInputLength: 1,
+});
+
+$("#<?php echo $this->campoSeguro('IDbaja') ?>").select2({
+placeholder: "Search for a repository",
+minimumInputLength: 1,
+});
+
+$("#<?php echo $this->campoSeguro('IDtraslado') ?>").select2({
+placeholder: "Search for a repository",
+minimumInputLength: 1,
+});
+
+$("#<?php echo $this->campoSeguro('estado_b') ?>").select2({
+placeholder: "Search for a repository",
+minimumInputLength: 1,
+});
+
+
 
 
           

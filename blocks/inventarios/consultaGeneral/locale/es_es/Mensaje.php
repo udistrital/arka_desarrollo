@@ -24,6 +24,7 @@ $this->idioma ["fecha_final"] ="&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspFecha Fi
 $this->idioma ["fecha_finalTitulo"] ="Seleccione Fecha Final";
 $this->idioma ["vigencia_entrada"] ="Vigencia Entrada: ";
 $this->idioma ["vigencia_entradaTitulo"] ="Seleccione Vigencia";
+$this->idioma ["tipo_entrada"] ="Clase Entrada: ";
 
 
 //Salida

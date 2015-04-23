@@ -472,7 +472,7 @@ class registrarForm {
                             ' '
                         )
                     );
-                    $matrizItems = $esteRecursoDBO->ejecutarAcceso($atributos ['cadena_sql'], "busqueda");
+                    $matrizItems = $esteRecursoDB->ejecutarAcceso($atributos ['cadena_sql'], "busqueda");
                     $atributos ['matrizItems'] = $matrizItems;
 // Aplica atributos globales al control
                     $atributos = array_merge($atributos, $atributosGlobales);
