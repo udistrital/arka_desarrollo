@@ -24,6 +24,8 @@ class RegistradorOrden {
 		$this->miFuncion = $funcion;
 	}
 	function procesarFormulario() {
+		var_dump($_REQUEST);
+		
 		foreach ( $_FILES as $key => $values ) {
 			
 			$archivo = $_FILES [$key];

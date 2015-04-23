@@ -371,7 +371,7 @@ $html2pdf = new \HTML2PDF ( 'P', 'LETTER', 'es', true, 'UTF-8' );
 $html2pdf->pdf->SetDisplayMode ( 'fullpage' );
 $html2pdf->WriteHTML ( $textos );
 
-$html2pdf->Output ( 'Compra.pdf', 'D' );
+$html2pdf->Output ( 'Compra_Nro_'.$_REQUEST['numero_orden'].'_'.date ( "Y-m-d" ).'.pdf', 'D' );
 
 ?>
 
