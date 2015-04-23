@@ -89,7 +89,7 @@ class registrarForm {
             $atributos ['nombre'] = $esteCampo;
             $atributos ['id'] = $esteCampo;
             $atributos ['etiqueta'] = $this->lenguaje->getCadena($esteCampo);
-            $atributos ["etiquetaObligatorio"] = false;
+            $atributos ["etiquetaObligatorio"] = true;
             $atributos ['tab'] = $tab ++;
             $atributos ['seleccion'] = - 1;
             $atributos ['anchoEtiqueta'] = 310;
@@ -132,7 +132,7 @@ class registrarForm {
             $atributos ['nombre'] = $esteCampo;
             $atributos ['id'] = $esteCampo;
             $atributos ['etiqueta'] = $this->lenguaje->getCadena($esteCampo);
-            $atributos ["etiquetaObligatorio"] = false;
+            $atributos ["etiquetaObligatorio"] = true;
             $atributos ['tab'] = $tab ++;
             $atributos ['seleccion'] = - 1;
             $atributos ['anchoEtiqueta'] = 310;
@@ -174,7 +174,7 @@ class registrarForm {
             $atributos ['nombre'] = $esteCampo;
             $atributos ['id'] = $esteCampo;
             $atributos ['etiqueta'] = $this->lenguaje->getCadena($esteCampo);
-            $atributos ["etiquetaObligatorio"] = false;
+            $atributos ["etiquetaObligatorio"] = true;
             $atributos ['tab'] = $tab ++;
             $atributos ['seleccion'] = - 1;
             $atributos ['anchoEtiqueta'] = 310;
@@ -214,8 +214,6 @@ class registrarForm {
 
         echo $this->miFormulario->agrupacion('fin');
 
-
-
         $esteCampo = "AgrupacionDisponibilidad";
         $atributos ['id'] = $esteCampo;
         $atributos ['leyenda'] = "Segundo Filtro";
@@ -227,7 +225,7 @@ class registrarForm {
             $atributos ['nombre'] = $esteCampo;
             $atributos ['id'] = $esteCampo;
             $atributos ['etiqueta'] = $this->lenguaje->getCadena($esteCampo);
-            $atributos ["etiquetaObligatorio"] = false;
+            $atributos ["etiquetaObligatorio"] = true;
             $atributos ['tab'] = $tab ++;
             $atributos ['seleccion'] = - 1;
             $atributos ['anchoEtiqueta'] = 310;
@@ -243,7 +241,7 @@ class registrarForm {
             $atributos ['ajax_function'] = "";
             $atributos ['ajax_control'] = $esteCampo;
             $atributos ['estilo'] = "jqueryui";
-            $atributos ['validar'] = "";
+            $atributos ['validar'] = "required";
             $atributos ['limitar'] = 1;
             $atributos ['anchoCaja'] = 49;
             $atributos ['miEvento'] = '';
@@ -302,7 +300,7 @@ class registrarForm {
                     $atributos ['ajax_function'] = "";
                     $atributos ['ajax_control'] = $esteCampo;
                     $atributos ['estilo'] = "jqueryui";
-                    $atributos ['validar'] = "required";
+                    $atributos ['validar'] = "";
                     $atributos ['limitar'] = true;
                     $atributos ['anchoCaja'] = 24;
                     $atributos ['miEvento'] = '';
@@ -357,7 +355,7 @@ class registrarForm {
                     $atributos ['ajax_function'] = "";
                     $atributos ['ajax_control'] = $esteCampo;
                     $atributos ['estilo'] = "jqueryui";
-                    $atributos ['validar'] = "required";
+                    $atributos ['validar'] = "";
                     $atributos ['limitar'] = true;
                     $atributos ['anchoCaja'] = 24;
                     $atributos ['miEvento'] = '';
@@ -526,7 +524,6 @@ class registrarForm {
                     $matrizItems = $matrizItems[0][0] != '' ? $matrizItems : $arreglo;
                     $atributos ['matrizItems'] = $matrizItems;
                     // $atributos['miniRegistro']=;
-                    $atributos ['baseDatos'] = "inventarios";
                     // $atributos ['cadena_sql'] = $this->miSql->getCadenaSql ( "clase_entrada" );
                     // Aplica atributos globales al control
                     $atributos = array_merge($atributos, $atributosGlobales);
@@ -562,7 +559,7 @@ class registrarForm {
                     $atributos ['ajax_function'] = "";
                     $atributos ['ajax_control'] = $esteCampo;
                     $atributos ['estilo'] = "jqueryui";
-                    $atributos ['validar'] = "required";
+                    $atributos ['validar'] = "";
                     $atributos ['limitar'] = true;
                     $atributos ['anchoCaja'] = 24;
                     $atributos ['miEvento'] = '';
@@ -580,7 +577,6 @@ class registrarForm {
                     $matrizItems = $matrizItems[0][0] != '' ? $matrizItems : $arreglo;
                     $atributos ['matrizItems'] = $matrizItems;
                     // $atributos['miniRegistro']=;
-                    $atributos ['baseDatos'] = "inventarios";
                     // $atributos ['cadena_sql'] = $this->miSql->getCadenaSql ( "clase_entrada" );
                     // Aplica atributos globales al control
                     $atributos = array_merge($atributos, $atributosGlobales);
@@ -617,7 +613,7 @@ class registrarForm {
                     $atributos ['ajax_function'] = "";
                     $atributos ['ajax_control'] = $esteCampo;
                     $atributos ['estilo'] = "jqueryui";
-                    $atributos ['validar'] = "required";
+                    $atributos ['validar'] = "";
                     $atributos ['limitar'] = true;
                     $atributos ['anchoCaja'] = 24;
                     $atributos ['miEvento'] = '';
@@ -670,7 +666,7 @@ class registrarForm {
                     $atributos ['ajax_function'] = "";
                     $atributos ['ajax_control'] = $esteCampo;
                     $atributos ['estilo'] = "jqueryui";
-                    $atributos ['validar'] = "required";
+                    $atributos ['validar'] = "";
                     $atributos ['limitar'] = true;
                     $atributos ['anchoCaja'] = 24;
                     $atributos ['miEvento'] = '';
@@ -687,7 +683,6 @@ class registrarForm {
                     $matrizItems = $matrizItems[0][0] != '' ? $matrizItems : $arreglo;
                     $atributos ['matrizItems'] = $matrizItems;
                     // $atributos['miniRegistro']=;
-                    $atributos ['baseDatos'] = "inventarios";
                     // $atributos ['cadena_sql'] = $this->miSql->getCadenaSql ( "clase_entrada" );
                     // Aplica atributos globales al control
                     $atributos = array_merge($atributos, $atributosGlobales);
@@ -699,7 +694,7 @@ class registrarForm {
 
 // ---- agrupación para las tipologías de elementos ------- //
 
-             
+
                 $atributos ["id"] = "IDbaja";
                 $atributos ["estiloEnLinea"] = "display:none";
                 $atributos = array_merge($atributos, $atributosGlobales);
@@ -725,11 +720,11 @@ class registrarForm {
                     $atributos ['ajax_function'] = "";
                     $atributos ['ajax_control'] = $esteCampo;
                     $atributos ['estilo'] = "jqueryui";
-                    $atributos ['validar'] = "required";
+                    $atributos ['validar'] = "";
                     $atributos ['limitar'] = true;
                     $atributos ['anchoCaja'] = 24;
                     $atributos ['miEvento'] = '';
-                    $atributos ['cadena_sql'] = $this->miSql->getCadenaSql("buscar_placa");
+                    $atributos ['cadena_sql'] = $this->miSql->getCadenaSql("buscar_bajas");
                     $matrizItems = $esteRecursoDB->ejecutarAcceso($atributos ['cadena_sql'], "busqueda");
 
                     $arreglo = array(
@@ -742,7 +737,6 @@ class registrarForm {
                     $matrizItems = $matrizItems[0][0] != '' ? $matrizItems : $arreglo;
                     $atributos ['matrizItems'] = $matrizItems;
                     // $atributos['miniRegistro']=;
-                    $atributos ['baseDatos'] = "inventarios";
                     // $atributos ['cadena_sql'] = $this->miSql->getCadenaSql ( "clase_entrada" );
                     // Aplica atributos globales al control
                     $atributos = array_merge($atributos, $atributosGlobales);
@@ -756,7 +750,8 @@ class registrarForm {
                 $atributos ["estiloEnLinea"] = "display:none";
                 $atributos = array_merge($atributos, $atributosGlobales);
                 echo $this->miFormulario->division("inicio", $atributos);
-                unset($atributos); {
+                unset($atributos);
+                {
                     $esteCampo = 'estado_b';
                     $atributos ['nombre'] = $esteCampo;
                     $atributos ['id'] = $esteCampo;
@@ -777,11 +772,11 @@ class registrarForm {
                     $atributos ['ajax_function'] = "";
                     $atributos ['ajax_control'] = $esteCampo;
                     $atributos ['estilo'] = "jqueryui";
-                    $atributos ['validar'] = "required";
+                    $atributos ['validar'] = "";
                     $atributos ['limitar'] = true;
                     $atributos ['anchoCaja'] = 24;
                     $atributos ['miEvento'] = '';
-                    $atributos ['cadena_sql'] = $this->miSql->getCadenaSql("buscar_placa");
+                    $atributos ['cadena_sql'] = $this->miSql->getCadenaSql("buscar_estadobaja");
                     $matrizItems = $esteRecursoDB->ejecutarAcceso($atributos ['cadena_sql'], "busqueda");
 
                     $arreglo = array(
@@ -829,11 +824,11 @@ class registrarForm {
                     $atributos ['ajax_function'] = "";
                     $atributos ['ajax_control'] = $esteCampo;
                     $atributos ['estilo'] = "jqueryui";
-                    $atributos ['validar'] = "required";
+                    $atributos ['validar'] = "";
                     $atributos ['limitar'] = true;
                     $atributos ['anchoCaja'] = 24;
                     $atributos ['miEvento'] = '';
-                    $atributos ['cadena_sql'] = $this->miSql->getCadenaSql("buscar_placa");
+                    $atributos ['cadena_sql'] = $this->miSql->getCadenaSql("buscar_faltante");
                     $matrizItems = $esteRecursoDB->ejecutarAcceso($atributos ['cadena_sql'], "busqueda");
 
                     $arreglo = array(
@@ -882,11 +877,11 @@ class registrarForm {
                     $atributos ['ajax_function'] = "";
                     $atributos ['ajax_control'] = $esteCampo;
                     $atributos ['estilo'] = "jqueryui";
-                    $atributos ['validar'] = "required";
+                    $atributos ['validar'] = "";
                     $atributos ['limitar'] = true;
                     $atributos ['anchoCaja'] = 24;
                     $atributos ['miEvento'] = '';
-                    $atributos ['cadena_sql'] = $this->miSql->getCadenaSql("buscar_placa");
+                    $atributos ['cadena_sql'] = $this->miSql->getCadenaSql("buscar_hurto");
                     $matrizItems = $esteRecursoDB->ejecutarAcceso($atributos ['cadena_sql'], "busqueda");
 
                     $arreglo = array(
@@ -975,8 +970,8 @@ class registrarForm {
                 $atributos = array_merge($atributos, $atributosGlobales);
                 echo $this->miFormulario->campoCuadroTexto($atributos);
                 unset($atributos);
-                
-                  $atributos ["id"] = "IDtraslado";
+
+                $atributos ["id"] = "IDtraslado";
                 $atributos ["estiloEnLinea"] = "display:none";
                 $atributos = array_merge($atributos, $atributosGlobales);
                 echo $this->miFormulario->division("inicio", $atributos);
@@ -1001,11 +996,11 @@ class registrarForm {
                     $atributos ['ajax_function'] = "";
                     $atributos ['ajax_control'] = $esteCampo;
                     $atributos ['estilo'] = "jqueryui";
-                    $atributos ['validar'] = "required";
+                    $atributos ['validar'] = "";
                     $atributos ['limitar'] = true;
                     $atributos ['anchoCaja'] = 24;
                     $atributos ['miEvento'] = '';
-                    $atributos ['cadena_sql'] = $this->miSql->getCadenaSql("buscar_placa");
+                    $atributos ['cadena_sql'] = $this->miSql->getCadenaSql("buscar_traslado");
                     $matrizItems = $esteRecursoDB->ejecutarAcceso($atributos ['cadena_sql'], "busqueda");
 
                     $arreglo = array(
