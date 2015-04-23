@@ -1,6 +1,12 @@
 <?php
 $this->idioma ["noDefinido"] = "Etiqueta no esta definida en locale/es_es/Mensaje.php";
 
+$this->idioma ["botonDocumento"] ="Generar Documento";
+
+
+
+$this->idioma ["orden_compra_consulta"] ="Orden de Compra: ";
+$this->idioma ["orden_compra_consultaTitulo"] ="Seleccione Orden de Compra a Generar Documento";
 
 //________________
 $this->idioma ["vigencia_registro"] ="Vigencia Registro : ";
@@ -243,7 +249,7 @@ $this->idioma ["botonAceptar"] ="Actualizar Orden de Compra";
 $this->idioma ["botonCancelar"] ="Cancelar";
 $this->idioma ["botonContinuar"] ="Continuar";
 $this->idioma ["botonConsultar"] ="Consultar";
-$this->idioma ["botonRegresar"] ="Regresar";
+$this->idioma ["botonRegresar"] ="< < Regresar";
 $this->idioma ["botonReporte"] ="Reporte PDF";
 
 

@@ -30,7 +30,8 @@
                  } );
 
                      
-                       $("#<?php echo $this->campoSeguro('selec_dependencia')?>").select2();
+        $("#<?php echo $this->campoSeguro('selec_dependencia')?>").select2();
+        $("#<?php echo $this->campoSeguro('orden_compra_consulta')?>").select2();
          
          
          $("#<?php echo $this->campoSeguro('selec_dependencia_Sol')?>").select2();

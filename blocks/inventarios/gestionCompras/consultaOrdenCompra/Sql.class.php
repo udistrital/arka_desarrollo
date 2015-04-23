@@ -319,6 +319,13 @@ class Sql extends \Sql {
 				$cadenaSql .= " WHERE PRO_IDENTIFICADOR='" . $variable . "' ";
 				break;
 			
+			case "consultarRubro" :
+				$cadenaSql = " SELECT RUB_NOMBRE_RUBRO ";
+				$cadenaSql .= " FROM RUBROS ";
+				$cadenaSql .= " WHERE  RUB_IDENTIFICADOR='" . $variable . "'";
+				
+				break;
+			
 			case "proveedores" :
 				$cadenaSql = " SELECT PRO_IDENTIFICADOR,PRO_NIT||' - '||PRO_RAZON_SOCIAL AS proveedor ";
 				$cadenaSql .= " FROM PROVEEDORES ";
@@ -328,6 +335,13 @@ class Sql extends \Sql {
 			case "seleccion_proveedor" :
 				$cadenaSql = " SELECT PRO_IDENTIFICADOR,PRO_NIT||' - '||PRO_RAZON_SOCIAL AS proveedor ";
 				$cadenaSql .= " FROM PROVEEDORES ";
+				
+				break;
+			
+			case "consultarDestino" :
+				$cadenaSql = "SELECT descripcion ";
+				$cadenaSql .= "FROM destino_orden ";
+				$cadenaSql .= "WHERE id_destino='" . $variable . "'";
 				
 				break;
 			
@@ -411,11 +425,43 @@ class Sql extends \Sql {
 				
 				break;
 			
+			case 'consultarOrdenCompra_documento' :
+				
+				$cadenaSql = " SELECT info_presupuestal,fecha_registro, rubro, obligaciones_proveedor,  ";
+				$cadenaSql .= " obligaciones_contratista, poliza1, poliza2, poliza3, poliza4,";
+				$cadenaSql .= " poliza5, lugar_entrega, destino, tiempo_entrega, forma_pago,";
+				$cadenaSql .= " supervision, inhabilidades, id_proveedor, ruta_cotizacion, nombre_cotizacion, ";
+				$cadenaSql .= " id_dependencia, id_contratista, id_ordenador, subtotal, iva,";
+				$cadenaSql .= " total, valor_letras, vig_contratista";
+				$cadenaSql .= " FROM orden_compra ";
+				$cadenaSql .= " WHERE  id_orden_compra='" . $variable . "';";
+				break;
+			
 			case "consultarContratista" :
 				$cadenaSql = "SELECT CON_IDENTIFICADOR,CON_NOMBRE  ";
 				$cadenaSql .= " FROM CONTRATISTAS  ";
 				$cadenaSql .= " WHERE CON_IDENTIFICADOR='" . $variable . "' ";
 				
+				break;
+			
+			case "consultarOrdenador_gasto" :
+				$cadenaSql = " 	SELECT ORG_ORDENADOR_GASTO,ORG_NOMBRE ";
+				$cadenaSql .= " FROM ORDENADORES_GASTO ";
+				$cadenaSql .= " WHERE ORG_IDENTIFICADOR ='" . $variable . "'";
+				break;
+			
+			case "consultar_forma_pago" :
+				$cadenaSql = "SELECT  descripcion ";
+				$cadenaSql .= "FROM forma_pago_orden  ";
+				$cadenaSql .= "WHERE  id_forma_pago='" . $variable . "';";
+				
+				break;
+			
+			case "consultarContratista_consulta" :
+				$cadenaSql = "SELECT CON_IDENTIFICACION , CON_NOMBRE AS CONTRATISTA ";
+				$cadenaSql .= "FROM CONTRATISTAS ";
+				$cadenaSql .= "WHERE CON_VIGENCIA ='" . $variable [1] . "' ";
+				$cadenaSql .= "AND  CON_IDENTIFICADOR ='" . $variable [0] . "' ";
 				break;
 			case "consultarProveedor" :
 				$cadenaSql = " SELECT PRO_RAZON_SOCIAL,PRO_NIT,PRO_DIRECCION,PRO_TELEFONO  ";
@@ -429,6 +475,12 @@ class Sql extends \Sql {
 				$cadenaSql .= " FROM DEPENDENCIAS ";
 				$cadenaSql .= " WHERE DEP_IDENTIFICADOR='" . $variable . "' ";
 				
+				break;
+			
+			case "consultarDependencia_consulta" :
+				$cadenaSql = " SELECT *  ";
+				$cadenaSql .= "FROM DEPENDENCIAS ";
+				$cadenaSql .= "WHERE DEP_IDENTIFICADOR='" . $variable . "'";
 				break;
 			
 			case "consultarEncargado" :
@@ -446,6 +498,13 @@ class Sql extends \Sql {
 				$cadenaSql .= " FROM items_orden_compra ";
 				$cadenaSql .= " WHERE id_orden='" . $variable . "'";
 				
+				break;
+			
+			case "consultarItems_consulta" :
+				$cadenaSql = " SELECT item, unidad_medida, cantidad, descripcion,
+				                   valor_unitario, valor_total, descuento ";
+				$cadenaSql .= " FROM items_orden_compra ";
+				$cadenaSql .= " WHERE id_orden='" . $variable . "'";
 				break;
 			
 			case "insertarItemTemporal" :
@@ -522,7 +581,6 @@ class Sql extends \Sql {
 				$cadenaSql = " UPDATE ";
 				$cadenaSql .= " orden_compra ";
 				$cadenaSql .= " SET ";
-				
 				
 				$cadenaSql .= " rubro='" . $variable [0] . "', ";
 				$cadenaSql .= " obligaciones_proveedor='" . $variable [1] . "', ";
@@ -606,6 +664,12 @@ class Sql extends \Sql {
 				$cadenaSql = " SELECT DEP_DEPENDENCIA  ";
 				$cadenaSql .= " FROM DEPENDENCIAS  ";
 				$cadenaSql .= " WHERE DEP_IDENTIFICADOR='" . $variable . "' ";
+				
+				break;
+			
+			case "consultar_numero_orden" :
+				$cadenaSql = " SELECT id_orden_compra, id_orden_compra numero_orden  ";
+				$cadenaSql .= " FROM orden_compra ; ";
 				
 				break;
 			
