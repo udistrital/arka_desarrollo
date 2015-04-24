@@ -149,8 +149,7 @@ class Sql extends \Sql {
             /**
              * Clausulas Del Caso Uso.
              */
-
-              case "rubros" :
+            case "rubros" :
                 $cadenaSql = " SELECT RUB_IDENTIFICADOR, RUB_RUBRO ||' - '|| RUB_NOMBRE_RUBRO ";
                 $cadenaSql .= " FROM RUBROS ";
 
@@ -252,49 +251,53 @@ class Sql extends \Sql {
                 $cadenaSql .= " FROM PROVEEDORES ";
                 break;
 
+
+            //--------------- Consultas Reportes Específicos -----------------//
+
+
+
             case "consultarEntrada" :
-                $cadenaSql = "SELECT DISTINCT ";
-                $cadenaSql .= "id_entrada, fecha_registro,  ";
-                $cadenaSql .= " descripcion,proveedor   ";
-                $cadenaSql .= "FROM entrada ";
-                $cadenaSql .= "JOIN clase_entrada ON clase_entrada.id_clase = entrada.clase_entrada ";
-                // $cadenaSql .= "JOIN proveedor ON proveedor.id_proveedor = entrada.proveedor ";
-                $cadenaSql .= "WHERE 1=1 ";
-                if ($variable [0] != '') {
-                    $cadenaSql .= " AND id_entrada = '" . $variable [0] . "'";
+                $cadenaSql = "SELECT  ";
+                $cadenaSql.= "id_entrada,  ";
+                $cadenaSql.= "fecha_registro, ";
+                $cadenaSql.= "clase_entrada.descripcion as clase_entrada, ";
+                $cadenaSql.= "vigencia, ";
+                $cadenaSql.= "tipo_contrato.descripcion as tipo_contrato,  ";
+                $cadenaSql.= "numero_contrato,  ";
+                $cadenaSql.= "fecha_contrato,  ";
+                $cadenaSql.= "proveedor,  ";
+                $cadenaSql.= "numero_factura,  ";
+                $cadenaSql.= "fecha_factura,  ";
+                $cadenaSql.= "observaciones,  ";
+                $cadenaSql.= "estado_entrada.descripcion as estado_entrada ";
+                $cadenaSql.= "FROM entrada ";
+                $cadenaSql.= "JOIN clase_entrada ON entrada.clase_entrada=clase_entrada.id_clase ";
+                $cadenaSql.= "JOIN tipo_contrato ON tipo_contrato.id_tipo=entrada.tipo_contrato ";
+                $cadenaSql.= "JOIN estado_entrada ON estado_entrada.id_estado=entrada.estado_entrada ";
+                $cadenaSql.= "WHERE estado_registro='TRUE' ";
+                $cadenaSql.= "AND 1=1 ";
+                if ($variable ['numero_entrada'] != '') {
+                    $cadenaSql .= " AND id_entrada = '" . $variable ['numero_entrada'] . "'";
                 }
 
-                if ($variable [1] != '') {
-                    $cadenaSql .= " AND fecha_registro BETWEEN CAST ( '" . $variable [1] . "' AS DATE) ";
-                    $cadenaSql .= " AND  CAST ( '" . $variable [2] . "' AS DATE)  ";
+                if ($variable ['vigencia_entrada'] != '') {
+                    $cadenaSql .= " AND vigencia = '" . $variable ['vigencia_entrada'] . "'";
                 }
-
-                if ($variable [3] != '') {
-                    $cadenaSql .= " AND clase_entrada = '" . $variable [3] . "'";
+                
+                if ($variable ['proveedor'] != '') {
+                    $cadenaSql .= " AND proveedor = '" . $variable ['proveedor'] . "'";
                 }
-                if ($variable [4] != '') {
-                    $cadenaSql .= " AND entrada.proveedor = '" . $variable [4] . "'";
+                
+                if ($variable ['tipo_entrada'] != '') {
+                    $cadenaSql .= " AND entrada.clase_entrada = '" . $variable ['clase_entrada'] . "'";
+                }
+                
+                if ($variable['fecha_inicio'] != '' && $variable ['fecha_final'] != '') {
+                    $cadenaSql .= " AND fecha_registro BETWEEN CAST ( '" . $variable ['fecha_inicio'] . "' AS DATE) ";
+                    $cadenaSql .= " AND  CAST ( '" . $variable ['fecha_final'] . "' AS DATE)  ";
                 }
 
                 break;
-
-            case "estado_entrada" :
-                $cadenaSql = " SELECT id_estado, descripcion ";
-                $cadenaSql .= "FROM estado_entrada;";
-                break;
-
-            case "consultarEstadoEntradas" :
-                $cadenaSql = "SELECT DISTINCT ";
-                $cadenaSql .= "id_entrada, fecha_registro,descripcion ";
-                $cadenaSql .= ",estado_entrada ";
-                $cadenaSql .= "FROM entrada ";
-                $cadenaSql .= "JOIN clase_entrada ON clase_entrada.id_clase = entrada.clase_entrada ";
-                $cadenaSql .= "WHERE ";
-                $cadenaSql .= " id_entrada = '" . $variable . "';";
-                break;
-            // ____________________________________update___________________________________________
-
-         
         }
         return $cadenaSql;
     }

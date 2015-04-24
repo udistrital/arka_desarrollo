@@ -23,7 +23,7 @@ return false;
 });
 });
 
-$('#tablaTitulos').dataTable( {
+$('#tablaReporte').dataTable( {
 "sPaginationType": "full_numbers"
 } );
 

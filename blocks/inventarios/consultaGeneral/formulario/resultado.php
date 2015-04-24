@@ -56,7 +56,6 @@ class registrarForm {
         $conexion = "sicapital";
         $esteRecursoDBO = $this->miConfigurador->fabricaConexiones->getRecursoDB($conexion);
 
-        var_dump($_REQUEST);
 
         $datos_consulta = array(
             //Entrada
@@ -85,8 +84,8 @@ class registrarForm {
 
         switch ($_REQUEST['selec_tipoConsulta']) {
             case 1:
-                $cadenaSql = $this->miSql->getCadenaSql('consultarOrden', $datos_consulta);
-                $ordenCompra = $esteRecursoDB->ejecutarAcceso($cadenaSql, "busqueda");
+                $cadenaSql = $this->miSql->getCadenaSql('consultarEntrada', $datos_consulta);
+                $datos = $esteRecursoDB->ejecutarAcceso($cadenaSql, "busqueda");
                 break;
 
             case 2:
@@ -105,48 +104,41 @@ class registrarForm {
                 break;
         }
 
+        $contenido_consultas = array('');
+        $encabezado = array();
 
-        EXIT;
-        $consultas = array(
-            "datosTitulos",
-            "datosExcInvestigacion",
-            "datosExcDireccion",
-            "datosExcCalificada",
-            "datosExcProfesional",
-            "datosExcAcademica",
-            "datosProAcademica",
-        );
-
-        $contenido_consultas = array('', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '');
-
-
-        $cadena_sql = $this->sql->cadena_sql($consultas[$key], $arreglo);
-        $datos = $esteRecursoDB->ejecutarAcceso($cadena_sql, "busqueda");
-
-        if (is_array($datos)) {
-            foreach ($datos as $nodo => $fila) {
-                $contenido_consultas[$key].= '<tr>';
-                foreach ($fila as $columna => $valor) {
-                    if (is_numeric($columna)) {
-                        $contenido_consultas[$key].= "<td>" . $valor . "</td> ";
-                    }
-                }
-                $contenido_consultas[$key].= '</tr>';
+        foreach ($datos[0] as $key => $values) {
+            if (!is_numeric($key)) {
+                $encabezado[$key] = '<th>' . strtoupper(str_replace("_", " ", $key)) . '</th>';
             }
-        } else {
-            $contenido_consultas[$key].= '<tr>';
-            $contenido_consultas[$key].= '</tr>';
         }
 
+        $encabezadof = implode($encabezado);
+      
+        foreach ($contenido_consultas as $key => $values) {
 
-
-
-
-        exit;
-
-
-
-
+            if (is_array($datos)) {
+                $contenido_consultas[$key] = '<table id="tablaTitulos"><thead><tr>';
+                $contenido_consultas[$key].=$encabezadof;
+                $contenido_consultas[$key].='</tr></thead><tbody>';
+                for ($j = 0; $j < count($datos); $j++) {
+                    foreach ($datos as $nodo => $fila) {
+                        $contenido_consultas[$key].= '<tr>';
+                        foreach ($fila as $columna => $valor) {
+                            if (is_numeric($columna)) {
+                                $contenido_consultas[$key].= "<td>" . $valor . "</td> ";
+                            }
+                        }
+                        $contenido_consultas[$key].= '</tr>';
+                    }
+                }
+                $contenido_consultas[$key].= '</tbody>';
+                $contenido_consultas[$key].= '</table>';
+            } else {
+                $contenido_consultas[$key].= '<tr>';
+                $contenido_consultas[$key].= '</tr>';
+            }
+        }
 
 
 // ---------------- SECCION: Parámetros Generales del Formulario ----------------------------------
@@ -205,74 +197,15 @@ class registrarForm {
 // ------------------Fin Division para los botones-------------------------
         echo $this->miFormulario->division("fin");
 
-        if ($ordenCompra) {
+        if ($datos) {
 
-            echo "<table id='tablaTitulos'>";
-
-            echo "<thead>
-                <tr>
-                <th>Fecha Orden Servicios</th>
-                <th>Número Orden Servicios </th>
-                <th>Identificacion<br>Contratista</th>
-		<th>Dependencia Solicitante</th>
-		<th>Modificar</th>
-                </tr>
-            </thead>
-            <tbody>";
-
-            for ($i = 0; $i < count($ordenCompra); $i ++) {
-                $variable = "pagina=" . $miPaginaActual; // pendiente la pagina para modificar parametro
-                $variable .= "&opcion=modificar";
-// $variable .= "&usuario=" . $miSesion->getSesionUsuarioId ();
-
-                $variable .= "&numero_orden=" . $ordenCompra [$i] [0];
-
-
-                $cadenaSql = $this->miSql->getCadenaSql('identificacion_contratista', $ordenCompra [$i] [2]);
-
-                $identificacion = $esteRecursoDBO->ejecutarAcceso($cadenaSql, "busqueda");
-
-                $cadenaSql = $this->miSql->getCadenaSql('dependecia_solicitante', $ordenCompra [$i] [3]);
-
-                $dependencia = $esteRecursoDBO->ejecutarAcceso($cadenaSql, "busqueda");
-                $arreglo = array(
-                    $ordenCompra[$i][1],
-                    $ordenCompra[$i][0],
-                    $identificacion[0][0],
-                    $dependencia[0][0]
-                );
-                $arreglo = serialize($arreglo);
-
-                $variable .= "&informacionGeneral=" . $arreglo;
-
-                $variable = $this->miConfigurador->fabricaConexiones->crypto->codificar_url($variable, $directorio);
-
-                $mostrarHtml = "<tr>
-                    <td><center>" . $ordenCompra [$i] [1] . "</center></td>
-                    <td><center>" . $ordenCompra [$i] [0] . "</center></td>
-                    <td><center>" . $identificacion [0] [0] . "</center></td>
-                    <td><center>" . $dependencia [0] [0] . "</center></td>
-                    <td><center>
-                    	<a href='" . $variable . "'>
-                            <img src='" . $rutaBloque . "/css/images/edit.png' width='15px'>
-                        </a>
-                  	</center> </td>
-           
-                </tr>";
-                echo $mostrarHtml;
-                unset($mostrarHtml);
-                unset($variable);
-            }
-
-            echo "</tbody>";
-
-            echo "</table>";
-
+            
+            echo $this->miFormulario->tablaReporte($datos);
 // Fin de Conjunto de Controles
 // echo $this->miFormulario->marcoAgrupacion("fin");
         } else {
 
-            $mensaje = "No Se Encontraron<br>Ordenes de Servicios Registradas.";
+            $mensaje = "No Se Encontraron<br>Datos Relacionados con la Búsqueda";
 
 // ---------------- CONTROL: Cuadro de Texto --------------------------------------------------------
             $esteCampo = 'mensajeRegistro';
