@@ -273,7 +273,7 @@ class registrarForm {
             $atributos ['leyenda'] = "Criterios de Búsqueda";
             echo $this->miFormulario->agrupacion('inicio', $atributos); {
 
-                $atributos ["id"] = "numero_entrada";
+                $atributos ["id"] = "numero_entradaD";
                 $atributos ["estiloEnLinea"] = "display:none";
                 $atributos = array_merge($atributos, $atributosGlobales);
                 echo $this->miFormulario->division("inicio", $atributos);
@@ -329,7 +329,7 @@ class registrarForm {
 
 
                 // ---- Control de Lista desplegable -----//
-                $atributos ["id"] = "vigencia_entrada";
+                $atributos ["id"] = "vigencia_entradaD";
                 $atributos ["estiloEnLinea"] = "display:none";
                 $atributos = array_merge($atributos, $atributosGlobales);
                 echo $this->miFormulario->division("inicio", $atributos);
@@ -386,7 +386,7 @@ class registrarForm {
 
 
                 //------- control lista desplegable ---------------- //
-                $atributos ["id"] = "proveedor";
+                $atributos ["id"] = "proveedorD";
                 $atributos ["estiloEnLinea"] = "display:none";
                 $atributos = array_merge($atributos, $atributosGlobales);
                 echo $this->miFormulario->division("inicio", $atributos);
@@ -433,7 +433,7 @@ class registrarForm {
                 echo $this->miFormulario->division("fin");
                 unset($atributos);
 
-                $atributos ["id"] = "tipo_entrada";
+                $atributos ["id"] = "tipo_entradaD";
                 $atributos ["estiloEnLinea"] = "display:none";
                 $atributos = array_merge($atributos, $atributosGlobales);
                 echo $this->miFormulario->division("inicio", $atributos);
@@ -481,7 +481,7 @@ class registrarForm {
                 unset($atributos);
                 //--------------------- fin agrupacion 1----------------------------//
                 // ---- Control de Lista desplegable -----//
-                $atributos ["id"] = "numero_salida";
+                $atributos ["id"] = "numero_salidaD";
                 $atributos ["estiloEnLinea"] = "display:none";
                 $atributos = array_merge($atributos, $atributosGlobales);
                 echo $this->miFormulario->division("inicio", $atributos);
@@ -533,7 +533,7 @@ class registrarForm {
                 echo $this->miFormulario->division("fin");
                 unset($atributos);
                 // ---- Control de Lista desplegable -----//
-                $atributos ["id"] = "vigencia_salida";
+                $atributos ["id"] = "vigencia_salidaD";
                 $atributos ["estiloEnLinea"] = "display:none";
                 $atributos = array_merge($atributos, $atributosGlobales);
                 echo $this->miFormulario->division("inicio", $atributos);
@@ -587,7 +587,7 @@ class registrarForm {
                 unset($atributos);
 //------------------------ FIN AGRUPACION 2 --------------------------------------//
                 ////--------Agrupacion Elementos ---------------///
-                $atributos ["id"] = "numero_placa";
+                $atributos ["id"] = "numero_placaD";
                 $atributos ["estiloEnLinea"] = "display:none";
                 $atributos = array_merge($atributos, $atributosGlobales);
                 echo $this->miFormulario->division("inicio", $atributos);
@@ -640,7 +640,7 @@ class registrarForm {
                 echo $this->miFormulario->division("fin");
                 unset($atributos);
                 ///-----------------FIN LISTA DESPLEGABLE ------------------------------------//
-                $atributos ["id"] = "numero_serie";
+                $atributos ["id"] = "numero_serieD";
                 $atributos ["estiloEnLinea"] = "display:none";
                 $atributos = array_merge($atributos, $atributosGlobales);
                 echo $this->miFormulario->division("inicio", $atributos);
@@ -695,7 +695,7 @@ class registrarForm {
 // ---- agrupación para las tipologías de elementos ------- //
 
 
-                $atributos ["id"] = "IDbaja";
+                $atributos ["id"] = "IDbajaD";
                 $atributos ["estiloEnLinea"] = "display:none";
                 $atributos = array_merge($atributos, $atributosGlobales);
                 echo $this->miFormulario->division("inicio", $atributos);
@@ -746,7 +746,7 @@ class registrarForm {
                 echo $this->miFormulario->division("fin");
                 unset($atributos);
 
-                $atributos ["id"] = "estado_b";
+                $atributos ["id"] = "estado_bD";
                 $atributos ["estiloEnLinea"] = "display:none";
                 $atributos = array_merge($atributos, $atributosGlobales);
                 echo $this->miFormulario->division("inicio", $atributos);
@@ -799,7 +799,7 @@ class registrarForm {
                 echo $this->miFormulario->division("fin");
                 unset($atributos);
 
-                $atributos ["id"] = "IDfaltante";
+                $atributos ["id"] = "IDfaltanteD";
                 $atributos ["estiloEnLinea"] = "display:none";
                 $atributos = array_merge($atributos, $atributosGlobales);
                 echo $this->miFormulario->division("inicio", $atributos);
@@ -852,7 +852,7 @@ class registrarForm {
                 unset($atributos);
 
 
-                $atributos ["id"] = "IDhurto";
+                $atributos ["id"] = "IDhurtoD";
                 $atributos ["estiloEnLinea"] = "display:none";
                 $atributos = array_merge($atributos, $atributosGlobales);
                 echo $this->miFormulario->division("inicio", $atributos);
@@ -971,7 +971,7 @@ class registrarForm {
                 echo $this->miFormulario->campoCuadroTexto($atributos);
                 unset($atributos);
 
-                $atributos ["id"] = "IDtraslado";
+                $atributos ["id"] = "IDtrasladoD";
                 $atributos ["estiloEnLinea"] = "display:none";
                 $atributos = array_merge($atributos, $atributosGlobales);
                 echo $this->miFormulario->division("inicio", $atributos);

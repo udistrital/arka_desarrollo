@@ -174,14 +174,17 @@ $urlFinal15 = $url . $cadena15;
             minimumInputLength: 2,
         });
 
-
+        $("#<?php echo $this->campoSeguro('selec_dependencia_Sol') ?>").select2({
+            placeholder: "Search for a repository",
+            minimumInputLength: 2,
+        });
 
         $("#<?php echo $this->campoSeguro('nombreFuncionario') ?>").select2({
             placeholder: "Search for a repository",
             minimumInputLength: 2,
         });
 
-       });
+    });
 
 </script>
 

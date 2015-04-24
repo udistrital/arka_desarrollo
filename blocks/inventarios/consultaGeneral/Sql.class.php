@@ -284,7 +284,6 @@ class Sql extends \Sql {
                 break;
 
             case "consultarEstadoEntradas" :
-
                 $cadenaSql = "SELECT DISTINCT ";
                 $cadenaSql .= "id_entrada, fecha_registro,descripcion ";
                 $cadenaSql .= ",estado_entrada ";
@@ -292,11 +291,7 @@ class Sql extends \Sql {
                 $cadenaSql .= "JOIN clase_entrada ON clase_entrada.id_clase = entrada.clase_entrada ";
                 $cadenaSql .= "WHERE ";
                 $cadenaSql .= " id_entrada = '" . $variable . "';";
-
                 break;
-
-
-
             // ____________________________________update___________________________________________
 
          

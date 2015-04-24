@@ -36,19 +36,19 @@ $("#<?php echo $this->campoSeguro('selec_dependencia_Sol') ?>").select2();
 
 
 
-$("#<?php echo $this->campoSeguro('numero_entrada') ?>").css('display','none');
-$("#<?php echo $this->campoSeguro('numero_salida') ?>").css('display','none');
-$("#<?php echo $this->campoSeguro('vigencia_entrada') ?>").css('display','none');
-$("#<?php echo $this->campoSeguro('vigencia_salida') ?>").css('display','none');
-$("#<?php echo $this->campoSeguro('proveedor') ?>").css('display','none');
-$("#<?php echo $this->campoSeguro('numero_placa') ?>").css('display','none');
-$("#<?php echo $this->campoSeguro('numero_serie') ?>").css('display','none');
-$("#<?php echo $this->campoSeguro('IDtraslado') ?>").css('display','none');
-$("#<?php echo $this->campoSeguro('IDbaja') ?>").css('display','none');
-$("#<?php echo $this->campoSeguro('estado_b') ?>").css('display','none');
-$("#<?php echo $this->campoSeguro('IDfaltante') ?>").css('display','none');
-$("#<?php echo $this->campoSeguro('IDhurto') ?>").css('display','none');
-$("#<?php echo $this->campoSeguro('tipo_entrada') ?>").css('display','none');
+$("#<?php echo $this->campoSeguro('numero_entradaD') ?>").css('display','none');
+$("#<?php echo $this->campoSeguro('numero_salidaD') ?>").css('display','none');
+$("#<?php echo $this->campoSeguro('vigencia_entradaD') ?>").css('display','none');
+$("#<?php echo $this->campoSeguro('vigencia_salidaD') ?>").css('display','none');
+$("#<?php echo $this->campoSeguro('proveedorD') ?>").css('display','none');
+$("#<?php echo $this->campoSeguro('numero_placaD') ?>").css('display','none');
+$("#<?php echo $this->campoSeguro('numero_serieD') ?>").css('display','none');
+$("#<?php echo $this->campoSeguro('IDtrasladoD') ?>").css('display','none');
+$("#<?php echo $this->campoSeguro('IDbajaD') ?>").css('display','none');
+$("#<?php echo $this->campoSeguro('estado_bD') ?>").css('display','none');
+$("#<?php echo $this->campoSeguro('IDfaltanteD') ?>").css('display','none');
+$("#<?php echo $this->campoSeguro('IDhurtoD') ?>").css('display','none');
+$("#<?php echo $this->campoSeguro('tipo_entradaD') ?>").css('display','none');
 $("#<?php echo $this->campoSeguro('agrupacionCriterios') ?>").css('display','none');
 
 
@@ -60,20 +60,20 @@ switch($("#<?php echo $this->campoSeguro('selec_tipoConsulta') ?>").val())
 
 case '1':
 
-$("#<?php echo $this->campoSeguro('numero_entrada') ?>").css('display','block');
-$("#<?php echo $this->campoSeguro('numero_salida') ?>").css('display','none');
-$("#<?php echo $this->campoSeguro('vigencia_entrada') ?>").css('display','block');
-$("#<?php echo $this->campoSeguro('vigencia_salida') ?>").css('display','none');
-$("#<?php echo $this->campoSeguro('proveedor') ?>").css('display','block');
-$("#<?php echo $this->campoSeguro('numero_placa') ?>").css('display','none');
-$("#<?php echo $this->campoSeguro('numero_serie') ?>").css('display','none');
-$("#<?php echo $this->campoSeguro('IDtraslado') ?>").css('display','none');
-$("#<?php echo $this->campoSeguro('IDbaja') ?>").css('display','none');
-$("#<?php echo $this->campoSeguro('estado_b') ?>").css('display','none');
-$("#<?php echo $this->campoSeguro('IDfaltante') ?>").css('display','none');
-$("#<?php echo $this->campoSeguro('IDhurto') ?>").css('display','none');
+$("#<?php echo $this->campoSeguro('numero_entradaD') ?>").css('display','block');
+$("#<?php echo $this->campoSeguro('numero_salidaD') ?>").css('display','none');
+$("#<?php echo $this->campoSeguro('vigencia_entradaD') ?>").css('display','block');
+$("#<?php echo $this->campoSeguro('vigencia_salidaD') ?>").css('display','none');
+$("#<?php echo $this->campoSeguro('proveedorD') ?>").css('display','block');
+$("#<?php echo $this->campoSeguro('numero_placaD') ?>").css('display','none');
+$("#<?php echo $this->campoSeguro('numero_serieD') ?>").css('display','none');
+$("#<?php echo $this->campoSeguro('IDtrasladoD') ?>").css('display','none');
+$("#<?php echo $this->campoSeguro('IDbajaD') ?>").css('display','none');
+$("#<?php echo $this->campoSeguro('estado_bD') ?>").css('display','none');
+$("#<?php echo $this->campoSeguro('IDfaltanteD') ?>").css('display','none');
+$("#<?php echo $this->campoSeguro('IDhurtoD') ?>").css('display','none');
 $("#<?php echo $this->campoSeguro('agrupacionCriterios') ?>").css('display','block');
-$("#<?php echo $this->campoSeguro('tipo_entrada') ?>").css('display','block');
+$("#<?php echo $this->campoSeguro('tipo_entradaD') ?>").css('display','block');
 
 
 $("#<?php echo $this->campoSeguro('numero_entrada') ?>").select2({
@@ -147,19 +147,19 @@ break;
 
 case '2':
 
-$("#<?php echo $this->campoSeguro('numero_entrada') ?>").css('display','block');
-$("#<?php echo $this->campoSeguro('numero_salida') ?>").css('display','block');
-$("#<?php echo $this->campoSeguro('vigencia_entrada') ?>").css('display','block');
-$("#<?php echo $this->campoSeguro('vigencia_salida') ?>").css('display','block');
-$("#<?php echo $this->campoSeguro('proveedor') ?>").css('display','none');
-$("#<?php echo $this->campoSeguro('numero_placa') ?>").css('display','none');
-$("#<?php echo $this->campoSeguro('numero_serie') ?>").css('display','none');
-$("#<?php echo $this->campoSeguro('IDtraslado') ?>").css('display','none');
-$("#<?php echo $this->campoSeguro('IDbaja') ?>").css('display','none');
-$("#<?php echo $this->campoSeguro('estado_b') ?>").css('display','none');
-$("#<?php echo $this->campoSeguro('IDfaltante') ?>").css('display','none');
-$("#<?php echo $this->campoSeguro('IDhurto') ?>").css('display','none');
-$("#<?php echo $this->campoSeguro('tipo_entrada') ?>").css('display','none');
+$("#<?php echo $this->campoSeguro('numero_entradaD') ?>").css('display','block');
+$("#<?php echo $this->campoSeguro('numero_salidaD') ?>").css('display','block');
+$("#<?php echo $this->campoSeguro('vigencia_entradaD') ?>").css('display','block');
+$("#<?php echo $this->campoSeguro('vigencia_salidaD') ?>").css('display','block');
+$("#<?php echo $this->campoSeguro('proveedorD') ?>").css('display','none');
+$("#<?php echo $this->campoSeguro('numero_placaD') ?>").css('display','none');
+$("#<?php echo $this->campoSeguro('numero_serieD') ?>").css('display','none');
+$("#<?php echo $this->campoSeguro('IDtrasladoD') ?>").css('display','none');
+$("#<?php echo $this->campoSeguro('IDbajaD') ?>").css('display','none');
+$("#<?php echo $this->campoSeguro('estado_bD') ?>").css('display','none');
+$("#<?php echo $this->campoSeguro('IDfaltanteD') ?>").css('display','none');
+$("#<?php echo $this->campoSeguro('IDhurtoD') ?>").css('display','none');
+$("#<?php echo $this->campoSeguro('tipo_entradaD') ?>").css('display','none');
 $("#<?php echo $this->campoSeguro('agrupacionCriterios') ?>").css('display','block');
 
 $("#<?php echo $this->campoSeguro('numero_entrada') ?>").select2({
@@ -234,19 +234,19 @@ break;
 
 case '3':
 
-$("#<?php echo $this->campoSeguro('numero_entrada') ?>").css('display','block');
-$("#<?php echo $this->campoSeguro('numero_salida') ?>").css('display','block');
-$("#<?php echo $this->campoSeguro('vigencia_entrada') ?>").css('display','block');
-$("#<?php echo $this->campoSeguro('vigencia_salida') ?>").css('display','block');
-$("#<?php echo $this->campoSeguro('proveedor') ?>").css('display','none');
-$("#<?php echo $this->campoSeguro('numero_placa') ?>").css('display','block');
-$("#<?php echo $this->campoSeguro('numero_serie') ?>").css('display','block');
-$("#<?php echo $this->campoSeguro('IDtraslado') ?>").css('display','none');
-$("#<?php echo $this->campoSeguro('IDbaja') ?>").css('display','none');
-$("#<?php echo $this->campoSeguro('estado_b') ?>").css('display','none');
-$("#<?php echo $this->campoSeguro('IDfaltante') ?>").css('display','none');
-$("#<?php echo $this->campoSeguro('IDhurto') ?>").css('display','none');
-$("#<?php echo $this->campoSeguro('tipo_entrada') ?>").css('display','none');
+$("#<?php echo $this->campoSeguro('numero_entradaD') ?>").css('display','block');
+$("#<?php echo $this->campoSeguro('numero_salidaD') ?>").css('display','block');
+$("#<?php echo $this->campoSeguro('vigencia_entradaD') ?>").css('display','block');
+$("#<?php echo $this->campoSeguro('vigencia_salidaD') ?>").css('display','block');
+$("#<?php echo $this->campoSeguro('proveedorD') ?>").css('display','none');
+$("#<?php echo $this->campoSeguro('numero_placaD') ?>").css('display','block');
+$("#<?php echo $this->campoSeguro('numero_serieD') ?>").css('display','block');
+$("#<?php echo $this->campoSeguro('IDtrasladoD') ?>").css('display','none');
+$("#<?php echo $this->campoSeguro('IDbajaD') ?>").css('display','none');
+$("#<?php echo $this->campoSeguro('estado_bD') ?>").css('display','none');
+$("#<?php echo $this->campoSeguro('IDfaltanteD') ?>").css('display','none');
+$("#<?php echo $this->campoSeguro('IDhurtoD') ?>").css('display','none');
+$("#<?php echo $this->campoSeguro('tipo_entradaD') ?>").css('display','none');
 $("#<?php echo $this->campoSeguro('agrupacionCriterios') ?>").css('display','block');
 
 $("#<?php echo $this->campoSeguro('numero_entrada') ?>").select2({
@@ -319,19 +319,19 @@ minimumInputLength: 1,
 break;
 
 case '4':
-$("#<?php echo $this->campoSeguro('numero_entrada') ?>").css('display','none');
-$("#<?php echo $this->campoSeguro('numero_salida') ?>").css('display','none');
-$("#<?php echo $this->campoSeguro('vigencia_entrada') ?>").css('display','none');
-$("#<?php echo $this->campoSeguro('vigencia_salida') ?>").css('display','none');
-$("#<?php echo $this->campoSeguro('proveedor') ?>").css('display','none');
-$("#<?php echo $this->campoSeguro('numero_placa') ?>").css('display','none');
-$("#<?php echo $this->campoSeguro('numero_serie') ?>").css('display','none');
-$("#<?php echo $this->campoSeguro('IDtraslado') ?>").css('display','block');
-$("#<?php echo $this->campoSeguro('IDbaja') ?>").css('display','none');
-$("#<?php echo $this->campoSeguro('estado_b') ?>").css('display','none');
-$("#<?php echo $this->campoSeguro('IDfaltante') ?>").css('display','none');
-$("#<?php echo $this->campoSeguro('IDhurto') ?>").css('display','none');
-$("#<?php echo $this->campoSeguro('tipo_entrada') ?>").css('display','none');
+$("#<?php echo $this->campoSeguro('numero_entradaD') ?>").css('display','none');
+$("#<?php echo $this->campoSeguro('numero_salidaD') ?>").css('display','none');
+$("#<?php echo $this->campoSeguro('vigencia_entradaD') ?>").css('display','none');
+$("#<?php echo $this->campoSeguro('vigencia_salidaD') ?>").css('display','none');
+$("#<?php echo $this->campoSeguro('proveedorD') ?>").css('display','none');
+$("#<?php echo $this->campoSeguro('numero_placaD') ?>").css('display','none');
+$("#<?php echo $this->campoSeguro('numero_serieD') ?>").css('display','none');
+$("#<?php echo $this->campoSeguro('IDtrasladoD') ?>").css('display','block');
+$("#<?php echo $this->campoSeguro('IDbajaD') ?>").css('display','none');
+$("#<?php echo $this->campoSeguro('estado_bD') ?>").css('display','none');
+$("#<?php echo $this->campoSeguro('IDfaltanteD') ?>").css('display','none');
+$("#<?php echo $this->campoSeguro('IDhurtoD') ?>").css('display','none');
+$("#<?php echo $this->campoSeguro('tipo_entradaD') ?>").css('display','none');
 $("#<?php echo $this->campoSeguro('agrupacionCriterios') ?>").css('display','block');
 
 
@@ -407,19 +407,19 @@ break;
 
 
 case '5':
-$("#<?php echo $this->campoSeguro('numero_entrada') ?>").css('display','none');
-$("#<?php echo $this->campoSeguro('numero_salida') ?>").css('display','none');
-$("#<?php echo $this->campoSeguro('vigencia_entrada') ?>").css('display','none');
-$("#<?php echo $this->campoSeguro('vigencia_salida') ?>").css('display','none');
-$("#<?php echo $this->campoSeguro('proveedor') ?>").css('display','none');
-$("#<?php echo $this->campoSeguro('numero_placa') ?>").css('display','none');
-$("#<?php echo $this->campoSeguro('numero_serie') ?>").css('display','none');
-$("#<?php echo $this->campoSeguro('IDtraslado') ?>").css('display','none');
-$("#<?php echo $this->campoSeguro('IDbaja') ?>").css('display','block');
-$("#<?php echo $this->campoSeguro('estado_b') ?>").css('display','block');
-$("#<?php echo $this->campoSeguro('IDfaltante') ?>").css('display','none');
-$("#<?php echo $this->campoSeguro('IDhurto') ?>").css('display','none');
-$("#<?php echo $this->campoSeguro('tipo_entrada') ?>").css('display','none');
+$("#<?php echo $this->campoSeguro('numero_entradaD') ?>").css('display','none');
+$("#<?php echo $this->campoSeguro('numero_salidaD') ?>").css('display','none');
+$("#<?php echo $this->campoSeguro('vigencia_entradaD') ?>").css('display','none');
+$("#<?php echo $this->campoSeguro('vigencia_salidaD') ?>").css('display','none');
+$("#<?php echo $this->campoSeguro('proveedorD') ?>").css('display','none');
+$("#<?php echo $this->campoSeguro('numero_placaD') ?>").css('display','none');
+$("#<?php echo $this->campoSeguro('numero_serieD') ?>").css('display','none');
+$("#<?php echo $this->campoSeguro('IDtrasladoD') ?>").css('display','none');
+$("#<?php echo $this->campoSeguro('IDbajaD') ?>").css('display','block');
+$("#<?php echo $this->campoSeguro('estado_bD') ?>").css('display','block');
+$("#<?php echo $this->campoSeguro('IDfaltanteD') ?>").css('display','none');
+$("#<?php echo $this->campoSeguro('IDhurtoD') ?>").css('display','none');
+$("#<?php echo $this->campoSeguro('tipo_entradaD') ?>").css('display','none');
 $("#<?php echo $this->campoSeguro('agrupacionCriterios') ?>").css('display','block');
 
 
@@ -493,19 +493,19 @@ break;
 
 
 case '6':
-$("#<?php echo $this->campoSeguro('numero_entrada') ?>").css('display','none');
-$("#<?php echo $this->campoSeguro('numero_salida') ?>").css('display','none');
-$("#<?php echo $this->campoSeguro('vigencia_entrada') ?>").css('display','none');
-$("#<?php echo $this->campoSeguro('vigencia_salida') ?>").css('display','none');
-$("#<?php echo $this->campoSeguro('proveedor') ?>").css('display','none');
-$("#<?php echo $this->campoSeguro('numero_placa') ?>").css('display','none');
-$("#<?php echo $this->campoSeguro('numero_serie') ?>").css('display','none');
-$("#<?php echo $this->campoSeguro('IDtraslado') ?>").css('display','none');
-$("#<?php echo $this->campoSeguro('IDbaja') ?>").css('display','none');
-$("#<?php echo $this->campoSeguro('estado_b') ?>").css('display','none');
-$("#<?php echo $this->campoSeguro('IDfaltante') ?>").css('display','block');
-$("#<?php echo $this->campoSeguro('IDhurto') ?>").css('display','block');
-$("#<?php echo $this->campoSeguro('tipo_entrada') ?>").css('display','none');
+$("#<?php echo $this->campoSeguro('numero_entradaD') ?>").css('display','none');
+$("#<?php echo $this->campoSeguro('numero_salidaD') ?>").css('display','none');
+$("#<?php echo $this->campoSeguro('vigencia_entradaD') ?>").css('display','none');
+$("#<?php echo $this->campoSeguro('vigencia_salidaD') ?>").css('display','none');
+$("#<?php echo $this->campoSeguro('proveedorD') ?>").css('display','none');
+$("#<?php echo $this->campoSeguro('numero_placaD') ?>").css('display','none');
+$("#<?php echo $this->campoSeguro('numero_serieD') ?>").css('display','none');
+$("#<?php echo $this->campoSeguro('IDtrasladoD') ?>").css('display','none');
+$("#<?php echo $this->campoSeguro('IDbajaD') ?>").css('display','none');
+$("#<?php echo $this->campoSeguro('estado_bD') ?>").css('display','none');
+$("#<?php echo $this->campoSeguro('IDfaltanteD') ?>").css('display','block');
+$("#<?php echo $this->campoSeguro('IDhurtoD') ?>").css('display','block');
+$("#<?php echo $this->campoSeguro('tipo_entradaD') ?>").css('display','none');
 $("#<?php echo $this->campoSeguro('agrupacionCriterios') ?>").css('display','block');
 
 
@@ -578,19 +578,19 @@ minimumInputLength: 1,
 break;
 
 case '7':
-$("#<?php echo $this->campoSeguro('numero_entrada') ?>").css('display','none');
-$("#<?php echo $this->campoSeguro('numero_salida') ?>").css('display','none');
-$("#<?php echo $this->campoSeguro('vigencia_entrada') ?>").css('display','none');
-$("#<?php echo $this->campoSeguro('vigencia_salida') ?>").css('display','none');
-$("#<?php echo $this->campoSeguro('proveedor') ?>").css('display','none');
-$("#<?php echo $this->campoSeguro('numero_placa') ?>").css('display','none');
-$("#<?php echo $this->campoSeguro('numero_serie') ?>").css('display','none');
-$("#<?php echo $this->campoSeguro('IDtraslado') ?>").css('display','none');
-$("#<?php echo $this->campoSeguro('IDbaja') ?>").css('display','none');
-$("#<?php echo $this->campoSeguro('estado_b') ?>").css('display','none');
-$("#<?php echo $this->campoSeguro('IDfaltante') ?>").css('display','none');
-$("#<?php echo $this->campoSeguro('IDhurto') ?>").css('display','none');
-$("#<?php echo $this->campoSeguro('tipo_entrada') ?>").css('display','none');
+$("#<?php echo $this->campoSeguro('numero_entradaD') ?>").css('display','none');
+$("#<?php echo $this->campoSeguro('numero_salidaD') ?>").css('display','none');
+$("#<?php echo $this->campoSeguro('vigencia_entradaD') ?>").css('display','none');
+$("#<?php echo $this->campoSeguro('vigencia_salidaD') ?>").css('display','none');
+$("#<?php echo $this->campoSeguro('proveedorD') ?>").css('display','none');
+$("#<?php echo $this->campoSeguro('numero_placaD') ?>").css('display','none');
+$("#<?php echo $this->campoSeguro('numero_serieD') ?>").css('display','none');
+$("#<?php echo $this->campoSeguro('IDtrasladoD') ?>").css('display','none');
+$("#<?php echo $this->campoSeguro('IDbajaD') ?>").css('display','none');
+$("#<?php echo $this->campoSeguro('estado_bD') ?>").css('display','none');
+$("#<?php echo $this->campoSeguro('IDfaltanteD') ?>").css('display','none');
+$("#<?php echo $this->campoSeguro('IDhurtoD') ?>").css('display','none');
+$("#<?php echo $this->campoSeguro('tipo_entradaD') ?>").css('display','none');
 $("#<?php echo $this->campoSeguro('agrupacionCriterios') ?>").css('display','none');
 
 $("#<?php echo $this->campoSeguro('numero_entrada') ?>").select2({
@@ -663,18 +663,18 @@ break;
 
 default:
 
-$("#<?php echo $this->campoSeguro('numero_entrada') ?>").css('display','none');
-$("#<?php echo $this->campoSeguro('numero_salida') ?>").css('display','none');
-$("#<?php echo $this->campoSeguro('vigencia_entrada') ?>").css('display','none');
-$("#<?php echo $this->campoSeguro('vigencia_salida') ?>").css('display','none');
-$("#<?php echo $this->campoSeguro('proveedor') ?>").css('display','none');
-$("#<?php echo $this->campoSeguro('numero_placa') ?>").css('display','none');
-$("#<?php echo $this->campoSeguro('numero_serie') ?>").css('display','none');
-$("#<?php echo $this->campoSeguro('IDtraslado') ?>").css('display','none');
-$("#<?php echo $this->campoSeguro('IDbaja') ?>").css('display','none');
-$("#<?php echo $this->campoSeguro('estado_b') ?>").css('display','none');
-$("#<?php echo $this->campoSeguro('IDfaltante') ?>").css('display','none');
-$("#<?php echo $this->campoSeguro('IDhurto') ?>").css('display','none');
+$("#<?php echo $this->campoSeguro('numero_entradaD') ?>").css('display','none');
+$("#<?php echo $this->campoSeguro('numero_salidaD') ?>").css('display','none');
+$("#<?php echo $this->campoSeguro('vigencia_entradaD') ?>").css('display','none');
+$("#<?php echo $this->campoSeguro('vigencia_salidaD') ?>").css('display','none');
+$("#<?php echo $this->campoSeguro('proveedorD') ?>").css('display','none');
+$("#<?php echo $this->campoSeguro('numero_placaD') ?>").css('display','none');
+$("#<?php echo $this->campoSeguro('numero_serieD') ?>").css('display','none');
+$("#<?php echo $this->campoSeguro('IDtrasladoD') ?>").css('display','none');
+$("#<?php echo $this->campoSeguro('IDbajaD') ?>").css('display','none');
+$("#<?php echo $this->campoSeguro('estado_bD') ?>").css('display','none');
+$("#<?php echo $this->campoSeguro('IDfaltanteD') ?>").css('display','none');
+$("#<?php echo $this->campoSeguro('IDhurtoD') ?>").css('display','none');
 $("#<?php echo $this->campoSeguro('tipo_entrada') ?>").css('display','none');
 
 
