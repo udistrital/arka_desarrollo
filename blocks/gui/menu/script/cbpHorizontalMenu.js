@@ -1,11 +1,14 @@
-<?php
-?>
-
-$(function() {
-				cbpHorizontalMenu.init();
-			});
-  
-  var cbpHorizontalMenu = (function() {
+/**
+ * cbpHorizontalMenu.js v1.0.0
+ * http://www.codrops.com
+ *
+ * Licensed under the MIT license.
+ * http://www.opensource.org/licenses/mit-license.php
+ * 
+ * Copyright 2013, Codrops
+ * http://www.codrops.com
+ */
+var cbpHorizontalMenu = (function() {
 
 	var $listItems = $( '#cbp-hrmenu > ul > li' ),
 		$menuItems = $listItems.children( 'a' ),
