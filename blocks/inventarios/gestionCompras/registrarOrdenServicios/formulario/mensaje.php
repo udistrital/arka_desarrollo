@@ -192,6 +192,8 @@ class registrarForm {
 					// Aplica atributos globales al control
 					$atributos = array_merge ( $atributos, $atributosGlobales );
 					echo $this->miFormulario->cuadroMensaje ( $atributos );
+					unset($atributos);
+					$this->botonRegresar ( $tab, 2 );
 					// --------------- FIN CONTROL : Cuadro de Texto --------------------------------------------------
 				}
 			}

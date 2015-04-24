@@ -1,9 +1,5 @@
 <?
 
-namespace inventarios\gestionCompras\registrarOrdenCompra\funcion;
-
-use inventarios\gestionCompras\registrarOrdenCompra\funcion\redireccion;
-
 $ruta = $this->miConfigurador->getVariableConfiguracion ( "raizDocumento" );
 
 $host = $this->miConfigurador->getVariableConfiguracion ( "host" ) . $this->miConfigurador->getVariableConfiguracion ( "site" ) . "/plugin/html2pfd/";
@@ -29,6 +25,8 @@ class RegistradorOrden {
 		$this->miFuncion = $funcion;
 	}
 	function documento() {
+		
+		var_dump($_REQUEST);exit;
 		$conexion = "sicapital";
 		$esteRecursoDBO = $this->miConfigurador->fabricaConexiones->getRecursoDB ( $conexion );
 		
