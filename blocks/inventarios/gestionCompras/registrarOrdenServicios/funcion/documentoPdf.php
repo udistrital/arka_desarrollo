@@ -26,7 +26,7 @@ class RegistradorOrden {
 	}
 	function documento() {
 		
-		var_dump($_REQUEST);exit;
+// 		var_dump($_REQUEST);exit;
 		$conexion = "sicapital";
 		$esteRecursoDBO = $this->miConfigurador->fabricaConexiones->getRecursoDB ( $conexion );
 		
@@ -35,62 +35,65 @@ class RegistradorOrden {
 		
 		$directorio = $this->miConfigurador->getVariableConfiguracion ( 'rutaUrlBloque' );
 		
-		$cadenaSql = $this->miSql->getCadenaSql ( 'consultarOrdenCompra', $_REQUEST ['numero_orden'] );
-		$ordenCompra = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
-		$ordenCompra = $ordenCompra [0];
+		$cadenaSql = $this->miSql->getCadenaSql ( 'consultarOrdenServicios', $_REQUEST ['numero_orden'] );
+		$orden = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
+		$orden = $orden [0];
 		
-		$cadenaSql = $this->miSql->getCadenaSql ( 'informacionPresupuestal', $ordenCompra ['info_presupuestal'] );
-		$info_presupuestal = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
-		$info_presupuestal = $info_presupuestal [0];
 		
-		$cadenaSql = $this->miSql->getCadenaSql ( 'informacion_proveedor', $ordenCompra ['id_proveedor'] );
-		$proveedor = $esteRecursoDBO->ejecutarAcceso ( $cadenaSql, "busqueda" );
-		$proveedor = $proveedor [0];
+		var_dump($orden);exit;
 		
-		$cotizacion = ($ordenCompra ['nombre_cotizacion'] != '') ? 'SI' : 'NO';
+// 		$cadenaSql = $this->miSql->getCadenaSql ( 'informacionPresupuestal', $ordenCompra ['info_presupuestal'] );
+// 		$info_presupuestal = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
+// 		$info_presupuestal = $info_presupuestal [0];
 		
-		$cadenaSql = $this->miSql->getCadenaSql ( 'consultarRubro', $ordenCompra ['rubro'] );
+// 		$cadenaSql = $this->miSql->getCadenaSql ( 'informacion_proveedor', $ordenCompra ['id_proveedor'] );
+// 		$proveedor = $esteRecursoDBO->ejecutarAcceso ( $cadenaSql, "busqueda" );
+// 		$proveedor = $proveedor [0];
+		
+// 		$cotizacion = ($ordenCompra ['nombre_cotizacion'] != '') ? 'SI' : 'NO';
+		
+		$cadenaSql = $this->miSql->getCadenaSql ( 'consultarRubro', $orden ['rubro'] );
 		$rubro = $esteRecursoDBO->ejecutarAcceso ( $cadenaSql, "busqueda" );
 		$rubro = $rubro [0];
 		
-		$cadenaSql = $this->miSql->getCadenaSql ( 'consultarDependencia', $ordenCompra ['id_dependencia'] );
-		$dependencia = $esteRecursoDBO->ejecutarAcceso ( $cadenaSql, "busqueda" );
-		$dependencia = $dependencia [0];
+		$cadenaSql = $this->miSql->getCadenaSql ( 'consultarDependencia', $orden ['dependencia_solicitante'] );
+		$dependencia_solicitante = $esteRecursoDBO->ejecutarAcceso ( $cadenaSql, "busqueda" );
+		$dependencia_solicitante = $dependencia_solicitante [0];
 		
-		$cadenaSql = $this->miSql->getCadenaSql ( 'consultarItems', $_REQUEST ['numero_orden'] );
-		$items = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
+// 		$cadenaSql = $this->miSql->getCadenaSql ( 'consultarItems', $_REQUEST ['numero_orden'] );
+// 		$items = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
 		
-		$cadenaSql = $this->miSql->getCadenaSql ( 'polizas' );
-		$polizas = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
-		$polizas = $polizas [0];
+// 		$cadenaSql = $this->miSql->getCadenaSql ( 'polizas' );
+// 		$polizas = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
+// 		$polizas = $polizas [0];
 		
-		$poliza1 = ($ordenCompra ['poliza1'] != 'f') ? 'X' : ' ';
-		$poliza2 = ($ordenCompra ['poliza2'] != 'f') ? 'X' : ' ';
-		$poliza3 = ($ordenCompra ['poliza3'] != 'f') ? 'X' : ' ';
-		$poliza4 = ($ordenCompra ['poliza4'] != 'f') ? 'X' : ' ';
-		$poliza5 = ($ordenCompra ['poliza5'] != 'f') ? 'X' : ' ';
+// 		$poliza1 = ($ordenCompra ['poliza1'] != 'f') ? 'X' : ' ';
+// 		$poliza2 = ($ordenCompra ['poliza2'] != 'f') ? 'X' : ' ';
+// 		$poliza3 = ($ordenCompra ['poliza3'] != 'f') ? 'X' : ' ';
+// 		$poliza4 = ($ordenCompra ['poliza4'] != 'f') ? 'X' : ' ';
+// 		$poliza5 = ($ordenCompra ['poliza5'] != 'f') ? 'X' : ' ';
 		
-		$cadenaSql = $this->miSql->getCadenaSql ( 'consultarDestino', $ordenCompra ['destino'] );
-		$destino = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
-		$destino = $destino [0];
+// 		$cadenaSql = $this->miSql->getCadenaSql ( 'consultarDestino', $ordenCompra ['destino'] );
+// 		$destino = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
+// 		$destino = $destino [0];
 		
-		$cadenaSql = $this->miSql->getCadenaSql ( 'consultar_forma_pago', $ordenCompra ['forma_pago'] );
-		$forma_pago = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
-		$forma_pago = $forma_pago [0];
+// 		$cadenaSql = $this->miSql->getCadenaSql ( 'consultar_forma_pago', $ordenCompra ['forma_pago'] );
+// 		$forma_pago = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
+// 		$forma_pago = $forma_pago [0];
 		
-		$arreglo = array (
-				$ordenCompra ['id_contratista'],
-				$ordenCompra ['vig_contratista'] 
-		);
-		$cadenaSql = $this->miSql->getCadenaSql ( 'consultarContratista', $arreglo );
-		$contratista = $esteRecursoDBO->ejecutarAcceso ( $cadenaSql, "busqueda" );
-		$contratista = $contratista [0];
+// 		$arreglo = array (
+// 				$ordenCompra ['id_contratista'],
+// 				$ordenCompra ['vig_contratista'] 
+// 		);
+// 		$cadenaSql = $this->miSql->getCadenaSql ( 'consultarContratista', $arreglo );
+// 		$contratista = $esteRecursoDBO->ejecutarAcceso ( $cadenaSql, "busqueda" );
+// 		$contratista = $contratista [0];
 		
 		
 		
-		$cadenaSql = $this->miSql->getCadenaSql ( 'consultarOrdenador_gasto', $ordenCompra['id_ordenador'] );
-		$ordenador = $esteRecursoDBO->ejecutarAcceso ( $cadenaSql, "busqueda" );
-		$ordenador = $ordenador [0];
+// 		$cadenaSql = $this->miSql->getCadenaSql ( 'consultarOrdenador_gasto', $ordenCompra['id_ordenador'] );
+// 		$ordenador = $esteRecursoDBO->ejecutarAcceso ( $cadenaSql, "busqueda" );
+// 		$ordenador = $ordenador [0];
 		
 		
 // 		var_dump($ordenador);exit;
@@ -161,174 +164,26 @@ class RegistradorOrden {
 	                  		
        		<table style='width:100%;'>
             <tr> 
-			<td style='width:50%;'>ORDEN DE COMPRA Nro.  " . $_REQUEST ['numero_orden'] . "</td>
-			<td style='width:50%;text-aling=right;'>FECHA DE ORDEN :  " . $ordenCompra ['fecha_registro'] . "</td> 			
- 		 	</tr>
-			<tr> 
-			<td >Disponibilidad Presupuestal : Nro. " . $info_presupuestal ['numero_dispo'] . "</td>
-			<td>Vigencia Disponibilidad :  " . $info_presupuestal ['vigencia_dispo'] . "</td> 			
- 		 	</tr>	
-		 	<tr> 
-			<td >Proveedor : " . $proveedor [0] . "</td>
-			<td>Nit :  " . $info_presupuestal ['1'] . "</td> 			
+			<td style='width:50%;'>ORDEN DE SERVICIOS Nro.  " . $_REQUEST ['numero_orden'] . "</td>
+			<td style='width:50%;text-aling=right;'>FECHA DE ORDEN :  " . $orden ['fecha_registro'] . "</td> 			
  		 	</tr>
 		    </table>	
-					                 		
 		    <table style='width:100%;'>
 			<tr> 
-			<td style='width:33.31%;'>Dirección : " . $proveedor [2] . "</td>
-			<td style='width:33.31%;'>Telefono :  " . $proveedor [3] . "</td>
-			<td style='width:33.31%;'>Cotización Adjunta:  " . $cotizacion . "</td> 			
- 		 	</tr> 		          		
- 			</table>	    
-					             		
-			<table style='width:100%;'>
-			<tr> 
-			<td style='width:100%;'>Rubro :  " . $rubro [0] . "</td>
-			</tr> 		          		
- 			</table>
-			<table style='width:100%;'>
-			<tr> 
-			<td style='width:100%;'>Dependencia Solicitante :  " . $dependencia [1] . "</td>
-			</tr> 		          		
- 			</table>	
-			<table style='width:100%;'>
-			<tr> 
-			<td style='width:50%;'>Dirección :  " . $dependencia [2] . "</td>
-			<td style='width:50%;'>Telefono :  " . $dependencia [3] . "</td>
-			</tr> 		          		
- 			</table>	
-			 		
-			<table style='width:100%;'>
-			<tr> 
-			<td style='width:100%;'>Descripción Solicitante : </td>
-			</tr> 		          		
- 			</table>		
-			<table style='width:100%;'>
-			<tr> 
-			<td style='width:10%;text-align=center;'>Item</td>
-			<td style='width:15%;text-align=center;'>Unidad/Medida</td>
-			<td style='width:20%;text-align=center;'>Cantidad</td>
-			<td style='width:30%;text-align=center;'>Descripción</td>
-			<td style='width:8.3%;text-align=center;'>Valor Unitario($)</td>
-			<td style='width:8.3%;text-align=center;'>Valor Total($)</td>
-			<td style='width:8.3%;text-align=center;'>Descuento</td>
-			</tr> 		          		
- 			</table>		
-			<table style='width:100%;'>";
-		
-		foreach ( $items as $it ) {
-			$contenidoPagina .= "<tr>";
-			$contenidoPagina .= "<td style='width:10%;text-align=center;'>" . $it [0] . "</td>";
-			$contenidoPagina .= "<td style='width:15%;text-align=center;'>" . $it [1] . "</td>";
-			$contenidoPagina .= "<td style='width:20%;text-align=center;'>" . $it [2] . "</td>";
-			$contenidoPagina .= "<td style='width:30%;text-align=justify;'>" . $it [3] . "</td>";
-			$contenidoPagina .= "<td style='width:8.3%;text-align=center;'>$ " . $it [4] . "</td>";
-			$contenidoPagina .= "<td style='width:8.3%;text-align=center;'>$ " . $it [5] . "</td>";
-			$contenidoPagina .= "<td style='width:8.3%;text-align=center;'>$ " . $it [6] . "</td>";
-			$contenidoPagina .= "</tr>";
-		}
-		
-		$contenidoPagina .= "</table>
-			<table style='width:100%;'>
-			<tr> 
-			<td style='width:50%;text-align=left;'><b>SUBTOTAL</b></td>
-			<td style='width:50%;text-align=center;'>$ " . $ordenCompra ['subtotal'] . "</td>	
+			<td style='width:100%;'><b>Información Solicitante</b></td>
 			</tr>
-			<tr> 
-			<td style='width:50%;text-align=left;'><b>APLICA IVA</b></td>
-			<td style='width:50%;text-align=center;'>$ " . $ordenCompra ['iva'] . "</td>	
-			</tr>
-			<tr> 
-			<td style='width:50%;text-align=left;'><b>TOTAL</b></td>
-			<td style='width:50%;text-align=center;'>$ " . $ordenCompra ['total'] . "</td>	
-			</tr>
-			</table>
+         	</table>
 
-			<table style='width:100%;'>		
+
+		    <table style='width:100%;'>
 			<tr> 
-			<td style='width:100%;text-align:center;text-transform:uppercase;'><b>" . $ordenCompra ['valor_letras'] . "</b></td>	
-			</tr>	
-			</table>	
-			 	
-			<table style='width:100%;'>		
-			<tr> 
-			<td style='width:100%;text-align:left;'>Obligaciones Proveedor : </td>	
+			<td style='width:50%;'>Dependencia : </td>
+			<td style='width:50%;'>Rubro: </td>		
 			</tr>
-			<tr> 
-			<td style='width:100%;text-align:left;'>" . $ordenCompra ['obligaciones_proveedor'] . "</td>	
-			</tr>
-			<tr> 
-			<td style='width:100%;text-align:left;'>Obligaciones Constratista : </td>	
-			</tr>
-			<tr> 
-			<td style='width:100%;text-align:left;'>" . $ordenCompra ['obligaciones_contratista'] . "</td>	
-			</tr>					
-			</table>	
-        	<table style='width:100%;'>		
-			<tr> 
-			<td style='width:90%;text-align:left;'>" . $polizas [1] . "</td>	
-			<td style='width:10%;text-align:center;'>" . $poliza1 . "</td>		
-			</tr>
-			<tr> 
-			<td style='width:90%;text-align:left;'>" . $polizas [2] . "</td>	
-			<td style='width:10%;text-align:center;'>" . $poliza2 . "</td>		
-			</tr>
-			<tr> 
-			<td style='width:90%;text-align:left;'>" . $polizas [3] . "</td>	
-			<td style='width:10%;text-align:center;'>" . $poliza3 . "</td>		
-			</tr>								
-			<tr> 
-			<td style='width:90%;text-align:left;'>" . $polizas [4] . "</td>	
-			<td style='width:10%;text-align:center;'>" . $poliza4 . "</td>		
-			</tr>					
-			<tr> 
-			<td style='width:90%;text-align:left;'>" . $polizas [5] . "</td>	
-			<td style='width:10%;text-align:center;'>" . $poliza5 . "</td>		
-			</tr>					
-			</table>	
-			
-			<table style='width:100%;'>		
-			<tr>
-			<td style='width:50%;text-align:left;'>Lugar Entrega : " . $ordenCompra ['lugar_entrega'] . "</td>	
-			<td style='width:50%;text-align:left;'>Destino :  " . $destino [0] . "</td>				
-			</tr>
-			<tr>
-			<td style='width:50%;text-align:left;'>Tiempo Entrega : " . $ordenCompra ['tiempo_entrega'] . " dias </td>	
-			<td style='width:50%;text-align:left;'>Forma de Pago :  " . $forma_pago [0] . "</td>				
-			</tr>							
-			</table>
-			<table style='width:100%;'>		
-			<tr>
-			<td style='width:100%;text-align:left;'>Supervisor :  " . $ordenCompra ['supervision'] . "</td>				
-			</tr>
-			<tr>
-			<td style='width:100%;text-align:left;'> Inhabilidades y/o Incompatibilidades :  " . $ordenCompra ['inhabilidades'] . "</td>				
-			</tr>
-			<tr>
-			<td style='width:100%;text-align:left;'><b>NOTA: SI DENTRO DE LOS TRES (3) DIAS HABILES SIGUIENTES AL RECIBO DE LA PRESENTE ORDEN DE COMPRA, ESTA UNIVERSIDAD NO RECIBE OBSERVACIONES POR PARTE DEL PROVEEDOR, SE ENTENDERAN ACEPTADAS TODAS Y CADA UNA DE LAS OBLIGACIONES Y CONDICIONES AQUÍ PACTADAS</b></td>				
-			</tr>		
-			</table>
-			<br>
-			<br>
-			<table style='width:100%; background:#FFFFFF ; border: 0px  #FFFFFF;'>		
-			<tr>
-			<td style='width:50%;text-align:left;background:#FFFFFF ; border: 0px  #FFFFFF;'>_______________________________</td>
-			<td style='width:50%;text-align:left;background:#FFFFFF ; border: 0px  #FFFFFF;'>_______________________________</td>						
-			</tr>
-			<tr>
-			<td style='width:50%;text-align:left;background:#FFFFFF ; border: 0px  #FFFFFF;'>FIRMA CONTRATISTA</td>
-			<td style='width:50%;text-align:left;background:#FFFFFF ; border: 0px  #FFFFFF; text-transform:capitalize;'>" . $ordenador[1]. "</td>
-			</tr>
-			<tr>
-			<td style='width:50%;text-align:left;background:#FFFFFF ; border: 0px  #FFFFFF; text-transform:capitalize;'>NOMBRE: " . $contratista[1] . "</td>
-			<td style='width:50%;text-align:left;background:#FFFFFF ; border: 0px  #FFFFFF;'>ORDENADOR GASTO</td>
-			</tr>
-			<tr>
-			<td style='width:50%;text-align:left;background:#FFFFFF ; border: 0px  #FFFFFF;'>C.C: " . $contratista[0]. "</td>
-			<td style='width:50%;text-align:left;background:#FFFFFF ; border: 0px  #FFFFFF;'>" . $ordenador[0]. "</td>
-			</tr>							
-			</table>
+			</table>			
+					
+			                 		
+
 <page_footer  backleft='10mm' backright='10mm'>
 			<table style='width:100%;'>		
 			<tr>
