@@ -405,6 +405,50 @@ class Sql extends \Sql {
 				$cadenaSql .= "'" . $variable [0] . "') ";
 				$cadenaSql .= "RETURNING  id_informacion; ";
 				break;
+			
+			case "consultarDependencia" :
+				$cadenaSql = " SELECT *  ";
+				$cadenaSql .= "FROM DEPENDENCIAS ";
+				$cadenaSql .= "WHERE DEP_IDENTIFICADOR='" . $variable . "'";
+				break;
+			
+			case "consultarRubro" :
+				$cadenaSql = " SELECT RUB_NOMBRE_RUBRO ";
+				$cadenaSql .= " FROM RUBROS ";
+				$cadenaSql .= " WHERE  RUB_IDENTIFICADOR='" . $variable . "'";
+				
+				break;
+			
+			case "consultarDependenciaSupervisor" :
+				$cadenaSql = " SELECT *  ";
+				$cadenaSql .= "FROM DEPENDENCIAS ";
+				$cadenaSql .= "WHERE DEP_IDENTIFICADOR='" . $variable . "'";
+				break;
+			
+			case "consultarSupervisor" :
+				$cadenaSql = " SELECT nombre, cargo, dependencia ";
+				$cadenaSql .= " FROM supervisor_servicios ";
+				$cadenaSql .= " WHERE id_supervisor='" . $variable . "'";
+				break;
+			
+
+				
+			case "consultarCosntraistaServicios" :
+				$cadenaSql = " SELECT nombre_razon_social, identificacion, direccion,telefono, cargo ";
+				$cadenaSql .= " FROM contratista_servicios ";
+				$cadenaSql .= " WHERE id_contratista='" . $variable . "'";
+				break;
+			
+			case "consultarOrdenServicios" :
+				$cadenaSql = "SELECT  fecha_registro, info_presupuestal, dependencia_solicitante,
+				rubro, objeto_contrato, poliza1, poliza2, poliza3, poliza4, duracion_pago,
+				fecha_inicio_pago, fecha_final_pago, forma_pago, total_preliminar,
+				iva, total, id_contratista, id_contratista_encargado, vig_contratista,
+				id_ordenador_encargado, id_supervisor, estado ";
+				$cadenaSql .= "FROM orden_servicio  ";
+				$cadenaSql .= "WHERE  id_orden_servicio='" . $variable . "';";
+				
+				break;
 		}
 		return $cadenaSql;
 	}

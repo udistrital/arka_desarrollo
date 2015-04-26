@@ -40,7 +40,10 @@ class RegistradorOrden {
 		$orden = $orden [0];
 		
 		
-		var_dump($orden);exit;
+// 		var_dump($orden);
+		
+		
+		
 		
 // 		$cadenaSql = $this->miSql->getCadenaSql ( 'informacionPresupuestal', $ordenCompra ['info_presupuestal'] );
 // 		$info_presupuestal = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
@@ -56,22 +59,38 @@ class RegistradorOrden {
 		$rubro = $esteRecursoDBO->ejecutarAcceso ( $cadenaSql, "busqueda" );
 		$rubro = $rubro [0];
 		
+// 		var_dump($rubro);
 		$cadenaSql = $this->miSql->getCadenaSql ( 'consultarDependencia', $orden ['dependencia_solicitante'] );
 		$dependencia_solicitante = $esteRecursoDBO->ejecutarAcceso ( $cadenaSql, "busqueda" );
 		$dependencia_solicitante = $dependencia_solicitante [0];
+// 		var_dump($dependencia_solicitante);exit;
 		
-// 		$cadenaSql = $this->miSql->getCadenaSql ( 'consultarItems', $_REQUEST ['numero_orden'] );
-// 		$items = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
 		
-// 		$cadenaSql = $this->miSql->getCadenaSql ( 'polizas' );
-// 		$polizas = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
-// 		$polizas = $polizas [0];
 		
-// 		$poliza1 = ($ordenCompra ['poliza1'] != 'f') ? 'X' : ' ';
-// 		$poliza2 = ($ordenCompra ['poliza2'] != 'f') ? 'X' : ' ';
-// 		$poliza3 = ($ordenCompra ['poliza3'] != 'f') ? 'X' : ' ';
-// 		$poliza4 = ($ordenCompra ['poliza4'] != 'f') ? 'X' : ' ';
-// 		$poliza5 = ($ordenCompra ['poliza5'] != 'f') ? 'X' : ' ';
+		$cadenaSql = $this->miSql->getCadenaSql ( 'consultarSupervisor', $orden ['id_supervisor'] );
+		$supervisor = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
+		$supervisor = $supervisor [0];
+		
+		
+		$cadenaSql = $this->miSql->getCadenaSql ( 'consultarDependenciaSupervisor', $supervisor ['dependencia'] );
+		$dependencia_supervisor = $esteRecursoDBO->ejecutarAcceso ( $cadenaSql, "busqueda" );
+		$dependencia_supervisor = $dependencia_supervisor [0];
+		
+		$cadenaSql = $this->miSql->getCadenaSql ( 'consultarCosntraistaServicios', $orden['id_contratista'] );
+		$datosContratista = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
+		
+		$datosContratista=$datosContratista[0];
+// 		var_dump($datosContratista);exit;
+		
+// 		exit;
+		$cadenaSql = $this->miSql->getCadenaSql ( 'polizas' );
+		$polizas = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
+		$polizas = $polizas [0];
+		
+		$poliza1 = ($orden ['poliza1'] != 'f') ? 'X' : ' ';
+		$poliza2 = ($orden ['poliza2'] != 'f') ? 'X' : ' ';
+		$poliza3 = ($orden ['poliza3'] != 'f') ? 'X' : ' ';
+		$poliza4 = ($orden ['poliza4'] != 'f') ? 'X' : ' ';
 		
 // 		$cadenaSql = $this->miSql->getCadenaSql ( 'consultarDestino', $ordenCompra ['destino'] );
 // 		$destino = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
@@ -167,7 +186,8 @@ class RegistradorOrden {
 			<td style='width:50%;'>ORDEN DE SERVICIOS Nro.  " . $_REQUEST ['numero_orden'] . "</td>
 			<td style='width:50%;text-aling=right;'>FECHA DE ORDEN :  " . $orden ['fecha_registro'] . "</td> 			
  		 	</tr>
-		    </table>	
+		    </table>
+						
 		    <table style='width:100%;'>
 			<tr> 
 			<td style='width:100%;'><b>Información Solicitante</b></td>
@@ -177,12 +197,84 @@ class RegistradorOrden {
 
 		    <table style='width:100%;'>
 			<tr> 
-			<td style='width:50%;'>Dependencia : </td>
-			<td style='width:50%;'>Rubro: </td>		
+			<td style='width:50%;'>Dependencia : ".$dependencia_solicitante[1]." </td>
+			<td style='width:50%;'>Rubro: ".$rubro[0]."</td>		
 			</tr>
+			</table>	
+
+			<table style='width:100%;'>
+			<tr> 
+			<td style='width:100%;'><b>Datos Supervisor</b></td>
+			</tr>
+         	</table>
+
+		    <table style='width:100%;'>
+			<tr> 
+			<td style='width:100%;'>Nombre : ".$supervisor['nombre']." </td>
+			</tr>
+			<tr> 
+			<td style='width:100%;'>Cargo : ".$supervisor['cargo']." </td>
+			</tr>		
+			<tr> 
+			<td style='width:100%;'>Dependencia : ".rtrim($dependencia_supervisor[1])." </td>
+			</tr>						
 			</table>			
 					
-			                 		
+			<table style='width:100%;'>
+			<tr> 
+			<td style='width:100%;'><b>Información Contratista</b></td>
+			</tr>
+         	</table>	
+
+            <table style='width:100%;'>
+			<tr> 
+			<td style='width:50%;'>Nombre o Razón Social : ".$datosContratista['nombre_razon_social']." </td>
+			<td style='width:50%;'>Cedula o Nit : ".$datosContratista['identificacion']." </td>
+			</tr>
+			<tr> 
+			<td style='width:50%;'>Dirección : ".$datosContratista['direccion']." </td>
+			<td style='width:50%;'>Telefono : ".$datosContratista['telefono']." </td>
+			</tr>		
+			</table>	
+
+			<table style='width:100%;'>
+			<tr> 
+			<td style='width:100%;'>Cargo : ".$datosContratista['cargo']."</td>
+			</tr>
+         	</table>			
+					
+			<table style='width:100%;'>
+			<tr> 
+			<td style='width:100%;'><b>Información Contrato</b></td>
+			</tr>
+         	</table>	
+
+			<table style='width:100%;'>
+			<tr> 
+			<td style='width:100%;'>Objeto General : </td>
+			</tr>
+			<tr> 
+			<td style='width:100%;text-align:justify;'>".$orden[4]." </td>
+			</tr>		
+			</table>			
+<table style='width:100%;'>		
+			<tr> 
+			<td style='width:90%;text-align:left;'>" . $polizas [1] . "</td>	
+			<td style='width:10%;text-align:center;'>" . $poliza1 . "</td>		
+			</tr>
+			<tr> 
+			<td style='width:90%;text-align:left;'>" . $polizas [2] . "</td>	
+			<td style='width:10%;text-align:center;'>" . $poliza2 . "</td>		
+			</tr>
+			<tr> 
+			<td style='width:90%;text-align:left;'>" . $polizas [3] . "</td>	
+			<td style='width:10%;text-align:center;'>" . $poliza3 . "</td>		
+			</tr>								
+			<tr> 
+			<td style='width:90%;text-align:left;'>" . $polizas [4] . "</td>	
+			<td style='width:10%;text-align:center;'>" . $poliza4 . "</td>		
+			</tr>					
+			</table>			                 		
 
 <page_footer  backleft='10mm' backright='10mm'>
 			<table style='width:100%;'>		
