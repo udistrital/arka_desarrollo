@@ -431,12 +431,32 @@ class Sql extends \Sql {
 				$cadenaSql .= " WHERE id_supervisor='" . $variable . "'";
 				break;
 			
-
-				
+			case "consultarOrdenador_gasto" :
+				$cadenaSql = " 	SELECT ORG_ORDENADOR_GASTO,ORG_NOMBRE ";
+				$cadenaSql .= " FROM ORDENADORES_GASTO ";
+				$cadenaSql .= " WHERE ORG_IDENTIFICADOR ='" . $variable . "'";
+				break;
+			
+			case "consultarContratista" :
+				$cadenaSql = "SELECT CON_IDENTIFICACION , CON_NOMBRE AS CONTRATISTA ";
+				$cadenaSql .= "FROM CONTRATISTAS ";
+				$cadenaSql .= "WHERE CON_VIGENCIA ='" . $variable [1] . "' ";
+				$cadenaSql .= "AND  CON_IDENTIFICADOR ='" . $variable [0] . "' ";
+				break;
+			
 			case "consultarCosntraistaServicios" :
 				$cadenaSql = " SELECT nombre_razon_social, identificacion, direccion,telefono, cargo ";
 				$cadenaSql .= " FROM contratista_servicios ";
 				$cadenaSql .= " WHERE id_contratista='" . $variable . "'";
+				break;
+			
+			case "informacionPresupuestal" :
+				$cadenaSql = "SELECT  vigencia_dispo, numero_dispo, valor_disp, fecha_dip,
+									letras_dispo, vigencia_regis, numero_regis, valor_regis, fecha_regis,
+									letras_regis  ";
+				$cadenaSql .= "FROM informacion_presupuestal_orden ";
+				$cadenaSql .= "WHERE id_informacion ='" . $variable . "' ";
+				
 				break;
 			
 			case "consultarOrdenServicios" :

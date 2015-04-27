@@ -45,10 +45,11 @@ class RegistradorOrden {
 		
 		
 		
-// 		$cadenaSql = $this->miSql->getCadenaSql ( 'informacionPresupuestal', $ordenCompra ['info_presupuestal'] );
-// 		$info_presupuestal = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
-// 		$info_presupuestal = $info_presupuestal [0];
+		$cadenaSql = $this->miSql->getCadenaSql ( 'informacionPresupuestal', $orden ['info_presupuestal'] );
+		$info_presupuestal = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
+		$info_presupuestal = $info_presupuestal [0];
 		
+// 		var_dump($info_presupuestal);
 // 		$cadenaSql = $this->miSql->getCadenaSql ( 'informacion_proveedor', $ordenCompra ['id_proveedor'] );
 // 		$proveedor = $esteRecursoDBO->ejecutarAcceso ( $cadenaSql, "busqueda" );
 // 		$proveedor = $proveedor [0];
@@ -100,22 +101,22 @@ class RegistradorOrden {
 // 		$forma_pago = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
 // 		$forma_pago = $forma_pago [0];
 		
-// 		$arreglo = array (
-// 				$ordenCompra ['id_contratista'],
-// 				$ordenCompra ['vig_contratista'] 
-// 		);
-// 		$cadenaSql = $this->miSql->getCadenaSql ( 'consultarContratista', $arreglo );
-// 		$contratista = $esteRecursoDBO->ejecutarAcceso ( $cadenaSql, "busqueda" );
-// 		$contratista = $contratista [0];
+		$arreglo = array (
+				$orden ['id_contratista_encargado'],
+				$orden ['vig_contratista'] 
+		);
+		$cadenaSql = $this->miSql->getCadenaSql ( 'consultarContratista', $arreglo );
+		$contratista = $esteRecursoDBO->ejecutarAcceso ( $cadenaSql, "busqueda" );
+		$contratista = $contratista [0];
 		
 		
 		
-// 		$cadenaSql = $this->miSql->getCadenaSql ( 'consultarOrdenador_gasto', $ordenCompra['id_ordenador'] );
-// 		$ordenador = $esteRecursoDBO->ejecutarAcceso ( $cadenaSql, "busqueda" );
-// 		$ordenador = $ordenador [0];
+		$cadenaSql = $this->miSql->getCadenaSql ( 'consultarOrdenador_gasto', $orden['id_ordenador_encargado'] );
+		$ordenador = $esteRecursoDBO->ejecutarAcceso ( $cadenaSql, "busqueda" );
+		$ordenador = $ordenador [0];
 		
 		
-// 		var_dump($ordenador);exit;
+// 		var_dump($ordenador);
 // 		var_dump($contratista);exit;
 		// var_dump($forma_pago);exit;
 		// var_dump($destino);exit;
@@ -208,17 +209,22 @@ class RegistradorOrden {
 			</tr>
          	</table>
 
-		    <table style='width:100%;'>
+			<table style='width:100%;'>		
 			<tr> 
-			<td style='width:100%;'>Nombre : ".$supervisor['nombre']." </td>
+			<td style='width:50%;'>Nombre : ".$supervisor['nombre']." </td>
+			<td style='width:50%;'>Cargo : ".$supervisor['cargo']." </td>
 			</tr>
-			<tr> 
-			<td style='width:100%;'>Cargo : ".$supervisor['cargo']." </td>
-			</tr>		
+			</table>
+					
+		    <table style='width:100%;'>
 			<tr> 
 			<td style='width:100%;'>Dependencia : ".rtrim($dependencia_supervisor[1])." </td>
 			</tr>						
-			</table>			
+			</table>	
+
+					
+					
+					
 					
 			<table style='width:100%;'>
 			<tr> 
@@ -257,7 +263,8 @@ class RegistradorOrden {
 			<td style='width:100%;text-align:justify;'>".$orden[4]." </td>
 			</tr>		
 			</table>			
-<table style='width:100%;'>		
+			
+			<table style='width:100%;'>		
 			<tr> 
 			<td style='width:90%;text-align:left;'>" . $polizas [1] . "</td>	
 			<td style='width:10%;text-align:center;'>" . $poliza1 . "</td>		
@@ -274,27 +281,103 @@ class RegistradorOrden {
 			<td style='width:90%;text-align:left;'>" . $polizas [4] . "</td>	
 			<td style='width:10%;text-align:center;'>" . $poliza4 . "</td>		
 			</tr>					
-			</table>			                 		
+			</table>	
+					
+		    <table style='width:100%;'>
+			<tr> 
+			<td style='width:100%;'><b>Información Referente Pago</b></td>
+			</tr>
+         	</table>	             		
 
+		    <table style='width:100%;'>
+			<tr> 
+			<td style='width:33.31%;'>Fecha Inicio:  ".$orden['fecha_inicio_pago']."</td>
+			<td style='width:33.31%;'>Fecha Final:  ".$orden['fecha_final_pago']."</td>
+			<td style='width:33.31%;'>Duración (en Dias):  ".$orden['duracion_pago']."</td>		
+			</tr>
+         	</table>	 
+
+            <table style='width:100%;'>
+			<tr> 
+			<td style='width:100%;text-align:justify;'>Forma de Pago :  ".$orden['forma_pago']."</td>
+			</tr>
+         	</table>
+
+			<table style='width:100%;'>
+			<tr> 
+			<td style='width:33.31%;'>Total Preliminar :  $ ".$orden['total_preliminar']."</td>
+			<td style='width:33.31%;'>Total Iva :  $ ".$orden['iva']."</td>
+			<td style='width:33.31%;'>Total :  $ ".$orden['total']."</td>		
+			</tr>
+         	</table>	 		
+			
+			<table style='width:100%;'>
+			<tr> 
+			<td style='width:100%;'><b>Información Respaldo Presupuestal</b></td>
+			</tr>
+         	</table>
+
+			<table style='width:100%;'>
+			<tr> 
+			<td style='width:50%;'>Vigencia (Disponibilidad) :   ".$info_presupuestal['vigencia_dispo']."</td>
+			<td style='width:50%;'>Número (Disponibilidad) :   ".$info_presupuestal['numero_dispo']."</td>
+			</tr>
+			<tr> 
+			<td style='width:50%;'>Valor (Disponibilidad) :   $  ".$info_presupuestal['valor_disp']."</td>
+			<td style='width:50%;'>Fecha (Disponibilidad) :   ".$info_presupuestal['fecha_dip']."</td>
+			</tr>		
+         	</table>		
+					
+    		<table style='width:100%;'>
+			<tr> 
+			<td style='width:100%;'>Valor en Letras (Disponibilidad) :  ".$info_presupuestal['letras_dispo']."</td>
+			</tr>
+         	</table>		
+
+			<table style='width:100%;'>
+			<tr> 
+			<td style='width:50%;'>Vigencia (Registro) :   ".$info_presupuestal['vigencia_regis']."</td>
+			<td style='width:50%;'>Número (Registro) :   ".$info_presupuestal['numero_regis']."</td>
+			</tr>
+			<tr> 
+			<td style='width:50%;'>Valor (Registro) :  $  ".$info_presupuestal['valor_regis']."</td>
+			<td style='width:50%;'>Fecha (Registro) :   ".$info_presupuestal['fecha_regis']."</td>
+			</tr>		
+         	</table>		
+					
+    		<table style='width:100%;'>
+			<tr> 
+			<td style='width:100%;'>Valor en Letras (Registro) :  ".$info_presupuestal['letras_regis']."</td>
+			</tr>
+         	</table>		
+
+			<table style='width:100%; background:#FFFFFF ; border: 0px  #FFFFFF;'>		
+			<tr>
+			<td style='width:50%;text-align:left;background:#FFFFFF ; border: 0px  #FFFFFF;'>_______________________________</td>
+			<td style='width:50%;text-align:left;background:#FFFFFF ; border: 0px  #FFFFFF;'>_______________________________</td>						
+			</tr>
+			<tr>
+			<td style='width:50%;text-align:left;background:#FFFFFF ; border: 0px  #FFFFFF;'>FIRMA CONTRATISTA</td>
+			<td style='width:50%;text-align:left;background:#FFFFFF ; border: 0px  #FFFFFF; text-transform:capitalize;'>" . $ordenador[1]. "</td>
+			</tr>
+			<tr>
+			<td style='width:50%;text-align:left;background:#FFFFFF ; border: 0px  #FFFFFF; text-transform:capitalize;'>NOMBRE: " . $contratista[1] . "</td>
+			<td style='width:50%;text-align:left;background:#FFFFFF ; border: 0px  #FFFFFF;'>ORDENADOR GASTO</td>
+			</tr>
+			<tr>
+			<td style='width:50%;text-align:left;background:#FFFFFF ; border: 0px  #FFFFFF;'>C.C: " . $contratista[0]. "</td>
+			<td style='width:50%;text-align:left;background:#FFFFFF ; border: 0px  #FFFFFF;'>" . $ordenador[0]. "</td>
+			</tr>							
+			</table>		
+					
+					
 <page_footer  backleft='10mm' backright='10mm'>
 			<table style='width:100%;'>		
 			<tr>
-			<td style='width:100%;text-align:left;'><font size='1px'>Para el respectivo pago deberá radicar en la sección de compras la factura o cuenta de cobro, pago de aportes para fiscales o planilla de pago si es el caso, certificación bancaria indicando tipo y numero de cuenta y el cumplido a satisfacción del bien debidamente firmado por el supervisor del contrato o el funcionario quien recibe el bien.</font></td>	
+			<td style='width:100%;text-align:justify;'><font size='1px'>Observaciones: para el respectivo pago la factura y/o cuenta de cobro debe coincidir en valores, cantidades y razón social, con la presente orden de servicio. igualmente se debe anexar el recibido a satisfacción del servicio, pago de aportes parafiscal y/o seguridad social del mes de facturación y certificación bancaria con el numero de cuenta para realizar la transferencia bancaria.</font></td>	
 			</tr>
 			</table>
-			<table style='width:100%;'>		
-			<tr>
-			<td style='width:50%;text-align:left;'>Proveedor : </td>
-			<td style='width:50%;text-align:left;'>Nombre de quien recibe : </td>			
-			</tr>
-			</table>
-			<table style='width:100%;'>		
-			<tr>
-			<td style='width:33.31%;'>Firma : </td>
-			<td style='width:33.31%;'>Fecha : </td>
-			<td style='width:33.31%;'>Sello : </td>			
-			</tr>
-			</table>		
+		
 </page_footer> 
 					
 					
@@ -316,7 +399,7 @@ $html2pdf = new \HTML2PDF ( 'P', 'LETTER', 'es', true, 'UTF-8' );
 $html2pdf->pdf->SetDisplayMode ( 'fullpage' );
 $html2pdf->WriteHTML ( $textos );
 
-$html2pdf->Output ( 'Compra_Nro_'.$_REQUEST['numero_orden'].'_'.date ( "Y-m-d" ).'.pdf', 'D' );
+$html2pdf->Output ( 'Servicios_Nro_'.$_REQUEST['numero_orden'].'_'.date ( "Y-m-d" ).'.pdf', 'D' );
 
 ?>
 
