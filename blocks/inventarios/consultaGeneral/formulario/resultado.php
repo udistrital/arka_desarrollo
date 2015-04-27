@@ -83,63 +83,46 @@ class registrarForm {
         );
 
         switch ($_REQUEST['selec_tipoConsulta']) {
+            
             case 1:
                 $cadenaSql = $this->miSql->getCadenaSql('consultarEntrada', $datos_consulta);
                 $datos = $esteRecursoDB->ejecutarAcceso($cadenaSql, "busqueda");
                 break;
 
             case 2:
+                $cadenaSql = $this->miSql->getCadenaSql('consultarEntrada', $datos_consulta);
+                $datos = $esteRecursoDB->ejecutarAcceso($cadenaSql, "busqueda");
                 break;
+            
             case 3:
+                $cadenaSql = $this->miSql->getCadenaSql('consultarEntrada', $datos_consulta);
+                $datos = $esteRecursoDB->ejecutarAcceso($cadenaSql, "busqueda");
                 break;
+            
             case 4:
+                $cadenaSql = $this->miSql->getCadenaSql('consultarEntrada', $datos_consulta);
+                $datos = $esteRecursoDB->ejecutarAcceso($cadenaSql, "busqueda");
                 break;
+            
             case 5:
+                $cadenaSql = $this->miSql->getCadenaSql('consultarEntrada', $datos_consulta);
+                $datos = $esteRecursoDB->ejecutarAcceso($cadenaSql, "busqueda");
                 break;
+            
             case 6:
+                $cadenaSql = $this->miSql->getCadenaSql('consultarEntrada', $datos_consulta);
+                $datos = $esteRecursoDB->ejecutarAcceso($cadenaSql, "busqueda");
                 break;
+            
             case 7:
+                $cadenaSql = $this->miSql->getCadenaSql('consultarEntrada', $datos_consulta);
+                $datos = $esteRecursoDB->ejecutarAcceso($cadenaSql, "busqueda");
                 break;
+            
             default:
+                $datos = array();
                 break;
         }
-
-        $contenido_consultas = array('');
-        $encabezado = array();
-
-        foreach ($datos[0] as $key => $values) {
-            if (!is_numeric($key)) {
-                $encabezado[$key] = '<th>' . strtoupper(str_replace("_", " ", $key)) . '</th>';
-            }
-        }
-
-        $encabezadof = implode($encabezado);
-      
-        foreach ($contenido_consultas as $key => $values) {
-
-            if (is_array($datos)) {
-                $contenido_consultas[$key] = '<table id="tablaTitulos"><thead><tr>';
-                $contenido_consultas[$key].=$encabezadof;
-                $contenido_consultas[$key].='</tr></thead><tbody>';
-                for ($j = 0; $j < count($datos); $j++) {
-                    foreach ($datos as $nodo => $fila) {
-                        $contenido_consultas[$key].= '<tr>';
-                        foreach ($fila as $columna => $valor) {
-                            if (is_numeric($columna)) {
-                                $contenido_consultas[$key].= "<td>" . $valor . "</td> ";
-                            }
-                        }
-                        $contenido_consultas[$key].= '</tr>';
-                    }
-                }
-                $contenido_consultas[$key].= '</tbody>';
-                $contenido_consultas[$key].= '</table>';
-            } else {
-                $contenido_consultas[$key].= '<tr>';
-                $contenido_consultas[$key].= '</tr>';
-            }
-        }
-
 
 // ---------------- SECCION: Parámetros Generales del Formulario ----------------------------------
         $esteCampo = $esteBloque ['nombre'];
@@ -198,15 +181,11 @@ class registrarForm {
         echo $this->miFormulario->division("fin");
 
         if ($datos) {
-
-            
             echo $this->miFormulario->tablaReporte($datos);
 // Fin de Conjunto de Controles
 // echo $this->miFormulario->marcoAgrupacion("fin");
         } else {
-
             $mensaje = "No Se Encontraron<br>Datos Relacionados con la Búsqueda";
-
 // ---------------- CONTROL: Cuadro de Texto --------------------------------------------------------
             $esteCampo = 'mensajeRegistro';
             $atributos ['id'] = $esteCampo;
