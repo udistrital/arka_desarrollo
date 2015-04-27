@@ -10,6 +10,14 @@ $this->idioma ["informacion_contratista"] ="Identificación de Contratista :";
 $this->idioma ["informacion_dependencia"] ="Dependencia Solicitante :";
 
 
+$this->idioma ["botonDocumento"] ="Generar Documento";
+
+
+
+$this->idioma ["orden_consulta"] ="Orden de Servicios: ";
+$this->idioma ["orden_consultaTitulo"] ="Seleccione Orden de Servicios a Generar Documento";
+
+
 
 //________________
 $this->idioma ["vigencia_registro"] ="Vigencia Registro : ";
@@ -196,7 +204,7 @@ $this->idioma ["botonAceptar"] ="Actualizar Orden de Servicios";
 $this->idioma ["botonCancelar"] ="Cancelar";
 $this->idioma ["botonContinuar"] ="Continuar";
 $this->idioma ["botonConsultar"] ="Consultar";
-$this->idioma ["botonRegresar"] ="Regresar";
+$this->idioma ["botonRegresar"] ="< < Regresar";
 
 
 

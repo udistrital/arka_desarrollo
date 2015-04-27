@@ -399,8 +399,6 @@ class Sql extends \Sql {
 				
 				break;
 			
-	
-				
 			case "actualizarOrden" :
 				$cadenaSql = " UPDATE ";
 				$cadenaSql .= " orden_servicio ";
@@ -443,7 +441,6 @@ class Sql extends \Sql {
 				$cadenaSql .= " id_contratista_encargado='" . $variable [16] . "' ";
 				$cadenaSql .= "  WHERE id_orden_servicio='" . $variable [17] . "';";
 				
-				
 				break;
 			
 			case "actualizarPresupuestal" :
@@ -482,6 +479,12 @@ class Sql extends \Sql {
 				$cadenaSql = " SELECT DEP_DEPENDENCIA  ";
 				$cadenaSql .= " FROM DEPENDENCIAS  ";
 				$cadenaSql .= " WHERE DEP_IDENTIFICADOR='" . $variable . "' ";
+				
+				break;
+			
+			case 'consultar_numero_orden' :
+				$cadenaSql = " SELECT id_orden_servicio, id_orden_servicio  ";
+				$cadenaSql .= " FROM orden_servicio; ";
 				
 				break;
 			
