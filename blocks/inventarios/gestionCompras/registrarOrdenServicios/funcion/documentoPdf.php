@@ -26,7 +26,7 @@ class RegistradorOrden {
 	}
 	function documento() {
 		
-// 		var_dump($_REQUEST);exit;
+
 		$conexion = "sicapital";
 		$esteRecursoDBO = $this->miConfigurador->fabricaConexiones->getRecursoDB ( $conexion );
 		
@@ -40,7 +40,6 @@ class RegistradorOrden {
 		$orden = $orden [0];
 		
 		
-// 		var_dump($orden);
 		
 		
 		
@@ -49,22 +48,16 @@ class RegistradorOrden {
 		$info_presupuestal = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
 		$info_presupuestal = $info_presupuestal [0];
 		
-// 		var_dump($info_presupuestal);
-// 		$cadenaSql = $this->miSql->getCadenaSql ( 'informacion_proveedor', $ordenCompra ['id_proveedor'] );
-// 		$proveedor = $esteRecursoDBO->ejecutarAcceso ( $cadenaSql, "busqueda" );
-// 		$proveedor = $proveedor [0];
-		
-// 		$cotizacion = ($ordenCompra ['nombre_cotizacion'] != '') ? 'SI' : 'NO';
+
 		
 		$cadenaSql = $this->miSql->getCadenaSql ( 'consultarRubro', $orden ['rubro'] );
 		$rubro = $esteRecursoDBO->ejecutarAcceso ( $cadenaSql, "busqueda" );
 		$rubro = $rubro [0];
-		
-// 		var_dump($rubro);
+
 		$cadenaSql = $this->miSql->getCadenaSql ( 'consultarDependencia', $orden ['dependencia_solicitante'] );
 		$dependencia_solicitante = $esteRecursoDBO->ejecutarAcceso ( $cadenaSql, "busqueda" );
 		$dependencia_solicitante = $dependencia_solicitante [0];
-// 		var_dump($dependencia_solicitante);exit;
+
 		
 		
 		
@@ -81,9 +74,7 @@ class RegistradorOrden {
 		$datosContratista = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
 		
 		$datosContratista=$datosContratista[0];
-// 		var_dump($datosContratista);exit;
-		
-// 		exit;
+
 		$cadenaSql = $this->miSql->getCadenaSql ( 'polizas' );
 		$polizas = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
 		$polizas = $polizas [0];
@@ -93,13 +84,7 @@ class RegistradorOrden {
 		$poliza3 = ($orden ['poliza3'] != 'f') ? 'X' : ' ';
 		$poliza4 = ($orden ['poliza4'] != 'f') ? 'X' : ' ';
 		
-// 		$cadenaSql = $this->miSql->getCadenaSql ( 'consultarDestino', $ordenCompra ['destino'] );
-// 		$destino = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
-// 		$destino = $destino [0];
-		
-// 		$cadenaSql = $this->miSql->getCadenaSql ( 'consultar_forma_pago', $ordenCompra ['forma_pago'] );
-// 		$forma_pago = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
-// 		$forma_pago = $forma_pago [0];
+
 		
 		$arreglo = array (
 				$orden ['id_contratista_encargado'],
@@ -115,16 +100,7 @@ class RegistradorOrden {
 		$ordenador = $esteRecursoDBO->ejecutarAcceso ( $cadenaSql, "busqueda" );
 		$ordenador = $ordenador [0];
 		
-		
-// 		var_dump($ordenador);
-// 		var_dump($contratista);exit;
-		// var_dump($forma_pago);exit;
-		// var_dump($destino);exit;
-		// var_dump($items);
-// 		var_dump ( $ordenCompra );exit;
-		// var_dump($info_presupuestal);
-		// var_dump($proveedor);
-		// var_dump($dependencia);exit;
+
 		$contenidoPagina = "
 <style type=\"text/css\">
     table { 
@@ -159,7 +135,7 @@ class RegistradorOrden {
 </style>				
 				
 				
-<page backtop='10mm' backbottom='7mm' backleft='10mm' backright='10mm'>
+<page backtop='5mm' backbottom='5mm' backleft='10mm' backright='10mm'>
 	
 
         <table align='left' style='width:100%;' >
@@ -351,6 +327,9 @@ class RegistradorOrden {
 			</tr>
          	</table>		
 
+			<br>
+			<br>		
+					
 			<table style='width:100%; background:#FFFFFF ; border: 0px  #FFFFFF;'>		
 			<tr>
 			<td style='width:50%;text-align:left;background:#FFFFFF ; border: 0px  #FFFFFF;'>_______________________________</td>
