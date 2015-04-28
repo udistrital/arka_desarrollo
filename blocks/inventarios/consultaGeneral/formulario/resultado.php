@@ -83,42 +83,43 @@ class registrarForm {
         );
 
         switch ($_REQUEST['selec_tipoConsulta']) {
-            
+
+            //Entradas
             case 1:
                 $cadenaSql = $this->miSql->getCadenaSql('consultarEntrada', $datos_consulta);
                 $datos = $esteRecursoDB->ejecutarAcceso($cadenaSql, "busqueda");
                 break;
-
+            //Salidas
             case 2:
-                $cadenaSql = $this->miSql->getCadenaSql('consultarEntrada', $datos_consulta);
+                $cadenaSql = $this->miSql->getCadenaSql('consultarSalida', $datos_consulta);
                 $datos = $esteRecursoDB->ejecutarAcceso($cadenaSql, "busqueda");
                 break;
-            
+            //Elementos
             case 3:
-                $cadenaSql = $this->miSql->getCadenaSql('consultarEntrada', $datos_consulta);
+                $cadenaSql = $this->miSql->getCadenaSql('consultarElementos', $datos_consulta);
                 $datos = $esteRecursoDB->ejecutarAcceso($cadenaSql, "busqueda");
                 break;
-            
+            //Traslados
             case 4:
-                $cadenaSql = $this->miSql->getCadenaSql('consultarEntrada', $datos_consulta);
+                $cadenaSql = $this->miSql->getCadenaSql('consultarTraslados', $datos_consulta);
                 $datos = $esteRecursoDB->ejecutarAcceso($cadenaSql, "busqueda");
                 break;
-            
+            //Sobrantes o faltantes
             case 5:
-                $cadenaSql = $this->miSql->getCadenaSql('consultarEntrada', $datos_consulta);
+                $cadenaSql = $this->miSql->getCadenaSql('consultarSobranteFaltante', $datos_consulta);
                 $datos = $esteRecursoDB->ejecutarAcceso($cadenaSql, "busqueda");
                 break;
-            
+            //Bajas
             case 6:
-                $cadenaSql = $this->miSql->getCadenaSql('consultarEntrada', $datos_consulta);
+                $cadenaSql = $this->miSql->getCadenaSql('consultarBajas', $datos_consulta);
                 $datos = $esteRecursoDB->ejecutarAcceso($cadenaSql, "busqueda");
                 break;
-            
+            //Inventario
             case 7:
-                $cadenaSql = $this->miSql->getCadenaSql('consultarEntrada', $datos_consulta);
+                $cadenaSql = $this->miSql->getCadenaSql('consultarInventario', $datos_consulta);
                 $datos = $esteRecursoDB->ejecutarAcceso($cadenaSql, "busqueda");
                 break;
-            
+
             default:
                 $datos = array();
                 break;

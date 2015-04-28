@@ -254,8 +254,6 @@ class Sql extends \Sql {
 
             //--------------- Consultas Reportes Específicos -----------------//
 
-
-
             case "consultarEntrada" :
                 $cadenaSql = "SELECT  ";
                 $cadenaSql.= "id_entrada,  ";
@@ -283,19 +281,94 @@ class Sql extends \Sql {
                 if ($variable ['vigencia_entrada'] != '') {
                     $cadenaSql .= " AND vigencia = '" . $variable ['vigencia_entrada'] . "'";
                 }
-                
+
                 if ($variable ['proveedor'] != '') {
                     $cadenaSql .= " AND proveedor = '" . $variable ['proveedor'] . "'";
                 }
-                
+
                 if ($variable ['tipo_entrada'] != '') {
                     $cadenaSql .= " AND entrada.clase_entrada = '" . $variable ['clase_entrada'] . "'";
                 }
-                
+
                 if ($variable['fecha_inicio'] != '' && $variable ['fecha_final'] != '') {
                     $cadenaSql .= " AND fecha_registro BETWEEN CAST ( '" . $variable ['fecha_inicio'] . "' AS DATE) ";
                     $cadenaSql .= " AND  CAST ( '" . $variable ['fecha_final'] . "' AS DATE)  ";
                 }
+                break;
+
+            case "consultarSalida" :
+                $cadenaSql = "SELECT ";
+                $cadenaSql .= " salida.id_salida,  ";
+                $cadenaSql .= " salida.fecha,  ";
+                $cadenaSql .= " salida.dependencia,  ";
+                $cadenaSql .= " salida.ubicacion,  ";
+                $cadenaSql .= " salida.funcionario, ";
+                $cadenaSql .= " salida.observaciones, ";
+                $cadenaSql .= " count(id_elemento_ind) as numero_elementos ";
+                $cadenaSql .= " FROM salida ";
+                $cadenaSql .= " JOIN elemento_individual ON elemento_individual.id_salida=salida.id_salida ";
+                $cadenaSql .= " JOIN elemento ON elemento_individual.id_elemento_gen=elemento.id_elemento ";
+                $cadenaSql .= " JOIN entrada ON elemento.id_entrada=entrada.id_entrada ";
+                $cadenaSql.= " WHERE 1=1 ";
+                if ($variable ['numero_entrada'] != '') {
+                    $cadenaSql .= " AND entrada.id_entrada = '" . $variable ['numero_entrada'] . "'";
+                }
+
+                if ($variable ['vigencia_entrada'] != '') {
+                    $cadenaSql .= " AND entrada.vigencia = '" . $variable ['vigencia_entrada'] . "'";
+                }
+
+                if ($variable ['numero_salida'] != '') {
+                    $cadenaSql .= " AND salida.id_salida = '" . $variable ['numero_salida'] . "'";
+                }
+
+                if ($variable ['vigencia_salida'] != '') {
+                    $cadenaSql .= " AND salida.fecha = '" . $variable ['vigencia_salida'] . "'";
+                }
+
+                if ($variable['fecha_inicio'] != '' && $variable ['fecha_final'] != '') {
+                    $cadenaSql .= " AND salida.fecha BETWEEN CAST ( '" . $variable ['fecha_inicio'] . "' AS DATE) ";
+                    $cadenaSql .= " AND  CAST ( '" . $variable ['fecha_final'] . "' AS DATE)  ";
+                }
+                $cadenaSql .= " GROUP BY salida.id_salida, salida.fecha, salida.dependencia, salida.ubicacion, salida.funcionario,salida.observaciones ";
+
+                break;
+
+            case "consultarTraslados" :
+                $cadenaSql = "SELECT ";
+                $cadenaSql .= " salida.id_salida,  ";
+                $cadenaSql .= " salida.fecha,  ";
+                $cadenaSql .= " salida.dependencia,  ";
+                $cadenaSql .= " salida.ubicacion,  ";
+                $cadenaSql .= " salida.funcionario, ";
+                $cadenaSql .= " salida.observaciones, ";
+                $cadenaSql .= " count(id_elemento_ind) as numero_elementos ";
+                $cadenaSql .= " FROM salida ";
+                $cadenaSql .= " JOIN elemento_individual ON elemento_individual.id_salida=salida.id_salida ";
+                $cadenaSql .= " JOIN elemento ON elemento_individual.id_elemento_gen=elemento.id_elemento ";
+                $cadenaSql .= " JOIN entrada ON elemento.id_entrada=entrada.id_entrada ";
+                $cadenaSql.= " WHERE 1=1 ";
+                if ($variable ['numero_entrada'] != '') {
+                    $cadenaSql .= " AND entrada.id_entrada = '" . $variable ['numero_entrada'] . "'";
+                }
+
+                if ($variable ['vigencia_entrada'] != '') {
+                    $cadenaSql .= " AND entrada.vigencia = '" . $variable ['vigencia_entrada'] . "'";
+                }
+
+                if ($variable ['numero_salida'] != '') {
+                    $cadenaSql .= " AND salida.id_salida = '" . $variable ['numero_salida'] . "'";
+                }
+
+                if ($variable ['vigencia_salida'] != '') {
+                    $cadenaSql .= " AND salida.fecha = '" . $variable ['vigencia_salida'] . "'";
+                }
+
+                if ($variable['fecha_inicio'] != '' && $variable ['fecha_final'] != '') {
+                    $cadenaSql .= " AND salida.fecha BETWEEN CAST ( '" . $variable ['fecha_inicio'] . "' AS DATE) ";
+                    $cadenaSql .= " AND  CAST ( '" . $variable ['fecha_final'] . "' AS DATE)  ";
+                }
+                $cadenaSql .= " GROUP BY salida.id_salida, salida.fecha, salida.dependencia, salida.ubicacion, salida.funcionario,salida.observaciones ";
 
                 break;
         }
