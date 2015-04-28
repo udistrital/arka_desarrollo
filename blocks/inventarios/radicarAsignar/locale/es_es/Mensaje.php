@@ -37,6 +37,11 @@ $this->idioma ["proveedorTitulo"] ="Ingrese Nombre Proveedor";
 $this->idioma ["nitproveedor"] ="NIT Proveedor :";
 $this->idioma ["nitproveedorTitulo"] ="Ingrese NIT Proveedor";
 
+$this->idioma ["numero_entrada"] ="Número Entrada:";
+$this->idioma ["numero_entradaTitulo"] ="Seleccione el número de entrada";
+
+$this->idioma ["vigencia_entrada"] ="Vigencia Entrada:";
+$this->idioma ["vigencia_entradaTitulo"] ="Seleccione la vigencia de entrada";
 
 
 $this->idioma ["fecha_inicio"] ="Fecha Inicial : ";
@@ -90,7 +95,7 @@ $this->idioma ["aprobacionCheck"] ="&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp¿Ap
 $this->idioma ["aprobacionCheckTitulo"] ="Seleccione en caso de ser aprobado";
 
 
-$this->idioma ["botonAceptar"] ="Aceptar";
+$this->idioma ["botonAceptar"] ="Cargar Documentos";
 $this->idioma ["botonCancelar"] ="Cancelar";
 $this->idioma ["botonContinuar"] ="Continuar";
 $this->idioma ["botonConsultar"] ="Consultar";

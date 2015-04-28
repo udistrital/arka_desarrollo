@@ -156,6 +156,18 @@ class Sql extends \Sql {
                 $cadenaSql .= " arka_inventarios.tipo_contrato ";
                 $cadenaSql .= " WHERE descripcion in('Avances', 'Contratos(ViceRectoria)', 'Orden Compras');";
                 break;
+            
+             case "buscar_entradas":
+                $cadenaSql = " SELECT id_entrada valor,id_entrada descripcion  ";
+                $cadenaSql.= " FROM entrada; ";
+                break;
+
+            case "vigencia_entrada" :
+                $cadenaSql = " SELECT DISTINCT vigencia, vigencia ";
+                $cadenaSql.= " FROM entrada ";
+                break;
+            
+            
 
 
             //**************** Para Compras *******************//
