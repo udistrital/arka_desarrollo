@@ -160,10 +160,7 @@ class registrarForm {
 		echo $this->miFormulario->formulario ( $atributos );
 		// ---------------- SECCION: Controles del Formulario -----------------------------------------------
 		
-		$variable = "pagina=" . $miPaginaActual; // pendiente la pagina para modificar parametro
-		                                         // $variable .= "&opcion=modificar";
-		                                         // $variable .= "&usuario=" . $miSesion->getSesionUsuarioId ();
-		
+		$variable = "pagina=" . $miPaginaActual;
 		$variable = $this->miConfigurador->fabricaConexiones->crypto->codificar_url ( $variable, $directorio );
 		
 		// ---------------- CONTROL: Cuadro de Texto --------------------------------------------------------
