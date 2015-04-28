@@ -158,6 +158,19 @@ class Sql extends \Sql {
 				
 				break;
 			
+			case "consultarDependencia" :
+				$cadenaSql = " SELECT *  ";
+				$cadenaSql .= "FROM DEPENDENCIAS ";
+				$cadenaSql .= "WHERE DEP_IDENTIFICADOR='" . $variable . "'";
+				break;
+			
+			case "consultarRubro" :
+				$cadenaSql = " SELECT RUB_NOMBRE_RUBRO ";
+				$cadenaSql .= " FROM RUBROS ";
+				$cadenaSql .= " WHERE  RUB_IDENTIFICADOR='" . $variable . "'";
+				
+				break;
+			
 			case "buscar_contratista" :
 				$cadenaSql = "SELECT CON_IDENTIFICADOR AS IDENTIFICADOR , CON_IDENTIFICACION ||'  -  '||CON_NOMBRE AS CONTRATISTA ";
 				$cadenaSql .= "FROM CONTRATISTAS ";
@@ -314,6 +327,17 @@ class Sql extends \Sql {
 			
 			// _________________________________________________
 			
+			case "consultarOrdenServiciosDocumento" :
+				$cadenaSql = "SELECT  fecha_registro, info_presupuestal, dependencia_solicitante,
+				rubro, objeto_contrato, poliza1, poliza2, poliza3, poliza4, duracion_pago,
+				fecha_inicio_pago, fecha_final_pago, forma_pago, total_preliminar,
+				iva, total, id_contratista, id_contratista_encargado, vig_contratista,
+				id_ordenador_encargado, id_supervisor, estado ";
+				$cadenaSql .= "FROM orden_servicio  ";
+				$cadenaSql .= "WHERE  id_orden_servicio='" . $variable . "';";
+				
+				break;
+			
 			case "consultarOrdenServicios" :
 				$cadenaSql = " SELECT ";
 				$cadenaSql .= " dependencia_solicitante,rubro,objeto_contrato, poliza1,";
@@ -333,12 +357,37 @@ class Sql extends \Sql {
 				
 				break;
 			
+			case "consultarContratistaDocumento" :
+				$cadenaSql = "SELECT CON_IDENTIFICACION , CON_NOMBRE AS CONTRATISTA ";
+				$cadenaSql .= "FROM CONTRATISTAS ";
+				$cadenaSql .= "WHERE CON_VIGENCIA ='" . $variable [1] . "' ";
+				$cadenaSql .= "AND  CON_IDENTIFICADOR ='" . $variable [0] . "' ";
+				break;
+			
+			case "consultarOrdenador_gasto" :
+				$cadenaSql = " 	SELECT ORG_ORDENADOR_GASTO,ORG_NOMBRE ";
+				$cadenaSql .= " FROM ORDENADORES_GASTO ";
+				$cadenaSql .= " WHERE ORG_IDENTIFICADOR ='" . $variable . "'";
+				break;
+			
 			case "consultarSupervisor" :
 				$cadenaSql = " SELECT ";
 				$cadenaSql .= "  nombre, cargo, dependencia";
 				$cadenaSql .= " FROM supervisor_servicios ";
 				$cadenaSql .= " WHERE id_supervisor='" . $variable . "'";
 				
+				break;
+			
+			case "consultarCosntraistaServicios" :
+				$cadenaSql = " SELECT nombre_razon_social, identificacion, direccion,telefono, cargo ";
+				$cadenaSql .= " FROM contratista_servicios ";
+				$cadenaSql .= " WHERE id_contratista='" . $variable . "'";
+				break;
+			
+			case "consultarDependenciaSupervisor" :
+				$cadenaSql = " SELECT *  ";
+				$cadenaSql .= "FROM DEPENDENCIAS ";
+				$cadenaSql .= "WHERE DEP_IDENTIFICADOR='" . $variable . "'";
 				break;
 			
 			case "consultarSolicitante" :

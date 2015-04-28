@@ -265,7 +265,6 @@ class registrarForm {
 		echo $this->miFormulario->division ( "fin" );
 		unset ( $atributos );
 		
-		
 		$atributos ["id"] = "div_documento";
 		$atributos ["estiloEnLinea"] = "display:block";
 		$atributos ["estiloMarco"] = '';
@@ -273,13 +272,13 @@ class registrarForm {
 		echo $this->miFormulario->division ( "inicio", $atributos );
 		unset ( $atributos );
 		{
-				
+			
 			$esteCampo = "AgrupacionGeneral";
 			$atributos ['id'] = $esteCampo;
 			$atributos ['leyenda'] = "Documento PDF";
 			echo $this->miFormulario->agrupacion ( 'inicio', $atributos );
 			{
-		
+				
 				$esteCampo = "orden_consulta";
 				$atributos ['nombre'] = $esteCampo;
 				$atributos ['id'] = $esteCampo;
@@ -307,19 +306,20 @@ class registrarForm {
 				$matrizItems = array (
 						array (
 								0,
-								' '
-						)
+								' ' 
+						) 
 				);
 				$matrizItems = $esteRecursoDB->ejecutarAcceso ( $atributos ['cadena_sql'], "busqueda" );
 				$atributos ['matrizItems'] = $matrizItems;
 				// $atributos['miniRegistro']=;
 				$atributos ['baseDatos'] = "inventarios";
 				// $atributos ['cadena_sql'] = $this->miSql->getCadenaSql ( "clase_entrada" );
-		
+				
 				// Aplica atributos globales al control
 				$atributos = array_merge ( $atributos, $atributosGlobales );
 				echo $this->miFormulario->campoCuadroLista ( $atributos );
 				unset ( $atributos );
+				
 				echo "<br><br><br>";
 				// ------------------Division para los botones-------------------------
 				$atributos ["id"] = "botones";
@@ -343,16 +343,16 @@ class registrarForm {
 					$atributos ["valor"] = $this->lenguaje->getCadena ( $esteCampo );
 					$atributos ['nombreFormulario'] = $esteBloque ['nombre'];
 					$tab ++;
-						
+					
 					// Aplica atributos globales al control
 					$atributos = array_merge ( $atributos, $atributosGlobales );
 					echo $this->miFormulario->campoBoton ( $atributos );
 					unset ( $atributos );
 				}
-		
+				
 				echo $this->miFormulario->division ( 'fin' );
 			}
-				
+			
 			echo $this->miFormulario->agrupacion ( 'fin' );
 		}
 		
@@ -378,12 +378,11 @@ class registrarForm {
 		
 		// Paso 1: crear el listado de variables
 		
-		$valorCodificado = "actionBloque=" . $esteBloque ["nombre"];
+		$valorCodificado = "action=" . $esteBloque ["nombre"];
 		$valorCodificado .= "&pagina=" . $this->miConfigurador->getVariableConfiguracion ( 'pagina' );
 		$valorCodificado .= "&bloque=" . $esteBloque ['nombre'];
 		$valorCodificado .= "&bloqueGrupo=" . $esteBloque ["grupo"];
-		$valorCodificado .= "&opcion=regresar";
-		$valorCodificado .= "&redireccionar=regresar";
+		$valorCodificado .= "&opcion=documento";
 		/**
 		 * SARA permite que los nombres de los campos sean dinámicos.
 		 * Para ello utiliza la hora en que es creado el formulario para
@@ -391,6 +390,7 @@ class registrarForm {
 		 * (a) invocando a la variable $_REQUEST ['tiempo'] que se ha declarado en ready.php o
 		 * (b) asociando el tiempo en que se está creando el formulario
 		 */
+		$valorCodificado .= "&campoSeguro=" . $_REQUEST ['tiempo'];
 		$valorCodificado .= "&tiempo=" . time ();
 		// Paso 2: codificar la cadena resultante
 		$valorCodificado = $this->miConfigurador->fabricaConexiones->crypto->codificar ( $valorCodificado );
