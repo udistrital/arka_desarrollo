@@ -57,8 +57,8 @@ class Funcion {
     function procesarContrato() {
         include_once ($this->ruta . "funcion/procesarContrato.php");
     }
-    
-     function procesarAvance() {
+
+    function procesarAvance() {
         include_once ($this->ruta . "funcion/procesarAvance.php");
     }
 
@@ -83,22 +83,42 @@ class Funcion {
             $this->procesarAjax();
         } elseif (isset($_REQUEST ["opcion"])) {
 
-            if ($_REQUEST ['opcion'] == 'registrarCompra') {
-                $this->procesarCompra();
+
+            switch ($_REQUEST ['opcion']) {
+
+                case "registroCargue" :
+                    switch ($_REQUEST['tipoCargue']) {
+                        case 1:
+                            $this->procesarAvance();
+                            break;
+
+                        case 2:
+                            $this->procesarCompra();
+                            break;
+
+                        case 3:
+                            $this->procesarContrato();
+                            break;
+                    }
+
+                    break;
             }
+
+
+//            if ($_REQUEST ['opcion'] == 'registrarCompra') {
+//                $this->procesarCompra();
+//            }
+//            if ($_REQUEST ['opcion'] == 'procesarContrato') {
+//                $this->procesarContrato();
+//            }
+//            if ($_REQUEST ['opcion'] == 'procesarAvance') {
+//                $this->procesarAvance();
+//            }
+
 
             if (isset($_REQUEST ["redireccionar"]) && $_REQUEST ['redireccionar'] == 'regresar') {
                 redireccion::redireccionar($_REQUEST['opcion']);
             }
-
-            if ($_REQUEST ['opcion'] == 'procesarContrato') {
-                $this->procesarContrato();
-            }
-            
-            if ($_REQUEST ['opcion'] == 'procesarAvance') {
-                $this->procesarAvance();
-            }
-		
         }
     }
 
