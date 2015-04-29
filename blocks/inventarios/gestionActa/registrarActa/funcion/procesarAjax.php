@@ -22,9 +22,8 @@ if ($_REQUEST ['funcion'] == 'tablaItems') {
 	
 	$cadenaSql = $this->sql->getCadenaSql ( 'items', $_REQUEST ['tiempo'] );
 	// echo $cadenaSql;
-	$resultadoItems = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
-	
-	// var_dump($resultadoItems);
+	$resultadoItems = $esteRecursoDB->ejecutarAcceso($cadenaSql, "busqueda" );
+
 	// ---------------------
 	$filas = count ( $resultadoItems );
 	
@@ -53,7 +52,7 @@ if ($_REQUEST ['funcion'] == 'tablaItems') {
 					$row ['cantidad'],
 					$row ['descripcion'],
 					$row ['valor_unitario'],
-					$row ['valor_total'] 
+					$row ['valor_total'],
 			);
 			$i ++;
 		}
@@ -84,7 +83,7 @@ if ($_REQUEST ['funcion'] == 'tablaItems') {
 	}
 }
 if ($_REQUEST ['funcion'] == 'AgregarItem') {
-	
+  	
 	$cadenaSql = $this->sql->getCadenaSql ( 'id_items_temporal' );
 	$idItems = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
 	$id = $idItems [0][0] + 1;
@@ -128,4 +127,14 @@ if ($_REQUEST ['funcion'] == 'EliminarItem') {
 	echo $resultadoItems;
 }
 
+
+$conexion2 = "sicapital";
+$esteRecursoDB2 = $this->miConfigurador->fabricaConexiones->getRecursoDB($conexion2);
+
+if ($_REQUEST ['funcion'] == 'proveedor') {
+    $cadenaSql = $this->sql->getCadenaSql('select_proveedor', $_REQUEST['proveedor']);
+    $resultadoItems = $esteRecursoDB2->ejecutarAcceso($cadenaSql, "busqueda");
+    $resultado = json_encode($resultadoItems[0]);
+    echo $resultado;
+}
 ?>

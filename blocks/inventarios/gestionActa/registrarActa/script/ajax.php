@@ -56,6 +56,21 @@ $cadena3 = $this->miConfigurador->fabricaConexiones->crypto->codificar_url($cade
 // URL definitiva
 $urlFinal3 = $url . $cadena3;
 
+// Variables
+$cadenaACodificar4 = "pagina=" . $this->miConfigurador->getVariableConfiguracion("pagina");
+$cadenaACodificar4 .= "&procesarAjax=true";
+$cadenaACodificar4 .= "&action=index.php";
+$cadenaACodificar4 .= "&bloqueNombre=" . $esteBloque ["nombre"];
+$cadenaACodificar4 .= "&bloqueGrupo=" . $esteBloque ["grupo"];
+$cadenaACodificar4 .= $cadenaACodificar . "&funcion=proveedor";
+$cadenaACodificar4 .="&tiempo=" . $_REQUEST['tiempo'];
+
+// Codificar las variables
+$enlace4 = $this->miConfigurador->getVariableConfiguracion("enlace");
+$cadena4 = $this->miConfigurador->fabricaConexiones->crypto->codificar_url($cadenaACodificar4, $enlace4);
+
+// URL definitiva
+$urlFinal4 = $url . $cadena4;
 
 
 
@@ -64,7 +79,7 @@ $urlFinal3 = $url . $cadena3;
 // echo $urlFinal3;
 ?>
 <script type='text/javascript'>
-    $(function() {
+    $(function () {
 
         $("#tablaContenido").jqGrid({
             url: "<?php echo $urlFinal ?>",
@@ -120,19 +135,19 @@ $urlFinal3 = $url . $cadena3;
                     bExit: "Salir",
                     closeOnEscape: true,
                     closeAfterAdd: true,
-                    onclickSubmit: function(params, postdata) {
+                    onclickSubmit: function (params, postdata) {
                         //save add
                         var p = params;
                         var pt = postdata;
                     },
-                    beforeSubmit: function(postdata, formid) {
+                    beforeSubmit: function (postdata, formid) {
                         var p = postdata;
                         var id = id;
                         var success = true;
                         var message = "continue";
                         return[success, message];
                     },
-                    afterSubmit: function(response, postdata)
+                    afterSubmit: function (response, postdata)
                     {
                         var r = response;
                         var p = postdata;
@@ -141,7 +156,7 @@ $urlFinal3 = $url . $cadena3;
                         var message = "continue";
                         return [success, message]
                     },
-                    afterComplete: function(response, postdata, formid) {
+                    afterComplete: function (response, postdata, formid) {
                         var responseText = jQuery.jgrid.parse(response.responseText);
                         var r = response;
                         var p = postdata;
@@ -163,19 +178,19 @@ $urlFinal3 = $url . $cadena3;
             closeOnEscape: true,
             closeAfterAdd: true,
             refresh: true,
-            onclickSubmit: function(params, postdata, id_items) {
+            onclickSubmit: function (params, postdata, id_items) {
                 //save add
                 var p = params;
                 var pt = postdata;
             },
-            beforeSubmit: function(postdata, formid) {
+            beforeSubmit: function (postdata, formid) {
                 var p = postdata;
                 var id = formid;
                 var success = true;
                 var message = "continue";
                 return[success, message];
             },
-            afterSubmit: function(response, postdata)
+            afterSubmit: function (response, postdata)
             {
                 var r = response;
                 var p = postdata;
@@ -184,7 +199,7 @@ $urlFinal3 = $url . $cadena3;
                 var message = "continue";
                 return [success, message]
             },
-            afterComplete: function(response, postdata, formid) {
+            afterComplete: function (response, postdata, formid) {
                 var responseText = jQuery.jgrid.parse(response.responseText);
                 var r = response;
                 var p = postdata;
@@ -196,6 +211,54 @@ $urlFinal3 = $url . $cadena3;
                 {}
         );
 
+    });
+
+
+    function datosInfo(elem, request, response) {
+
+        $("#<?php echo $this->campoSeguro('proveedor') ?>").val();
+
+        $.ajax({
+            url: "<?php echo $urlFinal4 ?>",
+            dataType: "json",
+            data: {proveedor: $("#<?php echo $this->campoSeguro('nitproveedor') ?>").val()},
+            success: function (data) {
+
+                if (data[0] != 'null') {
+
+                    $("#<?php echo $this->campoSeguro('proveedor') ?>").val(data[0]);
+                } else {
+                    $("#<?php echo $this->campoSeguro('proveedor') ?>").val();
+                }
+            }
+        });
+    }
+    ;
+
+    $("#<?php echo $this->campoSeguro('nitproveedor') ?>").select2({
+        placeholder: "Search for a repository",
+        minimumInputLength: 1,
+    });
+
+    $("#<?php echo $this->campoSeguro('dependencia') ?>").select2({
+        placeholder: "Search for a repository",
+        minimumInputLength: 1,
+    });
+
+    $("#<?php echo $this->campoSeguro('tipoOrden') ?>").select2({
+        placeholder: "Search for a repository",
+        minimumInputLength: 1,
+    });
+
+
+$("#<?php echo $this->campoSeguro('tipoBien') ?>").select2({
+        placeholder: "Search for a repository",
+        minimumInputLength: 1,
+    });
+
+    $("#<?php echo $this->campoSeguro('tipoComprador') ?>").select2({
+        placeholder: "Search for a repository",
+        minimumInputLength: 1,
     });
 
 </script>
