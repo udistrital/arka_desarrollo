@@ -78,7 +78,8 @@ class registrarForm {
         $esteCampo = "AgrupacionCriterios";
         $atributos ['id'] = $esteCampo;
         $atributos ['leyenda'] = "Selección Criterios";
-        echo $this->miFormulario->agrupacion('inicio', $atributos); {
+        echo $this->miFormulario->agrupacion('inicio', $atributos);
+        {
 //------------------CONTROL: Lista desplegable -----------------------------------------------------
 
             $esteCampo = 'tipoCargue';
@@ -212,15 +213,15 @@ class registrarForm {
         $esteCampo = "AgrupacionCargue";
         $atributos ['id'] = $esteCampo;
         $atributos ['leyenda'] = "Carga de Documentos";
-        echo $this->miFormulario->agrupacion('inicio', $atributos); {
+        echo $this->miFormulario->agrupacion('inicio', $atributos);
+        {
 
             //--------------------- CONTROL INICIO DIVISIÓN 1----------------------------//
             $atributos ["id"] = "resolucionD";
             $atributos ["estiloEnLinea"] = "display:none";
             $atributos = array_merge($atributos, $atributosGlobales);
             echo $this->miFormulario->division("inicio", $atributos);
-            unset($atributos);
-            {
+            unset($atributos); {
                 // ---------------- CONTROL: Cuadro de Texto --------------------------------------------------------
                 $esteCampo = 'resolucionDocumento';
                 $atributos ['id'] = $esteCampo;
@@ -262,8 +263,7 @@ class registrarForm {
             $atributos ["estiloEnLinea"] = "display:none";
             $atributos = array_merge($atributos, $atributosGlobales);
             echo $this->miFormulario->division("inicio", $atributos);
-            unset($atributos);
-            {
+            unset($atributos); {
                 // ---------------- CONTROL: Cuadro de Texto --------------------------------------------------------
                 $esteCampo = 'contratoDocumento';
                 $atributos ['id'] = $esteCampo;
@@ -305,8 +305,7 @@ class registrarForm {
             $atributos ["estiloEnLinea"] = "display:none";
             $atributos = array_merge($atributos, $atributosGlobales);
             echo $this->miFormulario->division("inicio", $atributos);
-            unset($atributos);
-            {
+            unset($atributos); {
                 // ---------------- CONTROL: Cuadro de Texto --------------------------------------------------------
                 $esteCampo = 'ordenDocumento';
                 $atributos ['id'] = $esteCampo;
@@ -348,8 +347,7 @@ class registrarForm {
             $atributos ["estiloEnLinea"] = "display:none";
             $atributos = array_merge($atributos, $atributosGlobales);
             echo $this->miFormulario->division("inicio", $atributos);
-            unset($atributos);
-            {
+            unset($atributos); {
                 // ---------------- CONTROL: Cuadro de Texto --------------------------------------------------------
                 $esteCampo = 'facturaDocumento';
                 $atributos ['id'] = $esteCampo;
@@ -392,8 +390,7 @@ class registrarForm {
             $atributos ["estiloEnLinea"] = "display:none";
             $atributos = array_merge($atributos, $atributosGlobales);
             echo $this->miFormulario->division("inicio", $atributos);
-            unset($atributos);
-            {
+            unset($atributos); {
                 // ---------------- CONTROL: Cuadro de Texto --------------------------------------------------------
                 $esteCampo = 'cartaDocumento';
                 $atributos ['id'] = $esteCampo;
@@ -436,7 +433,8 @@ class registrarForm {
             $atributos ["estiloEnLinea"] = "display:none";
             $atributos = array_merge($atributos, $atributosGlobales);
             echo $this->miFormulario->division("inicio", $atributos);
-            unset($atributos); {
+            unset($atributos);
+            {
                 // ---------------- CONTROL: Cuadro de Texto --------------------------------------------------------
                 $esteCampo = 'satisfaccionDocumento';
                 $atributos ['id'] = $esteCampo;
@@ -479,8 +477,7 @@ class registrarForm {
             $atributos ["estiloEnLinea"] = "display:none";
             $atributos = array_merge($atributos, $atributosGlobales);
             echo $this->miFormulario->division("inicio", $atributos);
-            unset($atributos);
-            {
+            unset($atributos); {
                 // ---------------- CONTROL: Cuadro de Texto --------------------------------------------------------
                 $esteCampo = 'actaRecibidoDocumento';
                 $atributos ['id'] = $esteCampo;
@@ -573,10 +570,10 @@ class registrarForm {
         // En este formulario se utiliza el mecanismo (b) para pasar las siguientes variables:
         // Paso 1: crear el listado de variables
         $valorCodificado = "actionBloque=" . $esteBloque ["nombre"];
-        $valorCodificado = "&pagina=" . $this->miConfigurador->getVariableConfiguracion('pagina');
-        $valorCodificado .= "&bloque=" . $esteBloque ['nombre'];
-        $valorCodificado .= "&bloqueGrupo=" . $esteBloque ["grupo"];
-        $valorCodificado .= "&opcion=registroCargue";
+        $valorCodificado.= "&pagina=" . $this->miConfigurador->getVariableConfiguracion('pagina');
+        $valorCodificado.= "&bloque=" . $esteBloque ['nombre'];
+        $valorCodificado.= "&bloqueGrupo=" . $esteBloque ["grupo"];
+        $valorCodificado.= "&opcion=registroCargue";
         /**
          * SARA permite que los nombres de los campos sean dinámicos.
          * Para ello utiliza la hora en que es creado el formulario para

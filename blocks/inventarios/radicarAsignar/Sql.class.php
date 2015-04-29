@@ -167,8 +167,6 @@ class Sql extends \Sql {
                 $cadenaSql.= " FROM entrada ";
                 break;
             
-            
-
 
             //**************** Para Compras *******************//
             case "registroDocumento":

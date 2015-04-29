@@ -58,7 +58,7 @@ $("#<?php echo $this->campoSeguro('actaD') ?>").css('display','block');
 break;
 
 
-case '2':
+case '3':
 
 $("#<?php echo $this->campoSeguro('resolucionD') ?>").css('display','none');
 $("#<?php echo $this->campoSeguro('contratoD') ?>").css('display','none');

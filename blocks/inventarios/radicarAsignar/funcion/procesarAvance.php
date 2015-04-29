@@ -52,7 +52,6 @@ class RegistradorAvance {
         $documento = 0;
 
         //Registro del Radicar Asignar entrada de compras
-
         $datosAvance = array(
             $_REQUEST ['fecha_recibido'],
             $_REQUEST ['nitProveedor'],
@@ -60,6 +59,7 @@ class RegistradorAvance {
             $fechaActual,
             1,
         );
+
         $cadenaSql = $this->miSql->getCadenaSql('insertarAsignar_Avance', $datosAvance);
         $id_asignar = $esteRecursoDB->ejecutarAcceso($cadenaSql, "busqueda");
 
