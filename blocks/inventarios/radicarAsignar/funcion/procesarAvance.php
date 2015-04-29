@@ -51,10 +51,9 @@ class RegistradorAvance {
         );
 
         //consultar si la vigencia y la entrada existen
-        echo $cadenaSql = $this->miSql->getCadenaSql('consultarAsignar_Avance', $datosAvance);
+        $cadenaSql = $this->miSql->getCadenaSql('consultarAsignar_Avance', $datosAvance);
         $estado_asignar = $esteRecursoDB->ejecutarAcceso($cadenaSql, "busqueda");
 
-        var_dump($estado_asignar);
         $actualizar = 2;
 
         if ($estado_asignar == false) {
