@@ -61,6 +61,19 @@ $this->idioma ["aprobacionCheck"] =" ¿Aprobado?:";
 $this->idioma ["aprobacionCheckTitulo"] ="Seleccione en caso de ser aprobado";
 
 
+$this->idioma ["informacion_numero"] ="Número de Orden :";
+$this->idioma ["informacion_fecha"] ="Fecha de Orden : ";
+
+
+
+
+$this->idioma ["documentoSoporte"] ="&nbsp;Soporte Acta :";
+$this->idioma ["documentoSoporteTitulo"] ="Seleccione Soporte de Acta de Recibido";
+
+
+
+
+
 $this->idioma ["botonAceptar"] ="Registrar Acta de Recibido";
 $this->idioma ["botonCancelar"] ="Cancelar";
 $this->idioma ["botonContinuar"] ="Continuar";

@@ -107,6 +107,7 @@
         } );
         
         $("#<?php echo $this->campoSeguro('tipoComprador') ?>").select2();
+        $("#<?php echo $this->campoSeguro('sede') ?>").select2();
         $("#<?php echo $this->campoSeguro('tipoBien') ?>").select2();        
         $("#<?php echo $this->campoSeguro('nitproveedor') ?>").select2();
         $("#<?php echo $this->campoSeguro('tipoOrden') ?>").select2();
