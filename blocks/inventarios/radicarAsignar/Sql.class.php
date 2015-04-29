@@ -156,8 +156,8 @@ class Sql extends \Sql {
                 $cadenaSql .= " arka_inventarios.tipo_contrato ";
                 $cadenaSql .= " WHERE descripcion in('Avances', 'Contratos(ViceRectoria)', 'Orden Compras');";
                 break;
-            
-             case "buscar_entradas":
+
+            case "buscar_entradas":
                 $cadenaSql = " SELECT id_entrada valor,id_entrada descripcion  ";
                 $cadenaSql.= " FROM entrada; ";
                 break;
@@ -166,7 +166,7 @@ class Sql extends \Sql {
                 $cadenaSql = " SELECT DISTINCT vigencia, vigencia ";
                 $cadenaSql.= " FROM entrada ";
                 break;
-            
+
 
             //**************** Para Compras *******************//
             case "registroDocumento":
@@ -324,20 +324,54 @@ class Sql extends \Sql {
                 $cadenaSql .= "'" . $variable ['estado'] . "' ); ";
                 break;
 
+            case "actualizarDocumento_Avance":
+                $cadenaSql = " UPDATE documento_radicarasignar_avance SET ";
+                $cadenaSql .=" avance_idunico='" . $variable ['id_unico'] . "', ";
+                $cadenaSql .=" avance_nombre='" . $variable ['nombre_archivo'] . "', ";
+                $cadenaSql .=" avance_tipodoc='" . $variable ['tipo'] . "',  ";
+                $cadenaSql .=" avance_ruta='" . $variable ['ruta'] . "', ";
+                $cadenaSql .=" avance_fechar='" . $variable ['fecha_registro'] . "', ";
+                $cadenaSql.= " WHERE ";
+                $cadenaSql.= " avance_idavance='" . $variable ['id_asignar'] . "' ";
+                break;
+
             case "insertarAsignar_Avance" :
                 $cadenaSql = " INSERT INTO registro_radicarasignar_avance( ";
                 $cadenaSql .= " avance_fecharecibido,  ";
-                $cadenaSql .= " avance_nitproveedor,  ";
-                $cadenaSql .= " avance_valorfactura, ";
+                $cadenaSql .= " avance_numeroentrada,  ";
+                $cadenaSql .= " avance_vigenciaentrada, ";
                 $cadenaSql .= " avance_fechar,   ";
                 $cadenaSql .= " avance_estado)";
                 $cadenaSql .= " VALUES (";
-                $cadenaSql .= "'" . $variable [0] . "',";
-                $cadenaSql .= "'" . $variable [1] . "',";
-                $cadenaSql .= "'" . $variable [2] . "',";
-                $cadenaSql .= "'" . $variable [3] . "',";
-                $cadenaSql .= "'" . $variable [4] . "') ";
+                $cadenaSql .= "'" . $variable ['fecha'] . "',";
+                $cadenaSql .= "'" . $variable ['numero_entrada'] . "',";
+                $cadenaSql .= "'" . $variable ['vigencia_entrada'] . "',";
+                $cadenaSql .= "'" . $variable ['fecha'] . "',";
+                $cadenaSql .= "'" . $variable ['estado'] . "') ";
                 $cadenaSql .= "RETURNING  avance_idavance; ";
+                break;
+
+            case "actualizarAsignar_Avance" :
+                $cadenaSql = " UPDATE registro_radicarasignar_avance ";
+                $cadenaSql.= " SET avance_fecharecibido='" . $variable ['fecha'] . "',  ";
+                $cadenaSql.= " avance_fechar='" . $variable ['fecha'] . "'   ";
+                $cadenaSql.= " WHERE ";
+                $cadenaSql.= " avance_numeroentrada='" . $variable ['numero_entrada'] . "' ";
+                $cadenaSql.= " AND avance_vigenciaentrada='" . $variable ['vigencia_entrada'] . "' ";
+                $cadenaSql.= " AND avance_estado='TRUE' ";
+                $cadenaSql.= "RETURNING  avance_idavance; ";
+                break;
+
+            case "consultarAsignar_Avance" :
+                $cadenaSql = "  SELECT ";
+                $cadenaSql.= " avance_numeroentrada,  ";
+                $cadenaSql.= " avance_vigenciaentrada, ";
+                $cadenaSql.= " avance_estado";
+                $cadenaSql.= " FROM registro_radicarasignar_avance ";
+                $cadenaSql.= " WHERE ";
+                $cadenaSql.= " avance_numeroentrada='" . $variable ['numero_entrada'] . "' ";
+                $cadenaSql.= " AND avance_vigenciaentrada='" . $variable ['vigencia_entrada'] . "' ";
+                $cadenaSql.= " AND avance_estado='TRUE' ";
                 break;
 
             //----------  Para registrar los items de la factura ------------//
