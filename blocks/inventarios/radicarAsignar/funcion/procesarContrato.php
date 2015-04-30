@@ -51,9 +51,9 @@ class RegistradorContrato {
         );
 
         //consultar si la vigencia y la entrada existen
-        $cadenaSql = $this->miSql->getCadenaSql('consultarAsignar_contrato', $datosAvance);
+        echo $cadenaSql = $this->miSql->getCadenaSql('consultarAsignar_contrato', $datosAvance);
         $estado_asignar = $esteRecursoDB->ejecutarAcceso($cadenaSql, "busqueda");
-
+exit;
 
         if ($estado_asignar == false) {
             //registrar si no existe

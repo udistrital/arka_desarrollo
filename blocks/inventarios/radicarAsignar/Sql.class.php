@@ -235,57 +235,7 @@ class Sql extends \Sql {
                 $cadenaSql .= " AND compra_estado='TRUE'";
                 break;
 
-            //----------  Para registrar los items de la factura ------------//
-            case "items" :
-                $cadenaSql = " SELECT ";
-                $cadenaSql .= " id_items,";
-                $cadenaSql .= " descripcion ";
-                $cadenaSql .= " FROM ";
-                $cadenaSql .= " arka_inventarios.items_radfactura_temp ";
-                $cadenaSql .= " WHERE seccion='" . $variable . "';";
-                break;
-
-            case "limpiar_tabla_items" :
-                $cadenaSql = " DELETE FROM ";
-                $cadenaSql .= " arka_inventarios.items_radfactura_temp";
-                $cadenaSql .= " WHERE seccion ='" . $variable . "';";
-                break;
-
-            case "insertarItem" :
-                $cadenaSql = " INSERT INTO ";
-                $cadenaSql .= " arka_inventarios.items_radfactura_temp(";
-                $cadenaSql .= " id_items,descripcion,seccion)";
-                $cadenaSql .= " VALUES (";
-                $cadenaSql .= "'" . $variable [0] . "',";
-                $cadenaSql .= "'" . $variable [1] . "',";
-                $cadenaSql .= "'" . $variable [2] . "');";
-                break;
-
-            case "eliminarItem" :
-                $cadenaSql = " DELETE FROM ";
-                $cadenaSql .= " arka_inventarios.items_radfactura_temp";
-                $cadenaSql .= " WHERE id_items ='" . $variable . "';";
-                break;
-
-            case "id_items_temporal" :
-                $cadenaSql = " SELECT ";
-                $cadenaSql .= " max(id_items)";
-                $cadenaSql .= " FROM arka_inventarios.items_radfactura_temp;";
-                break;
-
-            case "insertarItems" :
-                $cadenaSql = " INSERT INTO ";
-                $cadenaSql .= " arka_inventarios.items_radfactura(";
-                $cadenaSql .= " id_radicarasignar, item,  descripcion, estado_registro, fecha_registro)";
-                $cadenaSql .= " VALUES (";
-                $cadenaSql .= "'" . $variable [0] . "',";
-                $cadenaSql .= "'" . $variable [1] . "',";
-                $cadenaSql .= "'" . $variable [2] . "',";
-                $cadenaSql .= "'1',";
-                $cadenaSql .= "'" . date('Y-m-d') . "');";
-                break;
-
-            //************** Para contratos ***************//
+                  //************** Para contratos ***************//
             case "registroDocumento_contrato":
                 $cadenaSql = " INSERT INTO documento_radicarasignar_contrato( ";
                 $cadenaSql .=" contrato_idunico, ";
@@ -318,8 +268,6 @@ class Sql extends \Sql {
                 $cadenaSql.= " contrato_idcontrato='" . $variable ['id_asignar'] . "' ";
                 $cadenaSql .= "RETURNING  contrato_idcontrato; ";
                 break;
-                break;
-
 
             case "insertarAsignar_contrato" :
                 $cadenaSql = " INSERT INTO registro_radicarasignar_contrato( ";
@@ -347,19 +295,18 @@ class Sql extends \Sql {
                 $cadenaSql .= "RETURNING  contrato_idcontrato; ";
                 break;
 
-            //----------  Para registrar los items de la factura ------------//
-
-            case "insertarItems_contrato" :
-                $cadenaSql = " INSERT INTO ";
-                $cadenaSql .= " arka_inventarios.items_radfacturacontrato(";
-                $cadenaSql .= " id_radicarasignar, item,  descripcion, estado_registro, fecha_registro)";
-                $cadenaSql .= " VALUES (";
-                $cadenaSql .= "'" . $variable [0] . "',";
-                $cadenaSql .= "'" . $variable [1] . "',";
-                $cadenaSql .= "'" . $variable [2] . "',";
-                $cadenaSql .= "'1',";
-                $cadenaSql .= "'" . date('Y-m-d') . "');";
+            case "consultarAsignar_contrato" :
+                $cadenaSql = "  SELECT ";
+                $cadenaSql.= " contrato_numeroentrada,  ";
+                $cadenaSql.= " contrato_vigencia, ";
+                $cadenaSql.= " contrato_estado";
+                $cadenaSql.= " FROM registro_radicarasignar_contrato ";
+                $cadenaSql.= " WHERE ";
+                $cadenaSql.= " contrato_numeroentrada='" . $variable ['numero_entrada'] . "' ";
+                $cadenaSql.= " AND contrato_vigencia='" . $variable ['vigencia_entrada'] . "' ";
+                $cadenaSql.= " AND contrato_estado='TRUE' ";
                 break;
+       
 
             //************** Para Avances***************//
             case "registroDocumento_Avance":
@@ -429,20 +376,6 @@ class Sql extends \Sql {
                 $cadenaSql.= " avance_numeroentrada='" . $variable ['numero_entrada'] . "' ";
                 $cadenaSql.= " AND avance_vigenciaentrada='" . $variable ['vigencia_entrada'] . "' ";
                 $cadenaSql.= " AND avance_estado='TRUE' ";
-                break;
-
-            //----------  Para registrar los items de la factura ------------//
-
-            case "insertarItems_avance" :
-                $cadenaSql = " INSERT INTO ";
-                $cadenaSql .= " arka_inventarios.items_radfacturaavance(";
-                $cadenaSql .= " id_radicarasignar, item,  descripcion, estado_registro, fecha_registro)";
-                $cadenaSql .= " VALUES (";
-                $cadenaSql .= "'" . $variable [0] . "',";
-                $cadenaSql .= "'" . $variable [1] . "',";
-                $cadenaSql .= "'" . $variable [2] . "',";
-                $cadenaSql .= "'1',";
-                $cadenaSql .= "'" . date('Y-m-d') . "');";
                 break;
 
             // Consultas de Oracle para rescate de información de Sicapital
