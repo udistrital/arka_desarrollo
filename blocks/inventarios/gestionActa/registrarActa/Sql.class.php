@@ -292,6 +292,20 @@ class Sql extends \Sql {
 				$cadenaSql .= " max(id_items)";
 				$cadenaSql .= " FROM arka_inventarios.items_actarecibido_temp;";
 				break;
+			
+			case "consultarSercicios" :
+				$cadenaSql = " SELECT  * ";
+				$cadenaSql .= " FROM orden_servicio";
+				$cadenaSql .= " WHERE id_orden_servicio ='" . $variable . "';";
+				break;
+			
+			case "consultarCompras" :
+				$cadenaSql = " SELECT  * ";
+				$cadenaSql .= " FROM orden_compra";
+				$cadenaSql .= " WHERE id_orden_compra ='" . $variable . "';";
+				break;
+				
+				
 
 			/* * ***************** */
 			case "insertarActa" :

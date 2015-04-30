@@ -37,7 +37,7 @@ class registrarForm {
 		$_REQUEST ['tiempo'] = time ();
 		$tiempo = $_REQUEST ['tiempo'];
 		
-		var_dump($_REQUEST);
+		// var_dump($_REQUEST);
 		// -------------------------------------------------------------------------------------------------
 		$conexion = "inventarios";
 		$esteRecursoDB = $this->miConfigurador->fabricaConexiones->getRecursoDB ( $conexion );
@@ -45,33 +45,50 @@ class registrarForm {
 		$conexion2 = "sicapital";
 		$esteRecursoDB2 = $this->miConfigurador->fabricaConexiones->getRecursoDB ( $conexion2 );
 		
-		
-		if($_REQUEST['numero_orden']){
+		if (isset($_REQUEST ['numero_orden'])) {
 			
-			switch ($_REQUEST['titulo']){
+			switch ($_REQUEST ['titulo']) {
 				
+				case "Orden de Servicios" :
+					
+					$cadenaSql = $this->miSql->getCadenaSql ( 'consultarSercicios', $_REQUEST ['numero_orden'] );
+					$resultado_servicios = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
+					
+					$cadenaSql = $this->miSql->getCadenaSql ( 'informacion_ordenador', $resultado_servicios [0] ['id_ordenador_encargado'] );
+					$ordenador = $esteRecursoDB2->ejecutarAcceso ( $cadenaSql, "busqueda" );
+					
+					$arreglo = array (
+							"asignacionOrdenador" => $resultado_servicios [0] ['id_ordenador_encargado'],
+							"nombreOrdenador" => $ordenador [0] [0],
+							"id_ordenador" => $ordenador [0] [1] 
+					);
+					
+					break;
 				
-				case"": 
-				break;	
-				
+				case "Orden de Compra" :
+					
+					$cadenaSql = $this->miSql->getCadenaSql ( 'consultarCompras', $_REQUEST ['numero_orden'] );
+					$resultado_compras = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
+					
+					$cadenaSql = $this->miSql->getCadenaSql ( 'informacion_ordenador', $resultado_compras [0] ['id_ordenador'] );
+					$ordenador = $esteRecursoDB2->ejecutarAcceso ( $cadenaSql, "busqueda" );
+					
+					// var_dump($resultado_compras);exit;
+					
+					$arreglo = array (
+							"asignacionOrdenador" => $resultado_compras [0] ['id_ordenador'],
+							"nombreOrdenador" => $ordenador [0] [0],
+							"id_ordenador" => $ordenador [0] [1],
+							"nitproveedor" => $resultado_compras [0] ['id_proveedor'] 
+					)
+					;
+					
+					break;
 			}
 			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
+			$_REQUEST = array_merge ( $_REQUEST, $arreglo );
 		}
 		
-		
-		exit;
 		
 		
 		// ---------------- SECCION: Parámetros Generales del Formulario ----------------------------------
@@ -326,11 +343,11 @@ class registrarForm {
 					$atributos ['tab'] = $tab ++;
 					$atributos ['anchoEtiqueta'] = 150;
 					$atributos ['evento'] = '';
-				   if (isset ( $_REQUEST [$esteCampo] )) {
-				   $atributos ['seleccion'] = $_REQUEST [$esteCampo];
-				   } else {
-				   $atributos ['seleccion'] = - 1;
-				   }
+					if (isset ( $_REQUEST [$esteCampo] )) {
+						$atributos ['seleccion'] = $_REQUEST [$esteCampo];
+					} else {
+						$atributos ['seleccion'] = - 1;
+					}
 					$atributos ['deshabilitado'] = false;
 					$atributos ['columnas'] = 1;
 					$atributos ['tamanno'] = 1;
@@ -398,11 +415,11 @@ class registrarForm {
 					$atributos ['tab'] = $tab ++;
 					$atributos ['anchoEtiqueta'] = 180;
 					$atributos ['evento'] = '';
-				   if (isset ( $_REQUEST [$esteCampo] )) {
-				   $atributos ['seleccion'] = $_REQUEST [$esteCampo];
-				   } else {
-				   $atributos ['seleccion'] = - 1;
-				   }
+					if (isset ( $_REQUEST [$esteCampo] )) {
+						$atributos ['seleccion'] = $_REQUEST [$esteCampo];
+					} else {
+						$atributos ['seleccion'] = - 1;
+					}
 					$atributos ['deshabilitado'] = false;
 					$atributos ['columnas'] = 2;
 					$atributos ['tamanno'] = 1;
