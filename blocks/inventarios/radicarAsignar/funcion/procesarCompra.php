@@ -74,9 +74,6 @@ class RegistradorCompra {
             redireccion::redireccionar('noInserto', $datos);
         }
 
-        var_dump($_REQUEST);
-        var_dump($_FILES);
-        exit;
         //Guardar el archivo
         if ($_FILES) {
             foreach ($_FILES as $key => $values) {
@@ -152,7 +149,7 @@ class RegistradorCompra {
             echo "<br>NO existe el archivo D:!!!";
             $subida = 0;
         }
-        
+
 
         /* Registro de Items
           foreach ($items as $contenido) {
@@ -192,7 +189,7 @@ class RegistradorCompra {
 
 }
 
-$miRegistrador = new RegistradorAvance($this->lenguaje, $this->sql, $this->funcion);
+$miRegistrador = new RegistradorCompra($this->lenguaje, $this->sql, $this->funcion);
 
 $resultado = $miRegistrador->procesarFormulario();
 ?>

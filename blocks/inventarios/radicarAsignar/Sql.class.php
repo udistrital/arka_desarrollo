@@ -196,9 +196,8 @@ class Sql extends \Sql {
                 $cadenaSql .=" compra_tipodoc='" . $variable ['tipo'] . "',  ";
                 $cadenaSql .=" compra_ruta='" . $variable ['ruta'] . "', ";
                 $cadenaSql .=" compra_fechar='" . $variable ['fecha_registro'] . "', ";
-                $cadenaSql .= " WHERE compra_numeroentrada='" . $variable ['numero_entrada'] . "'  ";
-                $cadenaSql .= " AND compra_vigencia= '" . $variable ['vigencia_entrada'] . "'";
-                $cadenaSql .= " AND compra_estado='TRUE'";
+                $cadenaSql .= " WHERE  ";
+                $cadenaSql.= " compra_idcompra='" . $variable ['id_asignar'] . "' ";
                 $cadenaSql .= "RETURNING  compra_idcompra; ";
                 break;
 
@@ -224,7 +223,6 @@ class Sql extends \Sql {
                 $cadenaSql .= " compra_fechar='" . $variable ['fecha'] . "'   ";
                 $cadenaSql .= " WHERE compra_numeroentrada='" . $variable ['numero_entrada'] . "'  ";
                 $cadenaSql .= " AND compra_vigencia= '" . $variable ['vigencia_entrada'] . "'";
-                $cadenaSql .= " AND compra_estado='TRUE'";
                 $cadenaSql .= "RETURNING  compra_idcompra; ";
                 break;
 
@@ -288,7 +286,7 @@ class Sql extends \Sql {
                 break;
 
             //************** Para contratos ***************//
-            case "registroDocumento_Contrato":
+            case "registroDocumento_contrato":
                 $cadenaSql = " INSERT INTO documento_radicarasignar_contrato( ";
                 $cadenaSql .=" contrato_idunico, ";
                 $cadenaSql .=" contrato_idcontrato, ";
@@ -307,19 +305,45 @@ class Sql extends \Sql {
                 $cadenaSql .= "'" . $variable ['estado'] . "' ); ";
                 break;
 
-            case "insertarAsignar_Contrato" :
+            case "actualizarDocumento_contrato":
+                $cadenaSql = " UPDATE documento_radicarasignar_contrato SET ";
+                $cadenaSql .=" contrato_idunico='" . $variable ['id_unico'] . "', ";
+                $cadenaSql .=" contrato_idcontrato='" . $variable ['id_asignar'] . "', ";
+                $cadenaSql .=" contrato_nombre='" . $variable ['nombre_archivo'] . "' ";
+                $cadenaSql .=" contrato_tipodoc='" . $variable ['tipo'] . "',  ";
+                $cadenaSql .=" contrato_ruta='" . $variable ['ruta'] . "', ";
+                $cadenaSql .=" contrato_fechar='" . $variable ['fecha_registro'] . "', ";
+                $cadenaSql .=" contrato_estado='" . $variable ['estado'] . "' ";
+                $cadenaSql .= " WHERE ";
+                $cadenaSql.= " contrato_idcontrato='" . $variable ['id_asignar'] . "' ";
+                $cadenaSql .= "RETURNING  contrato_idcontrato; ";
+                break;
+                break;
+
+
+            case "insertarAsignar_contrato" :
                 $cadenaSql = " INSERT INTO registro_radicarasignar_contrato( ";
                 $cadenaSql .= " contrato_fecharecibido,  ";
-                $cadenaSql .= " contrato_nitproveedor,  ";
-                $cadenaSql .= " contrato_valorfactura, ";
+                $cadenaSql .= " contrato_numeroentrada,  ";
+                $cadenaSql .= " contrato_vigencia, ";
                 $cadenaSql .= " contrato_fechar,   ";
                 $cadenaSql .= " contrato_estado)";
                 $cadenaSql .= " VALUES (";
-                $cadenaSql .= "'" . $variable [0] . "',";
-                $cadenaSql .= "'" . $variable [1] . "',";
-                $cadenaSql .= "'" . $variable [2] . "',";
-                $cadenaSql .= "'" . $variable [3] . "',";
-                $cadenaSql .= "'" . $variable [4] . "') ";
+                $cadenaSql .= "'" . $variable ['fecha'] . "',";
+                $cadenaSql .= "'" . $variable ['numero_entrada'] . "',";
+                $cadenaSql .= "'" . $variable ['vigencia_entrada'] . "',";
+                $cadenaSql .= "'" . $variable ['fecha'] . "',";
+                $cadenaSql .= "'" . $variable ['estado'] . "') ";
+                $cadenaSql .= "RETURNING  contrato_idcontrato; ";
+                break;
+
+            case "actualizarAsignar_contrato" :
+                $cadenaSql = " UPDATE registro_radicarasignar_contrato ";
+                $cadenaSql .= " SET contrato_fecharecibido='" . $variable ['fecha'] . "',  ";
+                $cadenaSql .= " contrato_fechar='" . $variable ['fecha'] . "'   ";
+                $cadenaSql .= " WHERE contrato_estado='TRUE' ";
+                $cadenaSql .= " AND contrato_numeroentrada='" . $variable ['numero_entrada'] . "'";
+                $cadenaSql .= " AND contrato_vigencia='" . $variable ['vigencia_entrada'] . "',";
                 $cadenaSql .= "RETURNING  contrato_idcontrato; ";
                 break;
 

@@ -520,8 +520,6 @@ class registrarForm {
         unset($atributos);
 
 
-
-
         //----------------------FIN CONTROL AGRUPACIÓN---------------------------------//
         //--------------------- FIN CONTROL HTML ------------------------------------------//
         // ------------------Division para los botones-------------------------

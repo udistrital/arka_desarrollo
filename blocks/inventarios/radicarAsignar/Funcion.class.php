@@ -87,16 +87,17 @@ class Funcion {
             switch ($_REQUEST ['opcion']) {
 
                 case "registroCargue" :
+ 
                     switch ($_REQUEST['tipoCargue']) {
                         case 1:
                             $this->procesarAvance();
                             break;
 
-                        case 2:
+                        case 3:
                             $this->procesarCompra();
                             break;
 
-                        case 3:
+                        case 4:
                             $this->procesarContrato();
                             break;
                     }
