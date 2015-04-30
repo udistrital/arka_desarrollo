@@ -74,11 +74,74 @@ $urlFinal4 = $url . $cadena4;
 
 
 
+
+// Variables
+$cadenaACodificar6 = "pagina=" . $this->miConfigurador->getVariableConfiguracion ( "pagina" );
+$cadenaACodificar6 .= "&procesarAjax=true";
+$cadenaACodificar6 .= "&action=index.php";
+$cadenaACodificar6 .= "&bloqueNombre=" . $esteBloque ["nombre"];
+$cadenaACodificar6 .= "&bloqueGrupo=" . $esteBloque ["grupo"];
+$cadenaACodificar6 .= $cadenaACodificar . "&funcion=SeleccionOrdenador";
+$cadenaACodificar6 .= "&tiempo=" . $_REQUEST ['tiempo'];
+
+// Codificar las variables
+$enlace6 = $this->miConfigurador->getVariableConfiguracion ( "enlace" );
+$cadena6 = $this->miConfigurador->fabricaConexiones->crypto->codificar_url ( $cadenaACodificar6, $enlace6 );
+
+// URL definitiva
+$urlFinal6 = $url . $cadena6;
+
 // echo $urlFinal;exit;
 // echo $urlFinal2;
 // echo $urlFinal3;
 ?>
 <script type='text/javascript'>
+
+
+function datosInfo(elem, request, response) {
+
+    $("#<?php echo $this->campoSeguro('proveedor') ?>").val();
+
+    $.ajax({
+        url: "<?php echo $urlFinal4 ?>",
+        dataType: "json",
+        data: {proveedor: $("#<?php echo $this->campoSeguro('nitproveedor') ?>").val()},
+        success: function (data) {
+
+            if (data[0] != 'null') {
+
+                $("#<?php echo $this->campoSeguro('proveedor') ?>").val(data[0]);
+            } else {
+                $("#<?php echo $this->campoSeguro('proveedor') ?>").val();
+            }
+        }
+    });
+};
+
+function datosOrdenador(elem, request, response){
+	  $.ajax({
+	    url: "<?php echo $urlFinal6?>",
+	    dataType: "json",
+	    data: { ordenador:$("#<?php echo $this->campoSeguro('asignacionOrdenador')?>").val()},
+	    success: function(data){ 
+
+	    		if(data[0]!='null'){
+
+	    			$("#<?php echo $this->campoSeguro('nombreOrdenador')?>").val(data[0]);
+	    			$("#<?php echo $this->campoSeguro('id_ordenador')?>").val(data[1]);
+							    			
+		    		}else{
+
+				
+
+
+			    		
+		    		}
+
+	    }
+		                    
+	   });
+	};
     $(function () {
 
         $("#tablaContenido").jqGrid({
@@ -211,55 +274,31 @@ $urlFinal4 = $url . $cadena4;
                 {}
         );
 
+        $("#<?php echo $this->campoSeguro('asignacionOrdenador')?>").change(function(){
+        	
+        	    	if($("#<?php echo $this->campoSeguro('asignacionOrdenador')?>").val()!=''){
+        	    		datosOrdenador();
+        			}else{
+        				$("#<?php echo $this->campoSeguro('nombreOrdenador')?>").val('');
+        				}
+        		      });
+
+
+        $("#<?php echo $this->campoSeguro('asignacionOrdenador') ?>").select2();
+	      
+
     });
 
 
-    function datosInfo(elem, request, response) {
 
-        $("#<?php echo $this->campoSeguro('proveedor') ?>").val();
-
-        $.ajax({
-            url: "<?php echo $urlFinal4 ?>",
-            dataType: "json",
-            data: {proveedor: $("#<?php echo $this->campoSeguro('nitproveedor') ?>").val()},
-            success: function (data) {
-
-                if (data[0] != 'null') {
-
-                    $("#<?php echo $this->campoSeguro('proveedor') ?>").val(data[0]);
-                } else {
-                    $("#<?php echo $this->campoSeguro('proveedor') ?>").val();
-                }
-            }
-        });
-    }
-    ;
-
-    $("#<?php echo $this->campoSeguro('nitproveedor') ?>").select2({
-        placeholder: "Search for a repository",
-        minimumInputLength: 1,
-    });
-
-    $("#<?php echo $this->campoSeguro('dependencia') ?>").select2({
-        placeholder: "Search for a repository",
-        minimumInputLength: 1,
-    });
-
-    $("#<?php echo $this->campoSeguro('tipoOrden') ?>").select2({
-        placeholder: "Search for a repository",
-        minimumInputLength: 1,
-    });
+    
 
 
-$("#<?php echo $this->campoSeguro('tipoBien') ?>").select2({
-        placeholder: "Search for a repository",
-        minimumInputLength: 1,
-    });
 
-    $("#<?php echo $this->campoSeguro('tipoComprador') ?>").select2({
-        placeholder: "Search for a repository",
-        minimumInputLength: 1,
-    });
+
+
+
+    
 
 </script>
 

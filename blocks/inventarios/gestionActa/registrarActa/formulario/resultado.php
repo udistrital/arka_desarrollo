@@ -183,6 +183,7 @@ class registrarForm {
 				$variable .= "&numero_orden=" . $resultado_orden [$i] [0];
 				$variable .= "&tipo_orden=" . $resultado_orden [$i] [0];
 				$variable .= "&fecha_orden=" . $resultado_orden [$i] [1];
+				$variable .= "&titulo=" . $titulo ;
 				$variable = $this->miConfigurador->fabricaConexiones->crypto->codificar_url ( $variable, $directorio );
 				
 				$mostrarHtml = "<tr>

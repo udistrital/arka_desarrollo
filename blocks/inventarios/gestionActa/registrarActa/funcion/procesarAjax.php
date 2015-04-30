@@ -1,6 +1,7 @@
 <?php
 use inventarios\gestionActa\registrarActa\Sql;
 
+
 $conexion = "inventarios";
 $esteRecursoDB = $this->miConfigurador->fabricaConexiones->getRecursoDB ( $conexion );
 
@@ -137,4 +138,25 @@ if ($_REQUEST ['funcion'] == 'proveedor') {
     $resultado = json_encode($resultadoItems[0]);
     echo $resultado;
 }
+
+
+
+if ($_REQUEST ['funcion'] == 'SeleccionOrdenador') {
+
+	$conexion = "sicapital";
+	$esteRecursoDBO = $this->miConfigurador->fabricaConexiones->getRecursoDB ( $conexion );
+
+	$cadenaSql = $this->sql->getCadenaSql ( 'informacion_ordenador', $_REQUEST ['ordenador'] );
+	$resultadoItems = $esteRecursoDBO->ejecutarAcceso ( $cadenaSql, "busqueda" );
+
+	$resultado = json_encode ( $resultadoItems [0] );
+
+	echo $resultado;
+}
+
+
+
+
+
+
 ?>

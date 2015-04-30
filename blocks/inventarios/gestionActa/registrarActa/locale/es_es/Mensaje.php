@@ -47,8 +47,19 @@ $this->idioma ["revisorTitulo"] ="Ingrese Nombre de Quien Revisó";
 $this->idioma ["proveedor"] =" Nombre o Razón Social:";
 $this->idioma ["proveedorTitulo"] ="Ingrese Nombre Proveedor";
 
-$this->idioma ["nitproveedor"] =" NIT Proveedor :";
+$this->idioma ["nitproveedor"] =" NIT y/o Nombre :<br>Razón Social";
 $this->idioma ["nitproveedorTitulo"] ="Ingrese NIT Proveedor";
+
+$this->idioma ["asignacionOrdenador"] ="Asignación : ";
+$this->idioma ["asignacionOrdenadorTitulo"] ="Ingrese Asignación de Ordenador del Gasto";
+
+
+$this->idioma ["nombreOrdenador"] ="&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspNombre y Apellidos : ";
+$this->idioma ["nombreOrdenadorTitulo"] =" Nombre y Apellidos Ordenador ";
+
+
+$this->idioma ["ordenadorGasto"] ="Ordenador Gasto";
+
 
 $this->idioma ["numFactura"] =" Número Factura :";
 $this->idioma ["numFacturaTitulo"] ="Ingrese Número Factura";

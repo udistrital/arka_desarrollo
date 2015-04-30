@@ -159,8 +159,8 @@ class Sql extends \Sql {
 				$cadenaSql .= "id_orden_compra, fecha_registro  ";
 				$cadenaSql .= "  ";
 				$cadenaSql .= "FROM orden_compra ";
-// 				$cadenaSql .= "JOIN proveedor ON proveedor.id_proveedor = orden_compra.id_proveedor ";
-// 				$cadenaSql .= "JOIN dependencia ON dependencia.id_dependencia = orden_compra.id_dependencia ";
+				// $cadenaSql .= "JOIN proveedor ON proveedor.id_proveedor = orden_compra.id_proveedor ";
+				// $cadenaSql .= "JOIN dependencia ON dependencia.id_dependencia = orden_compra.id_dependencia ";
 				$cadenaSql .= "WHERE 1=1";
 				if ($variable [0] != '') {
 					$cadenaSql .= " AND fecha_registro BETWEEN CAST ( '" . $variable [0] . "' AS DATE) ";
@@ -215,10 +215,10 @@ class Sql extends \Sql {
 				$cadenaSql .= " AND to_id='" . $variable . "' ";
 				break;
 			
-// 			case "ordenador_gasto" :
-// 				$cadenaSql = " 	SELECT ORG_IDENTIFICADOR, ORG_ORDENADOR_GASTO ";
-// 				$cadenaSql .= " FROM ORDENADORES_GASTO ";
-// 				break;
+			// case "ordenador_gasto" :
+			// $cadenaSql = " SELECT ORG_IDENTIFICADOR, ORG_ORDENADOR_GASTO ";
+			// $cadenaSql .= " FROM ORDENADORES_GASTO ";
+			// break;
 			
 			case "tipoComprador" :
 				
@@ -363,8 +363,17 @@ class Sql extends \Sql {
 				break;
 			
 			case "proveedores" :
-				$cadenaSql = "SELECT PRO_NIT,PRO_NIT ||' '|| PRO_RAZON_SOCIAL";
+				
+				$cadenaSql = " SELECT PRO_IDENTIFICADOR,PRO_NIT||' - '||PRO_RAZON_SOCIAL AS proveedor ";
 				$cadenaSql .= " FROM PROVEEDORES ";
+				
+				break;
+			
+			case "informacion_ordenador" :
+				$cadenaSql = " SELECT ORG_NOMBRE,ORG_IDENTIFICADOR  ";
+				$cadenaSql .= " FROM ORDENADORES_GASTO ";
+				$cadenaSql .= " WHERE  ORG_IDENTIFICADOR='" . $variable . "' ";
+				$cadenaSql .= " AND ORG_ESTADO='A' ";
 				break;
 			
 			case "select_proveedor" :
