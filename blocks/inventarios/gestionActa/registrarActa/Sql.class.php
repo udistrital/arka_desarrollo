@@ -292,38 +292,32 @@ class Sql extends \Sql {
 				$cadenaSql .= " max(id_items)";
 				$cadenaSql .= " FROM arka_inventarios.items_actarecibido_temp;";
 				break;
-			
+
 			/* * ***************** */
 			case "insertarActa" :
 				$cadenaSql = " INSERT INTO registro_actarecibido( ";
-				$cadenaSql .= "tipo_orden,  ";
-				$cadenaSql .= "numero_orden,  ";
-				$cadenaSql .= "dependencia,  ";
-				$cadenaSql .= "fecha_recibido,  ";
-				$cadenaSql .= "tipo_bien,  ";
-				$cadenaSql .= "nitproveedor,  ";
-				$cadenaSql .= "proveedor,  ";
-				$cadenaSql .= "tipocomprador,  ";
-				$cadenaSql .= "fecha_revision,  ";
-				$cadenaSql .= "revisor,  ";
-				$cadenaSql .= "observacionesacta,  ";
-				$cadenaSql .= "estado_registro,  ";
-				$cadenaSql .= "fecha_registro)";
+				$cadenaSql .= " sede, dependencia, fecha_recibido, tipo_bien,
+						proveedor, ordenador_gasto, tipo_orden,
+						fecha_revision, revisor, observacionesacta, enlace_soporte, nombre_soporte,numero_orden,
+						estado_registro, fecha_registro )";
 				$cadenaSql .= " VALUES (";
-				$cadenaSql .= "'" . $variable ['tipo_orden'] . "',";
-				$cadenaSql .= "'" . $variable ['numero_orden'] . "',";
+				$cadenaSql .= "'" . $variable ['sede'] . "',";
 				$cadenaSql .= "'" . $variable ['dependencia'] . "',";
 				$cadenaSql .= "'" . $variable ['fecha_registro'] . "',";
 				$cadenaSql .= "'" . $variable ['tipo_bien'] . "',";
 				$cadenaSql .= "'" . $variable ['nitproveedor'] . "',";
-				$cadenaSql .= "'" . $variable ['razon_social'] . "',";
-				$cadenaSql .= "'" . $variable ['tipo_comprador'] . "',";
+				$cadenaSql .= "'" . $variable ['ordenador'] . "',";
+				$cadenaSql .= "'" . $variable ['tipo_orden'] . "',";
 				$cadenaSql .= "'" . $variable ['fecha_revision'] . "',";
 				$cadenaSql .= "'" . $variable ['revisor'] . "',";
 				$cadenaSql .= "'" . $variable ['observacion'] . "',";
+				$cadenaSql .= "'" . $variable ['enlace_soporte'] . "',";
+				$cadenaSql .= "'" . $variable ['nombre_soporte'] . "',";
+				$cadenaSql .= "'" . $variable ['numero_orden'] . "',";
 				$cadenaSql .= "'" . $variable ['estado'] . "',";
 				$cadenaSql .= "'" . $variable ['fecha_registro'] . "') ";
 				$cadenaSql .= "RETURNING  id_actarecibido; ";
+				
 				break;
 			
 			case "insertarItems" :
