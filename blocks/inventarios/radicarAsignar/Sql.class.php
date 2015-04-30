@@ -169,7 +169,7 @@ class Sql extends \Sql {
 
 
             //**************** Para Compras *******************//
-            case "registroDocumento":
+            case "registroDocumento_compra":
                 $cadenaSql = " INSERT INTO documento_radicarasignar_compra( ";
                 $cadenaSql .=" compra_idunico, ";
                 $cadenaSql .=" compra_idcompra, ";
@@ -188,20 +188,53 @@ class Sql extends \Sql {
                 $cadenaSql .= "'" . $variable ['estado'] . "' ); ";
                 break;
 
-            case "insertarAsignar" :
+            case "actualizarDocumento_compra":
+                $cadenaSql = " UPDATE documento_radicarasignar_compra ";
+                $cadenaSql .=" SET compra_idunico='" . $variable ['id_unico'] . "', ";
+                $cadenaSql .=" compra_idcompra='" . $variable ['id_asignar'] . "', ";
+                $cadenaSql .=" compra_nombre='" . $variable ['nombre_archivo'] . "', ";
+                $cadenaSql .=" compra_tipodoc='" . $variable ['tipo'] . "',  ";
+                $cadenaSql .=" compra_ruta='" . $variable ['ruta'] . "', ";
+                $cadenaSql .=" compra_fechar='" . $variable ['fecha_registro'] . "', ";
+                $cadenaSql .= " WHERE compra_numeroentrada='" . $variable ['numero_entrada'] . "'  ";
+                $cadenaSql .= " AND compra_vigencia= '" . $variable ['vigencia_entrada'] . "'";
+                $cadenaSql .= " AND compra_estado='TRUE'";
+                $cadenaSql .= "RETURNING  compra_idcompra; ";
+                break;
+
+            case "insertarAsignar_compra" :
                 $cadenaSql = " INSERT INTO registro_radicarasignar_compra( ";
                 $cadenaSql .= " compra_fecharecibido,  ";
-                $cadenaSql .= " compra_nitproveedor,  ";
-                $cadenaSql .= " compra_valorfactura, ";
+                $cadenaSql .= " compra_numeroentrada,  ";
+                $cadenaSql .= " compra_vigencia, ";
                 $cadenaSql .= " compra_fechar,   ";
                 $cadenaSql .= " compra_estado)";
                 $cadenaSql .= " VALUES (";
-                $cadenaSql .= "'" . $variable [0] . "',";
-                $cadenaSql .= "'" . $variable [1] . "',";
-                $cadenaSql .= "'" . $variable [2] . "',";
-                $cadenaSql .= "'" . $variable [3] . "',";
-                $cadenaSql .= "'" . $variable [4] . "') ";
+                $cadenaSql .= "'" . $variable ['fecha'] . "',";
+                $cadenaSql .= "'" . $variable ['numero_entrada'] . "',";
+                $cadenaSql .= "'" . $variable ['vigencia_entrada'] . "',";
+                $cadenaSql .= "'" . $variable ['fecha'] . "',";
+                $cadenaSql .= "'" . $variable ['estado'] . "') ";
                 $cadenaSql .= "RETURNING  compra_idcompra; ";
+                break;
+
+            case "actualizarAsignar_compra" :
+                $cadenaSql = " UPDATE registro_radicarasignar_compra ";
+                $cadenaSql .= " SET compra_fecharecibido='" . $variable ['fecha'] . "',  ";
+                $cadenaSql .= " compra_fechar='" . $variable ['fecha'] . "'   ";
+                $cadenaSql .= " WHERE compra_numeroentrada='" . $variable ['numero_entrada'] . "'  ";
+                $cadenaSql .= " AND compra_vigencia= '" . $variable ['vigencia_entrada'] . "'";
+                $cadenaSql .= " AND compra_estado='TRUE'";
+                $cadenaSql .= "RETURNING  compra_idcompra; ";
+                break;
+
+            case "consultarAsignar_compra" :
+                $cadenaSql = " SELECT compra_numeroentrada,  ";
+                $cadenaSql .= " compra_vigencia ";
+                $cadenaSql .= " FROM registro_radicarasignar_compra ";
+                $cadenaSql .= " WHERE compra_numeroentrada='" . $variable ['numero_entrada'] . "'  ";
+                $cadenaSql .= " AND compra_vigencia= '" . $variable ['vigencia_entrada'] . "'";
+                $cadenaSql .= " AND compra_estado='TRUE'";
                 break;
 
             //----------  Para registrar los items de la factura ------------//

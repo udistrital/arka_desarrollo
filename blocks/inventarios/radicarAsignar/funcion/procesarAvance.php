@@ -54,24 +54,23 @@ class RegistradorAvance {
         $cadenaSql = $this->miSql->getCadenaSql('consultarAsignar_Avance', $datosAvance);
         $estado_asignar = $esteRecursoDB->ejecutarAcceso($cadenaSql, "busqueda");
 
-        $actualizar = 2;
 
         if ($estado_asignar == false) {
             //registrar si no existe
             $cadenaSql = $this->miSql->getCadenaSql('insertarAsignar_Avance', $datosAvance);
             $id_asignar = $esteRecursoDB->ejecutarAcceso($cadenaSql, "busqueda");
-            $actualizar = 0;
+            $actualizar = 2;
         } else {
             //actualizar si existe
             $cadenaSql = $this->miSql->getCadenaSql('actualizarAsignar_Avance', $datosAvance);
             $id_asignar = $esteRecursoDB->ejecutarAcceso($cadenaSql, "busqueda");
             $actualizar = 1;
         }
-        
+
 
         $datos = array();
         //error en el registro para finalizar transacción
-        if ($id_asignar != false) {
+        if ($id_asignar == false) {
             redireccion::redireccionar('noInserto', $datos);
         }
 
@@ -107,7 +106,6 @@ class RegistradorAvance {
                     $archivo1 = $archivo['name'];
                     $prefijo = substr(md5(uniqid(rand())), 0, 6);
 
-
                     if ($archivo1 != "") {
                         // guardamos el archivo a la carpeta files
                         $destino1 = $rutaBloque . "/archivoSoporte/" . $prefijo . "-" . $archivo1;
@@ -132,12 +130,9 @@ class RegistradorAvance {
                                     $resultado = $esteRecursoDB->ejecutarAcceso($cadenaSql, 'insertar');
                                     break;
 
-                                case 0:
+                                case 2:
                                     $cadenaSql = $this->miSql->getCadenaSql("registroDocumento_Avance", $parametros);
                                     $resultado = $esteRecursoDB->ejecutarAcceso($cadenaSql, 'insertar');
-                                    break;
-
-                                default:
                                     break;
                             }
                         } else {
@@ -154,6 +149,8 @@ class RegistradorAvance {
             echo "<br>NO existe el archivo D:!!!";
             $subida = 0;
         }
+        
+
         /* Registro de Items
           foreach ($items as $contenido) {
 
@@ -175,7 +172,7 @@ class RegistradorAvance {
             $fechaActual
         );
 
-        if ($subida == 1 & $id_asignar != false) {
+        if ($subida == 1 && $id_asignar !== false) {
             redireccion::redireccionar('inserto', $datos);
         } else {
             redireccion::redireccionar('noInserto', $datos);
