@@ -70,6 +70,7 @@ class Registrador {
             }
         }
 
+        
         $array = array(
             'tipo' => $_REQUEST ['tipo'],
             'destino' => $destino1,
@@ -81,10 +82,10 @@ class Registrador {
 
         $cadenaSql = $this->miSql->getCadenaSql('insertarRadicacion', $array);
 
-        $id_movimiento = $esteRecursoDB->ejecutarAcceso($cadenaSql, "busqueda");
+        $id_movimiento = $esteRecursoDB->ejecutarAcceso($cadenaSql, "insertar");
 
         $datos = array(
-            $id_movimiento [0] [0],
+            $id_movimiento [0][0],
             $fechaActual
         );
 

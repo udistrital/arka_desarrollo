@@ -168,7 +168,7 @@ class Sql extends \Sql {
                 break;
 
             case "placa_elemento" :
-                $cadenaSql = " SELECT id_elemento_ind, placa ";
+                $cadenaSql = " SELECT placa, placa ";
                 $cadenaSql .= "FROM elemento_individual ";
                 $cadenaSql .= "WHERE estado_registro='TRUE' ";
                 break;
