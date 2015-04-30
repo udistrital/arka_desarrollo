@@ -4,6 +4,9 @@ $this->idioma ["noDefinido"] = "Etiqueta no esta definida en locale/es_es/Mensaj
 $this->idioma ["tipo"] = "Tipo Inexistencia : ";
 $this->idioma ["tipoTitulo"] = "Seleccione Tipo Inexistencia";
 
+$this->idioma ["placa"] = "Placa Elemento: ";
+$this->idioma ["placaTitulo"] = "Seleccione Placa";
+
 
 $this->idioma ["documento"] = "Cargue Documento : <br>a Radicar";
 $this->idioma ["documentoTitulo"] = "Seleccione Documento a Radicar ";
