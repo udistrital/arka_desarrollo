@@ -42,8 +42,7 @@ class RegistradorActa {
 		$items = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
 		
 		if ($items == 0) {
-			echo "noitems";
-			exit ();
+	
 			redireccion::redireccionar ( 'noItems' );
 		}
 		
