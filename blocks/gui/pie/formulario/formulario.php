@@ -76,27 +76,38 @@ class pie {
 				echo $this->miFormulario->division ( "inicio", $atributos );
 				unset ( $atributos );
 				{
-					$esteCampo = 'mensajeResolucion ';
-					$atributos ["id"] = $esteCampo;
-					$atributos ["estilo"] = $esteCampo;
-					$atributos ['columnas'] = 1;
-					$atributos ["estilo"] = "textoSubtituloCursiva";
-					$atributos ['texto'] = $this->lenguaje->getCadena ( $esteCampo );
-					$tab ++;
-					echo $this->miFormulario->campoTexto ( $atributos );
-					unset ( $atributos );
+					// $esteCampo = 'mensajeResolucion ';
+					// $atributos ["id"] = $esteCampo;
+					// $atributos ["estilo"] = $esteCampo;
+					// $atributos ['columnas'] = 1;
+					// $atributos ["estilo"] = "textoSubtituloCursiva";
+					// $atributos ['texto'] = $this->lenguaje->getCadena ( $esteCampo );
+					// $tab ++;
+					// echo $this->miFormulario->campoTexto ( $atributos );
+					// unset ( $atributos );
 					
-					// ---------------- CONTROL: Cuadro de Texto --------------------------------------------------------
-					$esteCampo = 'link_reso';
+					// // ---------------- CONTROL: Cuadro de Texto --------------------------------------------------------
+					// $esteCampo = 'link_reso';
+					// $atributos ['id'] = $esteCampo;
+					// $atributos ['enlace'] = $this->miConfigurador->getVariableConfiguracion ( 'rutaUrlBloque' ) . 'imagen/resolucion.pdf';
+					// $atributos ['tabIndex'] = 1;
+					// $atributos ['estilo'] = 'textoSubtitulo';
+					// $atributos ['enlaceTexto'] = $this->lenguaje->getCadena ( $esteCampo );
+					// $atributos ['ancho'] = '10%';
+					// $atributos ['alto'] = '10%';
+					// echo $this->miFormulario->enlace ( $atributos );
+					
+					// unset ( $atributos );
+					
+					$esteCampo = 'enlaceDistrital';
 					$atributos ['id'] = $esteCampo;
-					$atributos ['enlace'] = $this->miConfigurador->getVariableConfiguracion ( 'rutaUrlBloque' ) . 'imagen/resolucion.pdf';
+					$atributos ['enlace'] = $this->lenguaje->getCadena ( $esteCampo );
 					$atributos ['tabIndex'] = 1;
-					$atributos ['estilo'] = 'textoSubtitulo';
-					$atributos ['enlaceTexto'] = $this->lenguaje->getCadena ( $esteCampo );
-					$atributos ['ancho'] = '10%';
-					$atributos ['alto'] = '10%';
+					// $atributos ['estilo'] = 'jquery';
+					$atributos ['enlaceImagen'] = $this->miConfigurador->getVariableConfiguracion ( 'rutaUrlBloque' ) . 'imagen/escudo.png';
+					$atributos ['ancho'] = '60px';
+					$atributos ['alto'] = '80px';
 					echo $this->miFormulario->enlace ( $atributos );
-					
 					unset ( $atributos );
 					
 					$esteCampo = 'mensajePie';
@@ -112,104 +123,13 @@ class pie {
 				
 				echo $this->miFormulario->division ( "fin" );
 				
-				$atributos ["id"] = "colm2";
-				echo $this->miFormulario->division ( "inicio", $atributos );
-				unset ( $atributos );
-				{
-					
-					$esteCampo = 'otrasRedes ';
-					$atributos ["id"] = $esteCampo;
-					$atributos ["estilo"] = $esteCampo;
-					$atributos ['columnas'] = 1;
-					$atributos ["estilo"] = "textoSubtituloCursiva";
-					$atributos ['texto'] = $this->lenguaje->getCadena ( $esteCampo );
-					$tab ++;
-					echo $this->miFormulario->campoTexto ( $atributos );
-					unset ( $atributos );
-					
-					$esteCampo = 'enlaceDistrital';
-					$atributos ['id'] = $esteCampo;
-					$atributos ['enlace'] = $this->lenguaje->getCadena ( $esteCampo );
-					$atributos ['tabIndex'] = 1;
-					// $atributos ['estilo'] = 'jquery';
-					$atributos ['enlaceImagen'] = $this->miConfigurador->getVariableConfiguracion ( 'rutaUrlBloque' ) . 'imagen/escudo.png';
-					$atributos ['ancho'] = '60px';
-					$atributos ['alto'] = '80px';
-					echo $this->miFormulario->enlace ( $atributos );
-					unset ( $atributos );
-					
-					$esteCampo = 'enlaceCondor';
-					$atributos ['id'] = $esteCampo;
-					$atributos ['enlace'] = $this->lenguaje->getCadena ( $esteCampo );
-					$atributos ['tabIndex'] = 1;
-					// $atributos ['estilo'] = 'jquery';
-					$atributos ['enlaceImagen'] = $this->miConfigurador->getVariableConfiguracion ( 'rutaUrlBloque' ) . 'imagen/condor.png';
-					$atributos ['ancho'] = '130px';
-					$atributos ['alto'] = '80px';
-					echo $this->miFormulario->enlace ( $atributos );
-					unset ( $atributos );
-					
-					
-					$esteCampo = 'enlaceProveedores';
-					$atributos ['id'] = $esteCampo;
-					$atributos ['enlace'] = $this->lenguaje->getCadena ( $esteCampo );
-					$atributos ['tabIndex'] = 1;
-					// $atributos ['estilo'] = 'jquery';
-					$atributos ['enlaceImagen'] = $this->miConfigurador->getVariableConfiguracion ( 'rutaUrlBloque' ) . 'imagen/provee.png';
-					$atributos ['ancho'] = '80px';
-					$atributos ['alto'] = '90px';
-					$atributos ['saltoLinea'] =true;
-					echo $this->miFormulario->enlace ( $atributos );
-					unset ( $atributos );
-					
-					
-					$esteCampo = 'redesSociales ';
-					$atributos ["id"] = $esteCampo;
-					$atributos ["estilo"] = $esteCampo;
-					$atributos ['columnas'] = 1;
-					$atributos ["estilo"] = "textoSubtituloCursiva";
-					$atributos ['texto'] = $this->lenguaje->getCadena ( $esteCampo );
-					$tab ++;
-					echo $this->miFormulario->campoTexto ( $atributos );
-					unset ( $atributos );
-						
-					$esteCampo = 'enlacegoogle';
-					$atributos ['id'] = $esteCampo;
-					$atributos ['enlace'] = $this->lenguaje->getCadena ( $esteCampo );
-					$atributos ['tabIndex'] = 1;
-					// $atributos ['estilo'] = 'jquery';
-					$atributos ['enlaceImagen'] = $this->miConfigurador->getVariableConfiguracion ( 'rutaUrlBloque' ) . 'imagen/google+.png';
-					$atributos ['ancho'] = '30px';
-					$atributos ['alto'] = '30px';
-					echo $this->miFormulario->enlace ( $atributos );
-					unset ( $atributos );
-					
-					$esteCampo = 'enlacefacebook';
-					$atributos ['id'] = $esteCampo;
-					$atributos ['enlace'] = $this->lenguaje->getCadena ( $esteCampo );
-					$atributos ['tabIndex'] = 1;
-					// $atributos ['estilo'] = 'jquery';
-					$atributos ['enlaceImagen'] = $this->miConfigurador->getVariableConfiguracion ( 'rutaUrlBloque' ) . 'imagen/facebook.png';
-					$atributos ['ancho'] = '30px';
-					$atributos ['alto'] = '30px';
-					echo $this->miFormulario->enlace ( $atributos );
-					unset ( $atributos );
-					
-					$esteCampo = 'enlacetwitter';
-					$atributos ['id'] = $esteCampo;
-					$atributos ['enlace'] = $this->lenguaje->getCadena ( $esteCampo );
-					$atributos ['tabIndex'] = 1;
-					// $atributos ['estilo'] = 'jquery';
-					$atributos ['enlaceImagen'] = $this->miConfigurador->getVariableConfiguracion ( 'rutaUrlBloque' ) . 'imagen/twitter.png';
-					$atributos ['ancho'] = '30px';
-					$atributos ['alto'] = '30px';
-					echo $this->miFormulario->enlace ( $atributos );
-					unset ( $atributos );
-					
-					
-				}
+// 				$atributos ["id"] = "colm2";
+// 				echo $this->miFormulario->division ( "inicio", $atributos );
+// 				unset ( $atributos );
+// 				{
+// 				}
 				
-				echo $this->miFormulario->division ( "fin" );
+// 				echo $this->miFormulario->division ( "fin" );
 				
 				$atributos ["id"] = "colm3";
 				$atributos ["estilo"] = "textoDerecha";
@@ -237,6 +157,8 @@ class pie {
 
 
 <?php
+						
+					
 						
 						// $atributos ["id"] = "ventana1";
 						// echo $this->miFormulario->division ( "inicio", $atributos );
@@ -297,12 +219,89 @@ class pie {
 					echo $this->miFormulario->campoTexto ( $atributos );
 					unset ( $atributos );
 					
+					
+					
+// 					$esteCampo = 'otrasRedes ';
+// 					$atributos ["id"] = $esteCampo;
+// 					$atributos ["estilo"] = $esteCampo;
+// 					$atributos ['columnas'] = 1;
+// 					$atributos ["estilo"] = "textoSubtituloCursiva";
+// 					$atributos ['texto'] = $this->lenguaje->getCadena ( $esteCampo );
+// 					$tab ++;
+// 					echo $this->miFormulario->campoTexto ( $atributos );
+// 					unset ( $atributos );
+					
+					$esteCampo = 'enlaceCondor';
+					$atributos ['id'] = $esteCampo;
+					$atributos ['enlace'] = $this->lenguaje->getCadena ( $esteCampo );
+					$atributos ['tabIndex'] = 1;
+					// $atributos ['estilo'] = 'jquery';
+					$atributos ['enlaceImagen'] = $this->miConfigurador->getVariableConfiguracion ( 'rutaUrlBloque' ) . 'imagen/condor.png';
+					$atributos ['ancho'] = '40px';
+					$atributos ['alto'] = '30px';
+					echo $this->miFormulario->enlace ( $atributos );
+					unset ( $atributos );
+					
+					$esteCampo = 'enlaceProveedores';
+					$atributos ['id'] = $esteCampo;
+					$atributos ['enlace'] = $this->lenguaje->getCadena ( $esteCampo );
+					$atributos ['tabIndex'] = 1;
+					// $atributos ['estilo'] = 'jquery';
+					$atributos ['enlaceImagen'] = $this->miConfigurador->getVariableConfiguracion ( 'rutaUrlBloque' ) . 'imagen/provee.png';
+					$atributos ['ancho'] = '30px';
+					$atributos ['alto'] = '30px';
+					$atributos ['saltoLinea'] = true;
+					echo $this->miFormulario->enlace ( $atributos );
+					unset ( $atributos );
+					
+					$esteCampo = 'redesSociales ';
+					$atributos ["id"] = $esteCampo;
+					$atributos ["estilo"] = $esteCampo;
+					$atributos ['columnas'] = 1;
+					$atributos ["estilo"] = "textoSubtituloCursiva";
+					$atributos ['texto'] = $this->lenguaje->getCadena ( $esteCampo );
+					$tab ++;
+					echo $this->miFormulario->campoTexto ( $atributos );
+					unset ( $atributos );
+					
+					$esteCampo = 'enlacegoogle';
+					$atributos ['id'] = $esteCampo;
+					$atributos ['enlace'] = $this->lenguaje->getCadena ( $esteCampo );
+					$atributos ['tabIndex'] = 1;
+					// $atributos ['estilo'] = 'jquery';
+					$atributos ['enlaceImagen'] = $this->miConfigurador->getVariableConfiguracion ( 'rutaUrlBloque' ) . 'imagen/google+.png';
+					$atributos ['ancho'] = '30px';
+					$atributos ['alto'] = '30px';
+					echo $this->miFormulario->enlace ( $atributos );
+					unset ( $atributos );
+					
+					$esteCampo = 'enlacefacebook';
+					$atributos ['id'] = $esteCampo;
+					$atributos ['enlace'] = $this->lenguaje->getCadena ( $esteCampo );
+					$atributos ['tabIndex'] = 1;
+					// $atributos ['estilo'] = 'jquery';
+					$atributos ['enlaceImagen'] = $this->miConfigurador->getVariableConfiguracion ( 'rutaUrlBloque' ) . 'imagen/facebook.png';
+					$atributos ['ancho'] = '30px';
+					$atributos ['alto'] = '30px';
+					echo $this->miFormulario->enlace ( $atributos );
+					unset ( $atributos );
+					
+					$esteCampo = 'enlacetwitter';
+					$atributos ['id'] = $esteCampo;
+					$atributos ['enlace'] = $this->lenguaje->getCadena ( $esteCampo );
+					$atributos ['tabIndex'] = 1;
+					// $atributos ['estilo'] = 'jquery';
+					$atributos ['enlaceImagen'] = $this->miConfigurador->getVariableConfiguracion ( 'rutaUrlBloque' ) . 'imagen/twitter.png';
+					$atributos ['ancho'] = '30px';
+					$atributos ['alto'] = '30px';
+					echo $this->miFormulario->enlace ( $atributos );
+					unset ( $atributos );
+					
 					$atributos ["id"] = "cssclock";
 					echo $this->miFormulario->division ( "inicio", $atributos );
 					unset ( $atributos );
 					{
 					}
-
 					
 					echo $this->miFormulario->division ( "fin" );
 				}
