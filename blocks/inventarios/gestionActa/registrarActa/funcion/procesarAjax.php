@@ -97,7 +97,7 @@ if ($_REQUEST ['funcion'] == 'AgregarItem') {
 				$_GET ['cantidad'],
 				$_GET ['descripcion'],
 				$_GET ['valor_unitario'],
-				$_GET ['valor_total'],
+				$_GET ['cantidad']*$_GET ['valor_unitario'],
 				$_REQUEST ['tiempo'] 
 		);
 	} else {
@@ -107,7 +107,7 @@ if ($_REQUEST ['funcion'] == 'AgregarItem') {
 				$_GET ['cantidad'],
 				$_GET ['descripcion'],
 				$_GET ['valor_unitario'],
-				$_GET ['valor_total'],
+				$_GET ['cantidad']*$_GET ['valor_unitario'],
 				$_REQUEST ['tiempo']
 		);
 	}

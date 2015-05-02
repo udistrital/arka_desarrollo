@@ -73,7 +73,7 @@ class registrarForm {
 					$cadenaSql = $this->miSql->getCadenaSql ( 'informacion_ordenador', $resultado_compras [0] ['id_ordenador'] );
 					$ordenador = $esteRecursoDB2->ejecutarAcceso ( $cadenaSql, "busqueda" );
 					
-					// var_dump($resultado_compras);exit;
+
 					
 					$arreglo = array (
 							"asignacionOrdenador" => $resultado_compras [0] ['id_ordenador'],
@@ -87,6 +87,7 @@ class registrarForm {
 			}
 			
 			$_REQUEST = array_merge ( $_REQUEST, $arreglo );
+			
 		}
 		
 		
@@ -480,7 +481,8 @@ class registrarForm {
 					echo $this->miFormulario->campoCuadroTexto ( $atributos );
 					unset ( $atributos );
 					
-					$atributos ["id"] = "id_ordenador"; // No cambiar este nombre
+					$esteCampo = 'id_ordenador';
+					$atributos ["id"] = $esteCampo; // No cambiar este nombre
 					$atributos ["tipo"] = "hidden";
 					$atributos ['estilo'] = '';
 					$atributos ["obligatorio"] = false;

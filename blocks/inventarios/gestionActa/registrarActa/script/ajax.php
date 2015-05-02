@@ -156,7 +156,7 @@ function datosOrdenador(elem, request, response){
                 {name: "cantidad", width: 105, align: "center", editable: true, editrules: {number: true}, sorttype: 'number', formatter: 'number'},
                 {name: "descripcion", width: 105, align: "center", editable: true},
                 {name: "valor_unitario", width: 105, align: "center", editable: true, editrules: {number: true}, sorttype: 'number', formatter: 'number'},
-                {name: "valor_total", width: 105, align: "center", editable: true, editrules: {number: true}, sorttype: 'number', formatter: 'number'}
+                {name: "valor_total", width: 105, align: "center", editable: false, editrules: {number: true}, sorttype: 'number', formatter: 'number'}
             ],
             pager: "#barraNavegacion",
             rowNum: 10,
@@ -185,7 +185,7 @@ function datosOrdenador(elem, request, response){
                 {
                     caption: "Añadir Item",
                     addCaption: "Adicionar Item",
-                    width: 425,
+                    width: 250,
                     height: 310,
                     mtype: 'GET',
                     url: '<?php echo $urlFinal2 ?>',

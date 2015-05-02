@@ -110,7 +110,9 @@ class RegistradorActa {
 		
 		
 		$cadenaSql = $this->miSql->getCadenaSql ( 'insertarActa', $datosActa );
+		
 		$id_acta = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
+		
 		
 		// Registro de Items
 		foreach ( $items as $contenido ) {
@@ -140,7 +142,9 @@ class RegistradorActa {
 		);
 		
 		
-		if ($items == 1) {
+		
+		if ($items == true) {
+			
 			redireccion::redireccionar ( 'inserto', $datos );
 		} else {
 			redireccion::redireccionar ( 'noInserto', $datos );
