@@ -302,15 +302,14 @@ class Sql extends \Sql {
 				break;
 			
 			case "consultarActa" :
-				
 				$cadenaSql = "SELECT DISTINCT ";
-				$cadenaSql .= " id_actarecibido, dependencia, fecha_recibido, tb.tb_descripcion , proveedor, ";
-				$cadenaSql .= " tb.tb_descripcion, ";
-				$cadenaSql .= " fecha_revision, revisor, observacionesacta ";
+				$cadenaSql .= "id_actarecibido, dependencia, fecha_recibido, ";
+				$cadenaSql .= " tb_descripcion , proveedor,";
+				$cadenaSql .= "fecha_revision,revisor,observacionesacta ";
 				$cadenaSql .= "FROM registro_actarecibido ";
-				$cadenaSql .= "JOIN tipo_bien tb ON tb.tb_idbien = registro_actarecibido.tipo_bien ";
+				$cadenaSql .= "JOIN tipo_bien ON tb_idbien = tipo_bien ";
 				$cadenaSql .= "WHERE 1 = 1 ";
-				$cadenaSql .= "AND estado_registro = 1";
+				$cadenaSql .= "AND estado_registro = 1 ";
 				if ($variable ['numero_acta'] != '') {
 					$cadenaSql .= " AND id_actarecibido = '" . $variable ['numero_acta'] . "' ";
 				}
@@ -322,6 +321,13 @@ class Sql extends \Sql {
 				}
 				
 				$cadenaSql .= " ; ";
+				break;
+			
+			case "consultarProveedor" :
+				$cadenaSql = "SELECT PRO_NIT ||' - '|| PRO_RAZON_SOCIAL  ";
+				$cadenaSql .= "FROM PROVEEDORES ";
+				$cadenaSql .= "WHERE PRO_IDENTIFICADOR='".$variable."' ";
+				
 				break;
 			
 			case "consultarActaM" :

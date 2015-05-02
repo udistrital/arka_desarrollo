@@ -54,6 +54,10 @@ class registrarForm {
         $atributosGlobales ['campoSeguro'] = 'true';
 
         // -------------------------------------------------------------------------------------------------
+        $conexion2 = "sicapital";
+        $esteRecursoDBO= $this->miConfigurador->fabricaConexiones->getRecursoDB ( $conexion2 );
+        
+        
         $conexion = "inventarios";
         $esteRecursoDB = $this->miConfigurador->fabricaConexiones->getRecursoDB($conexion);
 
@@ -84,12 +88,11 @@ class registrarForm {
         $arreglo = array(
             'numero_acta' => $numeroActa,
             'fecha' => $fechaRecibido,
-            'nit' => $nit,
-                /* $factura */
-        );
+            'nit' => $nit
+                  );
 
         $cadenaSql = $this->miSql->getCadenaSql('consultarActa', $arreglo);
-        echo $cadenaSql;
+        
         $Acta = $esteRecursoDB->ejecutarAcceso($cadenaSql, "busqueda");
  
 // ---------------- SECCION: Parámetros Generales del Formulario ----------------------------------
@@ -175,19 +178,25 @@ class registrarForm {
                 $variable .= "&opcion=modificar";
                 $variable .= "&numero_acta=" . $Acta [$i] [0];
                 $variable = $this->miConfigurador->fabricaConexiones->crypto->codificar_url($variable, $directorio);
-
+ 
 
                 $variable1 = "pagina=" . $miPaginaActual; // pendiente la pagina para modificar parametro
                 $variable1.= "&opcion=eliminarActa";
                 $variable1.= "&numero_acta=" . $Acta [$i] [0];
                 $variable1 = $this->miConfigurador->fabricaConexiones->crypto->codificar_url($variable1, $directorio);
 
+                $cadenaSql = $this->miSql->getCadenaSql('consultarProveedor', $Acta [$i] ['proveedor']);
+                
+                $proveedor = $esteRecursoDBO->ejecutarAcceso($cadenaSql, "busqueda");
+                
+//                 var_dump($proveedor);exit;
+                
                 $mostrarHtml = "<tr>
                     <td><center>" . $Acta [$i] ['id_actarecibido'] . "</center></td>
                     <td><center>" . $Acta [$i] ['dependencia'] . "</center></td>
                     <td><center>" . $Acta [$i] ['fecha_recibido'] . "</center></td>
                     <td><center>" . $Acta [$i] ['tb_descripcion'] . "</center></td>
-                    <td><center>" . $Acta [$i] ['proveedor'] . "</center></td>
+                    <td><center>" . $proveedor[0][0]. "</center></td>
                     <td><center>" . $Acta [$i] ['observacionesacta'] . "</center></td>
                     <td><center>
                     	<a href='" . $variable . "'>
