@@ -185,8 +185,8 @@ function datosOrdenador(elem, request, response){
                 {
                     caption: "Añadir Item",
                     addCaption: "Adicionar Item",
-                    width: 250,
-                    height: 310,
+                    width: 390,
+                    height: 252,
                     mtype: 'GET',
                     url: '<?php echo $urlFinal2 ?>',
                     bSubmit: "Agregar",

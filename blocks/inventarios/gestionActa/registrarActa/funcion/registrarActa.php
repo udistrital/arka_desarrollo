@@ -72,7 +72,7 @@ class RegistradorActa {
 			}
 		}
 		
-		if ($_REQUEST ['tipoOrden']) {
+		if (isset($_REQUEST ['tipoOrden'])) {
 			
 			switch ($_REQUEST ['tipoOrden']) {
 				
