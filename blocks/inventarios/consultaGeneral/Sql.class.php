@@ -413,7 +413,43 @@ class Sql extends \Sql {
                 $cadenaSql.=" JOIN elemento ON elemento.id_elemento = elemento_individual.id_elemento_gen ";
                 $cadenaSql.=" JOIN salida ON salida.id_entrada = elemento.id_entrada ";
                 $cadenaSql.=" WHERE estado_elemento.estado_registro = 't' ";
+                if ($variable ['IDfaltante'] != '') {
+                    $cadenaSql.= " AND historial_elemento_individual.id_evento = '" . $variable ['IDtraslado'] . "'";
+                }
+
+                if ($variable ['IDhurto'] != '') {
+                    $cadenaSql.= " AND estado_elemento.id_hurto = '" . $variable ['IDhurto'] . "'";
+                }
+
+                if ($variable ['IDfaltante'] != '') {
+                    $cadenaSql.= " AND estado_elemento.id_faltante = '" . $variable ['IDfaltante'] . "'";
+                }
+
+                if ($variable['fecha_inicio'] != '' && $variable ['fecha_final'] != '') {
+                    $cadenaSql.= " AND estado_elemento.fecha_registro BETWEEN CAST ( '" . $variable ['fecha_inicio'] . "' AS DATE) ";
+                    $cadenaSql.= " AND  CAST ( '" . $variable ['fecha_final'] . "' AS DATE)  ";
+                }
+
                 $cadenaSql.=" ORDER BY tipo_faltsobr ";
+
+                break;
+
+            case "consultarBajas":
+                $cadenaSql = " SELECT id_baja,tramite, id_elemento_ind,  ";
+                $cadenaSql.=" tipo_mueble.descripcion,baja_elemento.fecha_registro, ";
+                $cadenaSql.=" observaciones, dependencia_funcionario, ";
+                $cadenaSql.=" estado_baja.descripcion ";
+                $cadenaSql.=" FROM baja_elemento ";
+                $cadenaSql.=" JOIN estado_baja ON estado_funcional=id_estado ";
+                $cadenaSql.=" JOIN tipo_mueble ON tipo_mueble=id_tipo_mueble ";
+                $cadenaSql.=" WHERE estado_registro='t' ";
+                if ($variable ['IDbaja'] != '') {
+                    $cadenaSql.= " AND baja_elemento.id_baja = '" . $variable ['IDbaja'] . "'";
+                }
+                if ($variable['fecha_inicio'] != '' && $variable ['fecha_final'] != '') {
+                    $cadenaSql.= " AND baja_elemento.fecha_registro BETWEEN CAST ( '" . $variable ['fecha_inicio'] . "' AS DATE) ";
+                    $cadenaSql.= " AND  CAST ( '" . $variable ['fecha_final'] . "' AS DATE)  ";
+                }
                 break;
         }
         return $cadenaSql;
