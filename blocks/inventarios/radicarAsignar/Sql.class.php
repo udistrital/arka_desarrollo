@@ -195,7 +195,7 @@ class Sql extends \Sql {
                 $cadenaSql .=" compra_nombre='" . $variable ['nombre_archivo'] . "', ";
                 $cadenaSql .=" compra_tipodoc='" . $variable ['tipo'] . "',  ";
                 $cadenaSql .=" compra_ruta='" . $variable ['ruta'] . "', ";
-                $cadenaSql .=" compra_fechar='" . $variable ['fecha_registro'] . "', ";
+                $cadenaSql .=" compra_fechar='" . $variable ['fecha_registro'] . "' ";
                 $cadenaSql .= " WHERE  ";
                 $cadenaSql.= " compra_idcompra='" . $variable ['id_asignar'] . "' ";
                 $cadenaSql .= "RETURNING  compra_idcompra; ";
@@ -259,7 +259,7 @@ class Sql extends \Sql {
                 $cadenaSql = " UPDATE documento_radicarasignar_contrato SET ";
                 $cadenaSql .=" contrato_idunico='" . $variable ['id_unico'] . "', ";
                 $cadenaSql .=" contrato_idcontrato='" . $variable ['id_asignar'] . "', ";
-                $cadenaSql .=" contrato_nombre='" . $variable ['nombre_archivo'] . "' ";
+                $cadenaSql .=" contrato_nombre='" . $variable ['nombre_archivo'] . "', ";
                 $cadenaSql .=" contrato_tipodoc='" . $variable ['tipo'] . "',  ";
                 $cadenaSql .=" contrato_ruta='" . $variable ['ruta'] . "', ";
                 $cadenaSql .=" contrato_fechar='" . $variable ['fecha_registro'] . "', ";
@@ -291,7 +291,7 @@ class Sql extends \Sql {
                 $cadenaSql .= " contrato_fechar='" . $variable ['fecha'] . "'   ";
                 $cadenaSql .= " WHERE contrato_estado='TRUE' ";
                 $cadenaSql .= " AND contrato_numeroentrada='" . $variable ['numero_entrada'] . "'";
-                $cadenaSql .= " AND contrato_vigencia='" . $variable ['vigencia_entrada'] . "',";
+                $cadenaSql .= " AND contrato_vigencia='" . $variable ['vigencia_entrada'] . "' ";
                 $cadenaSql .= "RETURNING  contrato_idcontrato; ";
                 break;
 
@@ -334,7 +334,7 @@ class Sql extends \Sql {
                 $cadenaSql .=" avance_nombre='" . $variable ['nombre_archivo'] . "', ";
                 $cadenaSql .=" avance_tipodoc='" . $variable ['tipo'] . "',  ";
                 $cadenaSql .=" avance_ruta='" . $variable ['ruta'] . "', ";
-                $cadenaSql .=" avance_fechar='" . $variable ['fecha_registro'] . "', ";
+                $cadenaSql .=" avance_fechar='" . $variable ['fecha_registro'] . "' ";
                 $cadenaSql.= " WHERE ";
                 $cadenaSql.= " avance_idavance='" . $variable ['id_asignar'] . "' ";
                 break;

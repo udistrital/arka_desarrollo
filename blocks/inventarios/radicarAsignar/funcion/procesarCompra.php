@@ -149,8 +149,6 @@ class RegistradorCompra {
             echo "<br>NO existe el archivo D:!!!";
             $subida = 0;
         }
-
-
         /* Registro de Items
           foreach ($items as $contenido) {
 

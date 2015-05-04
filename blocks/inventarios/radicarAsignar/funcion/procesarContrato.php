@@ -51,9 +51,9 @@ class RegistradorContrato {
         );
 
         //consultar si la vigencia y la entrada existen
-        echo $cadenaSql = $this->miSql->getCadenaSql('consultarAsignar_contrato', $datosAvance);
+        $cadenaSql = $this->miSql->getCadenaSql('consultarAsignar_contrato', $datosAvance);
         $estado_asignar = $esteRecursoDB->ejecutarAcceso($cadenaSql, "busqueda");
-exit;
+
 
         if ($estado_asignar == false) {
             //registrar si no existe
@@ -66,7 +66,7 @@ exit;
             $id_asignar = $esteRecursoDB->ejecutarAcceso($cadenaSql, "busqueda");
             $actualizar = 1;
         }
-
+        
 
         $datos = array();
         //error en el registro para finalizar transacción
@@ -126,7 +126,7 @@ exit;
 
                             switch ($actualizar) {
                                 case 1:
-                                    $cadenaSql = $this->miSql->getCadenaSql("actualizarDocumento_contrato", $parametros);
+                                   $cadenaSql = $this->miSql->getCadenaSql("actualizarDocumento_contrato", $parametros);
                                     $resultado = $esteRecursoDB->ejecutarAcceso($cadenaSql, 'insertar');
                                     break;
 
@@ -149,7 +149,6 @@ exit;
             echo "<br>NO existe el archivo D:!!!";
             $subida = 0;
         }
-
 
         /* Registro de Items
           foreach ($items as $contenido) {
