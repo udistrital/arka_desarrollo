@@ -326,7 +326,7 @@ class Sql extends \Sql {
 			case "consultarProveedor" :
 				$cadenaSql = "SELECT PRO_NIT ||' - '|| PRO_RAZON_SOCIAL  ";
 				$cadenaSql .= "FROM PROVEEDORES ";
-				$cadenaSql .= "WHERE PRO_IDENTIFICADOR='".$variable."' ";
+				$cadenaSql .= "WHERE PRO_IDENTIFICADOR='" . $variable . "' ";
 				
 				break;
 			
@@ -371,15 +371,7 @@ class Sql extends \Sql {
             ";
 				break;
 			
-			case "tipoComprador" :
-				$cadenaSql = " SELECT ";
-				$cadenaSql .= " tc_idcomprador, ";
-				$cadenaSql .= " tc_descripcion ";
-				$cadenaSql .= " FROM ";
-				$cadenaSql .= " arka_inventarios.tipo_comprador ";
-				$cadenaSql .= " WHERE tc_estado = '1';
-            ";
-				break;
+		
 			
 			case "tipoAccion" :
 				$cadenaSql = " SELECT ";
@@ -410,16 +402,6 @@ class Sql extends \Sql {
 			 * break;
 			 */
 			
-			case "dependencias" :
-				$cadenaSql = "SELECT elemento_codigo, elemento_codigo || ' -  ' || elemento_nombre ";
-				$cadenaSql .= "FROM dependencia.catalogo_elemento; ";
-				break;
-			
-			case "proveedores" :
-				$cadenaSql = "SELECT PRO_NIT,PRO_NIT ||' '|| PRO_RAZON_SOCIAL";
-				$cadenaSql .= " FROM PROVEEDORES ";
-				break;
-			
 			case "select_proveedor" :
 				$cadenaSql = "SELECT PRO_RAZON_SOCIAL";
 				$cadenaSql .= " FROM PROVEEDORES ";
@@ -434,6 +416,40 @@ class Sql extends \Sql {
 				 * $cadenaSql .= " CON_TELEFONO ";
 				 */
 				$cadenaSql .= " FROM CONTRATISTAS ";
+				break;
+			
+			// ---------------
+			
+			case "sede" :
+				$cadenaSql = "SELECT DISTINCT  ESF_COD_SEDE, ESF_SEDE ";
+				$cadenaSql .= " FROM ESPACIOS_FISICOS ";
+				break;
+			
+			case "dependencias" :
+				$cadenaSql = "SELECT DISTINCT  ESF_COD_SEDE, ESF_NOMBRE_ESPACIO ";
+				$cadenaSql .= " FROM ESPACIOS_FISICOS ";
+				break;
+			
+			case "proveedores" :
+				
+				$cadenaSql = " SELECT PRO_IDENTIFICADOR,PRO_NIT||' - '||PRO_RAZON_SOCIAL AS proveedor ";
+				$cadenaSql .= " FROM PROVEEDORES ";
+				
+				break;
+			
+			case "tipoComprador" :
+				
+				$cadenaSql = " 	SELECT ORG_IDENTIFICADOR, ORG_ORDENADOR_GASTO ";
+				$cadenaSql .= " FROM ORDENADORES_GASTO ";
+				$cadenaSql .= " WHERE ORG_ESTADO='A' ";
+				
+				break;
+			
+			case "informacion_ordenador" :
+				$cadenaSql = " SELECT ORG_NOMBRE,ORG_IDENTIFICADOR  ";
+				$cadenaSql .= " FROM ORDENADORES_GASTO ";
+				$cadenaSql .= " WHERE  ORG_IDENTIFICADOR='" . $variable . "' ";
+				$cadenaSql .= " AND ORG_ESTADO='A' ";
 				break;
 		}
 		
