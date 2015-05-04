@@ -48,19 +48,56 @@ class registrarForm {
 		$cadenaSql = $this->miSql->getCadenaSql ( 'limpiar_tabla_items' );
 		$resultado_secuencia = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
 		
+
+		$cadenaSql = $this->miSql->getCadenaSql ( 'consultarItems', $_REQUEST ['numero_acta'] );
+		$items = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
+		
+		$seccion ['tiempo'] = $tiempo;
+		
+		foreach ( $items as $valor => $key ) {
+			$key = array_merge ( $key, $seccion );
+			$cadenaSql = $this->miSql->getCadenaSql ( 'insertarItemTemporal', $key );
+		
+			$insertados = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "acceso" );
+		}
+		
+		
+		
 		// Consultar Orden Compra--------------------------------------------------------------------------------------------
 		$cadenaSql = $this->miSql->getCadenaSql ( 'consultarActaM', $_REQUEST ['numero_acta'] );
 		$Acta = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
+// 		var_dump($_REQUEST);
 		
-		$cadenaSql = $this->miSql->getCadenaSql ( 'consultarItems', $_REQUEST ['numero_acta'] );
-		$items = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
-		$seccion ['tiempo'] = $tiempo;
+			
 		
-	// 		foreach ( $items as $valor => $key ) {
-	// 			$key = array_merge ( $key, $seccion );
-	// 			$cadenaSql = $this->miSql->getCadenaSql ( 'insertarItemTemporal', $key );
-	// 			$insertados = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "acceso" );
-	// 		}
+// 		var_dump($Acta);
+		
+		$Acta=$Acta[0];
+		$cadenaSql = $this->miSql->getCadenaSql ( 'informacion_ordenador', $Acta['ordenador_gasto'] );
+		$ordenador = $esteRecursoDB2->ejecutarAcceso ( $cadenaSql, "busqueda" );
+			
+		$ordenadorGasto = array (
+				"asignacionOrdenador" => $ordenador [0] [1],
+				"nombreOrdenador" => $ordenador [0] [0],
+				"id_ordenador" => $ordenador [0] [1]
+		);
+		
+		
+		
+		
+		 
+		$arreglo=array(
+			'tipoBien'=>$Acta['tipo_bien'],
+			'nitproveedor'=>$Acta['proveedor'],
+			
+				
+		);
+		
+		
+		$_REQUEST=array_merge($_REQUEST,$Acta,$arreglo,$ordenadorGasto);
+		
+		
+
 			
 		$cadenaSql = $this->miSql->getCadenaSql ( 'tipoBien' );
 		$tipoBien = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
@@ -257,8 +294,8 @@ class registrarForm {
 					$atributos ['etiqueta'] = $this->lenguaje->getCadena ( $esteCampo );
 					$atributos ['anchoEtiqueta'] = 150;
 					
-					if (isset ( $Acta [0] [$esteCampo] )) {
-						$atributos ['seleccion'] = $Acta [0] [$esteCampo];
+					if (isset ( $_REQUEST[$esteCampo] )) {
+						$atributos ['seleccion'] =$_REQUEST[$esteCampo];
 					} else {
 						$atributos ['seleccion'] = - 1;
 					}
@@ -415,7 +452,7 @@ class registrarForm {
 						$atributos ['marco'] = true;
 						$atributos ['estiloMarco'] = '';
 						$atributos ["etiquetaObligatorio"] = true;
-						$atributos ['columnas'] = 1;
+						$atributos ['columnas'] = 2;
 						$atributos ['dobleLinea'] = 0;
 						$atributos ['tabIndex'] = $tab;
 						$atributos ['etiqueta'] = $this->lenguaje->getCadena ( $esteCampo );
@@ -447,14 +484,14 @@ class registrarForm {
 						$atributos ['marco'] = true;
 						$atributos ['estiloMarco'] = '';
 						$atributos ["etiquetaObligatorio"] = true;
-						$atributos ['columnas'] = 1;
+						$atributos ['columnas'] = 2;
 						$atributos ['dobleLinea'] = 0;
 						$atributos ['tabIndex'] = $tab;
 						$atributos ['etiqueta'] = $this->lenguaje->getCadena ( $esteCampo );
-						$atributos ['validar'] = 'required, minSize[1],maxSize[15]';
+						$atributos ['validar'] = 'required, minSize[1],maxSize[50]';
 						
-						if (isset ( $Acta [0] [$esteCampo] )) {
-							$atributos ['valor'] = $Acta [0] [$esteCampo];
+						if (isset ( $_REQUEST[$esteCampo] )) {
+							$atributos ['valor'] = $_REQUEST[$esteCampo];
 						} else {
 							$atributos ['valor'] = '';
 						}
@@ -543,8 +580,8 @@ class registrarForm {
 						$atributos ['tamanno'] = 20;
 						$atributos ['maximoTamanno'] = '';
 						$atributos ['anchoEtiqueta'] = 220;
-						if (isset ( $Acta [0] [$esteCampo] )) {
-							$atributos ['valor'] = $Acta [0] [$esteCampo];
+						if (isset ( $_REQUEST[$esteCampo])) {
+							$atributos ['valor'] =$_REQUEST[$esteCampo];
 						} else {
 							$atributos ['valor'] = '';
 						}

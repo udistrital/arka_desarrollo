@@ -332,16 +332,22 @@ class Sql extends \Sql {
 			
 			case "consultarActaM" :
 				
-				$cadenaSql = "SELECT DISTINCT ";
-				$cadenaSql .= " id_actarecibido, dependencia, fecha_recibido, tipo_bien as tipoBien, nitproveedor, ";
-				$cadenaSql .= " proveedor, tipocomprador as tipoComprador,  ";
-				$cadenaSql .= " fecha_revision, revisor, observacionesacta, estado_registro ";
+				$cadenaSql = "SELECT DISTINCT * ";
 				$cadenaSql .= " FROM registro_actarecibido ";
-				$cadenaSql .= " JOIN tipo_bien ON tipo_bien.tb_idbien = registro_actarecibido.tipo_bien ";
-				$cadenaSql .= " JOIN tipo_comprador ON tipo_comprador.tc_idcomprador = registro_actarecibido.tipocomprador ";
 				$cadenaSql .= " WHERE 1 = 1 ";
 				$cadenaSql .= " AND estado_registro = 1 ";
 				$cadenaSql .= " AND id_actarecibido = '" . $variable . "' ";
+				
+// 				$cadenaSql = "SELECT DISTINCT ";
+// 				$cadenaSql .= " id_actarecibido, dependencia, fecha_recibido, tipo_bien as tipoBien, nitproveedor, ";
+// 				$cadenaSql .= " proveedor, tipocomprador as tipoComprador,  ";
+// 				$cadenaSql .= " fecha_revision, revisor, observacionesacta, estado_registro ";
+// 				$cadenaSql .= " FROM registro_actarecibido ";
+// 				$cadenaSql .= " JOIN tipo_bien ON tipo_bien.tb_idbien = registro_actarecibido.tipo_bien ";
+// 				$cadenaSql .= " JOIN tipo_comprador ON tipo_comprador.tc_idcomprador = registro_actarecibido.tipocomprador ";
+// 				$cadenaSql .= " WHERE 1 = 1 ";
+// 				$cadenaSql .= " AND estado_registro = 1 ";
+// 				$cadenaSql .= " AND id_actarecibido = '" . $variable . "' ";
 				
 				// echo $cadenaSql;exit;
 				break;
