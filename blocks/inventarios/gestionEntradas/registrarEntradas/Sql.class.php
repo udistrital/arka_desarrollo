@@ -328,12 +328,23 @@ class Sql extends \Sql {
 				
 				break;
 			
+// 				INSERT INTO entrada(
+// 						id_entrada, fecha_registro, consecutivo, vigencia, clase_entrada,
+// 						info_clase, tipo_contrato, numero_contrato, fecha_contrato, proveedor,
+// 						numero_factura, fecha_factura, observaciones, acta_recibido,
+// 						ordenador, sede, dependencia, supervisor, estado_entrada, estado_registro)
+// 						VALUES (?, ?, ?, ?, ?,
+// 								?, ?, ?, ?, ?,
+// 								?, ?, ?, ?,
+// 								?, ?, ?, ?, ?, ?);
+				
+				
 			case "insertarEntrada" :
 				$cadenaSql = " INSERT INTO ";
 				$cadenaSql .= " entrada(";
 				$cadenaSql .= " fecha_registro, vigencia, clase_entrada, info_clase, ";
 				$cadenaSql .= " tipo_contrato, numero_contrato, fecha_contrato, proveedor, numero_factura, ";
-				$cadenaSql .= " fecha_factura, observaciones, acta_recibido)";
+				$cadenaSql .= " fecha_factura, observaciones, acta_recibido,ordenador,sede,dependencia,supervisor)";
 				$cadenaSql .= " VALUES (";
 				$cadenaSql .= "'" . $variable [0] . "',";
 				$cadenaSql .= "'" . $variable [1] . "',";
@@ -346,7 +357,11 @@ class Sql extends \Sql {
 				$cadenaSql .= "'" . $variable [8] . "',";
 				$cadenaSql .= "'" . $variable [9] . "',";
 				$cadenaSql .= "'" . $variable [10] . "',";
-				$cadenaSql .= "'" . $variable [11] . "') ";
+				$cadenaSql .= "'" . $variable [11] . "',";
+				$cadenaSql .= "'" . $variable [12] . "',";
+				$cadenaSql .= "'" . $variable [13] . "',";
+				$cadenaSql .= "'" . $variable [14] . "',";
+				$cadenaSql .= "'" . $variable [15] . "') ";
 				$cadenaSql .= "RETURNING  id_entrada; ";
 				
 				break;

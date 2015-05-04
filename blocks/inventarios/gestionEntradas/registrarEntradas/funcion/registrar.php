@@ -96,7 +96,7 @@ class RegistradorOrden {
 				$archivo = $archivo [3];
 				break;
 			
-			case '5' :
+			case '6' :
 				
 				$observacion = $_REQUEST ['observaciones_recuperacion'];
 				foreach ( $_FILES as $key => $values ) {
@@ -105,10 +105,10 @@ class RegistradorOrden {
 					$i ++;
 				}
 				
-				$archivo = $archivo [3];
+				$archivo = $archivo [4];
 				break;
 			
-			case '5' :
+			case '7' :
 				
 				$observacion = $_REQUEST ['observaciones_recuperacion'];
 				foreach ( $_FILES as $key => $values ) {
@@ -117,7 +117,7 @@ class RegistradorOrden {
 					$i ++;
 				}
 				
-				$archivo = $archivo [3];
+				$archivo = $archivo [5];
 				break;
 		}
 		
@@ -135,17 +135,19 @@ class RegistradorOrden {
 					$status = "Archivo subido: <b>" . $archivo1 . "</b>";
 					$destino1 = $host . "/actas/" . $prefijo . "_" . $archivo1;
 				} else {
-					$status = "Error al subir el archivo";
+					$status = "Error al subir el archivo 1";
 				}
 			} else {
-				$status = "Error al subir archivo";
+				$status = "Error al subir archivo 2";
 			}
+			
 			
 			$arreglo = array (
 					$destino1,
 					$archivo1 
 			);
 		}
+		
 		
 		$arreglo_clase = array (
 				$observacion,
@@ -162,6 +164,7 @@ class RegistradorOrden {
 		$info_clase = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
 		
 		$fechaActual = date ( 'Y-m-d' );
+// 		var_dump($_REQUEST);exit;
 		
 		$arregloDatos = array (
 				$fechaActual,
@@ -175,7 +178,11 @@ class RegistradorOrden {
 				($_REQUEST ['numero_factura'] != '') ? $_REQUEST ['numero_factura'] : 0,
 				($_REQUEST ['fecha_factura'] != '') ? $_REQUEST ['fecha_factura'] : '0001-01-01',
 				$_REQUEST ['observaciones_entrada'],
-				$_REQUEST ['numero_acta_r'] 
+				(isset($_REQUEST ['numero_acta_r'])&&$_REQUEST ['numero_acta_r'] != '') ? $_REQUEST ['numero_acta_r'] : 0 ,
+				$_REQUEST['id_ordenador'],
+				$_REQUEST['sede'],
+				$_REQUEST['dependencia'],
+				$_REQUEST['supervisor']
 		);
 		
 		$cadenaSql = $this->miSql->getCadenaSql ( 'insertarEntrada', $arregloDatos );
