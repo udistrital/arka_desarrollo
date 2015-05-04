@@ -371,6 +371,54 @@ class Sql extends \Sql {
                 $cadenaSql .= " GROUP BY salida.id_salida, salida.fecha, salida.dependencia, salida.ubicacion, salida.funcionario,salida.observaciones ";
 
                 break;
+
+            case "consultarElementos":
+                $cadenaSql = "SELECT id_elemento,  ";
+                $cadenaSql.= "nivel,  ";
+                $cadenaSql.= "tipo_bien, ";
+                $cadenaSql.= "descripcion, ";
+                $cadenaSql.= "marca,  ";
+                $cadenaSql.= "serie, ";
+                $cadenaSql.= "cantidad, ";
+                $cadenaSql.= "valor,  ";
+                $cadenaSql.= "iva,  ";
+                $cadenaSql.= "ajuste,  ";
+                $cadenaSql.= "total_iva_con, ";
+                $cadenaSql.= "bodega, ";
+                $cadenaSql.= "dependencia, ";
+                $cadenaSql.= "funcionario ";
+                $cadenaSql.= "  FROM elemento ";
+                $cadenaSql.= "JOIN salida ON elemento.id_entrada=salida.id_entrada ";
+                $cadenaSql.= "WHERE elemento.estado='1' ";
+                if ($variable ['numero_entrada'] != '') {
+                    $cadenaSql .= " AND entrada.id_entrada = '" . $variable ['numero_entrada'] . "'";
+                }
+
+                if ($variable ['vigencia_entrada'] != '') {
+                    $cadenaSql .= " AND entrada.vigencia = '" . $variable ['vigencia_entrada'] . "'";
+                }
+
+                if ($variable ['numero_salida'] != '') {
+                    $cadenaSql .= " AND salida.id_salida = '" . $variable ['numero_salida'] . "'";
+                }
+                
+                if ($variable ['placa'] != '') {
+                    $cadenaSql .= " AND elemento.placa = '" . $variable ['placa'] . "'";
+                }
+                
+                if ($variable ['serie'] != '') {
+                    $cadenaSql .= " AND elemento.serie = '" . $variable ['serie'] . "'";
+                }
+
+                if ($variable ['vigencia_salida'] != '') {
+                    $cadenaSql .= " AND salida.fecha = '" . $variable ['vigencia_salida'] . "'";
+                }
+
+                if ($variable['fecha_inicio'] != '' && $variable ['fecha_final'] != '') {
+                    $cadenaSql .= " AND elemento.fecha_registro BETWEEN CAST ( '" . $variable ['fecha_inicio'] . "' AS DATE) ";
+                    $cadenaSql .= " AND  CAST ( '" . $variable ['fecha_final'] . "' AS DATE)  ";
+                }
+                break;
         }
         return $cadenaSql;
     }

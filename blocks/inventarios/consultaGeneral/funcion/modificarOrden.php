@@ -1,6 +1,6 @@
 <?php
 
-namespace inventarios\gestionCompras\consultaOrdenServicios\funcion;
+namespace inventarios\consultaGeneral\funcion;
 
 use inventarios\gestionCompras\consultaOrdenServicios\funcion\redireccion;
 
@@ -29,7 +29,8 @@ class RegistradorOrden {
 	}
 	function procesarFormulario() {
 
-		
+            var_dump($_REQUEST);
+            exit;
 				
 		$conexion = "inventarios";
 		$esteRecursoDB = $this->miConfigurador->fabricaConexiones->getRecursoDB ( $conexion );
