@@ -451,6 +451,24 @@ class Sql extends \Sql {
                     $cadenaSql.= " AND  CAST ( '" . $variable ['fecha_final'] . "' AS DATE)  ";
                 }
                 break;
+
+            case "consultarInventario" :
+                $cadenaSql = "SELECT elemento_individual.id_elemento_ind, elemento_individual.fecha_registro, placa, serie,  ";
+                $cadenaSql .= " tipo_falt_sobr.descripcion as descripcion ";
+                $cadenaSql .= " FROM elemento_individual ";
+                $cadenaSql .= " JOIN estado_elemento ON estado_elemento.id_estado_elemento=elemento_individual.estado_elemento ";
+                $cadenaSql .= " JOIN tipo_falt_sobr ON tipo_falt_sobr.id_tipo_falt_sobr=estado_elemento.tipo_faltsobr ";
+                $cadenaSql .= " WHERE elemento_individual.estado_registro='t' ";
+                $cadenaSql .= " UNION ";
+                $cadenaSql .= " SELECT elemento_individual.id_elemento_ind, elemento_individual.fecha_registro, placa, serie, 'Activo' as descripcion ";
+                $cadenaSql .= " FROM elemento_individual ";
+                $cadenaSql .= " WHERE elemento_individual.id_elemento_ind NOT IN( ";
+                $cadenaSql .= " SELECT elemento_individual.id_elemento_ind ";
+                $cadenaSql .= " FROM elemento_individual ";
+                $cadenaSql .= " JOIN estado_elemento ON estado_elemento.id_estado_elemento=elemento_individual.estado_elemento ";
+                $cadenaSql .= " JOIN tipo_falt_sobr ON tipo_falt_sobr.id_tipo_falt_sobr=estado_elemento.tipo_faltsobr ";
+                $cadenaSql .= " ) ";
+                break;
         }
         return $cadenaSql;
     }
