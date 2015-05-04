@@ -12,6 +12,21 @@ $this->idioma ["informacion_nit"] ="Nit de Proveedor : ";
 $this->idioma ["informacion_proveedor"] ="Nombre y/o Razón Social Proveedor : ";
 
 
+$this->idioma ["acta_adquisicion"] ="Acto Administrativo : ";
+$this->idioma ["acta_adquisicionTitulo"] ="Carge Acto Administraivo de la Donación";
+
+$this->idioma ["observaciones_adquisicion"] ="Observaciones : ";
+$this->idioma ["observaciones_adquisicionTitulo"] ="Ingrese Observaciones";
+
+
+
+$this->idioma ["acta_avance"] ="Acto Administrativo : ";
+$this->idioma ["acta_avanceTitulo"] ="Carge Acto Administraivo";
+
+$this->idioma ["observaciones_avance"] ="Observaciones : ";
+$this->idioma ["observaciones_avanceTitulo"] ="Ingrese Observaciones";
+
+
 
 
 $this->idioma ["fecha_inicio"] ="Fecha Inicial : ";
@@ -214,8 +229,28 @@ $this->idioma ["jefeSeccion"] = "Jefe de Sección";
 
 $this->idioma ["contratista"] = "Contratista";
 
-$this->idioma ["ordenadorGasto"] = "Ordenador Gasto";
+$this->idioma ["supervisor"] ="Supervisor : ";
+$this->idioma ["supervisorTitulo"] ="Ingrese Supervisor";
 
+$this->idioma ["sede"] ="Sede : ";
+$this->idioma ["sedeTitulo"] ="Seleccione Sede";
+
+$this->idioma ["dependencia"] ="Dependencia Supervisora: ";
+$this->idioma ["dependenciaTitulo"] ="Seleccione Supervisora";
+
+
+$this->idioma ["supervisor"] ="Supervisor : ";
+$this->idioma ["asignacionOrdenadorTitulo"] ="Ingrese Supervisor";
+
+$this->idioma ["asignacionOrdenador"] ="Asignación : ";
+$this->idioma ["asignacionOrdenadorTitulo"] ="Ingrese Asignación de Ordenador del Gasto";
+
+
+$this->idioma ["nombreOrdenador"] ="&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspNombre y Apellidos : ";
+$this->idioma ["nombreOrdenadorTitulo"] =" Nombre y Apellidos Ordenador ";
+
+
+$this->idioma ["ordenadorGasto"] ="Ordenador Gasto";
 
 $this->idioma ["botonAceptar"] ="Guardar Entrada";
 $this->idioma ["botonCancelar"] ="Cancelar";

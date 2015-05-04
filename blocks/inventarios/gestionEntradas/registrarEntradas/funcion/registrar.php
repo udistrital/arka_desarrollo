@@ -95,11 +95,31 @@ class RegistradorOrden {
 				
 				$archivo = $archivo [3];
 				break;
+			
+			case '5' :
 				
+				$observacion = $_REQUEST ['observaciones_recuperacion'];
+				foreach ( $_FILES as $key => $values ) {
+					
+					$archivo [$i] = $_FILES [$key];
+					$i ++;
+				}
+				
+				$archivo = $archivo [3];
+				break;
+			
+			case '5' :
+				
+				$observacion = $_REQUEST ['observaciones_recuperacion'];
+				foreach ( $_FILES as $key => $values ) {
+					
+					$archivo [$i] = $_FILES [$key];
+					$i ++;
+				}
+				
+				$archivo = $archivo [3];
+				break;
 		}
-		
-		
-		
 		
 		if (isset ( $archivo )) {
 			// obtenemos los datos del archivo
@@ -116,11 +136,9 @@ class RegistradorOrden {
 					$destino1 = $host . "/actas/" . $prefijo . "_" . $archivo1;
 				} else {
 					$status = "Error al subir el archivo";
-					
 				}
 			} else {
 				$status = "Error al subir archivo";
-				
 			}
 			
 			$arreglo = array (
@@ -140,33 +158,29 @@ class RegistradorOrden {
 				(isset ( $archivo1 )) ? $archivo1 : 'NULL' 
 		);
 		
-		
 		$cadenaSql = $this->miSql->getCadenaSql ( 'insertarInformación', $arreglo_clase );
 		$info_clase = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
 		
 		$fechaActual = date ( 'Y-m-d' );
 		
-			
 		$arregloDatos = array (
 				$fechaActual,
 				$_REQUEST ['vigencia'],
 				$_REQUEST ['clase'],
-				$info_clase[0][0],
-				($_REQUEST ['tipo_contrato']!='')?$_REQUEST ['tipo_contrato']:0,
+				$info_clase [0] [0],
+				($_REQUEST ['tipo_contrato'] != '') ? $_REQUEST ['tipo_contrato'] : 0,
 				($_REQUEST ['numero_contrato'] != '') ? $_REQUEST ['numero_contrato'] : 0,
-				($_REQUEST ['fecha_contrato']!= '') ? $_REQUEST ['fecha_contrato'] : '0001-01-01',
-				($_REQUEST ['proveedor']!= '') ?$_REQUEST ['proveedor']: 0,
-				($_REQUEST ['numero_factura']!= '') ?$_REQUEST ['numero_factura'] : 0,
-				($_REQUEST ['fecha_factura']!= '') ?$_REQUEST ['fecha_factura'] : '0001-01-01',
+				($_REQUEST ['fecha_contrato'] != '') ? $_REQUEST ['fecha_contrato'] : '0001-01-01',
+				($_REQUEST ['proveedor'] != '') ? $_REQUEST ['proveedor'] : 0,
+				($_REQUEST ['numero_factura'] != '') ? $_REQUEST ['numero_factura'] : 0,
+				($_REQUEST ['fecha_factura'] != '') ? $_REQUEST ['fecha_factura'] : '0001-01-01',
 				$_REQUEST ['observaciones_entrada'],
 				$_REQUEST ['numero_acta_r'] 
 		);
-
+		
 		$cadenaSql = $this->miSql->getCadenaSql ( 'insertarEntrada', $arregloDatos );
-
 		
-		$id_entrada= $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
-		
+		$id_entrada = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
 		
 		if ($id_entrada) {
 			

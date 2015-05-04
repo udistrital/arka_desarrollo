@@ -229,6 +229,30 @@ class Sql extends \Sql {
 				
 				break;
 			
+			case "tipoComprador" :
+				
+				$cadenaSql = " 	SELECT ORG_IDENTIFICADOR, ORG_ORDENADOR_GASTO ";
+				$cadenaSql .= " FROM ORDENADORES_GASTO ";
+				$cadenaSql .= " WHERE ORG_ESTADO='A' ";
+				
+				break;
+			
+			case "dependencias" :
+				$cadenaSql = "SELECT DISTINCT  ESF_COD_SEDE, ESF_NOMBRE_ESPACIO ";
+				$cadenaSql .= " FROM ESPACIOS_FISICOS ";
+				break;
+			
+			case "sede" :
+				$cadenaSql = "SELECT DISTINCT  ESF_COD_SEDE, ESF_SEDE ";
+				$cadenaSql .= " FROM ESPACIOS_FISICOS ";
+				break;
+			case "informacion_ordenador" :
+				$cadenaSql = " SELECT ORG_NOMBRE,ORG_IDENTIFICADOR  ";
+				$cadenaSql .= " FROM ORDENADORES_GASTO ";
+				$cadenaSql .= " WHERE  ORG_IDENTIFICADOR='" . $variable . "' ";
+				$cadenaSql .= " AND ORG_ESTADO='A' ";
+				break;
+			
 			case "tipo_contrato_avance" :
 				
 				$cadenaSql = "SELECT id_tipo, descripcion ";
