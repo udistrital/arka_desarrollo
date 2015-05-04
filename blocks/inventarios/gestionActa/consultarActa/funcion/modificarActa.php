@@ -40,19 +40,20 @@ class RegistradorOrden {
 		$cadenaSql = $this->miSql->getCadenaSql ( 'items', $_REQUEST ['seccion'] );
 		$items = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
 		
-		var_dump ( $_REQUEST );
+// 		var_dump ( $_REQUEST );
 		if ($items == 0) {
-			echo "noiter";
-			exit ();
+
 			redireccion::redireccionar ( 'noItems' );
 		}
+		
+
 		
 		foreach ( $_FILES as $key => $values ) {
 			
 			$archivo = $_FILES [$key];
 		}
 		
-		if ($archivo) {
+		if ($archivo['name']!='') {
 			// obtenemos los datos del archivo
 			$tamano = $archivo ['size'];
 			$tipo = $archivo ['type'];
@@ -76,58 +77,53 @@ class RegistradorOrden {
 		$fechaActual = date ( 'Y-m-d' );
 		// Actualizar Acta de Recibido
 		
-		if ($archivo) {
+		if ($archivo['name']!='') {
 			
 			$datosActa = array (
 					'sede' => $_REQUEST ['sede'],
 					'dependencia' => $_REQUEST ['dependencia'],
 					'fecha_registro' => $fechaActual,
 					'tipo_bien' => $_REQUEST ['tipoBien'],
-					'nitproveedor' => $_REQUEST ['nitproveedor'],
+					'nit_proveedor' => $_REQUEST ['nitproveedor'],
 					'ordenador' => $_REQUEST ['id_ordenador'],
 					'fecha_revision' => $_REQUEST ['fecha_revision'],
 					'revisor' => $_REQUEST ['revisor'],
-					'observacion' => $_REQUEST ['observacionesacta'],
+					'observaciones' => $_REQUEST ['observacionesacta'],
 					'estado' => 1,
 					'enlace_soporte' => $destino1,
 					'nombre_soporte' => $archivo1,
 					'id_acta' => $_REQUEST ['id_acta'] 
 			);
+			$cadenaSql = $this->miSql->getCadenaSql ( 'actualizarActa_soporte', $datosActa );
+			$id_acta = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "acceso" );
+			
+			
+			
 		} else {
 			$datosActa = array (
 					'sede' => $_REQUEST ['sede'],
 					'dependencia' => $_REQUEST ['dependencia'],
 					'fecha_registro' => $fechaActual,
 					'tipo_bien' => $_REQUEST ['tipoBien'],
-					'nitproveedor' => $_REQUEST ['nitproveedor'],
+					'nit_proveedor' => $_REQUEST ['nitproveedor'],
 					'ordenador' => $_REQUEST ['id_ordenador'],
 					'fecha_revision' => $_REQUEST ['fecha_revision'],
 					'revisor' => $_REQUEST ['revisor'],
-					'observacion' => $_REQUEST ['observacionesacta'],
+					'observaciones' => $_REQUEST ['observacionesacta'],
 					'estado' => 1,
 					'id_acta' => $_REQUEST ['id_acta'] 
 			);
+			
+			
+			$cadenaSql = $this->miSql->getCadenaSql ( 'actualizarActa', $datosActa );
+			$id_acta = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "acceso" );
+			
+			
+			
 		}
 		
 		
-		
-		// $datosActa = array (
-		// 'dependencia' => $_REQUEST ['dependencia'],
-		// 'fecha_registro' => $fechaActual,
-		// 'tipo_bien' => $_REQUEST ['tipobien'],
-		// 'nit_proveedor' => $_REQUEST ['nitproveedor'],
-		// 'razon_social' => $_REQUEST ['proveedor'],
-		// 'tipo_comprador' => $_REQUEST ['tipocomprador'],
-		// 'fecha_revision' => $_REQUEST ['fecha_revision'],
-		// 'revisor' => $_REQUEST ['revisor'],
-		// 'observaciones' => $_REQUEST ['observacionesacta'],
-		// 'estado' => 1,
-		// 'id_acta' => $_REQUEST ['id_acta']
-		// );
-		
-		$cadenaSql = $this->miSql->getCadenaSql ( 'actualizarActa', $datosActa );
-		$id_acta = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "acceso" );
-		
+
 		$cadenaSql = $this->miSql->getCadenaSql ( 'limpiarItems', $_REQUEST ['id_acta'] );
 		$limpiar = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
 		
@@ -146,15 +142,17 @@ class RegistradorOrden {
 			$items = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "acceso" );
 		}
 		
-		// $cadenaSql = $this->miSql->getCadenaSql('limpiar_tabla_items', $_REQUEST ['seccion']);
-		// $resultado_secuencia = $esteRecursoDB->ejecutarAcceso($cadenaSql, "acceso");
+		$cadenaSql = $this->miSql->getCadenaSql('limpiar_tabla_items', $_REQUEST ['seccion']);
+		$resultado_secuencia = $esteRecursoDB->ejecutarAcceso($cadenaSql, "acceso");
 		
 		$datos = array (
 				$_REQUEST ['id_acta'],
 				$fechaActual 
 		);
-		exit ();
+		
+
 		if ($items == true && isset ( $id_acta )) {
+			
 			redireccion::redireccionar ( 'inserto', $datos );
 		} else {
 			
