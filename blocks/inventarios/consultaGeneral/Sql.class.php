@@ -334,44 +334,6 @@ class Sql extends \Sql {
 
                 break;
 
-            case "consultarTraslados" :
-                $cadenaSql = "SELECT ";
-                $cadenaSql .= " salida.id_salida,  ";
-                $cadenaSql .= " salida.fecha,  ";
-                $cadenaSql .= " salida.dependencia,  ";
-                $cadenaSql .= " salida.ubicacion,  ";
-                $cadenaSql .= " salida.funcionario, ";
-                $cadenaSql .= " salida.observaciones, ";
-                $cadenaSql .= " count(id_elemento_ind) as numero_elementos ";
-                $cadenaSql .= " FROM salida ";
-                $cadenaSql .= " JOIN elemento_individual ON elemento_individual.id_salida=salida.id_salida ";
-                $cadenaSql .= " JOIN elemento ON elemento_individual.id_elemento_gen=elemento.id_elemento ";
-                $cadenaSql .= " JOIN entrada ON elemento.id_entrada=entrada.id_entrada ";
-                $cadenaSql.= " WHERE 1=1 ";
-                if ($variable ['numero_entrada'] != '') {
-                    $cadenaSql .= " AND entrada.id_entrada = '" . $variable ['numero_entrada'] . "'";
-                }
-
-                if ($variable ['vigencia_entrada'] != '') {
-                    $cadenaSql .= " AND entrada.vigencia = '" . $variable ['vigencia_entrada'] . "'";
-                }
-
-                if ($variable ['numero_salida'] != '') {
-                    $cadenaSql .= " AND salida.id_salida = '" . $variable ['numero_salida'] . "'";
-                }
-
-                if ($variable ['vigencia_salida'] != '') {
-                    $cadenaSql .= " AND salida.fecha = '" . $variable ['vigencia_salida'] . "'";
-                }
-
-                if ($variable['fecha_inicio'] != '' && $variable ['fecha_final'] != '') {
-                    $cadenaSql .= " AND salida.fecha BETWEEN CAST ( '" . $variable ['fecha_inicio'] . "' AS DATE) ";
-                    $cadenaSql .= " AND  CAST ( '" . $variable ['fecha_final'] . "' AS DATE)  ";
-                }
-                $cadenaSql .= " GROUP BY salida.id_salida, salida.fecha, salida.dependencia, salida.ubicacion, salida.funcionario,salida.observaciones ";
-
-                break;
-
             case "consultarElementos":
                 $cadenaSql = "SELECT id_elemento,  ";
                 $cadenaSql.= "nivel,  ";
@@ -401,13 +363,13 @@ class Sql extends \Sql {
                 if ($variable ['numero_salida'] != '') {
                     $cadenaSql .= " AND salida.id_salida = '" . $variable ['numero_salida'] . "'";
                 }
-                
-                if ($variable ['placa'] != '') {
-                    $cadenaSql .= " AND elemento.placa = '" . $variable ['placa'] . "'";
+
+                if ($variable ['numero_placa'] != '') {
+                    $cadenaSql .= " AND elemento.placa = '" . $variable ['numero_placa'] . "'";
                 }
-                
-                if ($variable ['serie'] != '') {
-                    $cadenaSql .= " AND elemento.serie = '" . $variable ['serie'] . "'";
+
+                if ($variable ['numero_serie'] != '') {
+                    $cadenaSql .= " AND elemento.serie = '" . $variable ['numero_serie'] . "'";
                 }
 
                 if ($variable ['vigencia_salida'] != '') {
@@ -418,6 +380,40 @@ class Sql extends \Sql {
                     $cadenaSql .= " AND elemento.fecha_registro BETWEEN CAST ( '" . $variable ['fecha_inicio'] . "' AS DATE) ";
                     $cadenaSql .= " AND  CAST ( '" . $variable ['fecha_final'] . "' AS DATE)  ";
                 }
+                break;
+
+            case "consultarTraslados":
+                $cadenaSql = "SELECT elemento_individual.id_elemento_ind, ";
+                $cadenaSql.= " nivel, marca, elemento_individual.serie, ";
+                $cadenaSql.= " salida.funcionario as actual, historial_elemento_individual.funcionario as anterior, ";
+                $cadenaSql.= " historial_elemento_individual.fecha_registro, elemento_individual.observaciones_traslado ";
+                $cadenaSql.= " FROM elemento_individual ";
+                $cadenaSql.= " JOIN elemento ON id_elemento_gen = elemento.id_elemento ";
+                $cadenaSql.= " JOIN salida ON salida.id_entrada = elemento.id_entrada ";
+                $cadenaSql.= " JOIN historial_elemento_individual ON historial_elemento_individual.elemento_individual = elemento_individual.id_elemento_ind ";
+                $cadenaSql.=" WHERE 1=1 ";
+                if ($variable ['IDtraslado'] != '') {
+                    $cadenaSql.= " AND historial_elemento_individual.id_evento = '" . $variable ['IDtraslado'] . "'";
+                }
+
+                if ($variable['fecha_inicio'] != '' && $variable ['fecha_final'] != '') {
+                    $cadenaSql.= " AND historial_elemento_individual.fecha_registro BETWEEN CAST ( '" . $variable ['fecha_inicio'] . "' AS DATE) ";
+                    $cadenaSql.= " AND  CAST ( '" . $variable ['fecha_final'] . "' AS DATE)  ";
+                }
+                break;
+
+            case "consultarTraslados":
+                $cadenaSql = " SELECT estado_elemento.id_elemento_ind, tipo_falt_sobr.descripcion, placa, elemento_individual.serie, ";
+                $cadenaSql.=" salida.funcionario, salida.dependencia, ";
+                $cadenaSql.=" nombre_denuncia, ";
+                $cadenaSql.=" fecha_denuncia, fecha_hurto, estado_elemento.fecha_registro, estado_elemento.observaciones ";
+                $cadenaSql.=" FROM estado_elemento ";
+                $cadenaSql.=" JOIN elemento_individual ON elemento_individual.id_elemento_ind = estado_elemento.id_elemento_ind ";
+                $cadenaSql.=" JOIN tipo_falt_sobr ON tipo_falt_sobr.id_tipo_falt_sobr = estado_elemento.tipo_faltsobr ";
+                $cadenaSql.=" JOIN elemento ON elemento.id_elemento = elemento_individual.id_elemento_gen ";
+                $cadenaSql.=" JOIN salida ON salida.id_entrada = elemento.id_entrada ";
+                $cadenaSql.=" WHERE estado_elemento.estado_registro = 't' ";
+                $cadenaSql.=" ORDER BY tipo_faltsobr ";
                 break;
         }
         return $cadenaSql;
