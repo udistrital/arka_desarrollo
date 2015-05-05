@@ -29,6 +29,7 @@
                  } );
                  
          $("#<?php echo $this->campoSeguro('clase')?>").select2();
+         $("#<?php echo $this->campoSeguro('acta_recibido')?>").select2();
              
                 		$("#<?php echo $this->campoSeguro('proveedor')?>").select2({
              	 placeholder: "Search for a repository",

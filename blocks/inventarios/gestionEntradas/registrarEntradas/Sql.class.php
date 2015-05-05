@@ -269,6 +269,12 @@ class Sql extends \Sql {
 				
 				break;
 			
+			case "actasRecicbido" :
+				$cadenaSql = " SELECT id_actarecibido, id_actarecibido ";
+				$cadenaSql .= "FROM registro_actarecibido ";
+				
+				break;
+			
 			case "insertarReposicion" :
 				$cadenaSql = " INSERT INTO ";
 				$cadenaSql .= " reposicion_entrada(";
@@ -328,17 +334,16 @@ class Sql extends \Sql {
 				
 				break;
 			
-// 				INSERT INTO entrada(
-// 						id_entrada, fecha_registro, consecutivo, vigencia, clase_entrada,
-// 						info_clase, tipo_contrato, numero_contrato, fecha_contrato, proveedor,
-// 						numero_factura, fecha_factura, observaciones, acta_recibido,
-// 						ordenador, sede, dependencia, supervisor, estado_entrada, estado_registro)
-// 						VALUES (?, ?, ?, ?, ?,
-// 								?, ?, ?, ?, ?,
-// 								?, ?, ?, ?,
-// 								?, ?, ?, ?, ?, ?);
-				
-				
+			// INSERT INTO entrada(
+			// id_entrada, fecha_registro, consecutivo, vigencia, clase_entrada,
+			// info_clase, tipo_contrato, numero_contrato, fecha_contrato, proveedor,
+			// numero_factura, fecha_factura, observaciones, acta_recibido,
+			// ordenador, sede, dependencia, supervisor, estado_entrada, estado_registro)
+			// VALUES (?, ?, ?, ?, ?,
+			// ?, ?, ?, ?, ?,
+			// ?, ?, ?, ?,
+			// ?, ?, ?, ?, ?, ?);
+			
 			case "insertarEntrada" :
 				$cadenaSql = " INSERT INTO ";
 				$cadenaSql .= " entrada(";

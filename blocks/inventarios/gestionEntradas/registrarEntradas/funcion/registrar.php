@@ -98,7 +98,7 @@ class RegistradorOrden {
 			
 			case '6' :
 				
-				$observacion = $_REQUEST ['observaciones_recuperacion'];
+				$observacion = $_REQUEST ['observaciones_adquisicion'];
 				foreach ( $_FILES as $key => $values ) {
 					
 					$archivo [$i] = $_FILES [$key];
@@ -110,7 +110,7 @@ class RegistradorOrden {
 			
 			case '7' :
 				
-				$observacion = $_REQUEST ['observaciones_recuperacion'];
+				$observacion = $_REQUEST ['observaciones_avance'];
 				foreach ( $_FILES as $key => $values ) {
 					
 					$archivo [$i] = $_FILES [$key];
@@ -164,7 +164,7 @@ class RegistradorOrden {
 		$info_clase = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
 		
 		$fechaActual = date ( 'Y-m-d' );
-// 		var_dump($_REQUEST);exit;
+		
 		
 		$arregloDatos = array (
 				$fechaActual,
@@ -178,7 +178,7 @@ class RegistradorOrden {
 				($_REQUEST ['numero_factura'] != '') ? $_REQUEST ['numero_factura'] : 0,
 				($_REQUEST ['fecha_factura'] != '') ? $_REQUEST ['fecha_factura'] : '0001-01-01',
 				$_REQUEST ['observaciones_entrada'],
-				(isset($_REQUEST ['numero_acta_r'])&&$_REQUEST ['numero_acta_r'] != '') ? $_REQUEST ['numero_acta_r'] : 0 ,
+				(isset($_REQUEST ['acta_recibido'])&&$_REQUEST ['acta_recibido'] != '') ? $_REQUEST ['acta_recibido'] : 0 ,
 				$_REQUEST['id_ordenador'],
 				$_REQUEST['sede'],
 				$_REQUEST['dependencia'],

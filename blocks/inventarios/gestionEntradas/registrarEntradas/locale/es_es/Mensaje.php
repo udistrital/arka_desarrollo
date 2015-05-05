@@ -11,6 +11,9 @@ $this->idioma ["informacion_nit"] ="Nit de Proveedor : ";
 
 $this->idioma ["informacion_proveedor"] ="Nombre y/o Razón Social Proveedor : ";
 
+$this->idioma ["acta_recibido"] ="Acta Recibido : ";
+$this->idioma ["acta_recibidoTitulo"] ="Seleccione Acta Recibido";
+
 
 $this->idioma ["acta_adquisicion"] ="Acto Administrativo : ";
 $this->idioma ["acta_adquisicionTitulo"] ="Carge Acto Administraivo de la Donación";
