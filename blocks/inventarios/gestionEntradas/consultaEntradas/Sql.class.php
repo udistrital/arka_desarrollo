@@ -166,14 +166,16 @@ class Sql extends \Sql {
 				$cadenaSql .= " FROM PROVEEDORES ";
 				
 				break;
+				
+
 			
 			case "consultarEntrada" :
 				$cadenaSql = "SELECT DISTINCT ";
-				$cadenaSql .= "id_entrada, fecha_registro,  ";
-				$cadenaSql .= " descripcion,proveedor   ";
+				$cadenaSql .= "entrada.id_entrada, entrada.fecha_registro,  ";
+				$cadenaSql .= " clase_entrada.descripcion,proveedor   ";
 				$cadenaSql .= "FROM entrada ";
 				$cadenaSql .= "JOIN clase_entrada ON clase_entrada.id_clase = entrada.clase_entrada ";
-				// $cadenaSql .= "JOIN proveedor ON proveedor.id_proveedor = entrada.proveedor ";
+				$cadenaSql .= "JOIN elemento ON elemento.id_entrada = entrada.id_entrada ";
 				$cadenaSql .= "WHERE 1=1 ";
 				if ($variable [0] != '') {
 					$cadenaSql .= " AND id_entrada = '" . $variable [0] . "'";
