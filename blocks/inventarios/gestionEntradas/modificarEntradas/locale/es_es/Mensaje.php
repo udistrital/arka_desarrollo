@@ -1,6 +1,32 @@
 <?php
 $this->idioma ["noDefinido"] = "Etiqueta no esta definida en locale/es_es/Mensaje.php";
 
+$this->idioma ["acta_recibido"] ="Acta Recibido : ";
+$this->idioma ["acta_recibidoTitulo"] ="Seleccione Acta Recibido";
+
+
+$this->idioma ["supervisor"] ="Supervisor : ";
+$this->idioma ["supervisorTitulo"] ="Ingrese Supervisor";
+
+$this->idioma ["sede"] ="Sede : ";
+$this->idioma ["sedeTitulo"] ="Seleccione Sede";
+
+$this->idioma ["dependencia"] ="Dependencia Supervisora: ";
+$this->idioma ["dependenciaTitulo"] ="Seleccione Supervisora";
+
+
+$this->idioma ["supervisor"] ="Supervisor : ";
+$this->idioma ["asignacionOrdenadorTitulo"] ="Ingrese Supervisor";
+
+$this->idioma ["asignacionOrdenador"] ="Asignación : ";
+$this->idioma ["asignacionOrdenadorTitulo"] ="Ingrese Asignación de Ordenador del Gasto";
+
+
+$this->idioma ["nombreOrdenador"] ="&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspNombre y Apellidos : ";
+$this->idioma ["nombreOrdenadorTitulo"] =" Nombre y Apellidos Ordenador ";
+
+
+$this->idioma ["ordenadorGasto"] ="Ordenador Gasto";
 
 
 $this->idioma ["informacion_numero"] =" # Número de Entrada : ";
@@ -13,6 +39,25 @@ $this->idioma ["informacion_estado"] ="Clase de Entrada : ";
 
 $this->idioma ["informacion_proveedor"] ="Nombre y/o Razón Social Proveedor : ";
 
+
+
+$this->idioma ["acta_recibido"] ="Acta Recibido : ";
+$this->idioma ["acta_recibidoTitulo"] ="Seleccione Acta Recibido";
+
+
+$this->idioma ["acta_adquisicion"] ="Acto Administrativo : ";
+$this->idioma ["acta_adquisicionTitulo"] ="Carge Acto Administraivo de la Donación";
+
+$this->idioma ["observaciones_adquisicion"] ="Observaciones : ";
+$this->idioma ["observaciones_adquisicionTitulo"] ="Ingrese Observaciones";
+
+
+
+$this->idioma ["acta_avance"] ="Acto Administrativo : ";
+$this->idioma ["acta_avanceTitulo"] ="Carge Acto Administraivo";
+
+$this->idioma ["observaciones_avance"] ="Observaciones : ";
+$this->idioma ["observaciones_avanceTitulo"] ="Ingrese Observaciones";
 
 
 

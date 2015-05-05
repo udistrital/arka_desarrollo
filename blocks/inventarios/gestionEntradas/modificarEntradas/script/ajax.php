@@ -26,6 +26,24 @@ $cadena = $this->miConfigurador->fabricaConexiones->crypto->codificar_url ( $cad
 $urlFinal = $url . $cadena;
 
 
+// Variables
+$cadenaACodificar6 = "pagina=" . $this->miConfigurador->getVariableConfiguracion ( "pagina" );
+$cadenaACodificar6 .= "&procesarAjax=true";
+$cadenaACodificar6 .= "&action=index.php";
+$cadenaACodificar6 .= "&bloqueNombre=" . $esteBloque ["nombre"];
+$cadenaACodificar6 .= "&bloqueGrupo=" . $esteBloque ["grupo"];
+$cadenaACodificar6 .= $cadenaACodificar . "&funcion=SeleccionOrdenador";
+$cadenaACodificar6 .= "&tiempo=" . $_REQUEST ['tiempo'];
+
+// Codificar las variables
+$enlace6 = $this->miConfigurador->getVariableConfiguracion ( "enlace" );
+$cadena6 = $this->miConfigurador->fabricaConexiones->crypto->codificar_url ( $cadenaACodificar6, $enlace6 );
+
+// URL definitiva
+$urlFinal6 = $url . $cadena6;
+
+
+
 ?>
 <script type='text/javascript'>
 function estado(elem, request, response){
@@ -56,6 +74,46 @@ function estado(elem, request, response){
 		                    
 	   });
 	};
+
+
+
+	function datosOrdenador(elem, request, response){
+		  $.ajax({
+		    url: "<?php echo $urlFinal6?>",
+		    dataType: "json",
+		    data: { ordenador:$("#<?php echo $this->campoSeguro('asignacionOrdenador')?>").val()},
+		    success: function(data){ 
+
+		    		if(data[0]!='null'){
+
+		    			$("#<?php echo $this->campoSeguro('nombreOrdenador')?>").val(data[0]);
+		    			$("#<?php echo $this->campoSeguro('id_ordenador')?>").val(data[1]);
+								    			
+			    		}else{
+
+					
+
+
+				    		
+			    		}
+
+		    }
+			                    
+		   });
+		};
+	
+    $(function () {
+
+    $("#<?php echo $this->campoSeguro('asignacionOrdenador')?>").change(function(){
+    	
+    	if($("#<?php echo $this->campoSeguro('asignacionOrdenador')?>").val()!=''){
+    		datosOrdenador();
+		}else{
+			$("#<?php echo $this->campoSeguro('nombreOrdenador')?>").val('');
+			}
+	      });
+	
+    });
 
 </script>
 
