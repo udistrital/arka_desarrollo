@@ -385,8 +385,8 @@ class Sql extends \Sql {
             case "consultarTraslados":
                 $cadenaSql = "SELECT elemento_individual.id_elemento_ind, ";
                 $cadenaSql.= " nivel, marca, elemento_individual.serie, ";
-                $cadenaSql.= " salida.funcionario as actual, historial_elemento_individual.funcionario as anterior, ";
-                $cadenaSql.= " historial_elemento_individual.fecha_registro, elemento_individual.observaciones_traslado ";
+                $cadenaSql.= " salida.funcionario as funcionario_actual, historial_elemento_individual.funcionario as funcionario_anterior, ";
+                $cadenaSql.= " historial_elemento_individual.fecha_registro, elemento_individual.observaciones_traslados ";
                 $cadenaSql.= " FROM elemento_individual ";
                 $cadenaSql.= " JOIN elemento ON id_elemento_gen = elemento.id_elemento ";
                 $cadenaSql.= " JOIN salida ON salida.id_entrada = elemento.id_entrada ";
@@ -402,7 +402,7 @@ class Sql extends \Sql {
                 }
                 break;
 
-            case "consultarTraslados":
+           case "consultarSobranteFaltante":
                 $cadenaSql = " SELECT estado_elemento.id_elemento_ind, tipo_falt_sobr.descripcion, placa, elemento_individual.serie, ";
                 $cadenaSql.=" salida.funcionario, salida.dependencia, ";
                 $cadenaSql.=" nombre_denuncia, ";
@@ -414,17 +414,10 @@ class Sql extends \Sql {
                 $cadenaSql.=" JOIN salida ON salida.id_entrada = elemento.id_entrada ";
                 $cadenaSql.=" WHERE estado_elemento.estado_registro = 't' ";
                 if ($variable ['IDfaltante'] != '') {
-                    $cadenaSql.= " AND historial_elemento_individual.id_evento = '" . $variable ['IDtraslado'] . "'";
+                    $cadenaSql.= " AND historial_elemento_individual.id_evento = '" . $variable ['IDfaltante'] . "'";
                 }
 
-                if ($variable ['IDhurto'] != '') {
-                    $cadenaSql.= " AND estado_elemento.id_hurto = '" . $variable ['IDhurto'] . "'";
-                }
-
-                if ($variable ['IDfaltante'] != '') {
-                    $cadenaSql.= " AND estado_elemento.id_faltante = '" . $variable ['IDfaltante'] . "'";
-                }
-
+              
                 if ($variable['fecha_inicio'] != '' && $variable ['fecha_final'] != '') {
                     $cadenaSql.= " AND estado_elemento.fecha_registro BETWEEN CAST ( '" . $variable ['fecha_inicio'] . "' AS DATE) ";
                     $cadenaSql.= " AND  CAST ( '" . $variable ['fecha_final'] . "' AS DATE)  ";
@@ -436,9 +429,9 @@ class Sql extends \Sql {
 
             case "consultarBajas":
                 $cadenaSql = " SELECT id_baja,tramite, id_elemento_ind,  ";
-                $cadenaSql.=" tipo_mueble.descripcion,baja_elemento.fecha_registro, ";
+                $cadenaSql.=" tipo_mueble.descripcion as tipo_mueble,baja_elemento.fecha_registro as fecha_registro, ";
                 $cadenaSql.=" observaciones, dependencia_funcionario, ";
-                $cadenaSql.=" estado_baja.descripcion ";
+                $cadenaSql.=" estado_baja.descripcion as descripcion";
                 $cadenaSql.=" FROM baja_elemento ";
                 $cadenaSql.=" JOIN estado_baja ON estado_funcional=id_estado ";
                 $cadenaSql.=" JOIN tipo_mueble ON tipo_mueble=id_tipo_mueble ";

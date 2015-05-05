@@ -103,14 +103,15 @@ class registrarForm {
             case 4:
                 $cadenaSql = $this->miSql->getCadenaSql('consultarTraslados', $datos_consulta);
                 $datos = $esteRecursoDB->ejecutarAcceso($cadenaSql, "busqueda");
+             
                 break;
             //Sobrantes o faltantes
-            case 5:
+            case 6:
                 $cadenaSql = $this->miSql->getCadenaSql('consultarSobranteFaltante', $datos_consulta);
                 $datos = $esteRecursoDB->ejecutarAcceso($cadenaSql, "busqueda");
                 break;
             //Bajas
-            case 6:
+            case 5:
                 $cadenaSql = $this->miSql->getCadenaSql('consultarBajas', $datos_consulta);
                 $datos = $esteRecursoDB->ejecutarAcceso($cadenaSql, "busqueda");
                 break;
