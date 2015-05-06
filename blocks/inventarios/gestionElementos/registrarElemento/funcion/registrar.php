@@ -231,7 +231,7 @@ class RegistradorOrden {
 				);
 				
 				
-				exit;
+				
 				if ($elemento) {
 					
 					redireccion::redireccionar ( 'inserto', $datos, $_REQUEST['datosGenerales'] );
