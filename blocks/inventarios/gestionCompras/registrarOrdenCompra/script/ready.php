@@ -27,7 +27,7 @@
         
         
         
-        
+        $("#<?php echo $this->campoSeguro('sede')?>").select2();
         	$('#<?php echo $this->campoSeguro('proveedor')?>').attr('disabled','');
         	$('#<?php echo $this->campoSeguro('nitProveedor')?>').attr('disabled','');
         	$('#<?php echo $this->campoSeguro('direccionProveedor')?>').attr('disabled','');

@@ -5,6 +5,10 @@ $this->idioma ["informacion_numero"] ="# Número de Orden de Servicios :";
 
 $this->idioma ["informacion_fecha"] ="Fecha de Registro De Orden :";
 
+
+$this->idioma ["sede"] ="Sede: ";
+$this->idioma ["sedeTitulo"] ="Seleccione Sede";
+
 $this->idioma ["informacion_contratista"] ="Identificación de Contratista :";
 
 $this->idioma ["informacion_dependencia"] ="Dependencia Solicitante :";

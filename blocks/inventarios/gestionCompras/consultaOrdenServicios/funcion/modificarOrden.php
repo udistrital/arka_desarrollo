@@ -119,7 +119,8 @@ class RegistradorOrden {
 				$_REQUEST['id_ordenador'],
 				$_REQUEST['vigencia_contratista'],
 				$_REQUEST['nombreContratista'],
-				$_REQUEST['numero_orden']
+				$_REQUEST['numero_orden'],
+				$_REQUEST['sede']
 		);
 		
 	

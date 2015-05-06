@@ -149,6 +149,16 @@ class Sql extends \Sql {
 			 * Clausulas Del Caso Uso.
 			 */
 			
+			case "dependencias" :
+				$cadenaSql = "SELECT DISTINCT  ESF_COD_SEDE, ESF_NOMBRE_ESPACIO ";
+				$cadenaSql .= " FROM ESPACIOS_FISICOS ";
+				break;
+			
+			case "sede" :
+				$cadenaSql = "SELECT DISTINCT  ESF_COD_SEDE, ESF_SEDE ";
+				$cadenaSql .= " FROM ESPACIOS_FISICOS ";
+				break;
+			
 			case "buscar_contratista" :
 				$cadenaSql = "SELECT CON_IDENTIFICADOR AS IDENTIFICADOR , CON_IDENTIFICACION ||'  -  '||CON_NOMBRE AS CONTRATISTA ";
 				$cadenaSql .= "FROM CONTRATISTAS ";
@@ -216,12 +226,14 @@ class Sql extends \Sql {
 				$cadenaSql = " SELECT ORG_NOMBRE,ORG_IDENTIFICADOR  ";
 				$cadenaSql .= " FROM ORDENADORES_GASTO ";
 				$cadenaSql .= " WHERE  ORG_IDENTIFICADOR='" . $variable . "'";
+				$cadenaSql .= " AND ORG_ESTADO='A' ";
 				
 				break;
 			
 			case "ordenador_gasto" :
 				$cadenaSql = " 	SELECT ORG_IDENTIFICADOR, ORG_ORDENADOR_GASTO ";
 				$cadenaSql .= " FROM ORDENADORES_GASTO ";
+				$cadenaSql .= " WHERE ORG_ESTADO='A' ";
 				break;
 			
 			case "constratistas" :
@@ -339,7 +351,7 @@ class Sql extends \Sql {
 				$cadenaSql .= " orden_servicio(";
 				$cadenaSql .= "  fecha_registro,info_presupuestal,dependencia_solicitante, rubro, objeto_contrato, poliza1, ";
 				$cadenaSql .= " poliza2, poliza3, poliza4, duracion_pago, fecha_inicio_pago, ";
-				$cadenaSql .= " fecha_final_pago, forma_pago, total_preliminar, iva, total, id_contratista,id_contratista_encargado, vig_contratista,id_ordenador_encargado,id_supervisor, estado)";
+				$cadenaSql .= " fecha_final_pago, forma_pago, total_preliminar, iva, total, id_contratista,id_contratista_encargado, vig_contratista,id_ordenador_encargado,id_supervisor, estado,sede)";
 				$cadenaSql .= " VALUES (";
 				$cadenaSql .= "'" . $variable [0] . "',";
 				$cadenaSql .= "'" . $variable [1] . "',";
@@ -381,7 +393,8 @@ class Sql extends \Sql {
 				$cadenaSql .= "'" . $variable [18] . "',";
 				$cadenaSql .= "'" . $variable [19] . "',";
 				$cadenaSql .= "'" . $variable [20] . "',";
-				$cadenaSql .= "'" . $variable [21] . "') ";
+				$cadenaSql .= "'" . $variable [21] . "',";
+				$cadenaSql .= "'" . $variable [22] . "') ";
 				$cadenaSql .= "RETURNING  id_orden_servicio; ";
 				
 				break;
@@ -434,7 +447,8 @@ class Sql extends \Sql {
 			case "consultarOrdenador_gasto" :
 				$cadenaSql = " 	SELECT ORG_ORDENADOR_GASTO,ORG_NOMBRE ";
 				$cadenaSql .= " FROM ORDENADORES_GASTO ";
-				$cadenaSql .= " WHERE ORG_IDENTIFICADOR ='" . $variable . "'";
+				$cadenaSql .= " WHERE ORG_IDENTIFICADOR ='" . $variable . "' ";
+				$cadenaSql .= " AND ORG_ESTADO='A' ";
 				break;
 			
 			case "consultarContratista" :

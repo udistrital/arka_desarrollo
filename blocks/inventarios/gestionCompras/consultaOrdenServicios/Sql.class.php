@@ -149,6 +149,15 @@ class Sql extends \Sql {
 			 * Clausulas Del Caso Uso.
 			 */
 			
+			case "dependencias" :
+				$cadenaSql = "SELECT DISTINCT  ESF_COD_SEDE, ESF_NOMBRE_ESPACIO ";
+				$cadenaSql .= " FROM ESPACIOS_FISICOS ";
+				break;
+			
+			case "sede" :
+				$cadenaSql = "SELECT DISTINCT  ESF_COD_SEDE, ESF_SEDE ";
+				$cadenaSql .= " FROM ESPACIOS_FISICOS ";
+				break;
 			case "informacionPresupuestal" :
 				$cadenaSql = "SELECT  vigencia_dispo, numero_dispo, valor_disp, fecha_dip,
 									letras_dispo, vigencia_regis, numero_regis, valor_regis, fecha_regis,
@@ -250,6 +259,7 @@ class Sql extends \Sql {
 				$cadenaSql = " SELECT ORG_NOMBRE,ORG_IDENTIFICADOR  ";
 				$cadenaSql .= " FROM ORDENADORES_GASTO ";
 				$cadenaSql .= " WHERE  ORG_IDENTIFICADOR='" . $variable . "'";
+				$cadenaSql .= " AND  ORG_ESTADO='A' ";
 				
 				break;
 			
@@ -261,6 +271,7 @@ class Sql extends \Sql {
 			case "ordenador_gasto" :
 				$cadenaSql = " 	SELECT ORG_IDENTIFICADOR, ORG_ORDENADOR_GASTO ";
 				$cadenaSql .= " FROM ORDENADORES_GASTO ";
+				$cadenaSql .= " WHERE ORG_ESTADO='A' ";
 				break;
 			
 			case "constratistas" :
@@ -368,6 +379,7 @@ class Sql extends \Sql {
 				$cadenaSql = " 	SELECT ORG_ORDENADOR_GASTO,ORG_NOMBRE ";
 				$cadenaSql .= " FROM ORDENADORES_GASTO ";
 				$cadenaSql .= " WHERE ORG_IDENTIFICADOR ='" . $variable . "'";
+				$cadenaSql .= " AND ORG_ESTADO='A' ";
 				break;
 			
 			case "consultarSupervisor" :
@@ -487,7 +499,8 @@ class Sql extends \Sql {
 				$cadenaSql .= " total='" . $variable [13] . "', ";
 				$cadenaSql .= " id_ordenador_encargado='" . $variable [14] . "', ";
 				$cadenaSql .= " vig_contratista='" . $variable [15] . "', ";
-				$cadenaSql .= " id_contratista_encargado='" . $variable [16] . "' ";
+				$cadenaSql .= " id_contratista_encargado='" . $variable [16] . "', ";
+				$cadenaSql .= " sede='" . $variable [18] . "' ";
 				$cadenaSql .= "  WHERE id_orden_servicio='" . $variable [17] . "';";
 				
 				break;

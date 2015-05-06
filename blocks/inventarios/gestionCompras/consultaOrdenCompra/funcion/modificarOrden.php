@@ -190,7 +190,8 @@ class RegistradorOrden {
 				$total,
 				$_REQUEST['valorLetras_registro'],
 				$_REQUEST['vigencia_contratista'],
-				$_REQUEST ['numero_orden'] 
+				$_REQUEST ['numero_orden'], 
+				$_REQUEST['sede'] 
 		);
 		
 		

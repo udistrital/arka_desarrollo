@@ -192,7 +192,7 @@ class registrarForm {
 					// Aplica atributos globales al control
 					$atributos = array_merge ( $atributos, $atributosGlobales );
 					echo $this->miFormulario->cuadroMensaje ( $atributos );
-					unset($atributos);
+					unset ( $atributos );
 					$this->botonRegresar ( $tab, 2 );
 					// --------------- FIN CONTROL : Cuadro de Texto --------------------------------------------------
 				}
@@ -242,8 +242,11 @@ class registrarForm {
 		$valorCodificado .= "&bloque=" . $esteBloque ['nombre'];
 		$valorCodificado .= "&bloqueGrupo=" . $esteBloque ["grupo"];
 		$valorCodificado .= "&opcion=documento";
-		$valorCodificado .= "&numero_orden=" . $_REQUEST ['numero_orden'];
+		if (isset ( $_REQUEST ['numero_orden'] )) {
+			$valorCodificado .= "&numero_orden=" . $_REQUEST ['numero_orden'];
+		}
 		/**
+		 * }
 		 * SARA permite que los nombres de los campos sean dinámicos.
 		 * Para ello utiliza la hora en que es creado el formulario para
 		 * codificar el nombre de cada campo. Si se utiliza esta técnica es necesario pasar dicho tiempo como una variable:

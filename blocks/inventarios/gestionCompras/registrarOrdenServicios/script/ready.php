@@ -223,7 +223,7 @@
 		    
         
                
-        
+$("#<?php echo $this->campoSeguro('sede')?>").select2();        
 $("#<?php echo $this->campoSeguro('vigencia_disponibilidad')?>").select2();
 $('#<?php echo $this->campoSeguro('diponibilidad')?>').attr('disabled','');
 

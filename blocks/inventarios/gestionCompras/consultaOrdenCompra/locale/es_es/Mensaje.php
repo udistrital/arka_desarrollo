@@ -8,6 +8,10 @@ $this->idioma ["botonDocumento"] ="Generar Documento";
 $this->idioma ["orden_compra_consulta"] ="Orden de Compra: ";
 $this->idioma ["orden_compra_consultaTitulo"] ="Seleccione Orden de Compra a Generar Documento";
 
+$this->idioma ["sede"] ="Sede: ";
+$this->idioma ["sedeTitulo"] ="Seleccione Sede";
+
+
 //________________
 $this->idioma ["vigencia_registro"] ="Vigencia Registro : ";
 $this->idioma ["vigencia_registroTitulo"] ="Seleccione Vigencia Registro";

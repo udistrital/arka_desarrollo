@@ -265,6 +265,7 @@ class Sql extends \Sql {
 				$cadenaSql = " SELECT ORG_NOMBRE,ORG_IDENTIFICADOR  ";
 				$cadenaSql .= " FROM ORDENADORES_GASTO ";
 				$cadenaSql .= " WHERE  ORG_IDENTIFICADOR='" . $variable . "'";
+				$cadenaSql .= " AND ORG_ESTADO='A' ";
 				
 				break;
 			
@@ -272,6 +273,7 @@ class Sql extends \Sql {
 				
 				$cadenaSql = " 	SELECT ORG_IDENTIFICADOR, ORG_ORDENADOR_GASTO ";
 				$cadenaSql .= " FROM ORDENADORES_GASTO ";
+				$cadenaSql .= " WHERE ORG_ESTADO='A' ";
 				break;
 			
 			case "constratistas" :
@@ -419,7 +421,7 @@ class Sql extends \Sql {
 				$cadenaSql .= " info_presupuestal, rubro, obligaciones_proveedor, obligaciones_contratista,";
 				$cadenaSql .= " poliza1, poliza2, poliza3, poliza4, poliza5, lugar_entrega, destino,";
 				$cadenaSql .= " tiempo_entrega, forma_pago, supervision, inhabilidades, id_proveedor,";
-				$cadenaSql .= " ruta_cotizacion, nombre_cotizacion, id_dependencia, id_contratista, id_ordenador,subtotal, iva, total, valor_letras ,vig_contratista ";
+				$cadenaSql .= " ruta_cotizacion, nombre_cotizacion, id_dependencia, id_contratista, id_ordenador,subtotal, iva, total, valor_letras ,vig_contratista,sede ";
 				$cadenaSql .= " FROM orden_compra ";
 				$cadenaSql .= " WHERE id_orden_compra='" . $variable . "' AND estado='TRUE'";
 				
@@ -448,6 +450,7 @@ class Sql extends \Sql {
 				$cadenaSql = " 	SELECT ORG_ORDENADOR_GASTO,ORG_NOMBRE ";
 				$cadenaSql .= " FROM ORDENADORES_GASTO ";
 				$cadenaSql .= " WHERE ORG_IDENTIFICADOR ='" . $variable . "'";
+				$cadenaSql .= " AND ORG_ESTADO='A' ";
 				break;
 			
 			case "consultar_forma_pago" :
@@ -626,7 +629,8 @@ class Sql extends \Sql {
 				$cadenaSql .= " iva='" . $variable [21] . "',  ";
 				$cadenaSql .= " total='" . $variable [22] . "',  ";
 				$cadenaSql .= " valor_letras='" . $variable [23] . "' , ";
-				$cadenaSql .= " vig_contratista='" . $variable [24] . "'  ";
+				$cadenaSql .= " vig_contratista='" . $variable [24] . "', ";
+				$cadenaSql .= " sede='" . $variable [26] . "'  ";
 				$cadenaSql .= "  WHERE id_orden_compra='" . $variable [25] . "';";
 				
 				break;

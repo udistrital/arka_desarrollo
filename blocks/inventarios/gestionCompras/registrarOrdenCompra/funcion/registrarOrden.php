@@ -24,7 +24,7 @@ class RegistradorOrden {
 		$this->miFuncion = $funcion;
 	}
 	function procesarFormulario() {
-		var_dump($_REQUEST);
+		
 		
 		foreach ( $_FILES as $key => $values ) {
 			
@@ -164,7 +164,8 @@ class RegistradorOrden {
 				$total,
 				$_REQUEST ['valorLetras_registro'],
 				$_REQUEST['vigencia_contratista'],
-				'TRUE' 
+				'TRUE',
+				$_REQUEST['sede'] 
 		);
 		
 

@@ -974,7 +974,7 @@ function disponibilidades(elem, request, response){
 					            });
 					            
 					            $("#<?php echo $this->campoSeguro('nombreContratista')?>").removeAttr('disabled');
-					            $('#<?php echo $this->campoSeguro('nombreContratista')?>').attr("class", "  validate[required]");
+					            $('#<?php echo $this->campoSeguro('nombreContratista')?>').attr("class", "  validate[]");
 					            
 					            $('#<?php echo $this->campoSeguro('nombreContratista')?>').attr("style", "width: 70 ; '");
 					            					            
