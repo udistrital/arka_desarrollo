@@ -214,6 +214,12 @@ class Sql extends \Sql {
                 $cadenaSql .= " elemento_nombre='" . $variable[3] . "' ";
                 $cadenaSql .= " WHERE elemento_id=" . $variable[4] . " ";
                 break;
+            
+             case "dependencia" :
+                $cadenaSql = " SELECT DEP_IDENTIFICADOR, DEP_IDENTIFICADOR ||' - ' ||DEP_DEPENDENCIA  ";
+                $cadenaSql .= "FROM DEPENDENCIAS ";
+                break;
+
         }
 
         return $cadenaSql;

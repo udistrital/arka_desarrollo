@@ -58,6 +58,7 @@ $this->idioma["id"]="Identificador del Elemento";
 $this->idioma["idPadre"]="Identificador Padre";
 $this->idioma["idPadreTitulo"]="Añadir Identificador";
 $this->idioma["idTitulo"]="Ingrese el Identificador Elemento";
+$this->idioma["idGrupo"]="Grupo Contable";
 
 
 $this->idioma["reiniciar"]="Reiniciar";

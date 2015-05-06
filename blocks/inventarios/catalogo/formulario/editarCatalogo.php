@@ -38,6 +38,13 @@ class Formulario {
             //Este se considera un error fatal
             exit;
         }
+
+        $conexion2 = "sicapital";
+        $this->esteRecursoDB2 = $this->miConfigurador->fabricaConexiones->getRecursoDB($conexion2);
+        if (!$this->esteRecursoDB2) {
+            //Este se considera un error fatal
+            exit;
+        }
     }
 
     function formulario() {
@@ -152,14 +159,48 @@ class Formulario {
         echo ' ui-corner-all  validate[required,onlyLetterNumber] " tabindex="4" name="nombreElemento" id="nombreElemento" title=" Ingrese el Nombre del Elemento">';
         echo ' </div>';
     }
-    
+
     private function campoIdGrupo() {
 
-        echo ' <div class="jqueryui  anchoColumna1">';
-        echo ' <div style="float:left; width:200px"><label for="idGrupo">Grupo Contable</label><span style="white-space:pre;"> </span></div>';
-        echo ' <input type="text" maxlength="" size="50" value="" class="ui-widget ui-widget-content';
-        echo ' ui-corner-all  validate[onlyNumber] " tabindex="4" name="idGrupo" id="idGrupo" title=" Ingrese el identificador del Grupo Contable">';
-        echo ' </div>';
+        $esteCampo = "idGrupo";
+        $atributos ['nombre'] = $esteCampo;
+        $atributos ['id'] = $esteCampo;
+        $atributos ['etiqueta'] = $this->lenguaje->getCadena($esteCampo);
+        $atributos ["etiquetaObligatorio"] = false;
+        $atributos ['tab'] = 1;
+        $atributos ['seleccion'] = - 1;
+        $atributos ['anchoEtiqueta'] = 200;
+        $atributos ['evento'] = '';
+        if (isset($_REQUEST [$esteCampo])) {
+            $atributos ['valor'] = $_REQUEST [$esteCampo];
+        } else {
+            $atributos ['valor'] = '';
+        }
+        $atributos ['deshabilitado'] = false;
+        $atributos ['columnas'] = 1;
+        $atributos ['tamanno'] = 1;
+        $atributos ['ajax_function'] = "";
+        $atributos ['ajax_control'] = $esteCampo;
+        $atributos ['estilo'] = "jqueryui";
+        $atributos ['validar'] = "";
+        $atributos ['limitar'] = 1;
+        $atributos ['anchoCaja'] = 49;
+        $atributos ['miEvento'] = '';
+        $atributos ['cadena_sql'] = $this->sql->getCadenaSql("dependencia");
+        $matrizItems = array(
+            array(
+                0,
+                ' '
+            )
+        );
+        $matrizItems = $this->esteRecursoDB2->ejecutarAcceso($atributos ['cadena_sql'], "busqueda");
+        $atributos ['matrizItems'] = $matrizItems;
+// $atributos['miniRegistro']=;
+// $atributos ['baseDatos'] = "inventarios";
+// $atributos ['cadena_sql'] = $this->miSql->getCadenaSql ( "clase_entrada" );
+// Aplica atributos globales al control
+        echo $this->miFormulario->campoCuadroLista($atributos);
+        unset($atributos);
     }
 
     private function notaUso() {

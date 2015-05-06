@@ -5,6 +5,8 @@ $("#login").validationEngine({
     scroll: false
 });
 
+$("#idGrupo").select2();
+
 $("#catalogo").validationEngine({
     promptPosition: "centerRight",
     scroll: false
