@@ -7,7 +7,7 @@ if (! isset ( $GLOBALS ["autorizado"] )) {
 	exit ();
 }
 class redireccion {
-	public static function redireccionar($opcion, $valor = "") {
+	public static function redireccionar($opcion, $valor = "", $valor1 = "") {
 		$miConfigurador = \Configurador::singleton ();
 		$miPaginaActual = $miConfigurador->getVariableConfiguracion ( "pagina" );
 		
@@ -15,10 +15,12 @@ class redireccion {
 			case "inserto" :
 				
 				$variable = "pagina=" . $miPaginaActual;
-				$variable .= "&opcion=mensaje";
-				$variable .= "&mensaje=confirma";
+				$variable .= "&opcion=cargarElemento";
+				$variable .= "&mensaje=registro";
 				$variable .= "&numero_orden=" . $valor [0];
 				$variable .= "&fecha_orden=" . $valor [1];
+				$variable .= "&numero_entrada=" . $valor [2];
+				$variable .= "&datosGenerales=" . $valor1;
 				
 				break;
 			

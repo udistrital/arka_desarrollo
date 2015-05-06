@@ -289,6 +289,7 @@ class Oci8 extends ConectorDb {
         $this->clave = trim($registro ["dbclave"]);
         $this->dbsys = trim($registro ["dbsys"]);
         $this->dbesquema = trim($registro ['dbesquema']);
+
         $this->enlace = $this->conectar_db();
     }
 

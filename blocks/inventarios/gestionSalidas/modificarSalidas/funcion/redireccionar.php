@@ -17,9 +17,9 @@ class redireccion {
 				$variable = "pagina=" . $miPaginaActual;
 				$variable .= "&opcion=mensaje";
 				$variable .= "&mensaje=inserto";
-				$variable .= "&salida=" . $valor['salida'];
-				$variable .= "&entrada=" . $valor['entrada'];
-				$variable .= "&salidaSA=" . $valor['salidasAS'];
+				$variable .= "&salida=" . $valor ['salida'];
+				$variable .= "&entrada=" . $valor ['entrada'];
+				$variable .= "&salidaSA=" . $valor ['salidasAS'];
 				
 				break;
 			
@@ -34,6 +34,21 @@ class redireccion {
 				$variable = "pagina=" . $miPaginaActual;
 				$variable .= "&opcion=mensaje";
 				$variable .= "&mensaje=otros";
+				$variable .= "&errores=notextos";
+				
+				break;
+			
+			case "noitems" :
+				$variable = "pagina=" . $miPaginaActual;
+				$variable .= "&opcion=mensaje";
+				$variable .= "&mensaje=noitems";
+				
+				break;
+			
+			case "noCantidad" :
+				$variable = "pagina=" . $miPaginaActual;
+				$variable .= "&opcion=mensaje";
+				$variable .= "&mensaje=noCantidad";
 				$variable .= "&errores=notextos";
 				
 				break;

@@ -149,80 +149,105 @@ class Sql extends \Sql {
 			 * Clausulas Del Caso Uso.
 			 */
 			
+			case "informacionPresupuestal" :
+				$cadenaSql = "SELECT  vigencia_dispo, numero_dispo, valor_disp, fecha_dip,
+									letras_dispo, vigencia_regis, numero_regis, valor_regis, fecha_regis,
+									letras_regis  ";
+				$cadenaSql .= "FROM informacion_presupuestal_orden ";
+				$cadenaSql .= "WHERE id_informacion ='" . $variable . "' ";
+				
+				break;
+			
+			case "buscar_contratista" :
+				$cadenaSql = "SELECT CON_IDENTIFICADOR AS IDENTIFICADOR , CON_IDENTIFICACION ||'  -  '||CON_NOMBRE AS CONTRATISTA ";
+				$cadenaSql .= "FROM CONTRATISTAS ";
+				$cadenaSql .= "WHERE CON_VIGENCIA ='" . $variable . "' ";
+				break;
+			
+			case "vigencia_contratista" :
+				$cadenaSql = "SELECT CON_VIGENCIA AS VALOR , CON_VIGENCIA AS VIGENCIA  ";
+				$cadenaSql .= "FROM CONTRATISTAS ";
+				$cadenaSql .= "GROUP BY CON_VIGENCIA ";
+				break;
+			
+			case "vigencia_disponibilidad" :
+				$cadenaSql = "SELECT DIS_VIGENCIA AS valor, DIS_VIGENCIA AS vigencia  ";
+				$cadenaSql .= "FROM DISPONIBILIDAD ";
+				$cadenaSql .= "GROUP BY DIS_VIGENCIA";
+				break;
+			
+			case "buscar_disponibilidad" :
+				$cadenaSql = "SELECT DISTINCT DIS_IDENTIFICADOR AS identificador,DIS_NUMERO_DISPONIBILIDAD AS numero ";
+				$cadenaSql .= "FROM DISPONIBILIDAD ";
+				$cadenaSql .= "WHERE DIS_VIGENCIA='" . $variable . "'";
+				
+				break;
+			
+			case "info_disponibilidad" :
+				$cadenaSql = "SELECT DISTINCT TO_CHAR(DIS_FECHA_REGISTRO,'yyyy-mm-dd') AS FECHA,  DIS_VALOR ";
+				$cadenaSql .= "FROM DISPONIBILIDAD  ";
+				$cadenaSql .= "WHERE DIS_VIGENCIA='" . $variable [1] . "' ";
+				$cadenaSql .= "AND  DIS_IDENTIFICADOR='" . $variable [0] . "' ";
+				$cadenaSql .= "AND ROWNUM = 1 ";
+				
+				break;
+			
+			case "vigencia_registro" :
+				$cadenaSql = "SELECT REP_VIGENCIA AS VALOR,REP_VIGENCIA AS VIGENCIA ";
+				$cadenaSql .= "FROM REGISTRO_PRESUPUESTAL ";
+				$cadenaSql .= "GROUP BY REP_VIGENCIA ";
+				
+				break;
+			
+			case "buscar_registro" :
+				$cadenaSql = "SELECT DISTINCT REP_IDENTIFICADOR AS IDENTIFICADOR,REP_NUMERO_DISPONIBILIDAD AS NUMERO ";
+				$cadenaSql .= "FROM REGISTRO_PRESUPUESTAL ";
+				$cadenaSql .= "WHERE REP_VIGENCIA='" . $variable . "'";
+				
+				break;
+			
+			case "info_registro" :
+				$cadenaSql = "SELECT TO_CHAR(REP_FECHA_REGISTRO,'yyyy-mm-dd') AS fecha,  REP_VALOR ";
+				$cadenaSql .= "FROM REGISTRO_PRESUPUESTAL ";
+				$cadenaSql .= "WHERE REP_VIGENCIA='" . $variable [1] . "' ";
+				$cadenaSql .= "AND  REP_IDENTIFICADOR='" . $variable [0] . "' ";
+				$cadenaSql .= "AND ROWNUM = 1 ";
+				
+				break;
+			
+			case "informacion_supervisor" :
+				$cadenaSql = " SELECT JEF_NOMBRE,JEF_IDENTIFICADOR ";
+				$cadenaSql .= " FROM JEFES_DE_SECCION ";
+				$cadenaSql .= " WHERE  JEF_IDENTIFICADOR='" . $variable . "' ";
+				break;
+			
 			case "informacion_cargo_jefe" :
-				$cadenaSql = " SELECT ";
-				$cadenaSql .= " nombres ||' '||apellidos,";
-				$cadenaSql .= " id_encargado ";
-				$cadenaSql .= " FROM";
-				$cadenaSql .= " encargado ";
-				$cadenaSql .= " WHERE id_tipo_encargado='2' AND estado='TRUE' ";
-				$cadenaSql .= "AND cargo='" . $variable . "';";
-				
-				break;
-			
-			case "informacion_ordenador" :
-				$cadenaSql = " SELECT ";
-				$cadenaSql .= " nombres ||' '||apellidos, ";
-				$cadenaSql .= " id_encargado";
-				$cadenaSql .= " FROM";
-				$cadenaSql .= " encargado ";
-				$cadenaSql .= " WHERE id_tipo_encargado='1' AND estado='TRUE' ";
-				$cadenaSql .= "AND asignacion='" . $variable . "';";
-				
-				break;
-			
-			case "ordenador_gasto" :
-				$cadenaSql = " SELECT ";
-				$cadenaSql .= " id_ordenador,";
-				$cadenaSql .= " descripcion ";
-				$cadenaSql .= " FROM";
-				$cadenaSql .= " tipo_ordenador_gasto ";
+				$cadenaSql = " SELECT JEF_NOMBRE,JEF_IDENTIFICADOR ";
+				$cadenaSql .= " FROM JEFES_DE_SECCION ";
+				$cadenaSql .= " WHERE  JEF_IDENTIFICADOR='" . $variable . "' ";
 				break;
 			
 			case "constratistas" :
-				$cadenaSql = " SELECT ";
-				$cadenaSql .= " id_encargado,";
-				$cadenaSql .= "identificacion ||' - '|| nombres ||' 	'||apellidos as contratista ";
-				$cadenaSql .= " FROM";
-				$cadenaSql .= " encargado ";
-				$cadenaSql .= " WHERE id_tipo_encargado='3' AND estado='TRUE'";
-				break;
-			
-			case "cargo_jefe" :
-				$cadenaSql = " SELECT ";
-				$cadenaSql .= " id_cargo,";
-				$cadenaSql .= "descripcion ";
-				$cadenaSql .= " FROM";
-				$cadenaSql .= " tipo_cargo ; ";
-				break;
-			case "informacion_cargo_jefe" :
-				$cadenaSql = " SELECT ";
-				$cadenaSql .= " nombres ||' '||apellidos,";
-				$cadenaSql .= " id_encargado ";
-				$cadenaSql .= " FROM";
-				$cadenaSql .= " encargado ";
-				$cadenaSql .= " WHERE id_tipo_encargado='2' AND estado='TRUE' ";
-				$cadenaSql .= "AND cargo='" . $variable . "';";
+				$cadenaSql = " SELECT CON_IDENTIFICADOR,CON_IDENTIFICACION ||' - '|| CON_NOMBRE ";
+				$cadenaSql .= "FROM CONTRATISTAS ";
 				
 				break;
 			
 			case "informacion_ordenador" :
-				$cadenaSql = " SELECT ";
-				$cadenaSql .= " nombres ||' '||apellidos, ";
-				$cadenaSql .= " id_encargado";
-				$cadenaSql .= " FROM";
-				$cadenaSql .= " encargado ";
-				$cadenaSql .= " WHERE id_tipo_encargado='1' AND estado='TRUE' ";
-				$cadenaSql .= "AND asignacion='" . $variable . "';";
+				$cadenaSql = " SELECT ORG_NOMBRE,ORG_IDENTIFICADOR  ";
+				$cadenaSql .= " FROM ORDENADORES_GASTO ";
+				$cadenaSql .= " WHERE  ORG_IDENTIFICADOR='" . $variable . "'";
 				
 				break;
 			
+			case "cargo_jefe" :
+				$cadenaSql = " SELECT JEF_IDENTIFICADOR,JEF_DEPENDENCIA_PERTENECIENTE ";
+				$cadenaSql .= " FROM JEFES_DE_SECCION ";
+				break;
+			
 			case "ordenador_gasto" :
-				$cadenaSql = " SELECT ";
-				$cadenaSql .= " id_ordenador,";
-				$cadenaSql .= " descripcion ";
-				$cadenaSql .= " FROM";
-				$cadenaSql .= " tipo_ordenador_gasto ";
+				$cadenaSql = " 	SELECT ORG_IDENTIFICADOR, ORG_ORDENADOR_GASTO ";
+				$cadenaSql .= " FROM ORDENADORES_GASTO ";
 				break;
 			
 			case "constratistas" :
@@ -243,19 +268,14 @@ class Sql extends \Sql {
 				break;
 			
 			case "rubros" :
-				$cadenaSql = " SELECT ";
-				$cadenaSql .= " id_rubro,";
-				$cadenaSql .= " codigo  ||' - '|| nombre as rubro ";
-				$cadenaSql .= " FROM";
-				$cadenaSql .= " rubro ; ";
+				$cadenaSql = " SELECT RUB_IDENTIFICADOR, RUB_RUBRO ||' - '|| RUB_NOMBRE_RUBRO ";
+				$cadenaSql .= " FROM RUBROS ";
+				
 				break;
 			
 			case "dependencia" :
-				$cadenaSql = " SELECT ";
-				$cadenaSql .= " id_dependencia,";
-				$cadenaSql .= " cod_dependencia  ||' - '|| nombre as dependencia ";
-				$cadenaSql .= " FROM";
-				$cadenaSql .= " dependencia ; ";
+				$cadenaSql = " SELECT DEP_IDENTIFICADOR, DEP_IDENTIFICADOR ||' - ' ||DEP_DEPENDENCIA  ";
+				$cadenaSql .= "FROM DEPENDENCIAS ";
 				break;
 			
 			case 'seleccion_contratista' :
@@ -298,11 +318,9 @@ class Sql extends \Sql {
 				$cadenaSql = " SELECT ";
 				$cadenaSql .= " dependencia_solicitante,rubro,objeto_contrato, poliza1,";
 				$cadenaSql .= "poliza2, poliza3, poliza4, duracion_pago, fecha_inicio_pago,";
-				$cadenaSql .= "fecha_final_pago, forma_pago, total_preliminar, iva, total, fecha_diponibilidad,";
-				$cadenaSql .= "numero_disponibilidad, valor_disponibilidad, fecha_registrop,";
-				$cadenaSql .= " numero_registrop, valor_registrop, letra_registrop, id_contratista,";
-				$cadenaSql .= "id_contratista_encargado, id_jefe_encargado, id_ordenador_encargado,";
-				$cadenaSql .= "id_supervisor ";
+				$cadenaSql .= "fecha_final_pago, forma_pago, total_preliminar, iva, total,id_contratista,";
+				$cadenaSql .= "id_contratista_encargado, vig_contratista, id_ordenador_encargado,";
+				$cadenaSql .= "id_supervisor ,info_presupuestal ";
 				$cadenaSql .= " FROM orden_servicio ";
 				$cadenaSql .= " WHERE id_orden_servicio='" . $variable . "' AND estado='TRUE';";
 				break;
@@ -338,7 +356,7 @@ class Sql extends \Sql {
 				$cadenaSql .= " WHERE id_encargado='" . $variable . "' AND estado=TRUE";
 				
 				break;
-// 				____________________________________update___________________________________________
+			// ____________________________________update___________________________________________
 			
 			case "actualizarSolicitante" :
 				
@@ -381,6 +399,8 @@ class Sql extends \Sql {
 				
 				break;
 			
+	
+				
 			case "actualizarOrden" :
 				$cadenaSql = " UPDATE ";
 				$cadenaSql .= " orden_servicio ";
@@ -418,24 +438,28 @@ class Sql extends \Sql {
 				$cadenaSql .= " total_preliminar='" . $variable [11] . "', ";
 				$cadenaSql .= " iva='" . $variable [12] . "', ";
 				$cadenaSql .= " total='" . $variable [13] . "', ";
-				$cadenaSql .= " fecha_diponibilidad='" . $variable [14] . "', ";
-				$cadenaSql .= " numero_disponibilidad='" . $variable [15] . "', ";
-				$cadenaSql .= " valor_disponibilidad='" . $variable [16] . "', ";
-				$cadenaSql .= " fecha_registrop='" . $variable [17] . "', ";
-				$cadenaSql .= " numero_registrop='" . $variable [18] . "', ";
-				$cadenaSql .= " valor_registrop='" . $variable [19] . "', ";
-				$cadenaSql .= " letra_registrop='" . $variable [20] . "',  ";
-				$cadenaSql .= " id_ordenador_encargado='" . $variable [21] . "', ";
-				$cadenaSql .= " id_jefe_encargado='" . $variable [22] . "', ";
-				$cadenaSql .= " id_contratista_encargado='" . $variable [23] . "' ";
-				$cadenaSql .= "  WHERE id_orden_servicio='" . $variable [24] . "';";
+				$cadenaSql .= " id_ordenador_encargado='" . $variable [14] . "', ";
+				$cadenaSql .= " vig_contratista='" . $variable [15] . "', ";
+				$cadenaSql .= " id_contratista_encargado='" . $variable [16] . "' ";
+				$cadenaSql .= "  WHERE id_orden_servicio='" . $variable [17] . "';";
+				
 				
 				break;
 			
-			case "limpiarItems" :
-				$cadenaSql = " DELETE FROM ";
-				$cadenaSql .= " items_orden_compra ";
-				$cadenaSql .= " WHERE id_orden='" . $variable . "';";
+			case "actualizarPresupuestal" :
+				$cadenaSql = " UPDATE informacion_presupuestal_orden ";
+				$cadenaSql .= " SET vigencia_dispo='" . $variable [0] . "', ";
+				$cadenaSql .= " numero_dispo='" . $variable [1] . "', ";
+				$cadenaSql .= " valor_disp='" . $variable [2] . "', ";
+				$cadenaSql .= " fecha_dip='" . $variable [3] . "', ";
+				$cadenaSql .= " letras_dispo='" . $variable [4] . "', ";
+				$cadenaSql .= " vigencia_regis='" . $variable [5] . "', ";
+				$cadenaSql .= " numero_regis='" . $variable [6] . "', ";
+				$cadenaSql .= " valor_regis='" . $variable [7] . "', ";
+				$cadenaSql .= " fecha_regis='" . $variable [8] . "', ";
+				$cadenaSql .= " letras_regis='" . $variable [9] . "' ";
+				$cadenaSql .= "  WHERE id_informacion='" . $variable [10] . "';";
+				
 				break;
 			
 			case "insertarItems" :
@@ -454,14 +478,28 @@ class Sql extends \Sql {
 				
 				break;
 			
+			case "dependecia_solicitante" :
+				$cadenaSql = " SELECT DEP_DEPENDENCIA  ";
+				$cadenaSql .= " FROM DEPENDENCIAS  ";
+				$cadenaSql .= " WHERE DEP_IDENTIFICADOR='" . $variable . "' ";
+				
+				break;
+			
+			case "identificacion_contratista" :
+				$cadenaSql = " SELECT CON_IDENTIFICACION  ";
+				$cadenaSql .= " FROM CONTRATISTAS  ";
+				$cadenaSql .= " WHERE CON_IDENTIFICADOR='" . $variable . "' ";
+				
+				break;
+			
 			case "consultarOrden" :
 				
 				$cadenaSql = "SELECT DISTINCT ";
 				$cadenaSql .= "id_orden_servicio, fecha_registro,  ";
-				$cadenaSql .= "identificacion, nombre  ";
+				$cadenaSql .= "id_contratista_encargado , dependencia_solicitante   ";
 				$cadenaSql .= "FROM orden_servicio ";
-				$cadenaSql .= "JOIN dependencia ON dependencia.id_dependencia = orden_servicio.dependencia_solicitante ";
-				$cadenaSql .= "JOIN contratista_servicios ON contratista_servicios.id_contratista = orden_servicio.id_contratista ";
+				// $cadenaSql .= "JOIN dependencia ON dependencia.id_dependencia = orden_servicio.dependencia_solicitante ";
+				// $cadenaSql .= "JOIN contratista_servicios ON contratista_servicios.id_contratista = orden_servicio.id_contratista ";
 				$cadenaSql .= "WHERE 1=1 AND estado='TRUE' ";
 				
 				if ($variable [0] != '') {
@@ -477,6 +515,10 @@ class Sql extends \Sql {
 				if ($variable [3] != '') {
 					$cadenaSql .= " AND fecha_registro BETWEEN CAST ( '" . $variable [3] . "' AS DATE) ";
 					$cadenaSql .= " AND  CAST ( '" . $variable [4] . "' AS DATE)  ";
+				}
+				
+				if ($variable [5] != '') {
+					$cadenaSql .= " AND  vig_contratista= '" . $variable [5] . "'";
 				}
 				
 				break;

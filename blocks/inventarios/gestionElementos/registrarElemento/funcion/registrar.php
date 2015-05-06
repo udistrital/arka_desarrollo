@@ -37,26 +37,23 @@ class RegistradorOrden {
 		$cadenaSql = $this->miSql->getCadenaSql ( 'consultar_entrada_acta', $_REQUEST ['entrada'] );
 		$acta = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
 		
-		$acta=$acta[0][0];
+		$acta = $acta [0] [0];
 		
 		$cadenaSql = $this->miSql->getCadenaSql ( 'consultar_elementos_acta', $acta );
 		$elementos_acta = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
 		
-		$numero_elementos_acta=count($elementos_acta);
-		
+		$numero_elementos_acta = count ( $elementos_acta );
 		
 		$cadenaSql = $this->miSql->getCadenaSql ( 'consultar_elementos_entrada', $_REQUEST ['entrada'] );
 		$elementos_entrada = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
 		
-		$numero_elementos_entrada=count($elementos_entrada);
+		$numero_elementos_entrada = count ( $elementos_entrada );
 		
-		if($numero_elementos_acta==$numero_elementos_entrada){
-			
-			redireccion::redireccionar ( 'noCargarElemento' );
-			
-		}
+		// if($numero_elementos_acta==$numero_elementos_entrada){
 		
+		// redireccion::redireccionar ( 'noCargarElemento' );
 		
+		// }
 		
 		$fechaActual = date ( 'Y-m-d' );
 		
@@ -74,14 +71,7 @@ class RegistradorOrden {
 					
 					$cadenaSql = $this->miSql->getCadenaSql ( 'consultar_placa', '1' );
 					$placa = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
-					
-					if ($placa [0] [0] == NULL) {
-						
-						$placa = 1000001;
-					} else {
-						$placa = $placa [0] [0] + 1;
-					}
-					
+		
 					$arreglo = array (
 							$fechaActual,
 							$_REQUEST ['nivel'],
@@ -96,13 +86,14 @@ class RegistradorOrden {
 							$_REQUEST ['subtotal_sin_iva'],
 							$_REQUEST ['total_iva'],
 							$_REQUEST ['total_iva_con'],
-							$placa,
 							$_REQUEST ['marca'],
 							$_REQUEST ['serie'],
 							$_REQUEST ['entrada'] 
 					);
 					
+					
 					$cadenaSql = $this->miSql->getCadenaSql ( 'ingresar_elemento_tipo_1', $arreglo );
+					
 					
 					$elemento = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
 				} else if ($_REQUEST ['tipo_bien'] == 2) {
@@ -121,7 +112,6 @@ class RegistradorOrden {
 							$_REQUEST ['subtotal_sin_iva'],
 							$_REQUEST ['total_iva'],
 							$_REQUEST ['total_iva_con'],
-							$_REQUEST ['placa_cc'],
 							$_REQUEST ['marca'],
 							$_REQUEST ['serie'],
 							$_REQUEST ['entrada'] 
@@ -131,6 +121,7 @@ class RegistradorOrden {
 					
 					$elemento = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
 				} else if ($_REQUEST ['tipo_bien'] == 3) {
+					
 					
 					if ($_REQUEST ['tipo_poliza'] == 1) {
 						$arreglo = array (
@@ -147,7 +138,6 @@ class RegistradorOrden {
 								$_REQUEST ['subtotal_sin_iva'],
 								$_REQUEST ['total_iva'],
 								$_REQUEST ['total_iva_con'],
-								$_REQUEST ['placa_dev'],
 								$_REQUEST ['tipo_poliza'],
 								'0001-01-01',
 								'0001-01-01',
@@ -170,7 +160,6 @@ class RegistradorOrden {
 								$_REQUEST ['subtotal_sin_iva'],
 								$_REQUEST ['total_iva'],
 								$_REQUEST ['total_iva_con'],
-								$_REQUEST ['placa_dev'],
 								$_REQUEST ['tipo_poliza'],
 								$_REQUEST ['fecha_inicio'],
 								$_REQUEST ['fecha_final'],
@@ -185,14 +174,67 @@ class RegistradorOrden {
 					$elemento = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
 				}
 				
+				$placa = date ( 'Ymd' ) . "00000";
+				
+				$cadenaSql = $this->miSql->getCadenaSql ( 'buscar_repetida_placa', $placa );
+				
+				$num_placa = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
+				
+				if ($num_placa [0] [0] == 0) {
+					
+					for($i = 0; $i < $_REQUEST ['cantidad']; $i ++) {
+						$arregloElementosInv = array (
+								$fechaActual,
+								$placa + $i,
+								$_REQUEST ['serie'],
+								$elemento [0] [0] 
+						);
+						
+						$cadenaSql = $this->miSql->getCadenaSql ( 'ingresar_elemento_individual', $arregloElementosInv );
+						
+						
+						$elemento_id [$i] = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
+					}
+				} else if ($num_placa [0] [0] != 0) {
+					
+					
+					$cadenaSql = $this->miSql->getCadenaSql ( 'buscar_placa_maxima', $placa );
+					
+					$num_placa = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
+					
+					$placa = $num_placa [0] [0];
+					
+					for($i = 1; $i <= $_REQUEST ['cantidad']; $i ++) {
+						$arregloElementosInv = array (
+								$fechaActual,
+								$placa + $i,
+								$_REQUEST ['serie'],
+								$elemento [0] [0] 
+						);
+						
+						
+						
+						$cadenaSql = $this->miSql->getCadenaSql ( 'ingresar_elemento_individual', $arregloElementosInv );
+						
+						
+						$elemento_id [$i] = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
+					}
+				}
+				
+				
+				
 				$datos = array (
 						$elemento [0] [0],
-						$fechaActual 
+						$fechaActual,
+						$_REQUEST ['entrada'],
+						
 				);
 				
+				
+				exit;
 				if ($elemento) {
 					
-					redireccion::redireccionar ( 'inserto', $datos );
+					redireccion::redireccionar ( 'inserto', $datos, $_REQUEST['datosGenerales'] );
 				} else {
 					
 					redireccion::redireccionar ( 'noInserto', $datos );
@@ -362,8 +404,6 @@ class RegistradorOrden {
 				
 				break;
 		}
-		
-	
 	}
 	function resetForm() {
 		foreach ( $_REQUEST as $clave => $valor ) {

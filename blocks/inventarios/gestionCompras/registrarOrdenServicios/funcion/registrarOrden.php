@@ -24,8 +24,7 @@ class RegistradorOrden {
 		$this->miFuncion = $funcion;
 	}
 	function procesarFormulario() {
-		
-		
+	
 		
 		$fechaActual = date ( 'Y-m-d' );
 		
@@ -82,8 +81,30 @@ class RegistradorOrden {
 		
 		// Registro Orden
 		
+
+		
+		$arreglo = array (
+				$fechaActual,
+				$_REQUEST ['vigencia_disponibilidad'],
+				$_REQUEST ['diponibilidad'],
+				$_REQUEST ['valor_disponibilidad'],
+				$_REQUEST ['fecha_diponibilidad'],
+				$_REQUEST ['valorLetras_disponibilidad'],
+				$_REQUEST ['vigencia_registro'],
+				$_REQUEST ['registro'],
+				$_REQUEST ['valor_registro'],
+				$_REQUEST ['fecha_registro'],
+				$_REQUEST ['valorL_registro']
+		);
+		
+		$cadenaSql = $this->miSql->getCadenaSql ( 'insertarInformacionPresupuestal', $arreglo );
+		$info_presupuestal = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
+		
+		
+		
 		$datosOrden = array (
 				$fechaActual,
+				$info_presupuestal [0] [0],
 				$_REQUEST ['dependencia_solicitante'],
 				$_REQUEST ['rubro'],
 				$_REQUEST ['objeto_contrato'],
@@ -98,20 +119,14 @@ class RegistradorOrden {
 				$totalP,
 				$iva,
 				$total,
-				$_REQUEST ['fecha_disponibilidad'],
-				$_REQUEST ['numero_disponibilidad'],
-				$_REQUEST ['valor_disponibilidad'],
-				$_REQUEST ['fecha_registro'],
-				$_REQUEST ['numero_registro'],
-				$_REQUEST ['valor_registro'],
-				$_REQUEST ['valorLetras_registro'],
 				$id_ContratistaC [0] [0],
 				$_REQUEST ['nombreContratista'],
-				$_REQUEST ['id_jefe'],
+				$_REQUEST['vigencia_contratista'],
 				$_REQUEST ['id_ordenador'],
 				$id_supervisor [0] [0],
 				TRUE 
 		);
+		
 		
 		$cadenaSql = $this->miSql->getCadenaSql ( 'insertarOrden', $datosOrden );
 		

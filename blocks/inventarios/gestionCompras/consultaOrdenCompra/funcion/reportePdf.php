@@ -1,14 +1,18 @@
-<?php
+<?
 
 namespace inventarios\gestionCompras\consultaOrdenServicios\funcion;
-
+// var_dump($_REQUEST);
 use inventarios\gestionCompras\consultaOrdenServicios\funcion\redireccion;
 
 $ruta = $this->miConfigurador->getVariableConfiguracion ( "raizDocumento" );
 
-// include ($ruta . '/plugin/html2pdf/html2pdf.class.php');
+$host = $this->miConfigurador->getVariableConfiguracion ( "host" ) . $this->miConfigurador->getVariableConfiguracion ( "site" ) . "/plugin/html2pfd/";
 
-if (! isset ( $GLOBALS ["autorizado"] )) {
+
+include ($ruta."/plugin/html2pdf/html2pdf.class.php");
+
+// ob_end_clean();
+if (! isset ( $GLOBALS ["autorizado"])) {
 	include ("../index.php");
 	exit ();
 }
@@ -94,9 +98,7 @@ td{
 	
 	
 	
-	
-	<!--Columnas-->
-					<thead>
+						<thead>
 				<tr role='row'>
 					<th aria-label='Documento' aria-sort='ascending'
 						style='width: 100px;' colspan='1' rowspan='1'
@@ -144,7 +146,7 @@ td{
 			$contenido .= "</tr>";
 			
 			if ($i == 24) {
-				$paginaPDF = $this->paginas ( $contenido,'Ordenes de Compra', $directorio );
+				$paginaPDF = $this->paginas ( $contenido, 'Ordenes de Compra', $directorio );
 				$pagina .= $paginaPDF;
 				$contenido = '';
 				
@@ -167,8 +169,21 @@ td{
 		
 		$arreglo = unserialize ( $_REQUEST ['arreglo'] );
 		
-		$cadenaSql = $this->miSql->getCadenaSql ( 'consultarOrden', $arreglo );
-		$ordenCompra = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
+		$cadenaSql = $this->miSql->getCadenaSql ( 'consultarOrden1', $arreglo );
+		$ordenCompra1 = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
+		
+		$cadenaSql = $this->miSql->getCadenaSql ( 'consultarOrden2', $arreglo );
+		$ordenCompra2 = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
+		
+		if ($ordenCompra1 == false) {
+			
+			$ordenCompra = $ordenCompra2;
+		} else if ($ordenCompra2 == false) {
+			
+			$ordenCompra = $ordenCompra1;
+		} else {
+			$ordenCompra = array_merge ( $ordenCompra1, $ordenCompra2 );
+		}
 		
 		return $ordenCompra;
 	}
@@ -178,23 +193,21 @@ $miRegistrador = new RegistradorOrden ( $this->lenguaje, $this->sql, $this->func
 
 $resultado = $miRegistrador->procesarFormulario ();
 
-
 $textos = $miRegistrador->armarContenido ( count ( $resultado ), $resultado, $_REQUEST ['directorio'] );
 
-
+ob_start ();
 $html2pdf = new \HTML2PDF ( 'L', 'LETTER', 'es' );
-//  echo $textos;
-// $html2pdf->pdf->SetDisplayMode('fullpage');
+
+$html2pdf->WriteHTML ( $textos );
+
+$html2pdf->Output ( 'Compra.pdf', 'D' );
 
 
-$res = $html2pdf->WriteHTML ( $textos );
-
-ob_end_clean();
-$html2pdf->Output ( 'Reporte Orden Compra.pdf', 'D' );
-
-
-exit;
 
 
 ?>
+
+
+
+
 

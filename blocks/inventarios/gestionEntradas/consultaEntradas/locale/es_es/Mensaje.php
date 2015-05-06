@@ -1,6 +1,19 @@
 <?php
 $this->idioma ["noDefinido"] = "Etiqueta no esta definida en locale/es_es/Mensaje.php";
 
+$this->idioma ["informacion_numero"] =" # Número de Entrada : ";
+
+$this->idioma ["informacion_fecha"] ="Fecha de Entrada : ";
+
+$this->idioma ["informacion_nit"] ="Nit de Proveedor : ";
+
+$this->idioma ["informacion_estado"] ="Estado de Entrada : ";
+
+$this->idioma ["informacion_proveedor"] ="Nombre y/o Razón Social Proveedor : ";
+
+
+
+
 
 $this->idioma ["fecha_inicio"] ="Fecha Inicial : ";
 $this->idioma ["fecha_inicioTitulo"] ="Seleccione Fecha Inicial";
@@ -17,8 +30,8 @@ $this->idioma ["numero_entradaM"] ="(ID)Número Entrada: ";
 
 
 
-$this->idioma ["nit"] ="Nit : ";
-$this->idioma ["nitTitulo"] ="Ingrese Nit";
+$this->idioma ["clase"] ="Clase Entrada : ";
+
 
 $this->idioma ["nitM"] ="Nit : ";
 
@@ -31,7 +44,7 @@ $this->idioma ["fecha_registroM"] ="Fecha Registro:";
 
 
 
-$this->idioma ["estado"] ="Estado de Alamacén:";
+$this->idioma ["estado"] ="Estado de Almacén:";
 $this->idioma ["estadoTitulo"] ="Seleccione Estado Almacén";
 
 

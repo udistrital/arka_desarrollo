@@ -24,8 +24,6 @@ class RegistradorOrden {
 		$this->miFuncion = $funcion;
 	}
 	function procesarFormulario() {
-		
-		
 		$conexion = "inventarios";
 		$esteRecursoDB = $this->miConfigurador->fabricaConexiones->getRecursoDB ( $conexion );
 		
@@ -34,32 +32,21 @@ class RegistradorOrden {
 		$rutaBloque = $this->miConfigurador->getVariableConfiguracion ( "raizDocumento" ) . "/blocks/inventarios/gestionEntradas/";
 		$rutaBloque .= $esteBloque ['nombre'];
 		$host = $this->miConfigurador->getVariableConfiguracion ( "host" ) . $this->miConfigurador->getVariableConfiguracion ( "site" ) . "/blocks/inventarios/gestionEntradas/" . $esteBloque ['nombre'];
-
-		if($_REQUEST ['observaciones_entrada']==''){
-				
-			redireccion::redireccionar ( 'NoObservaciones');
-				
-		}
+		
+		$i = 0;
 		
 		switch ($_REQUEST ['clase']) {
 			
 			case '1' :
 				
-				$arreglo = array (
-						$_REQUEST ['id_entradaR'],
-						$_REQUEST ['id_salida'],
-						$_REQUEST ['id_hurto'] 
-				);
-				
-				$cadenaSql = $this->miSql->getCadenaSql ( 'insertarReposicion', $arreglo );
-				$id_clase = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
+				$observacion = $_REQUEST ['observaciones_reposicion'];
+				$entrada = $_REQUEST ['id_entradaR'];
+				$salida = $_REQUEST ['id_salidaR'];
 				
 				break;
 			
 			case '2' :
-				
-				$i = 0;
-				
+				$observacion = $_REQUEST ['observaciones_donacion'];
 				foreach ( $_FILES as $key => $values ) {
 					
 					$archivo [$i] = $_FILES [$key];
@@ -67,48 +54,13 @@ class RegistradorOrden {
 				}
 				
 				$archivo = $archivo [0];
-				
-				if ($archivo) {
-					// obtenemos los datos del archivo
-					$tamano = $archivo ['size'];
-					$tipo = $archivo ['type'];
-					$archivo1 = $archivo ['name'];
-					$prefijo = substr ( md5 ( uniqid ( rand () ) ), 0, 6 );
-					
-					if ($archivo1 != "") {
-						// guardamos el archivo a la carpeta files
-						$destino1 = $rutaBloque . "/actas/" . $prefijo . "_" . $archivo1;
-						if (copy ( $archivo ['tmp_name'], $destino1 )) {
-							$status = "Archivo subido: <b>" . $archivo1 . "</b>";
-							$destino1 = $host . "/actas/" . $prefijo . "_" . $archivo1;
-						} else {
-							$status = "Error al subir el archivo";
-						}
-					} else {
-						$status = "Error al subir archivo";
-					}
-				}
-				
-				$arreglo = array (
-						$destino1,
-						$archivo1 
-				);
-				
-				$cadenaSql = $this->miSql->getCadenaSql ( 'insertarDonacion', $arreglo );
-				$id_clase = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
-				
 				break;
 			
 			case '3' :
 				
-				if($_REQUEST ['observaciones_sobrante']==''){
-					
-					redireccion::redireccionar ( 'NoObservaciones');
-					
-				}
-				
-				
-				$i = 0;
+				$observacion = $_REQUEST ['observaciones_sobrante'];
+				$entrada = $_REQUEST ['id_entradaS'];
+				$salida = $_REQUEST ['id_salidaS'];
 				
 				foreach ( $_FILES as $key => $values ) {
 					
@@ -118,47 +70,10 @@ class RegistradorOrden {
 				
 				$archivo = $archivo [1];
 				
-				if ($archivo) {
-					// obtenemos los datos del archivo
-					$tamano = $archivo ['size'];
-					$tipo = $archivo ['type'];
-					$archivo1 = $archivo ['name'];
-					$prefijo = substr ( md5 ( uniqid ( rand () ) ), 0, 6 );
-					
-					if ($archivo1 != "") {
-						// guardamos el archivo a la carpeta files
-						$destino1 = $rutaBloque . "/actas/" . $prefijo . "_" . $archivo1;
-						if (copy ( $archivo ['tmp_name'], $destino1 )) {
-							$status = "Archivo subido: <b>" . $archivo1 . "</b>";
-							$destino1 = $host . "/actas/" . $prefijo . "_" . $archivo1;
-						} else {
-							$status = "Error al subir el archivo";
-						}
-					} else {
-						$status = "Error al subir archivo";
-					}
-				}
-				
-				$arreglo = array (
-						$_REQUEST ['observaciones_sobrante'],
-						$destino1,
-						$archivo1 
-				);
-				
-				$cadenaSql = $this->miSql->getCadenaSql ( 'insertarSobrante', $arreglo );
-				$id_clase = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
-				
 				break;
 			
 			case '4' :
-				
-				if($_REQUEST ['observaciones_produccion']==''){
-						
-					redireccion::redireccionar ( 'NoObservaciones');
-						
-				}
-				$i = 0;
-				
+				$observacion = $_REQUEST ['observaciones_produccion'];
 				foreach ( $_FILES as $key => $values ) {
 					
 					$archivo [$i] = $_FILES [$key];
@@ -167,48 +82,11 @@ class RegistradorOrden {
 				
 				$archivo = $archivo [2];
 				
-				if ($archivo) {
-					// obtenemos los datos del archivo
-					$tamano = $archivo ['size'];
-					$tipo = $archivo ['type'];
-					$archivo1 = $archivo ['name'];
-					$prefijo = substr ( md5 ( uniqid ( rand () ) ), 0, 6 );
-					
-					if ($archivo1 != "") {
-						// guardamos el archivo a la carpeta files
-						$destino1 = $rutaBloque . "/actas/" . $prefijo . "_" . $archivo1;
-						if (copy ( $archivo ['tmp_name'], $destino1 )) {
-							$status = "Archivo subido: <b>" . $archivo1 . "</b>";
-							$destino1 = $host . "/actas/" . $prefijo . "_" . $archivo1;
-						} else {
-							$status = "Error al subir el archivo";
-						}
-					} else {
-						$status = "Error al subir archivo";
-					}
-				}
-				
-				$arreglo = array (
-						$_REQUEST ['observaciones_produccion'],
-						$destino1,
-						$archivo1 
-				);
-				
-				$cadenaSql = $this->miSql->getCadenaSql ( 'insertarProduccion', $arreglo );
-				$id_clase = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
-				
 				break;
 			
 			case '5' :
 				
-				if($_REQUEST ['observaciones_recuperacion']==''){
-				
-					redireccion::redireccionar ( 'NoObservaciones');
-				
-				}
-				
-				$i = 0;
-				
+				$observacion = $_REQUEST ['observaciones_recuperacion'];
 				foreach ( $_FILES as $key => $values ) {
 					
 					$archivo [$i] = $_FILES [$key];
@@ -216,88 +94,87 @@ class RegistradorOrden {
 				}
 				
 				$archivo = $archivo [3];
-				
-				if ($archivo) {
-					// obtenemos los datos del archivo
-					$tamano = $archivo ['size'];
-					$tipo = $archivo ['type'];
-					$archivo1 = $archivo ['name'];
-					$prefijo = substr ( md5 ( uniqid ( rand () ) ), 0, 6 );
-					
-					if ($archivo1 != "") {
-						// guardamos el archivo a la carpeta files
-						$destino1 = $rutaBloque . "/actas/" . $prefijo . "_" . $archivo1;
-						if (copy ( $archivo ['tmp_name'], $destino1 )) {
-							$status = "Archivo subido: <b>" . $archivo1 . "</b>";
-							$destino1 = $host . "/actas/" . $prefijo . "_" . $archivo1;
-						} else {
-							$status = "Error al subir el archivo";
-						}
-					} else {
-						$status = "Error al subir archivo";
-					}
-				}
-				
-				$arreglo = array (
-						$_REQUEST ['observaciones_recuperacion'],
-						$destino1,
-						$archivo1 
-				);
-				
-				$cadenaSql = $this->miSql->getCadenaSql ( 'insertarRecuperacion', $arreglo );
-				$id_clase = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
-				
 				break;
-			
-			default :
 				
-				break;
 		}
+		
+		
+		
+		
+		if (isset ( $archivo )) {
+			// obtenemos los datos del archivo
+			$tamano = $archivo ['size'];
+			$tipo = $archivo ['type'];
+			$archivo1 = $archivo ['name'];
+			$prefijo = substr ( md5 ( uniqid ( rand () ) ), 0, 6 );
+			
+			if ($archivo1 != "") {
+				// guardamos el archivo a la carpeta files
+				$destino1 = $rutaBloque . "/actas/" . $prefijo . "_" . $archivo1;
+				if (copy ( $archivo ['tmp_name'], $destino1 )) {
+					$status = "Archivo subido: <b>" . $archivo1 . "</b>";
+					$destino1 = $host . "/actas/" . $prefijo . "_" . $archivo1;
+				} else {
+					$status = "Error al subir el archivo";
+					
+				}
+			} else {
+				$status = "Error al subir archivo";
+				
+			}
+			
+			$arreglo = array (
+					$destino1,
+					$archivo1 
+			);
+		}
+		
+		$arreglo_clase = array (
+				$observacion,
+				(isset ( $entrada )) ? $entrada : 0,
+				(isset ( $salida )) ? $salida : 0,
+				($_REQUEST ['clase'] == 1) ? $_REQUEST ['id_hurtoR'] : 0,
+				($_REQUEST ['clase'] == 3) ? $_REQUEST ['num_placa'] : 0,
+				($_REQUEST ['clase'] == 3) ? $_REQUEST ['valor_sobrante'] : 0,
+				(isset ( $destino1 )) ? $destino1 : 'NULL',
+				(isset ( $archivo1 )) ? $archivo1 : 'NULL' 
+		);
+		
+		
+		$cadenaSql = $this->miSql->getCadenaSql ( 'insertarInformación', $arreglo_clase );
+		$info_clase = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
 		
 		$fechaActual = date ( 'Y-m-d' );
 		
+			
 		$arregloDatos = array (
 				$fechaActual,
 				$_REQUEST ['vigencia'],
 				$_REQUEST ['clase'],
-				$id_clase[0][0],
-				$_REQUEST ['tipo_contrato'],
-				$_REQUEST ['numero_contrato'],
-				$_REQUEST ['fecha_contrato'],
-				$_REQUEST ['proveedor'],
-				$_REQUEST ['nit'],
-				$_REQUEST ['numero_factura'],
-				$_REQUEST ['fecha_factura'],
+				$info_clase[0][0],
+				($_REQUEST ['tipo_contrato']!='')?$_REQUEST ['tipo_contrato']:0,
+				($_REQUEST ['numero_contrato'] != '') ? $_REQUEST ['numero_contrato'] : 0,
+				($_REQUEST ['fecha_contrato']!= '') ? $_REQUEST ['fecha_contrato'] : '0001-01-01',
+				($_REQUEST ['proveedor']!= '') ?$_REQUEST ['proveedor']: 0,
+				($_REQUEST ['numero_factura']!= '') ?$_REQUEST ['numero_factura'] : 0,
+				($_REQUEST ['fecha_factura']!= '') ?$_REQUEST ['fecha_factura'] : '0001-01-01',
 				$_REQUEST ['observaciones_entrada'],
-				$_REQUEST['numero_acta_r'],
-				'1'
+				$_REQUEST ['numero_acta_r'] 
 		);
-		
-		
-		
-		
-		
-		
-		
+
 		$cadenaSql = $this->miSql->getCadenaSql ( 'insertarEntrada', $arregloDatos );
-		
-		$id_entrada = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
 
 		
+		$id_entrada= $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
 		
 		
 		if ($id_entrada) {
-				
-			redireccion::redireccionar ( 'inserto', $id_entrada[0][0] );
-		} else {
-				
-			redireccion::redireccionar ( 'noInserto');
-		}
-		
-		
 			
-		
-	
+			redireccion::redireccionar ( 'inserto', $id_entrada [0] [0] );
+		} else {
+			
+			redireccion::redireccionar ( 'noInserto' );
+		}
 	}
 	function resetForm() {
 		foreach ( $_REQUEST as $clave => $valor ) {

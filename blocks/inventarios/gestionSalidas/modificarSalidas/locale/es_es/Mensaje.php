@@ -2,7 +2,13 @@
 $this->idioma ["noDefinido"] = "Etiqueta no esta definida en locale/es_es/Mensaje.php";
 
 $this->idioma ["actualizar"] ="Actualizar Elementos : ";
-
+//-------------------
+$this->idioma ["informacion_anio"] ="Año Vigencia : ";
+$this->idioma ["informacion_numero_salida"] ="# Número Salida : ";
+$this->idioma ["informacion_numero_entrada"] ="# Número Entrada : ";
+$this->idioma ["informacion_identificacion"] ="Identificación Funcionario : ";
+$this->idioma ["informacion_funcionario"] ="Nombre Funcionario Elementos : ";
+//----------------
 $this->idioma ["dependencia"] ="Dependencia : ";
 $this->idioma ["dependenciaTitulo"] ="Seleccione Dependencia Solicitante";
 
@@ -10,7 +16,7 @@ $this->idioma ["dependenciaTitulo"] ="Seleccione Dependencia Solicitante";
 $this->idioma ["ubicacion"] ="Ubicación Específica : ";
 $this->idioma ["dependenciaTitulo"] ="Seleccione Ubicación Específica";
 
-$this->idioma ["funcionarioP"] ="&nbspFuncionario o Contratista : ";
+$this->idioma ["funcionarioP"] ="&nbspIdentificación :<br>Y/O Funcionario";
 $this->idioma ["funcionarioPTitulo"] ="Funcionario o Contratista";
 
 $this->idioma ["identificacion"] ="&nbspCedula : ";

@@ -75,6 +75,23 @@ class SesionSql {
             case "verificarNivelUsuario" :
                 $this->cadena_sql [$indice] = "SELECT tipo FROM " . $this->prefijoTablas . "usuario WHERE id_usuario='" . $parametro . "' ";
                 break;
+                
+            case "idPagina" :
+               	$this->cadena_sql [$indice] = "SELECT id_pagina FROM " . $this->prefijoTablas . "pagina WHERE nombre='" . $parametro . "' ";
+               	break;
+            
+            case "permisoUsuarioPagina" :
+            	$this->cadena_sql [$indice] = "SELECT id_pagina , id_usuario FROM " . $this->prefijoTablas . "usuario_pagina WHERE id_usuario='" . $parametro[0] . "' AND id_pagina='" . $parametro[1] . "'  ";
+            	break;
+            
+            case "verificarRolesUsuario" :
+            	$this->cadena_sql [$indice] = "SELECT rol_id FROM " . $this->prefijoTablas . "rol_usuario WHERE id_usuario='" . $parametro . "'   ";
+            	break;
+
+            case "permisoRolPagina" :
+            	$this->cadena_sql [$indice] = "SELECT id_pagina , rol_id FROM " . $this->prefijoTablas . "rol_pagina WHERE rol_id='" . $parametro[0] . "' AND id_pagina='" . $parametro[1] . "'  ";
+            	break;
+               	
             default :
         }
     

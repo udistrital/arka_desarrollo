@@ -1,6 +1,20 @@
 <?php
 $this->idioma ["noDefinido"] = "Etiqueta no esta definida en locale/es_es/Mensaje.php";
 
+$this->idioma ["informacion_numero"] =" # Número de Entrada : ";
+
+$this->idioma ["informacion_fecha"] ="Fecha de Entrada : ";
+
+$this->idioma ["informacion_nit"] ="Nit de Proveedor : ";
+
+$this->idioma ["informacion_estado"] ="Clase de Entrada : ";
+
+$this->idioma ["informacion_proveedor"] ="Nombre y/o Razón Social Proveedor : ";
+
+
+
+
+
 $this->idioma ["numero_entrada"] ="(ID)Número de Entrada : ";
 $this->idioma ["numero_entradaTitulo"] ="Ingrese Número de Entrada";
 
@@ -18,6 +32,13 @@ $this->idioma ["numero_actaTitulo"] ="Ingrese Número Acta de Recibido";
 
 $this->idioma ["nit"] ="Nit : ";
 $this->idioma ["nitTitulo"] ="Ingrese Nit";
+
+
+$this->idioma ["clase_entrada_consulta"] ="Clase de Entrada: ";
+$this->idioma ["clase_entrada_consultaTitulo"] ="Seleccione Clase de Entrada";
+
+$this->idioma ["clase"] ="Clase de Entrada: ";
+$this->idioma ["ClaseTitulo"] ="Seleccione Clase de Entrada";
 
 $this->idioma ["proveedor"] ="Proveedor : ";
 $this->idioma ["proveedorTitulo"] ="Ingrese Proveedor";
@@ -46,7 +67,7 @@ $this->idioma ["dependenciaTitulo"] ="Seleccione Dependencia Solicitante";
 $this->idioma ["ubicacion"] ="Ubicación Específica : ";
 $this->idioma ["dependenciaTitulo"] ="Seleccione Ubicación Específica";
 
-$this->idioma ["funcionario"] ="&nbspFuncionario o Contratista : ";
+$this->idioma ["funcionario"] ="&nbspIdentificación :<br>Y/O Funcionario";
 $this->idioma ["funcionarioTitulo"] ="Funcionario o Contratista";
 
 $this->idioma ["identificacion"] ="&nbspCedula : ";

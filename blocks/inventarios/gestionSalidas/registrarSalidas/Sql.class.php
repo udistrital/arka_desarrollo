@@ -149,6 +149,68 @@ class Sql extends \Sql {
 			 * Clausulas Del Caso Uso.
 			 */
 			
+			case "buscar_entradas" :
+				$cadenaSql = " SELECT id_entrada valor,id_entrada descripcion  ";
+				$cadenaSql .= " FROM entrada; ";
+				break;
+			
+			case "funcionarios" :
+				
+				$cadenaSql = "SELECT JEF_IDENTIFICADOR,JEF_INDENTIFICACION ||' - '|| JEF_NOMBRE ";
+				$cadenaSql .= "FROM JEFES_DE_SECCION ";
+				
+				break;
+			case "dependencia" :
+				$cadenaSql = " SELECT DEP_IDENTIFICADOR, DEP_IDENTIFICADOR ||' - ' ||DEP_DEPENDENCIA  ";
+				$cadenaSql .= "FROM DEPENDENCIAS ";
+				break;
+			
+			case "proveedor_informacion" :
+				$cadenaSql = " SELECT PRO_NIT,PRO_RAZON_SOCIAL  ";
+				$cadenaSql .= " FROM PROVEEDORES ";
+				$cadenaSql .= " WHERE PRO_IDENTIFICADOR='" . $variable . "'";
+				
+				break;
+			
+			case "proveedores" :
+				$cadenaSql = " SELECT PRO_IDENTIFICADOR,PRO_NIT||' - '||PRO_RAZON_SOCIAL AS proveedor ";
+				$cadenaSql .= " FROM PROVEEDORES ";
+				
+				break;
+			
+			case "consultarEntrada" :
+				$cadenaSql = "SELECT DISTINCT ";
+				$cadenaSql .= "id_entrada, fecha_registro,  ";
+				$cadenaSql .= " descripcion,proveedor   ";
+				$cadenaSql .= "FROM entrada ";
+				$cadenaSql .= "JOIN clase_entrada ON clase_entrada.id_clase = entrada.clase_entrada ";
+				// $cadenaSql .= "JOIN proveedor ON proveedor.id_proveedor = entrada.proveedor ";
+				$cadenaSql .= "WHERE 1=1 ";
+				if ($variable [0] != '') {
+					$cadenaSql .= " AND id_entrada = '" . $variable [0] . "'";
+				}
+				
+				if ($variable [1] != '') {
+					$cadenaSql .= " AND fecha_registro BETWEEN CAST ( '" . $variable [1] . "' AS DATE) ";
+					$cadenaSql .= " AND  CAST ( '" . $variable [2] . "' AS DATE)  ";
+				}
+				
+				if ($variable [3] != '') {
+					$cadenaSql .= " AND clase_entrada = '" . $variable [3] . "'";
+				}
+				if ($variable [4] != '') {
+					$cadenaSql .= " AND entrada.proveedor = '" . $variable [4] . "'";
+				}
+				
+				break;
+			
+			case "clase_entrada" :
+				
+				$cadenaSql = "SELECT ";
+				$cadenaSql .= "id_clase, descripcion  ";
+				$cadenaSql .= "FROM clase_entrada;";
+				break;
+			
 			case "consultarEntrada" :
 				
 				$cadenaSql = "SELECT DISTINCT ";
@@ -157,29 +219,29 @@ class Sql extends \Sql {
 				$cadenaSql .= "FROM entrada ";
 				$cadenaSql .= "JOIN proveedor ON proveedor.id_proveedor = entrada.proveedor ";
 				$cadenaSql .= "WHERE 1=1 AND id_salida ='0' ";
+				
 				if ($variable [0] != '') {
-					$cadenaSql .= " AND fecha_registro BETWEEN CAST ( '" . $variable [4] . "' AS DATE) ";
-					$cadenaSql .= " AND  CAST ( '" . $variable [5] . "' AS DATE)  ";
-				}
-				if ($variable [2] != '') {
 					$cadenaSql .= " AND id_entrada = '" . $variable [0] . "'";
 				}
-				if ($variable [3] != '') {
+				if ($variable [1] != '') {
 					$cadenaSql .= " AND  nit= '" . $variable [1] . "'";
 				}
-				if ($variable [4] != '') {
+				if ($variable [2] != '') {
 					$cadenaSql .= " AND  nombre= '" . $variable [3] . "'";
 				}
 				
+				if ($variable [3] != '') {
+					$cadenaSql .= " AND fecha_registro BETWEEN CAST ( '" . $variable [3] . "' AS DATE) ";
+					$cadenaSql .= " AND  CAST ( '" . $variable [4] . "' AS DATE)  ";
+				}
 				break;
 			
 			case "consultarEntradaParticular" :
 				
 				$cadenaSql = "SELECT DISTINCT ";
-				$cadenaSql .= "fecha_registro, vigencia, clase_entrada, tipo_entrada, ";
-				$cadenaSql .= "	tipo_contrato, numero_contrato, fecha_contrato, proveedor, nit,  ";
-				$cadenaSql .= "numero_factura, fecha_factura, observaciones, acta_recibido  ";
+				$cadenaSql .= "fecha_registro, vigencia, clase_entrada, descripcion ";
 				$cadenaSql .= "FROM entrada ";
+				$cadenaSql .= "JOIN clase_entrada ON clase_entrada.id_clase = entrada.clase_entrada ";
 				$cadenaSql .= "WHERE id_entrada='" . $variable . "';";
 				
 				break;
@@ -200,19 +262,27 @@ class Sql extends \Sql {
 				
 				break;
 			
+			case "consultar_nivel_inventario" :
+				
+				$cadenaSql = "SELECT id_catalogo,(codigo||' - '||nombre) AS nivel ";
+				$cadenaSql .= "FROM catalogo_elemento ;";
+				
+				break;
+			
 			case "consulta_elementos" :
 				
-				$cadenaSql = "SELECT id_items, item, cantidad, descripcion ";
-				$cadenaSql .= "FROM items_actarecibido ";
-				$cadenaSql .= "WHERE id_acta='" . $variable . "' ";
-				$cadenaSql .= "AND  id_salida='0';";
+				$cadenaSql = "SELECT id_elemento, (codigo||' - '||nombre) AS item, cantidad, descripcion ";
+				$cadenaSql .= "FROM elemento ";
+				$cadenaSql .= "JOIN catalogo_elemento ON id_catalogo = nivel ";
+				$cadenaSql .= "WHERE id_entrada='" . $variable . "' ";
+				
 				
 				break;
 			
 			case "consultar_dependencia" :
 				
-				$cadenaSql = "SELECT id_dependecia, (id_dependecia||' - '|| nombre) AS Dependencia ";
-				$cadenaSql .= "FROM dependecia ;";
+				$cadenaSql = "SELECT id_dependencia, (id_dependencia||' - '|| nombre) AS Dependencia ";
+				$cadenaSql .= "FROM dependencia ;";
 				
 				break;
 			
@@ -255,7 +325,6 @@ class Sql extends \Sql {
 				$cadenaSql .= "WHERE id_items='" . $variable [0] . "';";
 				
 				break;
-			
 			case "actualizar_entrada" :
 				$cadenaSql = "UPDATE entrada ";
 				$cadenaSql .= "SET id_salida ='TRUE'  ";
@@ -263,9 +332,43 @@ class Sql extends \Sql {
 				
 				break;
 			
-			// _________________________________________________
+			case "busqueda_elementos_individuales" :
+				$cadenaSql = "SELECT id_elemento_ind  id ";
+				$cadenaSql .= "FROM elemento_individual  ";
+				$cadenaSql .= "WHERE id_elemento_gen ='" . $variable . "' ";
+				$cadenaSql .= "AND  id_salida IS  NUll ";
+				$cadenaSql .= "ORDER BY id ASC;";
+				break;
 			
-					}
+			case "busqueda_elementos_individuales_cantidad_restante" :
+				$cadenaSql = "SELECT id_elemento_ind  id ";
+				$cadenaSql .= "FROM elemento_individual  ";
+				$cadenaSql .= "WHERE id_elemento_gen ='" . $variable . "'";
+				$cadenaSql .= "AND  id_salida IS  NUll ";
+				$cadenaSql .= "ORDER BY id ASC;";
+				
+				break;
+			
+			case "actualizar_elementos_individuales" :
+				$cadenaSql = "UPDATE elemento_individual ";
+				$cadenaSql .= "SET id_salida='" . $variable [1] . "' ";
+				$cadenaSql .= "WHERE id_elemento_ind ='" . $variable [0] . "';";
+				
+				break;
+				
+		
+			case "consulta_elementos_validar" :
+				$cadenaSql = "SELECT COUNT(id_elemento_ind) ";
+				$cadenaSql .= " FROM elemento_individual  ";
+				$cadenaSql .= "JOIN elemento el on id_elemento=id_elemento_gen  ";
+				$cadenaSql .= "WHERE id_salida IS NULL ";
+     			$cadenaSql .= "AND el.id_entrada='" . $variable. "' ";
+				
+				
+				break;
+			
+			// _________________________________________________
+		}
 		return $cadenaSql;
 	}
 }

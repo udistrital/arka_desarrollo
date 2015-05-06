@@ -142,7 +142,7 @@ class RegistradorOrden {
 		
 		if ($elemento) {
 				
-			redireccion::redireccionar ( 'inserto', $placa[0][0] );
+			redireccion::redireccionar ( 'inserto', $_REQUEST['id_elemento'] );
 		} else {
 				
 			redireccion::redireccionar ( 'noInserto', $datos );

@@ -311,7 +311,8 @@ if ($_REQUEST ['funcion'] == 'tablaItems') {
 					$row ['cantidad'],
 					$row ['descripcion'],
 					$row ['valor_unitario'],
-					$row ['valor_total'] 
+					$row ['valor_total'],
+					$row ['descuento'] 
 			);
 			$i ++;
 		}
@@ -333,6 +334,7 @@ if ($_REQUEST ['funcion'] == 'tablaItems') {
 				' ',
 				'0.00',
 				' ',
+				'0.00',
 				'0.00',
 				'0.00' 
 		);
@@ -358,6 +360,7 @@ if ($_REQUEST ['funcion'] == 'AgregarItem') {
 				$_GET ['descripcion'],
 				$_GET ['valor_unitario'],
 				$_GET ['cantidad'] * $_GET ['valor_unitario'],
+				$_GET ['descuento'],
 				$_REQUEST ['tiempo'] 
 		);
 	} else {
@@ -369,6 +372,7 @@ if ($_REQUEST ['funcion'] == 'AgregarItem') {
 				$_GET ['descripcion'],
 				$_GET ['valor_unitario'],
 				$_GET ['cantidad'] * $_GET ['valor_unitario'],
+				$_GET ['descuento'],
 				$_REQUEST ['tiempo'] 
 		);
 	}
@@ -391,8 +395,10 @@ if ($_REQUEST ['funcion'] == 'EliminarItem') {
 
 if ($_REQUEST ['funcion'] == 'SeleccionProveedor') {
 	
+	$conexion = "sicapital";
+	$esteRecursoDBO = $this->miConfigurador->fabricaConexiones->getRecursoDB ( $conexion );
 	$cadenaSql = $this->sql->getCadenaSql ( 'informacion_proveedor', $_REQUEST ['personaje'] );
-	$resultadoItems = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
+	$resultadoItems = $esteRecursoDBO->ejecutarAcceso ( $cadenaSql, "busqueda" );
 	
 	$resultado = json_encode ( $resultadoItems [0] );
 	
@@ -401,8 +407,12 @@ if ($_REQUEST ['funcion'] == 'SeleccionProveedor') {
 
 if ($_REQUEST ['funcion'] == 'SeleccionDependencia') {
 	
+	$conexion = "sicapital";
+	$esteRecursoDBO = $this->miConfigurador->fabricaConexiones->getRecursoDB ( $conexion );
+	
 	$cadenaSql = $this->sql->getCadenaSql ( 'informacion_dependencia', $_REQUEST ['dependencia'] );
-	$resultadoItems = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
+	
+	$resultadoItems = $esteRecursoDBO->ejecutarAcceso ( $cadenaSql, "busqueda" );
 	
 	$resultado = json_encode ( $resultadoItems [0] );
 	
@@ -411,8 +421,11 @@ if ($_REQUEST ['funcion'] == 'SeleccionDependencia') {
 
 if ($_REQUEST ['funcion'] == 'SeleccionOrdenador') {
 	
+	$conexion = "sicapital";
+	$esteRecursoDBO = $this->miConfigurador->fabricaConexiones->getRecursoDB ( $conexion );
+	
 	$cadenaSql = $this->sql->getCadenaSql ( 'informacion_ordenador', $_REQUEST ['ordenador'] );
-	$resultadoItems = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
+	$resultadoItems = $esteRecursoDBO->ejecutarAcceso ( $cadenaSql, "busqueda" );
 	
 	$resultado = json_encode ( $resultadoItems [0] );
 	
@@ -421,8 +434,11 @@ if ($_REQUEST ['funcion'] == 'SeleccionOrdenador') {
 
 if ($_REQUEST ['funcion'] == 'SeleccionCargo') {
 	
+	$conexion = "sicapital";
+	$esteRecursoDBO = $this->miConfigurador->fabricaConexiones->getRecursoDB ( $conexion );
+	
 	$cadenaSql = $this->sql->getCadenaSql ( 'informacion_cargo_jefe', $_REQUEST ['cargo'] );
-	$resultadoItems = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
+	$resultadoItems = $esteRecursoDBO->ejecutarAcceso ( $cadenaSql, "busqueda" );
 	
 	$resultado = json_encode ( $resultadoItems [0] );
 	
@@ -434,11 +450,10 @@ if ($_REQUEST ['funcion'] == 'CalItem') {
 	$cadenaSql = $this->sql->getCadenaSql ( 'datos_item', $_REQUEST ['tiempo'] );
 	$resultadoItems = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
 	
-	
-	if ($resultadoItems){
+	if ($resultadoItems) {
 		$valor = 0;
 		foreach ( $resultadoItems as $n ) {
-		
+			
 			$valor = $valor + $n [0];
 		}
 		
@@ -448,36 +463,117 @@ if ($_REQUEST ['funcion'] == 'CalItem') {
 		
 		$resultado = array (
 				$valor,
-				$Letras
+				$Letras 
 		);
 		
 		$resultado = json_encode ( $resultado );
-		
-	}else{
+	} else {
 		
 		$resultado = array (
 				'',
-				''
+				'' 
 		);
 		$resultado = json_encode ( $resultado );
-		
-		
 	}
-	
 	
 	echo $resultado;
 }
 
 if ($_REQUEST ['funcion'] == 'letrasNumeros') {
-
+	
 	$funcionLetras = new EnLetras ();
-
-	$Letras =  $funcionLetras->ValorEnLetras ( $_REQUEST ['valor'], 'Pesos' ) ;
-
+	
+	$Letras = $funcionLetras->ValorEnLetras ( $_REQUEST ['valor'], 'Pesos' );
+	
 	$Letras = json_encode ( $Letras );
-
+	
 	echo $Letras;
 }
+
+if ($_REQUEST ['funcion'] == 'disponibilidades') {
+	
+	$conexion = "sicapital";
+	$esteRecursoDBO = $this->miConfigurador->fabricaConexiones->getRecursoDB ( $conexion );
+	
+	$cadenaSql = $this->sql->getCadenaSql ( 'buscar_disponibilidad', $_REQUEST ['vigencia'] );
+	$resultadoItems = $esteRecursoDBO->ejecutarAcceso ( $cadenaSql, "busqueda" );
+	
+	$resultado = json_encode ( $resultadoItems );
+	
+	echo $resultado;
+}
+
+if ($_REQUEST ['funcion'] == 'Infodisponibilidades') {
+	
+	$conexion = "sicapital";
+	
+	$esteRecursoDBO = $this->miConfigurador->fabricaConexiones->getRecursoDB ( $conexion );
+	$arreglo = array (
+			$_REQUEST ['disponibilidad'],
+			$_REQUEST ['vigencia'] 
+	);
+	
+	$cadenaSql = $this->sql->getCadenaSql ( 'info_disponibilidad', $arreglo );
+	$resultadoItems = $esteRecursoDBO->ejecutarAcceso ( $cadenaSql, "busqueda" );
+	
+	
+	$resultado = json_encode ( $resultadoItems [0]);
+	
+	echo $resultado;
+}
+
+
+if ($_REQUEST ['funcion'] == 'registroPresupuestal') {
+
+	$conexion = "sicapital";
+	$esteRecursoDBO = $this->miConfigurador->fabricaConexiones->getRecursoDB ( $conexion );
+
+	$cadenaSql = $this->sql->getCadenaSql ( 'buscar_registro', $_REQUEST ['vigencia'] );
+	
+	$resultadoItems = $esteRecursoDBO->ejecutarAcceso ( $cadenaSql, "busqueda" );
+
+	$resultado = json_encode ( $resultadoItems );
+
+	echo $resultado;
+}
+
+if ($_REQUEST ['funcion'] == 'Inforegistro') {
+
+	$conexion = "sicapital";
+
+	$esteRecursoDBO = $this->miConfigurador->fabricaConexiones->getRecursoDB ( $conexion );
+	$arreglo = array (
+			$_REQUEST ['disponibilidad'],
+			$_REQUEST ['vigencia']
+	);
+
+	$cadenaSql = $this->sql->getCadenaSql ( 'info_registro', $arreglo );
+	$resultadoItems = $esteRecursoDBO->ejecutarAcceso ( $cadenaSql, "busqueda" );
+
+
+	$resultado = json_encode ( $resultadoItems [0]);
+
+	echo $resultado;
+}
+
+
+
+if ($_REQUEST ['funcion'] == 'consultarContratistas') {
+
+	$conexion = "sicapital";
+
+	$esteRecursoDBO = $this->miConfigurador->fabricaConexiones->getRecursoDB ( $conexion );
+
+
+	$cadenaSql = $this->sql->getCadenaSql ( 'buscar_contratista', $_REQUEST['vigencia'] );
+	$resultadoItems = $esteRecursoDBO->ejecutarAcceso ( $cadenaSql, "busqueda" );
+
+
+	$resultado = json_encode ( $resultadoItems);
+
+	echo $resultado;
+}
+
 
 
 ?>

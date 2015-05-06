@@ -82,6 +82,15 @@ $autocompletar = $url.$cadena10;
 
 <script type='text/javascript'>
 
+    $(function () {
+        $("#idGrupo").select2({
+            placeholder: "Search for a repository",
+            minimumInputLength: 2,
+        });
+    });
+
+
+
 var listaIds =  [];
 var listaNombres = [];
 var listaAlias = [];
@@ -517,6 +526,7 @@ var listaAlias = [];
 		}
 		$(document).tooltip();
 	}
+
 
 
 </script>

@@ -1,6 +1,62 @@
 <?php
 $this->idioma ["noDefinido"] = "Etiqueta no esta definida en locale/es_es/Mensaje.php";
 
+
+//________________
+$this->idioma ["vigencia_registro"] ="Vigencia Registro : ";
+$this->idioma ["vigencia_registroTitulo"] ="Seleccione Vigencia Registro";
+
+$this->idioma ["registro"] ="Número Registro : ";
+$this->idioma ["registroTitulo"] ="Seleccione Número Registro";
+
+$this->idioma ["valor_registro"] ="Valor  Registro ($): ";
+$this->idioma ["valor_registroTitulo"] ="Valor Registro Presupuestal";
+
+
+$this->idioma ["fecha_registro"] ="Fecha Registro : ";
+$this->idioma ["fecha_registroTitulo"] ="Fecha de Registro Presupuestal";
+
+
+$this->idioma ["valorL_registro"] ="Valor en Letras : ";
+$this->idioma ["valorL_registroTitulo"] ="Valor en Letras  Registro Presupuestal";
+
+
+
+//_______________________________________
+
+
+
+
+
+
+$this->idioma ["vigencia_disponibilidad"] ="Vigencia Disponibilidad : ";
+$this->idioma ["vigencia_disponibilidadTitulo"] ="Seleccione Vigencia";
+
+$this->idioma ["diponibilidad"] ="Número Disponibilidad : ";
+$this->idioma ["diponibilidadTitulo"] ="Seleccione Número Disponibilidad";
+
+
+$this->idioma ["valorLetras_disponibilidad"] ="Valor en Letras: ";
+$this->idioma ["valorLetras_disponibilidadTitulo"] ="Valor en Letras Disponibilidad Presupuestal";
+
+
+$this->idioma ["valor_disponibilidad"] ="Valor Disponibilidad ($): ";
+$this->idioma ["valor_disponibilidadTitulo"] ="Valor Disponibilidad Presupuestal";
+
+$this->idioma ["fecha_diponibilidad"] ="Fecha Disponibilidad : ";
+$this->idioma ["fecha_diponibilidadTitulo"] ="Ingrese Fecha Disponibilidad Presupuestal (YYYY-MM-DD)";
+
+
+//____________________________________________________________________________________
+
+
+
+
+$this->idioma ["vigencia_contratista"] ="&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspVigencia Contratista: ";
+$this->idioma ["vigencia_contratistaTitulo"] ="Seleccione Vigencia Contratista";
+
+
+
 $this->idioma ["selec_dependencia"] ="Dependencia : ";
 $this->idioma ["selec_dependenciaTitulo"] ="Seleccione Dependencia";
 
@@ -13,8 +69,8 @@ $this->idioma ["total_preliminar"] = "SubTotal  ($):";
 $this->idioma ["total"] = "Total ($):";
 $this->idioma ["totalTitulo"] = "Ingrese Total: ";
 
-$this->idioma ["iva"] = "Aplicar Iva 16% :";
-$this->idioma ["ivaTitulo"] = "Aplicar Iva 16%";
+$this->idioma ["iva"] = "Aplicar Iva :";
+$this->idioma ["ivaTitulo"] = "Aplicar Iva ";
 
 
 $this->idioma ["total_iva"] = "Total Iva ($):"; 
@@ -23,20 +79,14 @@ $this->idioma ["total_iva"] = "Total Iva ($):";
 $this->idioma ["reg_proveedor"] ="Registrar Proveedor: ";
 $this->idioma ["reg_proveedorTitulo"] ="Seleccione Proveedor";
 
-$this->idioma ["diponibilidad"] ="Disponibilidad Presupuestal : ";
-$this->idioma ["diponibilidadTitulo"] ="Ingrese Disponibilidad Presupuestal";
 
 $this->idioma ["selec_proveedor"] ="&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspProveedor : ";
 $this->idioma ["selec_proveedorTitulo"] ="Seleccione Proveedor";
 
 
 
-
-$this->idioma ["fecha_diponibilidad"] ="Fecha Disponibilidad : ";
-$this->idioma ["fecha_diponibilidadTitulo"] ="Ingrese Fecha Disponibilidad Presupuestal (YYYY-MM-DD)";
-
-$this->idioma ["proveedor"] ="&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspNombre o Razón Social:";
-$this->idioma ["proveedorTitulo"] ="Ingrese Nombre Proveedor";
+$this->idioma ["proveedor"] ="&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspRepresentante Legal:";
+$this->idioma ["proveedorTitulo"] ="Ingrese Representante Legal";
 
 $this->idioma ["nitProveedor"] ="&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspNIT :";
 $this->idioma ["nitProveedorTitulo"] ="Ingrese NIT Proveedor";
@@ -102,12 +152,19 @@ $this->idioma ["tiempoEntregaTitulo"] ="Ingrese Tiempo de Entrega";
 $this->idioma ["formaPago"] ="&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspForma de Pago : ";
 $this->idioma ["formaPagoTitulo"] ="Ingrese Forma de Pago";
 
-$this->idioma ["supervision"] ="&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspSupervisado Por : ";
+$this->idioma ["supervision"] ="&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspSupervisor : ";
 $this->idioma ["supervisionTitulo"] ="Ingrese Supervisador";
 
 
-$this->idioma ["inhabilidades"] ="&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspInhabilidades y/o Incompatibilidades : ";
+$this->idioma ["inhabilidades"] ="Inhabilidades y/o Incompatibilidades : ";
 $this->idioma ["inhabilidadesTitulo"] ="Ingrese Inhabilidades y/o Incompatibilidades";
+
+
+$this->idioma ["informacion_destino"] ="&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspNota: En la entrega de bienes muebles se debe coordinar con el Jefe de Almacén y el Supervisor del Contrato. ";
+
+$this->idioma ["informacion_tiempo"] ="&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspNota: Tiempo de Entrega en dias a partir de la firma del contrato.";
+
+
 
 
 

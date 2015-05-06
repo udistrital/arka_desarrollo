@@ -30,28 +30,71 @@ class RegistradorOrden {
 		$esteRecursoDB = $this->miConfigurador->fabricaConexiones->getRecursoDB ( $conexion );
 		
 		$arreglo = array (
-				$_REQUEST ['funcionario'],
-				$_REQUEST ['identificacion'] 
-		);
-		
-		$cadenaSql = $this->miSql->getCadenaSql ( 'insertar_funcionario', $arreglo );
-		echo $cadenaSql;
-		$id_funcionario = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
-		
-		$arreglo = array (
 				$fechaActual,
 				$_REQUEST ['dependencia'],
 				$_REQUEST ['ubicacion'],
-				$id_funcionario [0] [0],
+				$_REQUEST ['funcionario'],
 				$_REQUEST ['observaciones'],
 				$_REQUEST ['numero_entrada'] 
 		);
 		
 		$cadenaSql = $this->miSql->getCadenaSql ( 'insertar_salida', $arreglo );
-		echo $cadenaSql;
+		
 		$id_salida = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
 		
 		$items = unserialize ( $_REQUEST ['items'] );
+		$cantidad = unserialize ( $_REQUEST ['cantidad'] );
+		
+		foreach ( $items as $i ) {
+			$cadenaSql = $this->miSql->getCadenaSql ( 'busqueda_elementos_individuales', $i );
+			
+			$id_elem_ind [$i] = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
+		}
+		
+		
+
+		
+		foreach ( $cantidad as $i ) {
+			
+			if ($i != '') {
+				$contador_ele_ind = $i;
+			}
+		}
+		
+		foreach ( $id_elem_ind as $i => $e ) {
+			
+			
+			
+
+			if (count ( $e ) > 1) {
+				
+				for($i = 0; $i < $contador_ele_ind; $i ++) {
+					
+					$arreglo = array (
+							$e [$i] [0],
+							$id_salida [0] [0] 
+					);
+					
+					$cadenaSql = $this->miSql->getCadenaSql ( 'actualizar_elementos_individuales', $arreglo );
+					
+					$actualizo_elem = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "acceso" );
+				
+				}
+				
+			}
+			if (count ( $e ) == 1) {
+				$arreglo = array (
+						$e [0] [0],
+						$id_salida [0] [0] 
+				);
+				
+				
+				$cadenaSql = $this->miSql->getCadenaSql ( 'actualizar_elementos_individuales', $arreglo );
+				
+				$actualizo_elem = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "acceso" );
+			}
+		}
+		
 		
 		foreach ( $items as $i ) {
 			
@@ -61,17 +104,18 @@ class RegistradorOrden {
 			);
 			
 			$cadenaSql = $this->miSql->getCadenaSql ( 'insertar_salida_item', $arreglo );
-			echo $cadenaSql;
+			
 			$inserto = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "acceso" );
 		}
 		
-		var_dump ( $inserto );
-// 		exit ();
 		$arreglo = array (
 				"salida" => $id_salida [0] [0],
 				"entrada" => $_REQUEST ['numero_entrada'],
 				"fecha" => $fechaActual 
 		);
+		
+		
+		
 		
 		if ($inserto) {
 			

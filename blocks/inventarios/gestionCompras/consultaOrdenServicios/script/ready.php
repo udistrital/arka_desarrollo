@@ -30,7 +30,17 @@
                  } );
 
 
-   
+         $("#<?php echo $this->campoSeguro('vigencia_disponibilidad')?>").select2();
+		$('#<?php echo $this->campoSeguro('diponibilidad')?>').select2();
+		
+		$("#<?php echo $this->campoSeguro('vigencia_registro')?>").select2();
+		$("#<?php echo $this->campoSeguro('registro')?>").select2(); 
+		
+		$("#<?php echo $this->campoSeguro('vigencia_contratista')?>").select2();
+		$('#<?php echo $this->campoSeguro('nombreContratista')?>').attr("style", "width: 60px '");
+
+        
+        
                  
                  
         $('#<?php echo $this->campoSeguro('fecha_inicio')?>').datepicker({
@@ -208,7 +218,11 @@
 	   $("#<?php echo $this->campoSeguro('contratista_consulta')?>").select2();
 	   
 	   $("#<?php echo $this->campoSeguro('dependencia_solicitante')?>").select2();
-	   $("#<?php echo $this->campoSeguro('rubro')?>").select2();
+	   $("#<?php echo $this->campoSeguro('rubro')?>").select2({
+			   	 placeholder: "Search for a repository",
+			   	 minimumInputLength: 5,
+			
+			       });
 	   $("#<?php echo $this->campoSeguro('dependencia_supervisor')?>").select2();
 	   $("#<?php echo $this->campoSeguro('asignacionOrdenador')?>").select2();
 	   $("#<?php echo $this->campoSeguro('cargoJefeSeccion')?>").select2();

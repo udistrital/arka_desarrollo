@@ -75,8 +75,7 @@ class registrarForm {
 
         $cadenaSql = $this->miSql->getCadenaSql('consultarElementosSupervisor', $variables);
         $elementos_supervisor = $esteRecursoDB->ejecutarAcceso($cadenaSql, "busqueda");
-
-        // ---------------- SECCION: Parámetros Generales del Formulario ----------------------------------
+              // ---------------- SECCION: Parámetros Generales del Formulario ----------------------------------
         $esteCampo = $esteBloque ['nombre'];
         $atributos ['id'] = $esteCampo;
         $atributos ['nombre'] = $esteCampo;

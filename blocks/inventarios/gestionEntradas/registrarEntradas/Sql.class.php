@@ -151,11 +151,42 @@ class Sql extends \Sql {
 			
 			// _________________________________________________
 			
-			// SELECT id_actarecibido, dependencia, fecha_recibido, tipo_bien, nitproveedor,
-			// proveedor, numfactura, fecha_factura, tipocomprador, tipoaccion,
-			// fecha_revision, revisor, observacionesacta, estado_registro,
-			// fecha_registro
-			// FROM registro_actarecibido;
+			case "proveedores" :
+				$cadenaSql = " SELECT PRO_IDENTIFICADOR,PRO_NIT||' - '||PRO_RAZON_SOCIAL AS proveedor ";
+				$cadenaSql .= " FROM PROVEEDORES ";
+				
+				break;
+			
+			case "insertarInformación" :
+				$cadenaSql = " INSERT INTO info_clase_entrada(  ";
+				$cadenaSql .= " observacion, id_entrada, id_salida, id_hurto,";
+				$cadenaSql .= " num_placa, val_sobrante, ruta_archivo, nombre_archivo)";
+				$cadenaSql .= " VALUES (";
+				$cadenaSql .= "'" . $variable [0] . "',";
+				$cadenaSql .= "'" . $variable [1] . "',";
+				$cadenaSql .= "'" . $variable [2] . "',";
+				$cadenaSql .= "'" . $variable [3] . "',";
+				$cadenaSql .= "'" . $variable [4] . "',";
+				$cadenaSql .= "'" . $variable [5] . "',";
+				$cadenaSql .= "'" . $variable [6] . "',";
+				$cadenaSql .= "'" . $variable [7] . "') ";
+				$cadenaSql .= "RETURNING  id_info_clase; ";
+				
+				break;
+			
+			case "seleccion_proveedor" :
+				$cadenaSql = " SELECT ";
+				$cadenaSql .= " id_proveedor,";
+				$cadenaSql .= " nit_proveedor ||' - '|| razon_social as proveedor ";
+				$cadenaSql .= " FROM";
+				$cadenaSql .= " proveedor  ";
+				$cadenaSql .= " UNION SELECT ";
+				$cadenaSql .= " id_proveedor_n,";
+				$cadenaSql .= " nit_proveedor ||' - '|| razon_social as proveedor ";
+				$cadenaSql .= " FROM";
+				$cadenaSql .= " proveedor_nuevo ;";
+				
+				break;
 			
 			case "consultarActa" :
 				
@@ -164,19 +195,20 @@ class Sql extends \Sql {
 				$cadenaSql .= "nitproveedor, proveedor  ";
 				$cadenaSql .= "FROM registro_actarecibido ";
 				$cadenaSql .= "WHERE 1=1";
-				if ($variable [3] != '') {
-					$cadenaSql .= " AND fecha_registro BETWEEN CAST ( '" . $variable [3] . "' AS DATE) ";
-					$cadenaSql .= " AND  CAST ( '" . $variable [4] . "' AS DATE)  ";
-				}
+				
 				if ($variable [0] != '') {
 					$cadenaSql .= " AND id_actarecibido = '" . $variable [0] . "'";
 				}
+				
 				if ($variable [1] != '') {
-					$cadenaSql .= " AND  nitproveedor= '" . $variable [1] . "'";
+					$cadenaSql .= " AND  proveedor= '" . $variable [1] . "'";
 				}
+				
 				if ($variable [2] != '') {
-					$cadenaSql .= " AND  proveedor= '" . $variable [2] . "'";
+					$cadenaSql .= " AND fecha_registro BETWEEN CAST ( '" . $variable [2] . "' AS DATE) ";
+					$cadenaSql .= " AND  CAST ( '" . $variable [3] . "' AS DATE)  ";
 				}
+				
 				$cadenaSql .= " ; ";
 				
 				break;
@@ -194,6 +226,14 @@ class Sql extends \Sql {
 				$cadenaSql = "SELECT ";
 				$cadenaSql .= "id_tipo, descripcion  ";
 				$cadenaSql .= "FROM tipo_contrato;";
+				
+				break;
+			
+			case "tipo_contrato_avance" :
+				
+				$cadenaSql = "SELECT id_tipo, descripcion ";
+				$cadenaSql .= "FROM arka_inventarios.tipo_contrato ";
+				$cadenaSql .= "WHERE id_tipo<>1;";
 				
 				break;
 			
@@ -264,16 +304,12 @@ class Sql extends \Sql {
 				
 				break;
 			
-				
-				
-
-				
 			case "insertarEntrada" :
 				$cadenaSql = " INSERT INTO ";
 				$cadenaSql .= " entrada(";
-				$cadenaSql .= " fecha_registro, vigencia, clase_entrada, tipo_entrada, ";
-				$cadenaSql .= " tipo_contrato, numero_contrato, fecha_contrato, proveedor, nit, ";
-				$cadenaSql .= " numero_factura, fecha_factura, observaciones, acta_recibido,estado_entrada)";
+				$cadenaSql .= " fecha_registro, vigencia, clase_entrada, info_clase, ";
+				$cadenaSql .= " tipo_contrato, numero_contrato, fecha_contrato, proveedor, numero_factura, ";
+				$cadenaSql .= " fecha_factura, observaciones, acta_recibido)";
 				$cadenaSql .= " VALUES (";
 				$cadenaSql .= "'" . $variable [0] . "',";
 				$cadenaSql .= "'" . $variable [1] . "',";
@@ -286,9 +322,7 @@ class Sql extends \Sql {
 				$cadenaSql .= "'" . $variable [8] . "',";
 				$cadenaSql .= "'" . $variable [9] . "',";
 				$cadenaSql .= "'" . $variable [10] . "',";
-				$cadenaSql .= "'" . $variable [11] . "',";
-				$cadenaSql .= "'" . $variable [12] . "',";
-				$cadenaSql .= "'" . $variable [13] . "') ";
+				$cadenaSql .= "'" . $variable [11] . "') ";
 				$cadenaSql .= "RETURNING  id_entrada; ";
 				
 				break;

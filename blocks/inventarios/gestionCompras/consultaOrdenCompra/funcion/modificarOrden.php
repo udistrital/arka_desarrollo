@@ -133,15 +133,38 @@ class RegistradorOrden {
 			$_REQUEST ['selec_proveedor']=$_REQUEST ['selec_proveedor'];
 				
 				
+			
+			
+			
 		}
+		$arreglo = array (
+				$_REQUEST ['vigencia_disponibilidad'],
+				$_REQUEST ['diponibilidad'],
+				$_REQUEST ['valor_disponibilidad'],
+				$_REQUEST ['fecha_diponibilidad'],
+				$_REQUEST ['valorLetras_disponibilidad'],
+				$_REQUEST ['vigencia_registro'],
+				$_REQUEST ['registro'],
+				$_REQUEST ['valor_registro'],
+				$_REQUEST ['fecha_registro'],
+				$_REQUEST ['valorL_registro'],
+				$_REQUEST ['infoPresupuestal']
+		);
+		
+		
+		
+		
+		$cadenaSql = $this->miSql->getCadenaSql ( 'actualizarPresupuestal', $arreglo );
+		
+		$inf_pre = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "acceso" );
+		
+		
 		
 		
 
 				// Actualizar Orden
 		
 		$datosOrden = array (
-				$_REQUEST ['diponibilidad'],
-				$_REQUEST ['fecha_diponibilidad'],
 				$_REQUEST ['rubro'],
 				$_REQUEST ['obligacionesProveedor'],
 				$_REQUEST ['obligacionesContratista'],
@@ -161,12 +184,12 @@ class RegistradorOrden {
 				$archivo1,
 				$_REQUEST ['selec_dependencia'],
 				$_REQUEST ['nombreContratista'],
-				$_REQUEST ['id_jefe_oculto'],
 				$_REQUEST ['id_ordenador_oculto'],
 				$Subtotal,
 				$iva,
 				$total,
 				$_REQUEST['valorLetras_registro'],
+				$_REQUEST['vigencia_contratista'],
 				$_REQUEST ['numero_orden'] 
 		);
 		
@@ -175,6 +198,8 @@ class RegistradorOrden {
 		$cadenaSql = $this->miSql->getCadenaSql ( 'actualizarOrden', $datosOrden );
 		
 		$id_orden = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
+		
+		
 		
 				
 		
@@ -191,7 +216,9 @@ class RegistradorOrden {
 					$contenido ['cantidad'],
 					$contenido ['descripcion'],
 					$contenido ['valor_unitario'],
-					$contenido ['valor_total'] 
+					$contenido ['valor_total'],
+					$contenido ['descuento'],
+					 
 			)
 			;
 			

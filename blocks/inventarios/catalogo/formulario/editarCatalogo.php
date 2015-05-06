@@ -39,7 +39,7 @@ class Formulario {
             exit;
         }
 
-        $conexion2 = "sicapital";
+        $conexion2 = "inventarios";
         $this->esteRecursoDB2 = $this->miConfigurador->fabricaConexiones->getRecursoDB($conexion2);
         if (!$this->esteRecursoDB2) {
             //Este se considera un error fatal
@@ -167,7 +167,7 @@ class Formulario {
         $atributos ['id'] = $esteCampo;
         $atributos ['etiqueta'] = $this->lenguaje->getCadena($esteCampo);
         $atributos ["etiquetaObligatorio"] = false;
-        $atributos ['tab'] = 1;
+        $atributos ['tab'] = 5;
         $atributos ['seleccion'] = - 1;
         $atributos ['anchoEtiqueta'] = 200;
         $atributos ['evento'] = '';
@@ -186,7 +186,7 @@ class Formulario {
         $atributos ['limitar'] = 1;
         $atributos ['anchoCaja'] = 49;
         $atributos ['miEvento'] = '';
-        $atributos ['cadena_sql'] = $this->sql->getCadenaSql("dependencia");
+        $atributos ['cadena_sql'] = $this->sql->getCadenaSql("gruposcontables");
         $matrizItems = array(
             array(
                 0,
@@ -195,10 +195,6 @@ class Formulario {
         );
         $matrizItems = $this->esteRecursoDB2->ejecutarAcceso($atributos ['cadena_sql'], "busqueda");
         $atributos ['matrizItems'] = $matrizItems;
-// $atributos['miniRegistro']=;
-// $atributos ['baseDatos'] = "inventarios";
-// $atributos ['cadena_sql'] = $this->miSql->getCadenaSql ( "clase_entrada" );
-// Aplica atributos globales al control
         echo $this->miFormulario->campoCuadroLista($atributos);
         unset($atributos);
     }

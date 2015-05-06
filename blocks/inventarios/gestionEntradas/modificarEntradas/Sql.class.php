@@ -149,6 +149,39 @@ class Sql extends \Sql {
 			 * Clausulas Del Caso Uso.
 			 */
 			
+			case "buscar_entradas" :
+				$cadenaSql = " SELECT id_entrada valor,id_entrada descripcion  ";
+				$cadenaSql .= " FROM entrada; ";
+				break;
+			
+			case "proveedor_informacion" :
+				$cadenaSql = " SELECT PRO_NIT,PRO_RAZON_SOCIAL  ";
+				$cadenaSql .= " FROM PROVEEDORES ";
+				$cadenaSql .= " WHERE PRO_IDENTIFICADOR='" . $variable . "'";
+				
+				break;
+			
+			case "consultarInfoClase" :
+				$cadenaSql = " SELECT  observacion, id_entrada, id_salida, id_hurto,";
+				$cadenaSql .= " num_placa, val_sobrante, ruta_archivo, nombre_archivo  ";
+				$cadenaSql .= " FROM info_clase_entrada ";
+				$cadenaSql .= " WHERE id_info_clase='" . $variable . "';";
+				
+				break;
+			
+			case "proveedores" :
+				$cadenaSql = " SELECT PRO_IDENTIFICADOR,PRO_NIT||' - '||PRO_RAZON_SOCIAL AS proveedor ";
+				$cadenaSql .= " FROM PROVEEDORES ";
+				
+				break;
+			case "tipo_contrato_avance" :
+				
+				$cadenaSql = "SELECT id_tipo, descripcion ";
+				$cadenaSql .= "FROM arka_inventarios.tipo_contrato ";
+				$cadenaSql .= "WHERE id_tipo<>1;";
+				
+				break;
+			
 			case "clase_entrada" :
 				
 				$cadenaSql = "SELECT ";
@@ -174,25 +207,27 @@ class Sql extends \Sql {
 				break;
 			
 			case "consultarEntrada" :
-				
 				$cadenaSql = "SELECT DISTINCT ";
 				$cadenaSql .= "id_entrada, fecha_registro,  ";
-				$cadenaSql .= "nit, razon_social  ";
+				$cadenaSql .= " descripcion,proveedor   ";
 				$cadenaSql .= "FROM entrada ";
-				$cadenaSql .= "JOIN proveedor ON proveedor.id_proveedor = entrada.proveedor ";
-				$cadenaSql .= "WHERE 1=1";
+				$cadenaSql .= "JOIN clase_entrada ON clase_entrada.id_clase = entrada.clase_entrada ";
+				// $cadenaSql .= "JOIN proveedor ON proveedor.id_proveedor = entrada.proveedor ";
+				$cadenaSql .= "WHERE 1=1 ";
 				if ($variable [0] != '') {
-					$cadenaSql .= " AND fecha_registro BETWEEN CAST ( '" . $variable [4] . "' AS DATE) ";
-					$cadenaSql .= " AND  CAST ( '" . $variable [5] . "' AS DATE)  ";
-				}
-				if ($variable [2] != '') {
 					$cadenaSql .= " AND id_entrada = '" . $variable [0] . "'";
 				}
+				
+				if ($variable [1] != '') {
+					$cadenaSql .= " AND fecha_registro BETWEEN CAST ( '" . $variable [1] . "' AS DATE) ";
+					$cadenaSql .= " AND  CAST ( '" . $variable [2] . "' AS DATE)  ";
+				}
+				
 				if ($variable [3] != '') {
-					$cadenaSql .= " AND  nit= '" . $variable [1] . "'";
+					$cadenaSql .= " AND clase_entrada = '" . $variable [3] . "'";
 				}
 				if ($variable [4] != '') {
-					$cadenaSql .= " AND  nombre= '" . $variable [3] . "'";
+					$cadenaSql .= " AND entrada.proveedor = '" . $variable [4] . "'";
 				}
 				
 				break;
@@ -200,8 +235,8 @@ class Sql extends \Sql {
 			case "consultarEntradaParticular" :
 				
 				$cadenaSql = "SELECT DISTINCT ";
-				$cadenaSql .= " vigencia, clase_entrada, tipo_entrada, ";
-				$cadenaSql .= "	tipo_contrato, numero_contrato, fecha_contrato, proveedor, nit,  ";
+				$cadenaSql .= " vigencia, clase_entrada, info_clase , ";
+				$cadenaSql .= "	tipo_contrato, numero_contrato, fecha_contrato, proveedor,";
 				$cadenaSql .= "numero_factura, fecha_factura, observaciones, acta_recibido  ";
 				$cadenaSql .= "FROM entrada ";
 				$cadenaSql .= "WHERE id_entrada='" . $variable . "';";
@@ -309,22 +344,44 @@ class Sql extends \Sql {
 				$cadenaSql .= "  RETURNING  id_recuperacion ";
 				
 				break;
+			// UPDATE info_clase_entrada
+			// SET id_info_clase=?, observacion=?, id_entrada=?, id_salida=?, id_hurto=?,
+			// num_placa=?, val_sobrante=?, ruta_archivo=?, nombre_archivo=?
+			// WHERE <condition>;
+			case "actualizarInformacion" :
+				$cadenaSql = " UPDATE info_clase_entrada ";
+				$cadenaSql .= " SET observacion= '" . $variable [0] . "', ";
+				$cadenaSql .= "  id_entrada='" . $variable [1] . "', ";
+				$cadenaSql .= "  id_salida='" . $variable [2] . "', ";
+				$cadenaSql .= "  id_hurto='" . $variable [3] . "', ";
+				$cadenaSql .= "  num_placa='" . $variable [4] . "', ";
+				$cadenaSql .= "  val_sobrante='" . $variable [5] . "', ";
+				$cadenaSql .= "  ruta_archivo='" . $variable [6] . "', ";
+				$cadenaSql .= "  nombre_archivo='" . $variable [7] . "'  ";
+				$cadenaSql .= "  WHERE id_info_clase='" . $variable [8] . "' ";
+				
+				break;
+			
+			// UPDATE entrada
+			// SET id_entrada=?, fecha_registro=?, vigencia=?, clase_entrada=?,
+			// info_clase=?, tipo_contrato=?, numero_contrato=?, fecha_contrato=?,
+			// proveedor=?, numero_factura=?, fecha_factura=?, observaciones=?,
+			// acta_recibido=?, estado_entrada=?, estado_registro=?
+			// WHERE <condition>;
 			
 			case "actualizarEntrada" :
 				$cadenaSql = " UPDATE entrada ";
 				$cadenaSql .= " SET vigencia='" . $variable [0] . "', ";
 				$cadenaSql .= "  clase_entrada='" . $variable [1] . "', ";
-				$cadenaSql .= "  tipo_entrada='" . $variable [2] . "', ";
-				$cadenaSql .= "  tipo_contrato='" . $variable [3] . "', ";
-				$cadenaSql .= "  numero_contrato='" . $variable [4] . "', ";
-				$cadenaSql .= "  fecha_contrato='" . $variable [5] . "', ";
-				$cadenaSql .= "  proveedor='" . $variable [6] . "', ";
-				$cadenaSql .= "  nit='" . $variable [7] . "', ";
-				$cadenaSql .= "  numero_factura='" . $variable [8] . "', ";
-				$cadenaSql .= "  fecha_factura='" . $variable [9] . "', ";
-				$cadenaSql .= "  observaciones='" . $variable [10] . "', ";
-				$cadenaSql .= "  estado_entrada='" . $variable [11] . "'  ";
-				$cadenaSql .= "  WHERE id_entrada='" . $variable [12] . "' ";
+				$cadenaSql .= "  tipo_contrato='" . $variable [2] . "', ";
+				$cadenaSql .= "  numero_contrato='" . $variable [3] . "', ";
+				$cadenaSql .= "  fecha_contrato='" . $variable [4] . "', ";
+				$cadenaSql .= "  proveedor='" . $variable [5] . "', ";
+				$cadenaSql .= "  numero_factura='" . $variable [6] . "', ";
+				$cadenaSql .= "  fecha_factura='" . $variable [7] . "', ";
+				$cadenaSql .= "  observaciones='" . $variable [8] . "', ";
+				$cadenaSql .= "  estado_entrada='1'  ";
+				$cadenaSql .= "  WHERE id_entrada='" . $variable [9] . "' ";
 				$cadenaSql .= "  RETURNING  id_entrada ";
 				
 				break;

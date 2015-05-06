@@ -40,18 +40,25 @@ class registrarForm {
 		$conexion = "inventarios";
 		$esteRecursoDB = $this->miConfigurador->fabricaConexiones->getRecursoDB ( $conexion );
 		
-		$cadenaSql = $this->miSql->getCadenaSql ( 'consultarEntradaParticular', $_REQUEST ['entrada'] );
+		if (isset ( $_REQUEST ['salida'] )) {
+			$cadenaSql = $this->miSql->getCadenaSql ( 'consultarEntradaParticular', $_REQUEST ['entrada'] );
+			
+			$entrada = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
+			
+// 			$cadenaSql = $this->miSql->getCadenaSql ( 'consulta_elementos', $entrada [0] [12] );
+			
+			$elementos = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
+			
+			$arreglo = array (
+					$_REQUEST ['salida'],
+					$_REQUEST ['entrada'] 
+			);
+		}
 		
-		$entrada = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
+		$cadenaSql = $this->miSql->getCadenaSql ( 'consulta_elementos_validar', $_REQUEST ['entrada'] );
 		
-		$cadenaSql = $this->miSql->getCadenaSql ( 'consulta_elementos', $entrada [0] [12] );
+		$elementos_validacion = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
 		
-		$elementos = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
-		
-		$arreglo = array (
-				$_REQUEST ['salida'],
-				$_REQUEST ['entrada'] 
-		);
 		
 		// Limpia Items Tabla temporal
 		
@@ -75,6 +82,7 @@ class registrarForm {
 		$tab = 1;
 		// ---------------- FIN SECCION: de Parámetros Generales del Formulario ----------------------------
 		
+		
 		// ----------------INICIAR EL FORMULARIO ------------------------------------------------------------
 		$atributos ['tipoEtiqueta'] = 'inicio';
 		echo $this->miFormulario->formulario ( $atributos );
@@ -90,7 +98,7 @@ class registrarForm {
 			
 			{
 				
-				if ($_REQUEST ['mensaje'] == 'inserto' && $elementos) {
+				if ($_REQUEST ['mensaje'] == 'inserto' && $elementos_validacion[0][0]!=0) {
 					
 					$mensaje = "Se Registro Salida <br> Número de Salida: " . $_REQUEST ['salida'] . "<br>Fecha Registro:" . date ( 'Y-m-d' );
 					$mensaje .= "<br>Existen Elementos de la Entrada Sin Haber Generado Salidas ";
@@ -108,7 +116,7 @@ class registrarForm {
 					$atributos = array_merge ( $atributos, $atributosGlobales );
 					echo $this->miFormulario->cuadroMensaje ( $atributos );
 					// --------------- FIN CONTROL : Cuadro de Texto --------------------------------------------------
-				} else {
+				} else if($_REQUEST ['mensaje'] == 'inserto' && $elementos_validacion[0][0]==0) {
 					
 					$cadenaSql = $this->miSql->getCadenaSql ( 'actualizar_entrada', $arreglo );
 					$inserto = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "acceso" );
@@ -147,9 +155,9 @@ class registrarForm {
 					// --------------- FIN CONTROL : Cuadro de Texto --------------------------------------------------
 				}
 				
-				if (isset ( $_REQUEST ['errores'] ) && $_REQUEST ['errores'] == 'notextos') {
+				if ($_REQUEST ['mensaje'] == 'noitems') {
 					
-					$mensaje = "No se Creo Entrada, No se Colocaron Observaciones";
+					$mensaje = "No Selecciono Items<br>Error paraGenerar Salida";
 					
 					// ---------------- CONTROL: Cuadro de Texto --------------------------------------------------------
 					$esteCampo = 'mensajeRegistro';
@@ -165,6 +173,27 @@ class registrarForm {
 					echo $this->miFormulario->cuadroMensaje ( $atributos );
 					// --------------- FIN CONTROL : Cuadro de Texto --------------------------------------------------
 				}
+				
+				if ($_REQUEST ['mensaje'] == 'noCantidad') {
+						
+					$mensaje = "No Ingreso Cantidad Correspondiente del Item <br>Error para Generar Salida";
+						
+					// ---------------- CONTROL: Cuadro de Texto --------------------------------------------------------
+					$esteCampo = 'mensajeRegistro';
+					$atributos ['id'] = $esteCampo;
+					$atributos ['tipo'] = 'error';
+					$atributos ['estilo'] = 'textoCentrar';
+					$atributos ['mensaje'] = $mensaje;
+						
+					$tab ++;
+						
+					// Aplica atributos globales al control
+					$atributos = array_merge ( $atributos, $atributosGlobales );
+					echo $this->miFormulario->cuadroMensaje ( $atributos );
+					// --------------- FIN CONTROL : Cuadro de Texto --------------------------------------------------
+				}
+				
+				
 			}
 			
 			// ------------------Division para los botones-------------------------
