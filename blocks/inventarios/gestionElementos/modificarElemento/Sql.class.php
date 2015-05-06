@@ -165,9 +165,10 @@ class Sql extends \Sql {
 				
 				$cadenaSql = "SELECT DISTINCT ";
 				$cadenaSql .= "id_elemento, placa,  ";
-				$cadenaSql .= "elemento.serie, elemento.fecha_registro,tipo_bienes.descripcion  ";
+				$cadenaSql .= "elemento.serie, elemento.fecha_registro,tipo_bienes.descripcion, estado_entrada ";
 				$cadenaSql .= "FROM elemento ";
 				$cadenaSql .= "JOIN tipo_bienes ON tipo_bienes.id_tipo_bienes = elemento.tipo_bien ";
+				$cadenaSql .= "JOIN entrada ON entrada.id_entrada = elemento.id_entrada ";
 				$cadenaSql .= "JOIN elemento_individual ON elemento_individual.id_elemento_gen = elemento.id_elemento ";
 				$cadenaSql .= "WHERE 1=1 AND estado='TRUE' ";
 				if ($variable [0] != '') {

@@ -175,6 +175,11 @@ class registrarForm {
 				$variable2 .= "&opcion=anular";
 				$variable2 = $this->miConfigurador->fabricaConexiones->crypto->codificar_url ( $variable2, $directorio );
 				
+				$anulacion=($elementos[$i][5]==2)?"<a href='" . $variable2. "'>
+                            <img src='" . $rutaBloque . "/css/images/anular.png' width='15px'>
+                        </a>":" " ;
+				
+				
 				$mostrarHtml = "<tr>
                     <td><center>" . $elementos [$i] [1] . "</center></td>
                     <td><center>" . $elementos [$i] [2] . "</center></td>
@@ -186,9 +191,7 @@ class registrarForm {
                         </a>
                   	</center> </td>
            			<td><center>
-                    	<a href='" . $variable2. "'>
-                            <img src='" . $rutaBloque . "/css/images/anular.png' width='15px'>
-                        </a>
+                    	".$anulacion."
                   	</center> </td>
                             		
                             		
