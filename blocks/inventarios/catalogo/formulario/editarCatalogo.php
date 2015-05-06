@@ -152,6 +152,15 @@ class Formulario {
         echo ' ui-corner-all  validate[required,onlyLetterNumber] " tabindex="4" name="nombreElemento" id="nombreElemento" title=" Ingrese el Nombre del Elemento">';
         echo ' </div>';
     }
+    
+    private function campoIdGrupo() {
+
+        echo ' <div class="jqueryui  anchoColumna1">';
+        echo ' <div style="float:left; width:200px"><label for="idGrupo">Grupo Contable</label><span style="white-space:pre;"> </span></div>';
+        echo ' <input type="text" maxlength="" size="50" value="" class="ui-widget ui-widget-content';
+        echo ' ui-corner-all  validate[onlyNumber] " tabindex="4" name="idGrupo" id="idGrupo" title=" Ingrese el identificador del Grupo Contable">';
+        echo ' </div>';
+    }
 
     private function notaUso() {
         echo ' <div class="jqueryui  anchoColumna1">';
@@ -176,6 +185,7 @@ class Formulario {
         $this->campoPadre();
         $this->campoId();
         $this->campoNombre();
+        $this->campoIdGrupo();
 
         echo '<input id="idCatalogo" type="hidden" value="' . $_REQUEST['idCatalogo'] . '" name="idCatalogo">';
         echo '<input id="idReg" type="hidden" value="0" name="idReg">';
