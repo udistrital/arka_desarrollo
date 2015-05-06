@@ -37,25 +37,16 @@ class RegistradorOrden {
 			}
 		}
 		
-		// $arreglo = array (
-		// $_REQUEST ['funcionarioP'],
-		// $_REQUEST ['identificacion'],
-		// $_REQUEST ['id_funcionario']
-		// );
-		
-		// $cadenaSql = $this->miSql->getCadenaSql ( 'actualizar_funcionario', $arreglo );
-		
-		// $id_funcionario = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "acceso" );
-		
 		$arreglo = array (
 				
 				$_REQUEST ['dependencia'],
-				$_REQUEST ['ubicacion'],
+				$_REQUEST ['sede'] ,
 				$_REQUEST ['observaciones'],
 				$_REQUEST ['numero_salida'],
-				$_REQUEST ['funcionarioP'] 
+				$_REQUEST ['funcionarioP'] ,
+				$_REQUEST ['vigencia'] ,
 		);
-		
+
 		$cadenaSql = $this->miSql->getCadenaSql ( 'actualizar_salida', $arreglo );
 		$id_salida = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "acceso" );
 		
@@ -127,8 +118,8 @@ class RegistradorOrden {
 				$id_elem_ind [$i] = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
 			}
 			
-			var_dump($cantidad);
-			var_dump($items);
+// 			var_dump($cantidad);
+// 			var_dump($items);
 			
 			foreach ( $cantidad as $i ) {
 				
@@ -262,8 +253,7 @@ class RegistradorOrden {
 			);
 		}
 		
-		if ($semaforo) {
-			
+		if ($semaforo=='true') {
 			redireccion::redireccionar ( 'inserto', $arreglo );
 		} else {
 			

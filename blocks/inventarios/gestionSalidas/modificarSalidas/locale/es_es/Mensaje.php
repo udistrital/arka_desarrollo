@@ -2,6 +2,15 @@
 $this->idioma ["noDefinido"] = "Etiqueta no esta definida en locale/es_es/Mensaje.php";
 
 $this->idioma ["actualizar"] ="Actualizar Elementos : ";
+
+//_______________
+$this->idioma ["vigencia"] ="Vigencia : ";
+$this->idioma ["vigenciaTitulo"] ="Seleccione Vigencia";
+
+$this->idioma ["sede"] ="Sede : ";
+$this->idioma ["sedeTitulo"] ="Seleccione Sede";
+
+
 //-------------------
 $this->idioma ["informacion_anio"] ="Año Vigencia : ";
 $this->idioma ["informacion_numero_salida"] ="# Número Salida : ";

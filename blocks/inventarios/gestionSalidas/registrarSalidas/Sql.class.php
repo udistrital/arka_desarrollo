@@ -156,8 +156,9 @@ class Sql extends \Sql {
 			
 			case "funcionarios" :
 				
-				$cadenaSql = "SELECT JEF_IDENTIFICADOR,JEF_INDENTIFICACION ||' - '|| JEF_NOMBRE ";
-				$cadenaSql .= "FROM JEFES_DE_SECCION ";
+				$cadenaSql = "SELECT FUN_IDENTIFICADOR, FUN_IDENTIFICACION ||' - '|| FUN_NOMBRE ";
+				$cadenaSql .= "FROM FUNCIONARIOS ";
+				$cadenaSql .= "WHERE FUN_ESTADO='A' ";
 				
 				break;
 			case "dependencia" :
@@ -180,11 +181,11 @@ class Sql extends \Sql {
 			
 			case "consultarEntrada" :
 				$cadenaSql = "SELECT DISTINCT ";
-				$cadenaSql .= "id_entrada, fecha_registro,  ";
-				$cadenaSql .= " descripcion,proveedor   ";
+				$cadenaSql .= "entrada.id_entrada, entrada.fecha_registro,  ";
+				$cadenaSql .= " clase_entrada.descripcion, proveedor   ";
 				$cadenaSql .= "FROM entrada ";
 				$cadenaSql .= "JOIN clase_entrada ON clase_entrada.id_clase = entrada.clase_entrada ";
-				// $cadenaSql .= "JOIN proveedor ON proveedor.id_proveedor = entrada.proveedor ";
+				$cadenaSql .= "JOIN elemento ON elemento.id_entrada = entrada.id_entrada ";
 				$cadenaSql .= "WHERE 1=1 ";
 				if ($variable [0] != '') {
 					$cadenaSql .= " AND id_entrada = '" . $variable [0] . "'";
@@ -276,7 +277,16 @@ class Sql extends \Sql {
 				$cadenaSql .= "JOIN catalogo_elemento ON id_catalogo = nivel ";
 				$cadenaSql .= "WHERE id_entrada='" . $variable . "' ";
 				
-				
+				break;
+			
+			case "dependencias" :
+				$cadenaSql = "SELECT DISTINCT  ESF_COD_SEDE, ESF_NOMBRE_ESPACIO ";
+				$cadenaSql .= " FROM ESPACIOS_FISICOS ";
+				break;
+			
+			case "sede" :
+				$cadenaSql = "SELECT DISTINCT  ESF_COD_SEDE, ESF_SEDE ";
+				$cadenaSql .= " FROM ESPACIOS_FISICOS ";
 				break;
 			
 			case "consultar_dependencia" :
@@ -304,19 +314,22 @@ class Sql extends \Sql {
 				
 				break;
 			
+				
+ 				
 			case "insertar_salida" :
 				$cadenaSql = " INSERT INTO ";
-				$cadenaSql .= " salida( fecha, dependencia, ubicacion, funcionario, observaciones,";
-				$cadenaSql .= " id_entrada)";
+				$cadenaSql .= " salida( fecha_registro, dependencia, funcionario, observaciones,";
+				$cadenaSql .= " id_entrada,sede,vigencia)";
 				$cadenaSql .= " VALUES (";
 				$cadenaSql .= "'" . $variable [0] . "',";
 				$cadenaSql .= "'" . $variable [1] . "',";
 				$cadenaSql .= "'" . $variable [2] . "',";
 				$cadenaSql .= "'" . $variable [3] . "',";
 				$cadenaSql .= "'" . $variable [4] . "',";
-				$cadenaSql .= "'" . $variable [5] . "') ";
+				$cadenaSql .= "'" . $variable [5] . "',";
+				$cadenaSql .= "'" . $variable [6] . "') ";
 				$cadenaSql .= "RETURNING  id_salida; ";
-				
+
 				break;
 			
 			case "insertar_salida_item" :
@@ -355,15 +368,13 @@ class Sql extends \Sql {
 				$cadenaSql .= "WHERE id_elemento_ind ='" . $variable [0] . "';";
 				
 				break;
-				
-		
+			
 			case "consulta_elementos_validar" :
 				$cadenaSql = "SELECT COUNT(id_elemento_ind) ";
 				$cadenaSql .= " FROM elemento_individual  ";
 				$cadenaSql .= "JOIN elemento el on id_elemento=id_elemento_gen  ";
 				$cadenaSql .= "WHERE id_salida IS NULL ";
-     			$cadenaSql .= "AND el.id_entrada='" . $variable. "' ";
-				
+				$cadenaSql .= "AND el.id_entrada='" . $variable . "' ";
 				
 				break;
 			

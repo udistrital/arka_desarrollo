@@ -11,6 +11,12 @@ $this->idioma ["informacion_estado"] ="Clase de Entrada : ";
 
 $this->idioma ["informacion_proveedor"] ="Nombre y/o Razón Social Proveedor : ";
 
+$this->idioma ["vigencia"] ="Vigencia : ";
+$this->idioma ["vigenciaTitulo"] ="Seleccione Vigencia";
+
+$this->idioma ["sede"] ="Sede : ";
+$this->idioma ["sedeTitulo"] ="Seleccione Sede";
+
 
 
 

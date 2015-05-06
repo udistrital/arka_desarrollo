@@ -177,7 +177,7 @@ class registrarForm {
 		$atributos ['limitar'] = true;
 		$atributos ['anchoCaja'] = 24;
 		$atributos ['miEvento'] = '';
-		$atributos ['cadena_sql'] = $this->miSql->getCadenaSql ( "buscar_entradas" );
+		$atributos ['cadena_sql'] = $this->miSql->getCadenaSql ( "buscar_salidas" );
 		$matrizItems = $esteRecursoDB->ejecutarAcceso ( $atributos ['cadena_sql'], "busqueda" );
 		
 		$arreglo = array (

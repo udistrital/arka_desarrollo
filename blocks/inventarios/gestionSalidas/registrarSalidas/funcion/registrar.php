@@ -24,6 +24,7 @@ class RegistradorOrden {
 		$this->miFuncion = $funcion;
 	}
 	function procesarFormulario() {
+// 		var_dump($_REQUEST);exit;
 		$fechaActual = date ( 'Y-m-d' );
 		
 		$conexion = "inventarios";
@@ -32,10 +33,11 @@ class RegistradorOrden {
 		$arreglo = array (
 				$fechaActual,
 				$_REQUEST ['dependencia'],
-				$_REQUEST ['ubicacion'],
 				$_REQUEST ['funcionario'],
 				$_REQUEST ['observaciones'],
-				$_REQUEST ['numero_entrada'] 
+				$_REQUEST ['numero_entrada'],
+				$_REQUEST ['sede'],
+				$_REQUEST ['vigencia'],
 		);
 		
 		$cadenaSql = $this->miSql->getCadenaSql ( 'insertar_salida', $arreglo );
@@ -96,17 +98,17 @@ class RegistradorOrden {
 		}
 		
 		
-		foreach ( $items as $i ) {
+// 		foreach ( $items as $i ) {
 			
-			$arreglo = array (
-					$i,
-					$id_salida [0] [0] 
-			);
+// 			$arreglo = array (
+// 					$i,
+// 					$id_salida [0] [0] 
+// 			);
 			
-			$cadenaSql = $this->miSql->getCadenaSql ( 'insertar_salida_item', $arreglo );
+// 			$cadenaSql = $this->miSql->getCadenaSql ( 'insertar_salida_item', $arreglo );
 			
-			$inserto = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "acceso" );
-		}
+// 			$inserto = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "acceso" );
+// 		}
 		
 		$arreglo = array (
 				"salida" => $id_salida [0] [0],
@@ -117,7 +119,7 @@ class RegistradorOrden {
 		
 		
 		
-		if ($inserto) {
+		if ($actualizo_elem) {
 			
 			redireccion::redireccionar ( 'inserto', $arreglo );
 		} else {

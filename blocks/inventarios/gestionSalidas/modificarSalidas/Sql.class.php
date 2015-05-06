@@ -157,23 +157,20 @@ class Sql extends \Sql {
 				$cadenaSql .= " FROM salida; ";
 				break;
 			
-			case "dependencia" :
-				$cadenaSql = " SELECT DEP_IDENTIFICADOR, DEP_IDENTIFICADOR ||' - ' ||DEP_DEPENDENCIA  ";
-				$cadenaSql .= "FROM DEPENDENCIAS ";
-				break;
-			
 			case "funcionario_informacion" :
 				
-				$cadenaSql = "SELECT JEF_INDENTIFICACION,  JEF_NOMBRE ";
-				$cadenaSql .= "FROM JEFES_DE_SECCION ";
-				$cadenaSql .= "WHERE JEF_IDENTIFICADOR='" . $variable . "' ";
+				$cadenaSql = "SELECT FUN_IDENTIFICACION,  FUN_NOMBRE ";
+				$cadenaSql .= "FROM FUNCIONARIOS ";
+				$cadenaSql .= "WHERE FUN_IDENTIFICADOR='" . $variable . "' ";
+				$cadenaSql .= "AND  FUN_ESTADO='A' ";
 				
 				break;
 			
 			case "funcionarios" :
 				
-				$cadenaSql = "SELECT JEF_IDENTIFICADOR,JEF_INDENTIFICACION ||' - '|| JEF_NOMBRE ";
-				$cadenaSql .= "FROM JEFES_DE_SECCION ";
+				$cadenaSql = "SELECT FUN_IDENTIFICADOR, FUN_IDENTIFICACION ||' - '|| FUN_NOMBRE ";
+				$cadenaSql .= "FROM FUNCIONARIOS ";
+				$cadenaSql .= "WHERE FUN_ESTADO='A' ";
 				
 				break;
 			
@@ -188,10 +185,10 @@ class Sql extends \Sql {
 			case "consultarSalida" :
 				
 				$cadenaSql = "SELECT DISTINCT ";
-				$cadenaSql .= "vigencia,salida.id_salida,salida.id_entrada,fecha_registro,funcionario  ";
+				$cadenaSql .= "entrada.vigencia,salida.id_salida,salida.id_entrada,salida.fecha_registro,funcionario  ";
 				$cadenaSql .= "FROM salida ";
 				$cadenaSql .= "JOIN entrada ON entrada.id_entrada = salida.id_entrada ";
-				// $cadenaSql .= "JOIN funcionario ON funcionario.id_funcionario = salida.funcionario ";
+				$cadenaSql .= "JOIN elemento_individual ON elemento_individual.id_salida = salida.id_salida ";
 				$cadenaSql .= "WHERE 1=1";
 				if ($variable [0] != '') {
 					$cadenaSql .= " AND vigencia = '" . $variable [0] . "'";
@@ -214,6 +211,7 @@ class Sql extends \Sql {
 					$cadenaSql .= " AND  CAST ( '" . $variable [5] . "' AS DATE)  ";
 				}
 				$cadenaSql .= ";";
+				
 				break;
 			
 			case "consultar_dependencia" :
@@ -278,7 +276,7 @@ class Sql extends \Sql {
 			case "consultarSalidaParticular" :
 				
 				$cadenaSql = "SELECT DISTINCT ";
-				$cadenaSql .= " dependencia, ubicacion, funcionario, observaciones ";
+				$cadenaSql .= " dependencia, sede, funcionario, observaciones, vigencia ";
 				$cadenaSql .= "FROM salida ";
 				$cadenaSql .= "WHERE id_salida='" . $variable . "';";
 				
@@ -306,11 +304,22 @@ class Sql extends \Sql {
 				
 				$cadenaSql = " UPDATE salida ";
 				$cadenaSql .= " SET dependencia='" . $variable [0] . "', ";
-				$cadenaSql .= "  ubicacion='" . $variable [1] . "' , ";
+				$cadenaSql .= "  sede='" . $variable [1] . "' , ";
 				$cadenaSql .= "  observaciones='" . $variable [2] . "',  ";
-				$cadenaSql .= "  funcionario='" . $variable [4] . "'  ";
+				$cadenaSql .= "  funcionario='" . $variable [4] . "',  ";
+				$cadenaSql .= "  vigencia='" . $variable [5] . "'  ";
 				$cadenaSql .= "  WHERE id_salida='" . $variable [3] . "' ;";
 				
+				break;
+			
+			case "dependencias" :
+				$cadenaSql = "SELECT DISTINCT  ESF_COD_SEDE, ESF_NOMBRE_ESPACIO ";
+				$cadenaSql .= " FROM ESPACIOS_FISICOS ";
+				break;
+			
+			case "sede" :
+				$cadenaSql = "SELECT DISTINCT  ESF_COD_SEDE, ESF_SEDE ";
+				$cadenaSql .= " FROM ESPACIOS_FISICOS ";
 				break;
 			
 			case "busqueda_elementos_individuales" :
