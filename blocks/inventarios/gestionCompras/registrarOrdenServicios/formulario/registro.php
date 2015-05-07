@@ -159,14 +159,21 @@ class registrarForm {
 					$atributos ['validar'] = 'required';
 					$atributos ['limitar'] = true;
 					$atributos ['etiqueta'] = $this->lenguaje->getCadena ( $esteCampo );
-					$atributos ['anchoEtiqueta'] = 170;
+					$atributos ['anchoEtiqueta'] = 115;
 					if (isset ( $_REQUEST [$esteCampo] )) {
 						$atributos ['seleccion'] = $_REQUEST [$esteCampo];
 					} else {
 						$atributos ['seleccion'] = - 1;
 					}
-					$atributos ['cadena_sql'] = $this->miSql->getCadenaSql ( "dependencias" );
-					$matrizItems = $esteRecursoDBO->ejecutarAcceso ( $atributos ['cadena_sql'], "busqueda" );
+// 					$atributos ['cadena_sql'] = $this->miSql->getCadenaSql ( "dependencias" );
+// 					$matrizItems = $esteRecursoDBO->ejecutarAcceso ( $atributos ['cadena_sql'], "busqueda" );
+					$matrizItems = array (
+							array (
+									' ',
+									'Seleccion ... '
+							)
+					);
+						
 					$atributos ['matrizItems'] = $matrizItems;
 					
 					// Utilizar lo siguiente cuando no se pase un arreglo:
@@ -176,7 +183,7 @@ class registrarForm {
 					$atributos = array_merge ( $atributos, $atributosGlobales );
 					echo $this->miFormulario->campoCuadroLista ( $atributos );
 					unset ( $atributos );
-					
+					exit;
 					
 // 					// ---------------- CONTROL: Cuadro Lista --------------------------------------------------------
 					

@@ -160,8 +160,65 @@ $urlFinal15 = $url . $cadena15;
 
 
 
+
+// Variables
+$cadenaACodificar16 = "pagina=" . $this->miConfigurador->getVariableConfiguracion ( "pagina" );
+$cadenaACodificar16 .= "&procesarAjax=true";
+$cadenaACodificar16 .= "&action=index.php";
+$cadenaACodificar16 .= "&bloqueNombre=" . $esteBloque ["nombre"];
+$cadenaACodificar16 .= "&bloqueGrupo=" . $esteBloque ["grupo"];
+$cadenaACodificar16 .= $cadenaACodificar16 . "&funcion=consultarDependencia";
+$cadenaACodificar16 .= "&tiempo=" . $_REQUEST ['tiempo'];
+
+// Codificar las variables
+$enlace = $this->miConfigurador->getVariableConfiguracion ( "enlace" );
+$cadena16 = $this->miConfigurador->fabricaConexiones->crypto->codificar_url ( $cadenaACodificar16, $enlace );
+
+// URL definitiva
+$urlFinal16 = $url . $cadena16;
+
+
+
 ?>
 <script type='text/javascript'>
+
+
+function consultarDependencia(elem, request, response){
+	  $.ajax({
+	    url: "<?php echo $urlFinal16?>",
+	    dataType: "json",
+	    data: { valor:$("#<?php echo $this->campoSeguro('sede')?>").val()},
+	    success: function(data){ 
+
+
+
+	        if(data[0]!=" "){
+
+	            $("#<?php echo $this->campoSeguro('dependencia_solicitante')?>").html('');
+	            $("<option value=''>Seleccione  ....</option>").appendTo("#<?php echo $this->campoSeguro('dependencia_solicitante')?>");
+	            $.each(data , function(indice,valor){
+
+	            	$("<option value='"+data[ indice ].ESF_ID_ESPACIO+"'>"+data[ indice ].ESF_NOMBRE_ESPACIO+"</option>").appendTo("#<?php echo $this->campoSeguro('dependencia_solicitante')?>");
+	            	
+	            });
+	            
+	            $("#<?php echo $this->campoSeguro('dependencia_solicitante')?>").removeAttr('disabled');
+	            $('#<?php echo $this->campoSeguro('dependencia_solicitante')?>').attr("class", " validate[required]");
+	            $('#<?php echo $this->campoSeguro('dependencia_solicitante')?>').width(400);
+	            $("#<?php echo $this->campoSeguro('dependencia_solicitante')?>").select2();
+	            
+	          
+	            
+		        }
+	    			
+
+	    }
+		                    
+	   });
+	};
+
+
+
 
 function valorLetras(elem, request, response){
 	  $.ajax({
@@ -404,8 +461,23 @@ $("#<?php echo $this->campoSeguro('diponibilidad')?>").change(function() {
 
 
 	    
+	    $("#<?php echo $this->campoSeguro('sede')?>").change(function(){
+
+	    	if($("#<?php echo $this->campoSeguro('sede')?>").val()!=''){
+	    		consultarDependencia();
+			}else{
+
+
+
+
+				}
+
+		      });
 	    
 
+
+
+	    
 	    
 	    $("#<?php echo $this->campoSeguro('cargoJefeSeccion')?>").change(function(){
 
