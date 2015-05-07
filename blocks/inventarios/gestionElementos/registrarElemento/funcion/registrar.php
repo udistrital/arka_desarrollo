@@ -229,11 +229,11 @@ class RegistradorOrden {
 						$_REQUEST ['entrada'],
 						
 				);
-				
-				
+var_dump($elemento);		
+				exit;
 				
 				if ($elemento) {
-					
+					exit;
 					redireccion::redireccionar ( 'inserto', $datos, $_REQUEST['datosGenerales'] );
 				} else {
 					
