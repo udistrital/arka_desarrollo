@@ -5,6 +5,10 @@ $this->idioma ["sede"] ="Sede : ";
 $this->idioma ["sedeTitulo"] ="Seleccione Sede";
 
 
+$this->idioma ["sede_super"] ="Sede : ";
+$this->idioma ["sede_superTitulo"] ="Seleccione Sede";
+
+
 $this->idioma ["botonDocumento"] ="Generar Documento PDF";
 // --
 $this->idioma ["vigencia_registro"] = "Vigencia Registro : ";
@@ -47,13 +51,20 @@ $this->idioma ["vigencia_contratistaTitulo"] ="Seleccione Vigencia Contratista";
 
 
 
+
+
+$this->idioma ["selec_proveedor"] = "Proveedor y/o Contratista:";
+$this->idioma ["selec_proveedorTitulo"] = "Seleccione Proveedor y/o Contratista";
+
+
+
 $this->idioma ["dependencia_solicitante"] = "Dependencia :";
 $this->idioma ["dependencia_solicitanteTitulo"] = "Seleccione Dependencia";
 
 $this->idioma ["rubro"] = "&nbsp&nbspRubro :";
 $this->idioma ["rubroTitulo"] = "Ingrese Rubro";
 
-$this->idioma ["nombre_supervisor"] = "&nbspNombre  :";
+$this->idioma ["nombre_supervisor"] = "&nbspIdentificación:<br>y/o Nombre";
 $this->idioma ["nombre_supervisorTitulo"] = "Ingrese Nombre del Supervisor";
 
 $this->idioma ["cargo_supervisor"] = "&nbspCargo :";
