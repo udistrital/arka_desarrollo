@@ -138,7 +138,7 @@ class Formulario {
         echo '<div class= "jqueryui  anchoColumna1">';
         echo '<div style="float:left; width:200px"><label for="id">Identificador Elemento</label><span style="white-space:pre;"> </span></div>';
         echo '<input type="text" maxlength="" size="50" value="" class="ui-widget ui-widget-content ui-corner-all';
-        echo ' validate[required,number] " tabindex="2" name="id" id="id" title="Ingrese Identificador Elemento">';
+        echo ' validate[required,number] " tabindex="2" name="id" id="id" title="">';
         echo '</div>';
     }
 
@@ -156,12 +156,11 @@ class Formulario {
         echo ' <div class="jqueryui  anchoColumna1">';
         echo ' <div style="float:left; width:200px"><label for="nombreElemento">Nombre Elemento</label><span style="white-space:pre;"> </span></div>';
         echo ' <input type="text" maxlength="" size="50" value="" class="ui-widget ui-widget-content';
-        echo ' ui-corner-all  validate[required,onlyLetterNumber] " tabindex="4" name="nombreElemento" id="nombreElemento" title=" Ingrese el Nombre del Elemento">';
+        echo ' ui-corner-all  validate[required,onlyLetterNumber] " tabindex="4" name="nombreElemento" id="nombreElemento" title="">';
         echo ' </div>';
     }
 
     private function campoIdGrupo() {
-
         $esteCampo = "idGrupo";
         $atributos ['nombre'] = $esteCampo;
         $atributos ['id'] = $esteCampo;

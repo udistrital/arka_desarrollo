@@ -56,8 +56,10 @@ $this->idioma['operacionExitosa']="Operación Exitosa";
 
 $this->idioma["id"]="Identificador del Elemento";
 $this->idioma["idPadre"]="Identificador Padre";
-$this->idioma["idPadreTitulo"]="Añadir Identificador";
-$this->idioma["idTitulo"]="Ingrese el Identificador Elemento";
+//$this->idioma["idPadreTitulo"]="Añadir Identificador";
+$this->idioma["idPadreTitulo"]="";
+//$this->idioma["idTitulo"]="Ingrese el Identificador Elemento";
+$this->idioma["idTitulo"]="";
 $this->idioma["idGrupo"]="Grupo Contable";
 
 
@@ -69,13 +71,14 @@ $this->idioma["agregarTitulo"]="Agregar Elemento";
 $this->idioma["catalogoVacio"]="El Catálogo se encuentra vacío";
 
 $this->idioma["nombreElemento"]="Nombre Elemento";
-$this->idioma["nombreElementoTitulo"]=" Ingrese el Nombre del Elemento";
+$this->idioma["nombreElementoTitulo"]="";
+//$this->idioma["nombreElementoTitulo"]=" Ingrese el Nombre del Elemento";
 
 $this->idioma["nombreCatalogo"]="Nombre Catálogo";
 $this->idioma["nombreCatalogoTitulo"]="Modifique el nombre del Catálogo";
 
-$this->idioma["cambiarNombre"]=" Cambiar Nombre del Catálogo";
-$this->idioma["cambiarNombreTitulo"]=" Cambiar Nombre";
+$this->idioma["cambiarNombre"]="Cambiar Nombre del Catálogo";
+$this->idioma["cambiarNombreTitulo"]="Cambiar Nombre";
 $this->idioma['cambioNombre']="El Nombre ha cambiado con éxito";
 
 $this->idioma['crearLabel']="Crear Catálogo";

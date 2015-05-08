@@ -39,9 +39,6 @@ class Formulario {
     }
     
     public function validarEntrada(){
-    	
-    	//var_dump($_REQUEST);exit;
-    	
     	//validar request nombre
     	if(!isset($_REQUEST['nombreElemento'])){
     		$this->miConfigurador->setVariableConfiguracion ( 'mostrarMensaje', 'errorNombre' );
@@ -144,9 +141,7 @@ class Formulario {
     }
 
     function guardarEdicionElementoCatalogo() {
-		
-    	
-    	
+		    	
     	$cadena_sql = $this->sql->getCadenaSql("guardarEdicionElementoCatalogo",array($_REQUEST['idPadre'],$_REQUEST['id'],$_REQUEST['idCatalogo'],$_REQUEST['nombreElemento'],$_REQUEST['idElementoEd']));
     	$registros = $this->esteRecursoDB->ejecutarAcceso($cadena_sql);
     	

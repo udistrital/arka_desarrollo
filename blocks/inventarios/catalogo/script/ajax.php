@@ -339,9 +339,6 @@ var listaAlias = [];
 
 
 	function autocompletar(elemento){
-
-
-        
     	
     	if(typeof listaIds['lidPadre']=='undefined'){
 
@@ -353,7 +350,6 @@ var listaAlias = [];
     	listaAlias['lidPadre'] = [];       	
 
         data = "idCatalogo="+$("#idCatalogo").val();
-    	
     	
     	$.ajax({
             url: "<?php echo $autocompletar;?>",
@@ -423,13 +419,14 @@ var listaAlias = [];
      	return listaNombres['lidPadre'].indexOf(String(valor))<0?false:true;
     }
 
-	function editarElementoCatalogo(id,padre,codigo,nombre,idCatalogo){
+	function editarElementoCatalogo(id,padre,codigo,nombre,idCatalogo, idGrupo){
 		$('#idPadre').val(padre);
 		$('#id').val(codigo);
 		$('#nombreElemento').val(nombre);
 		$('#idCatalogo').val(idCatalogo);
 		$('#lidPadre').val(padre);
 		$('#idReg').val(id);
+                $('#idGrupo').val(idGrupo);
 		$("#agregarA").html("Guardar Cambios sobre el elemento "+codigo+" con Padre "+padre+"")
 		$("#agregarA").val("Guardar Cambios sobre elemento "+codigo+" con Padre "+padre+"");
 		$("#agregarA").attr("onclick","guardarEdicionElementos("+id+")");
