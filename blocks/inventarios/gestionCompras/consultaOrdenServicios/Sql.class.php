@@ -148,16 +148,39 @@ class Sql extends \Sql {
 			/**
 			 * Clausulas Del Caso Uso.
 			 */
+				
+				
+				case "sede" :
+					$cadenaSql = "SELECT DISTINCT  ESF_ID_SEDE, ESF_SEDE ";
+					$cadenaSql .= " FROM ESPACIOS_FISICOS ";
+					$cadenaSql .= " WHERE   ESF_ESTADO='A'";
+				
+					break;
+						
+				
+				case "dependencias" :
+					$cadenaSql = "SELECT DISTINCT  ESF_ID_ESPACIO, ESF_NOMBRE_ESPACIO ";
+					$cadenaSql .= " FROM ESPACIOS_FISICOS ";
+					$cadenaSql .= " WHERE ESF_ID_SEDE='" . $variable . "' ";
+					$cadenaSql .= " AND  ESF_ESTADO='A'";
+				
+					break;
 			
-			case "dependencias" :
-				$cadenaSql = "SELECT DISTINCT  ESF_COD_SEDE, ESF_NOMBRE_ESPACIO ";
-				$cadenaSql .= " FROM ESPACIOS_FISICOS ";
+			case "proveedores" :
+				$cadenaSql = " SELECT PRO_IDENTIFICADOR,PRO_NIT||' - '||PRO_RAZON_SOCIAL AS proveedor ";
+				$cadenaSql .= " FROM PROVEEDORES ";
+				
 				break;
 			
-			case "sede" :
-				$cadenaSql = "SELECT DISTINCT  ESF_COD_SEDE, ESF_SEDE ";
-				$cadenaSql .= " FROM ESPACIOS_FISICOS ";
-				break;
+// 			case "dependencias" :
+// 				$cadenaSql = "SELECT DISTINCT  ESF_COD_SEDE, ESF_NOMBRE_ESPACIO ";
+// 				$cadenaSql .= " FROM ESPACIOS_FISICOS ";
+// 				break;
+			
+// 			case "sede" :
+// 				$cadenaSql = "SELECT DISTINCT  ESF_COD_SEDE, ESF_SEDE ";
+// 				$cadenaSql .= " FROM ESPACIOS_FISICOS ";
+// 				break;
 			case "informacionPresupuestal" :
 				$cadenaSql = "SELECT  vigencia_dispo, numero_dispo, valor_disp, fecha_dip,
 									letras_dispo, vigencia_regis, numero_regis, valor_regis, fecha_regis,
@@ -537,10 +560,17 @@ class Sql extends \Sql {
 				
 				break;
 			
+				
+				
 			case "dependecia_solicitante" :
-				$cadenaSql = " SELECT DEP_DEPENDENCIA  ";
-				$cadenaSql .= " FROM DEPENDENCIAS  ";
-				$cadenaSql .= " WHERE DEP_IDENTIFICADOR='" . $variable . "' ";
+				
+				$cadenaSql = "SELECT DISTINCT ESF_NOMBRE_ESPACIO ";
+				$cadenaSql .= " FROM ESPACIOS_FISICOS ";
+				$cadenaSql .= " WHERE ESF_ID_ESPACIO='" . $variable . "' ";
+				$cadenaSql .= " AND  ESF_ESTADO='A'";
+				
+				break;
+				
 				
 				break;
 			
@@ -561,9 +591,9 @@ class Sql extends \Sql {
 				
 				$cadenaSql = "SELECT DISTINCT ";
 				$cadenaSql .= "id_orden_servicio, fecha_registro,  ";
-				$cadenaSql .= "id_contratista_encargado , dependencia_solicitante   ";
+				$cadenaSql .= "dependencia_solicitante ,  cs.identificacion ||' - '|| cs.nombre_razon_social contratista  "; 
 				$cadenaSql .= "FROM orden_servicio ";
-				// $cadenaSql .= "JOIN dependencia ON dependencia.id_dependencia = orden_servicio.dependencia_solicitante ";
+				$cadenaSql .= "JOIN contratista_servicios  cs ON cs.id_contratista = orden_servicio.id_contratista ";
 				// $cadenaSql .= "JOIN contratista_servicios ON contratista_servicios.id_contratista = orden_servicio.id_contratista ";
 				$cadenaSql .= "WHERE 1=1 AND estado='TRUE' ";
 				
@@ -581,10 +611,7 @@ class Sql extends \Sql {
 					$cadenaSql .= " AND fecha_registro BETWEEN CAST ( '" . $variable [3] . "' AS DATE) ";
 					$cadenaSql .= " AND  CAST ( '" . $variable [4] . "' AS DATE)  ";
 				}
-				
-				if ($variable [5] != '') {
-					$cadenaSql .= " AND  vig_contratista= '" . $variable [5] . "'";
-				}
+
 				
 				break;
 		}

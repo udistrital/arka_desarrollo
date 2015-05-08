@@ -217,8 +217,19 @@ $("#<?php echo $this->campoSeguro('sede')?>").select2();
         });
 	   
 	   
-	   $("#<?php echo $this->campoSeguro('selec_dependencia_Sol')?>").select2();
+	   
 	   $("#<?php echo $this->campoSeguro('contratista_consulta')?>").select2();
+	   
+	   	   $("#<?php echo $this->campoSeguro('proveedorContratista')?>").select2({
+			   	 placeholder: "Search for a repository",
+			   	 minimumInputLength: 5,
+			
+			       });
+	   
+	   
+	   $('#<?php echo $this->campoSeguro('selec_dependencia_Sol')?>').attr('disabled','');
+	   $("#<?php echo $this->campoSeguro('sede_consultar')?>").select2();
+	   
 	   
 	   $("#<?php echo $this->campoSeguro('dependencia_solicitante')?>").select2();
 	   $("#<?php echo $this->campoSeguro('rubro')?>").select2({
