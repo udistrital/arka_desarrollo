@@ -56,8 +56,6 @@ class Formulario {
             exit;
         }
 
-
-
         $this->consultarDatosCatalogo();
         $this->principal();
         //$this->consultarElementos();

@@ -210,12 +210,12 @@ class Sql extends \Sql {
 
             case "guardarEdicionElementoCatalogo":
                 $cadenaSql = " UPDATE catalogo.catalogo_elemento ";
-                $cadenaSql .= " SET  elemento_padre='" . $variable[0] . "', ";
-                $cadenaSql .= " elemento_codigo='" . $variable[1] . "', ";
-                $cadenaSql .= " elemento_catalogo='" . $variable[2] . "', ";
-                $cadenaSql .= " elemento_nombre='" . $variable[3] . "' ";
-                $cadenaSql .= " elemento_grupoc='" . $variable[5] . "' ";
-                $cadenaSql .= " WHERE elemento_id=" . $variable[4] . " ";
+                $cadenaSql .= " SET  elemento_padre='" . $variable['padre'] . "', ";
+                $cadenaSql .= " elemento_codigo='" . $variable['idElemento'] . "', ";
+                $cadenaSql .= " elemento_catalogo='" . $variable['idCatalogo'] . "', ";
+                $cadenaSql .= " elemento_nombre='" . $variable['nombreElemento'] . "', ";
+                $cadenaSql .= " elemento_grupoc='" . $variable['idGrupo'] . "' ";
+                $cadenaSql .= " WHERE elemento_id=" . $variable['idElementoEd'] . " ";
                 break;
 
             // ------------------------------ CONSULTAS PARA ALIMENTAR LOS SELECT ------------------------//
