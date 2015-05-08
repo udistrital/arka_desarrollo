@@ -54,8 +54,8 @@ $this->idioma["creacionExitosa"]="Creación exitosa";
 $this->idioma['operacionExitosa']="Operación Exitosa";
 
 
-$this->idioma["id"]="Identificador del Elemento";
-$this->idioma["idPadre"]="Identificador Padre";
+$this->idioma["id"]="Código Nivel";
+$this->idioma["idPadre"]="Código Nivel Padre";
 //$this->idioma["idPadreTitulo"]="Añadir Identificador";
 $this->idioma["idPadreTitulo"]="";
 //$this->idioma["idTitulo"]="Ingrese el Identificador Elemento";
@@ -70,7 +70,7 @@ $this->idioma["agregar"]="Agregar Elemento";
 $this->idioma["agregarTitulo"]="Agregar Elemento";
 $this->idioma["catalogoVacio"]="El Catálogo se encuentra vacío";
 
-$this->idioma["nombreElemento"]="Nombre Elemento";
+$this->idioma["nombreElemento"]="Nombre Nivel";
 $this->idioma["nombreElementoTitulo"]="";
 //$this->idioma["nombreElementoTitulo"]=" Ingrese el Nombre del Elemento";
 

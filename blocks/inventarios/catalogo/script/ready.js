@@ -5,7 +5,7 @@ $("#login").validationEngine({
     scroll: false
 });
 
-   $("#idGrupo").select2({
+$("#idGrupo").select2({
             placeholder: "Search for a repository",
             minimumInputLength: 2,
         });

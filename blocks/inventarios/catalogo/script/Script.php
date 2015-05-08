@@ -16,7 +16,6 @@ $funcion[$indice++]="jquery.tabelizer.min.js";
 $funcion[$indice++]="select2.js";
 $funcion[$indice++]="select2_locale_es.js";
 
-
 $rutaBloque=$this->miConfigurador->getVariableConfiguracion("host");
 $rutaBloque.=$this->miConfigurador->getVariableConfiguracion("site");
 
