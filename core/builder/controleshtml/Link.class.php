@@ -20,8 +20,19 @@ class Link extends HtmlBase {
 		}
 		
 		if (isset ( $atributos [self::ENLACE] ) && $atributos [self::ENLACE] != "") {
-			$this->cadenaHTML .= "href='" . $atributos [self::ENLACE] . "' target='_blank' ";
+			$this->cadenaHTML .= "href='" . $atributos [self::ENLACE]."' " ;
 		}
+		
+		if (isset ( $atributos [self::REDIRLUGAR] ) && $atributos [self::REDIRLUGAR] ==true) {
+			$this->cadenaHTML .= " " ;
+		}else{
+			$this->cadenaHTML .= " target='_blank' ";
+		}
+		
+		
+		
+		
+		
 		
 		if (isset ( $atributos [self::ENLACECODIFICAR] ) && $atributos [self::ENLACECODIFICAR] != "") {
 			$this->cadenaHTML .= "href='" . $this->miConfigurador->fabricaConexiones->crypto->$atributos [self::ENLACE] . "' ";

@@ -127,6 +127,11 @@ class HtmlBase {
 	const ENLACEIMAGEN = 'enlaceImagen';
 	
 	const SALTOLINEA = 'saltoLinea';
+	
+	const REDIRLUGAR = 'redirLugar';
+	
+	
+	
     /**
      * Atributos HTML
      * Se definen como constantes para evitar errores al duplicar
