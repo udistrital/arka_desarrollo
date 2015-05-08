@@ -229,7 +229,11 @@
 			   	 minimumInputLength: 3,
 			
 			       }); 	
-$("#<?php echo $this->campoSeguro('rubro')?>").select2();
+$("#<?php echo $this->campoSeguro('rubro')?>").select2({
+			   	 placeholder: "Search for a repository",
+			   	 minimumInputLength: 5,
+			
+			       }); 	
 $("#<?php echo $this->campoSeguro('sede')?>").select2();
 $("#<?php echo $this->campoSeguro('sede_super')?>").select2();
 

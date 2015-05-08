@@ -121,8 +121,6 @@ class RegistradorOrden {
 				$iva,
 				$total,
 				$id_ContratistaC [0] [0],
-				$_REQUEST ['nombreContratista'],
-				$_REQUEST['vigencia_contratista'],
 				$_REQUEST ['id_ordenador'],
 				$id_supervisor [0] [0],
 				TRUE ,

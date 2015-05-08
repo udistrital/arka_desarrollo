@@ -386,7 +386,7 @@ class Sql extends \Sql {
 				$cadenaSql .= " orden_servicio(";
 				$cadenaSql .= "  fecha_registro,info_presupuestal,dependencia_solicitante, rubro, objeto_contrato, poliza1, ";
 				$cadenaSql .= " poliza2, poliza3, poliza4, duracion_pago, fecha_inicio_pago, ";
-				$cadenaSql .= " fecha_final_pago, forma_pago, total_preliminar, iva, total, id_contratista,id_contratista_encargado, vig_contratista,id_ordenador_encargado,id_supervisor, estado,sede)";
+				$cadenaSql .= " fecha_final_pago, forma_pago, total_preliminar, iva, total, id_contratista ,id_ordenador_encargado,id_supervisor, estado,sede)";
 				$cadenaSql .= " VALUES (";
 				$cadenaSql .= "'" . $variable [0] . "',";
 				$cadenaSql .= "'" . $variable [1] . "',";
@@ -427,9 +427,7 @@ class Sql extends \Sql {
 				$cadenaSql .= "'" . $variable [17] . "',";
 				$cadenaSql .= "'" . $variable [18] . "',";
 				$cadenaSql .= "'" . $variable [19] . "',";
-				$cadenaSql .= "'" . $variable [20] . "',";
-				$cadenaSql .= "'" . $variable [21] . "',";
-				$cadenaSql .= "'" . $variable [22] . "') ";
+				$cadenaSql .= "'" . $variable [20] . "') ";
 				$cadenaSql .= "RETURNING  id_orden_servicio; ";
 				
 				break;
