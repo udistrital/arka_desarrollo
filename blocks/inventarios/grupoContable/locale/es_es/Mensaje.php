@@ -72,6 +72,8 @@ $this->idioma["vidautil"]="Vida Útil";
 $this->idioma["vidautilTitulo"]="Digite Número de Meses";
 $this->idioma["nombreElemento"]="Nombre Cuenta Contable";
 $this->idioma["nombreElementoTitulo"]="";
+$this->idioma["depreciacionTitulo"]="";
+$this->idioma["depreciacion"]="¿Aplica Depreciación?";
 
 
 $this->idioma["reiniciar"]="Reiniciar";
