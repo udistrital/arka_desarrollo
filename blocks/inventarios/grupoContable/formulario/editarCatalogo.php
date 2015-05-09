@@ -152,6 +152,24 @@ class Formulario {
         echo ' ui-corner-all  validate[required,onlyLetterNumber] " tabindex="4" name="nombreElemento" id="nombreElemento" title=" Ingrese el Nombre del Elemento">';
         echo ' </div>';
     }
+    
+    private function campoDebito() {
+
+        echo ' <div class="jqueryui  anchoColumna1">';
+        echo ' <div style="float:left; width:200px"><label for="nombreElemento">Nombre Elemento</label><span style="white-space:pre;"> </span></div>';
+        echo ' <input type="text" maxlength="" size="50" value="" class="ui-widget ui-widget-content';
+        echo ' ui-corner-all  validate[required,onlyLetterNumber] " tabindex="4" name="nombreElemento" id="nombreElemento" title=" Ingrese el Nombre del Elemento">';
+        echo ' </div>';
+    }
+    
+    private function campoCredito() {
+
+        echo ' <div class="jqueryui  anchoColumna1">';
+        echo ' <div style="float:left; width:200px"><label for="nombreElemento">Nombre Elemento</label><span style="white-space:pre;"> </span></div>';
+        echo ' <input type="text" maxlength="" size="50" value="" class="ui-widget ui-widget-content';
+        echo ' ui-corner-all  validate[required,onlyLetterNumber] " tabindex="4" name="nombreElemento" id="nombreElemento" title=" Ingrese el Nombre del Elemento">';
+        echo ' </div>';
+    }
 
     private function notaUso() {
         echo ' <div class="jqueryui  anchoColumna1">';
