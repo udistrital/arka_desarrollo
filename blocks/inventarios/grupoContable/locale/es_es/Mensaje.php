@@ -60,6 +60,20 @@ $this->idioma["idPadreTitulo"]="Añadir Identificador";
 $this->idioma["idTitulo"]="Ingrese el Identificador Elemento";
 
 
+$this->idioma["cuentaSalida"]="Cuenta Salida";
+$this->idioma["cuentaEntrada"]="Cuenta Entrada";
+$this->idioma["cuentaDebito"]="Cuenta Debito";
+$this->idioma["cuentaCredito"]="Cuenta Crédito";
+$this->idioma["cuentaSalidaTitulo"]="";
+$this->idioma["cuentaEntradaTitulo"]="";
+$this->idioma["cuentaDebitoTitulo"]="";
+$this->idioma["cuentaCreditoTitulo"]="";
+$this->idioma["vidautil"]="Vida Útil";
+$this->idioma["vidautilTitulo"]="Digite Número de Meses";
+$this->idioma["nombreElemento"]="Nombre Cuenta Contable";
+$this->idioma["nombreElementoTitulo"]="";
+
+
 $this->idioma["reiniciar"]="Reiniciar";
 $this->idioma["reiniciarTitulo"]="Reiniciar valores";
 
@@ -67,8 +81,7 @@ $this->idioma["agregar"]="Agregar Elemento";
 $this->idioma["agregarTitulo"]="Agregar Elemento";
 $this->idioma["catalogoVacio"]="El Catálogo de cuentas se encuentra vacío";
 
-$this->idioma["nombreElemento"]="Nombre Elemento";
-$this->idioma["nombreElementoTitulo"]=" Ingrese el Nombre del Elemento";
+
 
 $this->idioma["nombreCatalogo"]="Nombre Catálogo de cuentas";
 $this->idioma["nombreCatalogoTitulo"]="Modifique el nombre del Catálogo de cuentas";
