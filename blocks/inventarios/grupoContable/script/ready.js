@@ -120,24 +120,3 @@ $(document).ready(function () {
         },
     });
 });
-
-
-$("#depreciacion").change(function () {
-    
-    alert($("#depreciacion").val());
-    return true;
-    switch ($("#depreciacion").val())
-    {
-
-        case 0:
-            $("#descripcionDepreciacion").css('display', 'block');
-            break;
-
-        case 1:
-            $("#descripcionDepreciacion").css('display', 'none');
-            break;
-
-        default:
-            break;
-    }
-});

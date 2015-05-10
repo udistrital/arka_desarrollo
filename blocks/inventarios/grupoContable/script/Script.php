@@ -14,8 +14,6 @@ $funcion[$indice ++]="jquery-ui-1.10.4.custom.min.js";
 $funcion[$indice ++]="jquery.tabelizer.js";
 $funcion[$indice ++]="jquery.tabelizer.min.js";
 
-
-
 $rutaBloque=$this->miConfigurador->getVariableConfiguracion("host");
 $rutaBloque.=$this->miConfigurador->getVariableConfiguracion("site");
 

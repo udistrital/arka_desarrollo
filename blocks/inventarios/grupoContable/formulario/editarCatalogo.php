@@ -273,7 +273,7 @@ class Formulario {
         $atributos ['tab'] = 6;
         $atributos ['seleccion'] = 0;
         $atributos ['anchoEtiqueta'] = 200;
-        $atributos ['evento'] = '';
+        $atributos ['evento'] = "3";
         if (isset($_REQUEST [$esteCampo])) {
             $atributos ['valor'] = $_REQUEST [$esteCampo];
         } else {
@@ -282,23 +282,17 @@ class Formulario {
         $atributos ['deshabilitado'] = false;
         $atributos ['columnas'] = 2;
         $atributos ['tamanno'] = 1;
-        $atributos ['ajax_function'] = "";
+        $atributos ['ajax_function'] = "cambio()";
         $atributos ['ajax_control'] = $esteCampo;
         $atributos ['estilo'] = "jqueryui";
         $atributos ['validar'] = "";
         $atributos ['limitar'] = 1;
         $atributos ['anchoCaja'] = 49;
-        $atributos ['miEvento'] = '';
+        //$atributos ['miEvento'] = 'onchange';
         //$atributos ['cadena_sql'] = $this->sql->getCadenaSql("boolean");
         $matrizItems = array(
-            array(
-                0,
-                'NO'
-            ),
-            array(
-                1,
-                'SI'
-            )
+            array(0,'NO'),
+            array(1,'SI')
             
         );
         //$matrizItems = $this->esteRecursoDB2->ejecutarAcceso($atributos ['cadena_sql'], "busqueda");
