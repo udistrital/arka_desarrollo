@@ -127,7 +127,7 @@ class Formulario {
     }
 
     private function campoId() {
-        
+
         $esteCampo = 'id';
         $atributos ['id'] = $esteCampo;
         $atributos ['nombre'] = $esteCampo;
@@ -140,7 +140,7 @@ class Formulario {
         $atributos ['dobleLinea'] = 0;
         $atributos ['tabIndex'] = 1;
         $atributos ['etiqueta'] = $this->lenguaje->getCadena($esteCampo);
-        $atributos ['validar'] = 'required, minSize[1],maxSize[4],custom[onlyNumberSp]';
+        $atributos ['validar'] = 'required, minSize[1],maxSize[25],custom[onlyNumberSp]';
 
         if (isset($_REQUEST [$esteCampo])) {
             $atributos ['valor'] = $_REQUEST [$esteCampo];
@@ -148,7 +148,7 @@ class Formulario {
             $atributos ['valor'] = '';
         }
         $atributos ['titulo'] = $this->lenguaje->getCadena($esteCampo . 'Titulo');
-        $atributos ['deshabilitado'] = true;
+        $atributos ['deshabilitado'] = false;
         $atributos ['tamanno'] = 20;
         $atributos ['maximoTamanno'] = '';
         $atributos ['anchoEtiqueta'] = 200;
@@ -180,7 +180,7 @@ class Formulario {
         $atributos ['dobleLinea'] = 0;
         $atributos ['tabIndex'] = 3;
         $atributos ['etiqueta'] = $this->lenguaje->getCadena($esteCampo);
-        $atributos ['validar'] = 'required, minSize[1],maxSize[25],custom[onlyNumberSp]';
+        $atributos ['validar'] = 'required, minSize[1],maxSize[25]';
 
         if (isset($_REQUEST [$esteCampo])) {
             $atributos ['valor'] = $_REQUEST [$esteCampo];
@@ -188,8 +188,8 @@ class Formulario {
             $atributos ['valor'] = '';
         }
         $atributos ['titulo'] = $this->lenguaje->getCadena($esteCampo . 'Titulo');
-        $atributos ['deshabilitado'] = true;
-        $atributos ['tamanno'] = 20;
+        $atributos ['deshabilitado'] = false;
+        $atributos ['tamanno'] = 30;
         $atributos ['maximoTamanno'] = '';
         $atributos ['anchoEtiqueta'] = 200;
         //$tab ++;
@@ -220,7 +220,7 @@ class Formulario {
             $atributos ['valor'] = '';
         }
         $atributos ['titulo'] = $this->lenguaje->getCadena($esteCampo . 'Titulo');
-        $atributos ['deshabilitado'] = true;
+        $atributos ['deshabilitado'] = false;
         $atributos ['tamanno'] = 20;
         $atributos ['maximoTamanno'] = '';
         $atributos ['anchoEtiqueta'] = 200;
@@ -252,7 +252,7 @@ class Formulario {
             $atributos ['valor'] = '';
         }
         $atributos ['titulo'] = $this->lenguaje->getCadena($esteCampo . 'Titulo');
-        $atributos ['deshabilitado'] = true;
+        $atributos ['deshabilitado'] = false;
         $atributos ['tamanno'] = 20;
         $atributos ['maximoTamanno'] = '';
         $atributos ['anchoEtiqueta'] = 200;
@@ -271,7 +271,7 @@ class Formulario {
         $atributos ['etiqueta'] = $this->lenguaje->getCadena($esteCampo);
         $atributos ["etiquetaObligatorio"] = true;
         $atributos ['tab'] = 6;
-        $atributos ['seleccion'] = 0;
+        $atributos ['seleccion'] = -1;
         $atributos ['anchoEtiqueta'] = 200;
         $atributos ['evento'] = "3";
         if (isset($_REQUEST [$esteCampo])) {
@@ -285,15 +285,14 @@ class Formulario {
         $atributos ['ajax_function'] = "cambio()";
         $atributos ['ajax_control'] = $esteCampo;
         $atributos ['estilo'] = "jqueryui";
-        $atributos ['validar'] = "";
+        $atributos ['validar'] = "required";
         $atributos ['limitar'] = 1;
         $atributos ['anchoCaja'] = 49;
         //$atributos ['miEvento'] = 'onchange';
         //$atributos ['cadena_sql'] = $this->sql->getCadenaSql("boolean");
         $matrizItems = array(
-            array(0,'NO'),
-            array(1,'SI')
-            
+            array(0, 'NO'),
+            array(1, 'SI')
         );
         //$matrizItems = $this->esteRecursoDB2->ejecutarAcceso($atributos ['cadena_sql'], "busqueda");
         $atributos ['matrizItems'] = $matrizItems;
@@ -306,8 +305,7 @@ class Formulario {
         $atributos ["estiloEnLinea"] = "display:none";
         //$atributos = array_merge($atributos, $atributosGlobales);
         echo $this->miFormulario->division("inicio", $atributos);
-        unset($atributos);
-        {
+        unset($atributos); {
             $esteCampo = 'vidautil';
             $atributos ['id'] = $esteCampo;
             $atributos ['nombre'] = $esteCampo;
@@ -328,8 +326,8 @@ class Formulario {
                 $atributos ['valor'] = '';
             }
             $atributos ['titulo'] = $this->lenguaje->getCadena($esteCampo . 'Titulo');
-            $atributos ['deshabilitado'] = true;
-            $atributos ['tamanno'] = 25;
+            $atributos ['deshabilitado'] = false;
+            $atributos ['tamanno'] = 20;
             $atributos ['maximoTamanno'] = '';
             $atributos ['anchoEtiqueta'] = 200;
             //$tab ++;
@@ -358,8 +356,8 @@ class Formulario {
                 $atributos ['valor'] = '';
             }
             $atributos ['titulo'] = $this->lenguaje->getCadena($esteCampo . 'Titulo');
-            $atributos ['deshabilitado'] = true;
-            $atributos ['tamanno'] = 50;
+            $atributos ['deshabilitado'] = false;
+            $atributos ['tamanno'] = 20;
             $atributos ['maximoTamanno'] = '';
             $atributos ['anchoEtiqueta'] = 200;
             //$tab ++;
@@ -388,8 +386,8 @@ class Formulario {
                 $atributos ['valor'] = '';
             }
             $atributos ['titulo'] = $this->lenguaje->getCadena($esteCampo . 'Titulo');
-            $atributos ['deshabilitado'] = true;
-            $atributos ['tamanno'] = 50;
+            $atributos ['deshabilitado'] = false;
+            $atributos ['tamanno'] = 20;
             $atributos ['maximoTamanno'] = '';
             $atributos ['anchoEtiqueta'] = 200;
             //$tab ++;

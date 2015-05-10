@@ -54,7 +54,7 @@ $this->idioma["creacionExitosa"]="Creación exitosa";
 $this->idioma['operacionExitosa']="Operación Exitosa";
 
 
-$this->idioma["id"]="Identificador del Elemento";
+$this->idioma["id"]="Código Cuenta Contable";
 $this->idioma["idPadre"]="Identificador Padre";
 $this->idioma["idPadreTitulo"]="Añadir Identificador";
 $this->idioma["idTitulo"]="Ingrese el Identificador Elemento";

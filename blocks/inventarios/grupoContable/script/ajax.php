@@ -527,23 +527,21 @@ $autocompletar = $url . $cadena10;
 
     function cambio()
     {
-        $("#depreciacion").change(function () {
-            switch ($("#depreciacion").val())
-            {
-                case '0':
-                    $("#descripcionDepreciacion").css('display', 'none');
-                    break;
+        $(document).ready(function () {
+            $("#depreciacion").change(function () {
+                switch ($("#depreciacion").val())
+                {
+                    case '0':
+                        $("#descripcionDepreciacion").css('display', 'none');
+                        break;
 
-                case '1':
-                    $("#descripcionDepreciacion").css('display', 'block');
-                    break;
-
-                default:
-                    $("#descripcionDepreciacion").css('display', 'none');
-                    break;
-
-            }
+                    case '1':
+                        $("#descripcionDepreciacion").css('display', 'block');
+                        break;
+                }
+            });
         });
+
     }
 
 
