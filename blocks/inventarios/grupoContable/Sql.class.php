@@ -137,7 +137,7 @@ class Sql extends \Sql {
             case "listarElementos":
                 $cadenaSql = "SELECT elemento_id, elemento_padre, elemento_codigo, elemento_catalogo, ";
                 $cadenaSql.= " elemento_nombre, elemento_fecha_creacion, ";
-                $cadenaSql.= " grupo_cuentasalida, grupo_cuentaentrada, grupo_depreciacion, grupo_vidautil, grupo_dcuentadebito, grupo_dcuentacredito ";
+                $cadenaSql.= " grupo_cuentasalida, grupo_cuentaentrada, cast(grupo_depreciacion as integer), grupo_vidautil, grupo_dcuentadebito, grupo_dcuentacredito ";
                 $cadenaSql.= " FROM grupo.catalogo_elemento ";
                 $cadenaSql.= " JOIN grupo.grupo_descripcion ON cast(elemento_id as character varying)=grupo_id";
                 break;
@@ -145,7 +145,7 @@ class Sql extends \Sql {
             case "listarElementosID":
                 $cadenaSql = "SELECT elemento_id, elemento_padre, elemento_codigo, elemento_catalogo, ";
                 $cadenaSql .= " elemento_nombre, elemento_fecha_creacion, ";
-                $cadenaSql .= " grupo_cuentasalida, grupo_cuentaentrada, grupo_depreciacion, grupo_vidautil, grupo_dcuentadebito, grupo_dcuentacredito ";
+                $cadenaSql .= " grupo_cuentasalida, grupo_cuentaentrada, cast(grupo_depreciacion as integer), grupo_vidautil, grupo_dcuentadebito, grupo_dcuentacredito ";
                 $cadenaSql .= " FROM grupo.catalogo_elemento ";
                 $cadenaSql .= " JOIN grupo.grupo_descripcion ON cast(elemento_id as character varying)=grupo_id";
                 $cadenaSql .= " WHERE elemento_catalogo=" . $variable;
@@ -196,16 +196,16 @@ class Sql extends \Sql {
 
             case "buscarIdPadre":
                 $cadenaSql = " SELECT elemento_id , elemento_padre , elemento_codigo, elemento_catalogo , elemento_nombre , elemento_fecha_creacion ";
-                $cadenaSql .= " ,grupo_cuentasalida, grupo_cuentaentrada, grupo_depreciacion, grupo_vidautil, grupo_dcuentadebito, grupo_dcuentacredito ";
+                $cadenaSql .= " ,grupo_cuentasalida, grupo_cuentaentrada, cast(grupo_depreciacion as integer), grupo_vidautil, grupo_dcuentadebito, grupo_dcuentacredito ";
                 $cadenaSql .= " FROM grupo.catalogo_elemento ";
-                $cadenaSql .= " JOIN grupo.grupo_descripcion ON cast(elemento_id as character varying)=grupo_id";
+//                $cadenaSql .= " JOIN grupo.grupo_descripcion ON cast(elemento_id as character varying)=grupo_id";
                 $cadenaSql .= " WHERE elemento_codigo = " . $variable[0];
                 $cadenaSql .= " AND elemento_catalogo =" . $variable[1] . " ";
                 break;
 
             case "buscarIdElemento":
                 $cadenaSql = " SELECT elemento_id , elemento_padre , elemento_codigo, elemento_catalogo , elemento_nombre , elemento_fecha_creacion ";
-                $cadenaSql .= " ,grupo_cuentasalida, grupo_cuentaentrada, grupo_depreciacion, grupo_vidautil, grupo_dcuentadebito, grupo_dcuentacredito ";
+                $cadenaSql .= " ,grupo_cuentasalida, grupo_cuentaentrada, cast(grupo_depreciacion as integer), grupo_vidautil, grupo_dcuentadebito, grupo_dcuentacredito ";
                 $cadenaSql .= " FROM grupo.catalogo_elemento ";
                 $cadenaSql .= " JOIN grupo.grupo_descripcion ON cast(elemento_id as character varying)=grupo_id";
                 $cadenaSql .= " WHERE elemento_codigo = " . $variable[0] . " ";
@@ -215,7 +215,7 @@ class Sql extends \Sql {
 
             case "buscarNombreElementoNivel":
                 $cadenaSql = " SELECT elemento_id , elemento_padre , elemento_codigo, elemento_catalogo , elemento_nombre , elemento_fecha_creacion ";
-                $cadenaSql .= " ,grupo_cuentasalida, grupo_cuentaentrada, grupo_depreciacion, grupo_vidautil, grupo_dcuentadebito, grupo_dcuentacredito ";
+                $cadenaSql .= " ,grupo_cuentasalida, grupo_cuentaentrada, cast(grupo_depreciacion as integer), grupo_vidautil, grupo_dcuentadebito, grupo_dcuentacredito ";
                 $cadenaSql .= " FROM grupo.catalogo_elemento ";
                 $cadenaSql .= " JOIN grupo.grupo_descripcion ON cast(elemento_id as character varying)=grupo_id";
                 $cadenaSql .= " WHERE  ";
@@ -228,7 +228,7 @@ class Sql extends \Sql {
             //--- Consultas para los elementos ----//
             case "elementosNivel":
                 $cadenaSql = " SELECT elemento_id , elemento_padre , elemento_codigo, elemento_catalogo , upper(elemento_nombre) as elemento_nombre , elemento_fecha_creacion, ";
-                $cadenaSql .= " grupo_cuentasalida, grupo_cuentaentrada, grupo_depreciacion, grupo_vidautil, grupo_dcuentadebito, grupo_dcuentacredito ";
+                $cadenaSql .= " grupo_cuentasalida, grupo_cuentaentrada, cast(grupo_depreciacion as integer), grupo_vidautil, grupo_dcuentadebito, grupo_dcuentacredito ";
                 $cadenaSql .= " FROM grupo.catalogo_elemento ";
                 $cadenaSql .= " JOIN grupo.grupo_descripcion ON cast(elemento_id as character varying)=grupo_id";
                 $cadenaSql .= " WHERE elemento_catalogo =" . $variable[0] . " ";

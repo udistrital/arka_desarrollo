@@ -428,14 +428,15 @@ $autocompletar = $url . $cadena10;
         $('#nombreElemento').val(nombre);
         $('#idCatalogo').val(idCatalogo);
         $('#lidPadre').val(padre);
-        
+
         $('#cuentaSalida').val(cuentaSalida);
         $('#cuentaEntrada').val(cuentaEntrada);
         $('#vidautil').val(vidautil);
         $('#cuentaDebito').val(cuentaDebito);
         $('#cuentaCredito').val(cuentaCredito);
         $('#depreciacion').val(depreciacion);
-        
+        $("#descripcionDepreciacion").css('display', 'block');
+        alert(depreciacion);
         $('#idReg').val(id);
         $("#agregarA").html("Guardar Cambios sobre el elemento " + codigo + " con Padre " + padre + "")
         $("#agregarA").val("Guardar Cambios sobre elemento " + codigo + " con Padre " + padre + "");
@@ -541,9 +542,9 @@ $autocompletar = $url . $cadena10;
                 {
                     case '0':
                         $("#descripcionDepreciacion").css('display', 'none');
-                         $("#cuentaDebito").val("");
-                         $("#cuentaCredito").val("");
-                         $("#vidautil").val("");
+                        $("#cuentaDebito").val("");
+                        $("#cuentaCredito").val("");
+                        $("#vidautil").val("");
                         break;
 
                     case '1':
