@@ -533,6 +533,9 @@ $autocompletar = $url . $cadena10;
                 {
                     case '0':
                         $("#descripcionDepreciacion").css('display', 'none');
+                         $("#cuentaDebito").val("");
+                         $("#cuentaCredito").val("");
+                         $("#vidautil").val("");
                         break;
 
                     case '1':

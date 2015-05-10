@@ -106,7 +106,7 @@ class Sql extends \Sql {
                 $cadenaSql .= '\'' . $_REQUEST ['parametroPagina'] . '\'';
                 $cadenaSql .= ') ';
                 break;
-            
+
             //**** Consultas Específicas del Caso de Uso *****//
 
             case 'listarCatalogos':
@@ -155,18 +155,35 @@ class Sql extends \Sql {
                 $cadenaSql = " UPDATE grupo.catalogo_lista ";
                 $cadenaSql .= " SET lista_nombre='" . $variable[0] . "' ";
                 $cadenaSql .= " WHERE lista_id=" . $variable[1] . " ";
-
                 break;
 
             case "crearElementoCatalogo":
-
                 $cadenaSql = " INSERT INTO grupo.catalogo_elemento( ";
                 $cadenaSql .= " elemento_padre, elemento_codigo, elemento_catalogo, ";
                 $cadenaSql .= " elemento_nombre)   VALUES ( ";
-                $cadenaSql .= " " . $variable[0] . ", ";
-                $cadenaSql .= " " . $variable[1] . ", ";
-                $cadenaSql .= " " . $variable[2] . ", ";
-                $cadenaSql .= " '" . $variable[3] . "')";
+                $cadenaSql .= " '" . $variable['idPadre'] . "', ";
+                $cadenaSql .= " '" . $variable['id'] . "', ";
+                $cadenaSql .= " '" . $variable['idCatalogo'] . "', ";
+                $cadenaSql .= " '" . $variable['nombreElemento'] . "')";
+                $cadenaSql .= " RETURNING elemento_id;";
+                break;
+
+            case "crearElementoCatalogoDescripcion":
+                $cadenaSql = " INSERT INTO grupo.grupo_descripcion( ";
+                $cadenaSql.= "  grupo_id , ";
+                $cadenaSql.= "  grupo_cuentasalida, ";
+                $cadenaSql.= "  grupo_cuentaentrada, ";
+                $cadenaSql.= "  grupo_depreciacion, ";
+                $cadenaSql.= "  grupo_vidautil, ";
+                $cadenaSql.= "  grupo_dcuentadebito, ";
+                $cadenaSql.= "  grupo_dcuentacredito)  VALUES ( ";
+                $cadenaSql .= " '" . $variable['idCuenta'] . "', ";
+                $cadenaSql .= " '" . $variable['cuentasalida'] . "', ";
+                $cadenaSql .= " '" . $variable['cuentaentrada'] . "', ";
+                $cadenaSql .= " '" . $variable['depreciacion'] . "', ";
+                $cadenaSql .= " '" . $variable['vidautil'] . "', ";
+                $cadenaSql .= " '" . $variable['cuentacredito'] . "', ";
+                $cadenaSql .= " '" . $variable['cuentadebito'] . "')";
                 break;
 
             case "buscarElementoId":
@@ -197,6 +214,8 @@ class Sql extends \Sql {
                 $cadenaSql .= " AND elemento_nombre ='" . $variable[3] . "' ";
                 break;
 
+            
+            //--- Consultas para los elementos ----//
             case "elementosNivel":
                 $cadenaSql = " SELECT elemento_id , elemento_padre , elemento_codigo, elemento_catalogo , upper(elemento_nombre) as elemento_nombre , elemento_fecha_creacion ";
                 $cadenaSql .= " FROM grupo.catalogo_elemento ";
