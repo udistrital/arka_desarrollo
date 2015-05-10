@@ -94,6 +94,7 @@ class RegistradorOrden {
 					'nombre_soporte' => $archivo1,
 					'id_acta' => $_REQUEST ['id_acta'] 
 			);
+			
 			$cadenaSql = $this->miSql->getCadenaSql ( 'actualizarActa_soporte', $datosActa );
 			$id_acta = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "acceso" );
 			
@@ -123,7 +124,7 @@ class RegistradorOrden {
 		}
 		
 		
-
+// 		var_dump($datosActa);exit;
 		$cadenaSql = $this->miSql->getCadenaSql ( 'limpiarItems', $_REQUEST ['id_acta'] );
 		$limpiar = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
 		
@@ -142,8 +143,8 @@ class RegistradorOrden {
 			$items = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "acceso" );
 		}
 		
-		$cadenaSql = $this->miSql->getCadenaSql('limpiar_tabla_items', $_REQUEST ['seccion']);
-		$resultado_secuencia = $esteRecursoDB->ejecutarAcceso($cadenaSql, "acceso");
+// 		$cadenaSql = $this->miSql->getCadenaSql('limpiar_tabla_items', $_REQUEST ['seccion']);
+// 		$resultado_secuencia = $esteRecursoDB->ejecutarAcceso($cadenaSql, "acceso");
 		
 		$datos = array (
 				$_REQUEST ['id_acta'],

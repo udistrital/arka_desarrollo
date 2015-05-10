@@ -250,10 +250,9 @@ class Sql extends \Sql {
 			case "insertarItemTemporal" :
 				$cadenaSql = " INSERT INTO ";
 				$cadenaSql .= " arka_inventarios.items_actarecibido_temp(";
-				$cadenaSql .= " id_items,item,cantidad,descripcion, ";
+				$cadenaSql .= " item,cantidad,descripcion, ";
 				$cadenaSql .= " valor_unitario,valor_total,seccion)";
 				$cadenaSql .= " VALUES (";
-				$cadenaSql .= "'" . $variable [0] . "',";
 				$cadenaSql .= "'" . $variable [1] . "',";
 				$cadenaSql .= "'" . $variable [2] . "',";
 				$cadenaSql .= "'" . $variable [3] . "',";

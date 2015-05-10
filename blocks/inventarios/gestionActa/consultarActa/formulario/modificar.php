@@ -50,7 +50,10 @@ class registrarForm {
 		
 
 		$cadenaSql = $this->miSql->getCadenaSql ( 'consultarItems', $_REQUEST ['numero_acta'] );
+// 		echo $cadenaSql;
 		$items = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
+		
+// 		var_dump($items);;exit;
 		
 		$seccion ['tiempo'] = $tiempo;
 		
@@ -59,6 +62,7 @@ class registrarForm {
 			$cadenaSql = $this->miSql->getCadenaSql ( 'insertarItemTemporal', $key );
 		
 			$insertados = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "acceso" );
+		
 		}
 		
 		
@@ -66,7 +70,7 @@ class registrarForm {
 		// Consultar Orden Compra--------------------------------------------------------------------------------------------
 		$cadenaSql = $this->miSql->getCadenaSql ( 'consultarActaM', $_REQUEST ['numero_acta'] );
 		$Acta = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
-// 		var_dump($_REQUEST);
+// 		var_dump($Acta);exit;
 		
 			
 		
