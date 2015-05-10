@@ -40,6 +40,7 @@ $this->idioma["errorIdR"]=" Identificador No Definido";
 $this->idioma['errorCambioNombre']=" Error al cambiar Nombre";
 $this->idioma['errorLargoNombre']="Nombre mayor a 50 caracteres";
 $this->idioma['errorValId']="Identificador debe ser menor a 50 caracteres y numérico";
+$this->idioma['errorSalida']="Cuenta Salida No especificada";
 
 
 

@@ -422,12 +422,20 @@ $autocompletar = $url . $cadena10;
         return listaNombres['lidPadre'].indexOf(String(valor)) < 0 ? false : true;
     }
 
-    function editarElementoCatalogo(id, padre, codigo, nombre, idCatalogo) {
+    function editarElementoCatalogo(id, padre, codigo, nombre, idCatalogo, cuentaSalida, cuentaEntrada, vidautil, cuentaDebito, cuentaCredito, depreciacion) {
         $('#idPadre').val(padre);
         $('#id').val(codigo);
         $('#nombreElemento').val(nombre);
         $('#idCatalogo').val(idCatalogo);
         $('#lidPadre').val(padre);
+        
+        $('#cuentaSalida').val(cuentaSalida);
+        $('#cuentaEntrada').val(cuentaEntrada);
+        $('#vidautil').val(vidautil);
+        $('#cuentaDebito').val(cuentaDebito);
+        $('#cuentaCredito').val(cuentaCredito);
+        $('#depreciacion').val(depreciacion);
+        
         $('#idReg').val(id);
         $("#agregarA").html("Guardar Cambios sobre el elemento " + codigo + " con Padre " + padre + "")
         $("#agregarA").val("Guardar Cambios sobre elemento " + codigo + " con Padre " + padre + "");

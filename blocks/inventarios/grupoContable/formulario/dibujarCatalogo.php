@@ -166,11 +166,13 @@ class Formulario {
                     echo '<div class="posiscion">';
 
                     //eliminar
-                    echo '<button title="Click para Eliminar" class="eliminar" onclick="eliminarElementoCatalogo(' . $b['elemento_id'] . ',' . $b['elemento_padre'] . ',' . $b['elemento_codigo'] . ',' . $b['elemento_catalogo'] . ')">';
+                    echo '<button title="Click para Eliminar" class="eliminar" ';
+                    echo 'onclick="eliminarElementoCatalogo(' . $b['elemento_id'] . ',' . $b['elemento_padre'] . ',' . $b['elemento_codigo'] . ',' . $b['elemento_catalogo'] . ',' . $b['grupo_cuentasalida'] . ',' . $b['grupo_cuentaentrada'] . ',' . $b['grupo_vidautil'] . ',' . $b['grupo_dcuentadebito'] . ',' . $b['grupo_dcuentacredito'] . ',' . $b['grupo_depreciacion'] . ')">';
                     echo "</button>";
 
                     //editar
-                    echo '<button title="Click para Editar" class="editar" onclick="editarElementoCatalogo(' . $b['elemento_id'] . ',' . $b['elemento_padre'] . ',' . $b['elemento_codigo'] . ',\'' . $b['elemento_nombre'] . '\',' . $b['elemento_catalogo'] . ')">';
+                    echo '<button title="Click para Editar" class="editar" ';
+                    echo 'onclick="editarElementoCatalogo(' . $b['elemento_id'] . ',' . $b['elemento_padre'] . ',' . $b['elemento_codigo'] . ',' . $b['elemento_catalogo'] . ',' . $b['grupo_cuentasalida'] . ',' . $b['grupo_cuentaentrada'] . ',' . $b['grupo_vidautil'] . ',' . $b['grupo_dcuentadebito'] . ',' . $b['grupo_dcuentacredito'] . ',' . $b['grupo_depreciacion'] . ')">';
                     echo "</button>";
 
 
@@ -196,6 +198,7 @@ class Formulario {
     private function consultarElementosNivel($nivel) {
         $cadena_sql = $this->sql->getCadenaSql("elementosNivel", array($_REQUEST['idCatalogo'], $nivel));
         $registros = $this->esteRecursoDB->ejecutarAcceso($cadena_sql, "busqueda");
+    
         return $registros;
     }
 
