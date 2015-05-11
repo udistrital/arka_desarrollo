@@ -423,6 +423,13 @@ $autocompletar = $url . $cadena10;
     }
 
     function editarElementoCatalogo(id, padre, codigo, nombre, idCatalogo, cuentaSalida, cuentaEntrada, vidautil, cuentaDebito, cuentaCredito, depreciacion) {
+        $('#depreciacion').val();
+        $("#descripcionDepreciacion").css('display', 'none');
+        $('#vidautil').val(0);
+        $('#cuentaDebito').val(0);
+        $('#cuentaCredito').val(0);
+
+
         $('#idPadre').val(padre);
         $('#id').val(codigo);
         $('#nombreElemento').val(nombre);
@@ -431,12 +438,16 @@ $autocompletar = $url . $cadena10;
 
         $('#cuentaSalida').val(cuentaSalida);
         $('#cuentaEntrada').val(cuentaEntrada);
+
+        if (depreciacion == 1) {
+            $("#descripcionDepreciacion").css('display', 'block');
+        }
+        $('#depreciacion').val(depreciacion);
+        
         $('#vidautil').val(vidautil);
         $('#cuentaDebito').val(cuentaDebito);
         $('#cuentaCredito').val(cuentaCredito);
-        $('#depreciacion').val(depreciacion);
-        $("#descripcionDepreciacion").css('display', 'block');
-        alert(depreciacion);
+
         $('#idReg').val(id);
         $("#agregarA").html("Guardar Cambios sobre el elemento " + codigo + " con Padre " + padre + "")
         $("#agregarA").val("Guardar Cambios sobre elemento " + codigo + " con Padre " + padre + "");

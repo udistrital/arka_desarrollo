@@ -159,7 +159,6 @@ class Formulario {
 
     function agregarElementoCatalogo() {
 
-        var_dump($_REQUEST);
         $datos = array(
             'idPadre' => $_REQUEST['idPadre'],
             'id' => $_REQUEST['id'],
@@ -176,18 +175,15 @@ class Formulario {
             'cuentaentrada' => (isset($_REQUEST['cuentaEntrada']) ? $_REQUEST['cuentaEntrada'] : ''),
             'depreciacion' => (isset($_REQUEST['depreciacion']) ? $_REQUEST['depreciacion'] : ''),
             'vidautil' => (isset($_REQUEST['vidautil']) ? $_REQUEST['vidautil'] : ''),
-            'cuentacredito' => (isset($_REQUEST['cuentaCredito']) ? $_REQUEST['cuentaCredito'] : ''),
-            'cuentadebito' => (isset($_REQUEST['cuentaDebito']) ? $_REQUEST['cuentaDebito'] : ''),
+            'cuentacredito' => (isset($_REQUEST['cuentaCredito']) ? $_REQUEST['cuentaCredito'] : '0'),
+            'cuentadebito' => (isset($_REQUEST['cuentaDebito']) ? $_REQUEST['cuentaDebito'] : '0'),
         );
-
-       ECHO $cadena_sql2 = $this->sql->getCadenaSql("crearElementoCatalogoDescripcion", $datos2);
+        
+        $cadena_sql2 = $this->sql->getCadenaSql("crearElementoCatalogoDescripcion", $datos2);
         $registros2 = $this->esteRecursoDB->ejecutarAcceso($cadena_sql2);
 
-        var_dump($registros2);
-        exit;
 
-
-        if (!$registros) {
+        if (!$registros2) {
             $this->miConfigurador->setVariableConfiguracion('mostrarMensaje', 'errorCreacion');
             $this->mensaje();
             exit;
