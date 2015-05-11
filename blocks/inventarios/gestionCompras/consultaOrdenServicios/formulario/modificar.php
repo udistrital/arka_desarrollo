@@ -114,7 +114,7 @@ class registrarForm {
 		$supervisor_nom = $esteRecursoDBO->ejecutarAcceso ( $cadenaSql, "busqueda" );
 		
 		$datosSupervisor = array (
-				'nombre_supervisor' => $supervisor_nom [0] [0],
+				'nombre_supervisor' =>  $supervisor [0] [0],
 				'cargo_supervisor' => $supervisor [0] ['cargo'],
 				'dependencia_supervisor' => $supervisor [0] ['dependencia'] 
 		);
@@ -370,7 +370,7 @@ class registrarForm {
 					$atributos ['tab'] = $tab;
 					$atributos ['tamanno'] = 1;
 					$atributos ['estilo'] = 'jqueryui';
-					$atributos ['validar'] = 'required, minSize[1],maxSize[15],custom[onlyNumberSp]';
+					$atributos ['validar'] = 'required';
 					$atributos ['limitar'] = true;
 					$atributos ['etiqueta'] = $this->lenguaje->getCadena ( $esteCampo );
 					$atributos ['anchoEtiqueta'] = 170;
@@ -631,7 +631,7 @@ class registrarForm {
 					unset ( $atributos );
 				}
 				echo $this->miFormulario->agrupacion ( 'fin' );
-				exit;
+				
 				$esteCampo = "AgrupacionContratista";
 				$atributos ['id'] = $esteCampo;
 				$atributos ['leyenda'] = "Información del Contratista";
@@ -642,7 +642,7 @@ class registrarForm {
 					$atributos ['nombre'] = $esteCampo;
 					$atributos ['id'] = $esteCampo;
 					$atributos ['etiqueta'] = $this->lenguaje->getCadena ( $esteCampo );
-					$atributos ["etiquetaObligatorio"] = true;
+					$atributos ["etiquetaObligatorio"] = false;
 					$atributos ['tab'] = $tab ++;
 					$atributos ['seleccion'] = - 1;
 					$atributos ['anchoEtiqueta'] = 220;
@@ -658,7 +658,7 @@ class registrarForm {
 					$atributos ['ajax_function'] = "";
 					$atributos ['ajax_control'] = $esteCampo;
 					$atributos ['estilo'] = "jqueryui";
-					$atributos ['validar'] = "required";
+					$atributos ['validar'] = "";
 					$atributos ['limitar'] = 1;
 					$atributos ['anchoCaja'] = 27;
 					$atributos ['miEvento'] = '';

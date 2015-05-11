@@ -404,4 +404,38 @@ if ($_REQUEST ['funcion'] == 'consultarDependencia') {
 }
 
 
+if ($_REQUEST ['funcion'] == 'SeleccionProveedor') {
+
+	$conexion = "sicapital";
+	$esteRecursoDBO = $this->miConfigurador->fabricaConexiones->getRecursoDB ( $conexion );
+	$cadenaSql = $this->sql->getCadenaSql ( 'informacion_proveedor', $_REQUEST ['proveedor'] );
+	$resultadoItems = $esteRecursoDBO->ejecutarAcceso ( $cadenaSql, "busqueda" );
+
+	$resultado = json_encode ( $resultadoItems [0] );
+
+	echo $resultado;
+	
+	
+}
+
+
+
+if ($_REQUEST ['funcion'] == 'consultarCargoSuper') {
+
+	$conexion = "sicapital";
+
+	$esteRecursoDBO = $this->miConfigurador->fabricaConexiones->getRecursoDB ( $conexion );
+
+
+	$cadenaSql = $this->sql->getCadenaSql ( 'cargoSuper', $_REQUEST['valor'] );
+	$resultado = $esteRecursoDBO->ejecutarAcceso ( $cadenaSql, "busqueda" );
+
+
+	$resultado = json_encode ( $resultado[0]);
+
+	echo $resultado;
+}
+
+
+
 ?>

@@ -166,6 +166,22 @@ class Sql extends \Sql {
 				
 				break;
 			
+			case "informacion_proveedor" :
+				$cadenaSql = " SELECT PRO_RAZON_SOCIAL,PRO_NIT,PRO_DIRECCION,PRO_TELEFONO  ";
+				$cadenaSql .= " FROM PROVEEDORES  ";
+				$cadenaSql .= " WHERE PRO_IDENTIFICADOR='" . $variable . "' ";
+				
+				break;
+			
+			case "cargoSuper" :
+				
+				$cadenaSql = "SELECT FUN_CARGO ";
+				$cadenaSql .= "FROM FUNCIONARIOS ";
+				$cadenaSql .= "WHERE FUN_ESTADO='A' ";
+				$cadenaSql .= "AND FUN_IDENTIFICADOR='" . $variable . "' ";
+				
+				break;
+			
 			case "sedeConsulta" :
 				$cadenaSql = "SELECT DISTINCT  ESF_ID_SEDE  ";
 				$cadenaSql .= " FROM ESPACIOS_FISICOS ";
@@ -543,10 +559,8 @@ class Sql extends \Sql {
 				$cadenaSql .= " iva='" . $variable [12] . "', ";
 				$cadenaSql .= " total='" . $variable [13] . "', ";
 				$cadenaSql .= " id_ordenador_encargado='" . $variable [14] . "', ";
-				$cadenaSql .= " vig_contratista='" . $variable [15] . "', ";
-				$cadenaSql .= " id_contratista_encargado='" . $variable [16] . "', ";
-				$cadenaSql .= " sede='" . $variable [18] . "' ";
-				$cadenaSql .= "  WHERE id_orden_servicio='" . $variable [17] . "';";
+								$cadenaSql .= " sede='" . $variable [16] . "' ";
+				$cadenaSql .= "  WHERE id_orden_servicio='" . $variable [15] . "';";
 				
 				break;
 			
