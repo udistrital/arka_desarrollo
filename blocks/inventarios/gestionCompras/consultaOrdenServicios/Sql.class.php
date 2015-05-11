@@ -157,17 +157,22 @@ class Sql extends \Sql {
 				
 				break;
 			
+			case "dependenciasArreglo" :
 				
-
-				case "dependenciasArreglo" :
+				$cadenaSql = "SELECT DISTINCT ESF_ID_ESPACIO,ESF_NOMBRE_ESPACIO ";
+				$cadenaSql .= " FROM ESPACIOS_FISICOS ";
+				$cadenaSql .= " WHERE ESF_ID_SEDE='" . $variable . "' ";
+				$cadenaSql .= " AND  ESF_ESTADO='A'";
 				
-					$cadenaSql = "SELECT DISTINCT ESF_ID_ESPACIO,ESF_NOMBRE_ESPACIO ";
-					$cadenaSql .= " FROM ESPACIOS_FISICOS ";
-					$cadenaSql .= " WHERE ESF_ID_SEDE='" . $variable . "' ";
-					$cadenaSql .= " AND  ESF_ESTADO='A'";
-				
-					break;
-				
+				break;
+			
+			case "sedeConsulta" :
+				$cadenaSql = "SELECT DISTINCT  ESF_ID_SEDE  ";
+				$cadenaSql .= " FROM ESPACIOS_FISICOS ";
+				$cadenaSql .= " WHERE   ESF_ESTADO='A'";
+				$cadenaSql .= " AND  ESF_ID_ESPACIO='" . $variable . "' ";
+				break;
+			
 			case "sede" :
 				$cadenaSql = "SELECT DISTINCT  ESF_ID_SEDE, ESF_SEDE ";
 				$cadenaSql .= " FROM ESPACIOS_FISICOS ";
@@ -585,8 +590,6 @@ class Sql extends \Sql {
 				$cadenaSql .= " AND  ESF_ESTADO='A'";
 				
 				break;
-
-			
 			
 			case 'consultar_numero_orden' :
 				$cadenaSql = " SELECT id_orden_servicio, id_orden_servicio  ";

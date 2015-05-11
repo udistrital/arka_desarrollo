@@ -72,7 +72,7 @@ class registrarForm {
 		$cadenaSql = $this->miSql->getCadenaSql ( 'consultarOrdenServicios', $_REQUEST ['numero_orden'] );
 		// echo $cadenaSql;
 		$orden = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
-		var_dump($orden);
+// 		var_dump($orden);
 		$datosOrden = array (
 				'dependencia_solicitante' => $orden [0] ['dependencia_solicitante'],
 				'rubro' => $orden [0] ['rubro'],
@@ -145,7 +145,8 @@ class registrarForm {
 				'registro' => $info_presupuestal [0] [6],
 				'valor_registro' => $info_presupuestal [0] [7],
 				'fecha_registro' => $info_presupuestal [0] [8],
-				'valorL_registro' => $info_presupuestal [0] [9] 
+				'valorL_registro' => $info_presupuestal [0] [9],
+				 
 		)
 		;
 		$_REQUEST = array_merge ( $_REQUEST, $arreglo );
@@ -156,7 +157,30 @@ class registrarForm {
 		
 		$dependencia_solicitante = $esteRecursoDBO->ejecutarAcceso ( $cadenaSql, "busqueda" );
 		
-		var_dump($dependencia_solicitante);exit;
+		
+		$cadenaSql = $this->miSql->getCadenaSql ( 'dependenciasArreglo', $orden [0] ['sede'] );
+		
+		$dependencia_solicitante = $esteRecursoDBO->ejecutarAcceso ( $cadenaSql, "busqueda" );
+		
+		
+
+		$cadenaSql = $this->miSql->getCadenaSql ( 'sedeConsulta', $datosSupervisor['dependencia_supervisor']);
+		
+		$sedeConsulta = $esteRecursoDBO->ejecutarAcceso ( $cadenaSql, "busqueda" );
+		
+		
+		$cadenaSql = $this->miSql->getCadenaSql ( 'dependenciasArreglo', $sedeConsulta [0] [0] );
+		
+		$dependencia_supervisor = $esteRecursoDBO->ejecutarAcceso ( $cadenaSql, "busqueda" );
+		
+		
+		$arreglo=array(
+			'sede_super'=>$sedeConsulta[0][0],
+			'dependencia_supervisor'=>$datosSupervisor['dependencia_supervisor']
+				
+		);
+		
+		$_REQUEST=array_merge($_REQUEST,$arreglo);
 		
 		// ---------------- SECCION: Parámetros Generales del Formulario ----------------------------------
 		$esteCampo = $esteBloque ['nombre'];
@@ -396,6 +420,7 @@ class registrarForm {
 									'Seleccion ... ' 
 							) 
 					);
+					$matrizItems=array_merge($matrizItems,$dependencia_solicitante);
 					
 					$atributos ['matrizItems'] = $matrizItems;
 					
@@ -521,6 +546,7 @@ class registrarForm {
 							) 
 					);
 					
+					$matrizItems=array_merge($matrizItems,$dependencia_supervisor);
 					$atributos ['matrizItems'] = $matrizItems;
 					
 					// Utilizar lo siguiente cuando no se pase un arreglo:
