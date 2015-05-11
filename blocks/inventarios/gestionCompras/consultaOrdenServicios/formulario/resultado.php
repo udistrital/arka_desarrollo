@@ -120,7 +120,7 @@ class registrarForm {
 		);
 		
 		$cadenaSql = $this->miSql->getCadenaSql ( 'consultarOrden', $arreglo );
-		echo $cadenaSql;
+		
 		$ordenCompra = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
 		
 		// ---------------- SECCION: Parámetros Generales del Formulario ----------------------------------

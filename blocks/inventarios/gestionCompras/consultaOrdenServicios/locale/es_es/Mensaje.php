@@ -10,6 +10,16 @@ $this->idioma ["sede"] ="Sede: ";
 $this->idioma ["sedeTitulo"] ="Seleccione Sede";
 
 
+$this->idioma ["sede_super"] ="Sede: ";
+$this->idioma ["sede_superTitulo"] ="Seleccione Sede";
+
+
+$this->idioma ["selec_proveedor"] = "Proveedor y/o Contratista:";
+$this->idioma ["selec_proveedorTitulo"] = "Seleccione Proveedor y/o Contratista";
+
+
+
+
 
 $this->idioma ["sede_consultar"] ="&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspSede: ";
 $this->idioma ["sede_consultarTitulo"] ="Seleccione Sede";
