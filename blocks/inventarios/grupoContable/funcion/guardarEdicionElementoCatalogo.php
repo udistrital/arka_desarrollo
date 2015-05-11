@@ -109,21 +109,33 @@ class Formulario {
 
     function guardarEdicionElementoCatalogo() {
 
-        var_dump($_REQUEST);
-        exit;
-        $cadena_sql = $this->sql->getCadenaSql("guardarEdicionElementoCatalogo", array(
-            $_REQUEST['idPadre'],
-            $_REQUEST['id'],
-            $_REQUEST['idCatalogo'],
-            $_REQUEST['nombreElemento'],
-            $_REQUEST['idElementoEd'],
-            
-        ));
+        $datos = array(
+            'idPadre' => $_REQUEST['idPadre'],
+            'id' => $_REQUEST['id'],
+            'idCatalogo' => $_REQUEST['idCatalogo'],
+            'nombreElemento' => $_REQUEST['nombreElemento'],
+            'idElemento' => $_REQUEST['idElementoEd'],
+        );
 
-     
-        $registros = $this->esteRecursoDB->ejecutarAcceso($cadena_sql);
+        $cadena_sql = $this->sql->getCadenaSql("guardarEdicionElementoCatalogo", $datos);
+        $registros = $this->esteRecursoDB->ejecutarAcceso($cadena_sql, "busqueda");
 
-        if (!$registros) {
+        // para la descripción del grupo contable
+
+        $datos2 = array(
+            'idCuenta' => $registros[0][0],
+            'cuentasalida' => (isset($_REQUEST['cuentaSalida']) ? $_REQUEST['cuentaSalida'] : ''),
+            'cuentaentrada' => (isset($_REQUEST['cuentaEntrada']) ? $_REQUEST['cuentaEntrada'] : ''),
+            'depreciacion' => (isset($_REQUEST['depreciacion']) ? $_REQUEST['depreciacion'] : ''),
+            'vidautil' => (isset($_REQUEST['vidautil']) ? $_REQUEST['vidautil'] : ''),
+            'cuentacredito' => (isset($_REQUEST['cuentaCredito']) ? $_REQUEST['cuentaCredito'] : '0'),
+            'cuentadebito' => (isset($_REQUEST['cuentaDebito']) ? $_REQUEST['cuentaDebito'] : '0'),
+        );
+        
+        $cadena_sql2 = $this->sql->getCadenaSql("guardarEdicionElementoCatalogoDescripcion", $datos2);
+        $registros2 = $this->esteRecursoDB->ejecutarAcceso($cadena_sql2);
+
+        if (!$registros2) {
             $this->miConfigurador->setVariableConfiguracion('mostrarMensaje', 'errorCreacion');
             $this->mensaje();
             exit;

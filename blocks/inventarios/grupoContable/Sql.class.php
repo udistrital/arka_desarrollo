@@ -241,20 +241,25 @@ class Sql extends \Sql {
 
             case "guardarEdicionElementoCatalogo":
                 $cadenaSql = " UPDATE grupo.catalogo_elemento ";
-                $cadenaSql .= " SET  elemento_padre=" . $variable[0] . ", ";
-                $cadenaSql .= " elemento_codigo=" . $variable[1] . ", ";
-                $cadenaSql .= " elemento_catalogo=" . $variable[2] . ", ";
-                $cadenaSql .= " elemento_nombre='" . $variable[3] . "' ";
-                $cadenaSql .= " WHERE elemento_id=" . $variable[4] . " ";
+                $cadenaSql .= " SET  elemento_padre='" . $variable['idPadre'] . "', ";
+                $cadenaSql .= " elemento_codigo='" . $variable['id'] . "', ";
+                $cadenaSql .= " elemento_catalogo='" . $variable['idCatalogo'] . "', ";
+                $cadenaSql .= " elemento_nombre='" . $variable['nombreElemento'] . "' ";
+                $cadenaSql .= " WHERE elemento_id='" . $variable['idElemento'] . "' ";
+
+                $cadenaSql .= " RETURNING elemento_id;";
                 break;
-            
+
             case "guardarEdicionElementoCatalogoDescripcion":
-                $cadenaSql = " UPDATE grupo.catalogo_elemento ";
-                $cadenaSql .= " SET  elemento_padre=" . $variable[0] . ", ";
-                $cadenaSql .= " elemento_codigo=" . $variable[1] . ", ";
-                $cadenaSql .= " elemento_catalogo=" . $variable[2] . ", ";
-                $cadenaSql .= " elemento_nombre='" . $variable[3] . "' ";
-                $cadenaSql .= " WHERE elemento_id=" . $variable[4] . " ";
+                $cadenaSql = " UPDATE grupo.grupo_descripcion ";
+                $cadenaSql .= " SET  ";
+                $cadenaSql.= "  grupo_cuentasalida='" . $variable['cuentasalida'] . "', ";
+                $cadenaSql.= "  grupo_cuentaentrada='" . $variable['cuentaentrada'] . "', ";
+                $cadenaSql.= "  grupo_depreciacion='" . $variable['depreciacion'] . "', ";
+                $cadenaSql.= "  grupo_vidautil='" . intval($variable['vidautil']) . "', ";
+                $cadenaSql.= "  grupo_dcuentadebito='" . intval($variable['cuentacredito']) . "', ";
+                $cadenaSql.= "  grupo_dcuentacredito='" . intval($variable['cuentadebito']) . "' ";
+                $cadenaSql .= " WHERE grupo_id='" . $variable['idCuenta'] . "' ";
                 break;
         }
         return $cadenaSql;
