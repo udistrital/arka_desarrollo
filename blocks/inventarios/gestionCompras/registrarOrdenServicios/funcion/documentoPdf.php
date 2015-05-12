@@ -54,6 +54,7 @@ class RegistradorOrden {
 		$rubro = $esteRecursoDBO->ejecutarAcceso ( $cadenaSql, "busqueda" );
 		$rubro = $rubro [0];
 
+		
 		$cadenaSql = $this->miSql->getCadenaSql ( 'consultarDependencia', $orden ['dependencia_solicitante'] );
 		$dependencia_solicitante = $esteRecursoDBO->ejecutarAcceso ( $cadenaSql, "busqueda" );
 		$dependencia_solicitante = $dependencia_solicitante [0];
@@ -72,9 +73,10 @@ class RegistradorOrden {
 		
 		$cadenaSql = $this->miSql->getCadenaSql ( 'consultarCosntraistaServicios', $orden['id_contratista'] );
 		$datosContratista = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
-		
+	
 		$datosContratista=$datosContratista[0];
 
+		
 		$cadenaSql = $this->miSql->getCadenaSql ( 'polizas' );
 		$polizas = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
 		$polizas = $polizas [0];
@@ -86,13 +88,13 @@ class RegistradorOrden {
 		
 
 		
-		$arreglo = array (
-				$orden ['id_contratista_encargado'],
-				$orden ['vig_contratista'] 
-		);
-		$cadenaSql = $this->miSql->getCadenaSql ( 'consultarContratista', $arreglo );
-		$contratista = $esteRecursoDBO->ejecutarAcceso ( $cadenaSql, "busqueda" );
-		$contratista = $contratista [0];
+// 		$arreglo = array (
+// 				$orden ['id_contratista_encargado'],
+// 				$orden ['vig_contratista'] 
+// 		);
+// 		$cadenaSql = $this->miSql->getCadenaSql ( 'consultarContratista', $arreglo );
+// 		$contratista = $esteRecursoDBO->ejecutarAcceso ( $cadenaSql, "busqueda" );
+// 		$contratista = $contratista [0];
 		
 		
 		
