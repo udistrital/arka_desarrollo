@@ -148,7 +148,6 @@ class registrarForm {
 					$atributos ['columnas'] = 2;
 					$atributos ['nombre'] = $esteCampo;
 					$atributos ['id'] = $esteCampo;
-					
 					$atributos ['evento'] = '';
 					$atributos ['deshabilitado'] = false;
 					$atributos ["etiquetaObligatorio"] = true;

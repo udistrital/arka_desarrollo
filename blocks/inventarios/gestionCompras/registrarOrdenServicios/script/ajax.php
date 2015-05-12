@@ -269,7 +269,7 @@ function consultarDependencia(elem, request, response){
 	            });
 	            
 	            $("#<?php echo $this->campoSeguro('dependencia_solicitante')?>").removeAttr('disabled');
-	            $('#<?php echo $this->campoSeguro('dependencia_solicitante')?>').attr("class", " validate[required]");
+	            
 	            $('#<?php echo $this->campoSeguro('dependencia_solicitante')?>').width(400);
 	            $("#<?php echo $this->campoSeguro('dependencia_solicitante')?>").select2();
 	            
@@ -306,7 +306,7 @@ function consultarDependencia(elem, request, response){
 		            });
 		            
 		            $("#<?php echo $this->campoSeguro('dependencia_supervisor')?>").removeAttr('disabled');
-		            $('#<?php echo $this->campoSeguro('dependencia_supervisor')?>').attr("class", " validate[required]");
+		            
 		            $('#<?php echo $this->campoSeguro('dependencia_supervisor')?>').width(400);
 		            $("#<?php echo $this->campoSeguro('dependencia_supervisor')?>").select2();
 		            
@@ -683,7 +683,7 @@ function disponibilidades(elem, request, response){
 	            	
 	            });
 	            $("#<?php echo $this->campoSeguro('diponibilidad')?>").removeAttr('disabled');
-	            $('#<?php echo $this->campoSeguro('diponibilidad')?>').attr("class", " validate[required]");
+
 	            $("#<?php echo $this->campoSeguro('diponibilidad')?>").select2({
 	          		 placeholder: "Search for a repository",
 	           		 minimumInputLength: 1	,
@@ -745,7 +745,7 @@ function disponibilidades(elem, request, response){
 			            });
 			            
 			            $("#<?php echo $this->campoSeguro('registro')?>").removeAttr('disabled');
-			            $('#<?php echo $this->campoSeguro('registro')?>').attr("class", " validate[required]");
+			            
 			            $("#<?php echo $this->campoSeguro('registro')?>").select2({
 			          		 placeholder: "Search for a repository",
 			           		 minimumInputLength: 1	,
