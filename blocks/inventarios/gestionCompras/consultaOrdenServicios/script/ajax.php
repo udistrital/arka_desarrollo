@@ -232,7 +232,7 @@ function consultarDependenciaSuper(elem, request, response){
 	        if(data[0]!=" "){
 
 	            $("#<?php echo $this->campoSeguro('dependencia_supervisor')?>").html('');
-	            $("<option value=''>Seleccione  ....</option>").appendTo("#<?php echo $this->campoSeguro('dependencia_supervisor')?>");
+	            $('<option value=" ">Seleccione  ....</option>').appendTo("#<?php echo $this->campoSeguro('dependencia_supervisor')?>");
 	            $.each(data , function(indice,valor){
 
 	            	$("<option value='"+data[ indice ].ESF_ID_ESPACIO+"'>"+data[ indice ].ESF_NOMBRE_ESPACIO+"</option>").appendTo("#<?php echo $this->campoSeguro('dependencia_supervisor')?>");
@@ -240,7 +240,7 @@ function consultarDependenciaSuper(elem, request, response){
 	            });
 	            
 	            $("#<?php echo $this->campoSeguro('dependencia_supervisor')?>").removeAttr('disabled');
-	            $('#<?php echo $this->campoSeguro('dependencia_supervisor')?>').attr("class", " validate[required]");
+	            
 	            $('#<?php echo $this->campoSeguro('dependencia_supervisor')?>').width(400);
 	            $("#<?php echo $this->campoSeguro('dependencia_supervisor')?>").select2();
 	            
@@ -277,7 +277,7 @@ function consultarDependenciaSuper(elem, request, response){
 		            });
 		            
 		            $("#<?php echo $this->campoSeguro('dependencia_solicitante')?>").removeAttr('disabled');
-		            $('#<?php echo $this->campoSeguro('dependencia_solicitante')?>').attr("class", " validate[required]");
+		            
 		            $('#<?php echo $this->campoSeguro('dependencia_solicitante')?>').width(400);
 		            $("#<?php echo $this->campoSeguro('dependencia_solicitante')?>").select2();
 		            
@@ -377,7 +377,7 @@ function consultarDependenciaSuper(elem, request, response){
 			            });
 			            
 			            $("#<?php echo $this->campoSeguro('dependencia_supervisor')?>").removeAttr('disabled');
-			            $('#<?php echo $this->campoSeguro('dependencia_supervisor')?>').attr("class", " validate[required]");
+			            
 			            $('#<?php echo $this->campoSeguro('dependencia_supervisor')?>').width(400);
 			            $("#<?php echo $this->campoSeguro('dependencia_supervisor')?>").select2();
 			            
@@ -413,7 +413,7 @@ function consultarDependencia(elem, request, response){
 	            });
 	            
 	            $("#<?php echo $this->campoSeguro('dependencia_solicitante')?>").removeAttr('disabled');
-	            $('#<?php echo $this->campoSeguro('dependencia_solicitante')?>').attr("class", " validate[required]");
+	            
 	            $('#<?php echo $this->campoSeguro('dependencia_solicitante')?>').width(400);
 	            $("#<?php echo $this->campoSeguro('dependencia_solicitante')?>").select2();
 	            
@@ -452,7 +452,7 @@ function consultarDependencia(elem, request, response){
 		            
 		            $("#<?php echo $this->campoSeguro('selec_dependencia_Sol')?>").removeAttr('disabled');
 		            $('#<?php echo $this->campoSeguro('selec_dependencia_Sol')?>').width(300);
-		            $('#<?php echo $this->campoSeguro('selec_dependencia_Sol')?>').attr("class", " validate[required]");
+		            
 		            $("#<?php echo $this->campoSeguro('selec_dependencia_Sol')?>").select2();
 		            
 		          
@@ -821,7 +821,7 @@ $("#<?php echo $this->campoSeguro('diponibilidad')?>").change(function() {
 	    	            	
 	    	            });
 	    	            $("#<?php echo $this->campoSeguro('diponibilidad')?>").removeAttr('disabled');
-	    	            $('#<?php echo $this->campoSeguro('diponibilidad')?>').attr("class", " validate[required]");
+	    	            
 	    	            $("#<?php echo $this->campoSeguro('diponibilidad')?>").select2({
 	    	          		 placeholder: "Search for a repository",
 	    	           		 minimumInputLength: 1	,
@@ -883,7 +883,7 @@ $("#<?php echo $this->campoSeguro('diponibilidad')?>").change(function() {
 	    			            });
 	    			            
 	    			            $("#<?php echo $this->campoSeguro('registro')?>").removeAttr('disabled');
-	    			            $('#<?php echo $this->campoSeguro('registro')?>').attr("class", " validate[required]");
+	    			            
 	    			            $("#<?php echo $this->campoSeguro('registro')?>").select2({
 	    			          		 placeholder: "Search for a repository",
 	    			           		 minimumInputLength: 1	,

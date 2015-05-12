@@ -89,13 +89,13 @@ class RegistradorOrden {
 		
 
 		
-		$arreglo = array (
-				$orden ['id_contratista_encargado'],
-				$orden ['vig_contratista'] 
-		);
-		$cadenaSql = $this->miSql->getCadenaSql ( 'consultarContratistaDocumento', $arreglo );
-		$contratista = $esteRecursoDBO->ejecutarAcceso ( $cadenaSql, "busqueda" );
-		$contratista = $contratista [0];
+// 		$arreglo = array (
+// 				$orden ['id_contratista_encargado'],
+// 				$orden ['vig_contratista'] 
+// 		);
+// 		$cadenaSql = $this->miSql->getCadenaSql ( 'consultarContratistaDocumento', $arreglo );
+// 		$contratista = $esteRecursoDBO->ejecutarAcceso ( $cadenaSql, "busqueda" );
+// 		$contratista = $contratista [0];
 		
 		
 		
