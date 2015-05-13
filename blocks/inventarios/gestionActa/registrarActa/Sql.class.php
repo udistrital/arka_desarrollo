@@ -176,9 +176,9 @@ class Sql extends \Sql {
 			case "consultarOrdenServicios" :
 				$cadenaSql = "SELECT DISTINCT ";
 				$cadenaSql .= "id_orden_servicio, fecha_registro,  ";
-				$cadenaSql .= "identificacion, dependencia  ";
+				$cadenaSql .= "identificacion, dependencia_solicitante , sede ";
 				$cadenaSql .= "FROM orden_servicio ";
-				$cadenaSql .= "JOIN solicitante_servicios ON solicitante_servicios.id_solicitante = orden_servicio.dependencia_solicitante ";
+// 				$cadenaSql .= "JOIN solicitante_servicios ON solicitante_servicios.id_solicitante = orden_servic	io.dependencia_solicitante ";
 				$cadenaSql .= "JOIN contratista_servicios ON contratista_servicios.id_contratista = orden_servicio.id_contratista ";
 				$cadenaSql .= "WHERE 1=1";
 				if ($variable [0] != '') {
@@ -304,9 +304,7 @@ class Sql extends \Sql {
 				$cadenaSql .= " FROM orden_compra";
 				$cadenaSql .= " WHERE id_orden_compra ='" . $variable . "';";
 				break;
-				
-				
-
+			
 			/* * ***************** */
 			case "insertarActa" :
 				$cadenaSql = " INSERT INTO registro_actarecibido( ";
@@ -360,16 +358,27 @@ class Sql extends \Sql {
 			 * break;
 			 */
 			
+			case "dependenciasConsultadas" :
+				$cadenaSql = "SELECT DISTINCT  ESF_ID_ESPACIO, ESF_NOMBRE_ESPACIO ";
+				$cadenaSql .= " FROM ESPACIOS_FISICOS ";
+				$cadenaSql .= " WHERE ESF_ID_SEDE='" . $variable . "' ";
+				$cadenaSql .= " AND  ESF_ESTADO='A'";
+				
+				break;
+			
 			case "dependencias" :
-				$cadenaSql = "SELECT DISTINCT  ESF_COD_SEDE, ESF_NOMBRE_ESPACIO ";
+				$cadenaSql = "SELECT DISTINCT  ESF_ID_ESPACIO, ESF_NOMBRE_ESPACIO ";
 				$cadenaSql .= " FROM ESPACIOS_FISICOS ";
+				$cadenaSql .= " WHERE  ESF_ESTADO='A' ";
 				break;
-			
+				
 			case "sede" :
-				$cadenaSql = "SELECT DISTINCT  ESF_COD_SEDE, ESF_SEDE ";
+				$cadenaSql = "SELECT DISTINCT  ESF_ID_SEDE, ESF_SEDE ";
 				$cadenaSql .= " FROM ESPACIOS_FISICOS ";
+				$cadenaSql .= " WHERE   ESF_ESTADO='A'";
+				
 				break;
-			
+				
 			case "proveedores" :
 				
 				$cadenaSql = " SELECT PRO_IDENTIFICADOR,PRO_NIT||' - '||PRO_RAZON_SOCIAL AS proveedor ";

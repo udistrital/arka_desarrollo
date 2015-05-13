@@ -85,13 +85,16 @@ class registrarForm {
 		switch ($tipo_orden) {
 			case 1 :
 				$cadenaSql = $this->miSql->getCadenaSql ( 'consultarOrdenServicios', $arreglo );
+
 				$resultado_orden = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
+
 				$titulo = "Orden de Servicios";
 				break;
 			
 			case 2 :
 				$cadenaSql = $this->miSql->getCadenaSql ( 'consultarOrdenCompra', $arreglo );
 				$resultado_orden = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
+				
 				$titulo = "Orden de Compra";
 				break;
 			
