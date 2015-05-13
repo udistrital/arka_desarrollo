@@ -214,6 +214,8 @@ class registrarForm {
 					echo $this->miFormulario->campoCuadroLista ( $atributos );
 					unset ( $atributos );
 					// --------------- FIN CONTROL : Cuadro de Texto --------------------------------------------------
+					
+					
 					// ---------------- CONTROL: Cuadro de Texto --------------------------------------------------------
 					$esteCampo = 'fecha_recibido';
 					$atributos ['id'] = $esteCampo;
