@@ -20,18 +20,22 @@ class registrarForm {
 		$this->miSql = $sql;
 	}
 	function miForm() {
+	
 		
+
 		// Rescatar los datos de este bloque
 		$esteBloque = $this->miConfigurador->getVariableConfiguracion ( "esteBloque" );
-		$miPaginaActual = $this->miConfigurador->getVariableConfiguracion ( 'pagina' );
+		$miPaginaActual=$this->miConfigurador->getVariableConfiguracion ( 'pagina' );
+		
 		
 		$directorio = $this->miConfigurador->getVariableConfiguracion ( "host" );
 		$directorio .= $this->miConfigurador->getVariableConfiguracion ( "site" ) . "/index.php?";
 		$directorio .= $this->miConfigurador->getVariableConfiguracion ( "enlace" );
 		
+		
 		$rutaBloque = $this->miConfigurador->getVariableConfiguracion ( "host" );
 		$rutaBloque .= $this->miConfigurador->getVariableConfiguracion ( "site" ) . "/blocks/";
-		$rutaBloque .= $esteBloque ['grupo'] . $esteBloque ['nombre'];
+		$rutaBloque .= $esteBloque ['grupo']  . $esteBloque ['nombre'];
 		
 		// ---------------- SECCION: Parámetros Globales del Formulario ----------------------------------
 		/**
@@ -45,6 +49,7 @@ class registrarForm {
 		
 		$atributosGlobales ['campoSeguro'] = 'true';
 		
+		
 		// -------------------------------------------------------------------------------------------------
 		$conexion = "inventarios";
 		$esteRecursoDB = $this->miConfigurador->fabricaConexiones->getRecursoDB ( $conexion );
@@ -52,11 +57,15 @@ class registrarForm {
 		$conexion = "sicapital";
 		$esteRecursoDBO = $this->miConfigurador->fabricaConexiones->getRecursoDB ( $conexion );
 		
+		
+
+		
 		if (isset ( $_REQUEST ['fecha_inicio'] ) && $_REQUEST ['fecha_inicio'] != '') {
 			$fechaInicio = $_REQUEST ['fecha_inicio'];
 		} else {
 			$fechaInicio = '';
 		}
+		
 		
 		if (isset ( $_REQUEST ['fecha_final'] ) && $_REQUEST ['fecha_final'] != '') {
 			$fechaFinal = $_REQUEST ['fecha_final'];
@@ -76,26 +85,32 @@ class registrarForm {
 			$clase = '';
 		}
 		
+
+		
 		if (isset ( $_REQUEST ['proveedor'] ) && $_REQUEST ['proveedor'] != '') {
 			$proveedor = $_REQUEST ['proveedor'];
 		} else {
 			$proveedor = '';
 		}
 		
+		
+		
+		
 		$arreglo = array (
 				$numeroEntrada,
 				$fechaInicio,
 				$fechaFinal,
 				$clase,
-				$proveedor 
-		)
-		;
+				$proveedor
+			
+		);
 		
-		$cadenaSql = $this->miSql->getCadenaSql ( 'consultarEntrada', $arreglo );
+	 
+		$cadenaSql = $this->miSql->getCadenaSql ( 'consultarEntrada',$arreglo );
 		
 		
 		$entrada = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
-		
+		 
 		
 		// ---------------- SECCION: Parámetros Generales del Formulario ----------------------------------
 		$esteCampo = $esteBloque ['nombre'];
@@ -119,12 +134,15 @@ class registrarForm {
 		echo $this->miFormulario->formulario ( $atributos );
 		// ---------------- SECCION: Controles del Formulario -----------------------------------------------
 		
+		
+			
 		$esteCampo = "marcoDatosBasicos";
 		$atributos ['id'] = $esteCampo;
 		$atributos ["estilo"] = "jqueryui";
 		$atributos ['tipoEtiqueta'] = 'inicio';
 		$atributos ["leyenda"] = "Consultar y Modificar Entrada";
 		echo $this->miFormulario->marcoAgrupacion ( 'inicio', $atributos );
+		
 		
 		// ------------------Division para los botones-------------------------
 		$atributos ["id"] = "botones";
@@ -144,9 +162,9 @@ class registrarForm {
 		$atributos ["verificar"] = '';
 		$atributos ["tipoSubmit"] = 'jquery'; // Dejar vacio para un submit normal, en este caso se ejecuta la función submit declarada en ready.js
 		$atributos ["valor"] = $this->lenguaje->getCadena ( $esteCampo );
+		$atributos ['nombreFormulario'] = $esteBloque ['nombre'];
 		$tab ++;
 		
-		$atributos ['nombreFormulario'] = $esteBloque ['nombre'];
 		// Aplica atributos globales al control
 		$atributos = array_merge ( $atributos, $atributosGlobales );
 		echo $this->miFormulario->campoBoton ( $atributos );
@@ -155,12 +173,14 @@ class registrarForm {
 		// ---------------------------------------------------------
 		
 		// ------------------Fin Division para los botones-------------------------
+		echo $this->miFormulario->division ( "fin" );
+		
+
 		
 		if ($entrada) {
-			
+		
 			echo "<table id='tablaTitulos'>";
-		echo $this->miFormulario->division ( "fin" );
-			
+		
 			echo "<thead>
                 <tr>
                    <th># Número Entrada</th>
@@ -172,56 +192,71 @@ class registrarForm {
 				</tr>
             </thead>
             <tbody>";
-			
+		
 			for($i = 0; $i < count ( $entrada ); $i ++) {
 				$variable = "pagina=" . $miPaginaActual; // pendiente la pagina para modificar parametro
 				$variable .= "&opcion=modificar";
-				// $variable .= "&usuario=" . $miSesion->getSesionUsuarioId ();
+// 				$variable .= "&usuario=" . $miSesion->getSesionUsuarioId ();
 				$variable .= "&numero_entrada=" . $entrada [$i] [0];
 				
+		
 
-				
 				if ($entrada [$i] [3] ==0) {
-					
+						
 					$arreglo = array (
-							$entrada [$i] [0],
+							$entrada [$i] [4],
 							$entrada [$i] [1],
 							$entrada [$i] [2],
 							'',
-							'' 
+							''
 					);
-					
-					
+						
+						
 					$proveedor[0][0]='NO APLICA';
 					$proveedor[0][1]='NO APLICA';
 				} else {
 					$cadenaSql = $this->miSql->getCadenaSql ( 'proveedor_informacion', $entrada [$i] [3] );
-					
+						
 					$proveedor = $esteRecursoDBO->ejecutarAcceso ( $cadenaSql, "busqueda" );
-					
+						
 					$arreglo = array (
 							$entrada [$i] [0],
 							$entrada [$i] [1],
 							$entrada [$i] [2],
 							$proveedor [0] [0],
-							$proveedor [0] [1] 
+							$proveedor [0] [1]
 					);
 				}
-// 				exit ();
 				
-				$arreglo = serialize ( $arreglo );
+				
+// 				$cadenaSql = $this->miSql->getCadenaSql ( 'proveedor_informacion', $entrada [$i] [3] );
+				
+// 				$proveedor = $esteRecursoDBO->ejecutarAcceso ( $cadenaSql, "busqueda" );
+				
+				
+// 				$arreglo=array(
+// 				   		$entrada[$i][0],
+// 						$entrada[$i][1],
+// 						$entrada[$i][2],
+// 						$proveedor[0][0],
+// 						$proveedor[0][1]
+// 						);
+				
+				
+				
+				$arreglo=serialize($arreglo);
 				$variable .= "&datosGenerales=" . $arreglo;
 				
-				$variable = $this->miConfigurador->fabricaConexiones->crypto->codificar_url ( $variable, $directorio );
+				$variable = $this->miConfigurador->fabricaConexiones->crypto->codificar_url ( $variable, $directorio);
 				
 				$mostrarHtml = "<tr>
                     <td><center>" . $entrada [$i] [0] . "</center></td>
                     <td><center>" . $entrada [$i] [1] . "</center></td>
                     <td><center>" . $entrada [$i] [2] . "</center></td>
                     <td><center>" . $proveedor [0] [0] . "</center></td>
-                    <td><center>" . $proveedor [0] [1] . "</center></td>
+                    <td><center>" . $proveedor[0][1]. "</center></td>
                     <td><center>
-                    	<a href='" . $variable . "'>
+                    	<a href='".$variable."'>
                             <img src='" . $rutaBloque . "/css/images/edit.png' width='15px'>
                         </a>
                   	</center> </td>
@@ -231,28 +266,33 @@ class registrarForm {
 				unset ( $mostrarHtml );
 				unset ( $variable );
 			}
-			
+		
 			echo "</tbody>";
-			
+		
 			echo "</table>";
+
 		} else {
 			
 			$mensaje = "No Se Encontraron<br>Registros de Entradas";
-			
+				
 			// ---------------- CONTROL: Cuadro de Texto --------------------------------------------------------
 			$esteCampo = 'mensajeRegistro';
 			$atributos ['id'] = $esteCampo;
 			$atributos ['tipo'] = 'error';
 			$atributos ['estilo'] = 'textoCentrar';
 			$atributos ['mensaje'] = $mensaje;
-			
+				
 			$tab ++;
-			
+				
 			// Aplica atributos globales al control
 			$atributos = array_merge ( $atributos, $atributosGlobales );
 			echo $this->miFormulario->cuadroMensaje ( $atributos );
 			// --------------- FIN CONTROL : Cuadro de Texto --------------------------------------------------
+			
+			
 		}
+		
+	
 		
 		echo $this->miFormulario->marcoAgrupacion ( 'fin' );
 		

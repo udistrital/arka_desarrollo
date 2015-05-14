@@ -209,7 +209,7 @@ class Sql extends \Sql {
 			case "consultarEntrada" :
 				$cadenaSql = "SELECT DISTINCT ";
 				$cadenaSql .= "id_entrada, fecha_registro,  ";
-				$cadenaSql .= " descripcion,proveedor   ";
+				$cadenaSql .= " descripcion,proveedor ,consecutivo  ";
 				$cadenaSql .= "FROM entrada ";
 				$cadenaSql .= "JOIN clase_entrada ON clase_entrada.id_clase = entrada.clase_entrada ";
 				// $cadenaSql .= "JOIN proveedor ON proveedor.id_proveedor = entrada.proveedor ";
@@ -264,10 +264,11 @@ class Sql extends \Sql {
 				break;
 			
 			case "sede" :
-				$cadenaSql = "SELECT DISTINCT  ESF_COD_SEDE, ESF_SEDE ";
+				$cadenaSql = "SELECT DISTINCT  ESF_ID_SEDE, ESF_SEDE ";
 				$cadenaSql .= " FROM ESPACIOS_FISICOS ";
+				$cadenaSql .= " WHERE   ESF_ESTADO='A'";
+				
 				break;
-			
 			case "informacion_ordenador" :
 				$cadenaSql = " SELECT ORG_NOMBRE,ORG_IDENTIFICADOR  ";
 				$cadenaSql .= " FROM ORDENADORES_GASTO ";
@@ -276,10 +277,10 @@ class Sql extends \Sql {
 				break;
 			
 			case "dependencias" :
-				$cadenaSql = "SELECT DISTINCT  ESF_COD_SEDE, ESF_NOMBRE_ESPACIO ";
+				$cadenaSql = "SELECT DISTINCT  ESF_ID_ESPACIO, ESF_NOMBRE_ESPACIO ";
 				$cadenaSql .= " FROM ESPACIOS_FISICOS ";
+				$cadenaSql .= " WHERE  ESF_ESTADO='A' ";
 				break;
-			
 			case "consultarReposicion" :
 				
 				$cadenaSql = "SELECT  ";
@@ -430,7 +431,7 @@ class Sql extends \Sql {
 				$cadenaSql .= "  estado_entrada='1'  ";
 				$cadenaSql .= "  WHERE id_entrada='" . $variable [9] . "' ";
 				$cadenaSql .= "  RETURNING  id_entrada ";
-
+				
 				break;
 			
 			case "insertarReposicion" :
@@ -489,6 +490,14 @@ class Sql extends \Sql {
 				$cadenaSql .= "'" . $variable [1] . "',";
 				$cadenaSql .= "'" . $variable [2] . "') ";
 				$cadenaSql .= "RETURNING  id_recuperacion; ";
+				
+				break;
+			
+			case "dependenciasConsultadas" :
+				$cadenaSql = "SELECT DISTINCT  ESF_ID_ESPACIO, ESF_NOMBRE_ESPACIO ";
+				$cadenaSql .= " FROM ESPACIOS_FISICOS ";
+				$cadenaSql .= " WHERE ESF_ID_SEDE='" . $variable . "' ";
+				$cadenaSql .= " AND  ESF_ESTADO='A'";
 				
 				break;
 		}
