@@ -172,7 +172,7 @@ class Sql extends \Sql {
 			case "consultarEntrada" :
 				$cadenaSql = "SELECT DISTINCT ";
 				$cadenaSql .= "entrada.id_entrada, entrada.fecha_registro,  ";
-				$cadenaSql .= " clase_entrada.descripcion,proveedor   ";
+				$cadenaSql .= " clase_entrada.descripcion,proveedor,consecutivo   ";
 				$cadenaSql .= "FROM entrada ";
 				$cadenaSql .= "JOIN clase_entrada ON clase_entrada.id_clase = entrada.clase_entrada ";
 				$cadenaSql .= "JOIN elemento ON elemento.id_entrada = entrada.id_entrada ";
