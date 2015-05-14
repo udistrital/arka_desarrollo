@@ -334,7 +334,7 @@ class registrarForm {
 				$atributos ['tab'] = $tab;
 				$atributos ['tamanno'] = 1;
 				$atributos ['estilo'] = 'jqueryui';
-				$atributos ['validar'] = 'required, minSize[1],maxSize[15],custom[onlyNumberSp]';
+				$atributos ['validar'] = 'required';
 				$atributos ['limitar'] = true;
 				$atributos ['etiqueta'] = $this->lenguaje->getCadena ( $esteCampo );
 				$atributos ['anchoEtiqueta'] = 220;
@@ -363,7 +363,7 @@ class registrarForm {
 				$atributos ['id'] = $esteCampo;
 				
 				$atributos ['evento'] = '';
-				$atributos ['deshabilitado'] = false;
+				$atributos ['deshabilitado'] = true;
 				$atributos ["etiquetaObligatorio"] = true;
 				$atributos ['tab'] = $tab;
 				$atributos ['tamanno'] = 1;
@@ -378,6 +378,7 @@ class registrarForm {
 					$atributos ['seleccion'] = - 1;
 				}
 				$atributos ['cadena_sql'] = $this->miSql->getCadenaSql ( "dependencias" );
+				
 				$matrizItems = $esteRecursoDBO->ejecutarAcceso ( $atributos ['cadena_sql'], "busqueda" );
 				$atributos ['matrizItems'] = $matrizItems;
 				

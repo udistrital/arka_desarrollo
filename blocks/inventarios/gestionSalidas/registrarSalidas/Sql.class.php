@@ -150,7 +150,7 @@ class Sql extends \Sql {
 			 */
 			
 			case "buscar_entradas" :
-				$cadenaSql = " SELECT id_entrada valor,id_entrada descripcion  ";
+				$cadenaSql = " SELECT consecutivo valor,consecutivo descripcion  ";
 				$cadenaSql .= " FROM entrada; ";
 				break;
 			
@@ -182,7 +182,7 @@ class Sql extends \Sql {
 			case "consultarEntrada" :
 				$cadenaSql = "SELECT DISTINCT ";
 				$cadenaSql .= "entrada.id_entrada, entrada.fecha_registro,  ";
-				$cadenaSql .= " clase_entrada.descripcion, proveedor   ";
+				$cadenaSql .= " clase_entrada.descripcion, proveedor ,consecutivo   ";
 				$cadenaSql .= "FROM entrada ";
 				$cadenaSql .= "JOIN clase_entrada ON clase_entrada.id_clase = entrada.clase_entrada ";
 				$cadenaSql .= "JOIN elemento ON elemento.id_entrada = entrada.id_entrada ";
@@ -272,21 +272,31 @@ class Sql extends \Sql {
 			
 			case "consulta_elementos" :
 				
-				$cadenaSql = "SELECT id_elemento, (codigo||' - '||nombre) AS item, cantidad, descripcion ";
+				$cadenaSql = "SELECT id_elemento, elemento_padre||''||elemento_codigo||' - '||elemento_nombre AS item, cantidad, descripcion ";
 				$cadenaSql .= "FROM elemento ";
-				$cadenaSql .= "JOIN catalogo_elemento ON id_catalogo = nivel ";
+				$cadenaSql .= " JOIN catalogo.catalogo_elemento ON elemento_id = nivel ";
 				$cadenaSql .= "WHERE id_entrada='" . $variable . "' ";
 				
 				break;
 			
 			case "dependencias" :
-				$cadenaSql = "SELECT DISTINCT  ESF_COD_SEDE, ESF_NOMBRE_ESPACIO ";
+				$cadenaSql = "SELECT DISTINCT  ESF_ID_ESPACIO, ESF_NOMBRE_ESPACIO ";
 				$cadenaSql .= " FROM ESPACIOS_FISICOS ";
+				$cadenaSql .= " WHERE  ESF_ESTADO='A'";
+				
 				break;
-			
-			case "sede" :
-				$cadenaSql = "SELECT DISTINCT  ESF_COD_SEDE, ESF_SEDE ";
+			case "dependenciasConsultadas" :
+				$cadenaSql = "SELECT DISTINCT  ESF_ID_ESPACIO, ESF_NOMBRE_ESPACIO ";
 				$cadenaSql .= " FROM ESPACIOS_FISICOS ";
+				$cadenaSql .= " WHERE ESF_ID_SEDE='" . $variable . "' ";
+				$cadenaSql .= " AND  ESF_ESTADO='A'";
+				
+				break;
+			case "sede" :
+				$cadenaSql = "SELECT DISTINCT  ESF_ID_SEDE, ESF_SEDE ";
+				$cadenaSql .= " FROM ESPACIOS_FISICOS ";
+				$cadenaSql .= " WHERE   ESF_ESTADO='A'";
+				
 				break;
 			
 			case "consultar_dependencia" :
@@ -314,8 +324,6 @@ class Sql extends \Sql {
 				
 				break;
 			
-				
- 				
 			case "insertar_salida" :
 				$cadenaSql = " INSERT INTO ";
 				$cadenaSql .= " salida( fecha_registro, dependencia, funcionario, observaciones,";
@@ -329,7 +337,7 @@ class Sql extends \Sql {
 				$cadenaSql .= "'" . $variable [5] . "',";
 				$cadenaSql .= "'" . $variable [6] . "') ";
 				$cadenaSql .= "RETURNING  id_salida; ";
-
+				
 				break;
 			
 			case "insertar_salida_item" :
@@ -376,6 +384,17 @@ class Sql extends \Sql {
 				$cadenaSql .= "WHERE id_salida IS NULL ";
 				$cadenaSql .= "AND el.id_entrada='" . $variable . "' ";
 				
+				break;
+			
+			case 'consultaConsecutivo' :
+				$cadenaSql = "SELECT consecutivo ";
+				$cadenaSql .= "FROM salida  ";
+				$cadenaSql .= "WHERE  fecha_registro='" . $variable . "';";
+				
+				break;
+			
+			case 'reiniciarConsecutivo' :
+				$cadenaSql = "SELECT SETVAL((SELECT pg_get_serial_sequence('salida', 'consecutivo')), 1, false);";
 				break;
 			
 			// _________________________________________________
