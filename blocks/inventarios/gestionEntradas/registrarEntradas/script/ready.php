@@ -214,7 +214,7 @@
           
           
           $("#<?php echo $this->campoSeguro('sede')?>").select2();
-          $("#<?php echo $this->campoSeguro('dependencia')?>").select2();
+          
           $("#<?php echo $this->campoSeguro('asignacionOrdenador')?>").select2();
           
                  

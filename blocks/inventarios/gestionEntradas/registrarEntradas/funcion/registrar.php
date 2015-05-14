@@ -33,20 +33,39 @@ class RegistradorOrden {
 		$rutaBloque .= $esteBloque ['nombre'];
 		$host = $this->miConfigurador->getVariableConfiguracion ( "host" ) . $this->miConfigurador->getVariableConfiguracion ( "site" ) . "/blocks/inventarios/gestionEntradas/" . $esteBloque ['nombre'];
 		
+		$fechaActual = date ( 'Y-m-d' );
+		
+		$fechaReinicio = date ( "Y-m-d", mktime ( 0, 0, 0, 1, 1, date ( 'Y' ) ) );
+		
+
+		
+		if ($fechaActual == $fechaReinicio) {
+			
+			$cadenaSql = $this->miSql->getCadenaSql ( 'consultaConsecutivo', $fechaReinicio );
+			$consecutivo = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
+			
+			if (isset ( $consecutivo ) && $consecutivo == false) {
+				$cadenaSql = $this->miSql->getCadenaSql ( 'reiniciarConsecutivo' );
+				$consecutivo = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "acceso" );
+			}
+		}
+		
+		
+		
 		$i = 0;
 		
 		switch ($_REQUEST ['clase']) {
 			
 			case '1' :
 				
-				$observacion = $_REQUEST ['observaciones_reposicion'];
+				// $observacion = $_REQUEST ['observaciones_reposicion'];
 				$entrada = $_REQUEST ['id_entradaR'];
 				$salida = $_REQUEST ['id_salidaR'];
 				
 				break;
 			
 			case '2' :
-				$observacion = $_REQUEST ['observaciones_donacion'];
+				// $observacion = $_REQUEST ['observaciones_donacion'];
 				foreach ( $_FILES as $key => $values ) {
 					
 					$archivo [$i] = $_FILES [$key];
@@ -58,7 +77,7 @@ class RegistradorOrden {
 			
 			case '3' :
 				
-				$observacion = $_REQUEST ['observaciones_sobrante'];
+				// $observacion = $_REQUEST ['observaciones_sobrante'];
 				$entrada = $_REQUEST ['id_entradaS'];
 				$salida = $_REQUEST ['id_salidaS'];
 				
@@ -73,7 +92,7 @@ class RegistradorOrden {
 				break;
 			
 			case '4' :
-				$observacion = $_REQUEST ['observaciones_produccion'];
+				// $observacion = $_REQUEST ['observaciones_produccion'];
 				foreach ( $_FILES as $key => $values ) {
 					
 					$archivo [$i] = $_FILES [$key];
@@ -86,7 +105,7 @@ class RegistradorOrden {
 			
 			case '5' :
 				
-				$observacion = $_REQUEST ['observaciones_recuperacion'];
+				// $observacion = $_REQUEST ['observaciones_recuperacion'];
 				foreach ( $_FILES as $key => $values ) {
 					
 					$archivo [$i] = $_FILES [$key];
@@ -98,7 +117,7 @@ class RegistradorOrden {
 			
 			case '6' :
 				
-				$observacion = $_REQUEST ['observaciones_adquisicion'];
+				// $observacion = $_REQUEST ['observaciones_adquisicion'];
 				foreach ( $_FILES as $key => $values ) {
 					
 					$archivo [$i] = $_FILES [$key];
@@ -110,7 +129,7 @@ class RegistradorOrden {
 			
 			case '7' :
 				
-				$observacion = $_REQUEST ['observaciones_avance'];
+				// $observacion = $_REQUEST ['observaciones_avance'];
 				foreach ( $_FILES as $key => $values ) {
 					
 					$archivo [$i] = $_FILES [$key];
@@ -141,16 +160,14 @@ class RegistradorOrden {
 				$status = "Error al subir archivo 2";
 			}
 			
-			
 			$arreglo = array (
 					$destino1,
 					$archivo1 
 			);
 		}
 		
-		
 		$arreglo_clase = array (
-				$observacion,
+				$observacion = 'NULL',
 				(isset ( $entrada )) ? $entrada : 0,
 				(isset ( $salida )) ? $salida : 0,
 				($_REQUEST ['clase'] == 1) ? $_REQUEST ['id_hurtoR'] : 0,
@@ -165,7 +182,6 @@ class RegistradorOrden {
 		
 		$fechaActual = date ( 'Y-m-d' );
 		
-		
 		$arregloDatos = array (
 				$fechaActual,
 				$_REQUEST ['vigencia'],
@@ -178,11 +194,11 @@ class RegistradorOrden {
 				($_REQUEST ['numero_factura'] != '') ? $_REQUEST ['numero_factura'] : 0,
 				($_REQUEST ['fecha_factura'] != '') ? $_REQUEST ['fecha_factura'] : '0001-01-01',
 				$_REQUEST ['observaciones_entrada'],
-				(isset($_REQUEST ['acta_recibido'])&&$_REQUEST ['acta_recibido'] != '') ? $_REQUEST ['acta_recibido'] : 0 ,
-				$_REQUEST['id_ordenador'],
-				$_REQUEST['sede'],
-				$_REQUEST['dependencia'],
-				$_REQUEST['supervisor']
+				(isset ( $_REQUEST ['acta_recibido'] ) && $_REQUEST ['acta_recibido'] != '') ? $_REQUEST ['acta_recibido'] : 0,
+				$_REQUEST ['id_ordenador'],
+				$_REQUEST ['sede'],
+				$_REQUEST ['dependencia'],
+				$_REQUEST ['supervisor'] 
 		);
 		
 		$cadenaSql = $this->miSql->getCadenaSql ( 'insertarEntrada', $arregloDatos );

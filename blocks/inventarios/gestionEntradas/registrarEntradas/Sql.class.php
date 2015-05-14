@@ -225,7 +225,8 @@ class Sql extends \Sql {
 				
 				$cadenaSql = "SELECT ";
 				$cadenaSql .= "id_tipo, descripcion  ";
-				$cadenaSql .= "FROM tipo_contrato;";
+				$cadenaSql .= "FROM tipo_contrato ";
+				$cadenaSql .= "WHERE  id_tipo > 0;";
 				
 				break;
 			
@@ -238,13 +239,15 @@ class Sql extends \Sql {
 				break;
 			
 			case "dependencias" :
-				$cadenaSql = "SELECT DISTINCT  ESF_COD_SEDE, ESF_NOMBRE_ESPACIO ";
+				$cadenaSql = "SELECT DISTINCT  ESF_ID_ESPACIO, ESF_NOMBRE_ESPACIO ";
 				$cadenaSql .= " FROM ESPACIOS_FISICOS ";
+				$cadenaSql .= " WHERE  ESF_ESTADO='A' ";
 				break;
-			
 			case "sede" :
-				$cadenaSql = "SELECT DISTINCT  ESF_COD_SEDE, ESF_SEDE ";
+				$cadenaSql = "SELECT DISTINCT  ESF_ID_SEDE, ESF_SEDE ";
 				$cadenaSql .= " FROM ESPACIOS_FISICOS ";
+				$cadenaSql .= " WHERE   ESF_ESTADO='A'";
+				
 				break;
 			case "informacion_ordenador" :
 				$cadenaSql = " SELECT ORG_NOMBRE,ORG_IDENTIFICADOR  ";
@@ -367,7 +370,7 @@ class Sql extends \Sql {
 				$cadenaSql .= "'" . $variable [13] . "',";
 				$cadenaSql .= "'" . $variable [14] . "',";
 				$cadenaSql .= "'" . $variable [15] . "') ";
-				$cadenaSql .= "RETURNING  id_entrada; ";
+				$cadenaSql .= "RETURNING  consecutivo; ";
 				
 				break;
 			
@@ -536,6 +539,25 @@ class Sql extends \Sql {
 					$cadenaSql .= " AND  dependencia= '" . $variable [4] . "'";
 				}
 				
+				break;
+			
+			case "dependenciasConsultadas" :
+				$cadenaSql = "SELECT DISTINCT  ESF_ID_ESPACIO, ESF_NOMBRE_ESPACIO ";
+				$cadenaSql .= " FROM ESPACIOS_FISICOS ";
+				$cadenaSql .= " WHERE ESF_ID_SEDE='" . $variable . "' ";
+				$cadenaSql .= " AND  ESF_ESTADO='A'";
+				
+				break;
+			
+			case 'consultaConsecutivo' :
+				$cadenaSql = "SELECT consecutivo ";
+				$cadenaSql .= "FROM entrada  ";
+				$cadenaSql .= "WHERE  fecha_registro='" . $variable . "';";
+				
+				break;
+			
+			case 'reiniciarConsecutivo' :
+				$cadenaSql = "SELECT SETVAL((SELECT pg_get_serial_sequence('entrada', 'consecutivo')), 1, false);";
 				break;
 		}
 		return $cadenaSql;
