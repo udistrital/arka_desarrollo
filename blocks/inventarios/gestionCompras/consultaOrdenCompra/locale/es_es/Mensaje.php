@@ -3,6 +3,9 @@ $this->idioma ["noDefinido"] = "Etiqueta no esta definida en locale/es_es/Mensaj
 
 $this->idioma ["botonDocumento"] ="Generar Documento";
 
+$this->idioma ["sede_consultar"] ="Sede: ";
+$this->idioma ["sede_consultarTitulo"] ="Seleccione Sede";
+
 
 
 $this->idioma ["orden_compra_consulta"] ="Orden de Compra: ";
@@ -174,10 +177,10 @@ $this->idioma ["dependencia"] ="&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspNombre D
 $this->idioma ["dependenciaTitulo"] ="Ingrese Nombre Dependencia";
 
 
-$this->idioma ["direccionDependencia"] ="&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspDirección :";
+$this->idioma ["direccionDependencia"] ="Dirección :";
 $this->idioma ["direccionDependenciaTitulo"] ="Ingrese Dirección Dependencia";
 
-$this->idioma ["telefonoDependencia"] ="&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspTeléfono :";
+$this->idioma ["telefonoDependencia"] ="Teléfono :";
 $this->idioma ["telefonoDependenciaTitulo"] ="Ingrese Teléfono Dependencia";
 
 

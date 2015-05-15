@@ -119,7 +119,7 @@ class registrarForm {
 		$cadenaSql = $this->miSql->getCadenaSql ( 'consultarOrden1', $arreglo );
 		
 		$ordenCompra = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
-		// var_dump ( $ordenCompra1 );
+		
 		
 		// $cadenaSql = $this->miSql->getCadenaSql ( 'consultarOrden2', $arreglo );
 		// $ordenCompra2 = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
@@ -238,6 +238,100 @@ class registrarForm {
 				
 				echo "</table>";
 				
+				
+				$atributos ["id"] = "div_documento";
+				$atributos ["estiloEnLinea"] = "display:block";
+				$atributos ["estiloMarco"] = '';
+				// $atributos = array_merge ( $atributos, $atributosGlobales );
+				echo $this->miFormulario->division ( "inicio", $atributos );
+				unset ( $atributos );
+				{
+						
+					$esteCampo = "AgrupacionGeneral";
+					$atributos ['id'] = $esteCampo;
+					$atributos ['leyenda'] = "Documento PDF";
+					echo $this->miFormulario->agrupacion ( 'inicio', $atributos );
+					{
+				
+						$esteCampo = "orden_compra_consulta";
+						$atributos ['nombre'] = $esteCampo;
+						$atributos ['id'] = $esteCampo;
+						$atributos ['etiqueta'] = $this->lenguaje->getCadena ( $esteCampo );
+						$atributos ["etiquetaObligatorio"] = false;
+						$atributos ['tab'] = $tab ++;
+						$atributos ['anchoEtiqueta'] = 150;
+						$atributos ['evento'] = '';
+						if (isset ( $_REQUEST [$esteCampo] )) {
+							$atributos ['seleccion'] = $_REQUEST [$esteCampo];
+						} else {
+							$atributos ['seleccion'] = - 1;
+						}
+						$atributos ['deshabilitado'] = false;
+						$atributos ['columnas'] = 1;
+						$atributos ['tamanno'] = 1;
+						$atributos ['ajax_function'] = "";
+						$atributos ['ajax_control'] = $esteCampo;
+						$atributos ['estilo'] = "jqueryui";
+						$atributos ['validar'] = "required";
+						$atributos ['limitar'] = true;
+						$atributos ['anchoCaja'] = 25;
+						$atributos ['miEvento'] = '';
+						$atributos ['cadena_sql'] = $this->miSql->getCadenaSql ( "consultar_numero_orden" );
+						$matrizItems = array (
+								array (
+										0,
+										' '
+								)
+						);
+						$matrizItems = $esteRecursoDB->ejecutarAcceso ( $atributos ['cadena_sql'], "busqueda" );
+						$atributos ['matrizItems'] = $matrizItems;
+						// $atributos['miniRegistro']=;
+						$atributos ['baseDatos'] = "inventarios";
+						// $atributos ['cadena_sql'] = $this->miSql->getCadenaSql ( "clase_entrada" );
+				
+						// Aplica atributos globales al control
+						$atributos = array_merge ( $atributos, $atributosGlobales );
+						echo $this->miFormulario->campoCuadroLista ( $atributos );
+						unset ( $atributos );
+						echo "<br><br><br>";
+						// ------------------Division para los botones-------------------------
+						$atributos ["id"] = "botones";
+						$atributos ["estilo"] = "marcoBotones";
+						echo $this->miFormulario->division ( "inicio", $atributos );
+						unset ( $atributos );
+						{
+							// -----------------CONTROL: Botón ----------------------------------------------------------------
+							$esteCampo = 'botonDocumento';
+							$atributos ["id"] = $esteCampo;
+							$atributos ["tabIndex"] = $tab;
+							$atributos ["tipo"] = 'boton';
+							$atributos ['columnas'] = 1;
+							// submit: no se coloca si se desea un tipo button genérico
+							$atributos ['submit'] = true;
+							$atributos ["estiloMarco"] = '';
+							$atributos ["estiloBoton"] = 'jqueryui';
+							// verificar: true para verificar el formulario antes de pasarlo al servidor.
+							$atributos ["verificar"] = '';
+							$atributos ["tipoSubmit"] = 'jquery'; // Dejar vacio para un submit normal, en este caso se ejecuta la función submit declarada en ready.js
+							$atributos ["valor"] = $this->lenguaje->getCadena ( $esteCampo );
+							$atributos ['nombreFormulario'] = $esteBloque ['nombre'];
+							$tab ++;
+								
+							// Aplica atributos globales al control
+							$atributos = array_merge ( $atributos, $atributosGlobales );
+							echo $this->miFormulario->campoBoton ( $atributos );
+							unset ( $atributos );
+						}
+				
+						echo $this->miFormulario->division ( 'fin' );
+					}
+						
+					echo $this->miFormulario->agrupacion ( 'fin' );
+				}
+				
+				echo $this->miFormulario->division ( "fin" );
+				unset ( $atributos );
+				
 				// Fin de Conjunto de Controles
 				// echo $this->miFormulario->marcoAgrupacion("fin");
 			} else {
@@ -263,98 +357,7 @@ class registrarForm {
 		echo $this->miFormulario->division ( "fin" );
 		unset ( $atributos );
 		
-		$atributos ["id"] = "div_documento";
-		$atributos ["estiloEnLinea"] = "display:block";
-		$atributos ["estiloMarco"] = '';
-		// $atributos = array_merge ( $atributos, $atributosGlobales );
-		echo $this->miFormulario->division ( "inicio", $atributos );
-		unset ( $atributos );
-		{
-			
-			$esteCampo = "AgrupacionGeneral";
-			$atributos ['id'] = $esteCampo;
-			$atributos ['leyenda'] = "Documento PDF";
-			echo $this->miFormulario->agrupacion ( 'inicio', $atributos );
-			{
-				
-				$esteCampo = "orden_compra_consulta";
-				$atributos ['nombre'] = $esteCampo;
-				$atributos ['id'] = $esteCampo;
-				$atributos ['etiqueta'] = $this->lenguaje->getCadena ( $esteCampo );
-				$atributos ["etiquetaObligatorio"] = false;
-				$atributos ['tab'] = $tab ++;
-				$atributos ['anchoEtiqueta'] = 150;
-				$atributos ['evento'] = '';
-				if (isset ( $_REQUEST [$esteCampo] )) {
-					$atributos ['seleccion'] = $_REQUEST [$esteCampo];
-				} else {
-					$atributos ['seleccion'] = - 1;
-				}
-				$atributos ['deshabilitado'] = false;
-				$atributos ['columnas'] = 1;
-				$atributos ['tamanno'] = 1;
-				$atributos ['ajax_function'] = "";
-				$atributos ['ajax_control'] = $esteCampo;
-				$atributos ['estilo'] = "jqueryui";
-				$atributos ['validar'] = "required";
-				$atributos ['limitar'] = true;
-				$atributos ['anchoCaja'] = 25;
-				$atributos ['miEvento'] = '';
-				$atributos ['cadena_sql'] = $this->miSql->getCadenaSql ( "consultar_numero_orden" );
-				$matrizItems = array (
-						array (
-								0,
-								' ' 
-						) 
-				);
-				$matrizItems = $esteRecursoDB->ejecutarAcceso ( $atributos ['cadena_sql'], "busqueda" );
-				$atributos ['matrizItems'] = $matrizItems;
-				// $atributos['miniRegistro']=;
-				$atributos ['baseDatos'] = "inventarios";
-				// $atributos ['cadena_sql'] = $this->miSql->getCadenaSql ( "clase_entrada" );
-				
-				// Aplica atributos globales al control
-				$atributos = array_merge ( $atributos, $atributosGlobales );
-				echo $this->miFormulario->campoCuadroLista ( $atributos );
-				unset ( $atributos );
-				echo "<br><br><br>";
-				// ------------------Division para los botones-------------------------
-				$atributos ["id"] = "botones";
-				$atributos ["estilo"] = "marcoBotones";
-				echo $this->miFormulario->division ( "inicio", $atributos );
-				unset ( $atributos );
-				{
-					// -----------------CONTROL: Botón ----------------------------------------------------------------
-					$esteCampo = 'botonDocumento';
-					$atributos ["id"] = $esteCampo;
-					$atributos ["tabIndex"] = $tab;
-					$atributos ["tipo"] = 'boton';
-					$atributos ['columnas'] = 1;
-					// submit: no se coloca si se desea un tipo button genérico
-					$atributos ['submit'] = true;
-					$atributos ["estiloMarco"] = '';
-					$atributos ["estiloBoton"] = 'jqueryui';
-					// verificar: true para verificar el formulario antes de pasarlo al servidor.
-					$atributos ["verificar"] = '';
-					$atributos ["tipoSubmit"] = 'jquery'; // Dejar vacio para un submit normal, en este caso se ejecuta la función submit declarada en ready.js
-					$atributos ["valor"] = $this->lenguaje->getCadena ( $esteCampo );
-					$atributos ['nombreFormulario'] = $esteBloque ['nombre'];
-					$tab ++;
-					
-					// Aplica atributos globales al control
-					$atributos = array_merge ( $atributos, $atributosGlobales );
-					echo $this->miFormulario->campoBoton ( $atributos );
-					unset ( $atributos );
-				}
-				
-				echo $this->miFormulario->division ( 'fin' );
-			}
-			
-			echo $this->miFormulario->agrupacion ( 'fin' );
-		}
-		
-		echo $this->miFormulario->division ( "fin" );
-		unset ( $atributos );
+	
 		
 		echo $this->miFormulario->marcoAgrupacion ( 'fin' );
 		

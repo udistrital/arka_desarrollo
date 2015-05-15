@@ -81,13 +81,13 @@ class RegistradorOrden {
 		$forma_pago = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
 		$forma_pago = $forma_pago [0];
 		
-		$arreglo = array (
-				$ordenCompra ['id_contratista'],
-				$ordenCompra ['vig_contratista'] 
-		);
-		$cadenaSql = $this->miSql->getCadenaSql ( 'consultarContratista_consulta', $arreglo );
-		$contratista = $esteRecursoDBO->ejecutarAcceso ( $cadenaSql, "busqueda" );
-		$contratista = $contratista [0];
+// 		$arreglo = array (
+// 				$ordenCompra ['id_contratista'],
+// 				$ordenCompra ['vig_contratista'] 
+// 		);
+// 		$cadenaSql = $this->miSql->getCadenaSql ( 'consultarContratista_consulta', $arreglo );
+// 		$contratista = $esteRecursoDBO->ejecutarAcceso ( $cadenaSql, "busqueda" );
+// 		$contratista = $contratista [0];
 		
 		
 		
@@ -324,11 +324,11 @@ class RegistradorOrden {
 			<td style='width:50%;text-align:left;background:#FFFFFF ; border: 0px  #FFFFFF; text-transform:capitalize;'>" . $ordenador[1]. "</td>
 			</tr>
 			<tr>
-			<td style='width:50%;text-align:left;background:#FFFFFF ; border: 0px  #FFFFFF; text-transform:capitalize;'>NOMBRE: " . $contratista[1] . "</td>
+			<td style='width:50%;text-align:left;background:#FFFFFF ; border: 0px  #FFFFFF; text-transform:capitalize;'>NOMBRE: " . $proveedor[0] . "</td>
 			<td style='width:50%;text-align:left;background:#FFFFFF ; border: 0px  #FFFFFF;'>ORDENADOR GASTO</td>
 			</tr>
 			<tr>
-			<td style='width:50%;text-align:left;background:#FFFFFF ; border: 0px  #FFFFFF;'>C.C: " . $contratista[0]. "</td>
+			<td style='width:50%;text-align:left;background:#FFFFFF ; border: 0px  #FFFFFF;'>C.C: " . $proveedor[1]. "</td>
 			<td style='width:50%;text-align:left;background:#FFFFFF ; border: 0px  #FFFFFF;'>" . $ordenador[0]. "</td>
 			</tr>							
 			</table>

@@ -113,10 +113,10 @@ $this->idioma ["dependencia"] ="&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspNombre D
 $this->idioma ["dependenciaTitulo"] ="Ingrese Nombre Dependencia";
 
 
-$this->idioma ["direccionDependencia"] ="&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspDirección :";
+$this->idioma ["direccionDependencia"] ="Dirección :";
 $this->idioma ["direccionDependenciaTitulo"] ="Ingrese Dirección Dependencia";
 
-$this->idioma ["telefonoDependencia"] ="&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspTeléfono :";
+$this->idioma ["telefonoDependencia"] ="Teléfono :";
 $this->idioma ["telefonoDependenciaTitulo"] ="Ingrese Teléfono Dependencia";
 
 

@@ -309,16 +309,15 @@ class Sql extends \Sql {
 				break;
 			
 			case "informacion_dependencia" :
-				$cadenaSql = " SELECT DEP_DIRECCION, DEP_TELEFONO  ";
-				$cadenaSql .= " FROM DEPENDENCIAS ";
-				$cadenaSql .= " WHERE DEP_IDENTIFICADOR='" . $variable . "' ";
-				
+				$cadenaSql = " SELECT ESF_DIRECCION, ESF_TELEFONO  ";
+				$cadenaSql .= " FROM ESPACIOS_FISICOS ";
+				$cadenaSql .= " WHERE ESF_ID_ESPACIO='" . $variable . "' ";
 				break;
 			
 			case "informacion_proveedor" :
 				$cadenaSql = " SELECT PRO_RAZON_SOCIAL,PRO_NIT,PRO_DIRECCION,PRO_TELEFONO  ";
 				$cadenaSql .= " FROM PROVEEDORES  ";
-				$cadenaSql .= " WHERE PRO_IDENTIFICADOR='" . $variable . "' ";
+				$cadenaSql .= " WHERE PRO_NIT='" . $variable . "' ";
 				break;
 			
 			case "consultarRubro" :
@@ -329,13 +328,13 @@ class Sql extends \Sql {
 				break;
 			
 			case "proveedores" :
-				$cadenaSql = " SELECT PRO_IDENTIFICADOR,PRO_NIT||' - '||PRO_RAZON_SOCIAL AS proveedor ";
+				$cadenaSql = " SELECT PRO_NIT,PRO_NIT||' - '||PRO_RAZON_SOCIAL AS proveedor ";
 				$cadenaSql .= " FROM PROVEEDORES ";
 				
 				break;
 			
 			case "seleccion_proveedor" :
-				$cadenaSql = " SELECT PRO_IDENTIFICADOR,PRO_NIT||' - '||PRO_RAZON_SOCIAL AS proveedor ";
+				$cadenaSql = " SELECT PRO_NIT,PRO_NIT||' - '||PRO_RAZON_SOCIAL AS proveedor ";
 				$cadenaSql .= " FROM PROVEEDORES ";
 				
 				break;
@@ -421,7 +420,7 @@ class Sql extends \Sql {
 				$cadenaSql .= " info_presupuestal, rubro, obligaciones_proveedor, obligaciones_contratista,";
 				$cadenaSql .= " poliza1, poliza2, poliza3, poliza4, poliza5, lugar_entrega, destino,";
 				$cadenaSql .= " tiempo_entrega, forma_pago, supervision, inhabilidades, id_proveedor,";
-				$cadenaSql .= " ruta_cotizacion, nombre_cotizacion, id_dependencia, id_contratista, id_ordenador,subtotal, iva, total, valor_letras ,vig_contratista,sede ";
+				$cadenaSql .= " ruta_cotizacion, nombre_cotizacion, id_dependencia, id_ordenador,subtotal, iva, total, valor_letras ,id_sede ";
 				$cadenaSql .= " FROM orden_compra ";
 				$cadenaSql .= " WHERE id_orden_compra='" . $variable . "' AND estado='TRUE'";
 				
@@ -433,8 +432,8 @@ class Sql extends \Sql {
 				$cadenaSql .= " obligaciones_contratista, poliza1, poliza2, poliza3, poliza4,";
 				$cadenaSql .= " poliza5, lugar_entrega, destino, tiempo_entrega, forma_pago,";
 				$cadenaSql .= " supervision, inhabilidades, id_proveedor, ruta_cotizacion, nombre_cotizacion, ";
-				$cadenaSql .= " id_dependencia, id_contratista, id_ordenador, subtotal, iva,";
-				$cadenaSql .= " total, valor_letras, vig_contratista";
+				$cadenaSql .= " id_dependencia,id_ordenador, subtotal, iva,";
+				$cadenaSql .= " total, valor_letras ";
 				$cadenaSql .= " FROM orden_compra ";
 				$cadenaSql .= " WHERE  id_orden_compra='" . $variable . "';";
 				break;
@@ -469,23 +468,41 @@ class Sql extends \Sql {
 			case "consultarProveedor" :
 				$cadenaSql = " SELECT PRO_RAZON_SOCIAL,PRO_NIT,PRO_DIRECCION,PRO_TELEFONO  ";
 				$cadenaSql .= " FROM PROVEEDORES  ";
-				$cadenaSql .= " WHERE PRO_IDENTIFICADOR='" . $variable . "' ";
+				$cadenaSql .= " WHERE PRO_NIT='" . $variable . "' ";
+				
+				break;
+			
+			case "dependenciasArreglo" :
+				
+				$cadenaSql = "SELECT DISTINCT ESF_ID_ESPACIO,ESF_NOMBRE_ESPACIO ";
+				$cadenaSql .= " FROM ESPACIOS_FISICOS ";
+				$cadenaSql .= " WHERE ESF_ID_SEDE='" . $variable . "' ";
+				$cadenaSql .= " AND  ESF_ESTADO='A'";
 				
 				break;
 			
 			case "consultarDependencia" :
-				$cadenaSql = " SELECT DEP_IDENTIFICADOR,DEP_DIRECCION, DEP_TELEFONO  ";
-				$cadenaSql .= " FROM DEPENDENCIAS ";
-				$cadenaSql .= " WHERE DEP_IDENTIFICADOR='" . $variable . "' ";
+				$cadenaSql = " SELECT ESF_ID_ESPACIO,ESF_DIRECCION,ESF_TELEFONO  ";
+				$cadenaSql .= " FROM ESPACIOS_FISICOS ";
+				$cadenaSql .= " WHERE ESF_ID_ESPACIO='" . $variable . "' ";
+				
+				break;
+			case "dependencias" :
+				$cadenaSql = "SELECT DISTINCT  ESF_ID_ESPACIO, ESF_NOMBRE_ESPACIO ";
+				$cadenaSql .= " FROM ESPACIOS_FISICOS ";
+				$cadenaSql .= " WHERE ESF_ID_SEDE='" . $variable . "' ";
+				$cadenaSql .= " AND  ESF_ESTADO='A'";
 				
 				break;
 			
 			case "consultarDependencia_consulta" :
-				$cadenaSql = " SELECT *  ";
-				$cadenaSql .= "FROM DEPENDENCIAS ";
-				$cadenaSql .= "WHERE DEP_IDENTIFICADOR='" . $variable . "'";
+				$cadenaSql = " SELECT   ESF_ID_ESPACIO, ESF_NOMBRE_ESPACIO,ESF_DIRECCION,ESF_TELEFONO ";
+				$cadenaSql .= "FROM ESPACIOS_FISICOS  ";
+				$cadenaSql .= " WHERE ESF_ID_ESPACIO='" . $variable . "' ";
+				$cadenaSql .= " AND  ESF_ESTADO='A'";
 				break;
-			
+				
+				
 			case "consultarEncargado" :
 				$cadenaSql = " SELECT ";
 				$cadenaSql .= " nombres ||' '||apellidos as nombre, cargo,asignacion  ";
@@ -623,15 +640,20 @@ class Sql extends \Sql {
 				$cadenaSql .= " ruta_cotizacion='" . $variable [15] . "', ";
 				$cadenaSql .= " nombre_cotizacion='" . $variable [16] . "', ";
 				$cadenaSql .= " id_dependencia='" . $variable [17] . "', ";
-				$cadenaSql .= " id_contratista='" . $variable [18] . "', ";
-				$cadenaSql .= " id_ordenador='" . $variable [19] . "',  ";
-				$cadenaSql .= " subtotal='" . $variable [20] . "',  ";
-				$cadenaSql .= " iva='" . $variable [21] . "',  ";
-				$cadenaSql .= " total='" . $variable [22] . "',  ";
-				$cadenaSql .= " valor_letras='" . $variable [23] . "' , ";
-				$cadenaSql .= " vig_contratista='" . $variable [24] . "', ";
-				$cadenaSql .= " sede='" . $variable [26] . "'  ";
-				$cadenaSql .= "  WHERE id_orden_compra='" . $variable [25] . "';";
+				$cadenaSql .= " id_ordenador='" . $variable [18] . "',  ";
+				$cadenaSql .= " subtotal='" . $variable [19] . "',  ";
+				$cadenaSql .= " iva='" . $variable [20] . "',  ";
+				$cadenaSql .= " total='" . $variable [21] . "',  ";
+				$cadenaSql .= " valor_letras='" . $variable [22] . "' , ";
+				$cadenaSql .= " id_sede='" . $variable [24] . "'  ";
+				$cadenaSql .= "  WHERE id_orden_compra='" . $variable [23] . "';";
+				
+				break;
+			
+			case "sede" :
+				$cadenaSql = "SELECT DISTINCT  ESF_ID_SEDE, ESF_SEDE ";
+				$cadenaSql .= " FROM ESPACIOS_FISICOS ";
+				$cadenaSql .= " WHERE   ESF_ESTADO='A'";
 				
 				break;
 			
@@ -661,14 +683,21 @@ class Sql extends \Sql {
 			case "nit_proveedor" :
 				$cadenaSql = "SELECT PRO_NIT ";
 				$cadenaSql .= " FROM PROVEEDORES  ";
-				$cadenaSql .= " WHERE PRO_IDENTIFICADOR='" . $variable . "' ";
+				$cadenaSql .= " WHERE PRO_NIT='" . $variable . "' ";
 				break;
 			
+			// case "dependencias" :
+			// $cadenaSql = "SELECT DISTINCT ESF_ID_ESPACIO, ESF_NOMBRE_ESPACIO ";
+			// $cadenaSql .= " FROM ESPACIOS_FISICOS ";
+			// $cadenaSql .= " WHERE ESF_ID_SEDE='" . $variable . "' ";
+			// $cadenaSql .= " AND ESF_ESTADO='A'";
+			
+			// break;
 			case "dependecia_solicitante" :
-				$cadenaSql = " SELECT DEP_DEPENDENCIA  ";
-				$cadenaSql .= " FROM DEPENDENCIAS  ";
-				$cadenaSql .= " WHERE DEP_IDENTIFICADOR='" . $variable . "' ";
-				
+				$cadenaSql = " SELECT ESF_NOMBRE_ESPACIO  ";
+				$cadenaSql .= " FROM ESPACIOS_FISICOS  ";
+				$cadenaSql .= " WHERE ESF_ID_ESPACIO='" . $variable . "' ";
+				$cadenaSql .= " AND  ESF_ESTADO='A'";
 				break;
 			
 			case "consultar_numero_orden" :

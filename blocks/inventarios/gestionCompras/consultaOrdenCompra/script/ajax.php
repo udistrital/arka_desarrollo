@@ -246,12 +246,100 @@ $urlFinal15 = $url . $cadena15;
 
 
 
-// echo $urlFinal;exit;
-// echo $urlFinal2;
-// echo $urlFinal3;
+
+// Variables
+$cadenaACodificar16 = "pagina=" . $this->miConfigurador->getVariableConfiguracion ( "pagina" );
+$cadenaACodificar16 .= "&procesarAjax=true";
+$cadenaACodificar16 .= "&action=index.php";
+$cadenaACodificar16 .= "&bloqueNombre=" . $esteBloque ["nombre"];
+$cadenaACodificar16 .= "&bloqueGrupo=" . $esteBloque ["grupo"];
+$cadenaACodificar16 .= $cadenaACodificar16 . "&funcion=consultarDependencia";
+$cadenaACodificar16 .= "&tiempo=" . $_REQUEST ['tiempo'];
+
+// Codificar las variables
+$enlace = $this->miConfigurador->getVariableConfiguracion ( "enlace" );
+$cadena16 = $this->miConfigurador->fabricaConexiones->crypto->codificar_url ( $cadenaACodificar16, $enlace );
+
+// URL definitiva
+$urlFinal16 = $url . $cadena16;
 
 ?>
 <script type='text/javascript'>
+
+
+
+
+
+function consultarDependenciaModificar(elem, request, response){
+	  $.ajax({
+	    url: "<?php echo $urlFinal16?>",
+	    dataType: "json",
+	    data: { valor:$("#<?php echo $this->campoSeguro('sede')?>").val()},
+	    success: function(data){ 
+
+
+
+	        if(data[0]!=" "){
+
+	            $("#<?php echo $this->campoSeguro('selec_dependencia')?>").html('');
+	            $("<option value=''>Seleccione  ....</option>").appendTo("#<?php echo $this->campoSeguro('selec_dependencia')?>");
+	            $.each(data , function(indice,valor){
+
+	            	$("<option value='"+data[ indice ].ESF_ID_ESPACIO+"'>"+data[ indice ].ESF_NOMBRE_ESPACIO+"</option>").appendTo("#<?php echo $this->campoSeguro('selec_dependencia')?>");
+	            	
+	            });
+	            
+	            $("#<?php echo $this->campoSeguro('selec_dependencia')?>").removeAttr('disabled');
+	            
+	            $('#<?php echo $this->campoSeguro('selec_dependencia')?>').width(300);
+	            $("#<?php echo $this->campoSeguro('selec_dependencia')?>").select2();
+	            
+	          
+	            
+		        }
+	    			
+
+	    }
+		                    
+	   });
+	};
+
+
+
+
+function consultarDependencia(elem, request, response){
+	  $.ajax({
+	    url: "<?php echo $urlFinal16?>",
+	    dataType: "json",
+	    data: { valor:$("#<?php echo $this->campoSeguro('sede_consultar')?>").val()},
+	    success: function(data){ 
+
+
+
+	        if(data[0]!=" "){
+
+	            $("#<?php echo $this->campoSeguro('selec_dependencia_Sol')?>").html('');
+	            $("<option value=''>Seleccione  ....</option>").appendTo("#<?php echo $this->campoSeguro('selec_dependencia_Sol')?>");
+	            $.each(data , function(indice,valor){
+
+	            	$("<option value='"+data[ indice ].ESF_ID_ESPACIO+"'>"+data[ indice ].ESF_NOMBRE_ESPACIO+"</option>").appendTo("#<?php echo $this->campoSeguro('selec_dependencia_Sol')?>");
+	            	
+	            });
+	            
+	            $("#<?php echo $this->campoSeguro('selec_dependencia_Sol')?>").removeAttr('disabled');
+	            
+	            $('#<?php echo $this->campoSeguro('selec_dependencia_Sol')?>').width(300);
+	            $("#<?php echo $this->campoSeguro('selec_dependencia_Sol')?>").select2();
+	            
+	          
+	            
+		        }
+	    			
+
+	    }
+		                    
+	   });
+	};
 
 
 
@@ -607,6 +695,19 @@ $(function() {
    	);
 
 
+
+
+    $("#<?php echo $this->campoSeguro('sede_consultar')?>").change(function(){
+
+    	if($("#<?php echo $this->campoSeguro('sede_consultar')?>").val()!=''){
+    		consultarDependencia();
+		}else{
+			$("#<?php echo $this->campoSeguro('selec_dependencia_Sol')?>").attr('disabled','');
+			}
+
+	      });
+    
+    
     $("#<?php echo $this->campoSeguro('selec_proveedor')?>").select2({
     	 placeholder: "Search for a repository",
     	 minimumInputLength: 5,
@@ -639,6 +740,20 @@ $(function() {
 
 
  		});
+
+
+
+
+    $("#<?php echo $this->campoSeguro('sede')?>").change(function(){
+
+    	if($("#<?php echo $this->campoSeguro('sede')?>").val()!=''){
+    		consultarDependenciaModificar();
+		}else{
+			$("#<?php echo $this->campoSeguro('dependencia_solicitante')?>").attr('disabled','');
+			}
+
+	      });
+    
     
     $("#<?php echo $this->campoSeguro('vigencia_disponibilidad')?>").change(function() {
 	

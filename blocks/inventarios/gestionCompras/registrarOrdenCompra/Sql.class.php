@@ -295,31 +295,36 @@ class Sql extends \Sql {
 				break;
 			
 			case "informacion_dependencia" :
-				$cadenaSql = " SELECT DEP_DIRECCION, DEP_TELEFONO  ";
-				$cadenaSql .= " FROM DEPENDENCIAS ";
-				$cadenaSql .= " WHERE DEP_IDENTIFICADOR='" . $variable . "' ";
+				$cadenaSql = " SELECT ESF_DIRECCION, ESF_TELEFONO  ";
+				$cadenaSql .= " FROM ESPACIOS_FISICOS ";
+				$cadenaSql .= " WHERE ESF_ID_ESPACIO='" . $variable . "' ";
 				
 				break;
 			
 			case "dependencias" :
-				$cadenaSql = "SELECT DISTINCT  ESF_COD_SEDE, ESF_NOMBRE_ESPACIO ";
+				$cadenaSql = "SELECT DISTINCT  ESF_ID_ESPACIO, ESF_NOMBRE_ESPACIO ";
 				$cadenaSql .= " FROM ESPACIOS_FISICOS ";
+				$cadenaSql .= " WHERE ESF_ID_SEDE='" . $variable . "' ";
+				$cadenaSql .= " AND  ESF_ESTADO='A'";
+				
 				break;
 			
 			case "sede" :
-				$cadenaSql = "SELECT DISTINCT  ESF_COD_SEDE, ESF_SEDE ";
+				$cadenaSql = "SELECT DISTINCT  ESF_ID_SEDE, ESF_SEDE ";
 				$cadenaSql .= " FROM ESPACIOS_FISICOS ";
+				$cadenaSql .= " WHERE   ESF_ESTADO='A'";
+				
 				break;
 			
 			case "informacion_proveedor" :
 				$cadenaSql = " SELECT PRO_RAZON_SOCIAL,PRO_NIT,PRO_DIRECCION,PRO_TELEFONO  ";
 				$cadenaSql .= " FROM PROVEEDORES  ";
-				$cadenaSql .= " WHERE PRO_IDENTIFICADOR='" . $variable . "' ";
+				$cadenaSql .= " WHERE PRO_NIT='" . $variable . "' ";
 				
 				break;
 			
 			case "proveedores" :
-				$cadenaSql = " SELECT PRO_IDENTIFICADOR,PRO_NIT||' - '||PRO_RAZON_SOCIAL AS proveedor ";
+				$cadenaSql = " SELECT PRO_NIT,PRO_NIT||' - '||PRO_RAZON_SOCIAL AS proveedor ";
 				$cadenaSql .= " FROM PROVEEDORES ";
 				
 				break;
@@ -483,7 +488,7 @@ class Sql extends \Sql {
 				$cadenaSql .= " rubro, obligaciones_proveedor, obligaciones_contratista, ";
 				$cadenaSql .= " poliza1, poliza2, poliza3, poliza4, poliza5, lugar_entrega, destino, ";
 				$cadenaSql .= " tiempo_entrega, forma_pago, supervision, inhabilidades, id_proveedor,ruta_cotizacion,nombre_cotizacion,";
-				$cadenaSql .= " id_dependencia, id_contratista, id_ordenador,subtotal, iva, total,valor_letras,vig_contratista,estado,id_sede)";
+				$cadenaSql .= " id_dependencia , id_ordenador,subtotal, iva, total,valor_letras,estado,id_sede)";
 				$cadenaSql .= " VALUES (";
 				$cadenaSql .= "'" . $variable [0] . "',";
 				$cadenaSql .= "'" . $variable [1] . "',";
@@ -532,9 +537,7 @@ class Sql extends \Sql {
 				$cadenaSql .= "'" . $variable [23] . "',";
 				$cadenaSql .= "'" . $variable [24] . "',";
 				$cadenaSql .= "'" . $variable [25] . "',";
-				$cadenaSql .= "'" . $variable [26] . "',";
-				$cadenaSql .= "'" . $variable [27] . "',";
-				$cadenaSql .= "'" . $variable [28] . "') ";
+				$cadenaSql .= "'" . $variable [26] . "') ";
 				$cadenaSql .= "RETURNING  id_orden_compra; ";
 				
 				break;
@@ -562,8 +565,8 @@ class Sql extends \Sql {
 				$cadenaSql .= " obligaciones_contratista, poliza1, poliza2, poliza3, poliza4,";
 				$cadenaSql .= " poliza5, lugar_entrega, destino, tiempo_entrega, forma_pago,";
 				$cadenaSql .= " supervision, inhabilidades, id_proveedor, ruta_cotizacion, nombre_cotizacion, ";
-				$cadenaSql .= " id_dependencia, id_contratista, id_ordenador, subtotal, iva,";
-				$cadenaSql .= " total, valor_letras, vig_contratista";
+				$cadenaSql .= " id_dependencia,id_ordenador, subtotal, iva,";
+				$cadenaSql .= " total, valor_letras";
 				$cadenaSql .= " FROM orden_compra ";
 				$cadenaSql .= " WHERE  id_orden_compra='" . $variable . "';";
 				break;
@@ -585,11 +588,13 @@ class Sql extends \Sql {
 				break;
 			
 			case "consultarDependencia" :
-				$cadenaSql = " SELECT *  ";
-				$cadenaSql .= "FROM DEPENDENCIAS ";
-				$cadenaSql .= "WHERE DEP_IDENTIFICADOR='" . $variable . "'";
+				$cadenaSql = " SELECT   ESF_ID_ESPACIO, ESF_NOMBRE_ESPACIO,ESF_DIRECCION,ESF_TELEFONO ";
+				$cadenaSql .= "FROM ESPACIOS_FISICOS  ";
+				$cadenaSql .= " WHERE ESF_ID_ESPACIO='" . $variable . "' ";
+				$cadenaSql .= " AND  ESF_ESTADO='A'";
 				break;
-			
+				
+				
 			case "consultarItems" :
 				$cadenaSql = " SELECT item, unidad_medida, cantidad, descripcion,
 				                   valor_unitario, valor_total, descuento ";

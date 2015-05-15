@@ -57,6 +57,7 @@ class RegistradorOrden {
 		
 		$cadenaSql = $this->miSql->getCadenaSql ( 'consultarDependencia', $ordenCompra ['id_dependencia'] );
 		$dependencia = $esteRecursoDBO->ejecutarAcceso ( $cadenaSql, "busqueda" );
+		
 		$dependencia = $dependencia [0];
 		
 		$cadenaSql = $this->miSql->getCadenaSql ( 'consultarItems', $_REQUEST ['numero_orden'] );
@@ -79,31 +80,13 @@ class RegistradorOrden {
 		$cadenaSql = $this->miSql->getCadenaSql ( 'consultar_forma_pago', $ordenCompra ['forma_pago'] );
 		$forma_pago = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
 		$forma_pago = $forma_pago [0];
-		
-		$arreglo = array (
-				$ordenCompra ['id_contratista'],
-				$ordenCompra ['vig_contratista'] 
-		);
-		$cadenaSql = $this->miSql->getCadenaSql ( 'consultarContratista', $arreglo );
-		$contratista = $esteRecursoDBO->ejecutarAcceso ( $cadenaSql, "busqueda" );
-		$contratista = $contratista [0];
-		
-		
+
 		
 		$cadenaSql = $this->miSql->getCadenaSql ( 'consultarOrdenador_gasto', $ordenCompra['id_ordenador'] );
 		$ordenador = $esteRecursoDBO->ejecutarAcceso ( $cadenaSql, "busqueda" );
 		$ordenador = $ordenador [0];
 		
 		
-// 		var_dump($ordenador);exit;
-// 		var_dump($contratista);exit;
-		// var_dump($forma_pago);exit;
-		// var_dump($destino);exit;
-		// var_dump($items);
-// 		var_dump ( $ordenCompra );exit;
-		// var_dump($info_presupuestal);
-		// var_dump($proveedor);
-		// var_dump($dependencia);exit;
 		$contenidoPagina = "
 <style type=\"text/css\">
     table { 
@@ -323,11 +306,11 @@ class RegistradorOrden {
 			<td style='width:50%;text-align:left;background:#FFFFFF ; border: 0px  #FFFFFF; text-transform:capitalize;'>" . $ordenador[1]. "</td>
 			</tr>
 			<tr>
-			<td style='width:50%;text-align:left;background:#FFFFFF ; border: 0px  #FFFFFF; text-transform:capitalize;'>NOMBRE: " . $contratista[1] . "</td>
+			<td style='width:50%;text-align:left;background:#FFFFFF ; border: 0px  #FFFFFF; text-transform:capitalize;'>NOMBRE: " . $proveedor[0] . "</td>
 			<td style='width:50%;text-align:left;background:#FFFFFF ; border: 0px  #FFFFFF;'>ORDENADOR GASTO</td>
 			</tr>
 			<tr>
-			<td style='width:50%;text-align:left;background:#FFFFFF ; border: 0px  #FFFFFF;'>C.C: " . $contratista[0]. "</td>
+			<td style='width:50%;text-align:left;background:#FFFFFF ; border: 0px  #FFFFFF;'>C.C: " .  $proveedor[1]. "</td>
 			<td style='width:50%;text-align:left;background:#FFFFFF ; border: 0px  #FFFFFF;'>" . $ordenador[0]. "</td>
 			</tr>							
 			</table>
