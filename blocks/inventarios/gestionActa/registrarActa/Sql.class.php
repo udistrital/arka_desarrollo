@@ -178,7 +178,7 @@ class Sql extends \Sql {
 				$cadenaSql .= "id_orden_servicio, fecha_registro,  ";
 				$cadenaSql .= "identificacion, dependencia_solicitante , sede ";
 				$cadenaSql .= "FROM orden_servicio ";
-// 				$cadenaSql .= "JOIN solicitante_servicios ON solicitante_servicios.id_solicitante = orden_servic	io.dependencia_solicitante ";
+				// $cadenaSql .= "JOIN solicitante_servicios ON solicitante_servicios.id_solicitante = orden_servic io.dependencia_solicitante ";
 				$cadenaSql .= "JOIN contratista_servicios ON contratista_servicios.id_contratista = orden_servicio.id_contratista ";
 				$cadenaSql .= "WHERE 1=1";
 				if ($variable [0] != '') {
@@ -299,6 +299,16 @@ class Sql extends \Sql {
 				$cadenaSql .= " WHERE id_orden_servicio ='" . $variable . "';";
 				break;
 			
+				
+
+				
+				
+			case "indentificacion_contratista" :
+				$cadenaSql = " SELECT  * ";
+				$cadenaSql .= " FROM contratista_servicios";
+				$cadenaSql .= " WHERE id_contratista ='" . $variable . "';";
+				break;
+			
 			case "consultarCompras" :
 				$cadenaSql = " SELECT  * ";
 				$cadenaSql .= " FROM orden_compra";
@@ -371,17 +381,17 @@ class Sql extends \Sql {
 				$cadenaSql .= " FROM ESPACIOS_FISICOS ";
 				$cadenaSql .= " WHERE  ESF_ESTADO='A' ";
 				break;
-				
+			
 			case "sede" :
 				$cadenaSql = "SELECT DISTINCT  ESF_ID_SEDE, ESF_SEDE ";
 				$cadenaSql .= " FROM ESPACIOS_FISICOS ";
 				$cadenaSql .= " WHERE   ESF_ESTADO='A'";
 				
 				break;
-				
+			
 			case "proveedores" :
 				
-				$cadenaSql = " SELECT PRO_IDENTIFICADOR,PRO_NIT||' - '||PRO_RAZON_SOCIAL AS proveedor ";
+				$cadenaSql = " SELECT PRO_NIT,PRO_NIT||' - '||PRO_RAZON_SOCIAL AS proveedor ";
 				$cadenaSql .= " FROM PROVEEDORES ";
 				
 				break;

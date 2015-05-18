@@ -55,6 +55,10 @@ class registrarForm {
 					$cadenaSql = $this->miSql->getCadenaSql ( 'consultarSercicios', $_REQUEST ['numero_orden'] );
 					$resultado_servicios = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
 					
+					$cadenaSql = $this->miSql->getCadenaSql ( 'indentificacion_contratista', $resultado_servicios [0] ['id_contratista'] );
+					$id_contratista = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
+					
+					
 					$cadenaSql = $this->miSql->getCadenaSql ( 'informacion_ordenador', $resultado_servicios [0] ['id_ordenador_encargado'] );
 					$ordenador = $esteRecursoDB2->ejecutarAcceso ( $cadenaSql, "busqueda" );
 					
@@ -62,8 +66,9 @@ class registrarForm {
 							"asignacionOrdenador" => $resultado_servicios [0] ['id_ordenador_encargado'],
 							"nombreOrdenador" => $ordenador [0] [0],
 							"id_ordenador" => $ordenador [0] [1],
-							"sede"=>$resultado_servicios [0]['sede'],
-							"dependencia"=>$resultado_servicios [0]['dependencia_solicitante']
+							"sede" => $resultado_servicios [0] ['sede'],
+							"dependencia" => $resultado_servicios [0] ['dependencia_solicitante'],
+							"nitproveedor"=>$id_contratista[0] ['identificacion']
 					);
 					
 					$_REQUEST = array_merge ( $_REQUEST, $arreglo );
@@ -83,9 +88,8 @@ class registrarForm {
 							"id_ordenador" => $ordenador [0] [1],
 							"nitproveedor" => $resultado_compras [0] ['id_proveedor'],
 							"dependencia" => $resultado_compras [0] ['id_dependencia'],
-							"sede"=>$resultado_compras [0]['id_sede']
-							
-							
+							"sede" => $resultado_compras [0] ['id_sede'],
+							"nitproveedor"=>$resultado_compras[0] ['id_proveedor']
 					);
 					
 					$_REQUEST = array_merge ( $_REQUEST, $arreglo );
@@ -115,13 +119,13 @@ class registrarForm {
 			}
 			$atributos ['cadena_sql'] = $this->miSql->getCadenaSql ( "dependencias" );
 			
-// 			$matrizItems = array (
-// 					array (
-// 							' ',
-// 							'Seleccion ... ' 
-// 					) 
-// 			);
-
+			// $matrizItems = array (
+			// array (
+			// ' ',
+			// 'Seleccion ... '
+			// )
+			// );
+			
 			$matrizItems = $esteRecursoDB2->ejecutarAcceso ( $atributos ['cadena_sql'], "busqueda" );
 			
 			$atributos ['matrizItems'] = $matrizItems;
@@ -132,8 +136,6 @@ class registrarForm {
 			$tab ++;
 			$atributos = array_merge ( $atributos, $atributosGlobales );
 			$dependeciaOrdenes = $this->miFormulario->campoCuadroLista ( $atributos );
-			
-			
 		} else {
 			
 			$esteCampo = 'dependencia';
@@ -157,7 +159,7 @@ class registrarForm {
 			} else {
 				$atributos ['seleccion'] = - 1;
 			}
-// 			$atributos ['cadena_sql'] = $this->miSql->getCadenaSql ( "dependencias" );
+			// $atributos ['cadena_sql'] = $this->miSql->getCadenaSql ( "dependencias" );
 			
 			$matrizItems = array (
 					array (
@@ -174,11 +176,9 @@ class registrarForm {
 			$tab ++;
 			$atributos = array_merge ( $atributos, $atributosGlobales );
 			$dependeciaOrdenes = $this->miFormulario->campoCuadroLista ( $atributos );
-			
-			
 		}
 		
-		unset($atributos);
+		unset ( $atributos );
 		
 		// ---------------- SECCION: Parámetros Generales del Formulario ----------------------------------
 		$esteCampo = $esteBloque ['nombre'];
@@ -327,7 +327,6 @@ class registrarForm {
 					unset ( $atributos );
 					
 					echo $dependeciaOrdenes;
-			
 					
 					// --------------- FIN CONTROL : Cuadro de Texto --------------------------------------------------
 					// ---------------- CONTROL: Cuadro de Texto --------------------------------------------------------
