@@ -292,7 +292,7 @@ class Sql extends \Sql {
 				$cadenaSql = " UPDATE ";
 				$cadenaSql .= " registro_actarecibido ";
 				$cadenaSql .= " SET ";
-				$cadenaSql .= "sede='" . $variable ['dependencia'] . "',";
+				$cadenaSql .= "sede='" . $variable ['sede'] . "',";
 				$cadenaSql .= "dependencia='" . $variable ['dependencia'] . "',";
 				$cadenaSql .= "fecha_recibido='" . $variable ['fecha_registro'] . "',";
 				$cadenaSql .= "tipo_bien='" . $variable ['tipo_bien'] . "',";
@@ -314,7 +314,7 @@ class Sql extends \Sql {
 				$cadenaSql = " UPDATE ";
 				$cadenaSql .= " registro_actarecibido ";
 				$cadenaSql .= " SET ";
-				$cadenaSql .= "sede='" . $variable ['dependencia'] . "',";
+				$cadenaSql .= "sede='" . $variable ['sede'] . "',";
 				$cadenaSql .= "dependencia='" . $variable ['dependencia'] . "',";
 				$cadenaSql .= "fecha_recibido='" . $variable ['fecha_registro'] . "',";
 				$cadenaSql .= "tipo_bien='" . $variable ['tipo_bien'] . "',";
@@ -355,7 +355,7 @@ class Sql extends \Sql {
 			case "consultarProveedor" :
 				$cadenaSql = "SELECT PRO_NIT ||' - '|| PRO_RAZON_SOCIAL  ";
 				$cadenaSql .= "FROM PROVEEDORES ";
-				$cadenaSql .= "WHERE PRO_IDENTIFICADOR='" . $variable . "' ";
+				$cadenaSql .= "WHERE PRO_NIT='" . $variable . "' ";
 				
 				break;
 			
@@ -475,7 +475,7 @@ class Sql extends \Sql {
 			
 			case "proveedores" :
 				
-				$cadenaSql = " SELECT PRO_IDENTIFICADOR,PRO_NIT||' - '||PRO_RAZON_SOCIAL AS proveedor ";
+				$cadenaSql = " SELECT PRO_NIT,PRO_NIT||' - '||PRO_RAZON_SOCIAL AS proveedor ";
 				$cadenaSql .= " FROM PROVEEDORES ";
 				
 				break;
