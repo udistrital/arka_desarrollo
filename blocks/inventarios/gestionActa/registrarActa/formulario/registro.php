@@ -645,7 +645,7 @@ class registrarForm {
 					$atributos ["validar"] = "";
 					$atributos ["etiqueta"] = $this->lenguaje->getCadena ( $esteCampo );
 					// $atributos ["valor"] = $valorCodificado;
-					$atributos = array_merge ( $atributos, $atributosGlobales );
+// 					$atributos = array_merge ( $atributos, $atributosGlobales );
 					echo $this->miFormulario->campoCuadroTexto ( $atributos );
 					unset ( $atributos );
 					
