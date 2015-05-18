@@ -549,6 +549,13 @@ class Sql extends \Sql {
 				
 				break;
 			
+			case 'consultarActas' :
+				$cadenaSql = "SELECT *  ";
+				$cadenaSql .= "FROM registro_actarecibido  ";
+				$cadenaSql .= "WHERE  id_actarecibido='" . $variable . "';";
+				
+				break;
+			
 			case 'consultaConsecutivo' :
 				$cadenaSql = "SELECT consecutivo ";
 				$cadenaSql .= "FROM entrada  ";

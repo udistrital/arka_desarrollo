@@ -65,11 +65,68 @@ $urlFinal16 = $url . $cadena16;
 
 
 
+// Variables
+$cadenaACodificar17 = "pagina=" . $this->miConfigurador->getVariableConfiguracion ( "pagina" );
+$cadenaACodificar17 .= "&procesarAjax=true";
+$cadenaACodificar17 .= "&action=index.php";
+$cadenaACodificar17 .= "&bloqueNombre=" . $esteBloque ["nombre"];
+$cadenaACodificar17 .= "&bloqueGrupo=" . $esteBloque ["grupo"];
+$cadenaACodificar17 .= $cadenaACodificar17 . "&funcion=consultarActa";
+$cadenaACodificar17 .= "&tiempo=" . $_REQUEST ['tiempo'];
+
+// Codificar las variables
+$enlace = $this->miConfigurador->getVariableConfiguracion ( "enlace" );
+$cadena17 = $this->miConfigurador->fabricaConexiones->crypto->codificar_url ( $cadenaACodificar17, $enlace );
+
+// URL definitiva
+$urlFinal17 = $url . $cadena17;
+
+
+
+
+
+
 
 
 ?>
 <script type='text/javascript'>
 
+
+
+
+function consultarActa(elem, request, response){
+	  $.ajax({
+	    url: "<?php echo $urlFinal17?>",
+	    dataType: "json",
+	    data: { valor:$("#<?php echo $this->campoSeguro('acta_recibido')?>").val()},
+	    success: function(data){ 
+
+
+
+	        if(data[0]!=" "){
+
+	            $("#<?php echo $this->campoSeguro('dependencia')?>").html('');
+	            $("<option value=''>Seleccione  ....</option>").appendTo("#<?php echo $this->campoSeguro('dependencia')?>");
+	            $.each(data , function(indice,valor){
+
+	            	$("<option value='"+data[ indice ].ESF_ID_ESPACIO+"'>"+data[ indice ].ESF_NOMBRE_ESPACIO+"</option>").appendTo("#<?php echo $this->campoSeguro('dependencia')?>");
+	            	
+	            });
+	            
+	            $("#<?php echo $this->campoSeguro('dependencia')?>").removeAttr('disabled');
+	            
+	            $('#<?php echo $this->campoSeguro('dependencia')?>').width(350);
+	            $("#<?php echo $this->campoSeguro('dependencia')?>").select2();
+	            
+	          
+	            
+		        }
+	    			
+
+	    }
+		                    
+	   });
+	};
 
 
 function consultarDependencia(elem, request, response){
@@ -165,6 +222,16 @@ function estado(elem, request, response){
     $(function () {
 
 
+
+    	  $("#<?php echo $this->campoSeguro('acta_recibido')?>").change(function(){
+          	if($("#<?php echo $this->campoSeguro('acta_recibido')?>").val()!=''){
+              	
+          		consultarActa();
+      		}else{
+      			$("#<?php echo $this->campoSeguro('dependencia')?>").attr('disabled','');
+      			}
+
+      	      });
 
         $("#<?php echo $this->campoSeguro('sede')?>").change(function(){
         	if($("#<?php echo $this->campoSeguro('sede')?>").val()!=''){
