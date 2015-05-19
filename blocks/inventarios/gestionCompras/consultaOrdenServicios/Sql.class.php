@@ -151,7 +151,7 @@ class Sql extends \Sql {
 			
 			case "funcionarios" :
 				
-				$cadenaSql = "SELECT FUN_IDENTIFICADOR, FUN_IDENTIFICACION ||' - '|| FUN_NOMBRE ";
+				$cadenaSql = "SELECT FUN_IDENTIFICACION, FUN_IDENTIFICACION ||' - '|| FUN_NOMBRE ";
 				$cadenaSql .= "FROM FUNCIONARIOS ";
 				$cadenaSql .= "WHERE FUN_ESTADO='A' ";
 				
@@ -178,7 +178,7 @@ class Sql extends \Sql {
 				$cadenaSql = "SELECT FUN_CARGO ";
 				$cadenaSql .= "FROM FUNCIONARIOS ";
 				$cadenaSql .= "WHERE FUN_ESTADO='A' ";
-				$cadenaSql .= "AND FUN_IDENTIFICADOR='" . $variable . "' ";
+				$cadenaSql .= "AND FUN_IDENTIFICACION='" . $variable . "' ";
 				
 				break;
 			
