@@ -164,9 +164,22 @@ class Sql extends \Sql {
                 $cadenaSql.= " AND salida.id_salida=elemento_individual.id_salida ";
                 $cadenaSql.= " AND salida.id_entrada=elemento.id_entrada ";
                 $cadenaSql.= " AND elemento_individual.estado_asignacion=FALSE  ";
-                $cadenaSql.= " AND funcionario='" . $variable[0] . "' ORDER BY nivel ASC ";
-
+                //$cadenaSql.= " AND funcionario='" . $variable[0] . "' ORDER BY nivel ASC ";
                 break;
+            
+//            case "consultarElementosSupervisor" :
+//                $cadenaSql = "SELECT id_elemento_ind, nivel, marca, elemento_individual.placa,elemento_individual.serie, valor, subtotal_sin_iva, ";
+//                $cadenaSql.= " total_iva, total_iva_con ";
+//                $cadenaSql.= " FROM salida , elemento ";
+//                $cadenaSql.= " JOIN elemento_individual ON elemento.id_elemento=elemento_individual.id_elemento_gen  ";
+//                $cadenaSql.= " WHERE  ";
+//                $cadenaSql.= " elemento_individual.estado_registro=TRUE  ";
+//                $cadenaSql.= " AND salida.id_salida=elemento_individual.id_salida ";
+//                $cadenaSql.= " AND salida.id_entrada=elemento.id_entrada ";
+//                $cadenaSql.= " AND elemento_individual.estado_asignacion=FALSE  ";
+//                $cadenaSql.= " AND funcionario='" . $variable[0] . "' ORDER BY nivel ASC ";
+//
+//                break;
 
             case "consultarID":
                 $cadenaSql = " SELECT id_contratista ";

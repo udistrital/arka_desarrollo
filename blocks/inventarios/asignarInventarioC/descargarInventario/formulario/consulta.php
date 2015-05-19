@@ -39,7 +39,7 @@ class registrarForm {
          * $atributos= array_merge($atributos,$atributosGlobales);
          */
         $atributosGlobales ['campoSeguro'] = 'true';
-        $_REQUEST['usuario'] = '1100000';
+        $_REQUEST['usuario'] = '28851755';
         $_REQUEST ['tiempo'] = time();
         $tiempo = $_REQUEST ['tiempo'];
         // -------------------------------------------------------------------------------------------------

@@ -66,7 +66,7 @@ class registrarForm {
             $docContratista = '';
         }
 
-        $supervisor = 4;
+        $supervisor = '28851755';
 
         $variables = array(
             $supervisor,
