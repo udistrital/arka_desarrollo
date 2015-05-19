@@ -60,7 +60,7 @@ class registrarForm {
         $conexion = "inventarios";
         $esteRecursoDB = $this->miConfigurador->fabricaConexiones->getRecursoDB($conexion);
 
-        $conexion2 = "sicaarka";
+        $conexion2 = "sicapital";
         $esteRecursoDB2 = $this->miConfigurador->fabricaConexiones->getRecursoDB($conexion2);
 
         if (isset($_REQUEST['documentoContratista']) && $_REQUEST['documentoContratista'] != '') {
@@ -108,7 +108,7 @@ class registrarForm {
         $atributos ['id'] = $esteCampo;
         $atributos ["estilo"] = "jqueryui";
         $atributos ['tipoEtiqueta'] = 'inicio';
-        $atributos ["leyenda"] = "Asignación de Elementos a Contratista " . $docContratista . " - " . $nombreContratista[0][1];
+        $atributos ["leyenda"] = "Asignación de Elementos: " . $docContratista . " - " . $nombreContratista[0][1];
         echo $this->miFormulario->marcoAgrupacion('inicio', $atributos);
 
         if ($elementos_supervisor !== false) {

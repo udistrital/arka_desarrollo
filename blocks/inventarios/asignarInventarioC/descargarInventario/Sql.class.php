@@ -177,6 +177,7 @@ class Sql extends \Sql {
                 $cadenaSql.= " AND elemento_individual.estado_asignacion=TRUE  ";
                 $cadenaSql.= " AND salida.id_entrada=elemento.id_entrada ";
                 $cadenaSql.= " AND asignar_elementos.estado=1  ";
+                $cadenaSql.= " AND salida.id_salida=elemento_individual.id_salida ";
                 //$cadenaSql.= " AND supervisor='" . $variable[0] . "'  ";
                 $cadenaSql.= " AND contratista='" . $variable . "' ORDER BY nivel ASC ";
                 break;
