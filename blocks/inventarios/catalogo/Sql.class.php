@@ -175,17 +175,17 @@ class Sql extends \Sql {
 
             case "buscarIdPadre":
                 $cadenaSql = " SELECT elemento_id , elemento_padre , elemento_codigo, elemento_catalogo , elemento_nombre , elemento_fecha_creacion, elemento_grupoc ";
-                $cadenaSql .= " FROM catalogo.catalogo_elemento ";
-                $cadenaSql .= " WHERE elemento_codigo = " . $variable[0];
-                $cadenaSql .= " AND elemento_catalogo =" . $variable[1] . " ";
+                $cadenaSql.= " FROM catalogo.catalogo_elemento ";
+                $cadenaSql.= " WHERE elemento_codigo = '" . $variable[0]."' ";
+                $cadenaSql.= " AND elemento_catalogo ='" . $variable[1] . "' ";
                 break;
 
             case "buscarIdElemento":
                 $cadenaSql = " SELECT elemento_id , elemento_padre , elemento_codigo, elemento_catalogo , elemento_nombre , elemento_fecha_creacion, elemento_grupoc";
                 $cadenaSql .= " FROM catalogo.catalogo_elemento ";
-                $cadenaSql .= " WHERE elemento_codigo = " . $variable[0] . " ";
-                $cadenaSql .= " AND elemento_padre = " . $variable[1] . " ";
-                $cadenaSql .= " AND elemento_catalogo =" . $variable[2] . " ";
+                $cadenaSql .= " WHERE elemento_codigo = '" . $variable[0] . "' ";
+                $cadenaSql .= " AND elemento_padre = '" . $variable[1] . "' ";
+                $cadenaSql .= " AND elemento_catalogo ='" . $variable[2] . "' ";
                 break;
 
             case "buscarNombreElementoNivel":
