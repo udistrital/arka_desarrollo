@@ -98,8 +98,14 @@ class registrarForm {
             $atributos ['etiqueta'] = $this->lenguaje->getCadena($esteCampo);
             $atributos ['anchoEtiqueta'] = 220;
 
-            $atributos ['cadena_sql'] = $this->miSql->getCadenaSql("tipoCargue");
-            $matrizItems = $esteRecursoDB->ejecutarAcceso($atributos ['cadena_sql'], "busqueda");
+            //$atributos ['cadena_sql'] = $this->miSql->getCadenaSql("tipoCargue");
+            //$matrizItems = $esteRecursoDB->ejecutarAcceso($atributos ['cadena_sql'], "busqueda");
+            $matrizItems=array(
+             
+                array(1,'Avances'),
+                array(3,'Orden de Compra'),
+                array(4,'Contratos (Vicerectoría)'),
+            );
             $atributos ['matrizItems'] = $matrizItems;
 
             // Utilizar lo siguiente cuando no se pase un arreglo:
