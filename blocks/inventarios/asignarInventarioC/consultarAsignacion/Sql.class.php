@@ -181,8 +181,8 @@ class Sql extends \Sql {
                 $cadenaSql.= " JOIN elemento_individual ON elemento.id_elemento=elemento_individual.id_elemento_gen ";
                 $cadenaSql.= " WHERE elemento_individual.estado_registro=TRUE  ";
                 $cadenaSql.= " AND elemento_individual.id_elemento_ind=asignar_elementos.id_elemento  ";
-                $cadenaSql.= " AND elemento_individual.estado_asignacion=1  ";
-                $cadenaSql.= " AND asignar_elementos.estado=TRUE  ";
+                $cadenaSql.= " AND elemento_individual.estado_asignacion=TRUE  ";
+                $cadenaSql.= " AND asignar_elementos.estado=1  ";
                 $cadenaSql.= " AND salida.id_entrada=elemento.id_entrada ";
                 //$cadenaSql.= " AND supervisor='" . $variable[0] . "'  ";
                 $cadenaSql.= " AND contratista='" . $variable[1] . "' ORDER BY nivel ASC ";
@@ -270,6 +270,12 @@ class Sql extends \Sql {
                   $cadenaSql .= " CON_DIRECCION, ";
                   $cadenaSql .= " CON_TELEFONO "; */
                 $cadenaSql .= " FROM CONTRATISTAS ";
+                break;
+            
+                case "nombreContratista":
+                $cadenaSql =" SELECT CON_IDENTIFICACION, CON_NOMBRE ";
+                $cadenaSql.=" FROM CONTRATISTAS ";
+                $cadenaSql.=" WHERE CON_IDENTIFICACION='".$variable."' ";
                 break;
         }
         return $cadenaSql;
