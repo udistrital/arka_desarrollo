@@ -105,19 +105,18 @@ function consultarActa(elem, request, response){
 
 	        if(data[0]!=" "){
 
-	            $("#<?php echo $this->campoSeguro('dependencia')?>").html('');
-	            $("<option value=''>Seleccione  ....</option>").appendTo("#<?php echo $this->campoSeguro('dependencia')?>");
-	            $.each(data , function(indice,valor){
-
-	            	$("<option value='"+data[ indice ].ESF_ID_ESPACIO+"'>"+data[ indice ].ESF_NOMBRE_ESPACIO+"</option>").appendTo("#<?php echo $this->campoSeguro('dependencia')?>");
-	            	
-	            });
-	            
+	        	$("#<?php echo $this->campoSeguro('sede')?> option[value="+ data['sede'] +"]").attr("selected",true);
+	        	$("#<?php echo $this->campoSeguro('sede')?>").select2();
+	        	$("#<?php echo $this->campoSeguro('proveedor')?> option[value="+ data['proveedor'] +"]").attr("selected",true);	
+	        	$("#<?php echo $this->campoSeguro('proveedor')?>").select2();
 	            $("#<?php echo $this->campoSeguro('dependencia')?>").removeAttr('disabled');
-	            
-	            $('#<?php echo $this->campoSeguro('dependencia')?>').width(350);
+	            $('#<?php echo $this->campoSeguro('dependencia')?>').width(300);
+	            $("#<?php echo $this->campoSeguro('dependencia')?> option[value="+ data['dependencia'] +"]").attr("selected",true);
 	            $("#<?php echo $this->campoSeguro('dependencia')?>").select2();
-	            
+	        	
+	        	$("#<?php echo $this->campoSeguro('asignacionOrdenador')?> option[value="+ data['ordenador_gasto'] +"]").attr("selected",true);
+	        	$("#<?php echo $this->campoSeguro('asignacionOrdenador')?>").select2();
+	        	datosOrdenador();
 	          
 	            
 		        }
@@ -205,7 +204,8 @@ function estado(elem, request, response){
 
 		    			$("#<?php echo $this->campoSeguro('nombreOrdenador')?>").val(data[0]);
 		    			$("#<?php echo $this->campoSeguro('id_ordenador')?>").val(data[1]);
-								    			
+		    			$("#<?php echo $this->campoSeguro('tipo_ordenador')?>").val(data[2]);
+		    			$("#<?php echo $this->campoSeguro('identificacion_ordenador')?>").val(data[3]);		    			
 			    		}else{
 
 					
@@ -228,7 +228,24 @@ function estado(elem, request, response){
               	
           		consultarActa();
       		}else{
-      			$("#<?php echo $this->campoSeguro('dependencia')?>").attr('disabled','');
+
+      			$("#<?php echo $this->campoSeguro('sede')?> option[value="+''+"]").attr("selected",true);
+	        	$("#<?php echo $this->campoSeguro('sede')?>").select2();
+	        	$("#<?php echo $this->campoSeguro('proveedor')?> option[value="+''+"]").attr("selected",true);	
+	        	$("#<?php echo $this->campoSeguro('proveedor')?>").select2();
+
+	            
+	        	$("#<?php echo $this->campoSeguro('asignacionOrdenador')?> option[value="+''+"]").attr("selected",true);
+	        	$("#<?php echo $this->campoSeguro('asignacionOrdenador')?>").select2();
+
+				$("#<?php echo $this->campoSeguro('nombreOrdenador')?>").val('');
+    			$("#<?php echo $this->campoSeguro('id_ordenador')?>").val('');
+    			$("#<?php echo $this->campoSeguro('tipo_ordenador')?>").val('');
+    			$("#<?php echo $this->campoSeguro('identificacion_ordenador')?>").val('');		
+      			
+      			$("#<?php echo $this->campoSeguro('dependencia')?> option[value="+''+"]").attr("selected",true);
+      			$("#<?php echo $this->campoSeguro('dependencia')?>").select2();
+          		$("#<?php echo $this->campoSeguro('dependencia')?>").attr('disabled','');
       			}
 
       	      });

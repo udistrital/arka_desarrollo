@@ -198,7 +198,9 @@ class RegistradorOrden {
 				$_REQUEST ['id_ordenador'],
 				$_REQUEST ['sede'],
 				$_REQUEST ['dependencia'],
-				$_REQUEST ['supervisor'] 
+				$_REQUEST ['supervisor'],
+				$_REQUEST ['tipo_ordenador'],
+				$_REQUEST ['identificacion_ordenador']
 		);
 		
 		$cadenaSql = $this->miSql->getCadenaSql ( 'insertarEntrada', $arregloDatos );
