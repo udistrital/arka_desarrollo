@@ -36,6 +36,7 @@ class Formulario {
     }
 
     public function validarEntrada() {
+        
         //var_dump($_REQUEST);exit;
         //validar request nombre
         if (!isset($_REQUEST['nombreElemento'])) {

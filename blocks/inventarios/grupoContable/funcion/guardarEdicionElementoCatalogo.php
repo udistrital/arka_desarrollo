@@ -40,7 +40,7 @@ class Formulario {
         //var_dump($_REQUEST);exit;
         //validar request salida
         if (!isset($_REQUEST['cuentaSalida'])) {
-            $this->miConfigurador->setVariableConfiguracion('mostrarMensaje', 'errorSalida');
+          $this->miConfigurador->setVariableConfiguracion('mostrarMensaje', 'errorSalida');
             $this->mensaje();
             exit;
         }

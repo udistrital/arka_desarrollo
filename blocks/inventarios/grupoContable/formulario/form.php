@@ -55,14 +55,14 @@ class Formulario {
         $cadena1 = "<div id='seccionAmplia'><br>";
         $cadena1.= "<div id='marcoDatosBasicos'>";
         $cadena1.= "<fieldset class='ui-widget ui-widget-content'> ";
-        $cadena1.= "<legend class = 'ui-state-default ui-corner-all'>Módulo Gestión Registro Grupo Contable</legend><br>";
+        $cadena1.= "<legend class = 'ui-state-default ui-corner-all'>Módulo Grupo de Manejo de Bienes</legend><br>";
 
         $cadena1.= "<div id = 'espacioTrabajo'>";
         //menu 
         $cadena1.= "<div id = 'marcoMenu'>";
         $cadena1.= '<div  id="menu"  class="ui-widget-header ui-corner-all">';
         $cadena1.= '<button id="irACasa"  class="botonMenu" >Paǵina Principal</button>';
-        $cadena1.= '<button id="agregarElemento" class="botonMenu" >+ Nuevo Catálogo de Cuentas</button>';
+        $cadena1.= '<button id="agregarElemento" class="botonMenu" >+ Nuevo Catálogo Grupo de Manejo de Bienes</button>';
 
         //</div>';
         //$cadena .='</div>';

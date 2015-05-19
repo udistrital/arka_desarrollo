@@ -330,11 +330,7 @@ $autocompletar = $url . $cadena10;
 
 
     function autocompletar(elemento) {
-
-
-
-
-        if (typeof listaIds['lidPadre'] == 'undefined') {
+  if (typeof listaIds['lidPadre'] == 'undefined') {
 
 
             $("#lidPadre").attr('disabled', true);
@@ -405,10 +401,6 @@ $autocompletar = $url . $cadena10;
             $("#idPadre").val($("#lidPadre").val());
         else
             $("#idPadre").val(listaIds['lidPadre'][indice]);
-
-
-
-
     }
 
     function validarValorLista(valor, id) {
