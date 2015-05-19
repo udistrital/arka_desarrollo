@@ -28,7 +28,7 @@
               
 $("#<?php echo $this->campoSeguro('inexistencia')?>").select2();
  $("#<?php echo $this->campoSeguro('responsable')?>").select2();
-$("#<?php echo $this->campoSeguro('dependencia')?>").select2(); 
+$("#<?php echo $this->campoSeguro('sede')?>").select2(); 
 $("#<?php echo $this->campoSeguro('responsable_reci')?>").select2();
 
 $("#<?php echo $this->campoSeguro('dependencia_baja')?>").select2();

@@ -151,8 +151,9 @@ class Sql extends \Sql {
 			
 			case "funcionarios" :
 				
-				$cadenaSql = "SELECT JEF_IDENTIFICADOR,JEF_INDENTIFICACION ||' - '|| JEF_NOMBRE ";
-				$cadenaSql .= "FROM JEFES_DE_SECCION ";
+				$cadenaSql = "SELECT FUN_IDENTIFICACION, FUN_IDENTIFICACION ||' - '|| FUN_NOMBRE ";
+				$cadenaSql .= "FROM FUNCIONARIOS ";
+				$cadenaSql .= "WHERE FUN_ESTADO='A' ";
 				
 				break;
 			
@@ -166,7 +167,8 @@ class Sql extends \Sql {
 				
 				$cadenaSql = "SELECT ";
 				$cadenaSql .= "id_elemento_ind, elemento_individual.placa, elemento_individual.serie, funcionario, id_elemento_gen, ";
-				$cadenaSql .= "elemento_individual.id_salida ,tipo_bien.tb_descripcion ";
+				$cadenaSql .= "elemento_individual.id_salida, "; 
+				$cadenaSql .= "tb_descripcion ";
 				$cadenaSql .= "FROM elemento_individual ";
 				$cadenaSql .= "JOIN elemento ON elemento.id_elemento = elemento_individual.id_elemento_gen ";
 				$cadenaSql .= "JOIN salida ON salida.id_salida = elemento_individual.id_salida ";
@@ -220,23 +222,27 @@ class Sql extends \Sql {
 				
 				break;
 			
+				
+	
+				
 			case "funcionario_informacion" :
 				
-				$cadenaSql = "SELECT JEF_INDENTIFICACION,  JEF_NOMBRE ";
-				$cadenaSql .= "FROM JEFES_DE_SECCION ";
-				$cadenaSql .= "WHERE JEF_IDENTIFICADOR='" . $variable . "' ";
+				$cadenaSql = "SELECT FUN_IDENTIFICACION,  FUN_NOMBRE ";
+				$cadenaSql .= "FROM FUNCIONARIOS ";
+				$cadenaSql .= "WHERE FUN_IDENTIFICACION='" . $variable . "' ";
+				$cadenaSql .= "AND FUN_ESTADO='A' ";
 				
 				break;
 			
 			case "funcionario_informacion_fn" :
 				
-				$cadenaSql = "SELECT JEF_INDENTIFICACION ||' - '|| JEF_NOMBRE ";
-				$cadenaSql .= "FROM JEFES_DE_SECCION ";
-				$cadenaSql .= "WHERE JEF_IDENTIFICADOR='" . $variable . "' ";
+				$cadenaSql = "SELECT FUN_IDENTIFICACION ||' - '|| FUN_NOMBRE ";
+				$cadenaSql .= "FROM FUNCIONARIOS ";
+				$cadenaSql .= "WHERE FUN_IDENTIFICACION='" . $variable . "' ";
+				$cadenaSql .= "AND FUN_ESTADO='A' ";
 				
 				break;
 		}
 		return $cadenaSql;
 	}
-}
 ?>

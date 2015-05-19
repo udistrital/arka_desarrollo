@@ -88,7 +88,7 @@ class RegistradorOrden {
 			
 		
 		$arreglo = array (
-				$_REQUEST['dependencia_baja'],
+				$_REQUEST['dependencia'],
 				$_REQUEST['estado_baja'],
 				($_REQUEST['tramite_baja']<>'')?$_REQUEST['tramite_baja']:0,
 				$_REQUEST['tipo_mueble'],
@@ -96,7 +96,8 @@ class RegistradorOrden {
 				$archivo1,
 				$_REQUEST['observaciones'],
 				$_REQUEST['elemento_ind'],
-				$fechaActual	
+				$fechaActual,	
+				$_REQUEST['sede']
 		);
 		
 		

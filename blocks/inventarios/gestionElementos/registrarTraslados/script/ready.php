@@ -32,8 +32,10 @@
               	 minimumInputLength: 3,
               	 });
  
-$("#<?php echo $this->campoSeguro('responsable_reci')?>").select2();
-
+$("#<?php echo $this->campoSeguro('responsable_reci')?>").select2({
+             	 placeholder: "Search for a repository",
+              	 minimumInputLength: 4,
+              	 });
 
 
  $("#<?php echo $this->campoSeguro('tipo_bien')?>").select2();

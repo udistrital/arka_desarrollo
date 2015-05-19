@@ -230,12 +230,7 @@ class Sql extends \Sql {
 				
 				break;
 			
-			case "consultar_nivel_inventario" :
-				
-				$cadenaSql = "SELECT id_catalogo,(codigo||' - '||nombre) AS nivel ";
-				$cadenaSql .= "FROM catalogo_elemento ;";
-				
-				break;
+
 			
 			// SELECT id_elemento, fecha_registro, tipo_bien, descripcion, cantidad,
 			// unidad, valor, iva, ajuste, bodega, subtotal_sin_iva, total_iva,
@@ -472,6 +467,19 @@ class Sql extends \Sql {
 				}
 				
 				break;
+				
+		case "consultar_nivel_inventario" :
+				
+				$cadenaSql = "SELECT elemento_id, elemento_padre||''|| elemento_codigo||' - '||elemento_nombre ";
+				$cadenaSql .= "FROM catalogo.catalogo_elemento ";
+				$cadenaSql .= "WHERE elemento_catalogo=2 ";
+				$cadenaSql .= "ORDER BY elemento_id DESC ;";
+				
+				
+				break;
+			
+				
+				
 		}
 		return $cadenaSql;
 	}
