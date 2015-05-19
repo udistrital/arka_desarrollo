@@ -31,6 +31,7 @@
 
 
              	$("#<?php echo $this->campoSeguro('estado')?>").select2();
+             	$("#<?php echo $this->campoSeguro('acta_recibido')?>").select2();
              	$("#<?php echo $this->campoSeguro('numero_entrada')?>").select2();
                  
 			  $("#<?php echo $this->campoSeguro('proveedor')?>").select2({

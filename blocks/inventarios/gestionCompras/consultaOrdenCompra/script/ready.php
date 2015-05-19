@@ -29,11 +29,17 @@
                 "sPaginationType": "full_numbers"
                  } );
 
-                     
-                       $("#<?php echo $this->campoSeguro('selec_dependencia')?>").select2();
+		$("#<?php echo $this->campoSeguro('sede')?>").select2();
+		$("#<?php echo $this->campoSeguro('sede_consultar')?>").select2();
+		$('#<?php echo $this->campoSeguro('selec_dependencia_Sol')?>').attr('disabled','');                     
+        
+        $("#<?php echo $this->campoSeguro('selec_dependencia')?>").select2();
+        
+        
+        $("#<?php echo $this->campoSeguro('orden_compra_consulta')?>").select2();
          
          
-         $("#<?php echo $this->campoSeguro('selec_dependencia_Sol')?>").select2();
+         
           $("#<?php echo $this->campoSeguro('rubro')?>").select2();
           $("#<?php echo $this->campoSeguro('cargoJefeSeccion')?>").select2();
 	      $("#<?php echo $this->campoSeguro('nombreContratista')?>").select2();

@@ -5,7 +5,8 @@ $this->idioma ["noDefinido"] = "Etiqueta no esta definida en locale/es_es/Mensaj
 $this->idioma ["informacion"] ="&nbsp&nbsp&nbspInformacion General: ";
 
 
-
+$this->idioma ["sede"] ="Sede : ";
+$this->idioma ["sedeTitulo"] ="Seleccione Sede";
 
 $this->idioma ["observaciones"] ="Observaciones: ";
 $this->idioma ["observacionesTitulo"] ="Ingrese Observaciones ";

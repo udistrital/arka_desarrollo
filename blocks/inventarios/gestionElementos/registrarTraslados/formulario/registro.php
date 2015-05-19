@@ -269,11 +269,11 @@ class registrarForm {
 			
 			echo $this->miFormulario->agrupacion ( 'fin' );
 			
-			$array=array(
-					$datos[0],
-					$datos[1]
+			$array = array (
+					$datos [0],
+					$datos [1] 
 			);
-			$array=serialize($array);
+			$array = serialize ( $array );
 			
 			$esteCampo = "marcoDatosBasicos";
 			$atributos ['id'] = $esteCampo;
@@ -298,12 +298,7 @@ class registrarForm {
 				$atributos ['tabIndex'] = $tab;
 				$atributos ['etiqueta'] = $this->lenguaje->getCadena ( $esteCampo );
 				$atributos ['validar'] = '';
-				
-				if (isset ( $_REQUEST [$esteCampo] )) {
-					$atributos ['valor'] = $_REQUEST [$esteCampo];
-				} else {
-					$atributos ['valor'] = '';
-				}
+				$atributos ['valor'] = $datos[3]." - ".$datos[4];
 				$atributos ['titulo'] = $this->lenguaje->getCadena ( $esteCampo . 'Titulo' );
 				$atributos ['deshabilitado'] = true;
 				$atributos ['tamanno'] = 60;

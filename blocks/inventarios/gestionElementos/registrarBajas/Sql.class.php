@@ -176,7 +176,7 @@ class Sql extends \Sql {
 				
 				$cadenaSql = "INSERT INTO baja_elemento( ";
 				$cadenaSql .= "dependencia_funcionario, estado_funcional, tramite, ";
-				$cadenaSql .= "tipo_mueble, ruta_radicacion, nombre_radicacion, observaciones, id_elemento_ind,fecha_registro ) ";
+				$cadenaSql .= "tipo_mueble, ruta_radicacion, nombre_radicacion, observaciones, id_elemento_ind,fecha_registro,sede ) ";
 				$cadenaSql .= " VALUES (";
 				$cadenaSql .= "'" . $variable [0] . "',";
 				$cadenaSql .= "'" . $variable [1] . "',";
@@ -186,7 +186,8 @@ class Sql extends \Sql {
 				$cadenaSql .= "'" . $variable [5] . "',";
 				$cadenaSql .= "'" . $variable [6] . "',";
 				$cadenaSql .= "'" . $variable [7] . "',";
-				$cadenaSql .= "'" . $variable [8] . "') ";
+				$cadenaSql .= "'" . $variable [8] . "',";
+				$cadenaSql .= "'" . $variable [9] . "') ";
 				$cadenaSql .= "RETURNING  id_baja; ";
 				
 				break;
@@ -209,11 +210,26 @@ class Sql extends \Sql {
 				$cadenaSql = " SELECT id_tipo_falt_sobr, descripcion ";
 				$cadenaSql .= " FROM tipo_falt_sobr;";
 				break;
-			
 			case "funcionarios" :
 				
-				$cadenaSql = "SELECT JEF_IDENTIFICADOR,JEF_INDENTIFICACION ||' - '|| JEF_NOMBRE ";
-				$cadenaSql .= "FROM JEFES_DE_SECCION ";
+				$cadenaSql = "SELECT FUN_IDENTIFICADOR, FUN_IDENTIFICACION ||' - '|| FUN_NOMBRE ";
+				$cadenaSql .= "FROM FUNCIONARIOS ";
+				$cadenaSql .= "WHERE FUN_ESTADO='A' ";
+				
+				break;
+			
+			case "dependencias" :
+				$cadenaSql = "SELECT DISTINCT  ESF_ID_ESPACIO, ESF_NOMBRE_ESPACIO ";
+				$cadenaSql .= " FROM ESPACIOS_FISICOS ";
+				$cadenaSql .= " WHERE ESF_ID_SEDE='" . $variable . "' ";
+				$cadenaSql .= " AND  ESF_ESTADO='A'";
+				
+				break;
+			
+			case "sede" :
+				$cadenaSql = "SELECT DISTINCT  ESF_ID_SEDE, ESF_SEDE ";
+				$cadenaSql .= " FROM ESPACIOS_FISICOS ";
+				$cadenaSql .= " WHERE   ESF_ESTADO='A'";
 				
 				break;
 			
@@ -318,9 +334,9 @@ class Sql extends \Sql {
 			
 			case "funcionario_informacion" :
 				
-				$cadenaSql = "SELECT JEF_INDENTIFICACION,  JEF_NOMBRE ,JEF_DEPENDENCIA_PERTENECIENTE ";
-				$cadenaSql .= "FROM JEFES_DE_SECCION ";
-				$cadenaSql .= "WHERE JEF_IDENTIFICADOR='" . $variable . "' ";
+				$cadenaSql = "SELECT FUN_IDENTIFICACION,  FUN_NOMBRE  ";
+				$cadenaSql .= "FROM FUNCIONARIOS ";
+				$cadenaSql .= "WHERE FUN_ESTADO='A' ";
 				
 				break;
 		}

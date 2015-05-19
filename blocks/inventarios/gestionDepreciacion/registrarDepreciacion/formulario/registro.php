@@ -174,7 +174,7 @@ class registrarForm {
                     $atributos ['validar'] = 'required, minSize[1],maxSize[10]';
 
                     if (isset($datos_elemento[0]['cantidad'])) {
-                        $atributos ['valor'] = $datos_elemento[0]['fecha'];
+                        $atributos ['valor'] = $datos_elemento[0]['fecha_registro'];
                     } else {
                         $atributos ['valor'] = '';
                     }

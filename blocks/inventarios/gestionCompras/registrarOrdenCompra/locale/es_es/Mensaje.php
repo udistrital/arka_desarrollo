@@ -1,7 +1,10 @@
 <?php
 $this->idioma ["noDefinido"] = "Etiqueta no esta definida en locale/es_es/Mensaje.php";
 
+$this->idioma ["sede"] ="Sede : ";
+$this->idioma ["sedeTitulo"] ="Seleccione Sede";
 
+$this->idioma ["botonDocumento"] ="Generar Documento PDF";
 //________________
 $this->idioma ["vigencia_registro"] ="Vigencia Registro : ";
 $this->idioma ["vigencia_registroTitulo"] ="Seleccione Vigencia Registro";
@@ -110,10 +113,10 @@ $this->idioma ["dependencia"] ="&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspNombre D
 $this->idioma ["dependenciaTitulo"] ="Ingrese Nombre Dependencia";
 
 
-$this->idioma ["direccionDependencia"] ="&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspDirección :";
+$this->idioma ["direccionDependencia"] ="Dirección :";
 $this->idioma ["direccionDependenciaTitulo"] ="Ingrese Dirección Dependencia";
 
-$this->idioma ["telefonoDependencia"] ="&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspTeléfono :";
+$this->idioma ["telefonoDependencia"] ="Teléfono :";
 $this->idioma ["telefonoDependenciaTitulo"] ="Ingrese Teléfono Dependencia";
 
 

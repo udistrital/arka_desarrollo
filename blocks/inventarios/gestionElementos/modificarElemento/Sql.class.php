@@ -165,9 +165,10 @@ class Sql extends \Sql {
 				
 				$cadenaSql = "SELECT DISTINCT ";
 				$cadenaSql .= "id_elemento, placa,  ";
-				$cadenaSql .= "elemento.serie, elemento.fecha_registro,tipo_bienes.descripcion  ";
+				$cadenaSql .= "elemento.serie, elemento.fecha_registro,tipo_bienes.descripcion, estado_entrada ";
 				$cadenaSql .= "FROM elemento ";
 				$cadenaSql .= "JOIN tipo_bienes ON tipo_bienes.id_tipo_bienes = elemento.tipo_bien ";
+				$cadenaSql .= "JOIN entrada ON entrada.id_entrada = elemento.id_entrada ";
 				$cadenaSql .= "JOIN elemento_individual ON elemento_individual.id_elemento_gen = elemento.id_elemento ";
 				$cadenaSql .= "WHERE 1=1 AND estado='TRUE' ";
 				if ($variable [0] != '') {
@@ -229,12 +230,7 @@ class Sql extends \Sql {
 				
 				break;
 			
-			case "consultar_nivel_inventario" :
-				
-				$cadenaSql = "SELECT id_catalogo,(codigo||' - '||nombre) AS nivel ";
-				$cadenaSql .= "FROM catalogo_elemento ;";
-				
-				break;
+
 			
 			// SELECT id_elemento, fecha_registro, tipo_bien, descripcion, cantidad,
 			// unidad, valor, iva, ajuste, bodega, subtotal_sin_iva, total_iva,
@@ -471,6 +467,19 @@ class Sql extends \Sql {
 				}
 				
 				break;
+				
+		case "consultar_nivel_inventario" :
+				
+				$cadenaSql = "SELECT elemento_id, elemento_padre||''|| elemento_codigo||' - '||elemento_nombre ";
+				$cadenaSql .= "FROM catalogo.catalogo_elemento ";
+				$cadenaSql .= "WHERE elemento_catalogo=2 ";
+				$cadenaSql .= "ORDER BY elemento_id DESC ;";
+				
+				
+				break;
+			
+				
+				
 		}
 		return $cadenaSql;
 	}

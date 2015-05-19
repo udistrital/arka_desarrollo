@@ -31,6 +31,19 @@ class Sql extends \Sql {
 
         switch ($tipo) {
 
+            case "prueba":
+                $cadenaSql = "SELECT entrada.id_entrada, entrada.fecha_registro fentrada,clase_entrada.descripcion, tipo_contrato.descripcion tipo_contrato, ";
+                $cadenaSql.= ' numero_contrato, fecha_contrato, "PRO_NIT", numero_factura, fecha_factura, observaciones, ';
+                $cadenaSql.= " elemento.id_elemento, ";
+                $cadenaSql.= " elemento.nivel as nivel_inventario, elemento.unidad, elemento.cantidad, elemento.marca, ";
+                $cadenaSql.= " elemento.serie, elemento.valor, elemento.subtotal_sin_iva, elemento.total_iva, elemento.total_iva_con, elemento.estado, ";
+                $cadenaSql.= " elemento.fecha_registro felemento ";
+                $cadenaSql.= " FROM elemento, entrada ";
+                $cadenaSql.= ' JOIN arka_parametros.arka_proveedor ON arka_parametros.arka_proveedor."PRO_NIT"= CAST(entrada.proveedor AS CHARACTER VARYING) ';
+                $cadenaSql.= " JOIN clase_entrada ON clase_entrada.id_clase=entrada.clase_entrada ";
+                $cadenaSql.= " JOIN tipo_contrato ON tipo_contrato.id_tipo=entrada.tipo_contrato ";
+                $cadenaSql.= " WHERE elemento.id_entrada=entrada.id_entrada AND estado_registro='T' ";
+                break;
             /**
              * Clausulas específicas
              */

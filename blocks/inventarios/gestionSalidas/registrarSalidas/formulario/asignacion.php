@@ -76,7 +76,7 @@ class registrarForm {
 		
 		
 		
-// 		var_dump($elementos);
+		
 		$entrada = array (
 				'numero_entrada_c' => $_REQUEST ['numero_entrada'],
 				'fecha_entrada' => $entrada [0] [0],

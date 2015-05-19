@@ -104,7 +104,7 @@ $("#<?php echo $this->campoSeguro('tipo_poliza')?>").select2();
             switch($("#<?php echo $this->campoSeguro('tipo_poliza')?>").val())
             {
                            
-                case '1':
+                case '0':
                     
                    
                     $("#<?php echo $this->campoSeguro('fechas_polizas')?>").css('display','none');
@@ -115,7 +115,7 @@ $("#<?php echo $this->campoSeguro('tipo_poliza')?>").select2();
                 break;
                 
                 
-                case '2':
+                case '1':
                     
                   $("#<?php echo $this->campoSeguro('fechas_polizas')?>").css('display','block');
        
@@ -256,6 +256,32 @@ $("#<?php echo $this->campoSeguro('tipo_poliza')?>").select2();
                  cantidad=Number($("#<?php echo $this->campoSeguro('cantidad')?>").val());
             	 valor=Number($("#<?php echo $this->campoSeguro('valor')?>").val());
        			 iva = (cantidad * valor)* 0.04;
+       			 precio = cantidad*valor;
+       			 total=precio+iva;
+       			 
+                 $("#<?php echo $this->campoSeguro('total_iva')?>").val(iva);
+                 $("#<?php echo $this->campoSeguro('total_iva_con')?>").val(total);
+                                     
+                break;
+                
+                case '5':
+                
+                 cantidad=Number($("#<?php echo $this->campoSeguro('cantidad')?>").val());
+            	 valor=Number($("#<?php echo $this->campoSeguro('valor')?>").val());
+       			 iva = (cantidad * valor)* 0.1;
+       			 precio = cantidad*valor;
+       			 total=precio+iva;
+       			 
+                 $("#<?php echo $this->campoSeguro('total_iva')?>").val(iva);
+                 $("#<?php echo $this->campoSeguro('total_iva_con')?>").val(total);
+                                     
+                break;
+                
+                 case '6':
+                
+                 cantidad=Number($("#<?php echo $this->campoSeguro('cantidad')?>").val());
+            	 valor=Number($("#<?php echo $this->campoSeguro('valor')?>").val());
+       			 iva = (cantidad * valor)* 0.16;
        			 precio = cantidad*valor;
        			 total=precio+iva;
        			 

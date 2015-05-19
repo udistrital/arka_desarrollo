@@ -55,8 +55,8 @@ class Funcion {
 	function modificarOrden() {
 		include_once ($this->ruta . "funcion/modificarOrden.php");
 	}
-	function reporteOrden() {
-		include_once ($this->ruta . "funcion/reportePdf.php");
+	function documentoPdf() {
+		include_once ($this->ruta . "funcion/documentoPdf.php");
 	}
 	function action() {
 		
@@ -74,19 +74,17 @@ class Funcion {
 		if (isset ( $_REQUEST ['procesarAjax'] )) {
 			$this->procesarAjax ();
 		} elseif (isset ( $_REQUEST ["opcion"] )) {
-			
-			if (isset ( $_REQUEST ['botonReporte'] ) && $_REQUEST ['botonReporte'] == 'true') {
-				$this->reporteOrden ();
-				exit;
-			}
-			
-			if (isset ( $_REQUEST ["redireccionar"] ) && $_REQUEST ['redireccionar'] == 'regresar') {
-				redireccion::redireccionar ( $_REQUEST ['opcion'] );
-			}
-			
-			if ($_REQUEST ['opcion'] == 'modificarOrden') {
+// 			var_dump($_REQUEST);exit;
+			switch ($_REQUEST ['opcion']) {
 				
-				$this->modificarOrden ();
+				case 'modificarOrden' :
+					$this->modificarOrden ();
+					break;
+				
+				case 'documento' :
+					
+				$this->documentoPdf ();
+				break;
 			}
 		}
 	}

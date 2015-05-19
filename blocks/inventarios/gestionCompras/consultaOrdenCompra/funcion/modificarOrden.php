@@ -2,7 +2,6 @@
 
 namespace inventarios\gestionCompras\consultaOrdenServicios\funcion;
 
-
 use inventarios\gestionCompras\consultaOrdenServicios\funcion;
 use inventarios\gestionCompras\consultaOrdenCompra\funcion\redireccion;
 
@@ -29,7 +28,7 @@ class RegistradorOrden {
 		$esteBloque = $this->miConfigurador->getVariableConfiguracion ( "esteBloque" );
 		
 		$rutaBloque = $this->miConfigurador->getVariableConfiguracion ( "raizDocumento" ) . "/blocks/inventarios/gestionCompras/";
-		$rutaBloque .='registrarOrdenCompra' ;
+		$rutaBloque .= 'registrarOrdenCompra';
 		$host = $this->miConfigurador->getVariableConfiguracion ( "host" ) . $this->miConfigurador->getVariableConfiguracion ( "site" ) . "/blocks/inventarios/gestionCompras/registrarOrdenCompra/";
 		
 		$conexion = "inventarios";
@@ -37,11 +36,9 @@ class RegistradorOrden {
 		
 		$cadenaSql = $this->miSql->getCadenaSql ( 'items', $_REQUEST ['seccion'] );
 		$items = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
-
 		
 		if ($items == 0) {
 			redireccion::redireccionar ( 'noItems' );
-		
 		}
 		if ($_REQUEST ['obligacionesProveedor'] == '') {
 			
@@ -59,18 +56,19 @@ class RegistradorOrden {
 			$Subtotal = $Subtotal + $n [6];
 		}
 		
-		if ($_REQUEST ['iva'] == 1) {
-				
+		if ($_REQUEST ['iva'] == 6) {
+			
 			$iva = $Subtotal * 0.16;
+		} else if ($_REQUEST ['iva'] == 5) {
+			
+			$iva = $Subtotal * 0.10;
 		} else {
 			$iva = 0;
 		}
 		
 		$total = $Subtotal + $iva;
 		
-		
 		if ($_REQUEST ['actualizarCotizacion'] == '1') {
-			
 			
 			// Archivo de Cotizacion
 			foreach ( $_FILES as $key => $values ) {
@@ -98,45 +96,16 @@ class RegistradorOrden {
 					$status = "Error al subir archivo";
 				}
 			}
-			
-	
 		} else if ($_REQUEST ['actualizarCotizacion'] == '0') {
 			
 			$destino1 = $_REQUEST ['directorio'];
 			$archivo1 = $_REQUEST ['nombreArchivo'];
 		}
 		
-		
-		
-		
-		if ($_REQUEST ['reg_proveedor'] == 1) {
-				
-			$datosProveedor = array (
-					$_REQUEST ['proveedor'],
-					$_REQUEST ['nitProveedor'],
-					$_REQUEST ['direccionProveedor'],
-					$_REQUEST ['telefonoProveedor']
-			);
-				
-			$cadenaSql = $this->miSql->getCadenaSql ( 'insertarProveedor', $datosProveedor );
-			$id_proveedor = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
-				
-				
-			$_REQUEST ['selec_proveedor'] = $id_proveedor[0][0];
+	
 			
-			
-				
-				
-		}elseif($_REQUEST ['reg_proveedor'] == 0){
-				
-				
-			$_REQUEST ['selec_proveedor']=$_REQUEST ['selec_proveedor'];
-				
-				
-			
-			
-			
-		}
+			$_REQUEST ['selec_proveedor'] = $_REQUEST ['selec_proveedor'];
+	
 		$arreglo = array (
 				$_REQUEST ['vigencia_disponibilidad'],
 				$_REQUEST ['diponibilidad'],
@@ -148,21 +117,14 @@ class RegistradorOrden {
 				$_REQUEST ['valor_registro'],
 				$_REQUEST ['fecha_registro'],
 				$_REQUEST ['valorL_registro'],
-				$_REQUEST ['infoPresupuestal']
+				$_REQUEST ['infoPresupuestal'] 
 		);
-		
-		
-		
 		
 		$cadenaSql = $this->miSql->getCadenaSql ( 'actualizarPresupuestal', $arreglo );
 		
 		$inf_pre = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "acceso" );
 		
-		
-		
-		
-
-				// Actualizar Orden
+		// Actualizar Orden
 		
 		$datosOrden = array (
 				$_REQUEST ['rubro'],
@@ -183,25 +145,21 @@ class RegistradorOrden {
 				$destino1,
 				$archivo1,
 				$_REQUEST ['selec_dependencia'],
-				$_REQUEST ['nombreContratista'],
 				$_REQUEST ['id_ordenador_oculto'],
 				$Subtotal,
 				$iva,
 				$total,
-				$_REQUEST['valorLetras_registro'],
-				$_REQUEST['vigencia_contratista'],
-				$_REQUEST ['numero_orden'] 
+				$_REQUEST ['valorLetras_registro'],
+				$_REQUEST ['numero_orden'],
+				$_REQUEST ['sede']  ,
 		);
-		
-		
 		
 		$cadenaSql = $this->miSql->getCadenaSql ( 'actualizarOrden', $datosOrden );
 		
-		$id_orden = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
+		
+		$id_orden = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "acceso" );
 		
 		
-		
-				
 		
 		$cadenaSql = $this->miSql->getCadenaSql ( 'limpiarItems', $_REQUEST ['numero_orden'] );
 		
@@ -217,8 +175,7 @@ class RegistradorOrden {
 					$contenido ['descripcion'],
 					$contenido ['valor_unitario'],
 					$contenido ['valor_total'],
-					$contenido ['descuento'],
-					 
+					$contenido ['descuento'] 
 			)
 			;
 			
@@ -233,7 +190,8 @@ class RegistradorOrden {
 				$_REQUEST ['numero_orden'] 
 		);
 		
-		if ($items == 1) {
+		
+		if ($items == true) {
 			
 			redireccion::redireccionar ( 'inserto', $datos );
 		} else {

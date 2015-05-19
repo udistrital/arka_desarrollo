@@ -1,0 +1,10 @@
+2015-04-23 11:23:01 ERROR  : Error connecting to the server: FATAL:  no existe el rol «arka_Inventarios»
+
+2015-04-23 11:24:25 ERROR  : Error connecting to the server: FATAL:  no existe el rol «arka_Inventarios»
+
+2015-04-23 11:25:19 ERROR  : Error connecting to the server: FATAL:  no existe el rol «arka_Inventarios»
+
+2015-04-27 15:48:28 ERROR  : ERROR:  permiso denegado a la relación arka_usuario
+2015-04-27 15:48:32 ERROR  : ERROR:  permiso denegado a la relación arka_usuario
+2015-04-27 15:48:38 ERROR  : ERROR:  permiso denegado a la relación arka_usuario
+2015-04-27 15:51:11 ERROR  : ERROR:  permiso denegado a la relación arka_usuario

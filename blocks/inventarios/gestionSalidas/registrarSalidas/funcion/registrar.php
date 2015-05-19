@@ -24,18 +24,38 @@ class RegistradorOrden {
 		$this->miFuncion = $funcion;
 	}
 	function procesarFormulario() {
+		// var_dump($_REQUEST);exit;
 		$fechaActual = date ( 'Y-m-d' );
+		
+		$fechaReinicio = date ( "Y-m-d", mktime ( 0, 0, 0, 1, 1, date ( 'Y' ) ) );
 		
 		$conexion = "inventarios";
 		$esteRecursoDB = $this->miConfigurador->fabricaConexiones->getRecursoDB ( $conexion );
 		
+		
+		
+		if ($fechaActual == $fechaReinicio) {
+				
+			$cadenaSql = $this->miSql->getCadenaSql ( 'consultaConsecutivo', $fechaReinicio );
+			$consecutivo = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
+				
+			if (isset ( $consecutivo ) && $consecutivo == false) {
+				$cadenaSql = $this->miSql->getCadenaSql ( 'reiniciarConsecutivo' );
+				$consecutivo = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "acceso" );
+			}
+		}
+		
+	
+		
+		
 		$arreglo = array (
 				$fechaActual,
 				$_REQUEST ['dependencia'],
-				$_REQUEST ['ubicacion'],
 				$_REQUEST ['funcionario'],
 				$_REQUEST ['observaciones'],
-				$_REQUEST ['numero_entrada'] 
+				$_REQUEST ['numero_entrada'],
+				$_REQUEST ['sede'],
+				$_REQUEST ['vigencia'] 
 		);
 		
 		$cadenaSql = $this->miSql->getCadenaSql ( 'insertar_salida', $arreglo );
@@ -51,9 +71,6 @@ class RegistradorOrden {
 			$id_elem_ind [$i] = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
 		}
 		
-		
-
-		
 		foreach ( $cantidad as $i ) {
 			
 			if ($i != '') {
@@ -63,9 +80,6 @@ class RegistradorOrden {
 		
 		foreach ( $id_elem_ind as $i => $e ) {
 			
-			
-			
-
 			if (count ( $e ) > 1) {
 				
 				for($i = 0; $i < $contador_ele_ind; $i ++) {
@@ -78,9 +92,7 @@ class RegistradorOrden {
 					$cadenaSql = $this->miSql->getCadenaSql ( 'actualizar_elementos_individuales', $arreglo );
 					
 					$actualizo_elem = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "acceso" );
-				
 				}
-				
 			}
 			if (count ( $e ) == 1) {
 				$arreglo = array (
@@ -88,25 +100,23 @@ class RegistradorOrden {
 						$id_salida [0] [0] 
 				);
 				
-				
 				$cadenaSql = $this->miSql->getCadenaSql ( 'actualizar_elementos_individuales', $arreglo );
 				
 				$actualizo_elem = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "acceso" );
 			}
 		}
 		
+		// foreach ( $items as $i ) {
 		
-		foreach ( $items as $i ) {
-			
-			$arreglo = array (
-					$i,
-					$id_salida [0] [0] 
-			);
-			
-			$cadenaSql = $this->miSql->getCadenaSql ( 'insertar_salida_item', $arreglo );
-			
-			$inserto = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "acceso" );
-		}
+		// $arreglo = array (
+		// $i,
+		// $id_salida [0] [0]
+		// );
+		
+		// $cadenaSql = $this->miSql->getCadenaSql ( 'insertar_salida_item', $arreglo );
+		
+		// $inserto = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "acceso" );
+		// }
 		
 		$arreglo = array (
 				"salida" => $id_salida [0] [0],
@@ -115,9 +125,7 @@ class RegistradorOrden {
 		);
 		
 		
-		
-		
-		if ($inserto) {
+		if ($actualizo_elem = true) {
 			
 			redireccion::redireccionar ( 'inserto', $arreglo );
 		} else {

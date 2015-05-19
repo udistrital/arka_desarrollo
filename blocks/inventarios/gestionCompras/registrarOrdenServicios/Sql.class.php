@@ -149,6 +149,51 @@ class Sql extends \Sql {
 			 * Clausulas Del Caso Uso.
 			 */
 			
+			case "informacion_proveedor" :
+				$cadenaSql = " SELECT PRO_RAZON_SOCIAL,PRO_NIT,PRO_DIRECCION,PRO_TELEFONO  ";
+				$cadenaSql .= " FROM PROVEEDORES  ";
+				$cadenaSql .= " WHERE PRO_NIT='" . $variable . "' ";
+				
+				break;
+			
+			case "proveedores" :
+				$cadenaSql = " SELECT PRO_NIT,PRO_NIT||' - '||PRO_RAZON_SOCIAL AS proveedor ";
+				$cadenaSql .= " FROM PROVEEDORES ";
+				
+				break;
+			
+			case "cargoSuper" :
+				
+				$cadenaSql = "SELECT FUN_CARGO ";
+				$cadenaSql .= "FROM FUNCIONARIOS ";
+				$cadenaSql .= "WHERE FUN_ESTADO='A' ";
+				$cadenaSql .= "AND FUN_IDENTIFICACION='" . $variable . "' ";
+				
+				break;
+			
+			case "funcionarios" :
+				
+				$cadenaSql = "SELECT FUN_IDENTIFICACION, FUN_IDENTIFICACION ||' - '|| FUN_NOMBRE ";
+				$cadenaSql .= "FROM FUNCIONARIOS ";
+				$cadenaSql .= "WHERE FUN_ESTADO='A' ";
+				
+				break;
+			
+			case "dependencias" :
+				$cadenaSql = "SELECT DISTINCT  ESF_ID_ESPACIO, ESF_NOMBRE_ESPACIO ";
+				$cadenaSql .= " FROM ESPACIOS_FISICOS ";
+				$cadenaSql .= " WHERE ESF_ID_SEDE='" . $variable . "' ";
+				$cadenaSql .= " AND  ESF_ESTADO='A'";
+				
+				break;
+			
+			case "sede" :
+				$cadenaSql = "SELECT DISTINCT  ESF_ID_SEDE, ESF_SEDE ";
+				$cadenaSql .= " FROM ESPACIOS_FISICOS ";
+				$cadenaSql .= " WHERE   ESF_ESTADO='A'";
+				
+				break;
+			
 			case "buscar_contratista" :
 				$cadenaSql = "SELECT CON_IDENTIFICADOR AS IDENTIFICADOR , CON_IDENTIFICACION ||'  -  '||CON_NOMBRE AS CONTRATISTA ";
 				$cadenaSql .= "FROM CONTRATISTAS ";
@@ -216,12 +261,14 @@ class Sql extends \Sql {
 				$cadenaSql = " SELECT ORG_NOMBRE,ORG_IDENTIFICADOR  ";
 				$cadenaSql .= " FROM ORDENADORES_GASTO ";
 				$cadenaSql .= " WHERE  ORG_IDENTIFICADOR='" . $variable . "'";
+				$cadenaSql .= " AND ORG_ESTADO='A' ";
 				
 				break;
 			
 			case "ordenador_gasto" :
 				$cadenaSql = " 	SELECT ORG_IDENTIFICADOR, ORG_ORDENADOR_GASTO ";
 				$cadenaSql .= " FROM ORDENADORES_GASTO ";
+				$cadenaSql .= " WHERE ORG_ESTADO='A' ";
 				break;
 			
 			case "constratistas" :
@@ -339,7 +386,7 @@ class Sql extends \Sql {
 				$cadenaSql .= " orden_servicio(";
 				$cadenaSql .= "  fecha_registro,info_presupuestal,dependencia_solicitante, rubro, objeto_contrato, poliza1, ";
 				$cadenaSql .= " poliza2, poliza3, poliza4, duracion_pago, fecha_inicio_pago, ";
-				$cadenaSql .= " fecha_final_pago, forma_pago, total_preliminar, iva, total, id_contratista,id_contratista_encargado, vig_contratista,id_ordenador_encargado,id_supervisor, estado)";
+				$cadenaSql .= " fecha_final_pago, forma_pago, total_preliminar, iva, total, id_contratista ,id_ordenador_encargado,id_supervisor, estado,sede)";
 				$cadenaSql .= " VALUES (";
 				$cadenaSql .= "'" . $variable [0] . "',";
 				$cadenaSql .= "'" . $variable [1] . "',";
@@ -380,8 +427,7 @@ class Sql extends \Sql {
 				$cadenaSql .= "'" . $variable [17] . "',";
 				$cadenaSql .= "'" . $variable [18] . "',";
 				$cadenaSql .= "'" . $variable [19] . "',";
-				$cadenaSql .= "'" . $variable [20] . "',";
-				$cadenaSql .= "'" . $variable [21] . "') ";
+				$cadenaSql .= "'" . $variable [20] . "') ";
 				$cadenaSql .= "RETURNING  id_orden_servicio; ";
 				
 				break;
@@ -404,6 +450,74 @@ class Sql extends \Sql {
 				$cadenaSql .= "'" . $variable [10] . "',";
 				$cadenaSql .= "'" . $variable [0] . "') ";
 				$cadenaSql .= "RETURNING  id_informacion; ";
+				break;
+			
+			case "consultarDependencia" :
+				$cadenaSql = " SELECT   ESF_ID_ESPACIO, ESF_NOMBRE_ESPACIO ";
+				$cadenaSql .= "FROM ESPACIOS_FISICOS  ";
+				$cadenaSql .= " WHERE ESF_ID_ESPACIO='" . $variable . "' ";
+				$cadenaSql .= " AND  ESF_ESTADO='A'";
+				
+				break;
+			
+			case "consultarRubro" :
+				$cadenaSql = " SELECT RUB_NOMBRE_RUBRO ";
+				$cadenaSql .= " FROM RUBROS ";
+				$cadenaSql .= " WHERE  RUB_IDENTIFICADOR='" . $variable . "'";
+				
+				break;
+			
+			case "consultarDependenciaSupervisor" :
+				$cadenaSql = " SELECT   ESF_ID_ESPACIO, ESF_NOMBRE_ESPACIO ";
+				$cadenaSql .= "FROM ESPACIOS_FISICOS  ";
+				$cadenaSql .= " WHERE ESF_ID_ESPACIO='" . $variable . "' ";
+				$cadenaSql .= " AND  ESF_ESTADO='A'";
+				break;
+			
+			case "consultarSupervisor" :
+				$cadenaSql = " SELECT nombre, cargo, dependencia ";
+				$cadenaSql .= " FROM supervisor_servicios ";
+				$cadenaSql .= " WHERE id_supervisor='" . $variable . "'";
+				break;
+			
+			case "consultarOrdenador_gasto" :
+				$cadenaSql = " 	SELECT ORG_ORDENADOR_GASTO,ORG_NOMBRE ";
+				$cadenaSql .= " FROM ORDENADORES_GASTO ";
+				$cadenaSql .= " WHERE ORG_IDENTIFICADOR ='" . $variable . "' ";
+				$cadenaSql .= " AND ORG_ESTADO='A' ";
+				break;
+			
+			case "consultarContratista" :
+				$cadenaSql = "SELECT CON_IDENTIFICACION , CON_NOMBRE AS CONTRATISTA ";
+				$cadenaSql .= "FROM CONTRATISTAS ";
+				$cadenaSql .= "WHERE CON_VIGENCIA ='" . $variable [1] . "' ";
+				$cadenaSql .= "AND  CON_IDENTIFICADOR ='" . $variable [0] . "' ";
+				break;
+			
+			case "consultarCosntraistaServicios" :
+				$cadenaSql = " SELECT nombre_razon_social, identificacion, direccion,telefono, cargo ";
+				$cadenaSql .= " FROM contratista_servicios ";
+				$cadenaSql .= " WHERE id_contratista='" . $variable . "'";
+				break;
+			
+			case "informacionPresupuestal" :
+				$cadenaSql = "SELECT  vigencia_dispo, numero_dispo, valor_disp, fecha_dip,
+									letras_dispo, vigencia_regis, numero_regis, valor_regis, fecha_regis,
+									letras_regis  ";
+				$cadenaSql .= "FROM informacion_presupuestal_orden ";
+				$cadenaSql .= "WHERE id_informacion ='" . $variable . "' ";
+				
+				break;
+			
+			case "consultarOrdenServicios" :
+				$cadenaSql = "SELECT  fecha_registro, info_presupuestal, dependencia_solicitante,
+				rubro, objeto_contrato, poliza1, poliza2, poliza3, poliza4, duracion_pago,
+				fecha_inicio_pago, fecha_final_pago, forma_pago, total_preliminar,
+				iva, total, id_contratista,id_supervisor,
+				id_ordenador_encargado, estado ";
+				$cadenaSql .= "FROM orden_servicio  ";
+				$cadenaSql .= "WHERE  id_orden_servicio='" . $variable . "';";
+				
 				break;
 		}
 		return $cadenaSql;

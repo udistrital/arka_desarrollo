@@ -29,8 +29,14 @@
                 "sPaginationType": "full_numbers"
                  } );
 
-
-         $("#<?php echo $this->campoSeguro('vigencia_disponibilidad')?>").select2();
+        
+                     
+        $("#<?php echo $this->campoSeguro('proveedorContratista')?>").select2();
+		$("#<?php echo $this->campoSeguro('sede')?>").select2();
+		                     
+		$('#<?php echo $this->campoSeguro('orden_consulta')?>').select2();
+                     
+        $("#<?php echo $this->campoSeguro('vigencia_disponibilidad')?>").select2();
 		$('#<?php echo $this->campoSeguro('diponibilidad')?>').select2();
 		
 		$("#<?php echo $this->campoSeguro('vigencia_registro')?>").select2();
@@ -214,16 +220,35 @@
         });
 	   
 	   
-	   $("#<?php echo $this->campoSeguro('selec_dependencia_Sol')?>").select2();
+	   
 	   $("#<?php echo $this->campoSeguro('contratista_consulta')?>").select2();
 	   
+	   	   $("#<?php echo $this->campoSeguro('selec_proveedor')?>").select2({
+			   	 placeholder: "Search for a repository",
+			   	 minimumInputLength: 5,
+			
+			       });
+	   
+	   
+	   $('#<?php echo $this->campoSeguro('selec_dependencia_Sol')?>').attr('disabled','');
+	   $("#<?php echo $this->campoSeguro('sede_consultar')?>").select2();
+	   
+	   $("#<?php echo $this->campoSeguro('sede_super')?>").select2();
+	    	
+	   $("#<?php echo $this->campoSeguro('nombre_supervisor')?>").select2();
+	   
+	   
+	   $("#<?php echo $this->campoSeguro('sede_super')?>").select2();
 	   $("#<?php echo $this->campoSeguro('dependencia_solicitante')?>").select2();
+	   $("#<?php echo $this->campoSeguro('dependencia_supervisor')?>").select2();
+	   
+	   
 	   $("#<?php echo $this->campoSeguro('rubro')?>").select2({
 			   	 placeholder: "Search for a repository",
 			   	 minimumInputLength: 5,
 			
 			       });
-	   $("#<?php echo $this->campoSeguro('dependencia_supervisor')?>").select2();
+	   
 	   $("#<?php echo $this->campoSeguro('asignacionOrdenador')?>").select2();
 	   $("#<?php echo $this->campoSeguro('cargoJefeSeccion')?>").select2();
 	   $("#<?php echo $this->campoSeguro('nombreContratista')?>").select2();

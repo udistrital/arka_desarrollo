@@ -27,7 +27,6 @@
                
         
 $("#<?php echo $this->campoSeguro('tipo')?>").select2();
-$("#<?php echo $this->campoSeguro('placa')?>").select2();
 
 
 

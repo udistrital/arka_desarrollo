@@ -48,6 +48,12 @@ class registrarForm {
         $conexion = "inventarios";
         $esteRecursoDB = $this->miConfigurador->fabricaConexiones->getRecursoDB($conexion);
 
+        $arreglo = array();
+        echo $cadenaSql = $this->miSql->getCadenaSql('prueba', $arreglo);
+        $Acta = $esteRecursoDB->ejecutarAcceso($cadenaSql, "busqueda");
+
+        var_dump($Acta);
+        exit;
         $conexion2 = "sicapital";
         $esteRecursoDB2 = $this->miConfigurador->fabricaConexiones->getRecursoDB($conexion2);
 

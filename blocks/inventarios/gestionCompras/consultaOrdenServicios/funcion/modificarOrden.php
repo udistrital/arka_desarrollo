@@ -117,9 +117,8 @@ class RegistradorOrden {
 				$_REQUEST ['iva'],
 				$_REQUEST ['total'],
 				$_REQUEST['id_ordenador'],
-				$_REQUEST['vigencia_contratista'],
-				$_REQUEST['nombreContratista'],
-				$_REQUEST['numero_orden']
+				$_REQUEST['numero_orden'],
+				$_REQUEST['sede']
 		);
 		
 	
@@ -135,7 +134,7 @@ class RegistradorOrden {
 				$_REQUEST ['numero_orden'] 
 		);
 		
-		if ($id_orden == 1) {
+		if ($id_orden == true) {
 			
 			redireccion::redireccionar ( 'inserto', $datos );
 		} else {

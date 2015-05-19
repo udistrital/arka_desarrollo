@@ -118,44 +118,77 @@ class registrarForm {
 		echo $this->miFormulario->campoCuadroLista ( $atributos );
 		unset ( $atributos );
 		
-		$esteCampo = "dependencia";
+		
+		// ---------------- CONTROL: Cuadro de Texto --------------------------------------------------------
+		$esteCampo = 'sede';
+		$atributos ['columnas'] = 2;
 		$atributos ['nombre'] = $esteCampo;
 		$atributos ['id'] = $esteCampo;
-		$atributos ['etiqueta'] = $this->lenguaje->getCadena ( $esteCampo );
-		$atributos ["etiquetaObligatorio"] = false;
-		$atributos ['tab'] = $tab ++;
-		$atributos ['seleccion'] = - 1;
-		$atributos ['anchoEtiqueta'] = 300;
 		$atributos ['evento'] = '';
-		if (isset ( $_REQUEST [$esteCampo] )) {
-			$atributos ['valor'] = $_REQUEST [$esteCampo];
-		} else {
-			$atributos ['valor'] = '';
-		}
 		$atributos ['deshabilitado'] = false;
-		$atributos ['columnas'] = 1;
+		$atributos ["etiquetaObligatorio"] = false;
+		$atributos ['tab'] = $tab;
 		$atributos ['tamanno'] = 1;
-		$atributos ['ajax_function'] = "";
-		$atributos ['ajax_control'] = $esteCampo;
-		$atributos ['estilo'] = "jqueryui";
-		$atributos ['validar'] = "";
-		$atributos ['limitar'] = 1;
-		$atributos ['anchoCaja'] = 40;
-		$atributos ['miEvento'] = '';
-		$atributos ['cadena_sql'] = $this->miSql->getCadenaSql ( "dependencia" );
-		$matrizItems = array (
-				array (
-						0,
-						' ' 
-				) 
-		);
+		$atributos ['estilo'] = 'jqueryui';
+		$atributos ['validar'] = '';
+		$atributos ['limitar'] = true;
+		$atributos ['etiqueta'] = $this->lenguaje->getCadena ( $esteCampo );
+		$atributos ['anchoEtiqueta'] = 170;
+		
+		if (isset ( $_REQUEST [$esteCampo] )) {
+			$atributos ['seleccion'] = $_REQUEST [$esteCampo];
+		} else {
+			$atributos ['seleccion'] = - 1;
+		}
+		
+		$atributos ['cadena_sql'] = $this->miSql->getCadenaSql ( "sede" );
 		$matrizItems = $esteRecursoDBO->ejecutarAcceso ( $atributos ['cadena_sql'], "busqueda" );
 		$atributos ['matrizItems'] = $matrizItems;
-		// $atributos['miniRegistro']=;
-		$atributos ['baseDatos'] = "inventarios";
-		// $atributos ['cadena_sql'] = $this->miSql->getCadenaSql ( "clase_entrada" );
 		
-		// Aplica atributos globales al control
+		// Utilizar lo siguiente cuando no se pase un arreglo:
+		// $atributos['baseDatos']='ponerAquiElNombreDeLaConexión';
+		// $atributos ['cadena_sql']='ponerLaCadenaSqlAEjecutar';
+		$tab ++;
+		$atributos = array_merge ( $atributos, $atributosGlobales );
+		echo $this->miFormulario->campoCuadroLista ( $atributos );
+		unset ( $atributos );
+		
+		$esteCampo = "dependencia";
+			$atributos ['columnas'] = 2;
+		$atributos ['nombre'] = $esteCampo;
+		$atributos ['id'] = $esteCampo;
+		
+		$atributos ['evento'] = '';
+		$atributos ['deshabilitado'] = true;
+		$atributos ["etiquetaObligatorio"] = true;
+		$atributos ['tab'] = $tab;
+		$atributos ['tamanno'] = 1;
+		$atributos ['estilo'] = 'jqueryui';
+		$atributos ['validar'] = 'required';
+		$atributos ['limitar'] = 1;
+		$atributos ['anchoCaja'] = 25;
+		$atributos ['etiqueta'] = $this->lenguaje->getCadena ( $esteCampo );
+		$atributos ['anchoEtiqueta'] = 220;
+		if (isset ( $_REQUEST [$esteCampo] )) {
+			$atributos ['seleccion'] = $_REQUEST [$esteCampo];
+		} else {
+			$atributos ['seleccion'] = - 1;
+		}
+		// $atributos ['cadena_sql'] = $this->miSql->getCadenaSql ( "dependencias" );
+		
+		$matrizItems = array (
+				array (
+						' ',
+						'Seleccion ... ' 
+				) 
+		);
+		
+		$atributos ['matrizItems'] = $matrizItems;
+		
+		// Utilizar lo siguiente cuando no se pase un arreglo:
+		// $atributos['baseDatos']='ponerAquiElNombreDeLaConexión';
+		// $atributos ['cadena_sql']='ponerLaCadenaSqlAEjecutar';
+		$tab ++;
 		$atributos = array_merge ( $atributos, $atributosGlobales );
 		echo $this->miFormulario->campoCuadroLista ( $atributos );
 		unset ( $atributos );
@@ -184,7 +217,7 @@ class registrarForm {
 		$atributos ['deshabilitado'] = false;
 		$atributos ['tamanno'] = 20;
 		$atributos ['maximoTamanno'] = '';
-		$atributos ['anchoEtiqueta'] = 300;
+		$atributos ['anchoEtiqueta'] = 170;
 		$tab ++;
 		
 		// Aplica atributos globales al control
