@@ -181,7 +181,7 @@ class Sql extends \Sql {
                 $cadenaSql.= " JOIN elemento_individual ON elemento.id_elemento=elemento_individual.id_elemento_gen ";
                 $cadenaSql.= " WHERE elemento_individual.estado_registro=TRUE  ";
                 $cadenaSql.= " AND elemento_individual.id_elemento_ind=asignar_elementos.id_elemento  ";
-                $cadenaSql.= " AND elemento_individual.estado_asignacion=TRUE  ";
+                $cadenaSql.= " AND elemento_individual.estado_asignacion=1  ";
                 $cadenaSql.= " AND asignar_elementos.estado=TRUE  ";
                 $cadenaSql.= " AND salida.id_entrada=elemento.id_entrada ";
                 //$cadenaSql.= " AND supervisor='" . $variable[0] . "'  ";
