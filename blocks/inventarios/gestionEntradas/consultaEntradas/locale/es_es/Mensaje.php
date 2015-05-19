@@ -12,6 +12,10 @@ $this->idioma ["informacion_estado"] ="Estado de Entrada : ";
 $this->idioma ["informacion_proveedor"] ="Nombre y/o Razón Social Proveedor : ";
 
 
+$this->idioma ["acta_recibido"] ="Acta Recibido: ";
+$this->idioma ["acta_recibidoTitulo"] ="Seleccionar Acta Recibido";
+
+
 
 
 

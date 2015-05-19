@@ -92,7 +92,7 @@ class registrarForm {
         $atributos ['tab'] = $tab;
         $atributos ['tamanno'] = 1;
         $atributos ['estilo'] = 'jqueryui';
-        $atributos ['validar'] = 'required, minSize[1],maxSize[15],custom[onlyNumberSp]';
+        $atributos ['validar'] = '';
         $atributos ['limitar'] = false;
         $atributos ['etiqueta'] = $this->lenguaje->getCadena($esteCampo);
         $atributos ['anchoEtiqueta'] = 213;
@@ -192,7 +192,8 @@ class registrarForm {
         $atributos ['tamanno'] = 1;
         $atributos ['estilo'] = 'jqueryui';
         $atributos ['validar'] = '';
-        $atributos ['limitar'] = false;
+        $atributos ['limitar'] = true;
+        $atributos ['anchoCaja'] = 40;
         $atributos ['etiqueta'] = $this->lenguaje->getCadena($esteCampo);
         $atributos ['anchoEtiqueta'] = 213;
 

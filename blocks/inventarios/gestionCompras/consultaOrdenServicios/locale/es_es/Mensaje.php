@@ -5,9 +5,40 @@ $this->idioma ["informacion_numero"] ="# Número de Orden de Servicios :";
 
 $this->idioma ["informacion_fecha"] ="Fecha de Registro De Orden :";
 
+
+$this->idioma ["sede"] ="Sede: ";
+$this->idioma ["sedeTitulo"] ="Seleccione Sede";
+
+
+$this->idioma ["sede_super"] ="Sede: ";
+$this->idioma ["sede_superTitulo"] ="Seleccione Sede";
+
+
+$this->idioma ["selec_proveedor"] = "Proveedor y/o Contratista:";
+$this->idioma ["selec_proveedorTitulo"] = "Seleccione Proveedor y/o Contratista";
+
+
+
+
+
+$this->idioma ["sede_consultar"] ="&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspSede: ";
+$this->idioma ["sede_consultarTitulo"] ="Seleccione Sede";
+
 $this->idioma ["informacion_contratista"] ="Identificación de Contratista :";
 
 $this->idioma ["informacion_dependencia"] ="Dependencia Solicitante :";
+
+
+$this->idioma ["botonDocumento"] ="Generar Documento";
+
+
+
+$this->idioma ["orden_consulta"] ="Orden de Servicios: ";
+$this->idioma ["orden_consultaTitulo"] ="Seleccione Orden de Servicios a Generar Documento";
+
+
+$this->idioma ["proveedorContratista"] ="&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspConstratista:<br>y/o Proveedor";
+$this->idioma ["proveedorContratistaTitulo"] ="Seleccione Contratista Proveedor";
 
 
 
@@ -77,14 +108,14 @@ $this->idioma ["fecha_final"] ="Fecha Final : ";
 $this->idioma ["fecha_finalTitulo"] ="Seleccione Fecha Final";
 
 
-$this->idioma ["numero_orden"] ="&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspNúmero de Orden Servicio : ";
+$this->idioma ["numero_orden"] ="&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspNúmero de Orden:<br>Servicio";
 $this->idioma ["numero_ordenTitulo"] ="Ingrese Número Orden Servicio";
 
 
 $this->idioma ["nit"] ="Nit o Identificación : ";
 $this->idioma ["nitTitulo"] ="Ingrese Nit";
 
-$this->idioma ["selec_dependencia_Sol"] ="&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspDependencia Solicitante : ";
+$this->idioma ["selec_dependencia_Sol"] ="Dependencia Solicitante : ";
 $this->idioma ["selec_dependencia_SolTitulo"] ="Seleccione Dependecia Solicitante";
 
 $this->idioma ["dependencia_solicitante"] = "Dependencia :";
@@ -196,7 +227,7 @@ $this->idioma ["botonAceptar"] ="Actualizar Orden de Servicios";
 $this->idioma ["botonCancelar"] ="Cancelar";
 $this->idioma ["botonContinuar"] ="Continuar";
 $this->idioma ["botonConsultar"] ="Consultar";
-$this->idioma ["botonRegresar"] ="Regresar";
+$this->idioma ["botonRegresar"] ="< < Regresar";
 
 
 

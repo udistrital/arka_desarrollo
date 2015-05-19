@@ -11,6 +11,12 @@ $this->idioma ["informacion_estado"] ="Clase de Entrada : ";
 
 $this->idioma ["informacion_proveedor"] ="Nombre y/o Razón Social Proveedor : ";
 
+$this->idioma ["vigencia"] ="Vigencia : ";
+$this->idioma ["vigenciaTitulo"] ="Seleccione Vigencia";
+
+$this->idioma ["sede"] ="Sede : ";
+$this->idioma ["sedeTitulo"] ="Seleccione Sede";
+
 
 
 
@@ -32,6 +38,10 @@ $this->idioma ["numero_actaTitulo"] ="Ingrese Número Acta de Recibido";
 
 $this->idioma ["nit"] ="Nit : ";
 $this->idioma ["nitTitulo"] ="Ingrese Nit";
+
+
+$this->idioma ["clase_entrada_consulta"] ="Clase de Entrada: ";
+$this->idioma ["clase_entrada_consultaTitulo"] ="Seleccione Clase de Entrada";
 
 $this->idioma ["clase"] ="Clase de Entrada: ";
 $this->idioma ["ClaseTitulo"] ="Seleccione Clase de Entrada";

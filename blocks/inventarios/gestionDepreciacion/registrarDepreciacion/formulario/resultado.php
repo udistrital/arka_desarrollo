@@ -133,7 +133,7 @@ class registrarForm {
                     <td><center>" . $elementos [$i]['total_iva_con'] . "</center></td>
                     <td><center>";
                 // ---------------- CONTROL: Cuadro de Texto --------------------------------------------------------
-                $nombre = 'item' . $i;
+                $nombre = 'item';
                 $atributos ['id'] = $nombre;
                 $atributos ['nombre'] = $nombre;
                 $atributos ['marco'] = true;

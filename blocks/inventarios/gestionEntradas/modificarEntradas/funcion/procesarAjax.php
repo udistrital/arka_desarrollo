@@ -31,6 +31,62 @@ if (isset ( $_REQUEST ['funcion'] ) && $_REQUEST ['funcion'] == 'estado') {
 	echo $datos;
 }
 
+
+if ($_REQUEST ['funcion'] == 'SeleccionOrdenador') {
+
+	$conexion = "sicapital";
+	$esteRecursoDBO = $this->miConfigurador->fabricaConexiones->getRecursoDB ( $conexion );
+
+	$cadenaSql = $this->sql->getCadenaSql ( 'informacion_ordenador', $_REQUEST ['ordenador'] );
+	$resultadoItems = $esteRecursoDBO->ejecutarAcceso ( $cadenaSql, "busqueda" );
+
+	$resultado = json_encode ( $resultadoItems [0] );
+
+	echo $resultado;
+}
+
+if ($_REQUEST ['funcion'] == 'consultarDependencia') {
+
+	$conexion = "sicapital";
+
+	$esteRecursoDBO = $this->miConfigurador->fabricaConexiones->getRecursoDB ( $conexion );
+
+
+	$cadenaSql = $this->sql->getCadenaSql ( 'dependenciasConsultadas', $_REQUEST['valor'] );
+
+	$resultado = $esteRecursoDBO->ejecutarAcceso ( $cadenaSql, "busqueda" );
+
+
+	$resultado = json_encode ( $resultado);
+
+	echo $resultado;
+}
+
+
+
+
+if ($_REQUEST ['funcion'] == 'consultarActa') {
+
+
+	$cadenaSql = $this->sql->getCadenaSql ( 'consultarActas', $_REQUEST['valor'] );
+
+	$resultado = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
+
+	$resultado=$resultado[0];
+
+
+	$resultado = json_encode ( $resultado);
+
+	echo $resultado;
+}
+
+
+
+
+
+
+
+
 ?>
 
 

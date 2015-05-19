@@ -55,10 +55,15 @@ $this->idioma['operacionExitosa']="Operación Exitosa";
 
 
 $this->idioma["id"]="Identificador del Elemento";
-$this->idioma["idPadre"]="Identificador Padre";
+$this->idioma["idPadre"]="ID Dependencia Padre";
 $this->idioma["idPadreTitulo"]="Añadir Identificador";
 $this->idioma["idTitulo"]="Ingrese el Identificador Elemento";
 
+$this->idioma["direccionTitulo"]="Añadir Dirección";
+$this->idioma["direccion"]="Dirección:";
+
+$this->idioma["telefonoTitulo"]="Añadir Teléfono";
+$this->idioma["telefono"]="Teléfono:";
 
 $this->idioma["reiniciar"]="Reiniciar";
 $this->idioma["reiniciarTitulo"]="Reiniciar valores";
@@ -67,8 +72,8 @@ $this->idioma["agregar"]="Agregar Elemento";
 $this->idioma["agregarTitulo"]="Agregar Elemento";
 $this->idioma["catalogoVacio"]="El Conjunto Dependencias se encuentra vacío";
 
-$this->idioma["nombreElemento"]="Nombre Elemento";
-$this->idioma["nombreElementoTitulo"]=" Ingrese el Nombre del Elemento";
+$this->idioma["nombreElemento"]="Nombre Dependencia Hijo";
+$this->idioma["nombreElementoTitulo"]=" Ingrese el Nombre de Dependencia Hijo";
 
 $this->idioma["nombreCatalogo"]="Nombre Conjunto Dependencias";
 $this->idioma["nombreCatalogoTitulo"]="Modifique el nombre del Conjunto Dependencias";

@@ -66,9 +66,12 @@ class RegistradorOrden {
 			$Subtotal = $Subtotal + $n [6];
 		}
 		
-		if ($_REQUEST ['iva'] == 1) {
+		if ($_REQUEST ['iva'] == 6) {
 			
 			$iva = $Subtotal * 0.16;
+		} else if ($_REQUEST ['iva'] == 5) {
+			
+			$iva = $Subtotal * 0.10;
 		} else {
 			$iva = 0;
 		}
@@ -97,23 +100,7 @@ class RegistradorOrden {
 			}
 		}
 		
-		if ($_REQUEST ['reg_proveedor'] == 1) {
-			
-			$datosProveedor = array (
-					$_REQUEST ['proveedor'],
-					$_REQUEST ['nitProveedor'],
-					$_REQUEST ['direccionProveedor'],
-					$_REQUEST ['telefonoProveedor'] 
-			);
-			
-			$cadenaSql = $this->miSql->getCadenaSql ( 'insertarProveedor', $datosProveedor );
-			$id_proveedor = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
-			
-			$_REQUEST ['selec_proveedor'] = $id_proveedor [0] [0];
-		} elseif ($_REQUEST ['reg_proveedor'] == 0) {
-			
-			$_REQUEST ['selec_proveedor'] = $_REQUEST ['selec_proveedor'];
-		}
+		$_REQUEST ['selec_proveedor'] = $_REQUEST ['selec_proveedor'];
 		
 		// Registro Orden
 		
@@ -155,20 +142,17 @@ class RegistradorOrden {
 				$destino1,
 				$archivo1,
 				$_REQUEST ['selec_dependencia'],
-				$_REQUEST ['nombreContratista'],
 				$_REQUEST ['id_ordenador'],
 				$Subtotal,
 				$iva,
 				$total,
 				$_REQUEST ['valorLetras_registro'],
-				$_REQUEST['vigencia_contratista'],
-				'TRUE' 
+				'TRUE',
+				$_REQUEST ['sede'] 
 		);
 		
-
+		
 		$cadenaSql = $this->miSql->getCadenaSql ( 'insertarOrden', $datosOrden );
-		
-		
 		
 		$id_orden = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
 		
@@ -197,29 +181,27 @@ class RegistradorOrden {
 				$fechaActual 
 		);
 		
+		// //----- Registrar Evento
 		
+		// $arregloLogEvento = array (
+		// 'insertar_orden_compra',
+		// $datosOrden,
+		// $miSesion->getSesionUsuarioId (),
+		// $_SERVER ['REMOTE_ADDR'],
+		// $_SERVER ['HTTP_USER_AGENT']
+		// );
+		// $argumento = json_encode ( $arregloLogEvento );
+		// $arregloFinalLogEvento = array (
+		// $miSesion->getSesionUsuarioId (),
+		// $argumento
+		// );
+		// $cadena_sql = $this->sql->cadena_sql ( "registrarEvento", $arregloFinalLogEvento );
+		// $registroAcceso = $esteRecursoDB->ejecutarAcceso ( $cadena_sql, "acceso" );
 		
-// 		//----- Registrar Evento 
+		// //---------
 		
-// 		$arregloLogEvento = array (
-// 				'insertar_orden_compra',
-// 				$datosOrden,
-// 				$miSesion->getSesionUsuarioId (),
-// 				$_SERVER ['REMOTE_ADDR'],
-// 				$_SERVER ['HTTP_USER_AGENT']
-// 		);
-// 		$argumento = json_encode ( $arregloLogEvento );
-// 		$arregloFinalLogEvento = array (
-// 				$miSesion->getSesionUsuarioId (),
-// 				$argumento
-// 		);
-// 		$cadena_sql = $this->sql->cadena_sql ( "registrarEvento", $arregloFinalLogEvento );
-// 		$registroAcceso = $esteRecursoDB->ejecutarAcceso ( $cadena_sql, "acceso" );
+		if ($items == true) {
 		
-		
-// 		//---------
-		
-		if ($items == 1) {
 			
 			redireccion::redireccionar ( 'inserto', $datos );
 		} else {

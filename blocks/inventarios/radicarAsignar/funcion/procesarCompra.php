@@ -29,7 +29,7 @@ class RegistradorCompra {
 
     function procesarFormulario() {
 
-                       $subida = 1;
+        $subida = 1;
         $fechaActual = date('Y-m-d');
 
         $esteBloque = $this->miConfigurador->getVariableConfiguracion("esteBloque");
@@ -41,116 +41,136 @@ class RegistradorCompra {
         $conexion = "inventarios";
         $esteRecursoDB = $this->miConfigurador->fabricaConexiones->getRecursoDB($conexion);
 
-        $cadenaSql = $this->miSql->getCadenaSql('items', $_REQUEST['seccion']);
-        $items = $esteRecursoDB->ejecutarAcceso($cadenaSql, "busqueda");
-
-
-        if ($items == 0) {
-            redireccion::redireccionar('noItems');
-        }
-
         $documento = 0;
-
         //Registro del Radicar Asignar entrada de compras
-
-        $datosCompra = array(
-            $_REQUEST ['fecha_recibido'],
-            $_REQUEST ['nitProveedor'],
-            $_REQUEST ['valorFacturas'],
-            $fechaActual,
-            1,
+        $datosAvance = array(
+            'numero_entrada' => $_REQUEST ['numero_entrada'],
+            'vigencia_entrada' => $_REQUEST ['vigencia_entrada'],
+            'fecha' => $fechaActual,
+            'estado' => 1,
         );
 
-        $cadenaSql = $this->miSql->getCadenaSql('insertarAsignar', $datosCompra);
-        $id_asignar = $esteRecursoDB->ejecutarAcceso($cadenaSql, "busqueda");
+        //consultar si la vigencia y la entrada existen
+        $cadenaSql = $this->miSql->getCadenaSql('consultarAsignar_compra', $datosAvance);
+        $estado_asignar = $esteRecursoDB->ejecutarAcceso($cadenaSql, "busqueda");
+
+
+        if ($estado_asignar == false) {
+            //registrar si no existe
+            $cadenaSql = $this->miSql->getCadenaSql('insertarAsignar_compra', $datosAvance);
+            $id_asignar = $esteRecursoDB->ejecutarAcceso($cadenaSql, "busqueda");
+            $actualizar = 2;
+        } else {
+            //actualizar si existe
+            $cadenaSql = $this->miSql->getCadenaSql('actualizarAsignar_compra', $datosAvance);
+            $id_asignar = $esteRecursoDB->ejecutarAcceso($cadenaSql, "busqueda");
+            $actualizar = 1;
+        }
+
+
+        $datos = array();
+        //error en el registro para finalizar transacción
+        if ($id_asignar == false) {
+            redireccion::redireccionar('noInserto', $datos);
+        }
 
         //Guardar el archivo
         if ($_FILES) {
             foreach ($_FILES as $key => $values) {
-                $documento = $documento + 1;
-                $archivo = $_FILES[$key];
+                if ($_FILES[$key]['size'] > 0) {
+                    $documento = $documento + 1;
+                    $archivo = $_FILES[$key];
 
-                $tipoD = '';
-                switch ($documento) {
-                    case 1:
-                        $tipoD = 'orden';
-                        break;
+                    $tipoD = '';
+                    switch ($documento) {
+                        case 1:
+                            $tipoD = 'orden';
+                            break;
 
-                    case 2:
-                        $tipoD = 'factura';
-                        break;
+                        case 2:
+                            $tipoD = 'factura';
+                            break;
 
-                    case 3:
-                        $tipoD = 'satisfaccion';
-                        break;
+                        case 3:
+                            $tipoD = 'satisfaccion';
+                            break;
 
-                    case 4:
-                        $tipoD = 'actaRecibido';
-                        break;
-                }
+                        case 4:
+                            $tipoD = 'actaRecibido';
+                            break;
+                    }
 
-                // obtenemos los datos del archivo
-                $tamano = $archivo['size'];
-                $tipo = $archivo['type'];
-                $archivo1 = $archivo['name'];
-                $prefijo = substr(md5(uniqid(rand())), 0, 6);
-      
-                if ($archivo1 != "") {
-                    // guardamos el archivo a la carpeta files
-                    $destino1 = $rutaBloque . "/archivoSoporte/" . $prefijo . "-" . $archivo1;
+                    // obtenemos los datos del archivo
+                    $tamano = $archivo['size'];
+                    $tipo = $archivo['type'];
+                    $archivo1 = $archivo['name'];
+                    $prefijo = substr(md5(uniqid(rand())), 0, 6);
 
-                    if (copy($archivo['tmp_name'], $destino1)) {
-                        $status = "Archivo subido: <b>" . $archivo1 . "</b>";
-                        $destino1 = $host . "/archivoSoporte/" . $prefijo . "-" . $archivo1;
+                    if ($archivo1 != "") {
+                        // guardamos el archivo a la carpeta files
+                        $destino1 = $rutaBloque . "/archivoSoporte/" . $prefijo . "-" . $archivo1;
 
-                        $parametros = array(
-                            'id_unico' => $tipoD . "-" . $prefijo . "-" . $archivo1,
-                            'id_asignar' => $id_asignar[0][0],
-                            'nombre_archivo' => $archivo1,
-                            'tipo' => $tipoD,
-                            'ruta' => $destino1,
-                            'fecha_registro' => date('d/m/Y'),
-                            'estado' => TRUE
-                        );
+                        if (copy($archivo['tmp_name'], $destino1)) {
+                            $status = "Archivo subido: <b>" . $archivo1 . "</b>";
+                            $destino1 = $host . "/archivoSoporte/" . $prefijo . "-" . $archivo1;
 
-                        $cadenaSql = $this->miSql->getCadenaSql("registroDocumento", $parametros);
-                        $resultado = $esteRecursoDB->ejecutarAcceso($cadenaSql, 'insertar');
+                            $parametros = array(
+                                'id_unico' => $tipoD . "-" . $prefijo . "-" . $archivo1,
+                                'id_asignar' => $id_asignar[0][0],
+                                'nombre_archivo' => $archivo1,
+                                'tipo' => $tipoD,
+                                'ruta' => $destino1,
+                                'fecha_registro' => date('d/m/Y'),
+                                'estado' => TRUE
+                            );
+
+                            switch ($actualizar) {
+                                case 1:
+                                    $cadenaSql = $this->miSql->getCadenaSql("actualizarDocumento_compra", $parametros);
+                                    $resultado = $esteRecursoDB->ejecutarAcceso($cadenaSql, 'insertar');
+                                    break;
+
+                                case 2:
+                                    $cadenaSql = $this->miSql->getCadenaSql("registroDocumento_compra", $parametros);
+                                    $resultado = $esteRecursoDB->ejecutarAcceso($cadenaSql, 'insertar');
+                                    break;
+                            }
+                        } else {
+                            echo $status = "<br>Error al subir el archivo 1";
+                            $subida = 0;
+                        }
                     } else {
-                        $status = "<br>Error al subir el archivo 1";
+                        echo $status = "<br>Error al subir archivo 2";
                         $subida = 0;
                     }
-                } else {
-                    $status = "<br>Error al subir archivo 2";
-                    $subida = 0;
                 }
             }
         } else {
             echo "<br>NO existe el archivo D:!!!";
             $subida = 0;
         }
+        /* Registro de Items
+          foreach ($items as $contenido) {
 
-        // Registro de Items
-        foreach ($items as $contenido) {
+          $datosItems = array(
+          $id_asignar [0][0],
+          $contenido ['id_items'],
+          $contenido ['descripcion']
+          );
+          $cadenaSql = $this->miSql->getCadenaSql('insertarItems_avance', $datosItems);
+          $items = $esteRecursoDB->ejecutarAcceso($cadenaSql, "acceso");
+          }
 
-            $datosItems = array(
-                $id_asignar [0][0],
-                $contenido ['id_items'],
-                $contenido ['descripcion']
-            );
-
-            $cadenaSql = $this->miSql->getCadenaSql('insertarItems', $datosItems);
-            $items = $esteRecursoDB->ejecutarAcceso($cadenaSql, "acceso");
-        }
-
-        $cadenaSql = $this->miSql->getCadenaSql('limpiar_tabla_items', $_REQUEST['seccion']);
-        $resultado_secuencia = $esteRecursoDB->ejecutarAcceso($cadenaSql, "acceso");
+          $cadenaSql = $this->miSql->getCadenaSql('limpiar_tabla_items', $_REQUEST['seccion']);
+          $resultado_secuencia = $esteRecursoDB->ejecutarAcceso($cadenaSql, "acceso");
+         */
 
         $datos = array(
             $id_asignar[0][0],
             $fechaActual
         );
 
-        if ($items == 1 && $subida == 1) {
+        if ($subida == 1 && $id_asignar !== false) {
             redireccion::redireccionar('inserto', $datos);
         } else {
             redireccion::redireccionar('noInserto', $datos);

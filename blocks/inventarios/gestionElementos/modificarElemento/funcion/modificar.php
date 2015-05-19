@@ -30,6 +30,9 @@ class RegistradorOrden {
 		$conexion = "inventarios";
 		$esteRecursoDB = $this->miConfigurador->fabricaConexiones->getRecursoDB ( $conexion );
 
+		
+		$_REQUEST ['total_iva_con']=round($_REQUEST ['total_iva_con']);
+		
 		if ($_REQUEST ['tipo_bien'] == 1) {
 				
 			
@@ -40,7 +43,7 @@ class RegistradorOrden {
 					$_REQUEST ['unidad'],
 					$_REQUEST ['valor'],
 					$_REQUEST ['iva'],
-					$_REQUEST ['ajuste'],
+					$_REQUEST ['ajuste'] =0,
 					$_REQUEST ['bodega'],
 					$_REQUEST ['subtotal_sin_iva'],
 					$_REQUEST ['total_iva'],
@@ -69,7 +72,7 @@ class RegistradorOrden {
 					$_REQUEST ['unidad'],
 					$_REQUEST ['valor'],
 					$_REQUEST ['iva'],
-					$_REQUEST ['ajuste'],
+					$_REQUEST ['ajuste'] =0,
 					$_REQUEST ['bodega'],
 					$_REQUEST ['subtotal_sin_iva'],
 					$_REQUEST ['total_iva'],
@@ -81,8 +84,9 @@ class RegistradorOrden {
 			);
 				
 			$cadenaSql = $this->miSql->getCadenaSql ( 'actualizar_elemento_tipo_1', $arreglo );
-				
-			$elemento = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
+			
+			$elemento = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "acceso" );
+			
 		} else if ($_REQUEST ['tipo_bien'] == 3) {
 				
 			if ($_REQUEST ['tipo_poliza'] == 1) {
@@ -93,7 +97,7 @@ class RegistradorOrden {
 						$_REQUEST ['unidad'],
 						$_REQUEST ['valor'],
 						$_REQUEST ['iva'],
-						$_REQUEST ['ajuste'],
+						$_REQUEST ['ajuste'] =0,
 						$_REQUEST ['bodega'],
 						$_REQUEST ['subtotal_sin_iva'],
 						$_REQUEST ['total_iva'],
@@ -114,7 +118,7 @@ class RegistradorOrden {
 						$_REQUEST ['unidad'],
 						$_REQUEST ['valor'],
 						$_REQUEST ['iva'],
-						$_REQUEST ['ajuste'],
+						$_REQUEST ['ajuste'] =0,
 						$_REQUEST ['bodega'],
 						$_REQUEST ['subtotal_sin_iva'],
 						$_REQUEST ['total_iva'],
@@ -137,15 +141,20 @@ class RegistradorOrden {
 		}
 		
 		
+		
+			
+		
 		$cadenaSql = $this->miSql->getCadenaSql ( 'consultar_placa_actulizada', $_REQUEST['id_elemento']);
 		$placa = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
+		
+		
 		
 		if ($elemento) {
 				
 			redireccion::redireccionar ( 'inserto', $_REQUEST['id_elemento'] );
 		} else {
 				
-			redireccion::redireccionar ( 'noInserto', $datos );
+			redireccion::redireccionar ( 'noInserto' );
 		}
 		
 	}

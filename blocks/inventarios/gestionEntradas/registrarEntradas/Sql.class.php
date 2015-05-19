@@ -152,7 +152,7 @@ class Sql extends \Sql {
 			// _________________________________________________
 			
 			case "proveedores" :
-				$cadenaSql = " SELECT PRO_IDENTIFICADOR,PRO_NIT||' - '||PRO_RAZON_SOCIAL AS proveedor ";
+				$cadenaSql = " SELECT PRO_NIT,PRO_NIT||' - '||PRO_RAZON_SOCIAL AS proveedor ";
 				$cadenaSql .= " FROM PROVEEDORES ";
 				
 				break;
@@ -225,8 +225,36 @@ class Sql extends \Sql {
 				
 				$cadenaSql = "SELECT ";
 				$cadenaSql .= "id_tipo, descripcion  ";
-				$cadenaSql .= "FROM tipo_contrato;";
+				$cadenaSql .= "FROM tipo_contrato ";
+				$cadenaSql .= "WHERE  id_tipo > 0;";
 				
+				break;
+			
+			case "tipoComprador" :
+				
+				$cadenaSql = " 	SELECT ORG_IDENTIFICADOR, ORG_ORDENADOR_GASTO ";
+				$cadenaSql .= " FROM ORDENADORES_GASTO ";
+				$cadenaSql .= " WHERE ORG_ESTADO='A' ";
+				
+				break;
+			
+			case "dependencias" :
+				$cadenaSql = "SELECT   ESF_ID_ESPACIO, ESF_NOMBRE_ESPACIO ";
+				$cadenaSql .= " FROM ESPACIOS_FISICOS ";
+				$cadenaSql .= " WHERE  ESF_ESTADO='A' ";
+				break;
+			
+			case "sede" :
+				$cadenaSql = "SELECT DISTINCT  ESF_ID_SEDE, ESF_SEDE ";
+				$cadenaSql .= " FROM ESPACIOS_FISICOS ";
+				$cadenaSql .= " WHERE   ESF_ESTADO='A'";
+				
+				break;
+			case "informacion_ordenador" :
+				$cadenaSql = " SELECT ORG_NOMBRE,ORG_IDENTIFICADOR , ORG_TIPO_ORDENADOR,ORG_IDENTIFICACION ";
+				$cadenaSql .= " FROM ORDENADORES_GASTO ";
+				$cadenaSql .= " WHERE  ORG_IDENTIFICADOR='" . $variable . "' ";
+				$cadenaSql .= " AND ORG_ESTADO='A' ";
 				break;
 			
 			case "tipo_contrato_avance" :
@@ -242,6 +270,12 @@ class Sql extends \Sql {
 				$cadenaSql = "SELECT ";
 				$cadenaSql .= "id_proveedor, razon_social ";
 				$cadenaSql .= "FROM proveedor;";
+				
+				break;
+			
+			case "actasRecicbido" :
+				$cadenaSql = " SELECT id_actarecibido, id_actarecibido ";
+				$cadenaSql .= "FROM registro_actarecibido ";
 				
 				break;
 			
@@ -304,12 +338,22 @@ class Sql extends \Sql {
 				
 				break;
 			
+			// INSERT INTO entrada(
+			// id_entrada, fecha_registro, consecutivo, vigencia, clase_entrada,
+			// info_clase, tipo_contrato, numero_contrato, fecha_contrato, proveedor,
+			// numero_factura, fecha_factura, observaciones, acta_recibido,
+			// ordenador, sede, dependencia, supervisor, estado_entrada, estado_registro)
+			// VALUES (?, ?, ?, ?, ?,
+			// ?, ?, ?, ?, ?,
+			// ?, ?, ?, ?,
+			// ?, ?, ?, ?, ?, ?);
+			
 			case "insertarEntrada" :
 				$cadenaSql = " INSERT INTO ";
 				$cadenaSql .= " entrada(";
 				$cadenaSql .= " fecha_registro, vigencia, clase_entrada, info_clase, ";
 				$cadenaSql .= " tipo_contrato, numero_contrato, fecha_contrato, proveedor, numero_factura, ";
-				$cadenaSql .= " fecha_factura, observaciones, acta_recibido)";
+				$cadenaSql .= " fecha_factura, observaciones, acta_recibido,ordenador,sede,dependencia,supervisor,tipo_ordenador,identificacion_ordenador )";
 				$cadenaSql .= " VALUES (";
 				$cadenaSql .= "'" . $variable [0] . "',";
 				$cadenaSql .= "'" . $variable [1] . "',";
@@ -322,8 +366,14 @@ class Sql extends \Sql {
 				$cadenaSql .= "'" . $variable [8] . "',";
 				$cadenaSql .= "'" . $variable [9] . "',";
 				$cadenaSql .= "'" . $variable [10] . "',";
-				$cadenaSql .= "'" . $variable [11] . "') ";
-				$cadenaSql .= "RETURNING  id_entrada; ";
+				$cadenaSql .= "'" . $variable [11] . "',";
+				$cadenaSql .= "'" . $variable [12] . "',";
+				$cadenaSql .= "'" . $variable [13] . "',";
+				$cadenaSql .= "'" . $variable [14] . "',";
+				$cadenaSql .= "'" . $variable [15] . "',";
+				$cadenaSql .= "'" . $variable [16] . "',";
+				$cadenaSql .= "'" . $variable [17] . "') ";
+				$cadenaSql .= "RETURNING  consecutivo; ";
 				
 				break;
 			
@@ -491,6 +541,40 @@ class Sql extends \Sql {
 				if ($variable [4] != '') {
 					$cadenaSql .= " AND  dependencia= '" . $variable [4] . "'";
 				}
+				
+				break;
+			
+			case "dependenciasConsultadas" :
+				$cadenaSql = "SELECT DISTINCT  ESF_ID_ESPACIO, ESF_NOMBRE_ESPACIO ";
+				$cadenaSql .= " FROM ESPACIOS_FISICOS ";
+				$cadenaSql .= " WHERE ESF_ID_SEDE='" . $variable . "' ";
+				$cadenaSql .= " AND  ESF_ESTADO='A'";
+				
+				break;
+			
+			case 'consultarActas' :
+				$cadenaSql = "SELECT *  ";
+				$cadenaSql .= "FROM registro_actarecibido  ";
+				$cadenaSql .= "WHERE  id_actarecibido='" . $variable . "';";
+				
+				break;
+			
+			case 'consultaConsecutivo' :
+				$cadenaSql = "SELECT consecutivo ";
+				$cadenaSql .= "FROM entrada  ";
+				$cadenaSql .= "WHERE  fecha_registro='" . $variable . "';";
+				
+				break;
+			
+			case 'reiniciarConsecutivo' :
+				$cadenaSql = "SELECT SETVAL((SELECT pg_get_serial_sequence('entrada', 'consecutivo')), 1, false);";
+				break;
+			
+			case "funcionarios" :
+				
+				$cadenaSql = "SELECT FUN_IDENTIFICACION, FUN_IDENTIFICACION ||' - '|| FUN_NOMBRE ";
+				$cadenaSql .= "FROM FUNCIONARIOS ";
+				$cadenaSql .= "WHERE FUN_ESTADO='A' ";
 				
 				break;
 		}

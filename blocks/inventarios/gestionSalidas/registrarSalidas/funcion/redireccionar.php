@@ -45,6 +45,14 @@ class redireccion {
 				
 				break;
 			
+			case "noCantidad" :
+				$variable = "pagina=" . $miPaginaActual;
+				$variable .= "&opcion=mensaje";
+				$variable .= "&mensaje=noCantidad";
+				$variable .= "&errores=notextos";
+				
+				break;
+			
 			case "regresar" :
 				$variable = "pagina=" . $miPaginaActual;
 				break;

@@ -27,8 +27,7 @@ $urlFinal = $url . $cadena;
 
     function datosInfo(elem, request, response) {
         
-            $("#<?php echo $this->campoSeguro('meses_depreciar') ?>").val('8');
-        
+            $("#<?php echo $this->campoSeguro('meses_depreciar') ?>").val();        
         $.ajax({
             url: "<?php echo $urlFinal ?>",
             dataType: "json",
@@ -40,7 +39,7 @@ $urlFinal = $url . $cadena;
 
                             $("#<?php echo $this->campoSeguro('meses_depreciar') ?>").val(data[0]);
                         } else {
-                            $("#<?php echo $this->campoSeguro('meses_depreciar') ?>").val('8');
+                            $("#<?php echo $this->campoSeguro('meses_depreciar') ?>").val();
                         }
                     }
         });

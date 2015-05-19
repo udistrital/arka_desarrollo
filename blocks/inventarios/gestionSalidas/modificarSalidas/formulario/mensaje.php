@@ -47,7 +47,8 @@ class registrarForm {
 			
 			$entrada = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
 			
-			$cadenaSql = $this->miSql->getCadenaSql ( 'consulta_elementos_sin_actualizar', $entrada [0] [12] );
+			
+			$cadenaSql = $this->miSql->getCadenaSql ( 'consulta_elementos_sin_actualizar',  $_REQUEST ['entrada'] );
 			
 			$elementos = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
 
@@ -210,6 +211,33 @@ class registrarForm {
 					$semaforo = 0;
 					// --------------- FIN CONTROL : Cuadro de Texto --------------------------------------------------
 				}
+				
+				if ($_REQUEST ['mensaje'] == 'noCantidad') {
+				
+					$mensaje = "No Ingreso Cantidad Correspondiente del Item <br>Error para Actualizar Salida";
+				
+					// ---------------- CONTROL: Cuadro de Texto --------------------------------------------------------
+					$esteCampo = 'mensajeRegistro';
+					$atributos ['id'] = $esteCampo;
+					$atributos ['tipo'] = 'error';
+					$atributos ['estilo'] = 'textoCentrar';
+					$atributos ['mensaje'] = $mensaje;
+				
+					$tab ++;
+				
+					// Aplica atributos globales al control
+					$atributos = array_merge ( $atributos, $atributosGlobales );
+					echo $this->miFormulario->cuadroMensaje ( $atributos );
+					
+					
+					// --------------- FIN CONTROL : Cuadro de Texto --------------------------------------------------
+					$semaforo = 0;
+						
+				}
+				
+				
+				
+				
 			}
 			
 			// ------------------Division para los botones-------------------------

@@ -69,7 +69,7 @@ class registrarForm {
 		$leyenda = '# ID Elemento : ' . $elemento [4] . '<br>';
 		$leyenda .= '# ID Salida : ' . $elemento [5] . '&nbsp&nbsp&nbsp<br>';
 		$leyenda .= 'Funcionario a Cargo : ' . $funcionario [0][0]." - ".$funcionario[0][1] . '<br>';
-		$leyenda .= 'Dependencia  : ' . $funcionario[0][2] . '<br>';
+// 		$leyenda .= 'Dependencia  : ' . $funcionario[0][2] . '<br>';
 		
 		// $funcionario = array (
 		// "responsable_ante" => $funcionario [0] [1],

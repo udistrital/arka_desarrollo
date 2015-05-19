@@ -200,19 +200,47 @@ class registrarForm {
 				$variable .= "&numero_entrada=" . $entrada [$i] [0];
 				
 		
+
+				if ($entrada [$i] [3] ==0) {
+						
+					$arreglo = array (
+							$entrada [$i] [4],
+							$entrada [$i] [1],
+							$entrada [$i] [2],
+							'',
+							''
+					);
+						
+						
+					$proveedor[0][0]='NO APLICA';
+					$proveedor[0][1]='NO APLICA';
+				} else {
+					$cadenaSql = $this->miSql->getCadenaSql ( 'proveedor_informacion', $entrada [$i] [3] );
+						
+					$proveedor = $esteRecursoDBO->ejecutarAcceso ( $cadenaSql, "busqueda" );
+						
+					$arreglo = array (
+							$entrada [$i] [0],
+							$entrada [$i] [1],
+							$entrada [$i] [2],
+							$proveedor [0] [0],
+							$proveedor [0] [1]
+					);
+				}
 				
-				$cadenaSql = $this->miSql->getCadenaSql ( 'proveedor_informacion', $entrada [$i] [3] );
 				
-				$proveedor = $esteRecursoDBO->ejecutarAcceso ( $cadenaSql, "busqueda" );
+// 				$cadenaSql = $this->miSql->getCadenaSql ( 'proveedor_informacion', $entrada [$i] [3] );
+				
+// 				$proveedor = $esteRecursoDBO->ejecutarAcceso ( $cadenaSql, "busqueda" );
 				
 				
-				$arreglo=array(
-				   		$entrada[$i][0],
-						$entrada[$i][1],
-						$entrada[$i][2],
-						$proveedor[0][0],
-						$proveedor[0][1]
-						);
+// 				$arreglo=array(
+// 				   		$entrada[$i][0],
+// 						$entrada[$i][1],
+// 						$entrada[$i][2],
+// 						$proveedor[0][0],
+// 						$proveedor[0][1]
+// 						);
 				
 				
 				

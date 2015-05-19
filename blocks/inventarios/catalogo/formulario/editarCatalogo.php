@@ -38,6 +38,13 @@ class Formulario {
             //Este se considera un error fatal
             exit;
         }
+
+        $conexion2 = "inventarios";
+        $this->esteRecursoDB2 = $this->miConfigurador->fabricaConexiones->getRecursoDB($conexion2);
+        if (!$this->esteRecursoDB2) {
+            //Este se considera un error fatal
+            exit;
+        }
     }
 
     function formulario() {
@@ -48,8 +55,6 @@ class Formulario {
             $this->mensaje();
             exit;
         }
-
-
 
         $this->consultarDatosCatalogo();
         $this->principal();
@@ -128,10 +133,12 @@ class Formulario {
 
     private function campoId() {
 
+        $idNivel = $this->lenguaje->getCadena('id');
+        
         echo '<div class= "jqueryui  anchoColumna1">';
-        echo '<div style="float:left; width:200px"><label for="id">Identificador Elemento</label><span style="white-space:pre;"> </span></div>';
+        echo '<div style="float:left; width:200px"><label for="id">'.$idNivel.'</label><span style="white-space:pre;"> </span></div>';
         echo '<input type="text" maxlength="" size="50" value="" class="ui-widget ui-widget-content ui-corner-all';
-        echo ' validate[required,number] " tabindex="2" name="id" id="id" title="Ingrese Identificador Elemento">';
+        echo ' validate[required,number] " tabindex="2" name="id" id="id" title="">';
         echo '</div>';
     }
 
@@ -145,12 +152,50 @@ class Formulario {
     }
 
     private function campoNombre() {
-
+        $nombre = $this->lenguaje->getCadena('nombreElemento');
         echo ' <div class="jqueryui  anchoColumna1">';
-        echo ' <div style="float:left; width:200px"><label for="nombreElemento">Nombre Elemento</label><span style="white-space:pre;"> </span></div>';
+        echo ' <div style="float:left; width:200px"><label for="nombreElemento">'.$nombre.'</label><span style="white-space:pre;"> </span></div>';
         echo ' <input type="text" maxlength="" size="50" value="" class="ui-widget ui-widget-content';
-        echo ' ui-corner-all  validate[required,onlyLetterNumber] " tabindex="4" name="nombreElemento" id="nombreElemento" title=" Ingrese el Nombre del Elemento">';
+        echo ' ui-corner-all  validate[required,onlyLetterNumber] " tabindex="4" name="nombreElemento" id="nombreElemento" title="">';
         echo ' </div>';
+    }
+
+    private function campoIdGrupo() {
+        $esteCampo = "idGrupo";
+        $atributos ['nombre'] = $esteCampo;
+        $atributos ['id'] = $esteCampo;
+        $atributos ['etiqueta'] = $this->lenguaje->getCadena($esteCampo);
+        $atributos ["etiquetaObligatorio"] = false;
+        $atributos ['tab'] = 5;
+        $atributos ['seleccion'] = - 1;
+        $atributos ['anchoEtiqueta'] = 200;
+        $atributos ['evento'] = '';
+        if (isset($_REQUEST [$esteCampo])) {
+            $atributos ['valor'] = $_REQUEST [$esteCampo];
+        } else {
+            $atributos ['valor'] = '';
+        }
+        $atributos ['deshabilitado'] = false;
+        $atributos ['columnas'] = 1;
+        $atributos ['tamanno'] = 1;
+        $atributos ['ajax_function'] = "";
+        $atributos ['ajax_control'] = $esteCampo;
+        $atributos ['estilo'] = "jqueryui";
+        $atributos ['validar'] = "";
+        $atributos ['limitar'] = 1;
+        $atributos ['anchoCaja'] = 49;
+        $atributos ['miEvento'] = '';
+        $atributos ['cadena_sql'] = $this->sql->getCadenaSql("gruposcontables");
+        $matrizItems = array(
+            array(
+                0,
+                ' '
+            )
+        );
+        $matrizItems = $this->esteRecursoDB2->ejecutarAcceso($atributos ['cadena_sql'], "busqueda");
+        $atributos ['matrizItems'] = $matrizItems;
+        echo $this->miFormulario->campoCuadroLista($atributos);
+        unset($atributos);
     }
 
     private function notaUso() {
@@ -176,6 +221,7 @@ class Formulario {
         $this->campoPadre();
         $this->campoId();
         $this->campoNombre();
+        $this->campoIdGrupo();
 
         echo '<input id="idCatalogo" type="hidden" value="' . $_REQUEST['idCatalogo'] . '" name="idCatalogo">';
         echo '<input id="idReg" type="hidden" value="0" name="idReg">';

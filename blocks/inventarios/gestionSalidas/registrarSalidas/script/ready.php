@@ -30,6 +30,9 @@
                  } );
 
 
+                     
+                     
+                     
              
  $('#<?php echo $this->campoSeguro('numero_entrada_c')?>').attr('disabled','');
  $('#<?php echo $this->campoSeguro('fecha_entrada')?>').attr('disabled','');
@@ -41,9 +44,11 @@
  
  
  $("#<?php echo $this->campoSeguro('numero_entrada')?>").select2();
+ $("#<?php echo $this->campoSeguro('sede')?>").select2();
  $("#<?php echo $this->campoSeguro('dependencia')?>").select2();
+ $("#<?php echo $this->campoSeguro('clase_entrada_consulta')?>").select2();
  $("#<?php echo $this->campoSeguro('ubicacion')?>").select2();
- $("#<?php echo $this->campoSeguro('clase')?>").select2();
+ 
  
  
   $("#<?php echo $this->campoSeguro('proveedor')?>").select2({
@@ -160,7 +165,29 @@
         });
         
         
-        
+               $('#<?php echo $this->campoSeguro('vigencia')?>').datepicker({
+		
+			changeYear: true,
+			maxDate:0,
+			monthNames: ['Enero','Febrero','Marzo','Abril','Mayo','Junio',
+			'Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'],
+			dateFormat: 'yy',
+			onClose: function(dateText, inst) {
+			//lockDate.setDate(lockDate.getDate() + 1);
+			var year = $("#ui-datepicker-div .ui-datepicker-year :selected").val();
+			$(this).datepicker('setDate', new Date(year, 1, 1));
+			
+			}
+		});
+		$('#<?php echo $this->campoSeguro('vigencia')?>').focus(function () {
+			$(".ui-datepicker-calendar").hide();
+			$("#ui-datepicker-div").position({
+			my: "center top",
+			at: "center bottom",
+			of: $(this)
+				});
+			}); 
+		
         
 
                 

@@ -164,7 +164,7 @@ class Sql extends \Sql {
                 break;
 
             case "consultarElementos" :
-                $cadenaSql = "SELECT  ";
+                $cadenaSql = "SELECT DISTINCT  ";
                 $cadenaSql.= " id_elemento,  ";
                 $cadenaSql.= " nivel,  ";
                 $cadenaSql.= " unidad, ";
@@ -194,7 +194,7 @@ class Sql extends \Sql {
                 $cadenaSql.= " subtotal_sin_iva,  ";
                 $cadenaSql.= " total_iva, ";
                 $cadenaSql.= " total_iva_con, ";
-                $cadenaSql.= " salida.fecha ";
+                $cadenaSql.= " salida.fecha_registro ";
                 $cadenaSql.= " FROM elemento, salida ";
                 $cadenaSql.= " WHERE elemento.estado=TRUE ";
                 $cadenaSql.= " AND salida.id_entrada=elemento.id_entrada ";

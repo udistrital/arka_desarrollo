@@ -238,9 +238,29 @@ $cadena15 = $this->miConfigurador->fabricaConexiones->crypto->codificar_url ( $c
 $urlFinal15 = $url . $cadena15;
 
 
+
+
+
+// Variables
+$cadenaACodificar16 = "pagina=" . $this->miConfigurador->getVariableConfiguracion ( "pagina" );
+$cadenaACodificar16 .= "&procesarAjax=true";
+$cadenaACodificar16 .= "&action=index.php";
+$cadenaACodificar16 .= "&bloqueNombre=" . $esteBloque ["nombre"];
+$cadenaACodificar16 .= "&bloqueGrupo=" . $esteBloque ["grupo"];
+$cadenaACodificar16 .= $cadenaACodificar16 . "&funcion=consultarDependencia";
+$cadenaACodificar16 .= "&tiempo=" . $_REQUEST ['tiempo'];
+
+// Codificar las variables
+$enlace = $this->miConfigurador->getVariableConfiguracion ( "enlace" );
+$cadena16 = $this->miConfigurador->fabricaConexiones->crypto->codificar_url ( $cadenaACodificar16, $enlace );
+
+// URL definitiva
+$urlFinal16 = $url . $cadena16;
+
+
+
 ?>
 <script type='text/javascript'>
-
 
 function valorLetras(elem, request, response){
 	  $.ajax({
@@ -257,6 +277,42 @@ function valorLetras(elem, request, response){
 	   });
 	};
 
+
+
+
+	function consultarDependencia(elem, request, response){
+		  $.ajax({
+		    url: "<?php echo $urlFinal16?>",
+		    dataType: "json",
+		    data: { valor:$("#<?php echo $this->campoSeguro('sede')?>").val()},
+		    success: function(data){ 
+
+
+
+		        if(data[0]!=" "){
+
+		            $("#<?php echo $this->campoSeguro('selec_dependencia')?>").html('');
+		            $("<option value=''>Seleccione  ....</option>").appendTo("#<?php echo $this->campoSeguro('selec_dependencia')?>");
+		            $.each(data , function(indice,valor){
+
+		            	$("<option value='"+data[ indice ].ESF_ID_ESPACIO+"'>"+data[ indice ].ESF_NOMBRE_ESPACIO+"</option>").appendTo("#<?php echo $this->campoSeguro('selec_dependencia')?>");
+		            	
+		            });
+		            
+		            $("#<?php echo $this->campoSeguro('selec_dependencia')?>").removeAttr('disabled');
+		            
+		            $('#<?php echo $this->campoSeguro('selec_dependencia')?>').width(400);
+		            $("#<?php echo $this->campoSeguro('selec_dependencia')?>").select2();
+		            
+		          
+		            
+			        }
+		    			
+
+		    }
+			                    
+		   });
+		};
 
 
 
@@ -628,6 +684,17 @@ $(function() {
    	);
 
 
+    
+    $("#<?php echo $this->campoSeguro('sede')?>").change(function(){
+    	if($("#<?php echo $this->campoSeguro('sede')?>").val()!=''){
+    		consultarDependencia();
+		}else{
+			$("#<?php echo $this->campoSeguro('dependencia_solicitante')?>").attr('disabled','');
+			}
+
+	      });
+    
+
     $("#<?php echo $this->campoSeguro('selec_proveedor')?>").select2({
       	 placeholder: "Search for a repository",
       	 minimumInputLength: 5,
@@ -779,7 +846,7 @@ $("#<?php echo $this->campoSeguro('diponibilidad')?>").change(function() {
 		
 			case '5':
 		
-				$('#<?php echo $this->campoSeguro('total_iva')?>').val($('#<?php echo $this->campoSeguro('total_preliminar')?>').val() * 0.16);
+				$('#<?php echo $this->campoSeguro('total_iva')?>').val($('#<?php echo $this->campoSeguro('total_preliminar')?>').val() * 0.10);
 		
 				var total =$('#<?php echo $this->campoSeguro('total_preliminar')?>').val();
 				var iva =$('#<?php echo $this->campoSeguro('total_iva')?>').val();
@@ -804,7 +871,7 @@ $("#<?php echo $this->campoSeguro('diponibilidad')?>").change(function() {
 
 			case '6':
 				
-				$('#<?php echo $this->campoSeguro('total_iva')?>').val($('#<?php echo $this->campoSeguro('total_preliminar')?>').val() * 0.10);
+				$('#<?php echo $this->campoSeguro('total_iva')?>').val($('#<?php echo $this->campoSeguro('total_preliminar')?>').val() * 0.16);
 		
 				var total =$('#<?php echo $this->campoSeguro('total_preliminar')?>').val();
 				var iva =$('#<?php echo $this->campoSeguro('total_iva')?>').val();
@@ -975,7 +1042,7 @@ function disponibilidades(elem, request, response){
 					            });
 					            
 					            $("#<?php echo $this->campoSeguro('nombreContratista')?>").removeAttr('disabled');
-					            $('#<?php echo $this->campoSeguro('nombreContratista')?>').attr("class", "  validate[required]");
+					            $('#<?php echo $this->campoSeguro('nombreContratista')?>').attr("class", "  validate[]");
 					            
 					            $('#<?php echo $this->campoSeguro('nombreContratista')?>').attr("style", "width: 70 ; '");
 					            					            

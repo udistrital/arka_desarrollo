@@ -73,7 +73,7 @@ class Formulario {
     	
     	
     	$cadena_sql = $this->sql->getCadenaSql("listarElementosID",$_REQUEST['idCatalogo']);
-    	
+
     	$registros = $this->esteRecursoDB->ejecutarAcceso($cadena_sql,"busqueda");
     	
     	if(!$registros){
@@ -86,14 +86,16 @@ class Formulario {
     	$salida = array();
     	
     	foreach ($registros as $fila){
-    		$salida[] = array("id"=>$fila['elemento_id'],"nombre"=>$fila['elemento_codigo'],"alias"=>$fila['elemento_codigo']);
+    		$salida[] = array(
+                    "id"=>$fila['elemento_id'],
+                    "nombre"=>$fila['elemento_nombre'],
+                    "alias"=>$fila['elemento_codigo'], 
+                    "idGrupo"=>$fila['elemento_grupoc'],);
     	}
     	
     	echo json_encode($salida);
     	return true;
     	
-    	
-
     	$this->miConfigurador->setVariableConfiguracion ( 'mostrarMensaje', 'operacionExitosa' );
     	$this->mensaje();
     	

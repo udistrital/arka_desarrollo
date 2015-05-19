@@ -29,6 +29,21 @@
                 "sPaginationType": "full_numbers"
                  } );
 
+                     
+                     
+                     
+                                      $("#<?php echo $this->campoSeguro('supervisor')?>").select2({
+             	 placeholder: "Search for a repository",
+              	 minimumInputLength: 5,
+              	 });
+                 
+                               
+          
+          $("#<?php echo $this->campoSeguro('sede')?>").select2();
+          $("#<?php echo $this->campoSeguro('dependencia')?>").select2();
+          $("#<?php echo $this->campoSeguro('asignacionOrdenador')?>").select2();
+          
+          $("#<?php echo $this->campoSeguro('acta_recibido')?>").select2();
 
       $("#<?php echo $this->campoSeguro('numero_entrada')?>").select2();
       
@@ -61,7 +76,8 @@
             {
                            
                 case '1':
-                    
+                   $("#<?php echo $this->campoSeguro('adquisicion')?>").css('display','none');
+                   $("#<?php echo $this->campoSeguro('avances')?>").css('display','none');   
                    $("#<?php echo $this->campoSeguro('reposicion')?>").css('display','block');
                    $("#<?php echo $this->campoSeguro('donacion')?>").css('display','none');
                    $("#<?php echo $this->campoSeguro('sobrante')?>").css('display','none');
@@ -83,7 +99,8 @@
                 
                 
                  case '2':
-                    
+                   $("#<?php echo $this->campoSeguro('adquisicion')?>").css('display','none');
+                   $("#<?php echo $this->campoSeguro('avances')?>").css('display','none');   
                    $("#<?php echo $this->campoSeguro('reposicion')?>").css('display','none');
                    $("#<?php echo $this->campoSeguro('donacion')?>").css('display','block');
                    $("#<?php echo $this->campoSeguro('sobrante')?>").css('display','none');
@@ -101,7 +118,8 @@
                 break;
                 
                 case '3':
-                    
+                   $("#<?php echo $this->campoSeguro('adquisicion')?>").css('display','none');
+                   $("#<?php echo $this->campoSeguro('avances')?>").css('display','none');   
            		   $("#<?php echo $this->campoSeguro('reposicion')?>").css('display','none');
                    $("#<?php echo $this->campoSeguro('donacion')?>").css('display','none');
                    $("#<?php echo $this->campoSeguro('sobrante')?>").css('display','block');
@@ -120,7 +138,8 @@
                 break;
                 
                 case '4':
-                    
+  					$("#<?php echo $this->campoSeguro('adquisicion')?>").css('display','none');
+                   $("#<?php echo $this->campoSeguro('avances')?>").css('display','none');                    
         		   $("#<?php echo $this->campoSeguro('reposicion')?>").css('display','none');
                    $("#<?php echo $this->campoSeguro('donacion')?>").css('display','none');
                    $("#<?php echo $this->campoSeguro('sobrante')?>").css('display','none');
@@ -139,7 +158,8 @@
                 break;
                 
                 case '5':
-                    
+                    $("#<?php echo $this->campoSeguro('adquisicion')?>").css('display','none');
+                   $("#<?php echo $this->campoSeguro('avances')?>").css('display','none');  
                    $("#<?php echo $this->campoSeguro('reposicion')?>").css('display','none');
                    $("#<?php echo $this->campoSeguro('donacion')?>").css('display','none');
                    $("#<?php echo $this->campoSeguro('sobrante')?>").css('display','none');
@@ -156,6 +176,50 @@
                    
                    estado();
                 break;
+                
+                     case '6':
+                    
+                   $("#<?php echo $this->campoSeguro('adquisicion')?>").css('display','block');
+                   $("#<?php echo $this->campoSeguro('avances')?>").css('display','none'); 
+                   $("#<?php echo $this->campoSeguro('reposicion')?>").css('display','none');
+                   $("#<?php echo $this->campoSeguro('donacion')?>").css('display','none');
+                   $("#<?php echo $this->campoSeguro('sobrante')?>").css('display','none');
+                   $("#<?php echo $this->campoSeguro('produccion')?>").css('display','none');
+                   $("#<?php echo $this->campoSeguro('recuperacion')?>").css('display','none');
+                   $("#<?php echo $this->campoSeguro('tipo_cotr')?>").css('display',' block');
+                   $("#<?php echo $this->campoSeguro('inf_contr')?>").css('display',' block');
+                   $("#<?php echo $this->campoSeguro('inf_provee')?>").css('display','block');
+				   $("#<?php echo $this->campoSeguro('proveedor')?>").select2({
+             	 	placeholder: "Search for a repository",
+              	 	minimumInputLength: 3,
+              	 	});
+             
+                   
+                   estado();
+                break;
+                
+                    case '7':
+                    
+                   $("#<?php echo $this->campoSeguro('adquisicion')?>").css('display','none');
+                   $("#<?php echo $this->campoSeguro('avances')?>").css('display','block'); 
+                   
+                   $("#<?php echo $this->campoSeguro('reposicion')?>").css('display','none');
+                   $("#<?php echo $this->campoSeguro('donacion')?>").css('display','none');
+                   $("#<?php echo $this->campoSeguro('sobrante')?>").css('display','none');
+                   $("#<?php echo $this->campoSeguro('produccion')?>").css('display','none');
+                   $("#<?php echo $this->campoSeguro('recuperacion')?>").css('display','none');
+                   $("#<?php echo $this->campoSeguro('tipo_cotr')?>").css('display',' block');
+                   $("#<?php echo $this->campoSeguro('inf_contr')?>").css('display',' block');
+                   $("#<?php echo $this->campoSeguro('inf_provee')?>").css('display','block');
+				   $("#<?php echo $this->campoSeguro('proveedor')?>").select2({
+             	 	placeholder: "Search for a repository",
+              	 	minimumInputLength: 3,
+              	 	});
+             
+                   
+                   estado();
+                break;
+                
                 
                 
                default:

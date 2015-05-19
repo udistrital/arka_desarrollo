@@ -74,11 +74,127 @@ $urlFinal4 = $url . $cadena4;
 
 
 
+
+// Variables
+$cadenaACodificar6 = "pagina=" . $this->miConfigurador->getVariableConfiguracion ( "pagina" );
+$cadenaACodificar6 .= "&procesarAjax=true";
+$cadenaACodificar6 .= "&action=index.php";
+$cadenaACodificar6 .= "&bloqueNombre=" . $esteBloque ["nombre"];
+$cadenaACodificar6 .= "&bloqueGrupo=" . $esteBloque ["grupo"];
+$cadenaACodificar6 .= $cadenaACodificar . "&funcion=SeleccionOrdenador";
+$cadenaACodificar6 .= "&tiempo=" . $_REQUEST ['tiempo'];
+
+// Codificar las variables
+$enlace6 = $this->miConfigurador->getVariableConfiguracion ( "enlace" );
+$cadena6 = $this->miConfigurador->fabricaConexiones->crypto->codificar_url ( $cadenaACodificar6, $enlace6 );
+
+// URL definitiva
+$urlFinal6 = $url . $cadena6;
+
+
+// Variables
+$cadenaACodificar16 = "pagina=" . $this->miConfigurador->getVariableConfiguracion ( "pagina" );
+$cadenaACodificar16 .= "&procesarAjax=true";
+$cadenaACodificar16 .= "&action=index.php";
+$cadenaACodificar16 .= "&bloqueNombre=" . $esteBloque ["nombre"];
+$cadenaACodificar16 .= "&bloqueGrupo=" . $esteBloque ["grupo"];
+$cadenaACodificar16 .= $cadenaACodificar16 . "&funcion=consultarDependencia";
+$cadenaACodificar16 .= "&tiempo=" . $_REQUEST ['tiempo'];
+
+// Codificar las variables
+$enlace = $this->miConfigurador->getVariableConfiguracion ( "enlace" );
+$cadena16 = $this->miConfigurador->fabricaConexiones->crypto->codificar_url ( $cadenaACodificar16, $enlace );
+
+// URL definitiva
+$urlFinal16 = $url . $cadena16;
+
+
 // echo $urlFinal;exit;
 // echo $urlFinal2;
 // echo $urlFinal3;
 ?>
 <script type='text/javascript'>
+
+
+function consultarDependencia(elem, request, response){
+	  $.ajax({
+	    url: "<?php echo $urlFinal16?>",
+	    dataType: "json",
+	    data: { valor:$("#<?php echo $this->campoSeguro('sede')?>").val()},
+	    success: function(data){ 
+
+
+
+	        if(data[0]!=" "){
+
+	            $("#<?php echo $this->campoSeguro('dependencia')?>").html('');
+	            $("<option value=''>Seleccione  ....</option>").appendTo("#<?php echo $this->campoSeguro('dependencia')?>");
+	            $.each(data , function(indice,valor){
+
+	            	$("<option value='"+data[ indice ].ESF_ID_ESPACIO+"'>"+data[ indice ].ESF_NOMBRE_ESPACIO+"</option>").appendTo("#<?php echo $this->campoSeguro('dependencia')?>");
+	            	
+	            });
+	            
+	            $("#<?php echo $this->campoSeguro('dependencia')?>").removeAttr('disabled');
+	            
+	            $('#<?php echo $this->campoSeguro('dependencia')?>').width(350);
+	            $("#<?php echo $this->campoSeguro('dependencia')?>").select2();
+	            
+	          
+	            
+		        }
+	    			
+
+	    }
+		                    
+	   });
+	};
+
+
+function datosInfo(elem, request, response) {
+
+    $("#<?php echo $this->campoSeguro('proveedor') ?>").val();
+
+    $.ajax({
+        url: "<?php echo $urlFinal4 ?>",
+        dataType: "json",
+        data: {proveedor: $("#<?php echo $this->campoSeguro('nitproveedor') ?>").val()},
+        success: function (data) {
+
+            if (data[0] != 'null') {
+
+                $("#<?php echo $this->campoSeguro('proveedor') ?>").val(data[0]);
+            } else {
+                $("#<?php echo $this->campoSeguro('proveedor') ?>").val();
+            }
+        }
+    });
+};
+
+function datosOrdenador(elem, request, response){
+	  $.ajax({
+	    url: "<?php echo $urlFinal6?>",
+	    dataType: "json",
+	    data: { ordenador:$("#<?php echo $this->campoSeguro('asignacionOrdenador')?>").val()},
+	    success: function(data){ 
+
+	    		if(data[0]!='null'){
+
+	    			$("#<?php echo $this->campoSeguro('nombreOrdenador')?>").val(data[0]);
+	    			$("#<?php echo $this->campoSeguro('id_ordenador')?>").val(data[1]);
+							    			
+		    		}else{
+
+				
+
+
+			    		
+		    		}
+
+	    }
+		                    
+	   });
+	};
     $(function () {
 
         $("#tablaContenido").jqGrid({
@@ -93,7 +209,7 @@ $urlFinal4 = $url . $cadena4;
                 {name: "cantidad", width: 105, align: "center", editable: true, editrules: {number: true}, sorttype: 'number', formatter: 'number'},
                 {name: "descripcion", width: 105, align: "center", editable: true},
                 {name: "valor_unitario", width: 105, align: "center", editable: true, editrules: {number: true}, sorttype: 'number', formatter: 'number'},
-                {name: "valor_total", width: 105, align: "center", editable: true, editrules: {number: true}, sorttype: 'number', formatter: 'number'}
+                {name: "valor_total", width: 105, align: "center", editable: false, editrules: {number: true}, sorttype: 'number', formatter: 'number'}
             ],
             pager: "#barraNavegacion",
             rowNum: 10,
@@ -122,8 +238,8 @@ $urlFinal4 = $url . $cadena4;
                 {
                     caption: "Añadir Item",
                     addCaption: "Adicionar Item",
-                    width: 425,
-                    height: 310,
+                    width: 390,
+                    height: 252,
                     mtype: 'GET',
                     url: '<?php echo $urlFinal2 ?>',
                     bSubmit: "Agregar",
@@ -211,55 +327,42 @@ $urlFinal4 = $url . $cadena4;
                 {}
         );
 
+
+        $("#<?php echo $this->campoSeguro('sede')?>").change(function(){
+        	if($("#<?php echo $this->campoSeguro('sede')?>").val()!=''){
+            	consultarDependencia();
+    		}else{
+    			$("#<?php echo $this->campoSeguro('dependencia')?>").attr('disabled','');
+    			}
+
+    	      });
+        
+        
+        $("#<?php echo $this->campoSeguro('asignacionOrdenador')?>").change(function(){
+        	
+        	    	if($("#<?php echo $this->campoSeguro('asignacionOrdenador')?>").val()!=''){
+        	    		datosOrdenador();
+        			}else{
+        				$("#<?php echo $this->campoSeguro('nombreOrdenador')?>").val('');
+        				}
+        		      });
+
+
+        $("#<?php echo $this->campoSeguro('asignacionOrdenador') ?>").select2();
+	      
+
     });
 
 
-    function datosInfo(elem, request, response) {
 
-        $("#<?php echo $this->campoSeguro('proveedor') ?>").val();
-
-        $.ajax({
-            url: "<?php echo $urlFinal4 ?>",
-            dataType: "json",
-            data: {proveedor: $("#<?php echo $this->campoSeguro('nitproveedor') ?>").val()},
-            success: function (data) {
-
-                if (data[0] != 'null') {
-
-                    $("#<?php echo $this->campoSeguro('proveedor') ?>").val(data[0]);
-                } else {
-                    $("#<?php echo $this->campoSeguro('proveedor') ?>").val();
-                }
-            }
-        });
-    }
-    ;
-
-    $("#<?php echo $this->campoSeguro('nitproveedor') ?>").select2({
-        placeholder: "Search for a repository",
-        minimumInputLength: 1,
-    });
-
-    $("#<?php echo $this->campoSeguro('dependencia') ?>").select2({
-        placeholder: "Search for a repository",
-        minimumInputLength: 1,
-    });
-
-    $("#<?php echo $this->campoSeguro('tipoOrden') ?>").select2({
-        placeholder: "Search for a repository",
-        minimumInputLength: 1,
-    });
+    
 
 
-$("#<?php echo $this->campoSeguro('tipoBien') ?>").select2({
-        placeholder: "Search for a repository",
-        minimumInputLength: 1,
-    });
 
-    $("#<?php echo $this->campoSeguro('tipoComprador') ?>").select2({
-        placeholder: "Search for a repository",
-        minimumInputLength: 1,
-    });
+
+
+
+    
 
 </script>
 

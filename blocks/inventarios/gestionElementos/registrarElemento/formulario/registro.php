@@ -34,6 +34,11 @@ class registrarForm {
 		 * $atributos= array_merge($atributos,$atributosGlobales);
 		 */
 		
+		
+		$rutaBloque = $this->miConfigurador->getVariableConfiguracion ( "raizDocumento" ) . "/blocks/inventarios/gestionElementos/";
+		$rutaBloque .= $esteBloque ['nombre'];
+		$host = $this->miConfigurador->getVariableConfiguracion ( "host" ) . $this->miConfigurador->getVariableConfiguracion ( "site" ) . "/blocks/inventarios/gestionElementos/" . $esteBloque ['nombre']."/plantilla/archivo_elementos.xlsx";
+		
 		$atributosGlobales ['campoSeguro'] = 'true';
 		
 		$_REQUEST ['tiempo'] = time ();
@@ -44,9 +49,13 @@ class registrarForm {
 		
 		$esteRecursoDB = $this->miConfigurador->fabricaConexiones->getRecursoDB ( $conexion );
 		
-		
 		$conexion = "sicapital";
 		$esteRecursoDBO = $this->miConfigurador->fabricaConexiones->getRecursoDB ( $conexion );
+		
+		
+		$conexion = "catalogo";
+		$esteRecursoDBC = $this->miConfigurador->fabricaConexiones->getRecursoDB ( $conexion );
+		
 		
 		
 		$seccion ['tiempo'] = $tiempo;
@@ -81,17 +90,19 @@ class registrarForm {
 		{
 			// ---------------- SECCION: Controles del Formulario -----------------------------------------------
 			
-			
-			
 			$esteCampo = "AgrupacionGeneral";
 			$atributos ['id'] = $esteCampo;
 			$atributos ['leyenda'] = "Información General de la Entrada a Cargar Elementos ";
 			echo $this->miFormulario->agrupacion ( 'inicio', $atributos );
 			{
-					
-				$datos=unserialize($_REQUEST['datosGenerales']);
-					
-					
+				
+				$datos = unserialize ( $_REQUEST ['datosGenerales'] );
+				
+				if ($datos [3] == '') {
+					$datos [3] = 'NO APLICA';
+					$datos [4] = 'NO APLICA';
+				}
+				
 				// ---------------- CONTROL: Cuadro de Texto --------------------------------------------------------
 				$esteCampo = 'informacion_numero';
 				$atributos ['id'] = $esteCampo;
@@ -100,7 +111,7 @@ class registrarForm {
 				$atributos ['estilo'] = 'textoSubtituloCursiva';
 				$atributos ['marco'] = true;
 				$atributos ['estiloMarco'] = '';
-				$atributos ['texto'] = $this->lenguaje->getCadena ( $esteCampo )."    ".$datos [0];
+				$atributos ['texto'] = $this->lenguaje->getCadena ( $esteCampo ) . "    " . $datos [0];
 				$atributos ["etiquetaObligatorio"] = false;
 				$atributos ['columnas'] = 1;
 				$atributos ['dobleLinea'] = 0;
@@ -118,12 +129,12 @@ class registrarForm {
 				$atributos ['maximoTamanno'] = '';
 				$atributos ['anchoEtiqueta'] = 10;
 				$tab ++;
-					
+				
 				// Aplica atributos globales al control
 				$atributos = array_merge ( $atributos, $atributosGlobales );
 				echo $this->miFormulario->campoTexto ( $atributos );
 				unset ( $atributos );
-					
+				
 				// ---------------- CONTROL: Cuadro de Texto --------------------------------------------------------
 				$esteCampo = 'informacion_fecha';
 				$atributos ['id'] = $esteCampo;
@@ -132,7 +143,7 @@ class registrarForm {
 				$atributos ['estilo'] = 'textoSubtituloCursiva';
 				$atributos ['marco'] = true;
 				$atributos ['estiloMarco'] = '';
-				$atributos ['texto'] = $this->lenguaje->getCadena ( $esteCampo )."    ".$datos[1];
+				$atributos ['texto'] = $this->lenguaje->getCadena ( $esteCampo ) . "    " . $datos [1];
 				$atributos ["etiquetaObligatorio"] = false;
 				$atributos ['columnas'] = 1;
 				$atributos ['dobleLinea'] = 0;
@@ -150,12 +161,12 @@ class registrarForm {
 				$atributos ['maximoTamanno'] = '';
 				$atributos ['anchoEtiqueta'] = 10;
 				$tab ++;
-					
+				
 				// Aplica atributos globales al control
 				$atributos = array_merge ( $atributos, $atributosGlobales );
 				echo $this->miFormulario->campoTexto ( $atributos );
 				unset ( $atributos );
-					
+				
 				// ---------------- CONTROL: Cuadro de Texto --------------------------------------------------------
 				$esteCampo = 'informacion_nit';
 				$atributos ['id'] = $esteCampo;
@@ -164,7 +175,7 @@ class registrarForm {
 				$atributos ['estilo'] = 'textoSubtituloCursiva';
 				$atributos ['marco'] = true;
 				$atributos ['estiloMarco'] = '';
-				$atributos ['texto'] = $this->lenguaje->getCadena ( $esteCampo )."    ".$datos[3];
+				$atributos ['texto'] = $this->lenguaje->getCadena ( $esteCampo ) . "    " . $datos [3];
 				$atributos ["etiquetaObligatorio"] = false;
 				$atributos ['columnas'] = 1;
 				$atributos ['dobleLinea'] = 0;
@@ -182,12 +193,12 @@ class registrarForm {
 				$atributos ['maximoTamanno'] = '';
 				$atributos ['anchoEtiqueta'] = 10;
 				$tab ++;
-					
+				
 				// Aplica atributos globales al control
 				$atributos = array_merge ( $atributos, $atributosGlobales );
 				echo $this->miFormulario->campoTexto ( $atributos );
 				unset ( $atributos );
-					
+				
 				// ---------------- CONTROL: Cuadro de Texto --------------------------------------------------------
 				$esteCampo = 'informacion_proveedor';
 				$atributos ['id'] = $esteCampo;
@@ -196,7 +207,7 @@ class registrarForm {
 				$atributos ['estilo'] = 'textoSubtituloCursiva';
 				$atributos ['marco'] = true;
 				$atributos ['estiloMarco'] = '';
-				$atributos ['texto'] = $this->lenguaje->getCadena ( $esteCampo ).$datos[4];
+				$atributos ['texto'] = $this->lenguaje->getCadena ( $esteCampo ) . $datos [4];
 				$atributos ["etiquetaObligatorio"] = false;
 				$atributos ['columnas'] = 1;
 				$atributos ['dobleLinea'] = 0;
@@ -214,12 +225,12 @@ class registrarForm {
 				$atributos ['maximoTamanno'] = '';
 				$atributos ['anchoEtiqueta'] = 10;
 				$tab ++;
-					
+				
 				// Aplica atributos globales al control
 				$atributos = array_merge ( $atributos, $atributosGlobales );
 				echo $this->miFormulario->campoTexto ( $atributos );
 				unset ( $atributos );
-					
+				
 				// ---------------- CONTROL: Cuadro de Texto --------------------------------------------------------
 				$esteCampo = 'informacion_estado';
 				$atributos ['id'] = $esteCampo;
@@ -228,7 +239,7 @@ class registrarForm {
 				$atributos ['estilo'] = 'textoSubtituloCursiva';
 				$atributos ['marco'] = true;
 				$atributos ['estiloMarco'] = '';
-				$atributos ['texto'] = $this->lenguaje->getCadena ( $esteCampo ).$datos[2];
+				$atributos ['texto'] = $this->lenguaje->getCadena ( $esteCampo ) . $datos [2];
 				$atributos ["etiquetaObligatorio"] = false;
 				$atributos ['columnas'] = 1;
 				$atributos ['dobleLinea'] = 0;
@@ -246,18 +257,14 @@ class registrarForm {
 				$atributos ['maximoTamanno'] = '';
 				$atributos ['anchoEtiqueta'] = 10;
 				$tab ++;
-					
+				
 				// Aplica atributos globales al control
 				$atributos = array_merge ( $atributos, $atributosGlobales );
 				echo $this->miFormulario->campoTexto ( $atributos );
 				unset ( $atributos );
-					
-					
 			}
-				
-			echo $this->miFormulario->agrupacion ( 'fin' );
-				
 			
+			echo $this->miFormulario->agrupacion ( 'fin' );
 			
 			$esteCampo = "marcoDatosBasicos";
 			$atributos ['id'] = $esteCampo;
@@ -320,7 +327,8 @@ class registrarForm {
 						
 						$mensaje = "- El Archivo Tiene que Ser Tipo Excel.
 								<br>- Solo Se Cargaran de forma Correcta de Acuerdo al Plantilla Preedeterminada.
-								<br>- Para Verificar El Cargue Masivo Consulte los Elementos en el Modulo \"Consultar Y Modificar Elementos\".";
+								<br>- Para Verificar El Cargue Masivo Consulte los Elementos en el Modulo \"Consultar Y Modificar Elementos\".
+								<br>- Enlace de Archivo Plantilla : <A HREF=".$host."> Archivo Plantilla </A>";
 						
 						// ---------------- CONTROL: Cuadro de Texto --------------------------------------------------------
 						$esteCampo = 'mensajeRegistro';
@@ -335,12 +343,7 @@ class registrarForm {
 						$atributos = array_merge ( $atributos, $atributosGlobales );
 						echo $this->miFormulario->cuadroMensaje ( $atributos );
 						
-						// ------------------Division para los botones-------------------------
-						$atributos ["id"] = "botones";
-						$atributos ["estilo"] = "marcoBotones";
-						echo $this->miFormulario->division ( "inicio", $atributos );
-						
-						{
+					
 							$esteCampo = "documentos_elementos";
 							$atributos ["id"] = $esteCampo; // No cambiar este nombre
 							$atributos ["nombre"] = $esteCampo;
@@ -358,8 +361,7 @@ class registrarForm {
 							$atributos = array_merge ( $atributos, $atributosGlobales );
 							echo $this->miFormulario->campoCuadroTexto ( $atributos );
 							unset ( $atributos );
-						}
-						echo $this->miFormulario->division ( "fin" );
+					
 					}
 					echo $this->miFormulario->agrupacion ( 'fin' );
 				}
@@ -508,35 +510,35 @@ class registrarForm {
 						echo $this->miFormulario->division ( "inicio", $atributos );
 						unset ( $atributos );
 						{
-							$esteCampo = 'placa_cc';
-							$atributos ['id'] = $esteCampo;
-							$atributos ['nombre'] = $esteCampo;
-							$atributos ['tipo'] = 'text';
-							$atributos ['estilo'] = 'jqueryui';
-							$atributos ['marco'] = true;
-							$atributos ['estiloMarco'] = '';
-							$atributos ['columnas'] = 1;
-							$atributos ['dobleLinea'] = 0;
-							$atributos ['tabIndex'] = $tab;
-							$atributos ['etiqueta'] = $this->lenguaje->getCadena ( $esteCampo );
-							$atributos ['validar'] = 'required, minSize[1],maxSize[30],custom[onlyNumberSp]';
+// 							$esteCampo = 'placa_cc';
+// 							$atributos ['id'] = $esteCampo;
+// 							$atributos ['nombre'] = $esteCampo;
+// 							$atributos ['tipo'] = 'text';
+// 							$atributos ['estilo'] = 'jqueryui';
+// 							$atributos ['marco'] = true;
+// 							$atributos ['estiloMarco'] = '';
+// 							$atributos ['columnas'] = 1;
+// 							$atributos ['dobleLinea'] = 0;
+// 							$atributos ['tabIndex'] = $tab;
+// 							$atributos ['etiqueta'] = $this->lenguaje->getCadena ( $esteCampo );
+// 							$atributos ['validar'] = 'required, minSize[1],maxSize[30],custom[onlyNumberSp]';
 							
-							if (isset ( $_REQUEST [$esteCampo] )) {
-								$atributos ['valor'] = $_REQUEST [$esteCampo];
-							} else {
-								$atributos ['valor'] = '';
-							}
-							$atributos ['titulo'] = $this->lenguaje->getCadena ( $esteCampo . 'Titulo' );
-							$atributos ['deshabilitado'] = false;
-							$atributos ['tamanno'] = 10;
-							$atributos ['maximoTamanno'] = '';
-							$atributos ['anchoEtiqueta'] = 220;
-							$tab ++;
+// 							if (isset ( $_REQUEST [$esteCampo] )) {
+// 								$atributos ['valor'] = $_REQUEST [$esteCampo];
+// 							} else {
+// 								$atributos ['valor'] = '';
+// 							}
+// 							$atributos ['titulo'] = $this->lenguaje->getCadena ( $esteCampo . 'Titulo' );
+// 							$atributos ['deshabilitado'] = false;
+// 							$atributos ['tamanno'] = 10;
+// 							$atributos ['maximoTamanno'] = '';
+// 							$atributos ['anchoEtiqueta'] = 220;
+// 							$tab ++;
 							
-							// Aplica atributos globales al control
-							$atributos = array_merge ( $atributos, $atributosGlobales );
-							echo $this->miFormulario->campoCuadroTexto ( $atributos );
-							unset ( $atributos );
+// 							// Aplica atributos globales al control
+// 							$atributos = array_merge ( $atributos, $atributosGlobales );
+// 							echo $this->miFormulario->campoCuadroTexto ( $atributos );
+// 							unset ( $atributos );
 						}
 						echo $this->miFormulario->division ( "fin" );
 						
@@ -546,40 +548,40 @@ class registrarForm {
 						echo $this->miFormulario->division ( "inicio", $atributos );
 						unset ( $atributos );
 						{
-							$esteCampo = 'placa_dev';
-							$atributos ['id'] = $esteCampo;
-							$atributos ['nombre'] = $esteCampo;
-							$atributos ['tipo'] = 'text';
-							$atributos ['estilo'] = 'jqueryui';
-							$atributos ['marco'] = true;
-							$atributos ['estiloMarco'] = '';
-							$atributos ['columnas'] = 2;
-							$atributos ['dobleLinea'] = 0;
-							$atributos ['tabIndex'] = $tab;
-							$atributos ['etiqueta'] = $this->lenguaje->getCadena ( $esteCampo );
-							$atributos ['validar'] = 'required, minSize[1],maxSize[30],custom[onlyNumberSp]';
+// 							$esteCampo = 'placa_dev';
+// 							$atributos ['id'] = $esteCampo;
+// 							$atributos ['nombre'] = $esteCampo;
+// 							$atributos ['tipo'] = 'text';
+// 							$atributos ['estilo'] = 'jqueryui';
+// 							$atributos ['marco'] = true;
+// 							$atributos ['estiloMarco'] = '';
+// 							$atributos ['columnas'] = 1;
+// 							$atributos ['dobleLinea'] = 0;
+// 							$atributos ['tabIndex'] = $tab;
+// 							$atributos ['etiqueta'] = $this->lenguaje->getCadena ( $esteCampo );
+// 							$atributos ['validar'] = 'required, minSize[1],maxSize[30],custom[onlyNumberSp]';
 							
-							if (isset ( $_REQUEST [$esteCampo] )) {
-								$atributos ['valor'] = $_REQUEST [$esteCampo];
-							} else {
-								$atributos ['valor'] = '';
-							}
-							$atributos ['titulo'] = $this->lenguaje->getCadena ( $esteCampo . 'Titulo' );
-							$atributos ['deshabilitado'] = false;
-							$atributos ['tamanno'] = 10;
-							$atributos ['maximoTamanno'] = '';
-							$atributos ['anchoEtiqueta'] = 220;
-							$tab ++;
+// 							if (isset ( $_REQUEST [$esteCampo] )) {
+// 								$atributos ['valor'] = $_REQUEST [$esteCampo];
+// 							} else {
+// 								$atributos ['valor'] = '';
+// 							}
+// 							$atributos ['titulo'] = $this->lenguaje->getCadena ( $esteCampo . 'Titulo' );
+// 							$atributos ['deshabilitado'] = false;
+// 							$atributos ['tamanno'] = 10;
+// 							$atributos ['maximoTamanno'] = '';
+// 							$atributos ['anchoEtiqueta'] = 220;
+// 							$tab ++;
 							
-							// Aplica atributos globales al control
-							$atributos = array_merge ( $atributos, $atributosGlobales );
-							echo $this->miFormulario->campoCuadroTexto ( $atributos );
-							unset ( $atributos );
+// 							// Aplica atributos globales al control
+// 							$atributos = array_merge ( $atributos, $atributosGlobales );
+// 							echo $this->miFormulario->campoCuadroTexto ( $atributos );
+// 							unset ( $atributos );
 							
 							// ---------------- CONTROL: Cuadro Lista --------------------------------------------------------
 							
 							$esteCampo = 'tipo_poliza';
-							$atributos ['columnas'] = 2;
+							$atributos ['columnas'] = 1;
 							$atributos ['nombre'] = $esteCampo;
 							$atributos ['id'] = $esteCampo;
 							$atributos ['seleccion'] = - 1;
@@ -837,41 +839,41 @@ class registrarForm {
 						echo $this->miFormulario->campoCuadroLista ( $atributos );
 						unset ( $atributos );
 						
-						$esteCampo = 'ajuste';
-						$atributos ['id'] = $esteCampo;
-						$atributos ['nombre'] = $esteCampo;
-						$atributos ['tipo'] = 'text';
-						$atributos ['estilo'] = 'jqueryui';
-						$atributos ['marco'] = true;
-						$atributos ['estiloMarco'] = '';
-						$atributos ["etiquetaObligatorio"] = true;
-						$atributos ['columnas'] = 2;
-						$atributos ['dobleLinea'] = 0;
-						$atributos ['tabIndex'] = $tab;
-						$atributos ['etiqueta'] = $this->lenguaje->getCadena ( $esteCampo );
-						$atributos ['validar'] = 'required, minSize[1],maxSize[30],custom[number]';
+// 						$esteCampo = 'ajuste';
+// 						$atributos ['id'] = $esteCampo;
+// 						$atributos ['nombre'] = $esteCampo;
+// 						$atributos ['tipo'] = 'text';
+// 						$atributos ['estilo'] = 'jqueryui';
+// 						$atributos ['marco'] = true;
+// 						$atributos ['estiloMarco'] = '';
+// 						$atributos ["etiquetaObligatorio"] = true;
+// 						$atributos ['columnas'] = 2;
+// 						$atributos ['dobleLinea'] = 0;
+// 						$atributos ['tabIndex'] = $tab;
+// 						$atributos ['etiqueta'] = $this->lenguaje->getCadena ( $esteCampo );
+// 						$atributos ['validar'] = 'required, minSize[1],maxSize[30],custom[number]';
 						
-						if (isset ( $_REQUEST [$esteCampo] )) {
-							$atributos ['valor'] = $_REQUEST [$esteCampo];
-						} else {
-							$atributos ['valor'] = '';
-						}
-						$atributos ['titulo'] = $this->lenguaje->getCadena ( $esteCampo . 'Titulo' );
-						$atributos ['deshabilitado'] = false;
-						$atributos ['tamanno'] = 10;
-						$atributos ['maximoTamanno'] = '';
-						$atributos ['anchoEtiqueta'] = 220;
-						$tab ++;
+// 						if (isset ( $_REQUEST [$esteCampo] )) {
+// 							$atributos ['valor'] = $_REQUEST [$esteCampo];
+// 						} else {
+// 							$atributos ['valor'] = '';
+// 						}
+// 						$atributos ['titulo'] = $this->lenguaje->getCadena ( $esteCampo . 'Titulo' );
+// 						$atributos ['deshabilitado'] = false;
+// 						$atributos ['tamanno'] = 10;
+// 						$atributos ['maximoTamanno'] = '';
+// 						$atributos ['anchoEtiqueta'] = 220;
+// 						$tab ++;
 						
-						// Aplica atributos globales al control
-						$atributos = array_merge ( $atributos, $atributosGlobales );
-						echo $this->miFormulario->campoCuadroTexto ( $atributos );
-						unset ( $atributos );
+// 						// Aplica atributos globales al control
+// 						$atributos = array_merge ( $atributos, $atributosGlobales );
+// 						echo $this->miFormulario->campoCuadroTexto ( $atributos );
+// 						unset ( $atributos );
 						
 						// ---------------- CONTROL: Cuadro Lista --------------------------------------------------------
 						
 						$esteCampo = 'bodega';
-						$atributos ['columnas'] = 2;
+						$atributos ['columnas'] = 1;
 						$atributos ['nombre'] = $esteCampo;
 						$atributos ['id'] = $esteCampo;
 						$atributos ['seleccion'] = - 1;
@@ -1111,7 +1113,7 @@ class registrarForm {
 			
 			$atributos ["etiqueta"] = '';
 			$atributos ["columnas"] = ''; // El control ocupa 47% del tamaño del formulario
-			$atributos ['mensaje'] ="<center>Se Cargo Elemento <br> Número ID Elemento: " . $_REQUEST ['numero_orden'] . "<br>Fecha : " . $_REQUEST ['fecha_orden']."</center>";
+			$atributos ['mensaje'] = "<center>Se Cargo Elemento <br> Número ID Elemento: " . $_REQUEST ['numero_orden'] . "<br>Fecha : " . $_REQUEST ['fecha_orden'] . "</center>";
 			echo $this->miFormulario->campoMensaje ( $atributos );
 			unset ( $atributos );
 		}

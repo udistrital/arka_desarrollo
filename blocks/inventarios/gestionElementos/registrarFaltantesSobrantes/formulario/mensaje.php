@@ -93,7 +93,7 @@ class registrarForm {
 						
 					}else if($variable[1]<>'0'){
 						
-						$mensaje = "Se Registro Sobrante <br> # ID Sobante : ".$variable[1].".";
+						$mensaje = "Se Registro Sobrante <br> # ID Sobrante : ".$variable[1].".";
 						
 					}else if($variable[2]<>'0'){
 						

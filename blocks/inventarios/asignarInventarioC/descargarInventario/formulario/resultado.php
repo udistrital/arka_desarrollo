@@ -67,10 +67,10 @@ class registrarForm {
 
         $supervisor = $_REQUEST['usuario'];
 
-      $cadenaSql = $this->miSql->getCadenaSql('consultarElementosContratista', $docContratista);
+        $cadenaSql = $this->miSql->getCadenaSql('consultarElementosContratista', $docContratista);
         $elementos_contratista = $esteRecursoDB->ejecutarAcceso($cadenaSql, "busqueda");
         $total_elementos = count($elementos_contratista);
-        
+
 
         // ---------------- SECCION: Parámetros Generales del Formulario ----------------------------------
         $esteCampo = $esteBloque ['nombre'];
@@ -253,7 +253,7 @@ class registrarForm {
             echo $this->miFormulario->formulario($atributos);
         } else {
 
-            $mensaje = "No Se Encontraron<br>Elementos Activos para Asignar";
+            $mensaje = "No Se Encontraron<br>Elementos Asignados al Contratista para Descargar";
 
             // ---------------- CONTROL: Cuadro de Texto --------------------------------------------------------
             $esteCampo = 'mensajeRegistro';

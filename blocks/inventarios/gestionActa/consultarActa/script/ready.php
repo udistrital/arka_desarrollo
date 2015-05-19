@@ -42,15 +42,23 @@
         });
         
         
-        $("#<?php echo $this->campoSeguro('nitproveedor') ?>").select2();
+        
+        $("#<?php echo $this->campoSeguro('sede') ?>").select2();
+                $("#<?php echo $this->campoSeguro('nitproveedor') ?>").select2({
+   		 placeholder: "Search for a repository",
+   		 minimumInputLength: 5,
+
+       });
+       
+		$("#<?php echo $this->campoSeguro('tipoBien') ?>").select2();           
         $("#<?php echo $this->campoSeguro('dependencia') ?>").select2();
         $("#<?php echo $this->campoSeguro('numero_acta') ?>").select2();
-         $("#<?php echo $this->campoSeguro('tipobien') ?>").select2();
+         
           $("#<?php echo $this->campoSeguro('tipocomprador') ?>").select2();
         
         $("#<?php echo $this->campoSeguro('nitproveedor') ?>").change(function () {
-datosInfo();
-});
+		datosInfo();
+		});
         
         
           
