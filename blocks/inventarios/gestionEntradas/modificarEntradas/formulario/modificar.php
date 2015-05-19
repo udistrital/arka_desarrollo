@@ -50,7 +50,7 @@ class registrarForm {
 		$cadenaSql = $this->miSql->getCadenaSql ( 'consultarEntradaParticular', $_REQUEST ['numero_entrada'] );
 		
 		$datosEntrada = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
-// 		var_dump ( $datosEntrada );exit;
+		// var_dump ( $datosEntrada );exit;
 		$cadenaSql = $this->miSql->getCadenaSql ( 'consultarInfoClase', $datosEntrada [0] [2] );
 		
 		$inf_clase = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
@@ -58,7 +58,6 @@ class registrarForm {
 		$cadenaSql = $this->miSql->getCadenaSql ( 'informacion_ordenador', $datosEntrada [0] ['ordenador'] );
 		
 		$ordenador = $esteRecursoDBO->ejecutarAcceso ( $cadenaSql, "busqueda" );
-		     
 		
 		$datos = array (
 				'clase' => $datosEntrada [0] [1],
@@ -75,7 +74,9 @@ class registrarForm {
 				"sede" => $datosEntrada [0] ['sede'],
 				"dependencia" => $datosEntrada [0] ['dependencia'],
 				"supervisor" => $datosEntrada [0] ['supervisor'],
-				"acta_recibido" => $datosEntrada [0] ['acta_recibido'] 
+				"acta_recibido" => $datosEntrada [0] ['acta_recibido'],
+				"tipo_ordenador" => $datosEntrada [0] ['tipo_ordenador'],
+				"identificacion_ordenador" => $datosEntrada [0] ['identificacion_ordenador'] 
 		);
 		
 		$_REQUEST = array_merge ( $_REQUEST, $datosEntrada [0], $datos );
@@ -528,6 +529,47 @@ class registrarForm {
 				echo $this->miFormulario->campoCuadroLista ( $atributos );
 				unset ( $atributos );
 				
+				$esteCampo = "acta_recibido";
+				$atributos ['nombre'] = $esteCampo;
+				$atributos ['id'] = $esteCampo;
+				$atributos ['etiqueta'] = $this->lenguaje->getCadena ( $esteCampo );
+				$atributos ["etiquetaObligatorio"] = false;
+				$atributos ['tab'] = $tab ++;
+				$atributos ['anchoEtiqueta'] = 220;
+				$atributos ['evento'] = '';
+				if (isset ( $_REQUEST [$esteCampo] )) {
+					$atributos ['seleccion'] = $_REQUEST [$esteCampo];
+				} else {
+					$atributos ['seleccion'] = - 1;
+				}
+				$atributos ['deshabilitado'] = false;
+				$atributos ['columnas'] = 1;
+				$atributos ['tamanno'] = 1;
+				$atributos ['ajax_function'] = "";
+				$atributos ['ajax_control'] = $esteCampo;
+				$atributos ['estilo'] = "jqueryui";
+				$atributos ['validar'] = "";
+				$atributos ['limitar'] = true;
+				$atributos ['anchoCaja'] = 30;
+				$atributos ['miEvento'] = '';
+				$atributos ['cadena_sql'] = $this->miSql->getCadenaSql ( "actasRecicbido" );
+				$matrizItems1 = array (
+						array (
+								'',
+								'Seleccione...' 
+						) 
+				);
+				$matrizItems = $esteRecursoDB->ejecutarAcceso ( $atributos ['cadena_sql'], "busqueda" );
+				$matrizItems = array_merge ( $matrizItems1, $matrizItems );
+				$atributos ['matrizItems'] = $matrizItems;
+				// $atributos['miniRegistro']=;
+				$atributos ['baseDatos'] = "inventarios";
+				// $atributos ['cadena_sql'] = $this->miSql->getCadenaSql ( "clase_entrada" );
+				
+				// Aplica atributos globales al control
+				$atributos = array_merge ( $atributos, $atributosGlobales );
+				echo $this->miFormulario->campoCuadroLista ( $atributos );
+				unset ( $atributos );
 				$atributos ["id"] = "reposicion";
 				$atributos ["estiloEnLinea"] = "display:" . $reposicion;
 				$atributos = array_merge ( $atributos, $atributosGlobales );
@@ -662,8 +704,8 @@ class registrarForm {
 						
 						// Aplica atributos globales al control
 						$atributos = array_merge ( $atributos, $atributosGlobales );
-// 						echo $this->miFormulario->campoTextArea ( $atributos );
-// 						unset ( $atributos );
+						// echo $this->miFormulario->campoTextArea ( $atributos );
+						// unset ( $atributos );
 					}
 					echo $this->miFormulario->agrupacion ( 'fin' );
 				}
@@ -711,8 +753,8 @@ class registrarForm {
 						
 						// Aplica atributos globales al control
 						$atributos = array_merge ( $atributos, $atributosGlobales );
-// 						echo $this->miFormulario->campoTextArea ( $atributos );
-// 						unset ( $atributos );
+						// echo $this->miFormulario->campoTextArea ( $atributos );
+						// unset ( $atributos );
 						
 						echo ($_REQUEST ['clase'] == 2) ? $documento : '';
 						unset ( $atributos );
@@ -906,8 +948,8 @@ class registrarForm {
 						
 						// Aplica atributos globales al control
 						$atributos = array_merge ( $atributos, $atributosGlobales );
-// 						echo $this->miFormulario->campoTextArea ( $atributos );
-// 						unset ( $atributos );
+						// echo $this->miFormulario->campoTextArea ( $atributos );
+						// unset ( $atributos );
 						
 						echo ($_REQUEST ['clase'] == 3) ? $documento : '';
 						unset ( $atributos );
@@ -976,8 +1018,8 @@ class registrarForm {
 						
 						// Aplica atributos globales al control
 						$atributos = array_merge ( $atributos, $atributosGlobales );
-// 						echo $this->miFormulario->campoTextArea ( $atributos );
-// 						unset ( $atributos );
+						// echo $this->miFormulario->campoTextArea ( $atributos );
+						// unset ( $atributos );
 						
 						echo ($_REQUEST ['clase'] == 4) ? $documento : '';
 						unset ( $atributos );
@@ -1047,8 +1089,8 @@ class registrarForm {
 						
 						// Aplica atributos globales al control
 						$atributos = array_merge ( $atributos, $atributosGlobales );
-// 						echo $this->miFormulario->campoTextArea ( $atributos );
-// 						unset ( $atributos );
+						// echo $this->miFormulario->campoTextArea ( $atributos );
+						// unset ( $atributos );
 						
 						echo ($_REQUEST ['clase'] == 5) ? $documento : '';
 						unset ( $atributos );
@@ -1118,8 +1160,8 @@ class registrarForm {
 						
 						// Aplica atributos globales al control
 						$atributos = array_merge ( $atributos, $atributosGlobales );
-// 						echo $this->miFormulario->campoTextArea ( $atributos );
-// 						unset ( $atributos );
+						// echo $this->miFormulario->campoTextArea ( $atributos );
+						// unset ( $atributos );
 						
 						echo ($_REQUEST ['clase'] == 6) ? $documento : '';
 						unset ( $atributos );
@@ -1188,8 +1230,8 @@ class registrarForm {
 						
 						// Aplica atributos globales al control
 						$atributos = array_merge ( $atributos, $atributosGlobales );
-// 						echo $this->miFormulario->campoTextArea ( $atributos );
-// 						unset ( $atributos );
+						// echo $this->miFormulario->campoTextArea ( $atributos );
+						// unset ( $atributos );
 						
 						echo ($_REQUEST ['clase'] == 7) ? $documento : '';
 						unset ( $atributos );
@@ -1536,6 +1578,38 @@ class registrarForm {
 					$atributos = array_merge ( $atributos, $atributosGlobales );
 					echo $this->miFormulario->campoCuadroTexto ( $atributos );
 					unset ( $atributos );
+					
+					$esteCampo = 'tipo_ordenador';
+					$atributos ["id"] = $esteCampo; // No cambiar este nombre
+					$atributos ["tipo"] = "hidden";
+					$atributos ['estilo'] = '';
+					$atributos ["obligatorio"] = false;
+					$atributos ['marco'] = true;
+					$atributos ["etiqueta"] = "";
+					if (isset ( $_REQUEST [$esteCampo] )) {
+						$atributos ['valor'] = $_REQUEST [$esteCampo];
+					} else {
+						$atributos ['valor'] = '';
+					}
+					$atributos = array_merge ( $atributos, $atributosGlobales );
+					echo $this->miFormulario->campoCuadroTexto ( $atributos );
+					unset ( $atributos );
+					
+					$esteCampo = 'identificacion_ordenador';
+					$atributos ["id"] = $esteCampo; // No cambiar este nombre
+					$atributos ["tipo"] = "hidden";
+					$atributos ['estilo'] = '';
+					$atributos ["obligatorio"] = false;
+					$atributos ['marco'] = true;
+					$atributos ["etiqueta"] = "";
+					if (isset ( $_REQUEST [$esteCampo] )) {
+						$atributos ['valor'] = $_REQUEST [$esteCampo];
+					} else {
+						$atributos ['valor'] = '';
+					}
+					$atributos = array_merge ( $atributos, $atributosGlobales );
+					echo $this->miFormulario->campoCuadroTexto ( $atributos );
+					unset ( $atributos );
 				}
 				
 				echo $this->miFormulario->agrupacion ( 'fin' );
@@ -1610,43 +1684,12 @@ class registrarForm {
 				
 				// ---------------- CONTROL: Cuadro de Texto --------------------------------------------------------
 				$esteCampo = 'supervisor';
-				$atributos ['id'] = $esteCampo;
 				$atributos ['nombre'] = $esteCampo;
-				$atributos ['tipo'] = 'text';
-				$atributos ['estilo'] = 'jqueryui';
-				$atributos ['marco'] = true;
-				$atributos ['estiloMarco'] = '';
+				$atributos ['id'] = $esteCampo;
+				$atributos ['etiqueta'] = $this->lenguaje->getCadena ( $esteCampo );
 				$atributos ["etiquetaObligatorio"] = true;
-				$atributos ['columnas'] = 2;
-				$atributos ['dobleLinea'] = 0;
-				$atributos ['tabIndex'] = $tab;
-				$atributos ['etiqueta'] = $this->lenguaje->getCadena ( $esteCampo );
-				$atributos ['validar'] = 'required, minSize[1],maxSize[50]';
-				
-				if (isset ( $_REQUEST [$esteCampo] )) {
-					$atributos ['valor'] = $_REQUEST [$esteCampo];
-				} else {
-					$atributos ['valor'] = '';
-				}
-				$atributos ['titulo'] = $this->lenguaje->getCadena ( $esteCampo . 'Titulo' );
-				$atributos ['deshabilitado'] = false;
-				$atributos ['tamanno'] = 25;
-				$atributos ['maximoTamanno'] = '';
-				$atributos ['anchoEtiqueta'] = 150;
-				$tab ++;
-				
-				// Aplica atributos globales al control
-				$atributos = array_merge ( $atributos, $atributosGlobales );
-				echo $this->miFormulario->campoCuadroTexto ( $atributos );
-				unset ( $atributos );
-				
-				$esteCampo = "acta_recibido";
-				$atributos ['nombre'] = $esteCampo;
-				$atributos ['id'] = $esteCampo;
-				$atributos ['etiqueta'] = $this->lenguaje->getCadena ( $esteCampo );
-				$atributos ["etiquetaObligatorio"] = false;
 				$atributos ['tab'] = $tab ++;
-				$atributos ['anchoEtiqueta'] = 200;
+				$atributos ['anchoEtiqueta'] = 150;
 				$atributos ['evento'] = '';
 				if (isset ( $_REQUEST [$esteCampo] )) {
 					$atributos ['seleccion'] = $_REQUEST [$esteCampo];
@@ -1654,24 +1697,23 @@ class registrarForm {
 					$atributos ['seleccion'] = - 1;
 				}
 				$atributos ['deshabilitado'] = false;
-				$atributos ['columnas'] = 2;
+				$atributos ['columnas'] = 1;
 				$atributos ['tamanno'] = 1;
 				$atributos ['ajax_function'] = "";
 				$atributos ['ajax_control'] = $esteCampo;
 				$atributos ['estilo'] = "jqueryui";
-				$atributos ['validar'] = "";
+				$atributos ['validar'] = "required";
 				$atributos ['limitar'] = true;
-				$atributos ['anchoCaja'] = 30;
+				$atributos ['anchoCaja'] = 52;
 				$atributos ['miEvento'] = '';
-				$atributos ['cadena_sql'] = $this->miSql->getCadenaSql ( "actasRecicbido" );
-				$matrizItems1= array (
+				$atributos ['cadena_sql'] = $this->miSql->getCadenaSql ( "funcionarios" );
+				$matrizItems = array (
 						array (
-								'',
-								'Seleccione...' 
+								0,
+								' ' 
 						) 
 				);
-				$matrizItems = $esteRecursoDB->ejecutarAcceso ( $atributos ['cadena_sql'], "busqueda" );
-				$matrizItems=array_merge($matrizItems1,$matrizItems);
+				$matrizItems = $esteRecursoDBO->ejecutarAcceso ( $atributos ['cadena_sql'], "busqueda" );
 				$atributos ['matrizItems'] = $matrizItems;
 				// $atributos['miniRegistro']=;
 				$atributos ['baseDatos'] = "inventarios";

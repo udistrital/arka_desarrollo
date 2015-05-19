@@ -39,14 +39,14 @@ class RegistradorOrden {
 			
 			case '1' :
 				
-				//$observacion = $_REQUEST ['observaciones_reposicion'];
+				// $observacion = $_REQUEST ['observaciones_reposicion'];
 				$entrada = $_REQUEST ['id_entradaR'];
 				$salida = $_REQUEST ['id_salidaR'];
 				
 				break;
 			
 			case '2' :
-				//$observacion = $_REQUEST ['observaciones_donacion'];
+				// $observacion = $_REQUEST ['observaciones_donacion'];
 				foreach ( $_FILES as $key => $values ) {
 					
 					$archivo [$i] = $_FILES [$key];
@@ -58,7 +58,7 @@ class RegistradorOrden {
 			
 			case '3' :
 				
-				//$observacion = $_REQUEST ['observaciones_sobrante'];
+				// $observacion = $_REQUEST ['observaciones_sobrante'];
 				$entrada = $_REQUEST ['id_entradaS'];
 				$salida = $_REQUEST ['id_salidaS'];
 				
@@ -73,7 +73,7 @@ class RegistradorOrden {
 				break;
 			
 			case '4' :
-				//$observacion = $_REQUEST ['observaciones_produccion'];
+				// $observacion = $_REQUEST ['observaciones_produccion'];
 				foreach ( $_FILES as $key => $values ) {
 					
 					$archivo [$i] = $_FILES [$key];
@@ -86,7 +86,7 @@ class RegistradorOrden {
 			
 			case '5' :
 				
-				//$observacion = $_REQUEST ['observaciones_recuperacion'];
+				// $observacion = $_REQUEST ['observaciones_recuperacion'];
 				foreach ( $_FILES as $key => $values ) {
 					
 					$archivo [$i] = $_FILES [$key];
@@ -97,7 +97,7 @@ class RegistradorOrden {
 				break;
 			case '6' :
 				
-				//$observacion = $_REQUEST ['observaciones_adquisicion'];
+				// $observacion = $_REQUEST ['observaciones_adquisicion'];
 				foreach ( $_FILES as $key => $values ) {
 					
 					$archivo [$i] = $_FILES [$key];
@@ -109,7 +109,7 @@ class RegistradorOrden {
 			
 			case '7' :
 				
-				//$observacion = $_REQUEST ['observaciones_avance'];
+				// $observacion = $_REQUEST ['observaciones_avance'];
 				foreach ( $_FILES as $key => $values ) {
 					
 					$archivo [$i] = $_FILES [$key];
@@ -139,9 +139,9 @@ class RegistradorOrden {
 			} else {
 				$status = "Error al subir archivo 2	";
 			}
-
+			
 			$arreglo_clase = array (
-					$observacion='NULL',
+					$observacion = 'NULL',
 					(isset ( $entrada )) ? $entrada : 0,
 					(isset ( $salida )) ? $salida : 0,
 					($_REQUEST ['clase'] == 1) ? $_REQUEST ['id_hurtoR'] : 0,
@@ -158,7 +158,7 @@ class RegistradorOrden {
 		} else {
 			
 			$arreglo_clase = array (
-					$observacion='NULL',
+					$observacion = 'NULL',
 					(isset ( $entrada )) ? $entrada : 0,
 					(isset ( $salida )) ? $salida : 0,
 					($_REQUEST ['clase'] == 1) ? $_REQUEST ['id_hurtoR'] : 0,
@@ -188,14 +188,14 @@ class RegistradorOrden {
 				$_REQUEST ['id_ordenador'],
 				$_REQUEST ['sede'],
 				$_REQUEST ['dependencia'],
-				$_REQUEST ['supervisor'] 
+				$_REQUEST ['supervisor'],
+				$_REQUEST ['tipo_ordenador'],
+				$_REQUEST ['identificacion_ordenador'] 
 		);
 		
 		$cadenaSql = $this->miSql->getCadenaSql ( 'actualizarEntrada', $arregloDatos );
-		
 		$id_entrada = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
 		
-	 
 		if ($id_entrada) {
 			
 			redireccion::redireccionar ( 'inserto', $id_entrada [0] [0] );

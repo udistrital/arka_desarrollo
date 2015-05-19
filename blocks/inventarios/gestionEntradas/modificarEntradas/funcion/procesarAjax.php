@@ -65,6 +65,26 @@ if ($_REQUEST ['funcion'] == 'consultarDependencia') {
 
 
 
+if ($_REQUEST ['funcion'] == 'consultarActa') {
+
+
+	$cadenaSql = $this->sql->getCadenaSql ( 'consultarActas', $_REQUEST['valor'] );
+
+	$resultado = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
+
+	$resultado=$resultado[0];
+
+
+	$resultado = json_encode ( $resultado);
+
+	echo $resultado;
+}
+
+
+
+
+
+
 
 
 ?>

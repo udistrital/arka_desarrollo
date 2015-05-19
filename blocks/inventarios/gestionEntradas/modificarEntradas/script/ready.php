@@ -31,6 +31,12 @@
 
                      
                      
+                     
+                                      $("#<?php echo $this->campoSeguro('supervisor')?>").select2({
+             	 placeholder: "Search for a repository",
+              	 minimumInputLength: 5,
+              	 });
+                 
                                
           
           $("#<?php echo $this->campoSeguro('sede')?>").select2();

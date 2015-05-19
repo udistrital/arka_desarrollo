@@ -28,6 +28,13 @@
                 "sPaginationType": "full_numbers"
                  } );
                  
+                 
+                 $("#<?php echo $this->campoSeguro('supervisor')?>").select2({
+             	 placeholder: "Search for a repository",
+              	 minimumInputLength: 5,
+              	 });
+                 
+                 
          $("#<?php echo $this->campoSeguro('clase')?>").select2();
          $("#<?php echo $this->campoSeguro('acta_recibido')?>").select2();
              

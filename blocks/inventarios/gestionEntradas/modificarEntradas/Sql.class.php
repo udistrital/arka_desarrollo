@@ -157,7 +157,7 @@ class Sql extends \Sql {
 			case "proveedor_informacion" :
 				$cadenaSql = " SELECT PRO_NIT,PRO_RAZON_SOCIAL  ";
 				$cadenaSql .= " FROM PROVEEDORES ";
-				$cadenaSql .= " WHERE PRO_IDENTIFICADOR='" . $variable . "'";
+				$cadenaSql .= " WHERE PRO_NIT='" . $variable . "'";
 				
 				break;
 			
@@ -170,7 +170,7 @@ class Sql extends \Sql {
 				break;
 			
 			case "proveedores" :
-				$cadenaSql = " SELECT PRO_IDENTIFICADOR,PRO_NIT||' - '||PRO_RAZON_SOCIAL AS proveedor ";
+				$cadenaSql = " SELECT PRO_NIT,PRO_NIT||' - '||PRO_RAZON_SOCIAL AS proveedor ";
 				$cadenaSql .= " FROM PROVEEDORES ";
 				
 				break;
@@ -243,7 +243,7 @@ class Sql extends \Sql {
 				$cadenaSql = "SELECT DISTINCT ";
 				$cadenaSql .= " vigencia, clase_entrada, info_clase , ";
 				$cadenaSql .= "	tipo_contrato, numero_contrato, fecha_contrato, proveedor,";
-				$cadenaSql .= "numero_factura, fecha_factura, observaciones, acta_recibido , ordenador, sede, dependencia, supervisor  ";
+				$cadenaSql .= "numero_factura, fecha_factura, observaciones, acta_recibido , ordenador, sede, dependencia, supervisor ,tipo_ordenador, identificacion_ordenador ";
 				$cadenaSql .= "FROM entrada ";
 				$cadenaSql .= "WHERE id_entrada='" . $variable . "';";
 				
@@ -270,7 +270,7 @@ class Sql extends \Sql {
 				
 				break;
 			case "informacion_ordenador" :
-				$cadenaSql = " SELECT ORG_NOMBRE,ORG_IDENTIFICADOR  ";
+				$cadenaSql = " SELECT ORG_NOMBRE,ORG_IDENTIFICADOR,ORG_TIPO_ORDENADOR,ORG_IDENTIFICACION  ";
 				$cadenaSql .= " FROM ORDENADORES_GASTO ";
 				$cadenaSql .= " WHERE  ORG_IDENTIFICADOR='" . $variable . "' ";
 				$cadenaSql .= " AND ORG_ESTADO='A' ";
@@ -428,6 +428,8 @@ class Sql extends \Sql {
 				$cadenaSql .= "  sede='" . $variable [12] . "', ";
 				$cadenaSql .= "  dependencia='" . $variable [13] . "', ";
 				$cadenaSql .= "  supervisor='" . $variable [14] . "', ";
+				$cadenaSql .= "  tipo_ordenador='" . $variable [15] . "', ";
+				$cadenaSql .= "  identificacion_ordenador='" . $variable [16] . "', ";
 				$cadenaSql .= "  estado_entrada='1'  ";
 				$cadenaSql .= "  WHERE id_entrada='" . $variable [9] . "' ";
 				$cadenaSql .= "  RETURNING  id_entrada ";
@@ -498,6 +500,21 @@ class Sql extends \Sql {
 				$cadenaSql .= " FROM ESPACIOS_FISICOS ";
 				$cadenaSql .= " WHERE ESF_ID_SEDE='" . $variable . "' ";
 				$cadenaSql .= " AND  ESF_ESTADO='A'";
+				
+				break;
+			
+			case 'consultarActas' :
+				$cadenaSql = "SELECT *  ";
+				$cadenaSql .= "FROM registro_actarecibido  ";
+				$cadenaSql .= "WHERE  id_actarecibido='" . $variable . "';";
+				
+				break;
+			
+			case "funcionarios" :
+				
+				$cadenaSql = "SELECT FUN_IDENTIFICACION, FUN_IDENTIFICACION ||' - '|| FUN_NOMBRE ";
+				$cadenaSql .= "FROM FUNCIONARIOS ";
+				$cadenaSql .= "WHERE FUN_ESTADO='A' ";
 				
 				break;
 		}
