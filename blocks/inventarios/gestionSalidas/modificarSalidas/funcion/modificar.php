@@ -253,6 +253,7 @@ class RegistradorOrden {
 			);
 		}
 		
+		
 		if ($semaforo=='true') {
 			redireccion::redireccionar ( 'inserto', $arreglo );
 		} else {

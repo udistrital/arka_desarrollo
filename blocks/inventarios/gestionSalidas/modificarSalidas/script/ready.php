@@ -147,7 +147,7 @@
              }
           });  
           
-             $('#<?php echo $this->campoSeguro('vigencia')?>').datepicker({
+             $('#<?php echo $this->campoSeguro('anio')?>').datepicker({
 		
 			changeYear: true,
 			maxDate:0,
@@ -161,7 +161,7 @@
 			
 			}
 		});
-		$('#<?php echo $this->campoSeguro('vigencia')?>').focus(function () {
+		$('#<?php echo $this->campoSeguro('anio')?>').focus(function () {
 			$(".ui-datepicker-calendar").hide();
 			$("#ui-datepicker-div").position({
 			my: "center top",

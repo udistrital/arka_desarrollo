@@ -81,9 +81,9 @@ class registrarForm {
 				$cadenaSql = $this->miSql->getCadenaSql ( 'consulta_elementos', $_REQUEST['numero_entrada'] );
 				
 				$elementos = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
+				
 			}
 		}
-		
 		
 		$cantidaditems=count($elementos);
 		
@@ -361,7 +361,7 @@ class registrarForm {
 				$atributos ['tab'] = $tab;
 				$atributos ['tamanno'] = 1;
 				$atributos ['estilo'] = 'jqueryui';
-				$atributos ['validar'] = 'required, minSize[1],maxSize[15],custom[onlyNumberSp]';
+				$atributos ['validar'] = 'required';
 				$atributos ['limitar'] = true;
 				$atributos ['etiqueta'] = $this->lenguaje->getCadena ( $esteCampo );
 				$atributos ['anchoEtiqueta'] = 220;

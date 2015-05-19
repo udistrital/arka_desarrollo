@@ -156,7 +156,7 @@ class Sql extends \Sql {
 			
 			case "funcionarios" :
 				
-				$cadenaSql = "SELECT FUN_IDENTIFICADOR, FUN_IDENTIFICACION ||' - '|| FUN_NOMBRE ";
+				$cadenaSql = "SELECT FUN_IDENTIFICACION, FUN_IDENTIFICACION ||' - '|| FUN_NOMBRE ";
 				$cadenaSql .= "FROM FUNCIONARIOS ";
 				$cadenaSql .= "WHERE FUN_ESTADO='A' ";
 				
@@ -169,12 +169,12 @@ class Sql extends \Sql {
 			case "proveedor_informacion" :
 				$cadenaSql = " SELECT PRO_NIT,PRO_RAZON_SOCIAL  ";
 				$cadenaSql .= " FROM PROVEEDORES ";
-				$cadenaSql .= " WHERE PRO_IDENTIFICADOR='" . $variable . "'";
+				$cadenaSql .= " WHERE PRO_NIT='" . $variable . "'";
 				
 				break;
 			
 			case "proveedores" :
-				$cadenaSql = " SELECT PRO_IDENTIFICADOR,PRO_NIT||' - '||PRO_RAZON_SOCIAL AS proveedor ";
+				$cadenaSql = " SELECT PRO_NIT,PRO_NIT||' - '||PRO_RAZON_SOCIAL AS proveedor ";
 				$cadenaSql .= " FROM PROVEEDORES ";
 				
 				break;
@@ -188,11 +188,11 @@ class Sql extends \Sql {
 				$cadenaSql .= "JOIN elemento ON elemento.id_entrada = entrada.id_entrada ";
 				$cadenaSql .= "WHERE 1=1 ";
 				if ($variable [0] != '') {
-					$cadenaSql .= " AND id_entrada = '" . $variable [0] . "'";
+					$cadenaSql .= " AND entrada.id_entrada = '" . $variable [0] . "'";
 				}
 				
 				if ($variable [1] != '') {
-					$cadenaSql .= " AND fecha_registro BETWEEN CAST ( '" . $variable [1] . "' AS DATE) ";
+					$cadenaSql .= " AND entrada.fecha_registro BETWEEN CAST ( '" . $variable [1] . "' AS DATE) ";
 					$cadenaSql .= " AND  CAST ( '" . $variable [2] . "' AS DATE)  ";
 				}
 				
