@@ -167,7 +167,7 @@ class Sql extends \Sql {
 				
 				$cadenaSql = "SELECT ";
 				$cadenaSql .= "id_elemento_ind, elemento_individual.placa, elemento_individual.serie, funcionario, id_elemento_gen, ";
-				$cadenaSql .= "elemento_individual.id_salida, "; 
+				$cadenaSql .= "elemento_individual.id_salida, ";
 				$cadenaSql .= "tb_descripcion ";
 				$cadenaSql .= "FROM elemento_individual ";
 				$cadenaSql .= "JOIN elemento ON elemento.id_elemento = elemento_individual.id_elemento_gen ";
@@ -222,9 +222,6 @@ class Sql extends \Sql {
 				
 				break;
 			
-				
-	
-				
 			case "funcionario_informacion" :
 				
 				$cadenaSql = "SELECT FUN_IDENTIFICACION,  FUN_NOMBRE ";
@@ -245,4 +242,5 @@ class Sql extends \Sql {
 		}
 		return $cadenaSql;
 	}
+}
 ?>
