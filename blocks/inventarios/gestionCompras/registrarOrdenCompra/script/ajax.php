@@ -697,14 +697,14 @@ $(function() {
 
     $("#<?php echo $this->campoSeguro('selec_proveedor')?>").select2({
       	 placeholder: "Search for a repository",
-      	 minimumInputLength: 5,
+      	 minimumInputLength: 3,
 
           });
 
     
     $("#<?php echo $this->campoSeguro('rubro')?>").select2({
    	 placeholder: "Search for a repository",
-   	 minimumInputLength: 5,
+   	 minimumInputLength: 3,
 
        });
 
