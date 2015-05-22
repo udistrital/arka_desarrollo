@@ -188,7 +188,7 @@ class Sql extends \Sql {
                 break;
 
             case "buscar_entradas":
-                $cadenaSql = " SELECT id_entrada valor,id_entrada descripcion  ";
+                $cadenaSql = " SELECT id_entrada valor,consecutivo descripcion  ";
                 $cadenaSql.= " FROM entrada; ";
                 break;
 
@@ -198,7 +198,7 @@ class Sql extends \Sql {
                 break;
 
             case "buscar_salidas":
-                $cadenaSql = " SELECT id_salida valor,id_salida descripcion  ";
+                $cadenaSql = " SELECT id_salida valor,consecutivo descripcion  ";
                 $cadenaSql.= " FROM salida; ";
                 break;
 
@@ -335,23 +335,13 @@ class Sql extends \Sql {
                 break;
 
             case "consultarElementos":
-                $cadenaSql = "SELECT id_elemento,  ";
-                $cadenaSql.= "nivel,  ";
-                $cadenaSql.= "tipo_bien, ";
-                $cadenaSql.= "descripcion, ";
-                $cadenaSql.= "marca,  ";
-                $cadenaSql.= "serie, ";
-                $cadenaSql.= "cantidad, ";
-                $cadenaSql.= "valor,  ";
-                $cadenaSql.= "iva,  ";
-                $cadenaSql.= "ajuste,  ";
-                $cadenaSql.= "total_iva_con, ";
-                $cadenaSql.= "bodega, ";
-                $cadenaSql.= "dependencia, ";
-                $cadenaSql.= "funcionario ";
-                $cadenaSql.= "  FROM elemento ";
-                $cadenaSql.= "JOIN salida ON elemento.id_entrada=salida.id_entrada ";
-                $cadenaSql.= "WHERE elemento.estado='1' ";
+                $cadenaSql = "SELECT consecutivo, ";
+                $cadenaSql.= " id_elemento, elemento_nombre, tipo_bien, descripcion, marca, serie, cantidad, valor, iva, ajuste, ";
+                $cadenaSql.= " total_iva_con, bodega ";
+                $cadenaSql.= " FROM elemento  ";
+                $cadenaSql.= " JOIN entrada ON elemento.id_entrada=elemento.id_entrada ";
+                $cadenaSql.= " JOIN catalogo.catalogo_elemento ON catalogo.catalogo_elemento.elemento_id=nivel ";
+                $cadenaSql.= " WHERE elemento.estado='1'  ";
                 if ($variable ['numero_entrada'] != '') {
                     $cadenaSql .= " AND entrada.id_entrada = '" . $variable ['numero_entrada'] . "'";
                 }
@@ -402,7 +392,7 @@ class Sql extends \Sql {
                 }
                 break;
 
-           case "consultarSobranteFaltante":
+            case "consultarSobranteFaltante":
                 $cadenaSql = " SELECT estado_elemento.id_elemento_ind, tipo_falt_sobr.descripcion, placa, elemento_individual.serie, ";
                 $cadenaSql.=" salida.funcionario, salida.dependencia, ";
                 $cadenaSql.=" nombre_denuncia, ";
@@ -417,7 +407,7 @@ class Sql extends \Sql {
                     $cadenaSql.= " AND historial_elemento_individual.id_evento = '" . $variable ['IDfaltante'] . "'";
                 }
 
-              
+
                 if ($variable['fecha_inicio'] != '' && $variable ['fecha_final'] != '') {
                     $cadenaSql.= " AND estado_elemento.fecha_registro BETWEEN CAST ( '" . $variable ['fecha_inicio'] . "' AS DATE) ";
                     $cadenaSql.= " AND  CAST ( '" . $variable ['fecha_final'] . "' AS DATE)  ";
