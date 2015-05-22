@@ -1,4 +1,4 @@
-<?php
+e<?php
 
 if (!isset($GLOBALS ["autorizado"])) {
     include ("../index.php");

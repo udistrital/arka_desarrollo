@@ -125,8 +125,8 @@ class registrarForm {
                 $datos = array();
                 break;
         }
-
-// ---------------- SECCION: Parámetros Generales del Formulario ----------------------------------
+        
+    // ---------------- SECCION: Parámetros Generales del Formulario ----------------------------------
         $esteCampo = $esteBloque ['nombre'];
         $atributos ['id'] = $esteCampo;
         $atributos ['nombre'] = $esteCampo;

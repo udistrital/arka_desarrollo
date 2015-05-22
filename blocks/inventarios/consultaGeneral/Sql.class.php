@@ -256,7 +256,7 @@ class Sql extends \Sql {
 
             case "consultarEntrada" :
                 $cadenaSql = "SELECT  ";
-                $cadenaSql.= "id_entrada,  ";
+                $cadenaSql.= "consecutivo,  ";
                 $cadenaSql.= "entrada.fecha_registro, ";
                 $cadenaSql.= "clase_entrada.descripcion as clase_entrada, ";
                 $cadenaSql.= "vigencia, ";
@@ -287,7 +287,7 @@ class Sql extends \Sql {
                 }
 
                 if ($variable ['tipo_entrada'] != '') {
-                    $cadenaSql .= " AND entrada.clase_entrada = '" . $variable ['clase_entrada'] . "'";
+                    $cadenaSql .= " AND entrada.clase_entrada = '" . $variable ['tipo_entrada'] . "'";
                 }
 
                 if ($variable['fecha_inicio'] != '' && $variable ['fecha_final'] != '') {
@@ -298,10 +298,10 @@ class Sql extends \Sql {
 
             case "consultarSalida" :
                 $cadenaSql = "SELECT ";
-                $cadenaSql .= " salida.id_salida,  ";
-                $cadenaSql .= " salida.fecha,  ";
+                $cadenaSql .= " salida.consecutivo,  ";
+                $cadenaSql .= " salida.fecha_registro,  ";
                 $cadenaSql .= " salida.dependencia,  ";
-                $cadenaSql .= " salida.ubicacion,  ";
+                $cadenaSql .= " salida.sede,  ";
                 $cadenaSql .= " salida.funcionario, ";
                 $cadenaSql .= " salida.observaciones, ";
                 $cadenaSql .= " count(id_elemento_ind) as numero_elementos ";
@@ -330,7 +330,7 @@ class Sql extends \Sql {
                     $cadenaSql .= " AND salida.fecha BETWEEN CAST ( '" . $variable ['fecha_inicio'] . "' AS DATE) ";
                     $cadenaSql .= " AND  CAST ( '" . $variable ['fecha_final'] . "' AS DATE)  ";
                 }
-                $cadenaSql .= " GROUP BY salida.id_salida, salida.fecha, salida.dependencia, salida.ubicacion, salida.funcionario,salida.observaciones ";
+                $cadenaSql .= " GROUP BY salida.id_salida, salida.fecha_registro, salida.dependencia, salida.sede, salida.funcionario,salida.observaciones ";
 
                 break;
 
