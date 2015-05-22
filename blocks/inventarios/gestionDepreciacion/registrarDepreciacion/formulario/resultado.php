@@ -67,6 +67,7 @@ class registrarForm {
 
         $supervisor = $_REQUEST['usuario'];
         $cadenaSql = $this->miSql->getCadenaSql('consultarElementos', $nivel);
+        
         $elementos = $esteRecursoDB->ejecutarAcceso($cadenaSql, "busqueda");
 
         // ---------------- SECCION: Parámetros Generales del Formulario ----------------------------------
@@ -109,11 +110,7 @@ class registrarForm {
                 <th>Cantidad</th>
                 <th>Marca Elementos</th>
                 <th>Serie Elemento</th>
-                <th>Valor Unitario</th>
-                <th>Subtotal</th>
-                <th>Total con IVA</th>
-                <th>Total Ajustado</th>
-		<th>Seleccionar</th>
+       		<th>Seleccionar</th>
                 </tr>
             </thead>
             <tbody>";
@@ -127,11 +124,7 @@ class registrarForm {
                     <td><center>" . $elementos [$i]['cantidad'] . "</center></td>
                     <td><center>" . $elementos [$i]['marca'] . "</center></td>
                     <td><center>" . $elementos [$i]['serie'] . "</center></td>
-                    <td><center>" . $elementos [$i]['valor'] . "</center></td>
-                    <td><center>" . $elementos [$i]['subtotal_sin_iva'] . "</center></td>
-                    <td><center>" . $elementos [$i]['total_iva'] . "</center></td>
-                    <td><center>" . $elementos [$i]['total_iva_con'] . "</center></td>
-                    <td><center>";
+                           <td><center>";
                 // ---------------- CONTROL: Cuadro de Texto --------------------------------------------------------
                 $nombre = 'item';
                 $atributos ['id'] = $nombre;

@@ -146,14 +146,19 @@ class Sql extends \Sql {
 //-----------------------------** Cláusulas del caso de uso**----------------------------------//
 
             case "consultar_nivel_inventario" :
-                $cadenaSql = "SELECT codigo,(codigo||' - '||nombre) AS nivel ";
-                $cadenaSql .= "FROM catalogo_elemento ;";
+                $cadenaSql = "SELECT elemento_id, elemento_codigo ||' - '||elemento_nombre as nivel ";
+                $cadenaSql.= " FROM catalogo.catalogo_elemento ";
+                $cadenaSql.= " JOIN catalogo.catalogo_lista ON catalogo.catalogo_lista.lista_id=elemento_catalogo ";
+                $cadenaSql.= " WHERE elemento_id>0 ";
+                $cadenaSql.= " AND lista_activo=1";
                 break;
 
             case "consultar_grupo_contable" :
-                $cadenaSql = "SELECT grupo_numcuenta, (grupo_numcuenta||' - '||grupo_descripcion) as grupo,grupo_mesdepreciacion as meses_depreciar ";
-                $cadenaSql.= " FROM grupo_contable  ";
-                $cadenaSql.= " WHERE grupo_estado=TRUE";
+                $cadenaSql = "SELECT elemento_id, elemento_codigo ||' - '||elemento_nombre as nivel ";
+                $cadenaSql.= " FROM catalogo.catalogo_elemento ";
+                $cadenaSql.= " JOIN catalogo.catalogo_lista ON catalogo.catalogo_lista.lista_id=elemento_catalogo ";
+                $cadenaSql.= " WHERE elemento_id>0 ";
+                $cadenaSql.= " AND lista_activo=1";
                 break;
 
             case "consultar_meses" :
@@ -170,14 +175,9 @@ class Sql extends \Sql {
                 $cadenaSql.= " unidad, ";
                 $cadenaSql.= " cantidad,  ";
                 $cadenaSql.= " marca,  ";
-                $cadenaSql.= " serie, ";
-                $cadenaSql.= " valor, ";
-                $cadenaSql.= " subtotal_sin_iva,  ";
-                $cadenaSql.= " total_iva, ";
-                $cadenaSql.= " total_iva_con";
-                $cadenaSql.= " FROM elemento, salida ";
+                $cadenaSql.= " serie ";
+                $cadenaSql.= " FROM elemento ";
                 $cadenaSql.= " WHERE elemento.estado=TRUE ";
-                $cadenaSql.= " AND salida.id_entrada=elemento.id_entrada ";
                 $cadenaSql.= " AND nivel='" . $variable . "' ";
                 $cadenaSql.= " ORDER BY id_elemento ASC ";
                 break;
@@ -224,30 +224,30 @@ class Sql extends \Sql {
                 $cadenaSql.= " dep_estado, ";
                 $cadenaSql.= " dep_registro) ";
                 $cadenaSql.= " VALUES ( ";
-                $cadenaSql.= "'".$variable['elemento_general']."', ";
-                $cadenaSql.= "'".$variable['grupo_contable']."', ";
-                $cadenaSql.= "'".$variable['meses_depreciar']."', ";
-                $cadenaSql.= "'".$variable['fechaSalida']."', ";
-                $cadenaSql.= "'".$variable['fechaCorte']."', ";
-                $cadenaSql.= "'".$variable['cantidad']."', ";
-                $cadenaSql.= "'".$variable['precio']."', ";
-                $cadenaSql.= "'".$variable['valor_historico']."', ";
-                $cadenaSql.= "'".$variable['valor_ajustado']."', ";
-                $cadenaSql.= "'".$variable['cuota']."', ";
-                $cadenaSql.= "'".$variable['periodos_fecha']."', ";
-                $cadenaSql.= "'".$variable['depreciacion_acumulada']."', ";
-                $cadenaSql.= "'".$variable['circular_56']."', ";
-                $cadenaSql.= "'".$variable['cuota_inflacion']."', ";
-                $cadenaSql.= "'".$variable['api_acumulada']."', ";
-                $cadenaSql.= "'".$variable['circular_depreciacion']."', ";
-                $cadenaSql.= "'".$variable['valor_libros']."', ";
-                $cadenaSql.= "'".$variable['estado']."', ";
-                $cadenaSql.= "'".$variable['fregistro']."') ";
+                $cadenaSql.= "'" . $variable['elemento_general'] . "', ";
+                $cadenaSql.= "'" . $variable['grupo_contable'] . "', ";
+                $cadenaSql.= "'" . $variable['meses_depreciar'] . "', ";
+                $cadenaSql.= "'" . $variable['fechaSalida'] . "', ";
+                $cadenaSql.= "'" . $variable['fechaCorte'] . "', ";
+                $cadenaSql.= "'" . $variable['cantidad'] . "', ";
+                $cadenaSql.= "'" . $variable['precio'] . "', ";
+                $cadenaSql.= "'" . $variable['valor_historico'] . "', ";
+                $cadenaSql.= "'" . $variable['valor_ajustado'] . "', ";
+                $cadenaSql.= "'" . $variable['cuota'] . "', ";
+                $cadenaSql.= "'" . $variable['periodos_fecha'] . "', ";
+                $cadenaSql.= "'" . $variable['depreciacion_acumulada'] . "', ";
+                $cadenaSql.= "'" . $variable['circular_56'] . "', ";
+                $cadenaSql.= "'" . $variable['cuota_inflacion'] . "', ";
+                $cadenaSql.= "'" . $variable['api_acumulada'] . "', ";
+                $cadenaSql.= "'" . $variable['circular_depreciacion'] . "', ";
+                $cadenaSql.= "'" . $variable['valor_libros'] . "', ";
+                $cadenaSql.= "'" . $variable['estado'] . "', ";
+                $cadenaSql.= "'" . $variable['fregistro'] . "') ";
                 $cadenaSql.= " ;";
                 break;
-            
+
             case "oracle_prueba":
-                $cadenaSql= "SELECT CON_IDENTIFICADOR, CON_NOMBRE ";
+                $cadenaSql = "SELECT CON_IDENTIFICADOR, CON_NOMBRE ";
                 $cadenaSql.= "FROM CONTRATISTAS ";
                 $cadenaSql.= "WHERE CON_IDENTIFICADOR = '43542' ";
                 break;
