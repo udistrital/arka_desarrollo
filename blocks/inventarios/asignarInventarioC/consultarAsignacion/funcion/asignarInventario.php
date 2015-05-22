@@ -65,7 +65,7 @@ class RegistradorActa {
         
         $valor = 0;
 
-        for ($i = 0; $i <= 200; $i ++) {
+        for ($i = 0; $i <= 1000000; $i ++) {
             if (isset($_REQUEST ['item_sup' . $i])) {
                 $items_sup [] = $_REQUEST ['item_sup' . $i];
             }
@@ -132,7 +132,7 @@ class RegistradorActa {
         // Ahora para los elementos asociados al contratista inicialmente
         if ($elementos_contratista !== false) {
 
-            for ($i = 0; $i <= 200; $i ++) {
+            for ($i = 0; $i <= 1000000; $i ++) {
                 if (isset($_REQUEST ['item_cont' . $i])) {
                     $items_cont [] = $_REQUEST ['item_cont' . $i];
                 }
