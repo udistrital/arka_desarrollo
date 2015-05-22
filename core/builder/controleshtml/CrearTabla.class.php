@@ -28,7 +28,6 @@ class CrearTabla extends HtmlBase {
                 $this->cadenaHTML[$key] = '<table id="tablaReporte"><thead><tr>';
                 $this->cadenaHTML[$key].=$encabezadof;
                 $this->cadenaHTML[$key].='</tr></thead><tbody>';
-                for ($j = 0; $j < count($datos); $j++) {
                     foreach ($datos as $nodo => $fila) {
                         $this->cadenaHTML[$key].= '<tr>';
                         foreach ($fila as $columna => $valor) {
@@ -38,7 +37,7 @@ class CrearTabla extends HtmlBase {
                         }
                         $this->cadenaHTML[$key].= '</tr>';
                     }
-                }
+                
                 $this->cadenaHTML[$key].= '</tbody>';
                 $this->cadenaHTML[$key].= '</table>';
             } else {
