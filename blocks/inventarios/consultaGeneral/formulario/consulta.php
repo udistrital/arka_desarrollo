@@ -1,5 +1,4 @@
 e<?php
-
 if (!isset($GLOBALS ["autorizado"])) {
     include ("../index.php");
     exit();
@@ -81,50 +80,8 @@ class registrarForm {
         $esteCampo = "AgrupacionDisponibilidad";
         $atributos ['id'] = $esteCampo;
         $atributos ['leyenda'] = "Primer Filtro";
-        echo $this->miFormulario->agrupacion('inicio', $atributos);
-        {
+        echo $this->miFormulario->agrupacion('inicio', $atributos); {
 
-//---------------------- CONTROL LISTA DESPLEGABLE ----------------------//
-            $esteCampo = "selec_dependencia_Sol";
-            $atributos ['nombre'] = $esteCampo;
-            $atributos ['id'] = $esteCampo;
-            $atributos ['etiqueta'] = $this->lenguaje->getCadena($esteCampo);
-            $atributos ["etiquetaObligatorio"] = true;
-            $atributos ['tab'] = $tab ++;
-            $atributos ['seleccion'] = - 1;
-            $atributos ['anchoEtiqueta'] = 310;
-            $atributos ['evento'] = '';
-            if (isset($_REQUEST [$esteCampo])) {
-                $atributos ['valor'] = $_REQUEST [$esteCampo];
-            } else {
-                $atributos ['valor'] = '';
-            }
-            $atributos ['deshabilitado'] = false;
-            $atributos ['columnas'] = 1;
-            $atributos ['tamanno'] = 1;
-            $atributos ['ajax_function'] = "";
-            $atributos ['ajax_control'] = $esteCampo;
-            $atributos ['estilo'] = "jqueryui";
-            $atributos ['validar'] = "";
-            $atributos ['limitar'] = 1;
-            $atributos ['anchoCaja'] = 49;
-            $atributos ['miEvento'] = '';
-            $atributos ['cadena_sql'] = $this->miSql->getCadenaSql("dependencia");
-            $matrizItems = array(
-                array(
-                    0,
-                    ' '
-                )
-            );
-            $matrizItems = $esteRecursoDBO->ejecutarAcceso($atributos ['cadena_sql'], "busqueda");
-            $atributos ['matrizItems'] = $matrizItems;
-// $atributos['miniRegistro']=;
-// $atributos ['baseDatos'] = "inventarios";
-// $atributos ['cadena_sql'] = $this->miSql->getCadenaSql ( "clase_entrada" );
-// Aplica atributos globales al control
-            $atributos = array_merge($atributos, $atributosGlobales);
-            echo $this->miFormulario->campoCuadroLista($atributos);
-            unset($atributos);
 
 // ---------------------- CONTROL LISTA DESPLEGABLE ---------------------//
 
@@ -145,20 +102,12 @@ class registrarForm {
             $atributos ['deshabilitado'] = false;
             $atributos ['columnas'] = 1;
             $atributos ['tamanno'] = 1;
-            $atributos ['ajax_function'] = "";
-            $atributos ['ajax_control'] = $esteCampo;
             $atributos ['estilo'] = "jqueryui";
             $atributos ['validar'] = "";
             $atributos ['limitar'] = 1;
             $atributos ['anchoCaja'] = 49;
             $atributos ['miEvento'] = '';
             $atributos ['cadena_sql'] = $this->miSql->getCadenaSql("sede");
-            $matrizItems = array(
-                array(
-                    0,
-                    ' '
-                )
-            );
             $matrizItems = $esteRecursoDBO->ejecutarAcceso($atributos ['cadena_sql'], "busqueda");
             $atributos ['matrizItems'] = $matrizItems;
 // $atributos['miniRegistro']=;
@@ -168,7 +117,49 @@ class registrarForm {
             $atributos = array_merge($atributos, $atributosGlobales);
             echo $this->miFormulario->campoCuadroLista($atributos);
             unset($atributos);
+//---------------------------------------------------------------------------------
+            //---------------------- CONTROL LISTA DESPLEGABLE ----------------------//
+            $esteCampo = "selec_dependencia_Sol";
+            $atributos ['columnas'] = 2;
+            $atributos ['nombre'] = $esteCampo;
+            $atributos ['id'] = $esteCampo;
 
+            $atributos ['evento'] = '';
+            $atributos ['deshabilitado'] = false;
+            $atributos ["etiquetaObligatorio"] = true;
+            $atributos ['tab'] = $tab;
+            $atributos ['tamanno'] = 1;
+            $atributos ['estilo'] = 'jqueryui';
+            $atributos ['validar'] = 'required';
+            $atributos ['limitar'] = 1;
+            $atributos ['anchoCaja'] = 49;
+            $atributos ['etiqueta'] = $this->lenguaje->getCadena($esteCampo);
+            $atributos ['anchoEtiqueta'] = 310;
+            if (isset($_REQUEST [$esteCampo])) {
+                $atributos ['seleccion'] = $_REQUEST [$esteCampo];
+            } else {
+                $atributos ['seleccion'] = - 1;
+            }
+// 					$atributos ['cadena_sql'] = $this->miSql->getCadenaSql ( "dependencias" );
+
+            $matrizItems = array(
+                array(
+                    ' ',
+                    'Seleccion ... '
+                )
+            );
+
+
+            $atributos ['matrizItems'] = $matrizItems;
+
+            // Utilizar lo siguiente cuando no se pase un arreglo:
+            // $atributos['baseDatos']='ponerAquiElNombreDeLaConexión';
+            // $atributos ['cadena_sql']='ponerLaCadenaSqlAEjecutar';
+            $tab ++;
+            $atributos = array_merge($atributos, $atributosGlobales);
+            echo $this->miFormulario->campoCuadroLista($atributos);
+            unset($atributos);
+//---------------------------------------------------------------------------------
 
             $esteCampo = "nombreFuncionario";
             $atributos ['nombre'] = $esteCampo;
@@ -217,8 +208,7 @@ class registrarForm {
         $esteCampo = "AgrupacionDisponibilidad";
         $atributos ['id'] = $esteCampo;
         $atributos ['leyenda'] = "Segundo Filtro";
-        echo $this->miFormulario->agrupacion('inicio', $atributos);
-        {
+        echo $this->miFormulario->agrupacion('inicio', $atributos); {
 
 //---------------------- CONTROL LISTA DESPLEGABLE ----------------------//
             $esteCampo = "selec_tipoConsulta";
@@ -266,19 +256,18 @@ class registrarForm {
         $atributos ["estiloEnLinea"] = "display:none";
         $atributos = array_merge($atributos, $atributosGlobales);
         echo $this->miFormulario->division("inicio", $atributos);
-        unset($atributos);
-        {
+        unset($atributos); {
             $esteCampo = "AgrupacionEntrada";
             $atributos ['id'] = $esteCampo;
             $atributos ['leyenda'] = "Criterios de Búsqueda";
-            echo $this->miFormulario->agrupacion('inicio', $atributos); {
+            echo $this->miFormulario->agrupacion('inicio', $atributos);
+            {
 
                 $atributos ["id"] = "numero_entradaD";
                 $atributos ["estiloEnLinea"] = "display:none";
                 $atributos = array_merge($atributos, $atributosGlobales);
                 echo $this->miFormulario->division("inicio", $atributos);
-                unset($atributos);
-                {
+                unset($atributos); {
                     // ---- Control de Lista desplegable -----//
                     $esteCampo = 'numero_entrada';
                     $atributos ['nombre'] = $esteCampo;
@@ -333,8 +322,7 @@ class registrarForm {
                 $atributos ["estiloEnLinea"] = "display:none";
                 $atributos = array_merge($atributos, $atributosGlobales);
                 echo $this->miFormulario->division("inicio", $atributos);
-                unset($atributos);
-                {
+                unset($atributos); {
                     $esteCampo = 'vigencia_entrada';
                     $atributos ['nombre'] = $esteCampo;
                     $atributos ['id'] = $esteCampo;
@@ -390,8 +378,7 @@ class registrarForm {
                 $atributos ["estiloEnLinea"] = "display:none";
                 $atributos = array_merge($atributos, $atributosGlobales);
                 echo $this->miFormulario->division("inicio", $atributos);
-                unset($atributos);
-                {
+                unset($atributos); {
                     $esteCampo = "proveedor";
                     $atributos ['nombre'] = $esteCampo;
                     $atributos ['id'] = $esteCampo;
@@ -437,8 +424,7 @@ class registrarForm {
                 $atributos ["estiloEnLinea"] = "display:none";
                 $atributos = array_merge($atributos, $atributosGlobales);
                 echo $this->miFormulario->division("inicio", $atributos);
-                unset($atributos);
-                {
+                unset($atributos); {
                     $esteCampo = "tipo_entrada";
                     $atributos ['nombre'] = $esteCampo;
                     $atributos ['id'] = $esteCampo;
@@ -485,8 +471,7 @@ class registrarForm {
                 $atributos ["estiloEnLinea"] = "display:none";
                 $atributos = array_merge($atributos, $atributosGlobales);
                 echo $this->miFormulario->division("inicio", $atributos);
-                unset($atributos);
-                {
+                unset($atributos); {
                     $esteCampo = 'numero_salida';
                     $atributos ['nombre'] = $esteCampo;
                     $atributos ['id'] = $esteCampo;
@@ -537,8 +522,7 @@ class registrarForm {
                 $atributos ["estiloEnLinea"] = "display:none";
                 $atributos = array_merge($atributos, $atributosGlobales);
                 echo $this->miFormulario->division("inicio", $atributos);
-                unset($atributos);
-                {
+                unset($atributos); {
                     $esteCampo = 'vigencia_salida';
                     $atributos ['nombre'] = $esteCampo;
                     $atributos ['id'] = $esteCampo;
@@ -591,8 +575,7 @@ class registrarForm {
                 $atributos ["estiloEnLinea"] = "display:none";
                 $atributos = array_merge($atributos, $atributosGlobales);
                 echo $this->miFormulario->division("inicio", $atributos);
-                unset($atributos);
-                {
+                unset($atributos); {
                     $esteCampo = 'numero_placa';
                     $atributos ['nombre'] = $esteCampo;
                     $atributos ['id'] = $esteCampo;
@@ -644,8 +627,7 @@ class registrarForm {
                 $atributos ["estiloEnLinea"] = "display:none";
                 $atributos = array_merge($atributos, $atributosGlobales);
                 echo $this->miFormulario->division("inicio", $atributos);
-                unset($atributos);
-                {
+                unset($atributos); {
                     $esteCampo = 'numero_serie';
                     $atributos ['nombre'] = $esteCampo;
                     $atributos ['id'] = $esteCampo;
@@ -699,7 +681,8 @@ class registrarForm {
                 $atributos ["estiloEnLinea"] = "display:none";
                 $atributos = array_merge($atributos, $atributosGlobales);
                 echo $this->miFormulario->division("inicio", $atributos);
-                unset($atributos); {
+                unset($atributos);
+                {
                     $esteCampo = 'IDbaja';
                     $atributos ['nombre'] = $esteCampo;
                     $atributos ['id'] = $esteCampo;
@@ -750,8 +733,7 @@ class registrarForm {
                 $atributos ["estiloEnLinea"] = "display:none";
                 $atributos = array_merge($atributos, $atributosGlobales);
                 echo $this->miFormulario->division("inicio", $atributos);
-                unset($atributos);
-                {
+                unset($atributos); {
                     $esteCampo = 'estado_b';
                     $atributos ['nombre'] = $esteCampo;
                     $atributos ['id'] = $esteCampo;
@@ -803,7 +785,8 @@ class registrarForm {
                 $atributos ["estiloEnLinea"] = "display:none";
                 $atributos = array_merge($atributos, $atributosGlobales);
                 echo $this->miFormulario->division("inicio", $atributos);
-                unset($atributos); {
+                unset($atributos);
+                {
                     $esteCampo = 'IDfaltante';
                     $atributos ['nombre'] = $esteCampo;
                     $atributos ['id'] = $esteCampo;
@@ -856,7 +839,8 @@ class registrarForm {
                 $atributos ["estiloEnLinea"] = "display:none";
                 $atributos = array_merge($atributos, $atributosGlobales);
                 echo $this->miFormulario->division("inicio", $atributos);
-                unset($atributos); {
+                unset($atributos);
+                {
                     $esteCampo = 'IDhurto';
                     $atributos ['nombre'] = $esteCampo;
                     $atributos ['id'] = $esteCampo;
@@ -975,7 +959,8 @@ class registrarForm {
                 $atributos ["estiloEnLinea"] = "display:none";
                 $atributos = array_merge($atributos, $atributosGlobales);
                 echo $this->miFormulario->division("inicio", $atributos);
-                unset($atributos); {
+                unset($atributos);
+                {
                     $esteCampo = 'IDtraslado';
                     $atributos ['nombre'] = $esteCampo;
                     $atributos ['id'] = $esteCampo;

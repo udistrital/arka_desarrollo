@@ -156,9 +156,9 @@ class Sql extends \Sql {
                 break;
 
             case "dependencia" :
-                $cadenaSql = " SELECT DEP_IDENTIFICADOR, DEP_IDENTIFICADOR ||' - ' ||DEP_DEPENDENCIA  ";
-                $cadenaSql .= "FROM DEPENDENCIAS ";
-                break;
+                $cadenaSql = "SELECT DISTINCT  ESF_ID_ESPACIO, ESF_NOMBRE_ESPACIO ";
+                $cadenaSql .= " FROM ESPACIOS_FISICOS ";
+                $cadenaSql .= " WHERE  ESF_ESTADO='A'";
 
             case "clase_entrada";
                 $cadenaSql = " SELECT id_clase, descripcion ";
@@ -336,11 +336,12 @@ class Sql extends \Sql {
 
             case "consultarElementos":
                 $cadenaSql = "SELECT consecutivo, ";
-                $cadenaSql.= " id_elemento, elemento_nombre, tipo_bien, descripcion, marca, serie, cantidad, valor, iva, ajuste, ";
+                $cadenaSql.= " id_elemento, elemento_nombre, tipo_bienes.descripcion, elemento.descripcion, marca, serie, cantidad, valor, iva, ajuste, ";
                 $cadenaSql.= " total_iva_con, bodega ";
                 $cadenaSql.= " FROM elemento  ";
                 $cadenaSql.= " JOIN entrada ON elemento.id_entrada=elemento.id_entrada ";
                 $cadenaSql.= " JOIN catalogo.catalogo_elemento ON catalogo.catalogo_elemento.elemento_id=nivel ";
+                $cadenaSql.= " JOIN tipo_bienes ON tipo_bienes.id_tipo_bienes=tipo_bien ";
                 $cadenaSql.= " WHERE elemento.estado='1'  ";
                 if ($variable ['numero_entrada'] != '') {
                     $cadenaSql .= " AND entrada.id_entrada = '" . $variable ['numero_entrada'] . "'";
@@ -373,15 +374,16 @@ class Sql extends \Sql {
                 break;
 
             case "consultarTraslados":
-                $cadenaSql = "SELECT elemento_individual.id_elemento_ind, ";
-                $cadenaSql.= " nivel, marca, elemento_individual.serie, ";
-                $cadenaSql.= " salida.funcionario as funcionario_actual, historial_elemento_individual.funcionario as funcionario_anterior, ";
-                $cadenaSql.= " historial_elemento_individual.fecha_registro, elemento_individual.observaciones_traslados ";
-                $cadenaSql.= " FROM elemento_individual ";
-                $cadenaSql.= " JOIN elemento ON id_elemento_gen = elemento.id_elemento ";
-                $cadenaSql.= " JOIN salida ON salida.id_entrada = elemento.id_entrada ";
-                $cadenaSql.= " JOIN historial_elemento_individual ON historial_elemento_individual.elemento_individual = elemento_individual.id_elemento_ind ";
-                $cadenaSql.=" WHERE 1=1 ";
+                $cadenaSql = 'SELECT elemento_individual.id_elemento_ind,nivel, ';
+                $cadenaSql.= 'elemento_nombre, marca, elemento_individual.serie, pasado."FUN_NOMBRE" as funcionario_anterior, ';
+                $cadenaSql.= 'historial_elemento_individual.fecha_registro, elemento_individual.observaciones_traslados ';
+                $cadenaSql.= 'FROM elemento_individual ';
+                $cadenaSql.= 'JOIN elemento ON id_elemento_gen = elemento.id_elemento ';
+                $cadenaSql.= 'JOIN historial_elemento_individual ON historial_elemento_individual.elemento_individual = elemento_individual.id_elemento_ind  ';
+                $cadenaSql.= 'JOIN salida ON salida.id_entrada = elemento.id_entrada ';
+                $cadenaSql.= 'JOIN catalogo.catalogo_elemento ON catalogo.catalogo_elemento.elemento_id=nivel ';
+                $cadenaSql.= 'JOIN arka_parametros.arka_funcionarios pasado ON pasado."FUN_IDENTIFICACION"=historial_elemento_individual.funcionario ';
+                $cadenaSql.= ' WHERE elemento_individual.id_salida=salida.id_salida ';
                 if ($variable ['IDtraslado'] != '') {
                     $cadenaSql.= " AND historial_elemento_individual.id_evento = '" . $variable ['IDtraslado'] . "'";
                 }

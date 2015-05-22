@@ -28,6 +28,7 @@ $('#tablaReporte').dataTable( {
 } );
 
 
+         $("#<?php echo $this->campoSeguro('selec_dependencia_Sol')?>").attr('disabled','');
 
 $('#<?php echo $this->campoSeguro('sede') ?>').select2();
 $('#<?php echo $this->campoSeguro('nombreFuncionario') ?>').select2();
