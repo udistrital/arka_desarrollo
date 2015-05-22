@@ -257,7 +257,7 @@ class Sql extends \Sql {
             case "consultarEntrada" :
                 $cadenaSql = "SELECT  ";
                 $cadenaSql.= "id_entrada,  ";
-                $cadenaSql.= "fecha_registro, ";
+                $cadenaSql.= "entrada.fecha_registro, ";
                 $cadenaSql.= "clase_entrada.descripcion as clase_entrada, ";
                 $cadenaSql.= "vigencia, ";
                 $cadenaSql.= "tipo_contrato.descripcion as tipo_contrato,  ";
