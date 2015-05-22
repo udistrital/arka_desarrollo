@@ -57,6 +57,8 @@ class registrarForm {
 		$cadenaSql = $this->miSql->getCadenaSql ( 'consultarOrdenCompra', $_REQUEST ['numero_orden'] );
 		
 		$OrdenCompra = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
+		 
+
 		
 		
 		if ($OrdenCompra [0] [22] != 0) {
@@ -69,31 +71,34 @@ class registrarForm {
 		
 		
 		$datos = array (
-				'rubro' => $OrdenCompra [0] [2],
-				'obligacionesProveedor' => $OrdenCompra [0] [3],
-				'obligacionesContratista' => $OrdenCompra [0] [4],
-				'polizaA' => $OrdenCompra [0] [5],
-				'polizaB' => $OrdenCompra [0] [6],
-				'polizaC' => $OrdenCompra [0] [7],
-				'polizaD' => $OrdenCompra [0] [8],
-				'polizaE' => $OrdenCompra [0] [9],
-				'lugarEntrega' => $OrdenCompra [0] [10],
-				'destino' => $OrdenCompra [0] [11],
-				'tiempoEntrega' => $OrdenCompra [0] [12],
-				'formaPago' => $OrdenCompra [0] [13],
-				'supervision' => $OrdenCompra [0] [14],
-				'inhabilidades' => $OrdenCompra [0] [15],
-				'selec_proveedor' => $OrdenCompra [0] [16],
-				'selec_dependencia' => $OrdenCompra [0] [19],
-				'nombreCotizacion' => $OrdenCompra [0] [18],
-				'id_ordenador_oculto' => $OrdenCompra [0] [21],
-				'total_preliminar' => $OrdenCompra [0] [22],
-				'total_iva' => $OrdenCompra [0] [23],
-				'total' => $OrdenCompra [0] [24],
-				'asignacionOrdenador' => $OrdenCompra [0] [22],
-				'valorLetras_registro' => $OrdenCompra [0] [24],
+				'rubro' => $OrdenCompra [0] ['rubro'],
+				'obligacionesProveedor' => $OrdenCompra [0] ['obligaciones_proveedor'],
+				'obligacionesContratista' => $OrdenCompra [0] ['obligaciones_contratista'],
+				'polizaA' => $OrdenCompra [0] ['poliza1'],
+				'polizaB' => $OrdenCompra [0] ['poliza2'],
+				'polizaC' => $OrdenCompra [0] ['poliza3'],
+				'polizaD' => $OrdenCompra [0] ['poliza4'],
+				'polizaE' => $OrdenCompra [0] ['poliza5'],
+				'lugarEntrega' => $OrdenCompra [0] ['lugar_entrega'],
+				'destino' => $OrdenCompra [0] ['destino'],
+				'tiempoEntrega' => $OrdenCompra [0] ['tiempo_entrega'],
+				'formaPago' => $OrdenCompra [0] ['forma_pago'],
+				'supervision' => $OrdenCompra [0] ['supervision'],
+				'inhabilidades' => $OrdenCompra [0] ['inhabilidades'],
+				'selec_proveedor' => $OrdenCompra [0] ['id_proveedor'],
+				'selec_dependencia' => $OrdenCompra [0] ['id_dependencia'],
+				'nombreCotizacion' => $OrdenCompra [0] ['nombre_cotizacion'],
+				'id_ordenador_oculto' => $OrdenCompra [0] ['id_ordenador'],
+				'total_preliminar' => $OrdenCompra [0] ['subtotal'],
+				'total_iva' => $OrdenCompra [0] ['iva'],
+				'total' => $OrdenCompra [0] ['total'],
+				'asignacionOrdenador' => $OrdenCompra [0] ['id_ordenador'],
+				'valorLetras_registro' => $OrdenCompra [0] ['valor_letras'],
 				'iva' => $iva,
-				'sede'=>$OrdenCompra[0][25]		);
+				'sede'=>$OrdenCompra[0]['id_sede']		);
+		
+		
+		
 		
 		
 		
@@ -130,7 +135,11 @@ class registrarForm {
 		
 		$cadenaSql = $this->miSql->getCadenaSql ( 'informacion_ordenador', $OrdenCompra [0] [20] );
 		
+		
 		$ordenador = $esteRecursoDBO->ejecutarAcceso ( $cadenaSql, "busqueda" );
+		
+		
+		
 		
 		$datosOrdenador = array (
 				'nombreOrdenador' => $ordenador [0] [0] 
@@ -225,6 +234,28 @@ class registrarForm {
 		{
 			// ---------------- SECCION: Controles del Formulario -----------------------------------------------
 			
+			
+			$miPaginaActual = $this->miConfigurador->getVariableConfiguracion ( 'pagina' );
+				
+			$directorio = $this->miConfigurador->getVariableConfiguracion ( "host" );
+			$directorio .= $this->miConfigurador->getVariableConfiguracion ( "site" ) . "/index.php?";
+			$directorio .= $this->miConfigurador->getVariableConfiguracion ( "enlace" );
+				
+			$variable = "pagina=" . $miPaginaActual;
+			$variable = $this->miConfigurador->fabricaConexiones->crypto->codificar_url ( $variable, $directorio );
+				
+			// ---------------- CONTROL: Cuadro de Texto --------------------------------------------------------
+			$esteCampo = 'botonRegresar';
+			$atributos ['id'] = $esteCampo;
+			$atributos ['enlace'] = $variable;
+			$atributos ['tabIndex'] = 1;
+			$atributos ['estilo'] = 'textoSubtitulo';
+			$atributos ['enlaceTexto'] = $this->lenguaje->getCadena ( $esteCampo );
+			$atributos ['ancho'] = '10%';
+			$atributos ['alto'] = '10%';
+			$atributos ['redirLugar'] = true;
+			echo $this->miFormulario->enlace ( $atributos );
+			unset ( $atributos );
 			
 			
 			$esteCampo = "AgrupacionGeneral";
@@ -1344,7 +1375,7 @@ class registrarForm {
 						$atributos ['ajax_function'] = "";
 						$atributos ['ajax_control'] = $esteCampo;
 						$atributos ['estilo'] = "jqueryui";
-						$atributos ['validar'] = "required";
+						$atributos ['validar'] = " ";
 						$atributos ['limitar'] = 0;
 						$atributos ['anchoCaja'] = 30;
 						$atributos ['miEvento'] = '';
@@ -1777,35 +1808,46 @@ class registrarForm {
 					
 					// ---------------- CONTROL: Cuadro de Texto --------------------------------------------------------
 					$esteCampo = 'supervision';
-					$atributos ['id'] = $esteCampo;
 					$atributos ['nombre'] = $esteCampo;
-					$atributos ['tipo'] = 'text';
-					$atributos ['estilo'] = 'jqueryui';
-					$atributos ['marco'] = true;
-					$atributos ['estiloMarco'] = '';
-					$atributos ["etiquetaObligatorio"] = true;
-					$atributos ['columnas'] = 1;
-					$atributos ['dobleLinea'] = 0;
-					$atributos ['tabIndex'] = $tab;
+					$atributos ['id'] = $esteCampo;
 					$atributos ['etiqueta'] = $this->lenguaje->getCadena ( $esteCampo );
-					$atributos ['validar'] = 'required, minSize[1],maxSize[2000]';
-					
-					if (isset ( $_REQUEST [$esteCampo] )) {
-						$atributos ['valor'] = $_REQUEST [$esteCampo];
-					} else {
-						$atributos ['valor'] = '';
-					}
-					$atributos ['titulo'] = $this->lenguaje->getCadena ( $esteCampo . 'Titulo' );
-					$atributos ['deshabilitado'] = false;
-					$atributos ['tamanno'] = 50;
-					$atributos ['maximoTamanno'] = '';
+					$atributos ["etiquetaObligatorio"] = true;
+					$atributos ['tab'] = $tab ++;
 					$atributos ['anchoEtiqueta'] = 300;
-					$tab ++;
+					$atributos ['evento'] = '';
+					if (isset ( $_REQUEST [$esteCampo] )) {
+						$atributos ['seleccion'] = $_REQUEST [$esteCampo];
+					} else {
+						$atributos ['seleccion'] = - 1;
+					}
+					$atributos ['deshabilitado'] = false;
+					$atributos ['columnas'] = 1;
+					$atributos ['tamanno'] = 1;
+					$atributos ['ajax_function'] = "";
+					$atributos ['ajax_control'] = $esteCampo;
+					$atributos ['estilo'] = "jqueryui";
+					$atributos ['validar'] = "required";
+					$atributos ['limitar'] = true;
+					$atributos ['anchoCaja'] = 52;
+					$atributos ['miEvento'] = '';
+					$atributos ['cadena_sql'] = $this->miSql->getCadenaSql ( "funcionarios" );
+					$matrizItems = array (
+							array (
+									0,
+									' ' 
+							) 
+					);
+					$matrizItems = $esteRecursoDBO->ejecutarAcceso ( $atributos ['cadena_sql'], "busqueda" );
+					$atributos ['matrizItems'] = $matrizItems;
+					// $atributos['miniRegistro']=;
+					$atributos ['baseDatos'] = "inventarios";
+					// $atributos ['cadena_sql'] = $this->miSql->getCadenaSql ( "clase_entrada" );
 					
 					// Aplica atributos globales al control
 					$atributos = array_merge ( $atributos, $atributosGlobales );
-					echo $this->miFormulario->campoCuadroTexto ( $atributos );
+					echo $this->miFormulario->campoCuadroLista ( $atributos );
 					unset ( $atributos );
+				
 					
 					// ---------------- CONTROL: Cuadro de Texto --------------------------------------------------------
 					$esteCampo = 'inhabilidades';

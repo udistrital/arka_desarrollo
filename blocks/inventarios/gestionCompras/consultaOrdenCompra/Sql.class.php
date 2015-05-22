@@ -501,8 +501,7 @@ class Sql extends \Sql {
 				$cadenaSql .= " WHERE ESF_ID_ESPACIO='" . $variable . "' ";
 				$cadenaSql .= " AND  ESF_ESTADO='A'";
 				break;
-				
-				
+			
 			case "consultarEncargado" :
 				$cadenaSql = " SELECT ";
 				$cadenaSql .= " nombres ||' '||apellidos as nombre, cargo,asignacion  ";
@@ -759,6 +758,14 @@ class Sql extends \Sql {
 					$cadenaSql .= " AND fecha_registro BETWEEN CAST ( '" . $variable [3] . "' AS DATE) ";
 					$cadenaSql .= " AND  CAST ( '" . $variable [4] . "' AS DATE)  ";
 				}
+				
+				break;
+			
+			case "funcionarios" :
+				
+				$cadenaSql = "SELECT FUN_IDENTIFICACION, FUN_IDENTIFICACION ||' - '|| FUN_NOMBRE ";
+				$cadenaSql .= "FROM FUNCIONARIOS ";
+				$cadenaSql .= "WHERE FUN_ESTADO='A' ";
 				
 				break;
 		}
