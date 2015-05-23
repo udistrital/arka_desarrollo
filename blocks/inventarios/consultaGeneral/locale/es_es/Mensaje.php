@@ -7,11 +7,10 @@ $this->idioma ["dependencia_solicitanteTitulo"] = "Seleccione Dependencia";
 $this->idioma ["nombreFuncionario"] = "&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspNombre/Apellidos Funcionario  :";
 $this->idioma ["nombreFuncionarioTitulo"] = "Ingrese Nombre Funcionario";
 
-$this->idioma ["selec_sede"] = "&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspSede :";
+$this->idioma ["sede"] = "&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspSede :";
 
 $this->idioma ["selec_tipoConsulta"] = "&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspConsultar:";
 $this->idioma ["selec_tipoConsultaTitulo"] = "Seleccione el criterio de búsqueda";
-
 
 
 //Entrada

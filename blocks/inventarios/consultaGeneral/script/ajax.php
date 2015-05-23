@@ -43,10 +43,22 @@ $urlFinal16 = $url . $cadena16;
 
 ?>
 <script type='text/javascript'>
+   
+    $("#<?php echo $this->campoSeguro('sede') ?>").change(function () {
+        alert("cambió!");
+        return false;
+        
+        if ($("#<?php echo $this->campoSeguro('sede') ?>").val() !== '') {
+            consultarDependencia();
+        } else {
+            $("#<?php echo $this->campoSeguro('selec_dependencia_Sol') ?>").attr('disabled', '');
+        }
 
+    });
+    
     $(function () {
 
-        $("#<?php echo $this->campoSeguro('selec_sede') ?>").select2({
+        $("#<?php echo $this->campoSeguro('sede') ?>").select2({
             placeholder: "Search for a repository",
             minimumInputLength: 2,
         });
@@ -73,7 +85,7 @@ $urlFinal16 = $url . $cadena16;
         $.ajax({
             url: "<?php echo $urlFinal16 ?>",
             dataType: "json",
-            data: {valor: $("#<?php echo $this->campoSeguro('selec_sede') ?>").val()},
+            data: {valor: $("#<?php echo $this->campoSeguro('sede') ?>").val()},
             success: function (data) {
 
 
@@ -103,19 +115,5 @@ $urlFinal16 = $url . $cadena16;
         });
     }
     ;
-
-
-
-    $("#<?php echo $this->campoSeguro('selec_sede') ?>").change(function () {
-        alert("cambió!");
-        return false
-        if ($("#<?php echo $this->campoSeguro('selec_sede') ?>").val() != '') {
-            consultarDependencia();
-        } else {
-            $("#<?php echo $this->campoSeguro('selec_dependencia_Sol') ?>").attr('disabled', '');
-        }
-
-    });
-
 </script>
 
