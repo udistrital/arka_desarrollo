@@ -59,6 +59,7 @@ class registrarForm {
 
         $datos_consulta = array(
             // Filtro 1
+            'sede' => (isset($_REQUEST['sede']) ? $_REQUEST['sede'] : ''),
             'dependencia' => (isset($_REQUEST['dependencia']) ? $_REQUEST['dependencia'] : ''),
             'funcionario' => (isset($_REQUEST['nombreFuncionario']) ? $_REQUEST['nombreFuncionario'] : ''),
             //Entrada
@@ -129,7 +130,7 @@ class registrarForm {
                 break;
         }
 
-        echo $cadenaSql;
+        $cadenaSql;
 
 
 // ---------------- SECCION: Parámetros Generales del Formulario ----------------------------------
