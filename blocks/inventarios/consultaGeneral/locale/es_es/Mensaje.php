@@ -166,8 +166,8 @@ $this->idioma ["numero_ordenTitulo"] ="Ingrese Número Orden Servicio";
 $this->idioma ["nit"] ="Nit o Identificación : ";
 $this->idioma ["nitTitulo"] ="Ingrese Nit";
 
-$this->idioma ["selec_dependencia_Sol"] ="&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspDependencia Solicitante : ";
-$this->idioma ["selec_dependencia_SolTitulo"] ="Seleccione Dependecia Solicitante";
+$this->idioma ["dependencia"] ="&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspDependencia: ";
+$this->idioma ["dependenciaTitulo"] ="Seleccione Dependencia";
 
 
 

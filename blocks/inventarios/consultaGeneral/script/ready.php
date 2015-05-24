@@ -29,13 +29,11 @@ $('#tablaReporte').dataTable( {
 } );
 
 
-$("#<?php echo $this->campoSeguro('selec_dependencia_Sol') ?>").attr('disabled','');
+$("#<?php echo $this->campoSeguro('dependencia') ?>").attr('disabled','');
 
 $('#<?php echo $this->campoSeguro('sede') ?>').select2();
 $('#<?php echo $this->campoSeguro('nombreFuncionario') ?>').select2();
 $('#<?php echo $this->campoSeguro('selec_tipoConsulta') ?>').select2();
-$("#<?php echo $this->campoSeguro('selec_dependencia_Sol') ?>").select2();
-
 
 
 $("#<?php echo $this->campoSeguro('numero_entradaD') ?>").css('display','none');
@@ -52,6 +50,16 @@ $("#<?php echo $this->campoSeguro('IDfaltanteD') ?>").css('display','none');
 $("#<?php echo $this->campoSeguro('IDhurtoD') ?>").css('display','none');
 $("#<?php echo $this->campoSeguro('tipo_entradaD') ?>").css('display','none');
 $("#<?php echo $this->campoSeguro('agrupacionCriterios') ?>").css('display','none');
+
+
+$( "#<?php echo $this->campoSeguro('sede') ?>" ).change(function() {
+if($("#<?php echo $this->campoSeguro('sede') ?>").val()!=''){
+consultarDependencia();
+}else{
+$("#<?php echo $this->campoSeguro('dependencia') ?>").attr('disabled','');
+}
+});
+
 
 
 

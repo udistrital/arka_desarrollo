@@ -159,15 +159,33 @@ class Sql extends \Sql {
                 $cadenaSql = "SELECT DISTINCT  ESF_ID_ESPACIO, ESF_NOMBRE_ESPACIO ";
                 $cadenaSql .= " FROM ESPACIOS_FISICOS ";
                 $cadenaSql .= " WHERE  ESF_ESTADO='A'";
+                break;
+
+            case "consultarDependencia" :
+                $cadenaSql = " SELECT   ESF_ID_ESPACIO, ESF_NOMBRE_ESPACIO ";
+                $cadenaSql .= "FROM ESPACIOS_FISICOS  ";
+                $cadenaSql .= " WHERE ESF_ID_SEDE='" . $variable . "' ";
+                $cadenaSql .= " AND  ESF_ESTADO='A'";
+                break;
+
+            case "dependencias" :
+                $cadenaSql = "SELECT DISTINCT  ESF_ID_ESPACIO, ESF_NOMBRE_ESPACIO ";
+                $cadenaSql .= " FROM ESPACIOS_FISICOS ";
+                $cadenaSql .= " WHERE ESF_ID_SEDE='" . $variable . "' ";
+                $cadenaSql .= " AND  ESF_ESTADO='A'";
+                break;
+
 
             case "clase_entrada";
                 $cadenaSql = " SELECT id_clase, descripcion ";
                 $cadenaSql .= "FROM clase_entrada; ";
                 break;
 
-            case "sede":
-                $cadenaSql = " SELECT DISTINCT ESF_COD_SEDE,ESF_COD_SEDE || ' - ' ||ESF_SEDE ";
-                $cadenaSql.="FROM ESPACIOS_FISICOS ";
+            case "sede" :
+                $cadenaSql = "SELECT DISTINCT  ESF_ID_SEDE, ESF_SEDE ";
+                $cadenaSql .= " FROM ESPACIOS_FISICOS ";
+                $cadenaSql .= " WHERE   ESF_ESTADO='A'";
+
                 break;
 
             case 'seleccion_contratista' :
@@ -274,6 +292,10 @@ class Sql extends \Sql {
                 $cadenaSql.= "JOIN estado_entrada ON estado_entrada.id_estado=entrada.estado_entrada ";
                 $cadenaSql.= "WHERE estado_registro='TRUE' ";
                 $cadenaSql.= "AND 1=1 ";
+                if ($variable ['dependencia'] != '') {
+                    $cadenaSql .= " AND entrada.dependencia = '" . $variable ['dependencia'] . "'";
+                }
+
                 if ($variable ['numero_entrada'] != '') {
                     $cadenaSql .= " AND id_entrada = '" . $variable ['numero_entrada'] . "'";
                 }
@@ -310,6 +332,18 @@ class Sql extends \Sql {
                 $cadenaSql .= " JOIN elemento ON elemento_individual.id_elemento_gen=elemento.id_elemento ";
                 $cadenaSql .= " JOIN entrada ON elemento.id_entrada=entrada.id_entrada ";
                 $cadenaSql.= " WHERE 1=1 ";
+                if ($variable ['dependencia'] != '') {
+                    $cadenaSql .= " AND salida.dependencia = '" . $variable ['dependencia'] . "'";
+                }
+                
+                if ($variable ['sede'] != '') {
+                    $cadenaSql .= " AND salida.sede = '" . $variable ['sede'] . "'";
+                }
+
+                if ($variable ['funcionario'] != '') {
+                    $cadenaSql .= " AND salida.funcionario = '" . $variable ['funcionario'] . "'";
+                }
+
                 if ($variable ['numero_entrada'] != '') {
                     $cadenaSql .= " AND entrada.id_entrada = '" . $variable ['numero_entrada'] . "'";
                 }
@@ -339,10 +373,21 @@ class Sql extends \Sql {
                 $cadenaSql.= " id_elemento, elemento_nombre, tipo_bienes.descripcion, elemento.descripcion, marca, serie, cantidad, valor, iva, ajuste, ";
                 $cadenaSql.= " total_iva_con, bodega ";
                 $cadenaSql.= " FROM elemento  ";
-                $cadenaSql.= " JOIN entrada ON elemento.id_entrada=elemento.id_entrada ";
+                $cadenaSql.= " JOIN entrada ON elemento.id_entrada=entrada.id_entrada ";
                 $cadenaSql.= " JOIN catalogo.catalogo_elemento ON catalogo.catalogo_elemento.elemento_id=nivel ";
                 $cadenaSql.= " JOIN tipo_bienes ON tipo_bienes.id_tipo_bienes=tipo_bien ";
+                $cadenaSql.= " JOIN elemento_individual ON elemento_individual.id_elemento_gen=elemento.id_elemento ";
+                $cadenaSql.= " JOIN salida ON elemento_individual.id_salida=salida.id_salida ";
                 $cadenaSql.= " WHERE elemento.estado='1'  ";
+
+                if ($variable ['dependencia'] != '') {
+                    $cadenaSql .= " AND salida.dependencia = '" . $variable ['dependencia'] . "'";
+                }
+
+                if ($variable ['funcionario'] != '') {
+                    $cadenaSql .= " AND salida.funcionario = '" . $variable ['funcionario'] . "'";
+                }
+
                 if ($variable ['numero_entrada'] != '') {
                     $cadenaSql .= " AND entrada.id_entrada = '" . $variable ['numero_entrada'] . "'";
                 }
@@ -387,6 +432,14 @@ class Sql extends \Sql {
                 if ($variable ['IDtraslado'] != '') {
                     $cadenaSql.= " AND historial_elemento_individual.id_evento = '" . $variable ['IDtraslado'] . "'";
                 }
+                
+                 if ($variable ['dependencia'] != '') {
+                    $cadenaSql .= " AND salida.dependencia = '" . $variable ['dependencia'] . "'";
+                }
+
+                if ($variable ['funcionario'] != '') {
+                    $cadenaSql .= " AND salida.funcionario = '" . $variable ['funcionario'] . "'";
+                }
 
                 if ($variable['fecha_inicio'] != '' && $variable ['fecha_final'] != '') {
                     $cadenaSql.= " AND historial_elemento_individual.fecha_registro BETWEEN CAST ( '" . $variable ['fecha_inicio'] . "' AS DATE) ";
@@ -407,6 +460,14 @@ class Sql extends \Sql {
                 $cadenaSql.=" WHERE estado_elemento.estado_registro = 't' ";
                 if ($variable ['IDfaltante'] != '') {
                     $cadenaSql.= " AND historial_elemento_individual.id_evento = '" . $variable ['IDfaltante'] . "'";
+                }
+
+                 if ($variable ['dependencia'] != '') {
+                    $cadenaSql .= " AND salida.dependencia = '" . $variable ['dependencia'] . "'";
+                }
+
+                if ($variable ['funcionario'] != '') {
+                    $cadenaSql .= " AND salida.funcionario = '" . $variable ['funcionario'] . "'";
                 }
 
 
@@ -435,6 +496,8 @@ class Sql extends \Sql {
                     $cadenaSql.= " AND baja_elemento.fecha_registro BETWEEN CAST ( '" . $variable ['fecha_inicio'] . "' AS DATE) ";
                     $cadenaSql.= " AND  CAST ( '" . $variable ['fecha_final'] . "' AS DATE)  ";
                 }
+                
+                
                 break;
 
             case "consultarInventario" :
