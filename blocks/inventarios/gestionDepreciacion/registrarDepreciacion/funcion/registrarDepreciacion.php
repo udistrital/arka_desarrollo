@@ -29,6 +29,7 @@ class RegistradorDepreciacion {
 
     function procesarFormulario() {
 
+            
         $fechaActual = date('Y-m-d');
 
         $esteBloque = $this->miConfigurador->getVariableConfiguracion("esteBloque");
@@ -43,7 +44,7 @@ class RegistradorDepreciacion {
         // Organizar contenido del registro
         $datos_depreciacion = array(
             'elemento_general' => (isset($_REQUEST['elemento_general']) ? $_REQUEST['elemento_general'] : ''),
-            'grupo_contable' => (isset($_REQUEST['grupo_contable']) ? $_REQUEST['grupo_contable'] : ''),
+            'grupo_contable' => (isset($_REQUEST['nivel']) ? $_REQUEST['nivel'] : ''),
             'meses_depreciar' => (isset($_REQUEST['meses_depreciar']) ? $_REQUEST['meses_depreciar'] : ''),
             'fechaSalida' => (isset($_REQUEST['fechaSalida']) ? $_REQUEST['fechaSalida'] : ''),
             'fechaCorte' => (isset($_REQUEST['fechaCorte']) ? $_REQUEST['fechaCorte'] : ''),

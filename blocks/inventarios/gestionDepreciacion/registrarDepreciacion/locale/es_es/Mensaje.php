@@ -1,8 +1,8 @@
 <?php
 $this->idioma ["noDefinido"] = "Etiqueta no esta definida en locale/es_es/Mensaje.php";
 
-$this->idioma ["nivel"] ="Grupo/Nivel de Inventario : ";
-$this->idioma ["nivelTitulo"] ="Seleccione el Grupo/Nivel de Inventario";
+$this->idioma ["nivel"] ="Nivel de Inventario : ";
+$this->idioma ["nivelTitulo"] ="Seleccione el Nivel de Inventario";
 
 $this->idioma ["botonAceptar"] ="Depreciar";
 $this->idioma ["botonCancelar"] ="Cancelar";

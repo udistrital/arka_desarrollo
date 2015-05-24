@@ -147,10 +147,23 @@ class Sql extends \Sql {
 
             case "consultar_nivel_inventario" :
                 $cadenaSql = "SELECT elemento_id, elemento_codigo ||' - '||elemento_nombre as nivel ";
-                $cadenaSql.= " FROM catalogo.catalogo_elemento ";
-                $cadenaSql.= " JOIN catalogo.catalogo_lista ON catalogo.catalogo_lista.lista_id=elemento_catalogo ";
-                $cadenaSql.= " WHERE elemento_id>0 ";
-                $cadenaSql.= " AND lista_activo=1";
+                $cadenaSql.= " FROM catalogo.catalogo_elemento  ";
+                $cadenaSql.= " JOIN catalogo.catalogo_lista ON catalogo.catalogo_lista.lista_id=elemento_catalogo  ";
+                $cadenaSql.= " INNER JOIN grupo.grupo_descripcion ON grupo.grupo_descripcion.grupo_id=cast(elemento_id as character varying) ";
+                $cadenaSql.= " WHERE elemento_id>0  ";
+                $cadenaSql.= " AND lista_activo=1 ";
+                $cadenaSql.= " AND grupo.grupo_descripcion.grupo_depreciacion='t'";
+                break;
+
+            case "informacionDepreciacion":
+                $cadenaSql = "SELECT elemento_id, elemento_nombre as nivel , grupo_vidautil ";
+                $cadenaSql.= " FROM catalogo.catalogo_elemento  ";
+                $cadenaSql.= " JOIN catalogo.catalogo_lista ON catalogo.catalogo_lista.lista_id=elemento_catalogo  ";
+                $cadenaSql.= " INNER JOIN grupo.grupo_descripcion ON grupo.grupo_descripcion.grupo_id=cast(elemento_id as character varying) ";
+                $cadenaSql.= " WHERE elemento_id>0  ";
+                $cadenaSql.= " AND lista_activo=1 ";
+                $cadenaSql.= " AND grupo.grupo_descripcion.grupo_depreciacion='t' ";
+                $cadenaSql.= " AND grupo_id='" . $variable . "' ";
                 break;
 
             case "consultar_grupo_contable" :
@@ -159,13 +172,6 @@ class Sql extends \Sql {
                 $cadenaSql.= " JOIN catalogo.catalogo_lista ON catalogo.catalogo_lista.lista_id=elemento_catalogo ";
                 $cadenaSql.= " WHERE elemento_id>0 ";
                 $cadenaSql.= " AND lista_activo=1";
-                break;
-
-            case "consultar_meses" :
-                $cadenaSql = "SELECT grupo_mesdepreciacion ";
-                $cadenaSql.= " FROM grupo_contable  ";
-                $cadenaSql.= " WHERE grupo_estado=TRUE ";
-                $cadenaSql.= " AND grupo_numcuenta='" . $variable . "'; ";
                 break;
 
             case "consultarElementos" :

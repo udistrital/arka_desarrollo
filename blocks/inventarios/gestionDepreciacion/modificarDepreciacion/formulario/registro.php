@@ -287,6 +287,13 @@ class registrarForm {
 
                     echo $this->miFormulario->agrupacion('fin');
                 }
+                
+                  $atributos ["id"] = "agrupacionCriterios";
+                $atributos ["estiloEnLinea"] = "display:none";
+                $atributos = array_merge($atributos, $atributosGlobales);
+                echo $this->miFormulario->division("inicio", $atributos);
+                unset($atributos);
+                {
 
                 $esteCampo = "Formular Depreciación";
                 $atributos ['id'] = $esteCampo;
@@ -615,6 +622,9 @@ class registrarForm {
 
                     echo $this->miFormulario->agrupacion('fin');
                 }
+                    }
+                echo $this->miFormulario->division("fin");
+                unset($atributos);
 
 // ------------------Division para los botones-------------------------
                 $atributos ["id"] = "botones";
