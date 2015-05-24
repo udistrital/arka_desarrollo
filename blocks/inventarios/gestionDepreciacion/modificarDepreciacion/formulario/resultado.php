@@ -96,7 +96,7 @@ class registrarForm {
 
             echo "<thead>
                 <tr>
-                <th>ID Elemento General</th>
+                <th>ID Elemento</th>
                 <th>Grupo Contable</th>
                 <th>Meses Depreciados</th>
                 <th>Fecha Salida</th>
@@ -112,7 +112,7 @@ class registrarForm {
             for ($i = 0; $i < count($elementos); $i ++) {
 
                 $mostrarHtml = "<tr>
-                    <td><center>" . $elementos [$i]['dep_idelementogen'] . "</center></td>
+                    <td><center>" . $elementos [$i]['dep_idelemento'] . "</center></td>
                     <td><center>" . $elementos [$i]['dep_grupocontable'] . "</center></td>
                     <td><center>" . $elementos [$i]['dep_meses'] . "</center></td>
                     <td><center>" . $elementos [$i]['dep_fechasalida'] . "</center></td>
@@ -135,7 +135,7 @@ class registrarForm {
                 if (isset($_REQUEST [$esteCampo])) {
                     $atributos ['valor'] = $_REQUEST [$esteCampo];
                 } else {
-                    $atributos ['valor'] = $elementos[$i] ['dep_idelementogen'];
+                    $atributos ['valor'] = $elementos[$i] ['dep_idelemento'];
                 }
 
                 $atributos ['deshabilitado'] = false;

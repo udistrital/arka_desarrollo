@@ -78,7 +78,7 @@ class registrarForm {
 			{
 				if (isset($_REQUEST ['mensaje'])&&$_REQUEST ['mensaje'] == 'confirma') {
 					
-					$mensaje = "Se realizó la modificación a la depreciación para el conjunto de items ".$_REQUEST['elemento'];
+					$mensaje = "Se realizó la modificación a la depreciación para el item ".$_REQUEST['elemento'];
 					
 					// ---------------- CONTROL: Cuadro de Texto --------------------------------------------------------
 					$esteCampo = 'mensajeRegistro';
@@ -96,7 +96,7 @@ class registrarForm {
 				}
 				if (isset($_REQUEST ['mensaje'])&&$_REQUEST ['mensaje'] == 'error') {
 					
-					$mensaje = "No fue posible realizar la modificación de la depreciación para el conjunto de items seleccionado.";
+					$mensaje = "No fue posible realizar la modificación de la depreciación para el  item seleccionado.";
 					
 					// ---------------- CONTROL: Cuadro de Texto --------------------------------------------------------
 					$esteCampo = 'mensajeRegistro';

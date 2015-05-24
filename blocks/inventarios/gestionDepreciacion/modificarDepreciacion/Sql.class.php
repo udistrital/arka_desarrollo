@@ -164,7 +164,7 @@ class Sql extends \Sql {
                 break;
 
             case "consultarElementos_depreciados" :
-                $cadenaSql = " SELECT dep_idelementogen, ";
+                $cadenaSql = " SELECT dep_idelemento, ";
                 $cadenaSql.= " dep_grupocontable,  ";
                 $cadenaSql.= " dep_meses,  ";
                 $cadenaSql.= " dep_fechasalida,  ";
@@ -178,7 +178,7 @@ class Sql extends \Sql {
 
             case "consultarElemento_especifico" :
                 $cadenaSql = "SELECT ";
-                $cadenaSql.= " dep_id, dep_idelementogen, dep_grupocontable as grupo_contable, ";
+                $cadenaSql.= " dep_id, dep_idelemento, dep_grupocontable as grupo_contable, ";
                 $cadenaSql.= " dep_meses as meses_depreciar, ";
                 $cadenaSql.= " dep_fechasalida as fechaSalida, ";
                 $cadenaSql.= " dep_fechacorte as fechaCorte, ";
@@ -196,7 +196,7 @@ class Sql extends \Sql {
                 $cadenaSql.= " dep_libros as valor_libros";
                 $cadenaSql.= " FROM registro_depreciacion ";
                 $cadenaSql.= " WHERE dep_estado = TRUE";
-                $cadenaSql.= " AND dep_idelementogen = '" . $variable . "'";
+                $cadenaSql.= " AND dep_idelemento = '" . $variable . "'";
                 break;
 
             case "modificarDepreciacion":
@@ -220,7 +220,7 @@ class Sql extends \Sql {
                 $cadenaSql.= " dep_estado='" . $variable['estado'] . "', ";
                 $cadenaSql.= " dep_registro='" . $variable['fregistro'] . "'  ";
                 $cadenaSql.= " WHERE ";
-                $cadenaSql.= " dep_idelementogen='" . $variable['elemento_general'] . "' ";
+                $cadenaSql.= " dep_idelemento='" . $variable['elemento_general'] . "' ";
                 break;
             /*             * ***************** */
         }
