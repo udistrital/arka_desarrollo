@@ -66,8 +66,8 @@ class registrarForm {
         }
 
         $supervisor = $_REQUEST['usuario'];
-        $cadenaSql = $this->miSql->getCadenaSql('consultarElementos', $nivel);
-        
+       $cadenaSql = $this->miSql->getCadenaSql('consultarElementos', $nivel);
+
         $elementos = $esteRecursoDB->ejecutarAcceso($cadenaSql, "busqueda");
 
         // ---------------- SECCION: Parámetros Generales del Formulario ----------------------------------
@@ -104,10 +104,8 @@ class registrarForm {
 
             echo "<thead>
                 <tr>
+                <th>Id Elemento</th>
                 <th>Nivel de Inventario</th>
-                <th>Id Elemento General</th>
-                <th>Unidad</th>
-                <th>Cantidad</th>
                 <th>Marca Elementos</th>
                 <th>Serie Elemento</th>
        		<th>Seleccionar</th>
@@ -118,10 +116,8 @@ class registrarForm {
             for ($i = 0; $i < count($elementos); $i ++) {
 
                 $mostrarHtml = "<tr>
-                    <td><center>" . $elementos [$i]['nivel'] . "</center></td>
-                    <td><center>" . $elementos [$i]['id_elemento'] . "</center></td>
-                    <td><center>" . $elementos [$i]['unidad'] . "</center></td>
-                    <td><center>" . $elementos [$i]['cantidad'] . "</center></td>
+                    <td><center>" . $elementos [$i]['id_elemento_ind'] . "</center></td>
+                    <td><center>" . $elementos [$i]['elemento_nombre'] . "</center></td>
                     <td><center>" . $elementos [$i]['marca'] . "</center></td>
                     <td><center>" . $elementos [$i]['serie'] . "</center></td>
                            <td><center>";

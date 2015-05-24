@@ -44,7 +44,7 @@ class RegistradorDepreciacion {
 
 // Calculando la depreciacion
 
-        $cantidad = $_REQUEST['cantidad'];
+        $cantidad = 1;
         $meses = $_REQUEST['meses_depreciar'];
         $precio = $_REQUEST['precio'];
         $inflacion = 0;
@@ -102,7 +102,7 @@ class RegistradorDepreciacion {
             'meses_depreciar' => (isset($_REQUEST['meses_depreciar']) ? $_REQUEST['meses_depreciar'] : ''),
             'fechaSalida' => (isset($_REQUEST['fechaSalida']) ? $_REQUEST['fechaSalida'] : ''),
             'fechaCorte' => (isset($_REQUEST['fechaCorte']) ? $_REQUEST['fechaCorte'] : ''),
-            'cantidad' => (isset($_REQUEST['cantidad']) ? $_REQUEST['cantidad'] : ''),
+            'cantidad' => $cantidad,
             'precio' => number_format((float) (isset($_REQUEST['precio']) ? $_REQUEST['precio'] : ''), 2, '.', ''),
             'valor_historico' => $valor_historico,
             'valor_ajustado' => $valor_ajustado,
