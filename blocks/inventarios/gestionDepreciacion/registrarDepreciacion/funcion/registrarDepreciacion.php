@@ -41,28 +41,45 @@ class RegistradorDepreciacion {
         $conexion = "inventarios";
         $esteRecursoDB = $this->miConfigurador->fabricaConexiones->getRecursoDB($conexion);
 
-        // Organizar contenido del registro
-        $datos_depreciacion = array(
-            'elemento_general' => (isset($_REQUEST['elemento_general']) ? $_REQUEST['elemento_general'] : ''),
-            'grupo_contable' => (isset($_REQUEST['nivel']) ? $_REQUEST['nivel'] : ''),
-            'meses_depreciar' => (isset($_REQUEST['meses_depreciar']) ? $_REQUEST['meses_depreciar'] : ''),
-            'fechaSalida' => (isset($_REQUEST['fechaSalida']) ? $_REQUEST['fechaSalida'] : ''),
-            'fechaCorte' => (isset($_REQUEST['fechaCorte']) ? $_REQUEST['fechaCorte'] : ''),
-            'cantidad' => (isset($_REQUEST['cantidad']) ? $_REQUEST['cantidad'] : ''),
-            'precio' => number_format((float) (isset($_REQUEST['precio']) ? $_REQUEST['precio'] : ''), 2, '.', ''),
-            'valor_historico' => number_format((float) (isset($_REQUEST['valor_historico']) ? $_REQUEST['valor_historico'] : ''), 2, '.', ''),
-            'valor_ajustado' => number_format((float) (isset($_REQUEST['valor_ajustado']) ? $_REQUEST['valor_ajustado'] : ''), 2, '.', ''),
-            'cuota' => number_format((float) (isset($_REQUEST['cuota']) ? $_REQUEST['cuota'] : ''), 2, '.', ''),
-            'periodos_fecha' => (isset($_REQUEST['periodos_fecha']) ? $_REQUEST['periodos_fecha'] : ''),
-            'depreciacion_acumulada' => number_format((float) (isset($_REQUEST['depreciacion_acumulada']) ? $_REQUEST['depreciacion_acumulada'] : ''), 2, '.', ''),
-            'circular_56' => number_format((float) (isset($_REQUEST['circular_56']) ? $_REQUEST['circular_56'] : ''), 2, '.', ''),
-            'cuota_inflacion' => number_format((float) (isset($_REQUEST['cuota_inflacion']) ? $_REQUEST['cuota_inflacion'] : ''), 2, '.', ''),
-            'api_acumulada' => number_format((float) (isset($_REQUEST['api_acumulada']) ? $_REQUEST['api_acumulada'] : ''), 2, '.', ''),
-            'circular_depreciacion' => number_format((float) (isset($_REQUEST['circular_depreciacion']) ? $_REQUEST['circular_depreciacion'] : ''), 2, '.', ''),
-            'valor_libros' => number_format((float) (isset($_REQUEST['valor_libros']) ? $_REQUEST['valor_libros'] : ''), 2, '.', ''),
-            'estado' => TRUE,
-            'fregistro' => $fechaActual,
-        );
+        
+        // Calculando la depreciacion
+        
+        var_dump($_REQUEST);
+        exit;
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+//        // Organizar contenido del registro
+//        $datos_depreciacion = array(
+//            'elemento_general' => (isset($_REQUEST['elemento_general']) ? $_REQUEST['elemento_general'] : ''),
+//            'grupo_contable' => (isset($_REQUEST['nivel']) ? $_REQUEST['nivel'] : ''),
+//            'meses_depreciar' => (isset($_REQUEST['meses_depreciar']) ? $_REQUEST['meses_depreciar'] : ''),
+//            'fechaSalida' => (isset($_REQUEST['fechaSalida']) ? $_REQUEST['fechaSalida'] : ''),
+//            'fechaCorte' => (isset($_REQUEST['fechaCorte']) ? $_REQUEST['fechaCorte'] : ''),
+//            'cantidad' => (isset($_REQUEST['cantidad']) ? $_REQUEST['cantidad'] : ''),
+//            'precio' => number_format((float) (isset($_REQUEST['precio']) ? $_REQUEST['precio'] : ''), 2, '.', ''),
+//            'valor_historico' => number_format((float) (isset($_REQUEST['valor_historico']) ? $_REQUEST['valor_historico'] : ''), 2, '.', ''),
+//            'valor_ajustado' => number_format((float) (isset($_REQUEST['valor_ajustado']) ? $_REQUEST['valor_ajustado'] : ''), 2, '.', ''),
+//            'cuota' => number_format((float) (isset($_REQUEST['cuota']) ? $_REQUEST['cuota'] : ''), 2, '.', ''),
+//            'periodos_fecha' => (isset($_REQUEST['periodos_fecha']) ? $_REQUEST['periodos_fecha'] : ''),
+//            'depreciacion_acumulada' => number_format((float) (isset($_REQUEST['depreciacion_acumulada']) ? $_REQUEST['depreciacion_acumulada'] : ''), 2, '.', ''),
+//            'circular_56' => number_format((float) (isset($_REQUEST['circular_56']) ? $_REQUEST['circular_56'] : ''), 2, '.', ''),
+//            'cuota_inflacion' => number_format((float) (isset($_REQUEST['cuota_inflacion']) ? $_REQUEST['cuota_inflacion'] : ''), 2, '.', ''),
+//            'api_acumulada' => number_format((float) (isset($_REQUEST['api_acumulada']) ? $_REQUEST['api_acumulada'] : ''), 2, '.', ''),
+//            'circular_depreciacion' => number_format((float) (isset($_REQUEST['circular_depreciacion']) ? $_REQUEST['circular_depreciacion'] : ''), 2, '.', ''),
+//            'valor_libros' => number_format((float) (isset($_REQUEST['valor_libros']) ? $_REQUEST['valor_libros'] : ''), 2, '.', ''),
+//            'estado' => TRUE,
+//            'fregistro' => $fechaActual,
+//        );
 
 
         $cadenaSql = $this->miSql->getCadenaSql('registrarDepreciacion', $datos_depreciacion);
