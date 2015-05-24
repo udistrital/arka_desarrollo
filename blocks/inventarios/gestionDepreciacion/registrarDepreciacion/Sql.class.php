@@ -185,44 +185,48 @@ class Sql extends \Sql {
                 $cadenaSql.= " FROM elemento ";
                 $cadenaSql.= " WHERE elemento.estado=TRUE ";
                 $cadenaSql.= " AND nivel='" . $variable . "' ";
+                $cadenaSql.= " AND id_elemento NOT IN (  ";
+                $cadenaSql.= " SELECT dep_idelementogen ";
+                $cadenaSql.= " FROM registro_depreciacion ";
+                $cadenaSql.= " )";
                 $cadenaSql.= " ORDER BY id_elemento ASC ";
                 break;
 
             case "consultarElemento_especifico" :
-                $cadenaSql = "SELECT  ";
-                $cadenaSql.= " id_elemento,  ";
-                $cadenaSql.= " nivel,  ";
+                $cadenaSql = "SELECT ";
+                $cadenaSql.= " id_elemento, ";
+                $cadenaSql.= " nivel, ";
                 $cadenaSql.= " unidad, ";
-                $cadenaSql.= " cantidad,  ";
-                $cadenaSql.= " marca,  ";
+                $cadenaSql.= " cantidad, ";
+                $cadenaSql.= " marca, ";
                 $cadenaSql.= " serie, ";
                 $cadenaSql.= " valor, ";
-                $cadenaSql.= " subtotal_sin_iva,  ";
+                $cadenaSql.= " subtotal_sin_iva, ";
                 $cadenaSql.= " total_iva, ";
                 $cadenaSql.= " total_iva_con, ";
                 $cadenaSql.= " salida.fecha_registro ";
                 $cadenaSql.= " FROM elemento, salida ";
-                $cadenaSql.= " WHERE elemento.estado=TRUE ";
-                $cadenaSql.= " AND salida.id_entrada=elemento.id_entrada ";
-                $cadenaSql.= " AND id_elemento='" . $variable . "' ";
+                $cadenaSql.= " WHERE elemento.estado = TRUE ";
+                $cadenaSql.= " AND salida.id_entrada = elemento.id_entrada ";
+                $cadenaSql.= " AND id_elemento = '" . $variable . "' ";
                 $cadenaSql.= " ORDER BY id_elemento ASC ";
                 break;
 
             case "registrarDepreciacion":
                 $cadenaSql = " INSERT INTO registro_depreciacion( ";
                 $cadenaSql.= " dep_idelementogen, ";
-                $cadenaSql.= " dep_grupocontable,  ";
-                $cadenaSql.= " dep_meses,  ";
-                $cadenaSql.= " dep_fechasalida,  ";
-                $cadenaSql.= " dep_fechacorte,  ";
-                $cadenaSql.= " dep_cantidad,  ";
-                $cadenaSql.= " dep_precio,  ";
-                $cadenaSql.= " dep_valorhistorico,  ";
-                $cadenaSql.= " dep_valorajustado,  ";
-                $cadenaSql.= " dep_cuota,  ";
-                $cadenaSql.= " dep_periodo,  ";
+                $cadenaSql.= " dep_grupocontable, ";
+                $cadenaSql.= " dep_meses, ";
+                $cadenaSql.= " dep_fechasalida, ";
+                $cadenaSql.= " dep_fechacorte, ";
+                $cadenaSql.= " dep_cantidad, ";
+                $cadenaSql.= " dep_precio, ";
+                $cadenaSql.= " dep_valorhistorico, ";
+                $cadenaSql.= " dep_valorajustado, ";
+                $cadenaSql.= " dep_cuota, ";
+                $cadenaSql.= " dep_periodo, ";
                 $cadenaSql.= " dep_depacumulada, ";
-                $cadenaSql.= " dep_circular56,";
+                $cadenaSql.= " dep_circular56, ";
                 $cadenaSql.= " dep_cuotainflacion, ";
                 $cadenaSql.= " dep_apicacumulada, ";
                 $cadenaSql.= " dep_circulardeprecia, ";
@@ -249,7 +253,8 @@ class Sql extends \Sql {
                 $cadenaSql.= "'" . $variable['valor_libros'] . "', ";
                 $cadenaSql.= "'" . $variable['estado'] . "', ";
                 $cadenaSql.= "'" . $variable['fregistro'] . "') ";
-                $cadenaSql.= " ;";
+                $cadenaSql.= ";
+";
                 break;
 
             case "oracle_prueba":

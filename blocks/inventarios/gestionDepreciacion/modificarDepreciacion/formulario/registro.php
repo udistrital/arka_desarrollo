@@ -35,6 +35,7 @@ class registrarForm {
         $cadenaSql = $this->miSql->getCadenaSql('consultarElemento_especifico', $_REQUEST['item']);
         $datos_elemento = $esteRecursoDB->ejecutarAcceso($cadenaSql, "busqueda");
 
+        
         // ---------------- SECCION: Parámetros Globales del Formulario ----------------------------------
         /**
          * Atributos que deben ser aplicados a todos los controles de este formulario.
@@ -88,38 +89,30 @@ class registrarForm {
                 {
 
 // ---------------- CONTROL: Cuadro de Texto --------------------------------------------------------
-                    $esteCampo = "grupo_contable";
-                    $atributos ['nombre'] = $esteCampo;
+                    $esteCampo = 'grupo_contable';
                     $atributos ['id'] = $esteCampo;
-                    $atributos ['etiqueta'] = $this->lenguaje->getCadena($esteCampo);
+                    $atributos ['nombre'] = $esteCampo;
+                    $atributos ['tipo'] = 'text';
+                    $atributos ['estilo'] = 'jqueryui';
+                    $atributos ['marco'] = true;
+                    $atributos ['estiloMarco'] = '';
                     $atributos ["etiquetaObligatorio"] = true;
-                    $atributos ['tab'] = $tab ++;
-                    if (isset($datos_elemento[0][$esteCampo])) {
-                        $atributos ['seleccion'] = $datos_elemento[0][$esteCampo];
-                    } else {
-                        $atributos ['seleccion'] = - 1;
-                    }
-                    $atributos ['anchoEtiqueta'] = 220;
-                    $atributos ['evento'] = '';
-                    $atributos ['deshabilitado'] = false;
                     $atributos ['columnas'] = 1;
-                    $atributos ['tamanno'] = 1;
-                    $atributos ['ajax_function'] = "";
-                    $atributos ['ajax_control'] = $esteCampo;
-                    $atributos ['estilo'] = "jqueryui";
-                    $atributos ['validar'] = "required";
-                    $atributos ['limitar'] = 1;
-                    $atributos ['anchoCaja'] = 100;
-                    $atributos ['miEvento'] = '';
-                    $atributos ['cadena_sql'] = $this->miSql->getCadenaSql("consultar_grupo_contable");
-                    $matrizItems = $esteRecursoDB->ejecutarAcceso($atributos ['cadena_sql'], "busqueda");
-                    $atributos ['matrizItems'] = $matrizItems;
-                    // $atributos['miniRegistro']=;
-                    $atributos ['baseDatos'] = "inventarios";
-                    // $atributos ['cadena_sql'] = $this->miSql->getCadenaSql ( "clase_entrada" );
-                    // Aplica atributos globales al control
+                    $atributos ['dobleLinea'] = 0;
+                    $atributos ['tabIndex'] = $tab;
+                    $atributos ['etiqueta'] = $this->lenguaje->getCadena($esteCampo);
+                    $atributos ['validar'] = 'required, minSize[1],maxSize[3],custom[onlyNumberSp]';
+                    $atributos ['valor'] = $datos_elemento[0]['grupo_contable'];
+                    $atributos ['titulo'] = $this->lenguaje->getCadena($esteCampo . 'Titulo');
+                    $atributos ['deshabilitado'] = true;
+                    $atributos ['tamanno'] = 50;
+                    $atributos ['maximoTamanno'] = '';
+                    $atributos ['anchoEtiqueta'] = 220;
+                    $tab ++;
+
+// Aplica atributos globales al control
                     $atributos = array_merge($atributos, $atributosGlobales);
-                    echo $this->miFormulario->campoCuadroLista($atributos);
+                    echo $this->miFormulario->campoCuadroTexto($atributos);
                     unset($atributos);
 // --------------- FIN CONTROL : Cuadro de Texto --------------------------------------------------
 // ---------------- CONTROL: Cuadro de Texto --------------------------------------------------------
@@ -136,12 +129,7 @@ class registrarForm {
                     $atributos ['tabIndex'] = $tab;
                     $atributos ['etiqueta'] = $this->lenguaje->getCadena($esteCampo);
                     $atributos ['validar'] = 'required, minSize[1],maxSize[3],custom[onlyNumberSp]';
-
-                    if (isset($datos_elemento[0][$esteCampo])) {
-                        $atributos ['valor'] = $datos_elemento[0][$esteCampo];
-                    } else {
-                        $atributos ['valor'] = '';
-                    }
+                    $atributos ['valor'] = $datos_elemento[0]['meses_depreciar'];
                     $atributos ['titulo'] = $this->lenguaje->getCadena($esteCampo . 'Titulo');
                     $atributos ['deshabilitado'] = true;
                     $atributos ['tamanno'] = 5;
