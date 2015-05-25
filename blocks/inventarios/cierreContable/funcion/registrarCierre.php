@@ -41,29 +41,40 @@ class RegistradorCierre {
         $datosRegistro = array(
             'fechaRegistro' => $_REQUEST ['fecha_registro'],
             'vigencia' => $_REQUEST ['vigencia'],
-            'fecha_inicio' =>$_REQUEST ['fecha_inicio'],
+            'fecha_inicio' => $_REQUEST ['fecha_inicio'],
             'fecha_final' => $_REQUEST ['fecha_final'],
             'aprobacion' => $_REQUEST ['aprobacion'],
             'observaciones' => $_REQUEST ['observaciones'],
             'estado' => 1,
         );
 
-        //consultar si la vigencia y la entrada existen
-        $cadenaSql = $this->miSql->getCadenaSql('registrarCierre', $datosRegistro);
-        $estado_asignar = $esteRecursoDB->ejecutarAcceso($cadenaSql, "busqueda");
-
-        $cadenaSql = $this->miSql->getCadenaSql('actualizarEntrada', $datosRegistro);
-        $resultadoActualizacion= $esteRecursoDB->ejecutarAcceso($cadenaSql, "busqueda");
+        if ($_REQUEST['aprobacion'] == 1) {
+            //consultar si la vigencia y la entrada existen
+            $cadenaSql = $this->miSql->getCadenaSql('registrarCierre', $datosRegistro);
+            $estado_asignar = $esteRecursoDB->ejecutarAcceso($cadenaSql, "insertar");
 
 
-        $datos = array(
-            'vigencia'=>$_REQUEST['vigencia'],
-        );
+            $cadenaSql = $this->miSql->getCadenaSql('actualizarEntrada', $datosRegistro);
+            $resultadoActualizacion = $esteRecursoDB->ejecutarAcceso($cadenaSql, "insertar");
 
-        if ($estado_asignar == true && $resultadoActualizacion == true) {
-            redireccion::redireccionar('inserto', $datos);
+              $datos = array(
+                'vigencia' => $_REQUEST['vigencia'],
+                'f_inicio' => $_REQUEST['fecha_inicio'],
+                'f_final' => $_REQUEST['fecha_final'],
+            );
+
+            if ($estado_asignar == true && $resultadoActualizacion == true) {
+                redireccion::redireccionar('inserto', $datos);
+            } else {
+                redireccion::redireccionar('noInserto', $datos);
+            }
         } else {
-            redireccion::redireccionar('noInserto', $datos);
+            $datos = array(
+                'vigencia' => $_REQUEST['vigencia'],
+                'f_inicio' => $_REQUEST['fecha_inicio'],
+                'f_final' => $_REQUEST['fecha_final'],
+            );
+            redireccion::redireccionar('noAprobo', $datos);
         }
     }
 

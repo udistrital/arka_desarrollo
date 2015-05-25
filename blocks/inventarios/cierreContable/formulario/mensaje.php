@@ -78,8 +78,7 @@ class registrarForm {
 			{
 				if (isset($_REQUEST ['mensaje'])&&$_REQUEST ['mensaje'] == 'confirma') {
 					
-					$mensaje = "Se Registro el Radicado Exitosamente<br> Número: " . $_REQUEST ['numero_rad'] . "  
-							<br>Fecha Registro: " . $_REQUEST ['fecha_registro'];
+					$mensaje = "Se Registro el Cierre Contable<br> para la Vigencia: " . $_REQUEST ['vigencia']." entre el periodo ".$_REQUEST['inicio']." a ".$_REQUEST['fin'];
 					
 					// ---------------- CONTROL: Cuadro de Texto --------------------------------------------------------
 					$esteCampo = 'mensajeRegistro';
@@ -97,7 +96,7 @@ class registrarForm {
 				}
 				if (isset($_REQUEST ['mensaje'])&&$_REQUEST ['mensaje'] == 'error') {
 					
-					$mensaje = "No Se Pudo Hacer Registro del Radicado";
+					$mensaje = "No Se Pudo Realizar el Cierre Contable";
 					
 					// ---------------- CONTROL: Cuadro de Texto --------------------------------------------------------
 					$esteCampo = 'mensajeRegistro';
@@ -114,9 +113,9 @@ class registrarForm {
 					// --------------- FIN CONTROL : Cuadro de Texto --------------------------------------------------
 				}
 				
-				if (isset($_REQUEST['errores'])&&$_REQUEST ['errores'] == 'noItems') {
+				if (isset($_REQUEST['errores'])&&$_REQUEST ['errores'] == 'noAprobo') {
 					
-					$mensaje = "No se Agregaron Items Al Radicado";
+					$mensaje = "No se Aprobó el Cierre Contable";
 					
 					// ---------------- CONTROL: Cuadro de Texto --------------------------------------------------------
 					$esteCampo = 'mensajeRegistro';

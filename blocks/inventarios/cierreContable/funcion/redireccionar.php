@@ -18,8 +18,9 @@ class redireccion {
                 $variable = "pagina=" . $miPaginaActual;
                 $variable .= "&opcion=mensaje";
                 $variable .= "&mensaje=confirma";
-                $variable .= "&numero_rad=" . $valor [0];
-                $variable .= "&fecha_registro=" . $valor [1];
+                $variable .= "&vigencia=" . $valor ['vigencia'];
+                $variable .= "&inicio=" . $valor ['f_inicio'];
+                $variable .= "&fin=" . $valor ['f_final'];
                 break;
 
             case "noInserto" :
@@ -28,11 +29,11 @@ class redireccion {
                 $variable .= "&mensaje=error";
                 break;
 
-            case "noItems" :
+            case "noAprobo" :
                 $variable = "pagina=" . $miPaginaActual;
                 $variable .= "&opcion=mensaje";
                 $variable .= "&mensaje=otros";
-                $variable .= "&errores=noItems";
+                $variable .= "&errores=noAprobo";
                 break;
 
             case "regresar" :
