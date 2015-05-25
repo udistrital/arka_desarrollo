@@ -56,37 +56,31 @@ class registrarForm {
         $conexion = "sicapital";
         $esteRecursoDBO = $this->miConfigurador->fabricaConexiones->getRecursoDB($conexion);
 
-        if (isset($_REQUEST ['responsable']) && $_REQUEST ['responsable'] != '') {
-            $funcionario = $_REQUEST ['responsable'];
+
+
+        if (isset($_REQUEST ['vigencia']) && $_REQUEST ['vigencia'] != '') {
+            $vigencia = $_REQUEST ['vigencia'];
         } else {
-            $funcionario = '';
+            $vigencia = '';
         }
 
-        if (isset($_REQUEST ['placa']) && $_REQUEST ['placa'] != '') {
-            $placa = $_REQUEST ['placa'];
+        if (isset($_REQUEST ['fecha_inicio']) && $_REQUEST ['fecha_inicio'] != '') {
+            $fecha_inicio = $_REQUEST ['fecha_inicio'];
         } else {
-            $placa = '';
+            $fecha_inicio = '';
         }
 
-        if (isset($_REQUEST ['serial']) && $_REQUEST ['serial'] != '') {
-            $serial = $_REQUEST ['serial'];
+        if (isset($_REQUEST ['fecha_final']) && $_REQUEST ['fecha_final'] != '') {
+            $fecha_final = $_REQUEST ['fecha_final'];
         } else {
-            $serial = '';
-        }
-
-        if (isset($_REQUEST ['dependencia']) && $_REQUEST ['dependencia'] != '') {
-            $dependencia = $_REQUEST ['dependencia'];
-        } else {
-            $dependencia = '';
+            $fecha_final = '';
         }
 
         $arreglo = array(
-            $funcionario,
-            $serial,
-            $placa,
-            $dependencia
+            'vigencia' => $vigencia,
+            'fecha_inicio' => $fecha_inicio,
+            'fecha_final' => $fecha_final
         );
-
         $cadenaSql = $this->miSql->getCadenaSql('consultarElemento', $arreglo);
         $elemento = $esteRecursoDB->ejecutarAcceso($cadenaSql, "busqueda");
 
@@ -157,47 +151,144 @@ class registrarForm {
 
             echo "<thead>
                 <tr>
-				  	<th>Número Salida y/o<br>Vigencia</th>	
-					<th># ID Elemento </th>	
-                  	<th># Número Placa</th>
-                    <th># Número Serial</th>
-                    <th>Nombre Funcionario</th>
-					<th>Identificación<br>Funcionario</th>
-					<th>Tipo Bien</th>
-			        <th>Generar Baja<br>Elemento</th>
+		<th>Número Salida y/o<br>Vigencia</th>	
+             		<th># ID Elemento </th>	
+                <th># Número Placa</th>
+                <th># Número Serial</th>
+                <th>Identificación<br>Funcionario</th>
+		<th>Nombre<br>Funcionario</th>
+		<th>Tipo Bien</th>
+		<th>Aprobar Baja<br>Elemento</th>
                 </tr>
             </thead>
             <tbody>";
 
             for ($i = 0; $i < count($elemento); $i ++) {
-                $variable = "pagina=" . $miPaginaActual; // pendiente la pagina para modificar parametro
-                $variable .= "&opcion=trasladarElemento";
-                $variable .= "&id_elemento_ind=" . $elemento [$i] [0];
-                $variable = $this->miConfigurador->fabricaConexiones->crypto->codificar_url($variable, $directorio);
-
                 $mostrarHtml = "<tr>
 		    <td><center>" . $elemento [$i] [5] . "</center></td>
+                 
                     <td><center>" . $elemento [$i] [4] . "</center></td>
 		    <td><center>" . $elemento [$i] [1] . "</center></td>
                     <td><center>" . $elemento [$i] [2] . "</center></td>
                     <td><center>" . $elemento [$i] ['funcionario'] . "</center></td>
                     <td><center>" . $elemento [$i] ['fun_nombre'] . "</center></td>
                     <td><center>" . $elemento [$i] [6] . "</center></td>
-                    <td><center>
-                    	<a href='" . $variable . "'>
-                            <img src='" . $rutaBloque . "/css/images/baja.png' width='15px'>
-                        </a>
-                  	</center> </td>
-           
-                </tr>";
+                    <td><center>";
+                // ---------------- CONTROL: Cuadro de Texto --------------------------------------------------------
+                $nombre = 'item' . $i;
+                $atributos ['id'] = $nombre;
+                $atributos ['nombre'] = $nombre;
+                $atributos ['marco'] = true;
+                $atributos ['estiloMarco'] = true;
+                $atributos ["etiquetaObligatorio"] = true;
+                $atributos ['columnas'] = 1;
+                $atributos ['dobleLinea'] = 1;
+                $atributos ['tabIndex'] = $tab;
+                $atributos ['etiqueta'] = '';
+                if (isset($_REQUEST [$esteCampo])) {
+                    $atributos ['valor'] = $_REQUEST [$esteCampo];
+                } else {
+                    $atributos ['valor'] = $elemento[$i] [0];
+                }
+
+                $atributos ['deshabilitado'] = false;
+                $tab ++;
+
+                // Aplica atributos globales al control
+                $atributos = array_merge($atributos, $atributosGlobales);
+                $mostrarHtml .= $this->miFormulario->campoCuadroSeleccion($atributos);
+
+                $mostrarHtml .= "</center></td>
+                    </tr>";
                 echo $mostrarHtml;
                 unset($mostrarHtml);
-                unset($variable);
+                unset($atributos);
             }
 
             echo "</tbody>";
-
             echo "</table>";
+
+            // ------------------Division para los botones-------------------------
+            $atributos ["id"] = "botones";
+            $atributos ["estilo"] = "marcoBotones";
+            echo $this->miFormulario->division("inicio", $atributos);
+
+            // -----------------CONTROL: Botón ----------------------------------------------------------------
+            $esteCampo = 'botonAceptar';
+            $atributos ["id"] = $esteCampo;
+            $atributos ["tabIndex"] = $tab;
+            $atributos ["tipo"] = '';
+            // submit: no se coloca si se desea un tipo button genérico
+            $atributos ['submit'] = 'true';
+            $atributos ["estiloMarco"] = '';
+            $atributos ["estiloBoton"] = 'jqueryui';
+            // verificar: true para verificar el formulario antes de pasarlo al servidor.
+            $atributos ["verificar"] = '';
+            $atributos ["tipoSubmit"] = 'jquery'; // Dejar vacio para un submit normal, en este caso se ejecuta la función submit declarada en ready.js
+            $atributos ["valor"] = $this->lenguaje->getCadena($esteCampo);
+            $atributos ['nombreFormulario'] = $esteBloque ['nombre'];
+            $tab ++;
+
+            // Aplica atributos globales al control
+            $atributos = array_merge($atributos, $atributosGlobales);
+            echo $this->miFormulario->campoBoton($atributos);
+            // -----------------FIN CONTROL: Botón -----------------------------------------------------------
+
+            echo $this->miFormulario->division('fin');
+
+            echo $this->miFormulario->marcoAgrupacion('fin');
+
+            // ---------------- FIN SECCION: Controles del Formulario -------------------------------------------
+            // ----------------FINALIZAR EL FORMULARIO ----------------------------------------------------------
+            // Se debe declarar el mismo atributo de marco con que se inició el formulario.
+            // -----------------FIN CONTROL: Botón -----------------------------------------------------------
+            // ------------------Fin Division para los botones-------------------------
+            // ------------------- SECCION: Paso de variables ------------------------------------------------
+
+            /**
+             * En algunas ocasiones es útil pasar variables entre las diferentes páginas.
+             * SARA permite realizar esto a través de tres
+             * mecanismos:
+             * (a). Registrando las variables como variables de sesión. Estarán disponibles durante toda la sesión de usuario. Requiere acceso a
+             * la base de datos.
+             * (b). Incluirlas de manera codificada como campos de los formularios. Para ello se utiliza un campo especial denominado
+             * formsara, cuyo valor será una cadena codificada que contiene las variables.
+             * (c) a través de campos ocultos en los formularios. (deprecated)
+             */
+            // En este formulario se utiliza el mecanismo (b) para pasar las siguientes variables:
+            // Paso 1: crear el listado de variables
+
+            $valorCodificado = "actionBloque=" . $esteBloque ["nombre"];
+            $valorCodificado .= "&pagina=" . $this->miConfigurador->getVariableConfiguracion('pagina');
+            $valorCodificado .= "&bloque=" . $esteBloque ['nombre'];
+            $valorCodificado .= "&bloqueGrupo=" . $esteBloque ["grupo"];
+            $valorCodificado .= "&opcion=aprobarBaja";
+
+            /*             * supervisor
+             * SARA permite que los nombres de los campos sean dinámicos.
+             * Para ello utiliza la hora en que es creado el formulario para
+             * codificar el nombre de cada campo. Si se utiliza esta técnica es necesario pasar dicho tiempo como una variable:
+             * (a) invocando a la variable $_REQUEST ['tiempo'] que se ha declarado en ready.php o
+             * (b) asociando el tiempo en que se está creando el formulario
+             */
+            $valorCodificado .= "&campoSeguro=" . $_REQUEST ['tiempo'];
+            $valorCodificado .= "&tiempo=" . time();
+            // Paso 2: codificar la cadena resultante
+            $valorCodificado = $this->miConfigurador->fabricaConexiones->crypto->codificar($valorCodificado);
+
+            $atributos ["id"] = "formSaraData"; // No cambiar este nombre
+            $atributos ["tipo"] = "hidden";
+            $atributos ['estilo'] = '';
+            $atributos ["obligatorio"] = false;
+            $atributos ['marco'] = true;
+            $atributos ["etiqueta"] = "";
+            $atributos ["valor"] = $valorCodificado;
+            echo $this->miFormulario->campoCuadroTexto($atributos);
+            unset($atributos);
+
+            $atributos ['marco'] = true;
+            $atributos ['tipoEtiqueta'] = 'fin';
+            echo $this->miFormulario->formulario($atributos);
         } else {
 
             $mensaje = "No Se Encontraron<br>Elementos Asociados.";

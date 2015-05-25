@@ -288,26 +288,18 @@ class Sql extends \Sql {
                 $cadenaSql .= "JOIN salida ON salida.id_salida = elemento_individual.id_salida ";
                 $cadenaSql .= "JOIN tipo_bien ON tipo_bien.tb_idbien = elemento.tipo_bien ";
                 $cadenaSql .= 'JOIN arka_parametros.arka_funcionarios ON arka_parametros.arka_funcionarios."FUN_IDENTIFICACION" = salida.funcionario ';
-                //$cadenaSql .= "left JOIN dependencia ON dependencia.id_dependencia = funcionario.dependencia ";
                 $cadenaSql .= "WHERE 1=1 ";
                 $cadenaSql .= "AND elemento.tipo_bien <> 1 ";
-                $cadenaSql .= "AND id_elemento_ind NOT IN (SELECT id_elemento_ind FROM baja_elemento) ";
+                $cadenaSql .= "AND id_elemento_ind IN (SELECT id_elemento_ind FROM baja_elemento) ";
 
-                if ($variable [0] != '') {
-                    $cadenaSql .= " AND funcionario = '" . $variable [0] . "'";
-                }
-                if ($variable [1] != '') {
-                    $cadenaSql .= " AND  elemento_individual.serie= '" . $variable [1] . "'";
-                }
-                if ($variable [2] != '') {
-                    $cadenaSql .= " AND  elemento_individual.placa= '" . $variable [2] . "'";
-                }
-                if ($variable [3] != '') {
-                    $cadenaSql .= " AND  dependencia= '" . $variable [3] . "'";
+                if ($variable['fecha_inicio'] != '' && $variable ['fecha_final'] != '') {
+                    $cadenaSql .= " AND baja_elemento.fecha_registro BETWEEN CAST ( '" . $variable ['fecha_inicio'] . "' AS DATE) ";
+                    $cadenaSql .= " AND  CAST ( '" . $variable ['fecha_final'] . "' AS DATE)  ";
                 }
 
-// 				$cadenaSql .= " LIMIT 10 ;";
-
+                if ($variable ['vigencia'] != '') {
+                    $cadenaSql .= " AND salida.vigencia= '" . $variable ['vigencia'] . "'";
+                }
                 break;
 
             case "seleccion_funcionario_anterior" :
@@ -363,7 +355,23 @@ class Sql extends \Sql {
 
             case "vigencia":
                 $cadenaSql = " SELECT DISTINCT vigencia, vigencia as nombrevigencia ";
-                $cadenaSql.= "FROM entrada; ";
+                $cadenaSql.= "FROM salida; ";
+                break;
+
+            case "registroDocumento_Aprobacion":
+                $cadenaSql = " INSERT INTO aprobar_baja ( ";
+                $cadenaSql.= "fecha_registro, ruta_acto, nombre_acto, estado_registro) ";
+                $cadenaSql.= " VALUES ('" . $variable['fecha'] . "', ";
+                $cadenaSql.= " '" . $variable['destino'] . "', ";
+                $cadenaSql.= " '" . $variable['nombre'] . "', '" . $variable['estado'] . "') ";
+                $cadenaSql.= " RETURNING id_aprobacion ;";
+                break;
+            
+              case "actualizarAprobar":
+                $cadenaSql = " UPDATE baja_elemento ";
+                $cadenaSql.= " SET estado_aprobacion='".$variable['estado']."', ";
+                $cadenaSql.= "  id_aprobacion='".$variable['id_aprobacion']."' ";
+                $cadenaSql.= " WHERE id_elemento_ind='".$variable['id_elemento']."' ";
                 break;
         }
         return $cadenaSql;

@@ -26,9 +26,9 @@
         });
 
         
-         $("#<?php echo $this->campoSeguro('placa')?>").select2({
+         $("#<?php echo $this->campoSeguro('vigencia')?>").select2({
              	 placeholder: "Search for a repository",
-              	 minimumInputLength: 3,
+              	 minimumInputLength: 2,
               	 });
 
                 
@@ -84,12 +84,17 @@
 			  }
 			
 	   });
+           
+           
 	   
 	          $('#tablaTitulos').dataTable( {
                 "sPaginationType": "full_numbers"
                  } );
 	   
           
+                 var table = $('#tablaTitulos').DataTable();
+
+   $(function(){$("#tablaTitulos").click(function(){$('.case').attr('checked',this.checked);});$(".case").click(function(){if($(".case").length==$(".case:checked").length){$("#tablaTitulos").attr("checked","checked");}else{$("#tablaTitulos").removeAttr("checked");}});});
 
 
 
