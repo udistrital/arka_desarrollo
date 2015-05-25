@@ -147,7 +147,7 @@ class Sql extends \Sql {
                 break;
 
 //-----------------------------** Cláusulas del caso de uso**----------------------------------//
-            //**************** Para Compras *******************//
+//**************** Para Compras *******************//
             case "registroDocumento_compra":
                 $cadenaSql = " INSERT INTO documento_radicarasignar_compra( ";
                 $cadenaSql .=" compra_idunico, ";
@@ -180,9 +180,30 @@ class Sql extends \Sql {
                 $cadenaSql .= "RETURNING  compra_idcompra; ";
                 break;
 
+            case "registrarCierre":
+                $cadenaSql = " INSERT INTO cierre_contable( ";
+                $cadenaSql.= "vigencia_cierre, cierre_fecha_inicio, cierre_fecha_final,  ";
+                $cadenaSql.= "aprobacion, cierre_observaciones, estado_registro, fecha_cierre) ";
+                $cadenaSql.= "VALUES ( ";
+                $cadenaSql.= " '" . $variable['vigencia'] . "',";
+                $cadenaSql.= " '" . $variable['fecha_inicio'] . "',";
+                $cadenaSql.= " '" . $variable['fecha_final'] . "',";
+                $cadenaSql.= " '" . $variable['aprobacion'] . "',";
+                $cadenaSql.= " '" . $variable['observaciones'] . "',";
+                $cadenaSql.= " '" . $variable['estado'] . "',";
+                $cadenaSql.= " '" . $variable['fechaRegistro'] . "')";
+                break;
+
+            case "actualizarEntrada":
+                $cadenaSql = " UPDATE entrada ";
+                $cadenaSql.= " SET cierre_contable='TRUE' ";
+                $cadenaSql.= " AND fecha_registro BETWEEN CAST ( '" . $variable ['fecha_inicio'] . "' AS DATE) ";
+                $cadenaSql.= " AND  CAST ( '" . $variable ['fecha_final'] . "' AS DATE)  ";
+
             case "vigencia":
                 $cadenaSql = " SELECT DISTINCT vigencia, vigencia as nombrevigencia ";
-                $cadenaSql.= "FROM entrada; ";
+                $cadenaSql.= "FROM entrada;
+                        ";
                 break;
         }
         return $cadenaSql;
