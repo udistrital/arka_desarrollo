@@ -119,4 +119,34 @@ $(document).ready(function () {
             console.log('onAfterRowClick');
         },
     });
+
+
+    $("#depreciacion").change(function () {
+        switch ($("#depreciacion").val())
+        {
+            case '0':
+                $("#descripcionDepreciacion").css('display', 'none');
+                $("#cuentaDebito").val("");
+                $("#cuentaCredito").val("");
+                $("#vidautil").val("");
+                break;
+
+            case '1':
+                $("#descripcionDepreciacion").css('display', 'block');
+                break;
+
+            default:
+                $("#descripcionDepreciacion").css('display', 'none');
+                $("#cuentaDebito").val("");
+                $("#cuentaCredito").val("");
+                $("#vidautil").val("");
+                break;
+        }
+    });
+
+
+
+
 });
+
+

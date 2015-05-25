@@ -291,8 +291,8 @@ class Formulario {
         //$atributos ['miEvento'] = 'onchange';
         //$atributos ['cadena_sql'] = $this->sql->getCadenaSql("boolean");
         $matrizItems = array(
+            array(1, 'SI'),
             array(0, 'NO'),
-            array(1, 'SI')
         );
         //$matrizItems = $this->esteRecursoDB2->ejecutarAcceso($atributos ['cadena_sql'], "busqueda");
         $atributos ['matrizItems'] = $matrizItems;

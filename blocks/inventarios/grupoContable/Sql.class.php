@@ -243,7 +243,7 @@ class Sql extends \Sql {
                 $cadenaSql = " UPDATE grupo.catalogo_elemento ";
                 $cadenaSql .= " SET  elemento_padre='" . $variable['idPadre'] . "', ";
                 $cadenaSql .= " elemento_codigo='" . $variable['id'] . "', ";
-                $cadenaSql .= " elemento_catalogo='" . $variable['idCatalogo'] . "', ";
+                //$cadenaSql .= " elemento_catalogo='" . $variable['idCatalogo'] . "', ";
                 $cadenaSql .= " elemento_nombre='" . $variable['nombreElemento'] . "' ";
                 $cadenaSql .= " WHERE elemento_id='" . $variable['idElemento'] . "' ";
 

@@ -330,7 +330,8 @@ $autocompletar = $url . $cadena10;
 
 
     function autocompletar(elemento) {
-  if (typeof listaIds['lidPadre'] == 'undefined') {
+
+        if (typeof listaIds['lidPadre'] == 'undefined') {
 
 
             $("#lidPadre").attr('disabled', true);
@@ -367,14 +368,19 @@ $autocompletar = $url . $cadena10;
         $("#lidPadre").autocomplete({
             source: listaNombres['lidPadre']
         });
+        
 
         $("#lidPadre").change(function () {
 
-            var indice = listaNombres['lidPadre'].indexOf(this.value);
-            if (typeof listaIds['lidPadre'][indice] == 'undefined')
-                $("#idPadre").val($("#lidPadre").val());
-            else
-                $("#idPadre").val(listaIds['lidPadre'][indice]);
+            var indice = listaNombres['lidPadre'].indexOf($("#lidPadre").val());
+        if (typeof listaIds['lidPadre'][indice] == 'undefined'){
+            $("#idPadre").val($("#lidPadre").val());
+
+
+            }else{
+                    $("#idPadre").val(listaIds['lidPadre'][indice]);
+
+        }
 
 
         });
@@ -387,8 +393,6 @@ $autocompletar = $url . $cadena10;
         else
             $("#idPadre").val(listaIds['lidPadre'][indice]);
 
-
-
         return 0;
 
 
@@ -397,20 +401,22 @@ $autocompletar = $url . $cadena10;
 
     function cambiarPadre() {
         var indice = listaNombres['lidPadre'].indexOf($("#lidPadre").val());
-        if (typeof listaIds['lidPadre'][indice] == 'undefined')
+        if (typeof listaIds['lidPadre'][indice] == 'undefined'){
             $("#idPadre").val($("#lidPadre").val());
-        else
+
+            
+    }else{
             $("#idPadre").val(listaIds['lidPadre'][indice]);
+
+        }
     }
 
     function validarValorLista(valor, id) {
 
-
         if (valor == 0)
             return true;
         autocompletar();
-        if (typeof listaNombres['lidPadre'] == 'undefined')
-            autocompletar();
+        if (typeof listaNombres['lidPadre'] == 'undefined') autocompletar();
         return listaNombres['lidPadre'].indexOf(String(valor)) < 0 ? false : true;
     }
 
@@ -435,7 +441,7 @@ $autocompletar = $url . $cadena10;
             $("#descripcionDepreciacion").css('display', 'block');
         }
         $('#depreciacion').val(depreciacion);
-        
+
         $('#vidautil').val(vidautil);
         $('#cuentaDebito').val(cuentaDebito);
         $('#cuentaCredito').val(cuentaCredito);

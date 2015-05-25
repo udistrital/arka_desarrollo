@@ -55,7 +55,7 @@ $this->idioma["creacionExitosa"]="Creación exitosa";
 $this->idioma['operacionExitosa']="Operación Exitosa";
 
 
-$this->idioma["id"]="Código Cuenta Contable";
+$this->idioma["id"]="Código Elemento";
 $this->idioma["idPadre"]="Identificador Padre";
 $this->idioma["idPadreTitulo"]="Añadir Identificador";
 $this->idioma["idTitulo"]="Ingrese el Identificador Elemento";
@@ -71,7 +71,7 @@ $this->idioma["cuentaDebitoTitulo"]="";
 $this->idioma["cuentaCreditoTitulo"]="";
 $this->idioma["vidautil"]="Vida Útil";
 $this->idioma["vidautilTitulo"]="Digite Número de Meses";
-$this->idioma["nombreElemento"]="Nombre Cuenta Contable";
+$this->idioma["nombreElemento"]="Nombre Elemento";
 $this->idioma["nombreElementoTitulo"]="";
 $this->idioma["depreciacionTitulo"]="";
 $this->idioma["depreciacion"]="¿Aplica Depreciación?";
