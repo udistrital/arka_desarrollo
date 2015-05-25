@@ -291,6 +291,7 @@ class Sql extends \Sql {
 				//$cadenaSql .= "left JOIN dependencia ON dependencia.id_dependencia = funcionario.dependencia ";
 				$cadenaSql .= "WHERE 1=1 ";
 				$cadenaSql .= "AND elemento.tipo_bien <> 1 ";
+                                $cadenaSql .= "AND id_elemento_ind NOT IN (SELECT id_elemento_ind FROM baja_elemento) ";
 				
 				if ($variable [0] != '') {
 					$cadenaSql .= " AND funcionario = '" . $variable [0] . "'";
