@@ -202,8 +202,7 @@ class Sql extends \Sql {
 
             case "vigencia":
                 $cadenaSql = " SELECT DISTINCT vigencia, vigencia as nombrevigencia ";
-                $cadenaSql.= "FROM entrada;
-                        ";
+                $cadenaSql.= "FROM entrada; ";
                 break;
         }
         return $cadenaSql;
