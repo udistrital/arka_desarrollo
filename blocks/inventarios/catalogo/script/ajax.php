@@ -412,7 +412,6 @@ var listaAlias = [];
 	
 	function validarValorLista(valor,id){
         
-        
         if(valor==0) return true;
         autocompletar();
         if(typeof listaNombres['lidPadre'] == 'undefined') autocompletar();

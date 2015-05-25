@@ -166,7 +166,7 @@ class Formulario {
                     echo '<div class="posiscion">';
 
                     //eliminar
-                    echo '<button title="Click para Eliminar" class="eliminar" onclick="eliminarElementoCatalogo(' . $b['elemento_id'] . ',' . $b['elemento_padre'] . ',' . $b['elemento_codigo'] . ',' . $b['elemento_catalogo'] . '\',' . $b['elemento_grupoc'] . ')">';
+                    echo '<button title="Click para Eliminar" class="eliminar" onclick="eliminarElementoCatalogo(' . $b['elemento_id'] . ',' . $b['elemento_padre'] . ',' . $b['elemento_codigo'] . ',' . $b['elemento_catalogo'] . ',' . $b['elemento_grupoc'] . ')">';
                     echo "</button>";
 
                     //editar

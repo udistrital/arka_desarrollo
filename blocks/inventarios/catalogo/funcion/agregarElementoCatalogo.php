@@ -1,5 +1,4 @@
 <?php
-
 namespace arka\catalogo\agregarElementoCatalogo;
 
 if (!isset($GLOBALS["autorizado"])) {
