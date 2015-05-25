@@ -155,10 +155,11 @@ class Sql extends \Sql {
                 break;
 
             case "consultarElementosSupervisor" :
-                $cadenaSql = "SELECT id_elemento_ind, nivel, marca, elemento_individual.placa,elemento_individual.serie, valor, subtotal_sin_iva, ";
+                $cadenaSql = "SELECT id_elemento_ind,elemento_nombre as nivel, marca, elemento_individual.placa,elemento_individual.serie, valor, subtotal_sin_iva, ";
                 $cadenaSql.= " total_iva, total_iva_con ";
                 $cadenaSql.= " FROM salida , elemento ";
                 $cadenaSql.= " JOIN elemento_individual ON elemento.id_elemento=elemento_individual.id_elemento_gen  ";
+                $cadenaSql.= " JOIN catalogo.catalogo_elemento ON catalogo.catalogo_elemento.elemento_id=nivel ";
                 $cadenaSql.= " WHERE  ";
                 $cadenaSql.= " elemento_individual.estado_registro=TRUE  ";
                 $cadenaSql.= " AND salida.id_salida=elemento_individual.id_salida ";
