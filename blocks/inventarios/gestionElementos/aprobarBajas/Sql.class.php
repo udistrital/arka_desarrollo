@@ -290,7 +290,7 @@ class Sql extends \Sql {
                 $cadenaSql .= 'JOIN arka_parametros.arka_funcionarios ON arka_parametros.arka_funcionarios."FUN_IDENTIFICACION" = salida.funcionario ';
                 $cadenaSql .= "WHERE 1=1 ";
                 $cadenaSql .= "AND elemento.tipo_bien <> 1 ";
-                $cadenaSql .= "AND id_elemento_ind IN (SELECT id_elemento_ind FROM baja_elemento) ";
+                $cadenaSql .= "AND id_elemento_ind IN (SELECT id_elemento_ind FROM baja_elemento WHERE estado_aprobacion=FALSE) ";
 
                 if ($variable['fecha_inicio'] != '' && $variable ['fecha_final'] != '') {
                     $cadenaSql .= " AND baja_elemento.fecha_registro BETWEEN CAST ( '" . $variable ['fecha_inicio'] . "' AS DATE) ";
