@@ -149,6 +149,7 @@ class Sql extends \Sql {
                 $cadenaSql = "SELECT elemento_id, elemento_padre, elemento_codigo, elemento_catalogo, ";
                 $cadenaSql .= " elemento_nombre, elemento_fecha_creacion, elemento_grupoc ";
                 $cadenaSql .= " FROM catalogo.catalogo_elemento ";
+                $cadenaSql .= " WHERE elemento_id >0 ";
                 break;
 
             case "listarElementosID":
@@ -156,6 +157,7 @@ class Sql extends \Sql {
                 $cadenaSql .= " elemento_nombre, elemento_fecha_creacion, elemento_grupoc  ";
                 $cadenaSql .= " FROM catalogo.catalogo_elemento ";
                 $cadenaSql .= " WHERE elemento_catalogo='" . $variable."' ";
+                $cadenaSql .= " AND elemento_id >0 ";
                 break;
 
             case "crearElementoCatalogo":
@@ -178,6 +180,7 @@ class Sql extends \Sql {
                 $cadenaSql.= " FROM catalogo.catalogo_elemento ";
                 $cadenaSql.= " WHERE elemento_codigo = '" . $variable[0]."' ";
                 $cadenaSql.= " AND elemento_catalogo ='" . $variable[1] . "' ";
+                $cadenaSql .= " AND elemento_id >0 ";
                 break;
 
             case "buscarIdElemento":
@@ -186,6 +189,7 @@ class Sql extends \Sql {
                 $cadenaSql.= " WHERE elemento_codigo = '" . $variable[0] . "' ";
                 $cadenaSql.= " AND elemento_padre = '" . $variable[1] . "' ";
                 $cadenaSql.= " AND elemento_catalogo ='" . $variable[2] . "' ";
+                $cadenaSql.= " AND elemento_id >0 ";
                 break;
 
             case "buscarNombreElementoNivel":
@@ -201,7 +205,7 @@ class Sql extends \Sql {
                 $cadenaSql = " SELECT elemento_id , elemento_padre , elemento_codigo, elemento_catalogo , upper(elemento_nombre) as elemento_nombre , elemento_fecha_creacion, elemento_grupoc  ";
                 $cadenaSql .= " FROM catalogo.catalogo_elemento ";
                 $cadenaSql .= " WHERE elemento_catalogo ='" . $variable[0] . "' ";
-                $cadenaSql .= " AND elemento_padre='" . $variable[1] . "' ORDER BY elemento_codigo ";
+                $cadenaSql .= " AND elemento_padre='" . $variable[1] . "'   AND elemento_id >0  ORDER BY elemento_codigo ";
                 break;
 
             case "eliminarElementoCatalogo":
@@ -212,7 +216,7 @@ class Sql extends \Sql {
                 $cadenaSql = " UPDATE catalogo.catalogo_elemento ";
                 $cadenaSql .= " SET  elemento_padre='" . $variable['padre'] . "', ";
                 $cadenaSql .= " elemento_codigo='" . $variable['idElemento'] . "', ";
-                $cadenaSql .= " elemento_catalogo='" . $variable['idCatalogo'] . "', ";
+                //$cadenaSql .= " elemento_catalogo='" . $variable['idCatalogo'] . "', ";
                 $cadenaSql .= " elemento_nombre='" . $variable['nombreElemento'] . "', ";
                 $cadenaSql .= " elemento_grupoc='" . $variable['idGrupo'] . "' ";
                 $cadenaSql .= " WHERE elemento_id=" . $variable['idElementoEd'] . " ";

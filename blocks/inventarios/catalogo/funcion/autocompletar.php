@@ -88,7 +88,8 @@ class Formulario {
     	foreach ($registros as $fila){
     		$salida[] = array(
                     "id"=>$fila['elemento_id'],
-                    "nombre"=>$fila['elemento_nombre'],
+                    "idPadre"=>$fila['elemento_padre'],
+                    "nombre"=>$fila['elemento_codigo'],
                     "alias"=>$fila['elemento_codigo'], 
                     "idGrupo"=>$fila['elemento_grupoc'],);
     	}

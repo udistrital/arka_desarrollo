@@ -401,13 +401,12 @@ var listaAlias = [];
 
     	
 	function cambiarPadre(){
-		var indice = listaNombres['lidPadre'].indexOf($( "#lidPadre" ).val());
+       
+	var indice = listaNombres['lidPadre'].indexOf($("#lidPadre").val());
+        
     	if(typeof listaIds['lidPadre'][indice] == 'undefined') $( "#idPadre").val($( "#lidPadre" ).val());
     	else $( "#idPadre").val(listaIds['lidPadre'][indice]);
-
-    	
-    	
-    
+   	    
 	}
 	
 	function validarValorLista(valor,id){
