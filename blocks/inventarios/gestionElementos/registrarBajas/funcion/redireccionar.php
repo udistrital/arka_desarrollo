@@ -20,6 +20,7 @@ class redireccion {
 				$variable .= "&registro=".$valor;
 				
 				
+				
 				break;
 			
 			case "inserto_M" :

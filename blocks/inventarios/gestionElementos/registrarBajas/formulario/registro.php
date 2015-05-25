@@ -49,14 +49,14 @@ class registrarForm {
 		$cadenaSql = $this->miSql->getCadenaSql ( "seleccion_info_elemento", $_REQUEST ['id_elemento_ind'] );
 		$elemento = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
 		
-		$cadenaSql = $this->miSql->getCadenaSql ( 'funcionario_informacion', $elemento [0] [3] );
+		$cadenaSql = $this->miSql->getCadenaSql ( 'funcionario_informacion_consultada', $elemento [0] [3] );
 		
 		$funcionario = $esteRecursoDBO->ejecutarAcceso ( $cadenaSql, "busqueda" );
 		
 		$elemento = $elemento [0];
 		
 		$leyenda = '# ID Elemento : ' . $elemento [4] . '<br>';
-		$leyenda .= '# ID Salida : ' . $elemento [5] . '&nbsp&nbsp&nbsp<br>';
+		$leyenda .= 'Número Salida y/o Vigencia: ' . $elemento [5] . '&nbsp&nbsp&nbsp<br>';
 		$leyenda .= 'Funcionario a Cargo : ' . $funcionario [0] [0] . " - " . $funcionario [0] [1] . '<br>';
 		// $leyenda .= 'Dependencia : ' . $funcionario [0] [2] . '<br>';
 		
@@ -90,6 +90,29 @@ class registrarForm {
 		$atributos ['tipoEtiqueta'] = 'inicio';
 		echo $this->miFormulario->formulario ( $atributos );
 		{
+			$miPaginaActual = $this->miConfigurador->getVariableConfiguracion ( 'pagina' );
+				
+			$directorio = $this->miConfigurador->getVariableConfiguracion ( "host" );
+			$directorio .= $this->miConfigurador->getVariableConfiguracion ( "site" ) . "/index.php?";
+			$directorio .= $this->miConfigurador->getVariableConfiguracion ( "enlace" );
+				
+			$variable = "pagina=" . $miPaginaActual;
+			$variable = $this->miConfigurador->fabricaConexiones->crypto->codificar_url ( $variable, $directorio );
+				
+			// ---------------- CONTROL: Cuadro de Texto --------------------------------------------------------
+			$esteCampo = 'botonRegresar';
+			$atributos ['id'] = $esteCampo;
+			$atributos ['enlace'] = $variable;
+			$atributos ['tabIndex'] = 1;
+			$atributos ['estilo'] = 'textoSubtitulo';
+			$atributos ['enlaceTexto'] = $this->lenguaje->getCadena ( $esteCampo );
+			$atributos ['ancho'] = '10%';
+			$atributos ['alto'] = '10%';
+			$atributos ['redirLugar'] = true;
+			echo $this->miFormulario->enlace ( $atributos );
+				
+			unset ( $atributos );
+			
 			
 			$esteCampo = "AgrupacionGeneral";
 			$atributos ['id'] = $esteCampo;
@@ -139,7 +162,7 @@ class registrarForm {
 			$atributos ['id'] = $esteCampo;
 			$atributos ["estilo"] = "jqueryui";
 			$atributos ['tipoEtiqueta'] = 'inicio';
-			$atributos ["leyenda"] = "Baja Elementos";
+			$atributos ["leyenda"] = "Baja Elementos (Por Aprobar)";
 			echo $this->miFormulario->marcoAgrupacion ( 'inicio', $atributos );
 			unset ( $atributos );
 			{
