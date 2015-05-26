@@ -130,9 +130,6 @@ class registrarForm {
                 break;
         }
 
-        $cadenaSql;
-
-
 // ---------------- SECCION: Parámetros Generales del Formulario ----------------------------------
         $esteCampo = $esteBloque ['nombre'];
         $atributos ['id'] = $esteCampo;

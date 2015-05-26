@@ -369,8 +369,8 @@ class Sql extends \Sql {
                 break;
 
             case "consultarElementos":
-                $cadenaSql = "SELECT consecutivo, ";
-                $cadenaSql.= " id_elemento, elemento_nombre, tipo_bienes.descripcion, elemento.descripcion, marca, serie, cantidad, valor, iva, ajuste, ";
+                $cadenaSql = "SELECT entrada.consecutivo, ";
+                $cadenaSql.= " id_elemento, elemento_nombre, tipo_bienes.descripcion, elemento.descripcion, marca, elemento.serie, cantidad, valor, iva, ajuste, ";
                 $cadenaSql.= " total_iva_con, bodega ";
                 $cadenaSql.= " FROM elemento  ";
                 $cadenaSql.= " JOIN entrada ON elemento.id_entrada=entrada.id_entrada ";
