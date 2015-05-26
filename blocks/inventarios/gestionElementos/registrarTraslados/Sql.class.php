@@ -181,7 +181,7 @@ class Sql extends \Sql {
 					$cadenaSql .= " AND funcionario = '" . $variable [0] . "'";
 				}
 				if ($variable [1] != '') {
-					$cadenaSql .= " AND  elemento_individual.serial= '" . $variable [1] . "'";
+					$cadenaSql .= " AND  elemento_individual.serie= '" . $variable [1] . "'";
 				}
 				if ($variable [2] != '') {
 					$cadenaSql .= " AND  elemento_individual.placa= '" . $variable [2] . "'";
@@ -237,6 +237,21 @@ class Sql extends \Sql {
 				$cadenaSql .= "FROM FUNCIONARIOS ";
 				$cadenaSql .= "WHERE FUN_IDENTIFICACION='" . $variable . "' ";
 				$cadenaSql .= "AND FUN_ESTADO='A' ";
+				
+				break;
+			
+			case "buscar_serie" :
+				$cadenaSql = " SELECT DISTINCT serie, serie as series ";
+				$cadenaSql .= "FROM elemento_individual ";
+				$cadenaSql .= "WHERE  serie <> '' ";
+				$cadenaSql .= "ORDER BY serie DESC ";
+				
+				break;
+			
+			case "buscar_placa" :
+				$cadenaSql = " SELECT DISTINCT placa, placa as placas ";
+				$cadenaSql .= "FROM elemento_individual ";
+				$cadenaSql .= "ORDER BY placa DESC ";
 				
 				break;
 		}
