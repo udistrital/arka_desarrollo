@@ -199,7 +199,8 @@ class Sql extends \Sql {
                 $cadenaSql.= " SET cierre_contable='TRUE' ";
                 $cadenaSql.= " AND fecha_registro BETWEEN CAST ( '" . $variable ['fecha_inicio'] . "' AS DATE) ";
                 $cadenaSql.= " AND  CAST ( '" . $variable ['fecha_final'] . "' AS DATE)  ";
-
+                break;
+            
             case "vigencia":
                 $cadenaSql = " SELECT DISTINCT vigencia, vigencia as nombrevigencia ";
                 $cadenaSql.= "FROM entrada; ";

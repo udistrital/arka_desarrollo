@@ -53,11 +53,10 @@ class RegistradorCierre {
             $cadenaSql = $this->miSql->getCadenaSql('registrarCierre', $datosRegistro);
             $estado_asignar = $esteRecursoDB->ejecutarAcceso($cadenaSql, "insertar");
 
-
             $cadenaSql = $this->miSql->getCadenaSql('actualizarEntrada', $datosRegistro);
             $resultadoActualizacion = $esteRecursoDB->ejecutarAcceso($cadenaSql, "insertar");
 
-              $datos = array(
+            $datos = array(
                 'vigencia' => $_REQUEST['vigencia'],
                 'f_inicio' => $_REQUEST['fecha_inicio'],
                 'f_final' => $_REQUEST['fecha_final'],
