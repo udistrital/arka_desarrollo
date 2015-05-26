@@ -85,7 +85,11 @@ class RegistradorOrden {
 			);
 		}
 		
-			
+		
+		$cadenaSql = $this->miSql->getCadenaSql ( 'max_id_baja' );
+		
+		$max_id_baja = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
+		$max_id_baja=$max_id_baja[0][0]+1;
 		
 		$arreglo = array (
 				$_REQUEST['dependencia'],
@@ -97,7 +101,8 @@ class RegistradorOrden {
 				$_REQUEST['observaciones'],
 				$_REQUEST['elemento_ind'],
 				$fechaActual,	
-				$_REQUEST['sede']
+				$_REQUEST['sede'],
+				$max_id_baja
 		);
 		
 		
@@ -109,7 +114,6 @@ class RegistradorOrden {
 		$cadenaSql = $this->miSql->getCadenaSql ( 'insertar_baja', $arreglo );
 		
 		$registro = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
-		
 
         		
 	

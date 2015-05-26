@@ -172,11 +172,18 @@ class Sql extends \Sql {
 				
 				break;
 			
+			case "max_id_baja" :
+				
+				$cadenaSql = "SELECT MAX(id_baja) ";
+				$cadenaSql .= "FROM baja_elemento ";
+				
+				break;
+			
 			case "insertar_baja" :
 				
 				$cadenaSql = "INSERT INTO baja_elemento( ";
 				$cadenaSql .= "dependencia_funcionario, estado_funcional, tramite, ";
-				$cadenaSql .= "tipo_mueble, ruta_radicacion, nombre_radicacion, observaciones, id_elemento_ind,fecha_registro,sede ) ";
+				$cadenaSql .= "tipo_mueble, ruta_radicacion, nombre_radicacion, observaciones, id_elemento_ind,fecha_registro,sede,id_baja ) ";
 				$cadenaSql .= " VALUES (";
 				$cadenaSql .= "'" . $variable [0] . "',";
 				$cadenaSql .= "'" . $variable [1] . "',";
@@ -187,7 +194,8 @@ class Sql extends \Sql {
 				$cadenaSql .= "'" . $variable [6] . "',";
 				$cadenaSql .= "'" . $variable [7] . "',";
 				$cadenaSql .= "'" . $variable [8] . "',";
-				$cadenaSql .= "'" . $variable [9] . "') ";
+				$cadenaSql .= "'" . $variable [9] . "',";
+				$cadenaSql .= "'" . $variable [10] . "') ";
 				$cadenaSql .= "RETURNING  id_baja; ";
 				
 				break;
@@ -255,7 +263,7 @@ class Sql extends \Sql {
 				
 				$cadenaSql = "SELECT ";
 				$cadenaSql .= "id_elemento_ind, elemento_individual.placa, elemento_individual.serie,funcionario, id_elemento_gen, ";
-				$cadenaSql .= "elemento_individual.id_salida ,tipo_bien.tb_descripcion ,salida.id_salida as salida ";
+				$cadenaSql .= "salida.consecutivo||' - ('||salida.vigencia||')' salidas ,tipo_bien.tb_descripcion ,salida.id_salida as salida ";
 				$cadenaSql .= "FROM elemento_individual ";
 				$cadenaSql .= "JOIN elemento ON elemento.id_elemento = elemento_individual.id_elemento_gen ";
 				$cadenaSql .= "JOIN salida ON salida.id_salida = elemento_individual.id_salida ";
@@ -273,21 +281,23 @@ class Sql extends \Sql {
 				
 				$cadenaSql = "SELECT ";
 				$cadenaSql .= "id_elemento_ind, elemento_individual.placa, elemento_individual.serie,funcionario, id_elemento_gen, ";
-				$cadenaSql .= "elemento_individual.id_salida ,tipo_bien.tb_descripcion ,dependencia ,salida.id_salida as salida ";
+				$cadenaSql .= " salida.consecutivo||' - ('||salida.vigencia||')' salidas ,tipo_bien.tb_descripcion ,dependencia ,salida.id_salida as salida, ";
+                                $cadenaSql .= 'arka_parametros.arka_funcionarios."FUN_NOMBRE" as fun_nombre ';
 				$cadenaSql .= "FROM elemento_individual ";
 				$cadenaSql .= "JOIN elemento ON elemento.id_elemento = elemento_individual.id_elemento_gen ";
 				$cadenaSql .= "JOIN salida ON salida.id_salida = elemento_individual.id_salida ";
 				$cadenaSql .= "JOIN tipo_bien ON tipo_bien.tb_idbien = elemento.tipo_bien ";
-				// $cadenaSql .= "JOIN funcionario ON funcionario.id_funcionario = salida.funcionario ";
-				// $cadenaSql .= "left JOIN dependencia ON dependencia.id_dependencia = funcionario.dependencia ";
+				$cadenaSql .= 'JOIN arka_parametros.arka_funcionarios ON arka_parametros.arka_funcionarios."FUN_IDENTIFICACION" = salida.funcionario ';
+				//$cadenaSql .= "left JOIN dependencia ON dependencia.id_dependencia = funcionario.dependencia ";
 				$cadenaSql .= "WHERE 1=1 ";
 				$cadenaSql .= "AND elemento.tipo_bien <> 1 ";
+                                $cadenaSql .= "AND id_elemento_ind NOT IN (SELECT id_elemento_ind FROM baja_elemento) ";
 				
 				if ($variable [0] != '') {
 					$cadenaSql .= " AND funcionario = '" . $variable [0] . "'";
 				}
 				if ($variable [1] != '') {
-					$cadenaSql .= " AND  elemento_individual.serial= '" . $variable [1] . "'";
+					$cadenaSql .= " AND  elemento_individual.serie= '" . $variable [1] . "'";
 				}
 				if ($variable [2] != '') {
 					$cadenaSql .= " AND  elemento_individual.placa= '" . $variable [2] . "'";
@@ -296,7 +306,7 @@ class Sql extends \Sql {
 					$cadenaSql .= " AND  dependencia= '" . $variable [3] . "'";
 				}
 				
-				$cadenaSql .= " ; ";
+// 				$cadenaSql .= " LIMIT 10 ;";
 				
 				break;
 			
@@ -337,6 +347,30 @@ class Sql extends \Sql {
 				$cadenaSql = "SELECT FUN_IDENTIFICACION,  FUN_NOMBRE  ";
 				$cadenaSql .= "FROM FUNCIONARIOS ";
 				$cadenaSql .= "WHERE FUN_ESTADO='A' ";
+				
+				break;
+			
+			case "funcionario_informacion_consultada" :
+				
+				$cadenaSql = "SELECT FUN_IDENTIFICACION,  FUN_NOMBRE  ";
+				$cadenaSql .= "FROM FUNCIONARIOS ";
+				$cadenaSql .= "WHERE FUN_ESTADO='A' ";
+				$cadenaSql .= "AND FUN_IDENTIFICACION='" . $variable . "' ";
+				
+				break;
+			
+			case "buscar_serie" :
+				$cadenaSql = " SELECT DISTINCT serie, serie as series ";
+				$cadenaSql .= "FROM elemento_individual ";
+				$cadenaSql .= "WHERE  serie <> '' ";
+				$cadenaSql .= "ORDER BY serie DESC ";
+				
+				break;
+			
+			case "buscar_placa" :
+				$cadenaSql = " SELECT DISTINCT placa, placa as placas ";
+				$cadenaSql .= "FROM elemento_individual ";
+				$cadenaSql .= "ORDER BY placa DESC ";
 				
 				break;
 		}
