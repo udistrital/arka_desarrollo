@@ -25,7 +25,7 @@ class redireccion {
 			
 			case "noInserto" :
 				$variable = "pagina=" . $miPaginaActual;
-				$variable .= "&opcion=noactualizo";
+				$variable .= "&opcion=mensaje";
 				$variable .= "&mensaje=error";
 				
 				break;

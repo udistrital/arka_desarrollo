@@ -170,7 +170,29 @@
 				});
 			}); 
 		
-        
+                $('#<?php echo $this->campoSeguro('vigencia')?>').datepicker({
+		
+			changeYear: true,
+			maxDate:0,
+			monthNames: ['Enero','Febrero','Marzo','Abril','Mayo','Junio',
+			'Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'],
+			dateFormat: 'yy',
+			onClose: function(dateText, inst) {
+			//lockDate.setDate(lockDate.getDate() + 1);
+			var year = $("#ui-datepicker-div .ui-datepicker-year :selected").val();
+			$(this).datepicker('setDate', new Date(year, 1, 1));
+			
+			}
+		});
+		$('#<?php echo $this->campoSeguro('vigencia')?>').focus(function () {
+			$(".ui-datepicker-calendar").hide();
+			$("#ui-datepicker-div").position({
+			my: "center top",
+			at: "center bottom",
+			of: $(this)
+				});
+			}); 
+		
         
                 
          
