@@ -98,7 +98,7 @@ $this->idioma['crearLabel']="Crear Catálogo Grupo de Manejo de Bienes";
 
 $this->idioma["listaMostrar"]="Ver";
 $this->idioma["listaEdicion"]="Editar";
-$this->idioma["listaEliminacion"]="Eliminar";
+$this->idioma["listaEliminacion"]="Activar";
 $this->idioma['listaVer']="Mostrar elementos del Catálogo Grupo de Manejo de Bienes";
 $this->idioma['listaNombre']="Nombre";
 $this->idioma['listaFecha']="Fecha Creación";
@@ -108,6 +108,9 @@ $this->idioma["listaCasa"]="Regresar a la lista de Catálogos";
 $this->idioma["listaEditar"]="Editar Catálogo Grupo de Manejo de Bienes";
 $this->idioma["listaEliminar"]="Eliminar Catálogo Grupo de Manejo de Bienes";
 $this->idioma["listaAdicion"]="Agregar Catálogo Grupo de Manejo de Bienes";
+$this->idioma["listaActivo"]="Catálogo Activo";
+$this->idioma["listaActivar"]="Activar Catálogo";
+
 
 
 

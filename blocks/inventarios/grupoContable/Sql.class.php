@@ -110,7 +110,11 @@ class Sql extends \Sql {
             //**** Consultas Específicas del Caso de Uso *****//
 
             case 'listarCatalogos':
-                $cadenaSql = ' SELECT lista_id, lista_nombre, lista_fecha_creacion  FROM grupo.catalogo_lista ORDER BY 3 DESC ';
+                $cadenaSql = " SELECT lista_id, lista_nombre, lista_fecha_creacion, ";
+                $cadenaSql .= "CASE WHEN lista_activo=0 ";
+                $cadenaSql .= "THEN 'INACTIVO' ELSE 'ACTIVO' END activo ";
+                $cadenaSql .= "FROM grupo.catalogo_lista  ";
+                $cadenaSql .= "ORDER BY 3 DESC  ";
                 break;
 
             case 'crearCatalogo':
@@ -131,7 +135,12 @@ class Sql extends \Sql {
                 break;
 
             case "eliminarCatalogo":
-                $cadenaSql = "DELETE FROM grupo.catalogo_lista WHERE lista_id =" . $variable . " ";
+//                $cadenaSql = "DELETE FROM grupo.catalogo_lista WHERE lista_id ='" . $variable . "' ";
+//                break;
+
+            case "eliminarCatalogo":
+                $cadenaSql = "UPDATE grupo.catalogo_lista SET lista_activo=1 WHERE lista_id='" . $variable . "';"
+                        . " update  grupo.catalogo_lista SET lista_activo=0 WHERE lista_id!='" . $variable . "';";
                 break;
 
             case "listarElementos":
@@ -201,6 +210,7 @@ class Sql extends \Sql {
 //                $cadenaSql .= " JOIN grupo.grupo_descripcion ON cast(elemento_id as character varying)=grupo_id";
                 $cadenaSql .= " WHERE elemento_codigo = " . $variable[0];
                 $cadenaSql .= " AND elemento_catalogo =" . $variable[1] . " ";
+                $cadenaSql .= " AND elemento_estado=1 ";
                 break;
 
             case "buscarIdElemento":
@@ -222,6 +232,7 @@ class Sql extends \Sql {
                 $cadenaSql .= " elemento_padre = " . $variable[1] . " ";
                 $cadenaSql .= " AND elemento_catalogo =" . $variable[2] . " ";
                 $cadenaSql .= " AND elemento_nombre ='" . $variable[3] . "' ";
+                //$cadenaSql .= " AND elemento_estado=1 ";
                 break;
 
 
@@ -232,11 +243,12 @@ class Sql extends \Sql {
                 $cadenaSql .= " FROM grupo.catalogo_elemento ";
                 $cadenaSql .= " JOIN grupo.grupo_descripcion ON cast(elemento_id as character varying)=grupo_id";
                 $cadenaSql .= " WHERE elemento_catalogo =" . $variable[0] . " ";
-                $cadenaSql .= " AND elemento_padre=" . $variable[1] . " ORDER BY elemento_codigo ";
+                $cadenaSql .= " AND elemento_padre=" . $variable[1] . " ";
+                $cadenaSql .= " AND elemento_estado=1 ORDER BY elemento_codigo ";
                 break;
 
             case "eliminarElementoCatalogo":
-                $cadenaSql = " DELETE FROM grupo.catalogo_elemento WHERE elemento_id = " . $variable . " ";
+                $cadenaSql = "UPDATE grupo.catalogo_elemento SET elemento_estado=0 WHERE elemento_id= '" . $variable . "' ";
                 break;
 
             case "guardarEdicionElementoCatalogo":
