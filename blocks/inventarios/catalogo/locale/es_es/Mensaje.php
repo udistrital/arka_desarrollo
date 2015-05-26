@@ -96,6 +96,8 @@ $this->idioma["listaCasa"]="Regresar a la lista de Catálogos";
 $this->idioma["listaEditar"]="Editar Catálogo";
 $this->idioma["listaEliminar"]="Eliminar Catálogo";
 $this->idioma["listaAdicion"]="Agregar Catálogo";
+$this->idioma["listaActivo"]="Catálogo Activo";
+$this->idioma["listaActivar"]="Activar Catálogo";
 
 
 

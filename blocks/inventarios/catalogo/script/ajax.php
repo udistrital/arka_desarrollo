@@ -269,7 +269,7 @@ var listaAlias = [];
 	}
 	
 	function eliminarElementoLista(el){
-			var r = confirm("¿Está seguro de eliminar el Elemento?");
+			var r = confirm("¿Está seguro de Activar el Elemento?");
 			
 				var id =  el.id.substring(2);
 				if (r == true) {

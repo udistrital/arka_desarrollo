@@ -49,6 +49,8 @@ class Formulario {
         $textos[9] = $this->lenguaje->getCadena("listaMostrar");
         $textos[10] = $this->lenguaje->getCadena("listaEdicion");
         $textos[11] = $this->lenguaje->getCadena("listaEliminacion");
+        $textos[12] = $this->lenguaje->getCadena("listaActivo");
+        $textos[13] = $this->lenguaje->getCadena("listaActivar");
         $cadena_sql = $this->sql->getCadenaSql("listarCatalogos", '');
         $registros = $this->esteRecursoDB->ejecutarAcceso($cadena_sql, "busqueda");
 
@@ -90,6 +92,7 @@ class Formulario {
         $cadena .= "<th>" . $textos[9] . "</th>";
         $cadena .= "<th>" . $textos[10] . "</th>";
         $cadena .= "<th>" . $textos[11] . "</th>";
+        $cadena .= "<th>" . $textos[12] . "</th>";
         $cadena .= "</tr>";
         $cadena .= "</thead>";
         $cadena .= "<tfoot>";
@@ -100,6 +103,7 @@ class Formulario {
         $cadena .= "<th>" . $textos[9] . "</th>";
         $cadena .= "<th>" . $textos[10] . "</th>";
         $cadena .= "<th>" . $textos[11] . "</th>";
+        $cadena .= "<th>" . $textos[12] . "</th>";
         $cadena .= "</tr>";
         $cadena .= "</tfoot>";
         //exit;
@@ -127,6 +131,11 @@ class Formulario {
             $cadena .= "<td>";
             $cadena .= $fila[2];
             $cadena .= "</td>";
+            
+            //Estado Activacion
+            $cadena .= "<td>";
+            $cadena .= $fila[3];
+            $cadena .= "</td>";
 
             //Edicion
             //mostrar
@@ -143,10 +152,10 @@ class Formulario {
 
             $cadena .= "</td>";
 
-            //Eliminar
+            //Activar
             $cadena .= "<td>";
 
-            $cadena .= '<button class="eliminar" onclick="eliminarElementoLista(this)" id="el' . $fila[0] . '" title="' . $textos[5] . '"></button>';
+            $cadena .= '<button class="activar" onclick="eliminarElementoLista(this)" id="el' . $fila[0] . '" title="' . $textos[13] . '"></button>';
 
             $cadena .= "</td>";
 
@@ -206,3 +215,4 @@ $miFormulario = new Formulario($this->lenguaje, $this->miFormulario, $this->sql)
 $miFormulario->formulario();
 $miFormulario->mensaje();
 ?>
+
