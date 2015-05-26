@@ -317,7 +317,7 @@ class Sql extends \Sql {
 				$cadenaSql .= " sede, dependencia, fecha_recibido, tipo_bien,
 						proveedor, ordenador_gasto, tipo_orden,
 						fecha_revision, revisor, observacionesacta, enlace_soporte, nombre_soporte,numero_orden,
-						estado_registro, fecha_registro )";
+						estado_registro, fecha_registro, id_contrato )";
 				$cadenaSql .= " VALUES (";
 				$cadenaSql .= "'" . $variable ['sede'] . "',";
 				$cadenaSql .= "'" . $variable ['dependencia'] . "',";
@@ -333,7 +333,8 @@ class Sql extends \Sql {
 				$cadenaSql .= "'" . $variable ['nombre_soporte'] . "',";
 				$cadenaSql .= "'" . $variable ['numero_orden'] . "',";
 				$cadenaSql .= "'" . $variable ['estado'] . "',";
-				$cadenaSql .= "'" . $variable ['fecha_registro'] . "') ";
+				$cadenaSql .= "'" . $variable ['fecha_registro'] . "',";
+				$cadenaSql .= "'" . $variable ['identificador_contrato'] . "') ";
 				$cadenaSql .= "RETURNING  id_actarecibido; ";
 				
 				break;

@@ -24,6 +24,7 @@ class RegistradorActa {
 		$this->miFuncion = $funcion;
 	}
 	function procesarFormulario() {
+		
 		$fechaActual = date ( 'Y-m-d' );
 		
 		$esteBloque = $this->miConfigurador->getVariableConfiguracion ( "esteBloque" );
@@ -108,9 +109,10 @@ class RegistradorActa {
 				'tipo_orden' => $tipoOrden,
 				'numero_orden' => (isset ( $_REQUEST ['numero_orden'] )) ? $_REQUEST ['numero_orden'] : 0,
 				'enlace_soporte' => $destino1,
-				'nombre_soporte' => $archivo1 
+				'nombre_soporte' => $archivo1,
+				'identificador_contrato' => ($_REQUEST ['numeroContrato']!='') ? $_REQUEST ['numeroContrato'] : 0,
 		);
-		
+
 		$cadenaSql = $this->miSql->getCadenaSql ( 'insertarActa', $datosActa );
 		
 		$id_acta = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );

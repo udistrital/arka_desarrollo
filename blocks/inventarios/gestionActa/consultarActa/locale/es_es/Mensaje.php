@@ -1,6 +1,19 @@
 <?php
 $this->idioma ["noDefinido"] = "Etiqueta no esta definida en locale/es_es/Mensaje.php";
 
+
+
+$this->idioma ["documentoContrato"] ="Link Documento Contrato";
+
+
+
+
+$this->idioma ["numeroContrato"] ="Número y/o :             <br>Fecha de Contrato";
+$this->idioma ["numeroContratoTitulo"] ="Seleccione Fecha Inicial";
+
+
+
+
 $this->idioma ["asignacionOrdenador"] = "Asignación : ";
 $this->idioma ["asignacionOrdenadorTitulo"] = "Ingrese Asignación de Ordenador del Gasto";
 
@@ -24,7 +37,7 @@ $this->idioma ["fecha_facturaTitulo"] = "Seleccione Fecha Factura";
 $this->idioma ["fecha_revision"] = "&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspFecha Revisión : ";
 $this->idioma ["fecha_revisionTitulo"] = "Seleccione Fecha Revisión";
 
-$this->idioma ["numero_acta"] = "&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspNúmero Acta Recibido : ";
+$this->idioma ["numero_acta"] = "Número Acta Recibido : ";
 $this->idioma ["numero_actaTitulo"] = "Ingrese Número Acta Recibido";
 
 $this->idioma ["tipoOrden"] = "Tipo de Orden: ";
@@ -88,7 +101,7 @@ $this->idioma ["botonAceptar"] = "Actualizar Acta de Recibido";
 $this->idioma ["botonCancelar"] = "Cancelar";
 $this->idioma ["botonContinuar"] = "Continuar";
 $this->idioma ["botonConsultar"] = "Consultar";
-$this->idioma ["botonRegresar"] = "Regresar";
+$this->idioma ["botonRegresar"] = "<< Regresar";
 
 $this->idioma ["division1Titulo"] = "Seleccione Fecha Disponibilidad Presupuestal";
 

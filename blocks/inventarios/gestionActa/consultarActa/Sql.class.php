@@ -304,7 +304,8 @@ class Sql extends \Sql {
 				$cadenaSql .= "enlace_soporte='" . $variable ['enlace_soporte'] . "',";
 				$cadenaSql .= "nombre_soporte='" . $variable ['nombre_soporte'] . "',";
 				$cadenaSql .= "estado_registro='" . $variable ['estado'] . "',";
-				$cadenaSql .= "fecha_registro='" . $variable ['fecha_registro'] . "' ";
+				$cadenaSql .= "fecha_registro='" . $variable ['fecha_registro'] . "', ";
+				$cadenaSql .= "id_contrato='" . $variable ['identificador_contrato'] . "' ";
 				$cadenaSql .= " WHERE id_actarecibido = '" . $variable ['id_acta'] . "' ";
 				$cadenaSql .= "RETURNING id_actarecibido";
 				
@@ -324,7 +325,8 @@ class Sql extends \Sql {
 				$cadenaSql .= "revisor='" . $variable ['revisor'] . "',";
 				$cadenaSql .= "observacionesacta='" . $variable ['observaciones'] . "',";
 				$cadenaSql .= "estado_registro='" . $variable ['estado'] . "',";
-				$cadenaSql .= "fecha_registro='" . $variable ['fecha_registro'] . "' ";
+				$cadenaSql .= "fecha_registro='" . $variable ['fecha_registro'] . "', ";
+				$cadenaSql .= "id_contrato='" . $variable ['identificador_contrato'] . "' ";
 				$cadenaSql .= " WHERE id_actarecibido = '" . $variable ['id_acta'] . "' ";
 				$cadenaSql .= "RETURNING id_actarecibido";
 				
@@ -350,6 +352,7 @@ class Sql extends \Sql {
 				}
 				
 				$cadenaSql .= " ; ";
+				
 				break;
 			
 			case "consultarProveedor" :
@@ -473,6 +476,13 @@ class Sql extends \Sql {
 				$cadenaSql .= " WHERE  ESF_ESTADO='A' ";
 				break;
 			
+			case "consultaDependencia" :
+				$cadenaSql = "SELECT DISTINCT  ESF_ID_ESPACIO, ESF_NOMBRE_ESPACIO ";
+				$cadenaSql .= " FROM ESPACIOS_FISICOS ";
+				$cadenaSql .= " WHERE  ESF_ESTADO='A' ";
+				$cadenaSql .= " AND  ESF_ID_ESPACIO='".$variable."' ";
+				break;
+			
 			case "proveedores" :
 				
 				$cadenaSql = " SELECT PRO_NIT,PRO_NIT||' - '||PRO_RAZON_SOCIAL AS proveedor ";
@@ -493,6 +503,27 @@ class Sql extends \Sql {
 				$cadenaSql .= " FROM ORDENADORES_GASTO ";
 				$cadenaSql .= " WHERE  ORG_IDENTIFICADOR='" . $variable . "' ";
 				$cadenaSql .= " AND ORG_ESTADO='A' ";
+				break;
+			
+			case "consultarContratos" :
+				$cadenaSql = "SELECT id_contrato,numero_contrato||' - ('||fecha_contrato||') ' contrato ";
+				$cadenaSql .= "FROM contratos ";
+				
+				break;
+			
+			case "consultarInfoContrato" :
+				$cadenaSql = "SELECT contratos.*,rd.documento_ruta  ";
+				$cadenaSql .= " FROM contratos ";
+				$cadenaSql .= "JOIN registro_documento  rd  ON rd.documento_id = contratos.id_documento_soporte ";
+				$cadenaSql .= " WHERE id_contrato='" . $variable . "'; ";
+				
+				break;
+			
+			case "informacionContrato" :
+				$cadenaSql = "SELECT contratos.*,rd.documento_ruta  ";
+				$cadenaSql .= " FROM contratos ";
+				$cadenaSql .= "JOIN registro_documento  rd  ON rd.documento_id = contratos.id_documento_soporte ";
+				$cadenaSql .= " WHERE id_contrato='" . $variable . "'; ";
 				break;
 		}
 		

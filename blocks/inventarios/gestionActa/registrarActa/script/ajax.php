@@ -152,6 +152,10 @@ function consultarContrato(elem, request, response){
 	        if(data[0]!=" "){
 
 	        	$("#documentoContrato").attr("href",data['documento_ruta']);
+	        	$("#documentoContrato").attr("target","_blank");
+
+
+	        	
 	        	$("#<?php echo $this->campoSeguro('nitproveedor')?> option[value="+ data['nombre_contratista'] +"]").attr("selected",true);
 	        	$("#<?php echo $this->campoSeguro('nitproveedor')?>").select2();
 	        	
