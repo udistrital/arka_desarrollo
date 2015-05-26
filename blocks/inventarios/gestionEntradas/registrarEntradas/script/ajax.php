@@ -113,6 +113,9 @@ function consultarActa(elem, request, response){
 	            $('#<?php echo $this->campoSeguro('dependencia')?>').width(300);
 	            $("#<?php echo $this->campoSeguro('dependencia')?> option[value="+ data['dependencia'] +"]").attr("selected",true);
 	            $("#<?php echo $this->campoSeguro('dependencia')?>").select2();
+
+	            $("#<?php echo $this->campoSeguro('numero_contrato')?>").val(data['numero_contrato']);
+	            $("#<?php echo $this->campoSeguro('fecha_contrato')?>").val(data['fecha_contrato']);
 	        	
 	        	$("#<?php echo $this->campoSeguro('asignacionOrdenador')?> option[value="+ data['ordenador_gasto'] +"]").attr("selected",true);
 	        	$("#<?php echo $this->campoSeguro('asignacionOrdenador')?>").select2();

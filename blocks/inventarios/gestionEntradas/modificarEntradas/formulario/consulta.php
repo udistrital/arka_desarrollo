@@ -42,6 +42,11 @@ class registrarForm {
 		$conexion = "inventarios";
 		$esteRecursoDB = $this->miConfigurador->fabricaConexiones->getRecursoDB ( $conexion );
 		
+		
+		$conexion = "sicapital";
+		$esteRecursoDBO = $this->miConfigurador->fabricaConexiones->getRecursoDB ( $conexion );
+		
+		
 		// $conexion = "sicapital";
 		// $esteRecursoDBO = $this->miConfigurador->fabricaConexiones->getRecursoDB ( $conexion );
 		
@@ -84,7 +89,7 @@ class registrarForm {
 		$atributos ["etiquetaObligatorio"] = false;
 		$atributos ['tab'] = $tab ++;
 		$atributos ['seleccion'] = - 1;
-		$atributos ['anchoEtiqueta'] = 220;
+		$atributos ['anchoEtiqueta'] = 250;
 		$atributos ['evento'] = '';
 		if (isset ( $_REQUEST [$esteCampo] )) {
 			$atributos ['valor'] = $_REQUEST [$esteCampo];
@@ -122,7 +127,7 @@ class registrarForm {
 		echo $this->miFormulario->campoCuadroLista ( $atributos );
 		unset ( $atributos );
 		
-		$esteCampo = "proveedor";
+	$esteCampo = "proveedor";
 		$atributos ['nombre'] = $esteCampo;
 		$atributos ['id'] = $esteCampo;
 		$atributos ['etiqueta'] = $this->lenguaje->getCadena ( $esteCampo );
@@ -150,14 +155,11 @@ class registrarForm {
 		$matrizItems = array (
 				array (
 						'',
-						'Sin Registros' 
-				) 
+						'Sin Registros'
+				)
 		);
-		
-		// $matrizItems = $esteRecursoDBO->ejecutarAcceso ( $atributos ['cadena_sql'], "busqueda" );
-		
+		$matrizItems = $esteRecursoDBO->ejecutarAcceso ( $atributos ['cadena_sql'], "busqueda" );
 		$atributos ['matrizItems'] = $matrizItems;
-		
 		// $atributos['miniRegistro']=;
 		$atributos ['baseDatos'] = "inventarios";
 		// $atributos ['cadena_sql'] = $this->miSql->getCadenaSql ( "clase_entrada" );
@@ -166,7 +168,7 @@ class registrarForm {
 		$atributos = array_merge ( $atributos, $atributosGlobales );
 		echo $this->miFormulario->campoCuadroLista ( $atributos );
 		unset ( $atributos );
-		
+			
 		$esteCampo = "clase";
 		$atributos ['nombre'] = $esteCampo;
 		$atributos ['id'] = $esteCampo;
@@ -174,7 +176,7 @@ class registrarForm {
 		$atributos ["etiquetaObligatorio"] = false;
 		$atributos ['tab'] = $tab ++;
 		$atributos ['seleccion'] = - 1;
-		$atributos ['anchoEtiqueta'] = 220;
+		$atributos ['anchoEtiqueta'] = 250;
 		$atributos ['evento'] = '';
 		if (isset ( $_REQUEST [$esteCampo] )) {
 			$atributos ['valor'] = $_REQUEST [$esteCampo];
@@ -227,7 +229,7 @@ class registrarForm {
 		$atributos ['deshabilitado'] = false;
 		$atributos ['tamanno'] = 8;
 		$atributos ['maximoTamanno'] = '';
-		$atributos ['anchoEtiqueta'] = 220;
+		$atributos ['anchoEtiqueta'] = 250;
 		$tab ++;
 		
 		// Aplica atributos globales al control

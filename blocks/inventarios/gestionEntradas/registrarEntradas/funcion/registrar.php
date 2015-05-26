@@ -180,6 +180,14 @@ class RegistradorOrden {
 		$cadenaSql = $this->miSql->getCadenaSql ( 'insertarInformación', $arreglo_clase );
 		$info_clase = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
 		
+		
+		
+		$cadenaSql = $this->miSql->getCadenaSql ( 'idMaximoEntrada' );
+		$idEntradamax = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
+		
+		$idEntradamax=$idEntradamax[0][0]+1;
+		
+		
 		$fechaActual = date ( 'Y-m-d' );
 		
 		$arregloDatos = array (
@@ -200,12 +208,14 @@ class RegistradorOrden {
 				$_REQUEST ['dependencia'],
 				$_REQUEST ['supervisor'],
 				$_REQUEST ['tipo_ordenador'],
-				$_REQUEST ['identificacion_ordenador']
+				$_REQUEST ['identificacion_ordenador'],
+				$idEntradamax
 		);
 		
 		$cadenaSql = $this->miSql->getCadenaSql ( 'insertarEntrada', $arregloDatos );
 		
 		$id_entrada = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
+		
 		
 		if ($id_entrada) {
 			

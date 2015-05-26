@@ -45,10 +45,10 @@ class registrarForm {
 		$esteRecursoDB = $this->miConfigurador->fabricaConexiones->getRecursoDB ( $conexion );
 		
 		$cadenaSql = $this->miSql->getCadenaSql ( 'consultarEstadoEntradas', $_REQUEST ['numero_entrada'] );
-		
+
 		$datosEntrada = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
 		
-		
+
 		
 		// ---------------- SECCION: Parámetros Generales del Formulario ----------------------------------
 		$esteCampo = $esteBloque ['nombre'];
@@ -71,6 +71,31 @@ class registrarForm {
 		$atributos ['tipoEtiqueta'] = 'inicio';
 		echo $this->miFormulario->formulario ( $atributos );
 		{
+			
+			$miPaginaActual = $this->miConfigurador->getVariableConfiguracion ( 'pagina' );
+				
+			$directorio = $this->miConfigurador->getVariableConfiguracion ( "host" );
+			$directorio .= $this->miConfigurador->getVariableConfiguracion ( "site" ) . "/index.php?";
+			$directorio .= $this->miConfigurador->getVariableConfiguracion ( "enlace" );
+				
+			$variable = "pagina=" . $miPaginaActual;
+			$variable = $this->miConfigurador->fabricaConexiones->crypto->codificar_url ( $variable, $directorio );
+				
+			// ---------------- CONTROL: Cuadro de Texto --------------------------------------------------------
+			$esteCampo = 'botonRegresar';
+			$atributos ['id'] = $esteCampo;
+			$atributos ['enlace'] = $variable;
+			$atributos ['tabIndex'] = 1;
+			$atributos ['estilo'] = 'textoSubtitulo';
+			$atributos ['enlaceTexto'] = $this->lenguaje->getCadena ( $esteCampo );
+			$atributos ['ancho'] = '10%';
+			$atributos ['alto'] = '10%';
+			$atributos ['redirLugar'] = true;
+			echo $this->miFormulario->enlace ( $atributos );
+				
+			unset ( $atributos );
+			
+			
 			// ---------------- SECCION: Controles del Formulario -----------------------------------------------
 			
 			$esteCampo = "AgrupacionGeneral";
@@ -256,6 +281,8 @@ class registrarForm {
 			unset ( $atributos );
 			{
 				
+				
+				
 				// ---------------- CONTROL: Cuadro de Texto --------------------------------------------------------
 				$esteCampo = 'numero_entradaM';
 				$atributos ['id'] = $esteCampo;
@@ -273,9 +300,9 @@ class registrarForm {
 				$atributos ['valor'] = $datosEntrada [0] [0];
 				// $atributos ['titulo'] = $this->lenguaje->getCadena ( $esteCampo . 'Titulo' );
 				$atributos ['deshabilitado'] = false;
-				$atributos ['tamanno'] = 2;
+				$atributos ['tamanno'] = 10;
 				$atributos ['maximoTamanno'] = '';
-				$atributos ['anchoEtiqueta'] = 220;
+				$atributos ['anchoEtiqueta'] = 250;
 				$tab ++;
 				
 				// Aplica atributos globales al control
@@ -329,7 +356,7 @@ class registrarForm {
 				$atributos ['deshabilitado'] = false;
 				$atributos ['tamanno'] = 8;
 				$atributos ['maximoTamanno'] = '';
-				$atributos ['anchoEtiqueta'] = 220;
+				$atributos ['anchoEtiqueta'] = 250;
 				$tab ++;
 				
 				// Aplica atributos globales al control
