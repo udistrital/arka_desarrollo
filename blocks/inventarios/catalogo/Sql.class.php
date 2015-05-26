@@ -208,17 +208,19 @@ class Sql extends \Sql {
                 $cadenaSql .= " elemento_padre = '" . $variable[1] . "' ";
                 $cadenaSql .= " AND elemento_catalogo ='" . $variable[2] . "' ";
                 $cadenaSql .= " AND elemento_nombre ='" . $variable[3] . "' ";
+               // $cadenaSql .= " AND elemento_estado=1 ";
                 break;
 
             case "elementosNivel":
                 $cadenaSql = " SELECT elemento_id , elemento_padre , elemento_codigo, elemento_catalogo , upper(elemento_nombre) as elemento_nombre , elemento_fecha_creacion, elemento_grupoc  ";
                 $cadenaSql .= " FROM catalogo.catalogo_elemento ";
                 $cadenaSql .= " WHERE elemento_catalogo ='" . $variable[0] . "' ";
-                $cadenaSql .= " AND elemento_padre='" . $variable[1] . "'   AND elemento_id >0  ORDER BY elemento_codigo ";
+                $cadenaSql .= " AND elemento_padre='" . $variable[1] . "'   AND elemento_id >0  ";
+                $cadenaSql .= " AND elemento_estado=1 ORDER BY elemento_codigo ";
                 break;
 
             case "eliminarElementoCatalogo":
-                $cadenaSql = " DELETE FROM catalogo.catalogo_elemento WHERE elemento_id = '" . $variable . "' ";
+                $cadenaSql = "UPDATE catalogo.catalogo_elemento SET elemento_estado=0 WHERE elemento_id= '" . $variable . "' ";
                 break;
 
             case "guardarEdicionElementoCatalogo":
@@ -244,5 +246,4 @@ class Sql extends \Sql {
     }
 
 }
-
 ?>

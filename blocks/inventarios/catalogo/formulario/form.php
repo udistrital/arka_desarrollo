@@ -89,10 +89,11 @@ class Formulario {
         $cadena .= "<th>" . $textos[7] . "</th>";
         $cadena .= "<th>" . $textos[3] . "</th>";
         $cadena .= "<th>" . $textos[4] . "</th>";
+        
+        $cadena .= "<th>" . $textos[12] . "</th>";
         $cadena .= "<th>" . $textos[9] . "</th>";
         $cadena .= "<th>" . $textos[10] . "</th>";
         $cadena .= "<th>" . $textos[11] . "</th>";
-        $cadena .= "<th>" . $textos[12] . "</th>";
         $cadena .= "</tr>";
         $cadena .= "</thead>";
         $cadena .= "<tfoot>";
@@ -100,10 +101,10 @@ class Formulario {
         $cadena .= "<th>" . $textos[7] . "</th>";
         $cadena .= "<th>" . $textos[3] . "</th>";
         $cadena .= "<th>" . $textos[4] . "</th>";
+        $cadena .= "<th>" . $textos[12] . "</th>";
         $cadena .= "<th>" . $textos[9] . "</th>";
         $cadena .= "<th>" . $textos[10] . "</th>";
         $cadena .= "<th>" . $textos[11] . "</th>";
-        $cadena .= "<th>" . $textos[12] . "</th>";
         $cadena .= "</tr>";
         $cadena .= "</tfoot>";
         //exit;

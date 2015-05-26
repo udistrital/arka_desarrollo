@@ -86,7 +86,7 @@ $this->idioma['crearLabel']="Crear Catálogo";
 
 $this->idioma["listaMostrar"]="Ver";
 $this->idioma["listaEdicion"]="Editar";
-$this->idioma["listaEliminacion"]="Eliminar";
+$this->idioma["listaEliminacion"]="Activar";
 $this->idioma['listaVer']="Mostrar elementos del Catálogo";
 $this->idioma['listaNombre']="Nombre";
 $this->idioma['listaFecha']="Fecha Creación";
