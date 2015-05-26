@@ -165,7 +165,7 @@ class registrarForm {
 			
 			echo "<thead>
                 <tr>
-                   <th># Número Entrada</th>
+                   <th>Número Entrada y/o<br>Vigencia</th>
                     <th>Fecha Registro </th>
                     <th>Clase Entrada</th>
 					<th>Nit<br>Proveedor</th>

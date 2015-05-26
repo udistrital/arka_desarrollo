@@ -65,6 +65,16 @@ class RegistradorOrden {
 		
 		$_REQUEST ['total_iva_con'] = round ( $_REQUEST ['total_iva_con'] );
 		
+		
+		
+		
+		$cadenaSql = $this->miSql->getCadenaSql ( 'idElementoMax' );
+			
+		$elemento_id_max = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
+		
+		$elemento_id_max=$elemento_id_max[0][0]+1;
+		
+		
 		switch ($_REQUEST ['tipo_registro']) {
 			
 			case '1' :
@@ -90,7 +100,8 @@ class RegistradorOrden {
 							$_REQUEST ['total_iva_con'],
 							$_REQUEST ['marca'],
 							$_REQUEST ['serie'],
-							$_REQUEST ['entrada'] 
+							$_REQUEST ['entrada'],
+							$elemento_id_max
 					);
 					
 					$cadenaSql = $this->miSql->getCadenaSql ( 'ingresar_elemento_tipo_1', $arreglo );
@@ -114,7 +125,8 @@ class RegistradorOrden {
 							$_REQUEST ['total_iva_con'],
 							$_REQUEST ['marca'],
 							$_REQUEST ['serie'],
-							$_REQUEST ['entrada'] 
+							$_REQUEST ['entrada'],
+							$elemento_id_max
 					);
 					
 					$cadenaSql = $this->miSql->getCadenaSql ( 'ingresar_elemento_tipo_1', $arreglo );
@@ -122,7 +134,8 @@ class RegistradorOrden {
 					$elemento = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
 				} else if ($_REQUEST ['tipo_bien'] == 3) {
 					
-					if ($_REQUEST ['tipo_poliza'] == 1) {
+					
+					if ($_REQUEST ['tipo_poliza'] == 0) {
 						$arreglo = array (
 								$fechaActual,
 								$_REQUEST ['nivel'],
@@ -142,9 +155,11 @@ class RegistradorOrden {
 								'0001-01-01',
 								$_REQUEST ['marca'],
 								$_REQUEST ['serie'],
-								$_REQUEST ['entrada'] 
+								$_REQUEST ['entrada'],
+								$elemento_id_max
+								 
 						);
-					} else if ($_REQUEST ['tipo_poliza'] == 2) {
+					} else if ($_REQUEST ['tipo_poliza'] == 1) {
 						$arreglo = array (
 								$fechaActual,
 								$_REQUEST ['nivel'],
@@ -164,7 +179,8 @@ class RegistradorOrden {
 								$_REQUEST ['fecha_final'],
 								$_REQUEST ['marca'],
 								$_REQUEST ['serie'],
-								$_REQUEST ['entrada'] 
+								$_REQUEST ['entrada'],
+								$elemento_id_max
 						);
 					}
 					
@@ -172,12 +188,19 @@ class RegistradorOrden {
 					
 					$elemento = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
 				}
-				
+	
 				$placa = date ( 'Ymd' ) . "00000";
 				
 				$cadenaSql = $this->miSql->getCadenaSql ( 'buscar_repetida_placa', $placa );
 				
 				$num_placa = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
+				
+				
+				$cadenaSql = $this->miSql->getCadenaSql ( 'idElementoMaxIndividual' );
+					
+				$elemento_id_max_indiv = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
+				
+				$elemento_id_max_indiv=$elemento_id_max_indiv[0][0]+1;
 				
 				if ($num_placa [0] [0] == 0) {
 					
@@ -186,12 +209,16 @@ class RegistradorOrden {
 								$fechaActual,
 								$placa + $i,
 								$_REQUEST ['serie'],
-								$elemento [0] [0] 
+								$elemento [0] [0],
+								$elemento_id_max_indiv
 						);
 						
 						$cadenaSql = $this->miSql->getCadenaSql ( 'ingresar_elemento_individual', $arregloElementosInv );
 						
 						$elemento_id [$i] = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
+						
+						$elemento_id_max_indiv=$elemento_id_max_indiv +1;
+						
 					}
 				} else if ($num_placa [0] [0] != 0) {
 					
@@ -206,22 +233,26 @@ class RegistradorOrden {
 								$fechaActual,
 								$placa + $i,
 								$_REQUEST ['serie'],
-								$elemento [0] [0] 
+								$elemento [0] [0],
+								$elemento_id_max_indiv
 						);
 						
 						$cadenaSql = $this->miSql->getCadenaSql ( 'ingresar_elemento_individual', $arregloElementosInv );
 						
 						$elemento_id [$i] = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
+						$elemento_id_max_indiv=$elemento_id_max_indiv +1;
 					}
 				}
+				
 				
 				$datos = array (
 						$elemento [0] [0],
 						$fechaActual,
 						$_REQUEST ['entrada'] 
 				);
-	
 				
+	
+	
 				if ($elemento) {
 					
 					redireccion::redireccionar ( 'inserto', $datos, $_REQUEST ['datosGenerales'] );

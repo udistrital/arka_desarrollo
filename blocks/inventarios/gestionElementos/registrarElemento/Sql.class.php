@@ -161,7 +161,7 @@ class Sql extends \Sql {
 				break;
 			
 			case "buscar_entradas" :
-				$cadenaSql = " SELECT consecutivo valor,consecutivo descripcion  ";
+				$cadenaSql = " SELECT id_entrada valor, consecutivo||' - ('||entrada.vigencia||')' descripcion  ";
 				$cadenaSql .= " FROM entrada; ";
 				break;
 			
@@ -189,27 +189,28 @@ class Sql extends \Sql {
 			case "consultar_tipo_bien" :
 				
 				$cadenaSql = "SELECT id_tipo_bienes, descripcion ";
-				$cadenaSql .= "FROM tipo_bienes;";
+				$cadenaSql .= "FROM arka_inventarios.tipo_bienes;";
+				
 				break;
 			
 			case "consultar_tipo_poliza" :
 				
 				$cadenaSql = "SELECT id_tipo_poliza, descripcion ";
-				$cadenaSql .= "FROM tipo_poliza;";
+				$cadenaSql .= "FROM arka_inventarios.tipo_poliza;";
 				
 				break;
 			
 			case "consultar_tipo_iva" :
 				
 				$cadenaSql = "SELECT id_iva, descripcion ";
-				$cadenaSql .= "FROM aplicacion_iva;";
+				$cadenaSql .= "FROM arka_inventarios.aplicacion_iva;";
 				
 				break;
 			
 			case "consultar_bodega" :
 				
 				$cadenaSql = "SELECT id_bodega, descripcion ";
-				$cadenaSql .= "FROM bodega;";
+				$cadenaSql .= "FROM arka_inventarios.bodega;";
 				
 				break;
 			
@@ -245,26 +246,39 @@ class Sql extends \Sql {
 				
 				break;
 			
+			case "idElementoMax" :
 				
+				$cadenaSql = "SELECT max(id_elemento) ";
+				$cadenaSql .= "FROM elemento  ";
 				
+				break;
+				
+				case "idElementoMaxIndividual" :
+				
+					$cadenaSql = "SELECT max(id_elemento_ind) ";
+					$cadenaSql .= "FROM elemento_individual  ";
+				
+					break;
+			
 			case "consultar_nivel_inventario" :
 				
 				$cadenaSql = "SELECT elemento_id, elemento_padre||''|| elemento_codigo||' - '||elemento_nombre ";
 				$cadenaSql .= "FROM catalogo.catalogo_elemento ";
-				$cadenaSql .= "WHERE elemento_catalogo=2 ";
+				$cadenaSql .= "WHERE elemento_catalogo=1 ";
+				$cadenaSql .= "AND  elemento_id > 0  ";
 				$cadenaSql .= "ORDER BY elemento_id DESC ;";
-				
 				
 				break;
 			
 			case "ingresar_elemento_individual" :
 				$cadenaSql = " 	INSERT INTO elemento_individual(";
-				$cadenaSql .= "fecha_registro, placa, serie, id_elemento_gen) ";
+				$cadenaSql .= "fecha_registro, placa, serie, id_elemento_gen,id_elemento_ind) ";
 				$cadenaSql .= " VALUES (";
 				$cadenaSql .= "'" . $variable [0] . "',";
 				$cadenaSql .= "'" . $variable [1] . "',";
 				$cadenaSql .= "'" . $variable [2] . "',";
-				$cadenaSql .= "'" . $variable [3] . "') ";
+				$cadenaSql .= "'" . $variable [3] . "',";
+				$cadenaSql .= "'" . $variable [4] . "') ";
 				$cadenaSql .= "RETURNING id_elemento_ind; ";
 				
 				break;
@@ -274,7 +288,7 @@ class Sql extends \Sql {
 				$cadenaSql .= " elemento(";
 				$cadenaSql .= "fecha_registro,nivel, tipo_bien, descripcion, cantidad, ";
 				$cadenaSql .= "unidad, valor, iva, ajuste, bodega, subtotal_sin_iva, total_iva, ";
-				$cadenaSql .= "total_iva_con,marca,serie,id_entrada) ";
+				$cadenaSql .= "total_iva_con,marca,serie,id_entrada, id_elemento ) ";
 				$cadenaSql .= " VALUES (";
 				$cadenaSql .= "'" . $variable [0] . "',";
 				$cadenaSql .= "'" . $variable [1] . "',";
@@ -291,7 +305,8 @@ class Sql extends \Sql {
 				$cadenaSql .= "'" . $variable [12] . "',";
 				$cadenaSql .= "'" . $variable [13] . "',";
 				$cadenaSql .= "'" . $variable [14] . "',";
-				$cadenaSql .= "'" . $variable [15] . "') ";
+				$cadenaSql .= "'" . $variable [15] . "',";
+				$cadenaSql .= "'" . $variable [16] . "') ";
 				$cadenaSql .= "RETURNING  id_elemento; ";
 				
 				break;
@@ -301,7 +316,7 @@ class Sql extends \Sql {
 				$cadenaSql .= " elemento(";
 				$cadenaSql .= "fecha_registro,nivel,tipo_bien, descripcion, cantidad, ";
 				$cadenaSql .= "unidad, valor, iva, ajuste, bodega, subtotal_sin_iva, total_iva, ";
-				$cadenaSql .= "total_iva_con,tipo_poliza, fecha_inicio_pol, fecha_final_pol,marca,serie,id_entrada) ";
+				$cadenaSql .= "total_iva_con,tipo_poliza, fecha_inicio_pol, fecha_final_pol,marca,serie,id_entrada,id_elemento) ";
 				$cadenaSql .= " VALUES (";
 				$cadenaSql .= "'" . $variable [0] . "',";
 				$cadenaSql .= "'" . $variable [1] . "',";
@@ -321,56 +336,54 @@ class Sql extends \Sql {
 				$cadenaSql .= "'" . $variable [15] . "',";
 				$cadenaSql .= "'" . $variable [16] . "',";
 				$cadenaSql .= "'" . $variable [17] . "',";
-				$cadenaSql .= "'" . $variable [18] . "') ";
+				$cadenaSql .= "'" . $variable [18] . "',";
+				$cadenaSql .= "'" . $variable [19] . "') ";
 				$cadenaSql .= "RETURNING  id_elemento; ";
 				
 				break;
 			
+			case "ingresar_elemento_masivo" :
+				$cadenaSql = " INSERT INTO ";
+				$cadenaSql .= " elemento(";
+				$cadenaSql .= "fecha_registro,nivel,tipo_bien, descripcion, cantidad, ";
+				$cadenaSql .= "unidad, valor, ajuste, bodega, subtotal_sin_iva, total_iva, ";
+				$cadenaSql .= "total_iva_con,tipo_poliza, fecha_inicio_pol, fecha_final_pol,marca,serie,id_entrada) ";
+				$cadenaSql .= " VALUES (";
+				$cadenaSql .= "'" . $variable [0] . "',";
+				$cadenaSql .= "'" . $variable [1] . "',";
+				$cadenaSql .= "'" . $variable [2] . "',";
+				$cadenaSql .= "'" . $variable [3] . "',";
+				$cadenaSql .= "'" . $variable [4] . "',";
+				$cadenaSql .= "'" . $variable [5] . "',";
+				$cadenaSql .= "'" . $variable [6] . "',";
+				$cadenaSql .= "'" . $variable [7] . "',";
+				$cadenaSql .= "'" . $variable [8] . "',";
+				$cadenaSql .= "'" . $variable [9] . "',";
+				$cadenaSql .= "'" . $variable [10] . "',";
+				$cadenaSql .= "'" . $variable [11] . "',";
+				$cadenaSql .= "'" . $variable [12] . "',";
+				$cadenaSql .= "'" . $variable [13] . "',";
+				$cadenaSql .= "'" . $variable [14] . "',";
+				$cadenaSql .= "'" . $variable [15] . "',";
+				$cadenaSql .= "'" . $variable [16] . "',";
+				$cadenaSql .= "'" . $variable [17] . "') ";
+				$cadenaSql .= "RETURNING  id_elemento; ";
 				
-				
-				
-				case "ingresar_elemento_masivo" :
-					$cadenaSql = " INSERT INTO ";
-					$cadenaSql .= " elemento(";
-					$cadenaSql .= "fecha_registro,nivel,tipo_bien, descripcion, cantidad, ";
-					$cadenaSql .= "unidad, valor, ajuste, bodega, subtotal_sin_iva, total_iva, ";
-					$cadenaSql .= "total_iva_con,tipo_poliza, fecha_inicio_pol, fecha_final_pol,marca,serie,id_entrada) ";
-					$cadenaSql .= " VALUES (";
-					$cadenaSql .= "'" . $variable [0] . "',";
-					$cadenaSql .= "'" . $variable [1] . "',";
-					$cadenaSql .= "'" . $variable [2] . "',";
-					$cadenaSql .= "'" . $variable [3] . "',";
-					$cadenaSql .= "'" . $variable [4] . "',";
-					$cadenaSql .= "'" . $variable [5] . "',";
-					$cadenaSql .= "'" . $variable [6] . "',";
-					$cadenaSql .= "'" . $variable [7] . "',";
-					$cadenaSql .= "'" . $variable [8] . "',";
-					$cadenaSql .= "'" . $variable [9] . "',";
-					$cadenaSql .= "'" . $variable [10] . "',";
-					$cadenaSql .= "'" . $variable [11] . "',";
-					$cadenaSql .= "'" . $variable [12] . "',";
-					$cadenaSql .= "'" . $variable [13] . "',";
-					$cadenaSql .= "'" . $variable [14] . "',";
-					$cadenaSql .= "'" . $variable [15] . "',";
-					$cadenaSql .= "'" . $variable [16] . "',";
-					$cadenaSql .= "'" . $variable [17] . "') ";
-					$cadenaSql .= "RETURNING  id_elemento; ";
-				
-					break;
+				break;
 			case "consultarEntrada" :
 				$cadenaSql = "SELECT DISTINCT ";
-				$cadenaSql .= "id_entrada, fecha_registro,  ";
-				$cadenaSql .= " descripcion,proveedor, consecutivo   ";
+				$cadenaSql .= "entrada.id_entrada, entrada.fecha_registro,  ";
+				$cadenaSql .= " descripcion,proveedor, consecutivo||' - ('||entrada.vigencia||')' entradas   ";
 				$cadenaSql .= "FROM entrada ";
 				$cadenaSql .= "JOIN clase_entrada ON clase_entrada.id_clase = entrada.clase_entrada ";
-				// $cadenaSql .= "JOIN proveedor ON proveedor.id_proveedor = entrada.proveedor ";
+				
 				$cadenaSql .= "WHERE 1=1 ";
 				if ($variable [0] != '') {
-					$cadenaSql .= " AND id_entrada = '" . $variable [0] . "'";
+					$cadenaSql .= " AND entrada.id_entrada = '" . $variable [0] . "'";
 				}
 				
 				if ($variable [1] != '') {
-					$cadenaSql .= " AND fecha_registro BETWEEN CAST ( '" . $variable [1] . "' AS DATE) ";
+					$cadenaSql .= " AND entrada.fecha_registro BETWEEN CAST ( '" . $variable [1] . "' AS DATE) ";
 					$cadenaSql .= " AND  CAST ( '" . $variable [2] . "' AS DATE)  ";
 				}
 				

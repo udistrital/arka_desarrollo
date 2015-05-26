@@ -136,11 +136,29 @@ class registrarForm {
 		echo $this->miFormulario->marcoAgrupacion ( 'inicio', $atributos );
 		
 		// ------------------Division para los botones-------------------------
-		$atributos ["id"] = "botones";
-		$atributos ["estilo"] = "marcoBotones";
+		$atributos ["id"] = "DivPlacas";
+		$atributos ["estilo"] = " ";
 		echo $this->miFormulario->division ( "inicio", $atributos );
 		
-	
+		// -----------------CONTROL: Botón ----------------------------------------------------------------
+		$esteCampo = 'botonPlacas';
+		$atributos ["id"] = $esteCampo;
+		$atributos ["tabIndex"] = $tab;
+		$atributos ["tipo"] = 'boton';
+		// submit: no se coloca si se desea un tipo button genérico
+		$atributos ['submit'] = true;
+		$atributos ["estiloMarco"] = '';
+		$atributos ["estiloBoton"] = 'jqueryui';
+		// verificar: true para verificar el formulario antes de pasarlo al servidor.
+		$atributos ["verificar"] = '';
+		$atributos ["tipoSubmit"] = 'jquery'; // Dejar vacio para un submit normal, en este caso se ejecuta la función submit declarada en ready.js
+		$atributos ["valor"] = $this->lenguaje->getCadena ( $esteCampo );
+		$atributos ['nombreFormulario'] = $esteBloque ['nombre'];
+		$tab ++;
+		
+		// Aplica atributos globales al control
+// 		$atributos = array_merge ( $atributos );
+		echo $this->miFormulario->campoBoton ( $atributos );
 		
 		// ------------------Fin Division para los botones-------------------------
 		echo $this->miFormulario->division ( "fin" );
@@ -181,18 +199,26 @@ class registrarForm {
                     <td><center>" . $elementos [$i] [1] . "</center></td>
                     <td><center>" . $elementos [$i] [2] . "</center></td>
                     <td><center>" . $elementos [$i] [4] . "</center></td>
-                    <td><center>" . $elementos [$i] [3] . "</center></td>
-                    <td><center>
-                    	<a href='" . $variable . "'>
-                            <img src='" . $rutaBloque . "/css/images/edit.png' width='15px'>
-                        </a>
-                  	</center> </td>
-           			<td><center>
-                    	".$anulacion."
-                  	</center> </td>
-                            		
-                            		
-                </tr>";
+                    <td><center>" . $elementos [$i] [3] . "</center></td>";
+                    
+				if ($elementos [$i] [6] == 'f') {
+						
+					$mostrarHtml .= "<td><center>
+			                    	<a href='" . $variable . "'>
+			                            <img src='" . $rutaBloque . "/css/images/edit.png' width='15px'>
+			                        </a>
+                		  			</center> </td>
+			                         <td><center>
+                    					".$anulacion."
+                  						</center> </td>		";
+				} else if ($elementos [$i] [6] == 't') {
+						
+					$mostrarHtml .= "<td><center>Inhabilitado por Cierre Contable</center> </td>
+							         <td><center>Inhabilitado por Cierre Contable</center> </td> ";
+				}
+				$mostrarHtml .= "</tr>";
+				
+				
 				echo $mostrarHtml;
 				unset ( $mostrarHtml );
 				unset ( $variable );
@@ -246,8 +272,8 @@ class registrarForm {
 		$valorCodificado .= "&pagina=" . $this->miConfigurador->getVariableConfiguracion ( 'pagina' );
 		$valorCodificado .= "&bloque=" . $esteBloque ['nombre'];
 		$valorCodificado .= "&bloqueGrupo=" . $esteBloque ["grupo"];
-		$valorCodificado .= "&opcion=regresar";
-		$valorCodificado .= "&redireccionar=regresar";
+// 		$valorCodificado .= "&opcion=regresar";
+// 		$valorCodificado .= "&redireccionar=regresar";
 		/**
 		 * SARA permite que los nombres de los campos sean dinámicos.
 		 * Para ello utiliza la hora en que es creado el formulario para

@@ -18,7 +18,7 @@ $this->idioma ["informacion_proveedor"] ="Nombre y/o Razón Social Proveedor : "
 
 
 
-$this->idioma ["numero_entrada"] ="(ID)Número Entrada: ";
+$this->idioma ["numero_entrada"] ="Número Entrada y/o Vigencia : ";
 $this->idioma ["numero_entradaTitulo"] ="Ingrese Número Entrada";
 
 

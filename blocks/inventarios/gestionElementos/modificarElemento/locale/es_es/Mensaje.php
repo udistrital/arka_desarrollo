@@ -218,6 +218,9 @@ $this->idioma ["botonContinuar"] ="Continuar";
 $this->idioma ["botonConsultar"] ="Consultar";
 $this->idioma ["botonRegresar"] ="< < Regresar";
 
+$this->idioma ["botonPlacas"] ="Imprimir Placas";
+
+
 
 
 

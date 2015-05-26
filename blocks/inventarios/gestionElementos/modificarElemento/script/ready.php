@@ -43,9 +43,15 @@
  
  $("#<?php echo $this->campoSeguro('placa')?>").select2({
              	 placeholder: "Search for a repository",
-              	 minimumInputLength: 5,
+              	 minimumInputLength: 3,
               	 });
- $("#<?php echo $this->campoSeguro('serie1')?>").select2();
+ $("#<?php echo $this->campoSeguro('serie1')?>").select2({
+             	 placeholder: "Search for a repository",
+              	 minimumInputLength: 3,
+              	 });
+              	 
+              	 
+              	 $("#<?php echo $this->campoSeguro('tipo_poliza')?>").select2();
  $("#<?php echo $this->campoSeguro('nivel')?>").select2();
  $("#<?php echo $this->campoSeguro('tipo_registro')?>").select2();
  $("#<?php echo $this->campoSeguro('tipo_bien')?>").select2();
@@ -95,7 +101,7 @@
             switch($("#<?php echo $this->campoSeguro('tipo_poliza')?>").val())
             {
                            
-                case '1':
+                case '0':
                     
                    
                     $("#<?php echo $this->campoSeguro('fechas_polizas')?>").css('display','none');
@@ -106,7 +112,7 @@
                 break;
                 
                 
-                case '2':
+                case '1':
                     
                   $("#<?php echo $this->campoSeguro('fechas_polizas')?>").css('display','block');
        

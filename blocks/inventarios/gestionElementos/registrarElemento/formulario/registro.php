@@ -49,6 +49,7 @@ class registrarForm {
 		
 		$esteRecursoDB = $this->miConfigurador->fabricaConexiones->getRecursoDB ( $conexion );
 		
+// 		var_dump($esteRecursoDB);
 		$conexion = "sicapital";
 		$esteRecursoDBO = $this->miConfigurador->fabricaConexiones->getRecursoDB ( $conexion );
 		
@@ -424,6 +425,7 @@ class registrarForm {
 						$atributos ['anchoEtiqueta'] = 213;
 						
 						$atributos ['cadena_sql'] = $this->miSql->getCadenaSql ( "consultar_nivel_inventario" );
+						
 						$matrizItems = $esteRecursoDB->ejecutarAcceso ( $atributos ['cadena_sql'], "busqueda" );
 						
 						$atributos ['matrizItems'] = $matrizItems;
@@ -455,6 +457,7 @@ class registrarForm {
 						$atributos ['anchoEtiqueta'] = 213;
 						
 						$atributos ['cadena_sql'] = $this->miSql->getCadenaSql ( "consultar_tipo_bien" );
+						
 						$matrizItems = $esteRecursoDB->ejecutarAcceso ( $atributos ['cadena_sql'], "busqueda" );
 						
 						$atributos ['matrizItems'] = $matrizItems;

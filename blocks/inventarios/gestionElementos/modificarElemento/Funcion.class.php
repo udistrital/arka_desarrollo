@@ -84,6 +84,12 @@ class Funcion {
 				
 			}
 			
+			if (isset ( $_REQUEST ["redireccionar"])&&$_REQUEST ['redireccionar'] == 'regresar') {
+				redireccion::redireccionar($_REQUEST['opcion']);
+			
+			}
+			
+			
 			
 			if ($_REQUEST ['opcion'] == 'modificar') {
 				 			

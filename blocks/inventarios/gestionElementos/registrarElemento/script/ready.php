@@ -104,7 +104,7 @@ $("#<?php echo $this->campoSeguro('tipo_poliza')?>").select2();
             switch($("#<?php echo $this->campoSeguro('tipo_poliza')?>").val())
             {
                            
-                case '1':
+                case '0':
                     
                    
                     $("#<?php echo $this->campoSeguro('fechas_polizas')?>").css('display','none');
@@ -115,7 +115,7 @@ $("#<?php echo $this->campoSeguro('tipo_poliza')?>").select2();
                 break;
                 
                 
-                case '2':
+                case '1':
                     
                   $("#<?php echo $this->campoSeguro('fechas_polizas')?>").css('display','block');
        

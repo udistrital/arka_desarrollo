@@ -89,7 +89,7 @@ class RegistradorOrden {
 			
 		} else if ($_REQUEST ['tipo_bien'] == 3) {
 				
-			if ($_REQUEST ['tipo_poliza'] == 1) {
+			if ($_REQUEST ['tipo_poliza'] == 0) {
 				$arreglo = array (
 						$_REQUEST ['tipo_bien'],
 						$_REQUEST ['descripcion'],
@@ -110,7 +110,7 @@ class RegistradorOrden {
 						$_REQUEST['id_elemento'],
 						$_REQUEST ['nivel']
 				);
-			} else if ($_REQUEST ['tipo_poliza'] == 2) {
+			} else if ($_REQUEST ['tipo_poliza'] == 1) {
 				$arreglo = array (
 						$_REQUEST ['tipo_bien'],
 						$_REQUEST ['descripcion'],
@@ -139,16 +139,13 @@ class RegistradorOrden {
 			
 			
 		}
-		
-		
-		
-			
+
 		
 		$cadenaSql = $this->miSql->getCadenaSql ( 'consultar_placa_actulizada', $_REQUEST['id_elemento']);
 		$placa = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
 		
 		
-		
+
 		if ($elemento) {
 				
 			redireccion::redireccionar ( 'inserto', $_REQUEST['id_elemento'] );
