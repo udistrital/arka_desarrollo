@@ -25,6 +25,17 @@
             });
         });
 
+        
+        
+         $("#<?php echo $this->campoSeguro('placa')?>").select2({
+             	 placeholder: "Search for a repository",
+              	 minimumInputLength: 3,
+              	 });
+ $("#<?php echo $this->campoSeguro('serial')?>").select2({
+             	 placeholder: "Search for a repository",
+              	 minimumInputLength: 3,
+              	 });
+        
               
 $("#<?php echo $this->campoSeguro('inexistencia')?>").select2();
  $("#<?php echo $this->campoSeguro('responsable')?>").select2();

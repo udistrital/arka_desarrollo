@@ -45,6 +45,14 @@ class RegistradorOrden {
 		
 		$fechaActual = date ( 'Y-m-d' );
 		
+		
+		
+		$cadenaSql = $this->miSql->getCadenaSql ( 'max_estado_elemento' );
+		$max_estado_elemento = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
+		
+		$max_estado_elemento=$max_estado_elemento[0][0]+1;
+		
+		
 		switch ($_REQUEST ['inexistencia']) {
 			
 			case '1' :
@@ -65,7 +73,8 @@ class RegistradorOrden {
 						'0001-01-01',
 						'0001-01-01',
 						$fechaActual,
-						$_REQUEST ['inexistencia']
+						$_REQUEST ['inexistencia'],
+						$max_estado_elemento
 						 
 				);
 				
@@ -126,7 +135,8 @@ class RegistradorOrden {
 						$_REQUEST ['fecha_denuncia'],
 						$_REQUEST ['fecha_hurto'],
 						$fechaActual ,
-						$_REQUEST ['inexistencia']
+						$_REQUEST ['inexistencia'],
+						$max_estado_elemento
 				);
 				
 				break;
@@ -149,7 +159,8 @@ class RegistradorOrden {
 						'0001-01-01',
 						'0001-01-01',
 						$fechaActual,
-						$_REQUEST ['inexistencia'] 
+						$_REQUEST ['inexistencia'],
+						$max_estado_elemento 
 				);
 				
 				break;
@@ -168,9 +179,14 @@ class RegistradorOrden {
 					
 				
 		);
+		
+		
 		$cadenaSql = $this->miSql->getCadenaSql ( 'actualizacion_estado_elemento', $arreglo );
 	    $actualizacion = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "acceso" );
 
+	    
+	    
+	    
 	    
 		
 		

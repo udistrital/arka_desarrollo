@@ -157,11 +157,18 @@ class Sql extends \Sql {
 				
 				break;
 			
+			case "max_estado_elemento" :
+				
+				$cadenaSql = "SELECT MAX(id_estado_elemento) ";
+				$cadenaSql .= "FROM estado_elemento ";
+				
+				break;
+			
 			case "insertar_faltante_sobrante" :
 				
 				$cadenaSql = "INSERT INTO estado_elemento( ";
 				$cadenaSql .= "id_elemento_ind,id_faltante, id_sobrante, id_hurto, observaciones,  ";
-				$cadenaSql .= "ruta_denuncia, nombre_denuncia, fecha_denuncia, fecha_hurto, fecha_registro,tipo_faltsobr) ";
+				$cadenaSql .= "ruta_denuncia, nombre_denuncia, fecha_denuncia, fecha_hurto, fecha_registro,tipo_faltsobr, id_estado_elemento) ";
 				$cadenaSql .= " VALUES (";
 				$cadenaSql .= "'" . $variable [0] . "',";
 				$cadenaSql .= "'" . $variable [1] . "',";
@@ -173,7 +180,8 @@ class Sql extends \Sql {
 				$cadenaSql .= "'" . $variable [7] . "',";
 				$cadenaSql .= "'" . $variable [8] . "',";
 				$cadenaSql .= "'" . $variable [9] . "',";
-				$cadenaSql .= "'" . $variable [10] . "') ";
+				$cadenaSql .= "'" . $variable [10] . "',";
+				$cadenaSql .= "'" . $variable [11] . "') ";
 				$cadenaSql .= "RETURNING  id_faltante,id_sobrante,id_hurto,id_estado_elemento; ";
 				
 				break;
@@ -198,12 +206,12 @@ class Sql extends \Sql {
 				$cadenaSql .= " WHERE  id_tipo_falt_sobr < 4";
 				break;
 			
-// 			case "funcionarios" :
-				
-// 				$cadenaSql = "SELECT JEF_IDENTIFICADOR,JEF_INDENTIFICACION ||' - '|| JEF_NOMBRE ";
-// 				$cadenaSql .= "FROM JEFES_DE_SECCION ";
-				
-// 				break;
+			// case "funcionarios" :
+			
+			// $cadenaSql = "SELECT JEF_IDENTIFICADOR,JEF_INDENTIFICACION ||' - '|| JEF_NOMBRE ";
+			// $cadenaSql .= "FROM JEFES_DE_SECCION ";
+			
+			// break;
 			
 			case "dependencia" :
 				
@@ -222,7 +230,7 @@ class Sql extends \Sql {
 				
 				$cadenaSql = "SELECT ";
 				$cadenaSql .= "id_elemento_ind, elemento_individual.placa, elemento_individual.serie,funcionario, id_elemento_gen, ";
-				$cadenaSql .= "elemento_individual.id_salida ,tipo_bien.tb_descripcion ,salida.id_salida as salida ";
+				$cadenaSql .= "salida.consecutivo||' - ('||salida.vigencia||')' salidas,tipo_bien.tb_descripcion ,salida.id_salida as salida ";
 				$cadenaSql .= "FROM elemento_individual ";
 				$cadenaSql .= "JOIN elemento ON elemento.id_elemento = elemento_individual.id_elemento_gen ";
 				$cadenaSql .= "JOIN salida ON salida.id_salida = elemento_individual.id_salida ";
@@ -240,13 +248,11 @@ class Sql extends \Sql {
 				
 				$cadenaSql = "SELECT ";
 				$cadenaSql .= "id_elemento_ind, elemento_individual.placa, elemento_individual.serie,funcionario, id_elemento_gen, ";
-				$cadenaSql .= "elemento_individual.id_salida ,tipo_bien.tb_descripcion ,dependencia ,salida.id_salida as salida ";
+				$cadenaSql .= "salida.consecutivo||' - ('||salida.vigencia||')' salidas ,tipo_bien.tb_descripcion ,dependencia ,salida.id_salida as salida ";
 				$cadenaSql .= "FROM elemento_individual ";
 				$cadenaSql .= "JOIN elemento ON elemento.id_elemento = elemento_individual.id_elemento_gen ";
 				$cadenaSql .= "JOIN salida ON salida.id_salida = elemento_individual.id_salida ";
 				$cadenaSql .= "JOIN tipo_bien ON tipo_bien.tb_idbien = elemento.tipo_bien ";
-				// $cadenaSql .= "JOIN funcionario ON funcionario.id_funcionario = salida.funcionario ";
-				// $cadenaSql .= "left JOIN dependencia ON dependencia.id_dependencia = funcionario.dependencia ";
 				$cadenaSql .= "WHERE 1=1 ";
 				$cadenaSql .= "AND elemento.tipo_bien <> 1 ";
 				
@@ -254,7 +260,7 @@ class Sql extends \Sql {
 					$cadenaSql .= " AND funcionario = '" . $variable [0] . "'";
 				}
 				if ($variable [1] != '') {
-					$cadenaSql .= " AND  elemento_individual.serial= '" . $variable [1] . "'";
+					$cadenaSql .= " AND  elemento_individual.serie= '" . $variable [1] . "'";
 				}
 				if ($variable [2] != '') {
 					$cadenaSql .= " AND  elemento_individual.placa= '" . $variable [2] . "'";
@@ -263,7 +269,7 @@ class Sql extends \Sql {
 					$cadenaSql .= " AND  dependencia= '" . $variable [3] . "'";
 				}
 				
-				$cadenaSql .= " ; ";
+				
 				
 				break;
 			
@@ -326,6 +332,30 @@ class Sql extends \Sql {
 				$cadenaSql = "SELECT DISTINCT  ESF_ID_SEDE, ESF_SEDE ";
 				$cadenaSql .= " FROM ESPACIOS_FISICOS ";
 				$cadenaSql .= " WHERE   ESF_ESTADO='A'";
+				
+				break;
+			
+			case "buscar_serie" :
+				$cadenaSql = " SELECT DISTINCT serie, serie as series ";
+				$cadenaSql .= "FROM elemento_individual ";
+				$cadenaSql .= "WHERE  serie <> '' ";
+				$cadenaSql .= "ORDER BY serie DESC ";
+				
+				break;
+			
+			case "buscar_placa" :
+				$cadenaSql = " SELECT DISTINCT placa, placa as placas ";
+				$cadenaSql .= "FROM elemento_individual ";
+				$cadenaSql .= "ORDER BY placa DESC ";
+				
+				break;
+			
+			case "funcionario_informacion_consultada" :
+				
+				$cadenaSql = "SELECT FUN_IDENTIFICACION,  FUN_NOMBRE  ";
+				$cadenaSql .= "FROM FUNCIONARIOS ";
+				$cadenaSql .= "WHERE FUN_ESTADO='A' ";
+				$cadenaSql .= "AND FUN_IDENTIFICACION='" . $variable . "' ";
 				
 				break;
 		}

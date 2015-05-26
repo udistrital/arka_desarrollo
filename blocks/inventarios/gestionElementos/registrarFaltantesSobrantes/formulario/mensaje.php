@@ -21,7 +21,6 @@ class registrarForm {
 	}
 	function miForm() {
 		
-		
 		// Rescatar los datos de este bloque
 		$esteBloque = $this->miConfigurador->getVariableConfiguracion ( "esteBloque" );
 		
@@ -34,8 +33,6 @@ class registrarForm {
 		 * Si se utiliza esta técnica es necesario realizar un mezcla entre este arreglo y el específico en cada control:
 		 * $atributos= array_merge($atributos,$atributosGlobales);
 		 */
-		
-		
 		
 		$_REQUEST ['tiempo'] = time ();
 		
@@ -71,6 +68,30 @@ class registrarForm {
 		$atributos ['tipoEtiqueta'] = 'inicio';
 		echo $this->miFormulario->formulario ( $atributos );
 		{
+			
+			$miPaginaActual = $this->miConfigurador->getVariableConfiguracion ( 'pagina' );
+			
+			$directorio = $this->miConfigurador->getVariableConfiguracion ( "host" );
+			$directorio .= $this->miConfigurador->getVariableConfiguracion ( "site" ) . "/index.php?";
+			$directorio .= $this->miConfigurador->getVariableConfiguracion ( "enlace" );
+			
+			$variable = "pagina=" . $miPaginaActual;
+			$variable = $this->miConfigurador->fabricaConexiones->crypto->codificar_url ( $variable, $directorio );
+			
+			// ---------------- CONTROL: Cuadro de Texto --------------------------------------------------------
+			$esteCampo = 'botonRegresar';
+			$atributos ['id'] = $esteCampo;
+			$atributos ['enlace'] = $variable;
+			$atributos ['tabIndex'] = 1;
+			$atributos ['estilo'] = 'textoSubtitulo';
+			$atributos ['enlaceTexto'] = $this->lenguaje->getCadena ( $esteCampo );
+			$atributos ['ancho'] = '10%';
+			$atributos ['alto'] = '10%';
+			$atributos ['redirLugar'] = true;
+			echo $this->miFormulario->enlace ( $atributos );
+			
+			unset ( $atributos );
+			
 			// ---------------- SECCION: Controles del Formulario -----------------------------------------------
 			
 			$esteCampo = "marcoDatosBasicos";
@@ -84,26 +105,19 @@ class registrarForm {
 				
 				if (isset ( $_REQUEST ['mensaje'] ) && $_REQUEST ['mensaje'] == 'confirma') {
 					
-					$variable=$_REQUEST['registro'];
-					$variable=unserialize($variable);
-			
-					if($variable[0]<>'0'){
+					$variable = $_REQUEST ['registro'];
+					$variable = unserialize ( $variable );
+					
+					if ($variable [0] != '0') {
 						
-						$mensaje = "Se Registro Faltante <br> # ID Faltante : ".$variable[0].".";
+						$mensaje = "Se Registro Faltante <br> # ID Faltante : " . $variable [0] . ".";
+					} else if ($variable [1] != '0') {
 						
-					}else if($variable[1]<>'0'){
+						$mensaje = "Se Registro Sobrante <br> # ID Sobrante : " . $variable [1] . ".";
+					} else if ($variable [2] != '0') {
 						
-						$mensaje = "Se Registro Sobrante <br> # ID Sobrante : ".$variable[1].".";
-						
-					}else if($variable[2]<>'0'){
-						
-						$mensaje = "Se Registro Hurto <br> # ID Hurto : ".$variable[2].".";
-						
+						$mensaje = "Se Registro Hurto <br> # ID Hurto : " . $variable [2] . ".";
 					}
-					
-					
-					
-					
 					
 					// ---------------- CONTROL: Cuadro de Texto --------------------------------------------------------
 					$esteCampo = 'mensajeRegistro';
