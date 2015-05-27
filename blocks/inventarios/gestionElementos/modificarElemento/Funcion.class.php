@@ -31,14 +31,7 @@ class Funcion {
 	var 
 
 	$crypto;
-	// function verificarCampos() {
-	// include_once ($this->ruta . "/funcion/verificarCampos.php");
-	// if ($this->error == true) {
-	// return false;
-	// } else {
-	// return true;
-	// }
-	// }
+
 	function redireccionar($opcion, $valor = "") {
 		include_once ($this->ruta . "/funcion/redireccionar.php");
 	}
@@ -60,6 +53,12 @@ class Funcion {
 	
 		include_once ($this->ruta . "funcion/anular.php");
 	}
+	function ImprimirPlacas() {
+	
+		include_once ($this->ruta . "funcion/reportePdf.php");
+	}
+	
+	
 	
 	function action() {
 		 
@@ -88,6 +87,12 @@ class Funcion {
 				redireccion::redireccionar($_REQUEST['opcion']);
 			
 			}
+			
+			if (isset ( $_REQUEST ["botonPlacas"])&&$_REQUEST ['botonPlacas'] == true) {
+				$this->ImprimirPlacas();
+					
+			}
+			
 			
 			
 			

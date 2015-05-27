@@ -194,6 +194,9 @@ class registrarForm {
                             <img src='" . $rutaBloque . "/css/images/anular.png' width='15px'>
                         </a>":" " ;
 				
+				$placas[]=$elementos [$i] [1];
+				
+				
 				
 				$mostrarHtml = "<tr>
                     <td><center>" . $elementos [$i] [1] . "</center></td>
@@ -223,6 +226,8 @@ class registrarForm {
 				unset ( $mostrarHtml );
 				unset ( $variable );
 			}
+			
+			$placas =serialize($placas);
 			
 			echo "</tbody>";
 			
@@ -268,12 +273,12 @@ class registrarForm {
 		
 		// Paso 1: crear el listado de variables
 		
-		$valorCodificado = "actionBloque=" . $esteBloque ["nombre"];
+		$valorCodificado = "action=" . $esteBloque ["nombre"];
 		$valorCodificado .= "&pagina=" . $this->miConfigurador->getVariableConfiguracion ( 'pagina' );
 		$valorCodificado .= "&bloque=" . $esteBloque ['nombre'];
 		$valorCodificado .= "&bloqueGrupo=" . $esteBloque ["grupo"];
-// 		$valorCodificado .= "&opcion=regresar";
-// 		$valorCodificado .= "&redireccionar=regresar";
+		$valorCodificado .= "&opcion=placas";
+		$valorCodificado .= "&placas=".$placas;
 		/**
 		 * SARA permite que los nombres de los campos sean dinámicos.
 		 * Para ello utiliza la hora en que es creado el formulario para

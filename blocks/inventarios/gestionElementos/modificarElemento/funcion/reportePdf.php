@@ -1,18 +1,11 @@
 <?
-
-namespace inventarios\gestionCompras\consultaOrdenServicios\funcion;
-// var_dump($_REQUEST);
-use inventarios\gestionCompras\consultaOrdenServicios\funcion\redireccion;
-
 $ruta = $this->miConfigurador->getVariableConfiguracion ( "raizDocumento" );
 
 $host = $this->miConfigurador->getVariableConfiguracion ( "host" ) . $this->miConfigurador->getVariableConfiguracion ( "site" ) . "/plugin/html2pfd/";
 
+include ($ruta . "/plugin/html2pdf/html2pdf.class.php");
 
-include ($ruta."/plugin/html2pdf/html2pdf.class.php");
-
-// ob_end_clean();
-if (! isset ( $GLOBALS ["autorizado"])) {
+if (! isset ( $GLOBALS ["autorizado"] )) {
 	include ("../index.php");
 	exit ();
 }
@@ -30,180 +23,106 @@ class RegistradorOrden {
 		$this->miSql = $sql;
 		$this->miFuncion = $funcion;
 	}
-	function paginas($contenidoDatos, $nombre, $directorio) {
-		$contenidoPagina = "<page backtop='1mm' backbottom='1mm' backleft='1mm' backright='1mm'>";
-		$contenidoPagina .= "<page_header>
+	function documento() {
 		
-        <table align='center' style='width: 100%;'>
-            <tr>
-                <td align='center' >
-                    <img src='" . $directorio . "/css/images/escudo.jpg'>
-                </td>
-                <td align='center' >
-                    <font size='12px'><b>UNIVERSIDAD DISTRITAL</b></font>
-                    <br>
-                    <font size='12px'><b>FRANCISCO JOSÉ DE CALDAS</b></font>
-                    <br>
-                    <font size='9px'><b>REPORTE DE ORDENES DE COMPRA</b></font>
-                    <br>
-                    <font size='9px'><b>" . date ( "Y-m-d" ) . "</b></font>
-                </td>
-                <td align='center' >
-                    <img src='" . $directorio . "/css/images/sabio.jpg' width='60'>
-                </td>
-            </tr>
-        </table>
-    </page_header>
-    <page_footer>
-        <table align='center' width = '100%'>
-            <tr>
-                <td align='center'>
-                    <img src='" . $directorio . "/css/images/escudo.jpg'>
-                </td>
-            </tr>
-            <tr>
-                <td align='center'>
-                    Universidad Distrital Francisco José de Caldas
-                    <br>
-                    Todos los derechos reservados.
-                    <br>
-                    Carrera 8 N. 40-78 Piso 1 / PBX 3238400 - 3239300
-                    <br>
-              
-                </td>
-            </tr>
-        </table>
-    </page_footer>";
+
+		$placas = unserialize ( $_REQUEST ['placas'] );
+
+
 		
-		$contenidoPagina .= "
-     <table>
-            <tr>
-                <td>
-<br><br><br><br>
-                <p><h5>&nbsp; &nbsp; &nbsp; Este Documento en lista las Ordenes de Compra Segun la Consulta. </h5></p>
-	
-         
-                </td>
-            </tr>
-        </table>
-    <style>
-td{
-  font-size: 13px;
-}
-</style>
-	
-                		";
+		$contenidoPagina = "
+<style type=\"text/css\">
+    table { 
+        color:#333; /* Lighten up font color */
+        font-family:Helvetica, Arial, sans-serif; /* Nicer font */
 		
-		$contenidoPagina .= "<table width=\"30%\" border=\"1\" cellpadding=\"0\" cellspacing=\"0\" class='bordered' align=\"center \">
+        border-collapse:collapse; border-spacing: 3px; 
+    }
+
+    td, th { 
+        border: 1px solid #CCC; 
+        height: 13px;
+    } /* Make cells a bit taller */
+
+	col{
+	width=50%;
 	
-	
-	
-						<thead>
-				<tr role='row'>
-					<th aria-label='Documento' aria-sort='ascending'
-						style='width: 100px;' colspan='1' rowspan='1'
-						aria-controls='example' tabindex='0' role='columnheader'
-						class='sorting_asc'>#Número Orden Compra</th>
-					<th aria-label='nombres' aria-sort='ascending'
-						style='width: 230px;' colspan='1' rowspan='1'
-						aria-controls='example' tabindex='0' role='columnheader'
-						class='sorting_asc'>Fecha Orden</th>
-					<th aria-label='Descripciont' aria-sort='ascending'
-						style='width: 200px;' colspan='1' rowspan='1'
-						aria-controls='example' tabindex='0' role='columnheader'
-						class='sorting_asc'>Nit Proveedor</th>
-					<th aria-label='Descripciont' aria-sort='ascending'
-						style='width: 180px;' colspan='1' rowspan='1'
-						aria-controls='example' tabindex='0' role='columnheader'
-						class='sorting_asc'>Dependencia Solicitante</th>
-					 
-				</tr>
-			</thead>
-	
-	
-";
-		
-		$contenidoPagina .= $contenidoDatos;
-		
-		$contenidoPagina .= "   	  </table>";
-		
-		$contenidoPagina .= "</page> ";
-		
-		return $contenidoPagina;
-	}
-	function armarContenido($NoRegistros, $respuesta, $directorio) {
-		$pagina = '';
-		$contenido = '';
-		$i = 0;
-		$Modulo = $NoRegistros;
-		foreach ( $respuesta as $res ) {
-			$contenido .= "<tr class='gradeA odd' align=center> ";
-			$contenido .= "<td>" . $res [0] . " </td>";
-			$contenido .= "<td>" . $res [1] . " </td>";
-			$contenido .= "<td>" . $res [2] . " </td>";
-			$contenido .= "<td>" . $res [3] . " </td>";
-			
-			$contenido .= "</tr>";
-			
-			if ($i == 24) {
-				$paginaPDF = $this->paginas ( $contenido, 'Ordenes de Compra', $directorio );
-				$pagina .= $paginaPDF;
-				$contenido = '';
+	}			
 				
-				$Modulo = $Modulo - 24;
-				$i = 0;
+    th {
+        background: #F3F3F3; /* Light grey background */
+        font-weight: bold; /* Make sure they're bold */
+        text-align: center;
+        font-size:10px
+    }
+
+    td {
+        background: #FAFAFA; /* Lighter grey background */
+        text-align: left;
+        font-size:10px
+    }
+</style>				
+				
+				
+<page backtop='10mm' backbottom='7mm' backleft='10mm' backright='10mm'>
+	
+        		
+		    <table style='width:100%;'>";
+		$contador = 1;
+		$salidacontador = 1;
+		$salida=count($placas);
+		
+		$directorio = $this->miConfigurador->getVariableConfiguracion ( 'rutaUrlBloque' );
+		foreach($placas as $p) {
+			if ($contador == 1) {
+				
+				$contenidoPagina .= "<tr>";
 			}
 			
-			if ($Modulo > 0 && $Modulo < 24 && $i == ($Modulo - 1)) {
-				$paginaPDF = $this->paginas ( $contenido, 'Ordenes de Compra', $directorio );
-				$pagina .= $paginaPDF;
-				$contenido = '';
+			$contenidoPagina .= "<td style='width:33.31%;text-align=center;'>
+								<barcode type='CODABAR' value='".$p."' style='width:30mm; height:6mm; font-size: 4mm'></barcode>".'   '."<img src='" . $directorio . "/css/images/escudo2.jpeg'  width='40' height='40'></td><br>";
+			
+			
+			
+			if ($contador == 3) {
+			
+				$contenidoPagina .= "</tr>";
+				$contador=0;
+				
 			}
-			$i ++;
-		}
-		return $pagina;
-	}
-	function procesarFormulario() {
-		$conexion = "inventarios";
-		$esteRecursoDB = $this->miConfigurador->fabricaConexiones->getRecursoDB ( $conexion );
-		
-		$arreglo = unserialize ( $_REQUEST ['arreglo'] );
-		
-		$cadenaSql = $this->miSql->getCadenaSql ( 'consultarOrden1', $arreglo );
-		$ordenCompra1 = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
-		
-		$cadenaSql = $this->miSql->getCadenaSql ( 'consultarOrden2', $arreglo );
-		$ordenCompra2 = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
-		
-		if ($ordenCompra1 == false) {
+			$contador++;
 			
-			$ordenCompra = $ordenCompra2;
-		} else if ($ordenCompra2 == false) {
+			if ($salida == $salidacontador) {
+					
+				$contenidoPagina .= "</tr>";
+				
 			
-			$ordenCompra = $ordenCompra1;
-		} else {
-			$ordenCompra = array_merge ( $ordenCompra1, $ordenCompra2 );
+			}
+			
+			$salidacontador++;
+			
+			
 		}
 		
-		return $ordenCompra;
+		$contenidoPagina .= "</table>";
+		
+		$contenidoPagina .= "</page>";
+		
+// 		echo $contenidoPagina;exit;
+		return $contenidoPagina;
 	}
 }
 
 $miRegistrador = new RegistradorOrden ( $this->lenguaje, $this->sql, $this->funcion );
 
-$resultado = $miRegistrador->procesarFormulario ();
-
-$textos = $miRegistrador->armarContenido ( count ( $resultado ), $resultado, $_REQUEST ['directorio'] );
+$textos = $miRegistrador->documento ();
 
 ob_start ();
-$html2pdf = new \HTML2PDF ( 'L', 'LETTER', 'es' );
-
+$html2pdf = new \HTML2PDF ( 'P', 'LETTER', 'es', true, 'UTF-8' );
+$html2pdf->pdf->SetDisplayMode ( 'fullpage' );
 $html2pdf->WriteHTML ( $textos );
 
-$html2pdf->Output ( 'Compra.pdf', 'D' );
-
-
-
+$html2pdf->Output ( 'Placas' . '_' . date ( "Y-m-d" ) . '.pdf', 'D' );
 
 ?>
 
