@@ -38,6 +38,8 @@ class registrarForm {
         $rutaBloque .= $this->miConfigurador->getVariableConfiguracion("site") . "/blocks/";
         $rutaBloque .= $esteBloque ['grupo'] . $esteBloque ['nombre'];
 
+
+
 // ---------------- SECCION: Parámetros Globales del Formulario ----------------------------------
         /**
          * Atributos que deben ser aplicados a todos los controles de este formulario.
@@ -107,7 +109,6 @@ class registrarForm {
             case 4:
                 $cadenaSql = $this->miSql->getCadenaSql('consultarTraslados', $datos_consulta);
                 $datos = $esteRecursoDB->ejecutarAcceso($cadenaSql, "busqueda");
-
                 break;
             //Sobrantes o faltantes
             case 6:
@@ -129,6 +130,7 @@ class registrarForm {
                 $datos = array();
                 break;
         }
+
 
 // ---------------- SECCION: Parámetros Generales del Formulario ----------------------------------
         $esteCampo = $esteBloque ['nombre'];
