@@ -59,15 +59,42 @@ class registrarForm {
         $conexion = "inventarios";
         $esteRecursoDB = $this->miConfigurador->fabricaConexiones->getRecursoDB($conexion);
 
-        if (isset($_REQUEST['nivel']) && $_REQUEST['nivel'] != '') {
-            $nivel = $_REQUEST['nivel'];
+        $conexion = "sicapital";
+        $esteRecursoDBO = $this->miConfigurador->fabricaConexiones->getRecursoDB($conexion);
+
+        if (isset($_REQUEST['grupo_contable']) && $_REQUEST['grupo_contable'] != '') {
+            $nivel = $_REQUEST['grupo_contable'];
         } else {
             $nivel = '';
         }
 
-        $supervisor = $_REQUEST['usuario'];
-       $cadenaSql = $this->miSql->getCadenaSql('consultarElementos', $nivel);
+        if (isset($_REQUEST['funcionario']) && $_REQUEST['funcionario'] != '') {
+            $funcionario = $_REQUEST['funcionario'];
+        } else {
+            $funcionario = '';
+        }
 
+        if (isset($_REQUEST['fechaCorte']) && $_REQUEST['fechaCorte'] != '') {
+            $fechaCorte = $_REQUEST['fechaCorte'];
+        } else {
+            $fechaCorte = date('Y-m-d');
+        }
+
+        if (isset($_REQUEST['placa']) && $_REQUEST['placa'] != '') {
+            $placa = $_REQUEST['placa'];
+        } else {
+            $placa = '';
+        }
+
+
+        $datos = array(
+            'grupo' => $nivel,
+            'funcionario' => $funcionario,
+            'fecha_corte' => $fechaCorte,
+            'placa' => $placa
+        );
+
+        $cadenaSql = $this->miSql->getCadenaSql('mostrarInfoDepreciar', $datos);
         $elementos = $esteRecursoDB->ejecutarAcceso($cadenaSql, "busqueda");
 
         // ---------------- SECCION: Parámetros Generales del Formulario ----------------------------------
@@ -91,11 +118,29 @@ class registrarForm {
         echo $this->miFormulario->formulario($atributos);
         // ---------------- SECCION: Controles del Formulario -----------------------------------------------
 
+        $variable = "pagina=" . $miPaginaActual;
+        $variable = $this->miConfigurador->fabricaConexiones->crypto->codificar_url($variable, $directorio);
+
+        // ---------------- CONTROL: Cuadro de Texto --------------------------------------------------------
+        $esteCampo = 'botonRegresar';
+        $atributos ['id'] = $esteCampo;
+        $atributos ['enlace'] = $variable;
+        $atributos ['tabIndex'] = 1;
+        $atributos ['estilo'] = 'textoSubtitulo';
+        $atributos ['enlaceTexto'] = $this->lenguaje->getCadena($esteCampo);
+        $atributos ['ancho'] = '10%';
+        $atributos ['alto'] = '10%';
+        echo $this->miFormulario->enlace($atributos);
+
+        unset($atributos);
+
+        // ---------------- SECCION: Controles del Formulario -----------------------------------------------
+
         $esteCampo = "marcoDatosBasicos";
         $atributos ['id'] = $esteCampo;
         $atributos ["estilo"] = "jqueryui";
         $atributos ['tipoEtiqueta'] = 'inicio';
-        $atributos ["leyenda"] = "Depreciación Elementos Nivel " . $nivel;
+        $atributos ["leyenda"] = "Selección Elementos a Depreciar";
         echo $this->miFormulario->marcoAgrupacion('inicio', $atributos);
 
         if ($elementos !== false) {
@@ -105,10 +150,13 @@ class registrarForm {
             echo "<thead>
                 <tr>
                 <th>Id Elemento</th>
-                <th>Nivel de Inventario</th>
-                <th>Marca Elementos</th>
-                <th>Serie Elemento</th>
-       		<th>Seleccionar</th>
+                <th>Placa</th>
+                <th>Nombre Elementos</th>
+                <th>Grupo</th>
+                <th>Meses a Depreciar</th>
+                <th>Precio</th>
+                <th>Fecha Salida</th>
+                <th>Seleccionar</th>
                 </tr>
             </thead>
             <tbody>";
@@ -117,10 +165,13 @@ class registrarForm {
 
                 $mostrarHtml = "<tr>
                     <td><center>" . $elementos [$i]['id_elemento_ind'] . "</center></td>
-                    <td><center>" . $elementos [$i]['elemento_nombre'] . "</center></td>
-                    <td><center>" . $elementos [$i]['marca'] . "</center></td>
-                    <td><center>" . $elementos [$i]['serie'] . "</center></td>
-                           <td><center>";
+                    <td><center>" . $elementos [$i]['placa'] . "</center></td>
+                    <td><center>" . $elementos [$i]['descripcion'] . "</center></td>
+                    <td><center>" . $elementos [$i]['grupo'] . "</center></td>
+                    <td><center>" . $elementos [$i]['grupo_vidautil'] . "</center></td>
+                    <td><center>" . $elementos [$i]['valor'] . "</center></td>
+                    <td><center>" . $elementos [$i]['fecha_registro'] . "</center></td>
+                    <td><center>";
                 // ---------------- CONTROL: Cuadro de Texto --------------------------------------------------------
                 $nombre = 'item';
                 $atributos ['id'] = $nombre;
@@ -211,7 +262,6 @@ class registrarForm {
             $valorCodificado .= "&bloque=" . $esteBloque ['nombre'];
             $valorCodificado .= "&bloqueGrupo=" . $esteBloque ["grupo"];
             $valorCodificado .= "&opcion=depreciar";
-            $valorCodificado .= "&supervisor=" . $supervisor;
             $valorCodificado .= "&nivel=" . $nivel;
 
 

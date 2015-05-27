@@ -35,7 +35,7 @@ class registrarForm {
         $cadenaSql = $this->miSql->getCadenaSql('consultarElemento_especifico', $_REQUEST['item']);
         $datos_elemento = $esteRecursoDB->ejecutarAcceso($cadenaSql, "busqueda");
 
-        var_dump($datos_elemento);
+        //var_dump($datos_elemento);
         $cadenaSql = $this->miSql->getCadenaSql('informacionDepreciacion', $_REQUEST['nivel']);
         $depreciacion = $esteRecursoDB->ejecutarAcceso($cadenaSql, "busqueda");
 

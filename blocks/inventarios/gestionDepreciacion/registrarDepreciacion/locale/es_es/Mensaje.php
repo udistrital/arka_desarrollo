@@ -1,8 +1,20 @@
 <?php
 $this->idioma ["noDefinido"] = "Etiqueta no esta definida en locale/es_es/Mensaje.php";
 
-$this->idioma ["nivel"] ="Nivel de Inventario : ";
-$this->idioma ["nivelTitulo"] ="Seleccione el Nivel de Inventario";
+//$this->idioma ["nivel"] ="Nivel de Inventario : ";
+//$this->idioma ["nivelTitulo"] ="Seleccione el Nivel de Inventario";
+
+$this->idioma ["grupo_contable"] ="Grupo Manejo de Bienes : ";
+$this->idioma ["grupo_contableTitulo"] ="Seleccione Grupo";
+
+$this->idioma ["placa"] ="Placa Elemento : ";
+$this->idioma ["placaTitulo"] ="";
+
+$this->idioma ["funcionario"] ="Funcionario: ";
+$this->idioma ["funcionarioTitulo"] ="";
+
+$this->idioma ["fechaCorte"] ="Fecha Corte : ";
+$this->idioma ["fechaCorteTitulo"] ="Establezca fecha corte depreciación";
 
 $this->idioma ["botonAceptar"] ="Depreciar";
 $this->idioma ["botonCancelar"] ="Cancelar";
@@ -10,8 +22,6 @@ $this->idioma ["botonContinuar"] ="Continuar";
 $this->idioma ["botonConsultar"] ="Consultar";
 $this->idioma ["botonRegresar"] ="Regresar";
 
-$this->idioma ["grupo_contable"] ="Grupo Contable : ";
-$this->idioma ["grupo_contableTitulo"] ="Seleccione Grupo Contable";
 
 $this->idioma ["fechaCorte"] ="Fecha Corte Depreciación: ";
 $this->idioma ["fechaCorteTitulo"] ="Seleccione Fecha Corte";

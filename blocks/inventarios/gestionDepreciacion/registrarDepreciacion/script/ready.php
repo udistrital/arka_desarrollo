@@ -1,6 +1,6 @@
 
 // Asociar el widget de validación al formulario
-$("#gestionDepreciacion").validationEngine({
+$("#registrarDepreciacion").validationEngine({
 promptPosition : "centerRight", 
 scroll: false,
 autoHidePrompt: true,
@@ -9,7 +9,7 @@ autoHideDelay: 2000
 
 
 $(function() {
-$("#gestionDepreciacion").submit(function() {
+$("#registrarDepreciacion").submit(function() {
 $resultado=$("#gestionDepreciacion").validationEngine("validate");
 if ($resultado) {
 return true;
@@ -57,10 +57,20 @@ $('#<?php echo $this->campoSeguro('fechaCorte') ?>').attr("class", "cuadroTexto 
 
 
 
- $("#<?php echo $this->campoSeguro('nivel') ?>").select2({
-            placeholder: "Search for a repository",
-            minimumInputLength: 1,
-        });
+$("#<?php echo $this->campoSeguro('grupo_contable') ?>").select2({
+placeholder: "Search for a repository",
+minimumInputLength: 1,
+});
+
+$("#<?php echo $this->campoSeguro('placa') ?>").select2({
+placeholder: "Search for a repository",
+minimumInputLength: 1,
+});
+
+$("#<?php echo $this->campoSeguro('funcionario') ?>").select2({
+placeholder: "Search for a repository",
+minimumInputLength: 1,
+});
 
 
 
