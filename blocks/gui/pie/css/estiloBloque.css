@@ -88,7 +88,7 @@ element.style {
 
 #colm3 {
 	
-background: none repeat
+background: none repeat;
 width: 35%; 
 float: right;
 display: block;
@@ -100,7 +100,7 @@ margin: auto;
 
 #colm1 { 
 	
-    width: 35%; 
+    width: 8%; 
     float: left; 
     display: block; 
     height: 50px;
