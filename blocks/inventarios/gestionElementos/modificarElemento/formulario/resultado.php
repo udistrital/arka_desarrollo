@@ -135,33 +135,7 @@ class registrarForm {
 		$atributos ["leyenda"] = "Consultar y Modificar Elementos";
 		echo $this->miFormulario->marcoAgrupacion ( 'inicio', $atributos );
 		
-		// ------------------Division para los botones-------------------------
-		$atributos ["id"] = "DivPlacas";
-		$atributos ["estilo"] = " ";
-		echo $this->miFormulario->division ( "inicio", $atributos );
 		
-		// -----------------CONTROL: Botón ----------------------------------------------------------------
-		$esteCampo = 'botonPlacas';
-		$atributos ["id"] = $esteCampo;
-		$atributos ["tabIndex"] = $tab;
-		$atributos ["tipo"] = 'boton';
-		// submit: no se coloca si se desea un tipo button genérico
-		$atributos ['submit'] = true;
-		$atributos ["estiloMarco"] = '';
-		$atributos ["estiloBoton"] = 'jqueryui';
-		// verificar: true para verificar el formulario antes de pasarlo al servidor.
-		$atributos ["verificar"] = '';
-		$atributos ["tipoSubmit"] = 'jquery'; // Dejar vacio para un submit normal, en este caso se ejecuta la función submit declarada en ready.js
-		$atributos ["valor"] = $this->lenguaje->getCadena ( $esteCampo );
-		$atributos ['nombreFormulario'] = $esteBloque ['nombre'];
-		$tab ++;
-		
-		// Aplica atributos globales al control
-// 		$atributos = array_merge ( $atributos );
-		echo $this->miFormulario->campoBoton ( $atributos );
-		
-		// ------------------Fin Division para los botones-------------------------
-		echo $this->miFormulario->division ( "fin" );
 		
 		if ($elementos) {
 			
@@ -194,7 +168,7 @@ class registrarForm {
                             <img src='" . $rutaBloque . "/css/images/anular.png' width='15px'>
                         </a>":" " ;
 				
-				$placas[]=$elementos [$i] [1];
+				
 				
 				
 				
@@ -227,7 +201,7 @@ class registrarForm {
 				unset ( $variable );
 			}
 			
-			$placas =serialize($placas);
+			
 			
 			echo "</tbody>";
 			
@@ -278,7 +252,7 @@ class registrarForm {
 		$valorCodificado .= "&bloque=" . $esteBloque ['nombre'];
 		$valorCodificado .= "&bloqueGrupo=" . $esteBloque ["grupo"];
 		$valorCodificado .= "&opcion=placas";
-		$valorCodificado .= "&placas=".$placas;
+		
 		/**
 		 * SARA permite que los nombres de los campos sean dinámicos.
 		 * Para ello utiliza la hora en que es creado el formulario para

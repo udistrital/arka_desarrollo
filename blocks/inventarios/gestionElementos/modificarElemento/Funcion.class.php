@@ -1,6 +1,7 @@
 <?php
 
 namespace inventarios\gestionElementos\modificarElemento;
+
 use inventarios\gestionElementos\modificarElemento\funcion\redireccion;
 
 if (! isset ( $GLOBALS ["autorizado"] )) {
@@ -31,7 +32,6 @@ class Funcion {
 	var 
 
 	$crypto;
-
 	function redireccionar($opcion, $valor = "") {
 		include_once ($this->ruta . "/funcion/redireccionar.php");
 	}
@@ -45,23 +45,12 @@ class Funcion {
 		include_once ($this->ruta . "funcion/ConsultarOrden.php");
 	}
 	function modificar() {
-		
 		include_once ($this->ruta . "funcion/modificar.php");
 	}
-	
 	function anular() {
-	
 		include_once ($this->ruta . "funcion/anular.php");
 	}
-	function ImprimirPlacas() {
-	
-		include_once ($this->ruta . "funcion/reportePdf.php");
-	}
-	
-	
-	
 	function action() {
-		 
 		
 		// Evitar qu44444444rrrre se ingrese codigo HTML y PHP en los campos de texto
 		// Campos que se quieren excluir de la limpieza de código. Formato: nombreCampo1|nombreCampo2|nombreCampo3
@@ -77,36 +66,20 @@ class Funcion {
 		if (isset ( $_REQUEST ['procesarAjax'] )) {
 			$this->procesarAjax ();
 		} elseif (isset ( $_REQUEST ["opcion"] )) {
-		 
-			if (isset ( $_REQUEST ["redireccionar"])&&$_REQUEST ['redireccionar'] == 'regresar') {
-				redireccion::redireccionar($_REQUEST['opcion']);
-				
+			
+			if (isset ( $_REQUEST ["redireccionar"] ) && $_REQUEST ['redireccionar'] == 'regresar') {
+				redireccion::redireccionar ( $_REQUEST ['opcion'] );
 			}
-			
-			if (isset ( $_REQUEST ["redireccionar"])&&$_REQUEST ['redireccionar'] == 'regresar') {
-				redireccion::redireccionar($_REQUEST['opcion']);
-			
-			}
-			
-			if (isset ( $_REQUEST ["botonPlacas"])&&$_REQUEST ['botonPlacas'] == true) {
-				$this->ImprimirPlacas();
-					
-			}
-			
-			
-			
 			
 			if ($_REQUEST ['opcion'] == 'modificar') {
-				 			
+				
 				$this->modificar ();
 			}
-
-			if ($_REQUEST ['opcion'] == 'anular') {
 			
+			if ($_REQUEST ['opcion'] == 'anular') {
+				
 				$this->anular ();
 			}
-			
-
 		}
 	}
 	function __construct() {
