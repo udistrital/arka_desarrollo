@@ -228,6 +228,7 @@ class Sql extends \Sql {
                 $cadenaSql.= " ORDER BY id_elemento_ind ASC ";
                 break;
 
+            //-------------- LAS QUE FINALMENTE QUEDARON DEL CASO DE USO --------------//
             case "mostrarInfoDepreciar":
                 $cadenaSql = " SELECT DISTINCT   ";
                 $cadenaSql.= " id_elemento_ind,  ";
@@ -272,6 +273,29 @@ class Sql extends \Sql {
 
                 $cadenaSql.= " ORDER BY id_elemento_ind ASC ";
                 break;
+
+
+            case "mostrarInfoDepreciar_elemento":
+                $cadenaSql = " SELECT DISTINCT   ";
+                $cadenaSql.= " id_elemento_ind,placa,  ";
+                $cadenaSql.= " elemento_id grupo, ";
+                $cadenaSql.= " elemento_codigo grupo_codigo, ";
+                $cadenaSql.= " grupo_vidautil,  ";
+                $cadenaSql.= " elemento.valor, ";
+                $cadenaSql.= " salida.fecha_registro  ";
+                $cadenaSql.= " FROM elemento_individual  ";
+                $cadenaSql.= " JOIN elemento ON elemento.id_elemento=elemento_individual.id_elemento_gen  ";
+                $cadenaSql.= " JOIN catalogo.catalogo_elemento ON catalogo.catalogo_elemento.elemento_id=nivel  ";
+                $cadenaSql.= " JOIN salida ON salida.id_salida=elemento_individual.id_salida  ";
+                $cadenaSql.= " JOIN catalogo.catalogo_lista ON catalogo.catalogo_lista.lista_id=elemento_catalogo   ";
+                $cadenaSql.= " INNER JOIN grupo.grupo_descripcion ON grupo.grupo_descripcion.grupo_id=cast(elemento_id as character varying)  ";
+                $cadenaSql.= " WHERE catalogo.catalogo_elemento.elemento_id>0   ";
+                $cadenaSql.= " AND catalogo.catalogo_lista.lista_activo=1  ";
+                $cadenaSql.= " AND grupo.grupo_descripcion.grupo_depreciacion='t'  ";
+                $cadenaSql.= " AND elemento.estado=TRUE   ";
+                $cadenaSql.= " AND id_elemento_ind='" . $variable . "'";
+                break;
+
 
             case "registrarDepreciacion":
                 $cadenaSql = " INSERT INTO registro_depreciacion( ";

@@ -1,6 +1,8 @@
 <?php
 
-use inventarios\gestionDepreciacion\funcion\redireccion;
+use inventarios\gestionDepreciacion\registrarDepreciacion\funcion\calcularDepreciacion;
+
+//include_once ("gestionDepreciacion/registrarDepreciacion/funcion/calcularDepreciacion.php");
 
 if (!isset($GLOBALS ["autorizado"])) {
     include ("../index.php");
@@ -27,6 +29,7 @@ class registrarForm {
     }
 
     function miForm() {
+
         // Rescatar los datos de este bloque
         $esteBloque = $this->miConfigurador->getVariableConfiguracion("esteBloque");
         $miPaginaActual = $this->miConfigurador->getVariableConfiguracion('pagina');
@@ -41,15 +44,6 @@ class registrarForm {
         $rutaBloque .= $this->miConfigurador->getVariableConfiguracion("site") . "/blocks/";
         $rutaBloque .= $esteBloque ['grupo'] . "/" . $esteBloque ['nombre'];
 
-        // ---------------- SECCION: Parámetros Globales del Formulario ----------------------------------
-        /**
-         * Atributos que deben ser aplicados a todos los controles de este formulario.
-         * Se utiliza un arreglo
-         * independiente debido a que los atributos individuales se reinician cada vez que se declara un campo.
-         *
-         * Si se utiliza esta técnica es necesario realizar un mezcla entre este arreglo y el específico en cada control:
-         * $atributos= array_merge($atributos,$atributosGlobales);
-         */
         $atributosGlobales ['campoSeguro'] = 'true';
 
         $_REQUEST ['tiempo'] = time();
@@ -62,41 +56,115 @@ class registrarForm {
         $conexion = "sicapital";
         $esteRecursoDBO = $this->miConfigurador->fabricaConexiones->getRecursoDB($conexion);
 
-        if (isset($_REQUEST['grupo_contable']) && $_REQUEST['grupo_contable'] != '') {
-            $nivel = $_REQUEST['grupo_contable'];
-        } else {
-            $nivel = '';
+
+        for ($i = 0; $i <= 1000000; $i ++) {
+            if (isset($_REQUEST ['item' . $i])) {
+                $items[$i][0] = $_REQUEST ['item' . $i];
+            }
+        };
+
+        $a = 0;
+// Calculando la depreciacion
+        foreach ($items as $key => $values) {
+
+            $cadenaSql = $this->miSql->getCadenaSql('mostrarInfoDepreciar_elemento', $items[$key][0]);
+            $elemento = $esteRecursoDB->ejecutarAcceso($cadenaSql, "busqueda");
+
+            $cantidad = 1;
+            $meses = $elemento[0]['grupo_vidautil'];
+            $precio = $elemento[0]['valor'];
+            $inflacion = 0;
+
+            $fecha_salida = new \DateTime($elemento[0]['fecha_registro']);
+            $fecha_corte = new \DateTime($_REQUEST['fechaCorte']);
+
+            $periodos = $fecha_corte->diff($fecha_salida);
+            $meses_periodo = $periodos->format("%m");
+            $años_periodo = $periodos->format("%y") * 12;
+
+            $periodos_fecha1 = $meses_periodo + $años_periodo;
+
+            $valor_historico = $precio * $cantidad;
+            $valor_ajustado = $valor_historico + $inflacion;
+
+
+//Valor de la Cuota
+            if ($meses == 0) {
+                $cuota = 0;
+                $periodos_fecha = 0;
+            } else {
+                $cuota = $valor_historico / $meses;
+                $periodos_fecha = $periodos_fecha1;
+            }
+
+//
+//DEPRECIACION AUMULADA
+            if ($periodos_fecha >= $meses) {
+                $dep_acumulada = $valor_historico;
+            } else {
+                $dep_acumulada = $cuota * $periodos_fecha;
+            }
+
+
+//CIRCULAR 56
+            $circular56 = $valor_historico;
+
+//CUOTAS AJUSTES POR INFLACION -- el usuario determinó que no se realizan ajustes
+            $cuota_inflacion = 0;
+
+//AJUSTE POR INFLACION A LA DEPRECIACION ACUMULADA
+            $api_acumulada = 0;
+
+//CIRCULAR 56 - DEPRECIACIÓN
+            $circular_depreciacion = $api_acumulada + $dep_acumulada;
+
+//VALOR A LOS LIBROS
+            $valor_libros = $valor_ajustado - $circular_depreciacion;
+
+            $depreciacion_calculada[$a] = array(
+                0 => $elemento[0]['placa'],
+                'placa' => $elemento[0]['placa'],
+                1 => $elemento[0]['grupo_codigo'],
+                'grupo_contable' => $elemento[0]['grupo_codigo'],
+                2 => $meses,
+                'meses_depreciar' => $meses,
+                3 => $elemento[0]['fecha_registro'],
+                'fechaSalida' => $elemento[0]['fecha_registro'],
+                4 => $_REQUEST['fechaCorte'],
+                'fechaCorte' => $_REQUEST['fechaCorte'],
+                5 => $periodos_fecha,
+                'periodos_fecha' => $periodos_fecha,
+                6 => $valor_historico,
+                'valor_historico' => $valor_historico,
+                7 => $valor_ajustado,
+                'valor_ajustado' => $valor_ajustado,
+                8 => $cuota,
+                'cuota' => $cuota,
+                9 => $dep_acumulada,
+                'depreciacion_acumulada' => $dep_acumulada,
+                10 => $circular56,
+                'circular_56' => $circular56,
+                11 => $cuota_inflacion,
+                'cuota_inflacion' => $cuota_inflacion,
+                12 => $api_acumulada,
+                'api_acumulada' => $api_acumulada,
+                13 => $circular_depreciacion,
+                'circular_depreciacion' => $circular_depreciacion,
+                16 => $valor_libros,
+                'valor_libros' => $valor_libros,
+            );
+            $a++;
         }
 
-        if (isset($_REQUEST['funcionario']) && $_REQUEST['funcionario'] != '') {
-            $funcionario = $_REQUEST['funcionario'];
-        } else {
-            $funcionario = '';
-        }
-
-        if (isset($_REQUEST['fechaCorte']) && $_REQUEST['fechaCorte'] != '') {
-            $fechaCorte = $_REQUEST['fechaCorte'];
-        } else {
-            $fechaCorte = date('Y-m-d');
-        }
-
-        if (isset($_REQUEST['placa']) && $_REQUEST['placa'] != '') {
-            $placa = $_REQUEST['placa'];
-        } else {
-            $placa = '';
-        }
-
-
-        $datos = array(
-            'grupo' => $nivel,
-            'funcionario' => $funcionario,
-            'fecha_corte' => $fechaCorte,
-            'placa' => $placa
-        );
-
-        $cadenaSql = $this->miSql->getCadenaSql('mostrarInfoDepreciar', $datos);
-        $elementos = $esteRecursoDB->ejecutarAcceso($cadenaSql, "busqueda");
-
+        // ---------------- SECCION: Parámetros Globales del Formulario ----------------------------------
+        /**
+         * Atributos que deben ser aplicados a todos los controles de este formulario.
+         * Se utiliza un arreglo
+         * independiente debido a que los atributos individuales se reinician cada vez que se declara un campo.
+         *
+         * Si se utiliza esta técnica es necesario realizar un mezcla entre este arreglo y el específico en cada control:
+         * $atributos= array_merge($atributos,$atributosGlobales);
+         */
         // ---------------- SECCION: Parámetros Generales del Formulario ----------------------------------
         $esteCampo = $esteBloque ['nombre'];
         $atributos ['id'] = $esteCampo;
@@ -140,72 +208,11 @@ class registrarForm {
         $atributos ['id'] = $esteCampo;
         $atributos ["estilo"] = "jqueryui";
         $atributos ['tipoEtiqueta'] = 'inicio';
-        $atributos ["leyenda"] = "Selección Elementos a Depreciar";
+        $atributos ["leyenda"] = "Depreciación Realizada a Fecha de Corte " . $_REQUEST['fechaCorte'];
         echo $this->miFormulario->marcoAgrupacion('inicio', $atributos);
 
-        if ($elementos !== false) {
-
-            echo "<table id='tablaTitulos'>";
-
-            echo "<thead>
-                <tr>
-                <th>Id Elemento</th>
-                <th>Placa</th>
-                <th>Nombre Elementos</th>
-                <th>Grupo</th>
-                <th>Meses a Depreciar</th>
-                <th>Precio</th>
-                <th>Fecha Salida</th>
-                <th>Seleccionar</th>
-                </tr>
-            </thead>
-            <tbody>";
-
-            for ($i = 0; $i < count($elementos); $i ++) {
-
-                $mostrarHtml = "<tr>
-                    <td><center>" . $elementos [$i]['id_elemento_ind'] . "</center></td>
-                    <td><center>" . $elementos [$i]['placa'] . "</center></td>
-                    <td><center>" . $elementos [$i]['descripcion'] . "</center></td>
-                    <td><center>" . $elementos [$i]['grupo'] . "</center></td>
-                    <td><center>" . $elementos [$i]['grupo_vidautil'] . "</center></td>
-                    <td><center>" . $elementos [$i]['valor'] . "</center></td>
-                    <td><center>" . $elementos [$i]['fecha_registro'] . "</center></td>
-                    <td><center>";
-                // ---------------- CONTROL: Cuadro de Texto --------------------------------------------------------
-                $nombre = 'item'.$i;
-                $atributos ['id'] = $nombre;
-                $atributos ['nombre'] = $nombre;
-                $atributos ['marco'] = true;
-                $atributos ['estiloMarco'] = true;
-                $atributos ["etiquetaObligatorio"] = true;
-                $atributos ['columnas'] = 1;
-                $atributos ['dobleLinea'] = 1;
-                $atributos ['tabIndex'] = $tab;
-                $atributos ['etiqueta'] = '';
-                if (isset($_REQUEST [$esteCampo])) {
-                    $atributos ['valor'] = $_REQUEST [$esteCampo];
-                } else {
-                    $atributos ['valor'] = $elementos[$i] [0];
-                }
-
-                $atributos ['deshabilitado'] = false;
-                $tab ++;
-
-                // Aplica atributos globales al control
-                $atributos = array_merge($atributos, $atributosGlobales);
-                $mostrarHtml .= $this->miFormulario->campoCuadroSeleccion($atributos);
-
-                $mostrarHtml .= "</center></td>
-                    </tr>";
-                echo $mostrarHtml;
-                unset($mostrarHtml);
-                unset($atributos);
-            }
-
-            echo "</tbody>";
-
-            echo "</table>";
+        if ($depreciacion_calculada) {
+            echo $this->miFormulario->tablaReporte($depreciacion_calculada);
 
             // ------------------Division para los botones-------------------------
             $atributos ["id"] = "botones";
@@ -256,16 +263,14 @@ class registrarForm {
              */
             // En este formulario se utiliza el mecanismo (b) para pasar las siguientes variables:
             // Paso 1: crear el listado de variables
-
             //$valorCodificado = "actionBloque=" . $esteBloque ["nombre"];
-            $valorCodificado= "pagina=" . $this->miConfigurador->getVariableConfiguracion('pagina');
+            $valorCodificado = "&pagina=" . $this->miConfigurador->getVariableConfiguracion('pagina');
             $valorCodificado.= "&bloque=" . $esteBloque ['nombre'];
             $valorCodificado.= "&bloqueGrupo=" . $esteBloque ["grupo"];
             $valorCodificado.= "&opcion=mostrarDepreciacion";
-            $valorCodificado.= "&fechaCorte=" . $fechaCorte;
 
 
-            /*      
+            /*
              * SARA permite que los nombres de los campos sean dinámicos.
              * Para ello utiliza la hora en que es creado el formulario para
              * codificar el nombre de cada campo. Si se utiliza esta técnica es necesario pasar dicho tiempo como una variable:

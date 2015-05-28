@@ -18,7 +18,9 @@ return false;
 });
 });
 
-
+$('#tablaReporte').dataTable( {
+"sPaginationType": "full_numbers"
+} );
 
 
 $('#tablaTitulos').dataTable( {

@@ -32,13 +32,6 @@ class registrarForm {
         $conexion = "inventarios";
         $esteRecursoDB = $this->miConfigurador->fabricaConexiones->getRecursoDB($conexion);
 
-        $cadenaSql = $this->miSql->getCadenaSql('consultarElemento_especifico', $_REQUEST['item']);
-        $datos_elemento = $esteRecursoDB->ejecutarAcceso($cadenaSql, "busqueda");
-
-        //var_dump($datos_elemento);
-        $cadenaSql = $this->miSql->getCadenaSql('informacionDepreciacion', $_REQUEST['nivel']);
-        $depreciacion = $esteRecursoDB->ejecutarAcceso($cadenaSql, "busqueda");
-
 
         // ---------------- SECCION: Parámetros Globales del Formulario ----------------------------------
         /**
@@ -74,8 +67,7 @@ class registrarForm {
 // ---------------- FIN SECCION: de Parámetros Generales del Formulario ----------------------------
 // ----------------INICIAR EL FORMULARIO ------------------------------------------------------------
         $atributos ['tipoEtiqueta'] = 'inicio';
-        echo $this->miFormulario->formulario($atributos);
-        {
+        echo $this->miFormulario->formulario($atributos); {
 // ---------------- SECCION: Controles del Formulario -----------------------------------------------
 
             $esteCampo = "marcoDatosBasicos";
@@ -84,13 +76,11 @@ class registrarForm {
             $atributos ['tipoEtiqueta'] = 'inicio';
             $atributos ["leyenda"] = "Calcular Depreciación para el Conjunto de Elementos ID. " . $_REQUEST['item'];
             echo $this->miFormulario->marcoAgrupacion('inicio', $atributos);
-            unset($atributos);
-            {
+            unset($atributos); {
                 $esteCampo = "Formular Depreciación";
                 $atributos ['id'] = $esteCampo;
                 $atributos ['leyenda'] = "Datos Iniciales";
-                echo $this->miFormulario->agrupacion('inicio', $atributos);
-                {
+                echo $this->miFormulario->agrupacion('inicio', $atributos); {
 
 // ---------------- CONTROL: Cuadro de Texto --------------------------------------------------------
                     $esteCampo = 'nivel';

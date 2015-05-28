@@ -45,16 +45,19 @@ class Funcion {
     function funcionEjemplo() {
         include_once ($this->ruta . "/funcion/funcionEjemplo.php");
     }
-    
-     function registrarDepreciacion() {
+
+    function registrarDepreciacion() {
         include_once ($this->ruta . "/funcion/registrarDepreciacion.php");
+    }
+    
+    function calcularDepreciacion() {
+        include_once ($this->ruta . "/funcion/calcularDepreciacion.php");
     }
 
     function procesarAjax() {
         include_once ($this->ruta . "funcion/procesarAjax.php");
     }
 
-  
     function action() {
 // 		
         // Evitar que se ingrese codigo HTML y PHP en los campos de texto
@@ -81,9 +84,8 @@ class Funcion {
                 redireccion::redireccionar($_REQUEST['opcion']);
             }
 
-            if ($_REQUEST ['opcion'] == 'ConsultarOrden') {
-
-                $this->consultarOrden();
+            if ($_REQUEST ['opcion'] == 'calcularDepreciacion') {
+                $this->calcularDepreciacion();
             }
 
 // 			if ($validacion == false) {
@@ -138,4 +140,5 @@ class Funcion {
     }
 
 }
+
 ?>

@@ -64,9 +64,13 @@ class Frontera {
                 case "consultarElementos" :
                     include_once ($this->ruta . "/formulario/resultado.php");
                     break;
-                
+
                 case "depreciar":
                     include_once ($this->ruta . "/formulario/registro.php");
+                    break;
+
+                case "mostrarDepreciacion":
+                    include_once ($this->ruta . "/formulario/mostrarDepreciacion.php");
                     break;
             }
         } else {
