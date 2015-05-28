@@ -29,7 +29,6 @@ class registrarForm {
     }
 
     function miForm() {
-
         // Rescatar los datos de este bloque
         $esteBloque = $this->miConfigurador->getVariableConfiguracion("esteBloque");
         $miPaginaActual = $this->miConfigurador->getVariableConfiguracion('pagina');
@@ -153,6 +152,39 @@ class registrarForm {
                 16 => $valor_libros,
                 'valor_libros' => $valor_libros,
             );
+
+            $depreciacion_reporte[$a] = array(
+                0 => $elemento[0]['consecutivo'],
+                'consecutivo_salida' => $elemento[0]['consecutivo'],
+                1 => $elemento[0]['placa'],
+                'placa' => $elemento[0]['placa'],
+                2 => $elemento[0]['descripcion'],
+                'nombre_elemento' => $elemento[0]['descripcion'],
+                3 => $elemento[0]['grupo_codigo'],
+                'grupo' => $elemento[0]['grupo_codigo'],
+                4 => $meses,
+                'meses_depreciar' => $meses,
+                5 => $elemento[0]['fecha_registro'],
+                'fechaSalida' => $elemento[0]['fecha_registro'],
+                6 => $_REQUEST['fechaCorte'],
+                'fechaCorte' => $_REQUEST['fechaCorte'],
+                7 => $periodos_fecha,
+                'periodos_fecha' => $periodos_fecha,
+                8 => $valor_historico,
+                'valor_historico' => $valor_historico,
+                9 => $cuota_inflacion,
+                'cuota_ajuste_inflacion' => $cuota_inflacion,
+                10 => $valor_ajustado,
+                'valor_ajustado' => $valor_ajustado,
+                11 => $dep_acumulada,
+                'depreciacion_acumulada' => $dep_acumulada,
+                12 => $api_acumulada,
+                'api_acumulada' => $api_acumulada,
+                13 => $circular56,
+                'circular_56' => $circular56,
+                14 => $valor_libros,
+                'valor_libros' => $valor_libros,
+            );
             $a++;
         }
 
@@ -212,33 +244,34 @@ class registrarForm {
         echo $this->miFormulario->marcoAgrupacion('inicio', $atributos);
 
         if ($depreciacion_calculada) {
-            echo $this->miFormulario->tablaReporte($depreciacion_calculada);
+            echo $this->miFormulario->tablaReporte($depreciacion_reporte);
+            echo $this->miFormulario->marcoAgrupacion('fin');
 
-            // ------------------Division para los botones-------------------------
-            $atributos ["id"] = "botones";
-            $atributos ["estilo"] = "marcoBotones";
-            echo $this->miFormulario->division("inicio", $atributos);
-
-            // -----------------CONTROL: Botón ----------------------------------------------------------------
-            $esteCampo = 'botonAceptar';
-            $atributos ["id"] = $esteCampo;
-            $atributos ["tabIndex"] = $tab;
-            $atributos ["tipo"] = '';
-            // submit: no se coloca si se desea un tipo button genérico
-            $atributos ['submit'] = 'true';
-            $atributos ["estiloMarco"] = '';
-            $atributos ["estiloBoton"] = 'jqueryui';
-            // verificar: true para verificar el formulario antes de pasarlo al servidor.
-            $atributos ["verificar"] = '';
-            $atributos ["tipoSubmit"] = 'jquery'; // Dejar vacio para un submit normal, en este caso se ejecuta la función submit declarada en ready.js
-            $atributos ["valor"] = $this->lenguaje->getCadena($esteCampo);
-            $atributos ['nombreFormulario'] = $esteBloque ['nombre'];
-            $tab ++;
-
-            // Aplica atributos globales al control
-            $atributos = array_merge($atributos, $atributosGlobales);
-            echo $this->miFormulario->campoBoton($atributos);
-            // -----------------FIN CONTROL: Botón -----------------------------------------------------------
+//            // ------------------Division para los botones-------------------------
+//            $atributos ["id"] = "botones";
+//            $atributos ["estilo"] = "marcoBotones";
+//            echo $this->miFormulario->division("inicio", $atributos);
+//
+//            // -----------------CONTROL: Botón ----------------------------------------------------------------
+//            $esteCampo = 'botonContinuar';
+//            $atributos ["id"] = $esteCampo;
+//            $atributos ["tabIndex"] = $tab;
+//            $atributos ["tipo"] = '';
+//            // submit: no se coloca si se desea un tipo button genérico
+//            $atributos ['submit'] = 'true';
+//            $atributos ["estiloMarco"] = '';
+//            $atributos ["estiloBoton"] = 'jqueryui';
+//            // verificar: true para verificar el formulario antes de pasarlo al servidor.
+//            $atributos ["verificar"] = '';
+//            $atributos ["tipoSubmit"] = 'jquery'; // Dejar vacio para un submit normal, en este caso se ejecuta la función submit declarada en ready.js
+//            $atributos ["valor"] = $this->lenguaje->getCadena($esteCampo);
+//            $atributos ['nombreFormulario'] = $esteBloque ['nombre'];
+//            $tab ++;
+//
+//            // Aplica atributos globales al control
+//            $atributos = array_merge($atributos, $atributosGlobales);
+//            echo $this->miFormulario->campoBoton($atributos);
+//            // -----------------FIN CONTROL: Botón -----------------------------------------------------------
 
             echo $this->miFormulario->division('fin');
 

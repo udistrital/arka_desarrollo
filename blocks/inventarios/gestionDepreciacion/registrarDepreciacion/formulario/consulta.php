@@ -195,6 +195,35 @@ class registrarForm {
             $atributos = array_merge($atributos, $atributosGlobales);
             echo $this->miFormulario->campoCuadroLista($atributos);
             unset($atributos);
+            // ---------------- CONTROL: Cuadro Lista --------------------------------------------------------
+            $esteCampo = 'cuenta_salida';
+            $atributos ['columnas'] = 1;
+            $atributos ['nombre'] = $esteCampo;
+            $atributos ['id'] = $esteCampo;
+            $atributos ['seleccion'] = - 1;
+            $atributos ['evento'] = '';
+            $atributos ['deshabilitado'] = false;
+            $atributos ["etiquetaObligatorio"] = false;
+            $atributos ['tab'] = $tab;
+            $atributos ['tamanno'] = 1;
+            $atributos ['estilo'] = 'jqueryui';
+            $atributos ['validar'] = '';
+            $atributos ['limitar'] = false;
+            $atributos ['etiqueta'] = $this->lenguaje->getCadena($esteCampo);
+            $atributos ['anchoEtiqueta'] = 220;
+            $atributos ['cadena_sql'] = $this->miSql->getCadenaSql("consultar_cuentasalida");
+            $matrizItems = $esteRecursoDB->ejecutarAcceso($atributos ['cadena_sql'], "busqueda");
+            $atributos ['matrizItems'] = $matrizItems;
+
+            // Utilizar lo siguiente cuando no se pase un arreglo:
+            // $atributos['baseDatos']='ponerAquiElNombreDeLaConexión';
+            // $atributos ['cadena_sql']='ponerLaCadenaSqlAEjecutar';
+            $tab ++;
+            $atributos = array_merge($atributos, $atributosGlobales);
+            echo $this->miFormulario->campoCuadroLista($atributos);
+            unset($atributos);
+
+            // // ---------------- CONTROL: Cuadro de Texto --------------------------------------------------------
 
             // // ---------------- CONTROL: Cuadro de Texto --------------------------------------------------------
             $esteCampo = 'fechaCorte';

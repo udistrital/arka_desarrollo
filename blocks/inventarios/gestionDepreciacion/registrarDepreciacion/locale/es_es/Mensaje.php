@@ -10,6 +10,9 @@ $this->idioma ["grupo_contableTitulo"] ="Seleccione Grupo";
 $this->idioma ["placa"] ="Placa Elemento : ";
 $this->idioma ["placaTitulo"] ="";
 
+$this->idioma ["cuenta_salida"] ="Cuenta Salida : ";
+$this->idioma ["cuenta_salidaTitulo"] ="";
+
 $this->idioma ["funcionario"] ="Funcionario: ";
 $this->idioma ["funcionarioTitulo"] ="";
 
@@ -18,7 +21,7 @@ $this->idioma ["fechaCorteTitulo"] ="Establezca fecha corte depreciación";
 
 $this->idioma ["botonAceptar"] ="Depreciar";
 $this->idioma ["botonCancelar"] ="Cancelar";
-$this->idioma ["botonContinuar"] ="Continuar";
+$this->idioma ["botonContinuar"] ="Generar PDF";
 $this->idioma ["botonConsultar"] ="Consultar";
 $this->idioma ["botonRegresar"] ="Regresar";
 

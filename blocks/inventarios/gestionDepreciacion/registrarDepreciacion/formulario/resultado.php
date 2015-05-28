@@ -86,12 +86,19 @@ class registrarForm {
             $placa = '';
         }
 
+        if (isset($_REQUEST['cuenta_salida']) && $_REQUEST['cuenta_salida'] != '') {
+            $cuenta_contable = $_REQUEST['cuenta_salida'];
+        } else {
+            $cuenta_contable = '';
+        }
+
 
         $datos = array(
             'grupo' => $nivel,
             'funcionario' => $funcionario,
             'fecha_corte' => $fechaCorte,
-            'placa' => $placa
+            'placa' => $placa,
+            'cuenta_salida' => $cuenta_contable,
         );
 
         $cadenaSql = $this->miSql->getCadenaSql('mostrarInfoDepreciar', $datos);
@@ -149,13 +156,12 @@ class registrarForm {
 
             echo "<thead>
                 <tr>
-                <th>Id Elemento</th>
                 <th>Placa</th>
                 <th>Nombre Elementos</th>
-                <th>Grupo</th>
+                <th>Grupo</th>  
+                <th>Fecha Salida</th>
                 <th>Meses a Depreciar</th>
                 <th>Precio</th>
-                <th>Fecha Salida</th>
                 <th>Seleccionar</th>
                 </tr>
             </thead>
@@ -164,16 +170,15 @@ class registrarForm {
             for ($i = 0; $i < count($elementos); $i ++) {
 
                 $mostrarHtml = "<tr>
-                    <td><center>" . $elementos [$i]['id_elemento_ind'] . "</center></td>
                     <td><center>" . $elementos [$i]['placa'] . "</center></td>
                     <td><center>" . $elementos [$i]['descripcion'] . "</center></td>
                     <td><center>" . $elementos [$i]['grupo'] . "</center></td>
+                    <td><center>" . $elementos [$i]['fecha_registro'] . "</center></td>
                     <td><center>" . $elementos [$i]['grupo_vidautil'] . "</center></td>
                     <td><center>" . $elementos [$i]['valor'] . "</center></td>
-                    <td><center>" . $elementos [$i]['fecha_registro'] . "</center></td>
                     <td><center>";
                 // ---------------- CONTROL: Cuadro de Texto --------------------------------------------------------
-                $nombre = 'item'.$i;
+                $nombre = 'item' . $i;
                 $atributos ['id'] = $nombre;
                 $atributos ['nombre'] = $nombre;
                 $atributos ['marco'] = true;
@@ -206,6 +211,8 @@ class registrarForm {
             echo "</tbody>";
 
             echo "</table>";
+
+            echo $this->miFormulario->marcoAgrupacion('fin');
 
             // ------------------Division para los botones-------------------------
             $atributos ["id"] = "botones";
@@ -256,16 +263,15 @@ class registrarForm {
              */
             // En este formulario se utiliza el mecanismo (b) para pasar las siguientes variables:
             // Paso 1: crear el listado de variables
-
             //$valorCodificado = "actionBloque=" . $esteBloque ["nombre"];
-            $valorCodificado= "pagina=" . $this->miConfigurador->getVariableConfiguracion('pagina');
+            $valorCodificado = "pagina=" . $this->miConfigurador->getVariableConfiguracion('pagina');
             $valorCodificado.= "&bloque=" . $esteBloque ['nombre'];
             $valorCodificado.= "&bloqueGrupo=" . $esteBloque ["grupo"];
             $valorCodificado.= "&opcion=mostrarDepreciacion";
             $valorCodificado.= "&fechaCorte=" . $fechaCorte;
 
 
-            /*      
+            /*
              * SARA permite que los nombres de los campos sean dinámicos.
              * Para ello utiliza la hora en que es creado el formulario para
              * codificar el nombre de cada campo. Si se utiliza esta técnica es necesario pasar dicho tiempo como una variable:

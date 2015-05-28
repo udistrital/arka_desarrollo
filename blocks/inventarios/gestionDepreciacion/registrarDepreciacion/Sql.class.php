@@ -183,6 +183,18 @@ class Sql extends \Sql {
                 $cadenaSql.= " AND lista_activo=1";
                 break;
 
+            case "consultar_grupo_contable" :
+                $cadenaSql = "SELECT elemento_id, elemento_codigo ||' - '||elemento_nombre as nivel ";
+                $cadenaSql.= " FROM catalogo.catalogo_elemento ";
+                $cadenaSql.= " JOIN catalogo.catalogo_lista ON catalogo.catalogo_lista.lista_id=elemento_catalogo ";
+                $cadenaSql.= " WHERE elemento_id>0 ";
+                $cadenaSql.= " AND lista_activo=1";
+                break;
+
+            case "consultar_cuentasalida":
+                $cadenaSql = "SELECT DISTINCT grupo_cuentasalida,grupo_cuentasalida FROM grupo.grupo_descripcion WHERE grupo_depreciacion=TRUE ";
+                break;
+
             case "consultarElementos" :
                 $cadenaSql = "SELECT ";
                 $cadenaSql.= " id_elemento_ind, ";
@@ -257,14 +269,17 @@ class Sql extends \Sql {
                 $cadenaSql.= " FROM estado_elemento  ";
                 $cadenaSql.= " )  ";
 
-
-
                 if ($variable ['funcionario'] != '') {
                     $cadenaSql .= " AND salida.funcionario = '" . $variable ['funcionario'] . "'";
                 }
+                
+                if ($variable ['cuenta_salida'] != '') {
+                    $cadenaSql .= " AND grupo_cuentasalida = '" . $variable ['cuenta_salida'] . "'";
+                }
+
 
                 if ($variable ['placa'] != '') {
-                    $cadenaSql .= " AND placa = '" . $variable ['placa'] . "'";
+                    $cadenaSql .= " AND id_elemento = '" . $variable ['placa'] . "'";
                 }
 
                 if ($variable ['grupo'] != '') {
@@ -277,12 +292,12 @@ class Sql extends \Sql {
 
             case "mostrarInfoDepreciar_elemento":
                 $cadenaSql = " SELECT DISTINCT   ";
-                $cadenaSql.= " id_elemento_ind,placa,  ";
+                $cadenaSql.= " id_elemento_ind,placa,descripcion,salida.consecutivo,  ";
                 $cadenaSql.= " elemento_id grupo, ";
                 $cadenaSql.= " elemento_codigo grupo_codigo, ";
                 $cadenaSql.= " grupo_vidautil,  ";
                 $cadenaSql.= " elemento.valor, ";
-                $cadenaSql.= " salida.fecha_registro  ";
+                $cadenaSql.= " salida.fecha_registro,ajuste_inflacionario  ";
                 $cadenaSql.= " FROM elemento_individual  ";
                 $cadenaSql.= " JOIN elemento ON elemento.id_elemento=elemento_individual.id_elemento_gen  ";
                 $cadenaSql.= " JOIN catalogo.catalogo_elemento ON catalogo.catalogo_elemento.elemento_id=nivel  ";

@@ -54,7 +54,6 @@ $('#<?php echo $this->campoSeguro('fechaCorte') ?>').attr("class", "cuadroTexto 
 }
 }
 
-
 });
 
 
@@ -70,6 +69,11 @@ minimumInputLength: 1,
 });
 
 $("#<?php echo $this->campoSeguro('funcionario') ?>").select2({
+placeholder: "Search for a repository",
+minimumInputLength: 1,
+});
+
+$("#<?php echo $this->campoSeguro('cuenta_salida') ?>").select2({
 placeholder: "Search for a repository",
 minimumInputLength: 1,
 });
