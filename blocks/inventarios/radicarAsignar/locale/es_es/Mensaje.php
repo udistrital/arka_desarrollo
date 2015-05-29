@@ -1,6 +1,13 @@
 <?php
 $this->idioma ["noDefinido"] = "Etiqueta no esta definida en locale/es_es/Mensaje.php";
 
+
+$this->idioma ["tabCargarCrear"] ="Radicación Documentos Soporte para Entrada";
+
+$this->idioma ["tabConsultar"] ="Consultar Documentos Soporte para Entrada";
+
+
+
 $this->idioma ["tipoCargue"] ="Tipo de Entrada: ";
 $this->idioma ["tipoCargueTitulo"] ="Seleccione Tipo Entrada";
 
@@ -34,17 +41,14 @@ $this->idioma ["valorFacturasTitulo"] ="Ingrese Valor Total de las Facturas";
 $this->idioma ["proveedor"] ="Nombre o Razón Social:";
 $this->idioma ["proveedorTitulo"] ="Ingrese Nombre Proveedor";
 
-$this->idioma ["nitProveedor"] ="NIT Proveedor :";
-$this->idioma ["nitProveedorTitulo"] ="Ingrese NIT Proveedor";
+$this->idioma ["nitproveedor"] ="NIT Proveedor :";
+$this->idioma ["nitproveedorTitulo"] ="Ingrese NIT Proveedor";
 
+$this->idioma ["numero_entrada"] ="Número Entrada y/o Vigencia:";
+$this->idioma ["numero_entradaTitulo"] ="Seleccione el número de entrada";
 
-
-
-
-
-
-
-
+$this->idioma ["vigencia_entrada"] ="Vigencia Entrada:";
+$this->idioma ["vigencia_entradaTitulo"] ="Seleccione la vigencia de entrada";
 
 
 $this->idioma ["fecha_inicio"] ="Fecha Inicial : ";
@@ -85,7 +89,8 @@ $this->idioma ["dependenciaTitulo"] ="Ingrese Nombre Dependencia";
 $this->idioma ["revisor"] ="&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspNombre Revisor :";
 $this->idioma ["revisorTitulo"] ="Ingrese Nombre de Quien Revisó";
 
-
+$this->idioma ["id_contrato"] ="ID Contrato:";
+$this->idioma ["id_contratoTitulo"] ="Seleccione el contrato";
 
 
 
@@ -97,7 +102,7 @@ $this->idioma ["aprobacionCheck"] ="&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp¿Ap
 $this->idioma ["aprobacionCheckTitulo"] ="Seleccione en caso de ser aprobado";
 
 
-$this->idioma ["botonAceptar"] ="Aceptar";
+$this->idioma ["botonAceptar"] ="Cargar Documentos";
 $this->idioma ["botonCancelar"] ="Cancelar";
 $this->idioma ["botonContinuar"] ="Continuar";
 $this->idioma ["botonConsultar"] ="Consultar";
