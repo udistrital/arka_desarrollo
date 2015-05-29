@@ -91,13 +91,13 @@ class registrarForm {
 
 
         $cadenaSql = $this->miSql->getCadenaSql('mostrarInfoDepreciar_elemento', $datos);
-        $elemento = $esteRecursoDB->ejecutarAcceso($cadenaSql, "busqueda");
+        $elementoG = $esteRecursoDB->ejecutarAcceso($cadenaSql, "busqueda");
 
         $arr = array();
-        foreach ($elemento as $key => $item) {
-
+        foreach ($elementoG as $key => $item) {
             $arr[$item['grupo_cuentasalida']][$key] = $item;
         }
+
 
         $a = 0;
 // Calculando la depreciacion
@@ -112,7 +112,7 @@ class registrarForm {
                 $cantidad = 1;
                 $meses = $elemento[0]['grupo_vidautil'];
                 $precio = $elemento[0]['valor'];
-                $inflacion = 0;
+                $inflacion = $elemento[0]['ajuste_inflacionario'];
 
                 $fecha_salida = new \DateTime($elemento[0]['fecha_registro']);
                 $fecha_corte = new \DateTime($_REQUEST['fechaCorte']);
@@ -127,6 +127,7 @@ class registrarForm {
                 $valor_ajustado = $valor_historico + $inflacion;
 
 
+
 //Valor de la Cuota
                 if ($meses == 0) {
                     $cuota = 0;
@@ -136,29 +137,48 @@ class registrarForm {
                     $periodos_fecha = $periodos_fecha1;
                 }
 
-//
+
 //DEPRECIACION AUMULADA
-                if ($periodos_fecha >= $meses) {
-                    $dep_acumulada = $valor_historico;
+                if ($meses !== 0) {
+                    if ($periodos_fecha >= $meses) {
+
+                        $dep_acumulada = $valor_historico;
+                    } else {
+                        $dep_acumulada = $cuota * $periodos_fecha;
+                    }
                 } else {
-                    $dep_acumulada = $cuota * $periodos_fecha;
+                    $dep_acumulada = 0;
                 }
 
-
 //CIRCULAR 56
-                $circular56 = $valor_historico;
+                $circular56 = $valor_historico + $inflacion;
 
-//CUOTAS AJUSTES POR INFLACION -- el usuario determinó que no se realizan ajustes
-                $cuota_inflacion = 0;
+
+//CUOTAS AJUSTES POR INFLACION 
+                if ($meses == 0) {
+                    $cuota_inflacion = 0;
+                } else {
+                    $cuota_inflacion = $inflacion / $meses;
+                }
 
 //AJUSTE POR INFLACION A LA DEPRECIACION ACUMULADA
-                $api_acumulada = 0;
+                if ($meses !== 0) {
+                    if ($periodos_fecha >= $meses) {
+                        $api_acumulada = $inflacion;
+                    } else {
+                        $api_acumulada = $cuota_inflacion * $periodos_fecha;
+                    }
+                } else {
+                    $api_acumulada = 0;
+                }
+
 
 //CIRCULAR 56 - DEPRECIACIÓN
                 $circular_depreciacion = $api_acumulada + $dep_acumulada;
 
 //VALOR A LOS LIBROS
                 $valor_libros = $valor_ajustado - $circular_depreciacion;
+
 
 
                 //totalizar los valores de los elementos
@@ -169,27 +189,31 @@ class registrarForm {
                 $total_api = $total_api + $api_acumulada;
                 $total_dep56 = $total_dep56 + $circular_depreciacion;
                 $total_libros = $total_libros + $valor_libros;
+                $nombre_cuenta=$elemento[0]['elemento_nombre'];
                 $count ++;
             }
 
+
             $depreciacion_calculada[$a] = array(
                 0 => $llave,
-                'grupo' => $llave,
-                1 => $count,
+                'cuenta' => $llave,
+                1 => $nombre_cuenta,
+                'grupo' => $nombre_cuenta,
+                2 => $count,
                 'total_elementos' => $count,
-                2 => $total_valorhistorico,
+                3 => $total_valorhistorico,
                 'total_valor_historico' => $total_valorhistorico,
-                3 => $total_ajusteinflacion,
+                4 => $total_ajusteinflacion,
                 'total_ajuste_inflacion' => $total_ajusteinflacion,
-                4 => $total_valorajustado,
+                5 => $total_valorajustado,
                 'total_valor_ajustado' => $total_valorajustado,
-                5 => $total_depreciacion,
+                6 => $total_depreciacion,
                 'total_depreciacion' => $total_depreciacion,
-                6 => $total_api,
+                7 => $total_api,
                 'total_ajuste_inflacionario' => $total_api,
-                7 => $total_depreciacion,
+                8 => $total_depreciacion,
                 'total_depreciacion_circular56' => $total_dep56,
-                8 => $total_libros,
+                9 => $total_libros,
                 'total_libros' => $total_libros,
             );
 
