@@ -70,9 +70,9 @@ class registrarForm {
             $elemento = $esteRecursoDB->ejecutarAcceso($cadenaSql, "busqueda");
 
             $cantidad = 1;
-            $meses = $elemento[0]['grupo_vidautil'];
+            $meses = intval($elemento[0]['grupo_vidautil']);
             $precio = $elemento[0]['valor'];
-            $inflacion = 0;
+            $inflacion = $elemento[0]['ajuste_inflacionario'];
 
             $fecha_salida = new \DateTime($elemento[0]['fecha_registro']);
             $fecha_corte = new \DateTime($_REQUEST['fechaCorte']);
@@ -86,7 +86,6 @@ class registrarForm {
             $valor_historico = $precio * $cantidad;
             $valor_ajustado = $valor_historico + $inflacion;
 
-
 //Valor de la Cuota
             if ($meses == 0) {
                 $cuota = 0;
@@ -96,23 +95,41 @@ class registrarForm {
                 $periodos_fecha = $periodos_fecha1;
             }
 
-//
+
 //DEPRECIACION AUMULADA
-            if ($periodos_fecha >= $meses) {
-                $dep_acumulada = $valor_historico;
+            if ($meses !== 0) {
+                if ($periodos_fecha >= $meses) {
+
+                    $dep_acumulada = $valor_historico;
+                } else {
+                    $dep_acumulada = $cuota * $periodos_fecha;
+                }
             } else {
-                $dep_acumulada = $cuota * $periodos_fecha;
+                $dep_acumulada = 0;
             }
 
-
 //CIRCULAR 56
-            $circular56 = $valor_historico;
+            $circular56 = $valor_historico + $inflacion;
 
-//CUOTAS AJUSTES POR INFLACION -- el usuario determinó que no se realizan ajustes
-            $cuota_inflacion = 0;
+
+//CUOTAS AJUSTES POR INFLACION 
+            if ($meses !== 0) {
+                $cuota_inflacion = $inflacion / $meses;
+            } else {
+                $cuota_inflacion = 0;
+            }
 
 //AJUSTE POR INFLACION A LA DEPRECIACION ACUMULADA
-            $api_acumulada = 0;
+            if ($meses !== 0) {
+                if ($periodos_fecha >= $meses) {
+                    $api_acumulada = $inflacion;
+                } else {
+                    $api_acumulada = $cuota_inflacion * $periodos_fecha;
+                }
+            } else {
+                $api_acumulada = 0;
+            }
+
 
 //CIRCULAR 56 - DEPRECIACIÓN
             $circular_depreciacion = $api_acumulada + $dep_acumulada;
@@ -124,44 +141,46 @@ class registrarForm {
                 0 => $elemento[0]['placa'],
                 'placa' => $elemento[0]['placa'],
                 1 => $elemento[0]['grupo_codigo'],
-                'grupo_contable' => $elemento[0]['grupo_codigo'],
-                2 => $meses,
+                'cuenta' => $elemento[0]['grupo_codigo'],
+                2 => $elemento[0]['elemento_nombre'],
+                'grupo' => $elemento[0]['elemento_nombre'],
+                3 => $meses,
                 'meses_depreciar' => $meses,
-                3 => $elemento[0]['fecha_registro'],
+                4 => $elemento[0]['fecha_registro'],
                 'fechaSalida' => $elemento[0]['fecha_registro'],
-                4 => $_REQUEST['fechaCorte'],
+                5 => $_REQUEST['fechaCorte'],
                 'fechaCorte' => $_REQUEST['fechaCorte'],
-                5 => $periodos_fecha,
+                6 => $periodos_fecha,
                 'periodos_fecha' => $periodos_fecha,
-                6 => $valor_historico,
+                7 => $valor_historico,
                 'valor_historico' => $valor_historico,
-                7 => $valor_ajustado,
+                8 => $valor_ajustado,
                 'valor_ajustado' => $valor_ajustado,
-                8 => $cuota,
+                9 => $cuota,
                 'cuota' => $cuota,
-                9 => $dep_acumulada,
+                10 => $dep_acumulada,
                 'depreciacion_acumulada' => $dep_acumulada,
-                10 => $circular56,
+                11 => $circular56,
                 'circular_56' => $circular56,
-                11 => $cuota_inflacion,
+                12 => $cuota_inflacion,
                 'cuota_inflacion' => $cuota_inflacion,
-                12 => $api_acumulada,
+                13 => $api_acumulada,
                 'api_acumulada' => $api_acumulada,
-                13 => $circular_depreciacion,
+                14 => $circular_depreciacion,
                 'circular_depreciacion' => $circular_depreciacion,
-                16 => $valor_libros,
+                15 => $valor_libros,
                 'valor_libros' => $valor_libros,
             );
 
             $depreciacion_reporte[$a] = array(
-                0 => $elemento[0]['consecutivo'],
-                'consecutivo_salida' => $elemento[0]['consecutivo'],
-                1 => $elemento[0]['placa'],
+                0 => $elemento[0]['grupo_codigo'],
+                'cuenta' => $elemento[0]['grupo_codigo'],
+                1 => $elemento[0]['elemento_nombre'],
+                'grupo' => $elemento[0]['elemento_nombre'],
+                2 => $elemento[0]['placa'],
                 'placa' => $elemento[0]['placa'],
-                2 => $elemento[0]['descripcion'],
+                3 => $elemento[0]['descripcion'],
                 'nombre_elemento' => $elemento[0]['descripcion'],
-                3 => $elemento[0]['grupo_codigo'],
-                'grupo' => $elemento[0]['grupo_codigo'],
                 4 => $meses,
                 'meses_depreciar' => $meses,
                 5 => $elemento[0]['fecha_registro'],
@@ -172,17 +191,21 @@ class registrarForm {
                 'periodos_fecha' => $periodos_fecha,
                 8 => $valor_historico,
                 'valor_historico' => $valor_historico,
-                9 => $cuota_inflacion,
-                'cuota_ajuste_inflacion' => $cuota_inflacion,
-                10 => $valor_ajustado,
+                9 => $valor_ajustado,
                 'valor_ajustado' => $valor_ajustado,
+                10 => $cuota,
+                'cuota' => $cuota,
                 11 => $dep_acumulada,
                 'depreciacion_acumulada' => $dep_acumulada,
-                12 => $api_acumulada,
-                'api_acumulada' => $api_acumulada,
-                13 => $circular56,
+                12 => $circular56,
                 'circular_56' => $circular56,
-                14 => $valor_libros,
+                13 => $cuota_inflacion,
+                'cuota_inflacion' => $cuota_inflacion,
+                14 => $api_acumulada,
+                'api_acumulada' => $api_acumulada,
+                15 => $circular_depreciacion,
+                'circular_depreciacion' => $circular_depreciacion,
+                16 => $valor_libros,
                 'valor_libros' => $valor_libros,
             );
             $a++;

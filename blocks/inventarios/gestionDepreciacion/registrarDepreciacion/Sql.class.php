@@ -161,7 +161,7 @@ class Sql extends \Sql {
                 $cadenaSql.= " INNER JOIN grupo.grupo_descripcion ON grupo.grupo_descripcion.grupo_id=cast(elemento_id as character varying) ";
                 $cadenaSql.= " WHERE elemento_id>0  ";
                 $cadenaSql.= " AND lista_activo=1 ";
-                $cadenaSql.= " AND grupo.grupo_descripcion.grupo_depreciacion='t'";
+                //$cadenaSql.= " AND grupo.grupo_descripcion.grupo_depreciacion='t'";
                 break;
 
             case "informacionDepreciacion":
@@ -171,7 +171,7 @@ class Sql extends \Sql {
                 $cadenaSql.= " INNER JOIN grupo.grupo_descripcion ON grupo.grupo_descripcion.grupo_id=cast(elemento_id as character varying) ";
                 $cadenaSql.= " WHERE elemento_id>0  ";
                 $cadenaSql.= " AND lista_activo=1 ";
-                $cadenaSql.= " AND grupo.grupo_descripcion.grupo_depreciacion='t' ";
+                //$cadenaSql.= " AND grupo.grupo_descripcion.grupo_depreciacion='t' ";
                 $cadenaSql.= " AND grupo_id='" . $variable . "' ";
                 break;
 
@@ -258,7 +258,7 @@ class Sql extends \Sql {
                 $cadenaSql.= " INNER JOIN grupo.grupo_descripcion ON grupo.grupo_descripcion.grupo_id=cast(elemento_id as character varying)  ";
                 $cadenaSql.= " WHERE catalogo.catalogo_elemento.elemento_id>0   ";
                 $cadenaSql.= " AND catalogo.catalogo_lista.lista_activo=1  ";
-                $cadenaSql.= " AND grupo.grupo_descripcion.grupo_depreciacion='t'  ";
+                //$cadenaSql.= " AND grupo.grupo_descripcion.grupo_depreciacion='t'  ";
                 $cadenaSql.= " AND elemento.estado=TRUE   ";
                 $cadenaSql.= " AND id_elemento_ind NOT IN (    ";
                 $cadenaSql.= " SELECT dep_idelemento   ";
@@ -297,7 +297,7 @@ class Sql extends \Sql {
                 $cadenaSql.= " elemento_codigo grupo_codigo, ";
                 $cadenaSql.= " grupo_vidautil,  ";
                 $cadenaSql.= " elemento.valor, ";
-                $cadenaSql.= " salida.fecha_registro,ajuste_inflacionario  ";
+                $cadenaSql.= " salida.fecha_registro,ajuste_inflacionario,catalogo.catalogo_elemento.elemento_nombre   ";
                 $cadenaSql.= " FROM elemento_individual  ";
                 $cadenaSql.= " JOIN elemento ON elemento.id_elemento=elemento_individual.id_elemento_gen  ";
                 $cadenaSql.= " JOIN catalogo.catalogo_elemento ON catalogo.catalogo_elemento.elemento_id=nivel  ";
@@ -306,7 +306,7 @@ class Sql extends \Sql {
                 $cadenaSql.= " INNER JOIN grupo.grupo_descripcion ON grupo.grupo_descripcion.grupo_id=cast(elemento_id as character varying)  ";
                 $cadenaSql.= " WHERE catalogo.catalogo_elemento.elemento_id>0   ";
                 $cadenaSql.= " AND catalogo.catalogo_lista.lista_activo=1  ";
-                $cadenaSql.= " AND grupo.grupo_descripcion.grupo_depreciacion='t'  ";
+               // $cadenaSql.= " AND grupo.grupo_descripcion.grupo_depreciacion='t'  ";
                 $cadenaSql.= " AND elemento.estado=TRUE   ";
                 $cadenaSql.= " AND id_elemento_ind='" . $variable . "'";
                 break;
