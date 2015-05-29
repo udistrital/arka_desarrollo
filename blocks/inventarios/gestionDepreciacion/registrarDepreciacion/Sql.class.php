@@ -294,7 +294,7 @@ class Sql extends \Sql {
                 $cadenaSql = " SELECT DISTINCT   ";
                 $cadenaSql.= " id_elemento_ind,placa,descripcion,salida.consecutivo,  ";
                 $cadenaSql.= " elemento_id grupo, ";
-                $cadenaSql.= " elemento_codigo grupo_codigo, ";
+                $cadenaSql.= " elemento_codigo grupo_codigo, grupo_cuentasalida,";
                 $cadenaSql.= " grupo_vidautil,  ";
                 $cadenaSql.= " elemento.valor, ";
                 $cadenaSql.= " salida.fecha_registro,ajuste_inflacionario,catalogo.catalogo_elemento.elemento_nombre   ";

@@ -171,7 +171,7 @@ class registrarForm {
 
                 $mostrarHtml = "<tr>
                     <td><center>" . $elementos [$i]['placa'] . "</center></td>
-                    <td><center>" . $elementos [$i]['descripcion'] . "</center></td>
+                    <td><center>" . wordwrap($elementos [$i]['descripcion'], 65, "<br>") . "</center></td>
                     <td><center>" . $elementos [$i]['grupo'] . "</center></td>
                     <td><center>" . $elementos [$i]['fecha_registro'] . "</center></td>
                     <td><center>" . $elementos [$i]['grupo_vidautil'] . "</center></td>

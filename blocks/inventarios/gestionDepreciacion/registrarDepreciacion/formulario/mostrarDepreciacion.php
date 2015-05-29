@@ -173,8 +173,8 @@ class registrarForm {
             );
 
             $depreciacion_reporte[$a] = array(
-                0 => $elemento[0]['grupo_codigo'],
-                'cuenta' => $elemento[0]['grupo_codigo'],
+                0 => $elemento[0]['grupo_cuentasalida'],
+                'cuenta' => $elemento[0]['grupo_cuentasalida'],
                 1 => $elemento[0]['elemento_nombre'],
                 'grupo' => $elemento[0]['elemento_nombre'],
                 2 => $elemento[0]['placa'],
@@ -202,7 +202,7 @@ class registrarForm {
                 13 => $cuota_inflacion,
                 'cuota_inflacion' => $cuota_inflacion,
                 14 => $api_acumulada,
-                'api_acumulada' => $api_acumulada,
+                'ajuste_inflacionario' => $api_acumulada,
                 15 => $circular_depreciacion,
                 'circular_depreciacion' => $circular_depreciacion,
                 16 => $valor_libros,
