@@ -7,9 +7,36 @@ $this->idioma ["tabCargarCrear"] ="Radicación Documentos Soporte para Entrada";
 $this->idioma ["tabConsultar"] ="Consultar Documentos Soporte para Entrada";
 
 
+$this->idioma ["tipoContrato"] ="Tipo Constrato";
+$this->idioma ["tipoContratoTitulo"] ="Seleccione Tipo Contrato";
+
+$this->idioma ["tipoDocumento"] ="Tipo Documento";
+$this->idioma ["tipoContratoTitulo"] ="Seleccione Tipo Documento";
+
+
+$this->idioma ["numero_entradaConsulta"] ="Número Entrada y/o Vigencia:";
+$this->idioma ["numero_entradaConsultaTitulo"] ="Seleccione el número de entrada";
+
+
+$this->idioma ["tipoDocumentoConsulta"] ="Tipo Documento";
+$this->idioma ["tipoDocumentoConsultaTitulo"] ="Seleccione Tipo Documento";
+
+
+
+
+$this->idioma ["documentoSoporte"] ="Soporte Documento: ";
+$this->idioma ["tipoContratoTitulo"] ="Seleccione Documento Soporte";
+
+$this->idioma ["botonRegresar"] ="< < Regresar";
+
+
 
 $this->idioma ["tipoCargue"] ="Tipo de Entrada: ";
 $this->idioma ["tipoCargueTitulo"] ="Seleccione Tipo Entrada";
+
+$this->idioma ["tipoCargueConsulta"] ="Tipo de Entrada: ";
+$this->idioma ["tipoCargueConsultaTitulo"] ="Seleccione Tipo Entrada";
+
 
 $this->idioma ["ordenDocumento"] ="Orden de Compra/Servicio: ";
 $this->idioma ["ordenDocumentoTitulo"] ="Seleccione Documento para la Orden";
@@ -106,7 +133,6 @@ $this->idioma ["botonAceptar"] ="Cargar Documentos";
 $this->idioma ["botonCancelar"] ="Cancelar";
 $this->idioma ["botonContinuar"] ="Continuar";
 $this->idioma ["botonConsultar"] ="Consultar";
-$this->idioma ["botonRegresar"] ="Regresar";
 
 
 
