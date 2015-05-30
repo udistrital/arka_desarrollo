@@ -1,9 +1,5 @@
 <?php
 
-use inventarios\gestionDepreciacion\registrarDepreciacion\funcion\calcularDepreciacion;
-
-//include_once ("gestionDepreciacion/registrarDepreciacion/funcion/calcularDepreciacion.php");
-
 if (!isset($GLOBALS ["autorizado"])) {
     include ("../index.php");
     exit();
@@ -189,7 +185,7 @@ class registrarForm {
                 $total_api = $total_api + $api_acumulada;
                 $total_dep56 = $total_dep56 + $circular_depreciacion;
                 $total_libros = $total_libros + $valor_libros;
-                $nombre_cuenta=$elemento[0]['elemento_nombre'];
+                $nombre_cuenta = $elemento[0]['elemento_nombre'];
                 $count ++;
             }
 
@@ -272,37 +268,42 @@ class registrarForm {
         $atributos ['id'] = $esteCampo;
         $atributos ["estilo"] = "jqueryui";
         $atributos ['tipoEtiqueta'] = 'inicio';
-        $atributos ["leyenda"] = "Depreciación Realizada a Fecha de Corte " . $_REQUEST['fechaCorte'];
+        $atributos ["leyenda"] = "Depreciación General Realizada a Fecha de Corte " . $_REQUEST['fechaCorte'];
         echo $this->miFormulario->marcoAgrupacion('inicio', $atributos);
 
         if ($depreciacion_calculada) {
+            //Aquí genera la tabla !!!! :D
+
             echo $this->miFormulario->tablaReporte($depreciacion_calculada);
+
+            //Aquí termina la tabla
+
             echo $this->miFormulario->marcoAgrupacion('fin');
 
-//            // ------------------Division para los botones-------------------------
-//            $atributos ["id"] = "botones";
-//            $atributos ["estilo"] = "marcoBotones";
-//            echo $this->miFormulario->division("inicio", $atributos);
-//
-//            // -----------------CONTROL: Botón ----------------------------------------------------------------
-//            $esteCampo = 'botonContinuar';
-//            $atributos ["id"] = $esteCampo;
-//            $atributos ["tabIndex"] = $tab;
-//            $atributos ["tipo"] = '';
-//            // submit: no se coloca si se desea un tipo button genérico
-//            $atributos ['submit'] = 'true';
-//            $atributos ["estiloMarco"] = '';
-//            $atributos ["estiloBoton"] = 'jqueryui';
-//            // verificar: true para verificar el formulario antes de pasarlo al servidor.
-//            $atributos ["verificar"] = '';
-//            $atributos ["tipoSubmit"] = 'jquery'; // Dejar vacio para un submit normal, en este caso se ejecuta la función submit declarada en ready.js
-//            $atributos ["valor"] = $this->lenguaje->getCadena($esteCampo);
-//            $atributos ['nombreFormulario'] = $esteBloque ['nombre'];
-//            $tab ++;
-//
-//            // Aplica atributos globales al control
-//            $atributos = array_merge($atributos, $atributosGlobales);
-//            echo $this->miFormulario->campoBoton($atributos);
+            // ------------------Division para los botones-------------------------
+            $atributos ["id"] = "botones";
+            $atributos ["estilo"] = "marcoBotones";
+            echo $this->miFormulario->division("inicio", $atributos);
+
+            // -----------------CONTROL: Botón ----------------------------------------------------------------
+            $esteCampo = 'botonContinuar';
+            $atributos ["id"] = $esteCampo;
+            $atributos ["tabIndex"] = $tab;
+            $atributos ["tipo"] = '';
+            // submit: no se coloca si se desea un tipo button genérico
+            $atributos ['submit'] = 'true';
+            $atributos ["estiloMarco"] = '';
+            $atributos ["estiloBoton"] = 'jqueryui';
+            // verificar: true para verificar el formulario antes de pasarlo al servidor.
+            $atributos ["verificar"] = '';
+            $atributos ["tipoSubmit"] = 'jquery'; // Dejar vacio para un submit normal, en este caso se ejecuta la función submit declarada en ready.js
+            $atributos ["valor"] = $this->lenguaje->getCadena($esteCampo);
+            $atributos ['nombreFormulario'] = $esteBloque ['nombre'];
+            $tab ++;
+
+            // Aplica atributos globales al control
+            $atributos = array_merge($atributos, $atributosGlobales);
+            echo $this->miFormulario->campoBoton($atributos);
 //            // -----------------FIN CONTROL: Botón -----------------------------------------------------------
 
             echo $this->miFormulario->division('fin');
@@ -328,12 +329,12 @@ class registrarForm {
              */
             // En este formulario se utiliza el mecanismo (b) para pasar las siguientes variables:
             // Paso 1: crear el listado de variables
-            //$valorCodificado = "actionBloque=" . $esteBloque ["nombre"];
-            $valorCodificado = "&pagina=" . $this->miConfigurador->getVariableConfiguracion('pagina');
+            $valorCodificado = "action=" . $esteBloque ["nombre"];
+            $valorCodificado.= "&pagina=" . $this->miConfigurador->getVariableConfiguracion('pagina');
             $valorCodificado.= "&bloque=" . $esteBloque ['nombre'];
             $valorCodificado.= "&bloqueGrupo=" . $esteBloque ["grupo"];
-            $valorCodificado.= "&opcion=mostrarDepreciacion";
-
+            $valorCodificado.= "&opcion=generarPDF";
+            $valorCodificado.="&depreciacion=" . base64_encode(serialize($depreciacion_calculada));
 
             /*
              * SARA permite que los nombres de los campos sean dinámicos.

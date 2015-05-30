@@ -79,7 +79,7 @@ class registrarForm {
             $atributos ['id'] = $esteCampo;
             $atributos ["estilo"] = "jqueryui";
             $atributos ['tipoEtiqueta'] = 'inicio';
-            $atributos ["leyenda"] = "Selección de Criterios";
+            $atributos ["leyenda"] = "Selección de Criterios - Depreciación General";
             echo $this->miFormulario->marcoAgrupacion('inicio', $atributos);
 //-------------------------------------------------------------------------------------------------
          

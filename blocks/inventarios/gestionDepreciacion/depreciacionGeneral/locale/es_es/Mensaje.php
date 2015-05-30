@@ -22,7 +22,7 @@ $this->idioma ["fechaCorteTitulo"] ="Establezca fecha corte depreciación";
 $this->idioma ["botonAceptar"] ="Depreciar";
 $this->idioma ["botonCancelar"] ="Cancelar";
 $this->idioma ["botonContinuar"] ="Generar PDF";
-$this->idioma ["botonConsultar"] ="Consultar";
+$this->idioma ["botonConsultar"] ="Generar Depreciación";
 $this->idioma ["botonRegresar"] ="Regresar";
 
 

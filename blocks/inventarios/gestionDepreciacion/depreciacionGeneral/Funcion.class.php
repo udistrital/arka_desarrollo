@@ -2,7 +2,7 @@
 
 namespace inventarios\gestionDepreciacion\depreciacionGeneral;
 
-use inventarios\gestionDepreciacion\funcion\redireccion;
+use inventarios\gestionDepreciacion\depreciacionGeneral\funcion\redireccion;
 
 if (!isset($GLOBALS ["autorizado"])) {
     include ("../index.php");
@@ -30,14 +30,6 @@ class Funcion {
     var $miRecursoDB;
     var $crypto;
 
-    // function verificarCampos() {
-    // include_once ($this->ruta . "/funcion/verificarCampos.php");
-    // if ($this->error == true) {
-    // return false;
-    // } else {
-    // return true;
-    // }
-    // }
     function redireccionar($opcion, $valor = "") {
         include_once ($this->ruta . "/funcion/redireccionar.php");
     }
@@ -49,9 +41,13 @@ class Funcion {
     function registrarDepreciacion() {
         include_once ($this->ruta . "/funcion/registrarDepreciacion.php");
     }
-    
+
     function calcularDepreciacion() {
         include_once ($this->ruta . "/funcion/calcularDepreciacion.php");
+    }
+
+    function generarPDF() {
+        include_once ($this->ruta . "/funcion/generarPDF.php");
     }
 
     function procesarAjax() {
@@ -62,7 +58,7 @@ class Funcion {
 // 		
         // Evitar que se ingrese codigo HTML y PHP en los campos de texto
         // Campos que se quieren excluir de la limpieza de código. Formato: nombreCampo1|nombreCampo2|nombreCampo3
-        $excluir = "";
+
         $_REQUEST = $this->miInspectorHTML->limpiarPHPHTML($_REQUEST);
 
         // Aquí se coloca el código que procesará los diferentes formularios que pertenecen al bloque
@@ -88,15 +84,10 @@ class Funcion {
                 $this->calcularDepreciacion();
             }
 
-// 			if ($validacion == false) {
-// 				// Instanciar a la clase pagina con mensaje de correcion de datos
-// 				echo "Datos Incorrectos";
-// 			} else {
-// 				// Validar las variables para evitar un tipo insercion de SQL
-// 				$_REQUEST = $this->miInspectorHTML->limpiarSQL ( $_REQUEST );
-// 				$this->funcionEjemplo ();
-// 				$this->redireccionar ( "exito" );
-// 			}
+            if ($_REQUEST ['opcion'] == 'generarPDF') {
+                $this->generarPDF();
+            }
+
         }
     }
 

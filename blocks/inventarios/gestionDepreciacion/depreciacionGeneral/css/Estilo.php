@@ -9,6 +9,9 @@ $estilo[$indice++]="autocomplete.css";
 $estilo[$indice++]="chosen.css";
 $estilo[$indice++]="select2.css";
 $estilo[$indice++]="jquery_switch.css";
+$estilo[$indice++]="jquery_switch.css";
+$estilo[$indice++]="dataTables.tableTools.css";
+$estilo[$indice++]="dataTables.tableTools.min.css";
 $estilo[$indice++]="jquery-ui.css";
 
 // Tablas
