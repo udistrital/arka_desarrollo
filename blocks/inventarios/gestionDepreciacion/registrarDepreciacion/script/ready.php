@@ -18,10 +18,22 @@ return false;
 });
 });
 
-$('#tablaReporte').dataTable( {
-"sPaginationType": "full_numbers"
+$(document).ready(function() {
+$('#tablaReporte').DataTable( {
+dom: 'T<"clear">lfrtip',
+"sPaginationType": "full_numbers",
+tableTools: {
+"sSwfPath": "blocks/inventarios/gestionDepreciacion/registrarDepreciacion/script/swf/copy_csv_xls_pdf.swf",
+"aButtons": [
+{
+"sExtends":    "collection",
+"sButtonText": "Descargar",
+"aButtons":    [ "csv" ]
+}
+]
+}
 } );
-
+} );
 
 $('#tablaTitulos').dataTable( {
 "sPaginationType": "full_numbers"

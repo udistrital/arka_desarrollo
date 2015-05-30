@@ -49,18 +49,56 @@ class registrarForm {
         $tiempo = $_REQUEST ['tiempo'];
 
         // -------------------------------------------------------------------------------------------------
+        // -------------------------------------------------------------------------------------------------
         $conexion = "inventarios";
         $esteRecursoDB = $this->miConfigurador->fabricaConexiones->getRecursoDB($conexion);
 
         $conexion = "sicapital";
         $esteRecursoDBO = $this->miConfigurador->fabricaConexiones->getRecursoDB($conexion);
 
+        if (isset($_REQUEST['grupo_contable']) && $_REQUEST['grupo_contable'] != '') {
+            $nivel = $_REQUEST['grupo_contable'];
+        } else {
+            $nivel = '';
+        }
 
-        for ($i = 0; $i <= 1000000; $i ++) {
-            if (isset($_REQUEST ['item' . $i])) {
-                $items[$i][0] = $_REQUEST ['item' . $i];
-            }
-        };
+        if (isset($_REQUEST['funcionario']) && $_REQUEST['funcionario'] != '') {
+            $funcionario = $_REQUEST['funcionario'];
+        } else {
+            $funcionario = '';
+        }
+
+        if (isset($_REQUEST['fechaCorte']) && $_REQUEST['fechaCorte'] != '') {
+            $fechaCorte = $_REQUEST['fechaCorte'];
+        } else {
+            $fechaCorte = date('Y-m-d');
+        }
+
+        if (isset($_REQUEST['placa']) && $_REQUEST['placa'] != '') {
+            $placa = $_REQUEST['placa'];
+        } else {
+            $placa = '';
+        }
+
+        if (isset($_REQUEST['cuenta_salida']) && $_REQUEST['cuenta_salida'] != '') {
+            $cuenta_contable = $_REQUEST['cuenta_salida'];
+        } else {
+            $cuenta_contable = '';
+        }
+
+
+        $datos = array(
+            'grupo' => $nivel,
+            'funcionario' => $funcionario,
+            'fecha_corte' => $fechaCorte,
+            'placa' => $placa,
+            'cuenta_salida' => $cuenta_contable,
+        );
+
+        //-***************************************************************-//
+
+        $cadenaSql = $this->miSql->getCadenaSql('mostrarInfoDepreciar', $datos);
+        $items = $esteRecursoDB->ejecutarAcceso($cadenaSql, "busqueda");
 
         $a = 0;
 // Calculando la depreciacion
@@ -263,38 +301,38 @@ class registrarForm {
         $atributos ['id'] = $esteCampo;
         $atributos ["estilo"] = "jqueryui";
         $atributos ['tipoEtiqueta'] = 'inicio';
-        $atributos ["leyenda"] = "Depreciación Realizada a Fecha de Corte " . $_REQUEST['fechaCorte'];
+        $atributos ["leyenda"] = "Depreciación Elementos Realizada a Fecha de Corte " . $_REQUEST['fechaCorte'];
         echo $this->miFormulario->marcoAgrupacion('inicio', $atributos);
 
         if ($depreciacion_calculada) {
             echo $this->miFormulario->tablaReporte($depreciacion_reporte);
             echo $this->miFormulario->marcoAgrupacion('fin');
 
-//            // ------------------Division para los botones-------------------------
-//            $atributos ["id"] = "botones";
-//            $atributos ["estilo"] = "marcoBotones";
-//            echo $this->miFormulario->division("inicio", $atributos);
-//
-//            // -----------------CONTROL: Botón ----------------------------------------------------------------
-//            $esteCampo = 'botonContinuar';
-//            $atributos ["id"] = $esteCampo;
-//            $atributos ["tabIndex"] = $tab;
-//            $atributos ["tipo"] = '';
-//            // submit: no se coloca si se desea un tipo button genérico
-//            $atributos ['submit'] = 'true';
-//            $atributos ["estiloMarco"] = '';
-//            $atributos ["estiloBoton"] = 'jqueryui';
-//            // verificar: true para verificar el formulario antes de pasarlo al servidor.
-//            $atributos ["verificar"] = '';
-//            $atributos ["tipoSubmit"] = 'jquery'; // Dejar vacio para un submit normal, en este caso se ejecuta la función submit declarada en ready.js
-//            $atributos ["valor"] = $this->lenguaje->getCadena($esteCampo);
-//            $atributos ['nombreFormulario'] = $esteBloque ['nombre'];
-//            $tab ++;
-//
-//            // Aplica atributos globales al control
-//            $atributos = array_merge($atributos, $atributosGlobales);
-//            echo $this->miFormulario->campoBoton($atributos);
-//            // -----------------FIN CONTROL: Botón -----------------------------------------------------------
+            // ------------------Division para los botones-------------------------
+            $atributos ["id"] = "botones";
+            $atributos ["estilo"] = "marcoBotones";
+            echo $this->miFormulario->division("inicio", $atributos);
+
+            // -----------------CONTROL: Botón ----------------------------------------------------------------
+            $esteCampo = 'botonContinuar';
+            $atributos ["id"] = $esteCampo;
+            $atributos ["tabIndex"] = $tab;
+            $atributos ["tipo"] = '';
+            // submit: no se coloca si se desea un tipo button genérico
+            $atributos ['submit'] = 'true';
+            $atributos ["estiloMarco"] = '';
+            $atributos ["estiloBoton"] = 'jqueryui';
+            // verificar: true para verificar el formulario antes de pasarlo al servidor.
+            $atributos ["verificar"] = '';
+            $atributos ["tipoSubmit"] = 'jquery'; // Dejar vacio para un submit normal, en este caso se ejecuta la función submit declarada en ready.js
+            $atributos ["valor"] = $this->lenguaje->getCadena($esteCampo);
+            $atributos ['nombreFormulario'] = $esteBloque ['nombre'];
+            $tab ++;
+
+            // Aplica atributos globales al control
+            $atributos = array_merge($atributos, $atributosGlobales);
+            echo $this->miFormulario->campoBoton($atributos);
+            // -----------------FIN CONTROL: Botón -----------------------------------------------------------
 
             echo $this->miFormulario->division('fin');
 
@@ -319,11 +357,12 @@ class registrarForm {
              */
             // En este formulario se utiliza el mecanismo (b) para pasar las siguientes variables:
             // Paso 1: crear el listado de variables
-            //$valorCodificado = "actionBloque=" . $esteBloque ["nombre"];
-            $valorCodificado = "&pagina=" . $this->miConfigurador->getVariableConfiguracion('pagina');
+            $valorCodificado = "action=" . $esteBloque ["nombre"];
+            $valorCodificado.= "&pagina=" . $this->miConfigurador->getVariableConfiguracion('pagina');
             $valorCodificado.= "&bloque=" . $esteBloque ['nombre'];
             $valorCodificado.= "&bloqueGrupo=" . $esteBloque ["grupo"];
-            $valorCodificado.= "&opcion=mostrarDepreciacion";
+            $valorCodificado.= "&opcion=generarPDF";
+            $valorCodificado.="&depreciacion=" . base64_encode(serialize($depreciacion_calculada));
 
 
             /*

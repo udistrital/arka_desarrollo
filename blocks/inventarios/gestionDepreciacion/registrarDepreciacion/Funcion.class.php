@@ -49,9 +49,13 @@ class Funcion {
     function registrarDepreciacion() {
         include_once ($this->ruta . "/funcion/registrarDepreciacion.php");
     }
-    
+
     function calcularDepreciacion() {
         include_once ($this->ruta . "/funcion/calcularDepreciacion.php");
+    }
+
+    function generarPDF() {
+        include_once ($this->ruta . "/funcion/generarPDF.php");
     }
 
     function procesarAjax() {
@@ -88,15 +92,9 @@ class Funcion {
                 $this->calcularDepreciacion();
             }
 
-// 			if ($validacion == false) {
-// 				// Instanciar a la clase pagina con mensaje de correcion de datos
-// 				echo "Datos Incorrectos";
-// 			} else {
-// 				// Validar las variables para evitar un tipo insercion de SQL
-// 				$_REQUEST = $this->miInspectorHTML->limpiarSQL ( $_REQUEST );
-// 				$this->funcionEjemplo ();
-// 				$this->redireccionar ( "exito" );
-// 			}
+            if ($_REQUEST ['opcion'] == 'generarPDF') {
+                $this->generarPDF();
+            }
         }
     }
 
