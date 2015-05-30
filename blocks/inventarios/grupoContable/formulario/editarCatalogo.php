@@ -288,7 +288,7 @@ class Formulario {
         $atributos ['validar'] = "required";
         $atributos ['limitar'] = 1;
         $atributos ['anchoCaja'] = 49;
-        //$atributos ['miEvento'] = 'onchange';
+        $atributos ['miEvento'] = 'change';
         //$atributos ['cadena_sql'] = $this->sql->getCadenaSql("boolean");
         $matrizItems = array(
             array(1, 'SI'),

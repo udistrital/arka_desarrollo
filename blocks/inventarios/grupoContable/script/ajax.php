@@ -368,19 +368,19 @@ $autocompletar = $url . $cadena10;
         $("#lidPadre").autocomplete({
             source: listaNombres['lidPadre']
         });
-        
+
 
         $("#lidPadre").change(function () {
 
             var indice = listaNombres['lidPadre'].indexOf($("#lidPadre").val());
-        if (typeof listaIds['lidPadre'][indice] == 'undefined'){
-            $("#idPadre").val($("#lidPadre").val());
+            if (typeof listaIds['lidPadre'][indice] == 'undefined') {
+                $("#idPadre").val($("#lidPadre").val());
 
 
-            }else{
-                    $("#idPadre").val(listaIds['lidPadre'][indice]);
+            } else {
+                $("#idPadre").val(listaIds['lidPadre'][indice]);
 
-        }
+            }
 
 
         });
@@ -401,11 +401,11 @@ $autocompletar = $url . $cadena10;
 
     function cambiarPadre() {
         var indice = listaNombres['lidPadre'].indexOf($("#lidPadre").val());
-        if (typeof listaIds['lidPadre'][indice] == 'undefined'){
+        if (typeof listaIds['lidPadre'][indice] == 'undefined') {
             $("#idPadre").val($("#lidPadre").val());
 
-            
-    }else{
+
+        } else {
             $("#idPadre").val(listaIds['lidPadre'][indice]);
 
         }
@@ -416,7 +416,8 @@ $autocompletar = $url . $cadena10;
         if (valor == 0)
             return true;
         autocompletar();
-        if (typeof listaNombres['lidPadre'] == 'undefined') autocompletar();
+        if (typeof listaNombres['lidPadre'] == 'undefined')
+            autocompletar();
         return listaNombres['lidPadre'].indexOf(String(valor)) < 0 ? false : true;
     }
 
@@ -545,23 +546,19 @@ $autocompletar = $url . $cadena10;
 
     function cambio()
     {
-        $(document).ready(function () {
-            $("#depreciacion").change(function () {
-                switch ($("#depreciacion").val())
-                {
-                    case '0':
-                        $("#descripcionDepreciacion").css('display', 'none');
-                        $("#cuentaDebito").val("");
-                        $("#cuentaCredito").val("");
-                        $("#vidautil").val("");
-                        break;
+        $("#depreciacion").live('change', function () {
 
-                    case '1':
-                        $("#descripcionDepreciacion").css('display', 'block');
-                        break;
-                }
-            });
+            if ($("#depreciacion").val() == 0)
+            {
+                $("#descripcionDepreciacion").css('display', 'none');
+                $("#cuentaDebito").val("");
+                $("#cuentaCredito").val("");
+                $("#vidautil").val("");
+            } else {
+                $("#descripcionDepreciacion").css('display', 'block');
+            }
         });
+
 
     }
 
