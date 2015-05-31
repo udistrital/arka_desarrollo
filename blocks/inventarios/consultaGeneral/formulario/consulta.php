@@ -118,10 +118,6 @@ class registrarForm {
             );
             $matrizItems = $esteRecursoDBO->ejecutarAcceso($atributos ['cadena_sql'], "busqueda");
             $atributos ['matrizItems'] = $matrizItems;
-// $atributos['miniRegistro']=;
-// $atributos ['baseDatos'] = "inventarios";
-// $atributos ['cadena_sql'] = $this->miSql->getCadenaSql ( "clase_entrada" );
-// Aplica atributos globales al control
             $atributos = array_merge($atributos, $atributosGlobales);
             echo $this->miFormulario->campoCuadroLista($atributos);
             unset($atributos);
