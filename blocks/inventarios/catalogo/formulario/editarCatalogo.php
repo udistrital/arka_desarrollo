@@ -181,7 +181,7 @@ class Formulario {
         $atributos ['ajax_function'] = "";
         $atributos ['ajax_control'] = $esteCampo;
         $atributos ['estilo'] = "jqueryui";
-        $atributos ['validar'] = "";
+        $atributos ['validar'] = "required";
         $atributos ['limitar'] = 1;
         $atributos ['anchoCaja'] = 49;
         $atributos ['miEvento'] = '';

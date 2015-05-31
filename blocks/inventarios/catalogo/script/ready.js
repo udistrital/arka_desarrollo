@@ -86,11 +86,6 @@ $(function () {
     {hide: {duration: 800}}
     );
 
-
-
-
-
-
 });
 
 $(function () {
@@ -124,11 +119,11 @@ $(document).ready(function () {
             console.log('onAfterRowClick');
         },
     });
+
+    $("#idGrupo").select2({
+        placeholder: "Search for a repository",
+        minimumInputLength: 2,
+    });
 });
 
-
-$("#idGrupo").select2({
-    placeholder: "Search for a repository",
-    minimumInputLength: 2,
-});
 

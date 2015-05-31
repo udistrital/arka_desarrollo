@@ -8,6 +8,7 @@ $estilo[$indice++]="jquery.dataTables_themeroller.css";
 $estilo[$indice++]="arbol.css";
 $estilo[$indice++]="tabelizer.min.css";
 $estilo[$indice++]="tabelizer.css";
+$estilo[$indice++]="select2.css";
 $rutaBloque=$this->miConfigurador->getVariableConfiguracion("host");
 $rutaBloque.=$this->miConfigurador->getVariableConfiguracion("site");
 
