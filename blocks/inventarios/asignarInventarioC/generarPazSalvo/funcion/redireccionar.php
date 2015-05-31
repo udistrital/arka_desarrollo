@@ -1,6 +1,6 @@
 <?php
 
-namespace inventarios\asignarInventarioC\generarPazSalvo\funcion;
+namespace inventarios\gestionDepreciacion\depreciacionGeneral\funcion;
 
 if (!isset($GLOBALS ["autorizado"])) {
     include ("index.php");

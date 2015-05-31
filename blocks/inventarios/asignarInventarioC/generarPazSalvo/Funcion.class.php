@@ -30,14 +30,7 @@ class Funcion {
     var $miRecursoDB;
     var $crypto;
 
-    // function verificarCampos() {
-    // include_once ($this->ruta . "/funcion/verificarCampos.php");
-    // if ($this->error == true) {
-    // return false;
-    // } else {
-    // return true;
-    // }
-    // }
+
     function redireccionar($opcion, $valor = "") {
         include_once ($this->ruta . "/funcion/redireccionar.php");
     }
@@ -57,7 +50,6 @@ class Funcion {
     function action() {
         // Evitar que se ingrese codigo HTML y PHP en los campos de texto
         // Campos que se quieren excluir de la limpieza de código. Formato: nombreCampo1|nombreCampo2|nombreCampo3
-        $excluir = "";
         $_REQUEST = $this->miInspectorHTML->limpiarPHPHTML($_REQUEST);
 
         // Aquí se coloca el código que procesará los diferentes formularios que pertenecen al bloque
