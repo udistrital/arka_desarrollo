@@ -7,7 +7,7 @@ $this->idioma ["tabCargarCrear"] ="Radicación Documentos Soporte para Entrada";
 $this->idioma ["tabConsultar"] ="Consultar Documentos Soporte para Entrada";
 
 
-$this->idioma ["tipoContrato"] ="Tipo Constrato";
+$this->idioma ["tipoContrato"] ="Tipo Contrato";
 $this->idioma ["tipoContratoTitulo"] ="Seleccione Tipo Contrato";
 
 $this->idioma ["tipoDocumento"] ="Tipo Documento";
@@ -25,7 +25,7 @@ $this->idioma ["tipoDocumentoConsultaTitulo"] ="Seleccione Tipo Documento";
 
 
 $this->idioma ["documentoSoporte"] ="Soporte Documento: ";
-$this->idioma ["tipoContratoTitulo"] ="Seleccione Documento Soporte";
+$this->idioma ["documentoSoporteTitulo"] ="Seleccione Documento Soporte";
 
 $this->idioma ["botonRegresar"] ="< < Regresar";
 
