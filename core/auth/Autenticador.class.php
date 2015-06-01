@@ -1,4 +1,4 @@
-<?
+<?php
 
 /**
  * Autenticador.class.php
@@ -63,7 +63,7 @@ class Autenticador {
     }
     
     function iniciarAutenticacion() {
-        
+          
         $respuesta = '';
         
         $resultado = $this->verificarExistenciaPagina ();
