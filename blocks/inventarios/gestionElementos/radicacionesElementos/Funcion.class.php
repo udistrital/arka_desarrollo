@@ -46,14 +46,12 @@ class Funcion {
 	function procesarAjax() {
 		include_once ($this->ruta . "funcion/procesarAjax.php");
 	}
-	function regitrarOrden() {
+	function regitrarCargue() {
 		include_once ($this->ruta . "funcion/registrar.php");
 	}
 	function action() {
 		
-		
-		
-// 		
+		//
 		// Evitar qu44444444rrrre se ingrese codigo HTML y PHP en los campos de texto
 		// Campos que se quieren excluir de la limpieza de código. Formato: nombreCampo1|nombreCampo2|nombreCampo3
 		$excluir = "";
@@ -71,19 +69,10 @@ class Funcion {
 			
 			// Realizar una validación específica para los campos de este formulario:
 			// $validacion = $this->verificarCampos ();
-			if ($_REQUEST ['opcion'] == 'registrarOrden') {
-				$this->regitrarOrden ();
+			if ($_REQUEST ['opcion'] == 'registroCargue') {
+				$this->regitrarCargue ();
 			}
-// 			if ($validacion == false) {
-// 				// Instanciar a la clase pagina con mensaje de correcion de datos
-// 				echo "Datos Incorrectos";
-// 			} else {
-// 				// Validar las variables para evitar un tipo insercion de SQL
-// 				$_REQUEST = $this->miInspectorHTML->limpiarSQL ( $_REQUEST );
-				
-// 				$this->funcionEjemplo ();
-// 				$this->redireccionar ( "exito" );
-// 			}
+
 		}
 	}
 	function __construct() {

@@ -1,11 +1,43 @@
 <?php
 $this->idioma ["noDefinido"] = "Etiqueta no esta definida en locale/es_es/Mensaje.php";
 
+
+$this->idioma ["tabCargarCrear"] = "Registrar Radicaciones de Inesixtencia de Elementos";
+
+
+$this->idioma ["tabConsultar"] = "Consultar Radicaciones de Inesixtencia de Elementos";
+
+
+
+$this->idioma ["fecha_inicio"] = "Fecha Inicio: ";
+$this->idioma ["fecha_inicioTitulo"] = "Seleccione Fecha Inicio Registro";
+
+
+$this->idioma ["fecha_final"] = "Fecha Final: ";
+$this->idioma ["fecha_finalTitulo"] = "Seleccione Fecha Final Registro";
+
+
+
+
+
+$this->idioma ["placa"] = "Placa a Relacionar: ";
+$this->idioma ["placaTitulo"] = "Seleccione Placa a Relacionar";
+
+$this->idioma ["placaConsulta"] = "Placa a Relacionar: ";
+$this->idioma ["placaConsultaTitulo"] = "Seleccione Placa a Relacionar";
+
+
+
+$this->idioma ["tipoConsulta"] = "Tipo Inexistencia : ";
+$this->idioma ["tipoConsultaTitulo"] = "Seleccione Tipo Inexistencia";
+
+
+
 $this->idioma ["tipo"] = "Tipo Inexistencia : ";
 $this->idioma ["tipoTitulo"] = "Seleccione Tipo Inexistencia";
 
 
-$this->idioma ["documento"] = "Cargue Documento : <br>a Radicar";
+$this->idioma ["documento"] = "Documento a Radicar:";
 $this->idioma ["documentoTitulo"] = "Seleccione Documento a Radicar ";
 
 // --
@@ -28,6 +60,11 @@ $this->idioma ["valorL_registroTitulo"] = "Valor en Letras  Registro Presupuesta
 $this->idioma ["botonAceptar"] = "Guardar";
 $this->idioma ["botonCancelar"] = "Cancelar";
 $this->idioma ["botonContinuar"] = "Continuar";
+$this->idioma ["botonConsultar"] = "Consultar";
+$this->idioma ["botonRegresar"] ="< < Regresar";
+
+
+
 
 $this->idioma ["division1Titulo"] = "Seleccione Fecha Disponibilidad Presupuestal";
 
