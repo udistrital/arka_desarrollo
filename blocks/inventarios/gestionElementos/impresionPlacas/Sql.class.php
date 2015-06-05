@@ -181,7 +181,6 @@ class Sql extends \Sql {
 					$cadenaSql .= " AND  CAST ( '" . $variable ['fecha_final'] . "' AS DATE)  ";
 				}
 				
-				
 				$cadenaSql .= "ORDER BY id_elemento_ind ASC ; ";
 				
 				break;
@@ -468,12 +467,13 @@ class Sql extends \Sql {
 				
 				break;
 			
-			case "consultar_nivel_inventario" :
-				
-				$cadenaSql = "SELECT elemento_id, elemento_padre||''|| elemento_codigo||' - '||elemento_nombre ";
-				$cadenaSql .= "FROM catalogo.catalogo_elemento ";
-				$cadenaSql .= "WHERE elemento_catalogo=1 ";
-				$cadenaSql .= "ORDER BY elemento_id DESC ;";
+
+			
+			case "buscarMaxPlacas" :
+				$cadenaSql = " SELECT DISTINCT id_elemento_ind, placa as placas ";
+				$cadenaSql .= "FROM elemento_individual ";
+				$cadenaSql .= "WHERE id_elemento_ind > ".$variable." ";
+				$cadenaSql .= "ORDER BY placa ASC ";
 				
 				break;
 		}

@@ -135,7 +135,7 @@ class registrarForm {
 		} else {
 			$atributos ['valor'] = '';
 		}
-		$atributos ['deshabilitado'] = false;
+		$atributos ['deshabilitado'] = true;
 		$atributos ['columnas'] = 2;
 		$atributos ['tamanno'] = 1;
 		$atributos ['ajax_function'] = "";
@@ -151,11 +151,11 @@ class registrarForm {
 		$arreglo = array (
 				array (
 						'',
-						'Sin Entradas Registradas'
+						'Seleccione ...'
 				)
 		);
 		
-		$matrizItems = $matrizItems [0] [0] != '' ? $matrizItems : $arreglo;
+		$matrizItems = $arreglo;
 		$atributos ['matrizItems'] = $matrizItems;
 		// $atributos['miniRegistro']=;
 		$atributos ['baseDatos'] = "inventarios";
