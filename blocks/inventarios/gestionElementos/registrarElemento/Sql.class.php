@@ -252,13 +252,13 @@ class Sql extends \Sql {
 				$cadenaSql .= "FROM elemento  ";
 				
 				break;
+			
+			case "idElementoMaxIndividual" :
 				
-				case "idElementoMaxIndividual" :
+				$cadenaSql = "SELECT max(id_elemento_ind) ";
+				$cadenaSql .= "FROM elemento_individual  ";
 				
-					$cadenaSql = "SELECT max(id_elemento_ind) ";
-					$cadenaSql .= "FROM elemento_individual  ";
-				
-					break;
+				break;
 			
 			case "consultar_nivel_inventario" :
 				
@@ -393,6 +393,16 @@ class Sql extends \Sql {
 				if ($variable [4] != '') {
 					$cadenaSql .= " AND entrada.proveedor = '" . $variable [4] . "'";
 				}
+				
+				break;
+			
+			case "consultarEntradaParticular" :
+				$cadenaSql = "SELECT DISTINCT ";
+				$cadenaSql .= "entrada.id_entrada, entrada.fecha_registro,  ";
+				$cadenaSql .= " descripcion,proveedor, consecutivo||' - ('||entrada.vigencia||')' entradas   ";
+				$cadenaSql .= "FROM entrada ";
+				$cadenaSql .= "JOIN clase_entrada ON clase_entrada.id_clase = entrada.clase_entrada ";
+				$cadenaSql .= " AND entrada.id_entrada = '" . $variable. "'";
 				
 				break;
 		}

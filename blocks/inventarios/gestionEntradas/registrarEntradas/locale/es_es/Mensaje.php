@@ -3,6 +3,11 @@ $this->idioma ["noDefinido"] = "Etiqueta no esta definida en locale/es_es/Mensaj
 
 $this->idioma ["informacion_numero"] =" # Número de Acta de Recibido : ";
 
+
+$this->idioma ["desicion"] ="&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp¿ Que desea realizar ?";
+
+$this->idioma ["informacion_numero"] =" # Número de Acta de Recibido : ";
+
 $this->idioma ["informacion_fecha"] ="Fecha de Acta de Recibido : ";
 
 $this->idioma ["informacion_nit"] ="Nit de Proveedor : ";
@@ -257,9 +262,12 @@ $this->idioma ["ordenadorGasto"] ="Ordenador Gasto";
 
 $this->idioma ["botonAceptar"] ="Guardar Entrada";
 $this->idioma ["botonCancelar"] ="Cancelar";
-$this->idioma ["botonContinuar"] ="Continuar";
+$this->idioma ["botonContinuar"] ="Salir";
 $this->idioma ["botonConsultar"] ="Consultar";
 $this->idioma ["botonRegresar"] ="<< Regresar";
+$this->idioma ["botonRegistrar"] ="Registrar Nueva Entrada";
+$this->idioma ["botonCargarElemento"] ="Cargar Elementos a Entrada";
+
 
 
 

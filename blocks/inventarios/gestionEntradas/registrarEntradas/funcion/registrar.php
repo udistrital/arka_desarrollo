@@ -216,10 +216,10 @@ class RegistradorOrden {
 		
 		$id_entrada = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
 		
-		
-		if ($id_entrada) {
+		$arreglo=array($idEntradamax,$id_entrada[0][0]);
+		if ($id_entrada [0] [0]) {
 			
-			redireccion::redireccionar ( 'inserto', $id_entrada [0] [0] );
+			redireccion::redireccionar ( 'inserto', $arreglo);
 		} else {
 			
 			redireccion::redireccionar ( 'noInserto' );

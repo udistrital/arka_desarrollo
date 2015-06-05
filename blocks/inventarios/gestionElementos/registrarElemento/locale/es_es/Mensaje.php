@@ -283,9 +283,12 @@ $this->idioma ["contratista"] = "Contratista";
 $this->idioma ["ordenadorGasto"] = "Ordenador Gasto";
 
 
+$this->idioma ["desicion"] ="&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp¿ Que desea realizar ?<br>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspSi no desea ninguna de estas opciones<br>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsphaga caso omiso para seguir registrando elementos.";
+
 $this->idioma ["botonAceptar"] ="Guardar Entrada";
 $this->idioma ["botonCancelar"] ="Cancelar";
-$this->idioma ["botonContinuar"] ="Continuar";
+$this->idioma ["botonContinuar"] ="Salir";
+$this->idioma ["botonSalida"] ="Generar Salida";
 $this->idioma ["botonConsultar"] ="Consultar";
 $this->idioma ["botonRegresar"] ="<< Regresar";
 
@@ -296,7 +299,7 @@ $this->idioma ["botonRegresar"] ="<< Regresar";
 //________________________________________________
 $this->idioma ["botonAceptar"] = "Guardar";
 $this->idioma ["botonCancelar"] = "Cancelar";
-$this->idioma ["botonContinuar"] = "Continuar";
+
 
 $this->idioma ["division1Titulo"] = "Seleccione Fecha Disponibilidad Presupuestal";
 
