@@ -118,7 +118,7 @@ class RegistradorOrden {
 					
 					$contenidoPagina .= "</tr></table>
 								</page >";
-				} 	else {
+				} else {
 					
 					$contenidoPagina .= "</table>
 								</page >";
@@ -196,133 +196,194 @@ class RegistradorOrden {
 					$i ++;
 				}
 				
-				$contenidoPagina .= "<page backtop='0mm' backbottom='0mm' backleft='0mm' backright='0mm'  pagegroup='new'>
-										<table style='width:100%;' cellpadding='1'>";
-				
-				foreach ( $PLACASTOTALES as $placaSencilla ) {
+				if ($numeroTotal < 39) {
 					
-					if ($contadorSaltoLinea == 1) {
-						$contenidoPagina .= "<tr>";
+					$contenidoPagina .= "<page backtop='0mm' backbottom='0mm' backleft='0mm' backright='0mm'  pagegroup='new'>
+										<table style='width:100%;' cellpadding='1'>";
+					
+					for($i = 1; $i < 39; $i ++) {
+						
+						if ($contadorSaltoLinea == 1) {
+							$contenidoPagina .= "<tr>";
+						}
+						
+						if (array_key_exists ( $i, $PLACASTOTALES ) == false) {
+						
+							if ($POSICIONES [$i] == true) {
+								echo "stiv<br>";
+								$contenidoPagina .= "<td style='width:33.31%; height: 64px;text-align=center;border-spacing: 11px;'> </td><br>";
+							}
+							
+							$j = 1;
+							foreach ( $PLACASFALTANTES as $numero ) {
+								
+								$PLACASTOTALES [$j] = $numero;
+								$j ++;
+							}
+							
+							foreach ( $PLACASFALTANTES as $placaSencilla ) {
+								
+								if ($contadorSaltoLinea == 1) {
+									$contenidoPagina .= "<tr>";
+								}
+								
+								$contenidoPagina .= $placaSencilla;
+								
+								echo $contadorSaltoLinea."<br>";
+								
+								if ($contadorSaltoLinea == 3) {
+									
+									$contenidoPagina .= "</tr>";
+									$contadorSaltoLinea = 1;
+								} else {
+									$contadorSaltoLinea ++;
+								}
+								
+								$contadorPagina ++;
+								$iterador ++;
+							}
+							
+							if (($contadorSaltoLinea - 1) == 0) {
+								
+								$contenidoPagina .= "</table>
+								</page >";
+							} elseif (($contadorSaltoLinea - 1) < 3) {
+								
+								$contenidoPagina .= "</tr></table>
+								</page >";
+							} else {
+								
+								$contenidoPagina .= "</table>
+								</page >";
+							}
+						} else {
+							
+							if ($POSICIONES != false) {
+								
+								if ($POSICIONES [$i] == true) {
+									
+									$contenidoPagina .= "<td style='width:33.31%; height: 64px;text-align=center;border-spacing: 11px;'> </td><br>";
+									
+									$PLACASFALTANTES [] = "<td style='width:33.31%; height: 64px; text-align=center;border-spacing: 11px;'>UNIVERSIDAD DISTRITAL<BR>FRANCISCO JOSE DE CALDAS<BR><barcode type='CODABAR' value='" . $PLACASTOTALES [$i] . "' style='width:30mm; height:6mm; font-size: 2mm'></barcode>" . '   ' . "<img src='" . $directorio . "/css/images/escudo2.jpeg'  width='25' height='25'><br>Invetarios</td>";
+								} else {
+									
+									$contenidoPagina .= "<td style='width:33.31%; height: 64px; text-align=center;border-spacing: 11px;'>UNIVERSIDAD DISTRITAL<BR>FRANCISCO JOSE DE CALDAS<BR><barcode type='CODABAR' value='" . $PLACASTOTALES [$i] . "' style='width:30mm; height:6mm; font-size: 2mm'></barcode>" . '   ' . "<img src='" . $directorio . "/css/images/escudo2.jpeg'  width='25' height='25'><br>Invetarios</td>";
+								}
+								if ($contadorPosicion == 39) {
+									
+									$POSICIONES = false;
+								}
+								$contadorPosicion ++;
+							} else {
+								
+								$contenidoPagina .= "<td style='width:33.31%; height: 64px; text-align=center;border-spacing: 11px;'>UNIVERSIDAD DISTRITAL<BR>FRANCISCO JOSE DE CALDAS<BR><barcode type='CODABAR' value='" . $PLACASTOTALES [$i] . "' style='width:30mm; height:6mm; font-size: 2mm'></barcode>" . '   ' . "<img src='" . $directorio . "/css/images/escudo2.jpeg'  width='25' height='25'><br>Invetarios</td>";
+							}
+							
+							if ($contadorSaltoLinea == 3) {
+								
+								$contenidoPagina .= "</tr>";
+								$contadorSaltoLinea = 1;
+							} else {
+								$contadorSaltoLinea ++;
+							}
+							
+							$contadorPagina ++;
+							$iterador ++;
+						}
 					}
 					
-					if ($POSICIONES != false) {
+					echo $contenidoPagina;
+					exit ();
+				} else {
+					
+					$contenidoPagina .= "<page backtop='0mm' backbottom='0mm' backleft='0mm' backright='0mm'  pagegroup='new'>
+										<table style='width:100%;' cellpadding='1'>";
+					
+					foreach ( $PLACASTOTALES as $placaSencilla ) {
 						
-						if ($POSICIONES [$contadorPosicion] == true) {
+						if ($contadorSaltoLinea == 1) {
+							$contenidoPagina .= "<tr>";
+						}
+						
+						if ($POSICIONES != false) {
 							
-							$contenidoPagina .= "<td style='width:33.31%; height: 64px;text-align=center;border-spacing: 11px;'> </td><br>";
-							
-							$PLACASFALTANTES [] = "<td style='width:33.31%; height: 64px; text-align=center;border-spacing: 11px;'>UNIVERSIDAD DISTRITAL<BR>FRANCISCO JOSE DE CALDAS<BR><barcode type='CODABAR' value='" . $placaSencilla . "' style='width:30mm; height:6mm; font-size: 2mm'></barcode>" . '   ' . "<img src='" . $directorio . "/css/images/escudo2.jpeg'  width='25' height='25'><br>Invetarios</td>";
+							if ($POSICIONES [$contadorPosicion] == true) {
+								
+								$contenidoPagina .= "<td style='width:33.31%; height: 64px;text-align=center;border-spacing: 11px;'> </td><br>";
+								
+								$PLACASFALTANTES [] = "<td style='width:33.31%; height: 64px; text-align=center;border-spacing: 11px;'>UNIVERSIDAD DISTRITAL<BR>FRANCISCO JOSE DE CALDAS<BR><barcode type='CODABAR' value='" . $placaSencilla . "' style='width:30mm; height:6mm; font-size: 2mm'></barcode>" . '   ' . "<img src='" . $directorio . "/css/images/escudo2.jpeg'  width='25' height='25'><br>Invetarios</td>";
+							} else {
+								
+								$contenidoPagina .= "<td style='width:33.31%; height: 64px; text-align=center;border-spacing: 11px;'>UNIVERSIDAD DISTRITAL<BR>FRANCISCO JOSE DE CALDAS<BR><barcode type='CODABAR' value='" . $placaSencilla . "' style='width:30mm; height:6mm; font-size: 2mm'></barcode>" . '   ' . "<img src='" . $directorio . "/css/images/escudo2.jpeg'  width='25' height='25'><br>Invetarios</td>";
+							}
+							if ($contadorPosicion == 39) {
+								
+								$POSICIONES = false;
+							}
+							$contadorPosicion ++;
 						} else {
 							
 							$contenidoPagina .= "<td style='width:33.31%; height: 64px; text-align=center;border-spacing: 11px;'>UNIVERSIDAD DISTRITAL<BR>FRANCISCO JOSE DE CALDAS<BR><barcode type='CODABAR' value='" . $placaSencilla . "' style='width:30mm; height:6mm; font-size: 2mm'></barcode>" . '   ' . "<img src='" . $directorio . "/css/images/escudo2.jpeg'  width='25' height='25'><br>Invetarios</td>";
 						}
-						if ($contadorPosicion == 39) {
+						
+						if ($contadorSaltoLinea == 3) {
 							
-							$POSICIONES = false;
+							$contenidoPagina .= "</tr>";
+							$contadorSaltoLinea = 1;
+						} else {
+							$contadorSaltoLinea ++;
 						}
-						$contadorPosicion ++;
+						
+						$contadorPagina ++;
+						$iterador ++;
+					}
+					
+					$i = 1;
+					foreach ( $PLACASFALTANTES as $numero ) {
+						
+						$PLACASTOTALES [$i] = $numero;
+						$i ++;
+					}
+					
+					foreach ( $PLACASFALTANTES as $placaSencilla ) {
+						
+						if ($contadorSaltoLinea == 1) {
+							$contenidoPagina .= "<tr>";
+						}
+						
+						$contenidoPagina .= $placaSencilla;
+						
+						if ($contadorSaltoLinea == 3) {
+							
+							$contenidoPagina .= "</tr>";
+							$contadorSaltoLinea = 1;
+						} else {
+							$contadorSaltoLinea ++;
+						}
+						
+						$contadorPagina ++;
+						$iterador ++;
+					}
+					
+					if (($contadorSaltoLinea - 1) == 0) {
+						
+						$contenidoPagina .= "</table>
+								</page >";
+					} elseif (($contadorSaltoLinea - 1) < 3) {
+						
+						$contenidoPagina .= "</tr></table>
+								</page >";
 					} else {
 						
-						$contenidoPagina .= "<td style='width:33.31%; height: 64px; text-align=center;border-spacing: 11px;'>UNIVERSIDAD DISTRITAL<BR>FRANCISCO JOSE DE CALDAS<BR><barcode type='CODABAR' value='" . $placaSencilla . "' style='width:30mm; height:6mm; font-size: 2mm'></barcode>" . '   ' . "<img src='" . $directorio . "/css/images/escudo2.jpeg'  width='25' height='25'><br>Invetarios</td>";
-					}
-					
-					if ($contadorSaltoLinea == 3) {
-						
-						$contenidoPagina .= "</tr>";
-						$contadorSaltoLinea = 1;
-					} else {
-						$contadorSaltoLinea ++;
-					}
-					
-					$contadorPagina ++;
-					$iterador ++;
-				}
-				
-				$i = 1;
-				foreach ( $PLACASFALTANTES as $numero ) {
-					
-					$PLACASTOTALES [$i] = $numero;
-					$i ++;
-				}
-				
-				foreach ( $PLACASFALTANTES as $placaSencilla ) {
-					
-					if ($contadorSaltoLinea == 1) {
-						$contenidoPagina .= "<tr>";
-					}
-					
-					$contenidoPagina .= $placaSencilla;
-					
-					if ($contadorSaltoLinea == 3) {
-						
-						$contenidoPagina .= "</tr>";
-						$contadorSaltoLinea = 1;
-					} else {
-						$contadorSaltoLinea ++;
-					}
-					
-					$contadorPagina ++;
-					$iterador ++;
-				}
-				
-			if (($contadorSaltoLinea - 1) == 0) {
-					
-					$contenidoPagina .= "</table>
+						$contenidoPagina .= "</table>
 								</page >";
-				} elseif (($contadorSaltoLinea - 1) < 3) {
-					
-					$contenidoPagina .= "</tr></table>
-								</page >";
-				} 	else {
-					
-					$contenidoPagina .= "</table>
-								</page >";
+					}
 				}
 				
 				return $contenidoPagina;
 				
 				break;
 		}
-		
-		// $contador = 1;
-		// $salidacontador = 1;
-		// $salida = count ( $placas );
-		// $contadorposicion = 0;
-		
-		// foreach ( $placas as $p ) {
-		// if ($contador == 1) {
-		
-		// $contenidoPagina .= "<tr style='border-spacing: 11px;'>";
-		// }
-		// if ($arregloposiciones [$contadorposicion] == true) {
-		
-		//
-		// } else {
-		
-		// $contenidoPagina .= "<td style='width:33.31%; height: 64px; text-align=center;border-spacing: 11px;'>UNIVERSIDAD DISTRITAL<BR>FRANCISCO JOSE DE CALDAS<BR><barcode type='CODABAR' value='" . $p . "' style='width:30mm; height:6mm; font-size: 2mm'></barcode>" . ' ' . "<img src='" . $directorio . "/css/images/escudo2.jpeg' width='25' height='25'><br>Invetarios</td>";
-		// }
-		// if ($contador == 3) {
-		
-		// $contenidoPagina .= "</tr>";
-		// $contador = 0;
-		// }
-		// $contador ++;
-		
-		// if ($salida + 1 == $salidacontador) {
-		
-		// $contenidoPagina .= "</tr>";
-		// }
-		
-		// $salidacontador ++;
-		// $contadorposicion ++;
-		// }
-		
-		// $contenidoPagina .= "</table>";
-		
-		// $contenidoPagina .= "</page>";
-		
-		// echo $contenidoPagina;exit;
-		// return $contenidoPagina;
 	}
 }
 
