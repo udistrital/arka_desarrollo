@@ -167,26 +167,26 @@ class Sql extends \Sql {
 			case "consultarElemento" :
 				
 				$cadenaSql = "SELECT DISTINCT ";
-				$cadenaSql .= "id_elemento, placa,  ";
-				$cadenaSql .= "elemento.serie, elemento.fecha_registro,tipo_bienes.descripcion, estado_entrada,entrada.cierre_contable  ";
+				$cadenaSql .= "placa,  ";
+				$cadenaSql .= "elemento.serie, tipo_bienes.descripcion, elemento.fecha_registro  ";
 				$cadenaSql .= "FROM elemento ";
 				$cadenaSql .= "JOIN tipo_bienes ON tipo_bienes.id_tipo_bienes = elemento.tipo_bien ";
 				$cadenaSql .= "JOIN entrada ON entrada.id_entrada = elemento.id_entrada ";
 				$cadenaSql .= "JOIN elemento_individual ON elemento_individual.id_elemento_gen = elemento.id_elemento ";
 				$cadenaSql .= "WHERE 1=1 AND estado='TRUE' ";
-				if ($variable [0] != '') {
-					$cadenaSql .= " AND elemento.fecha_registro BETWEEN CAST ( '" . $variable [0] . "' AS DATE) ";
-					$cadenaSql .= " AND  CAST ( '" . $variable [1] . "' AS DATE)  ";
-				}
-				if ($variable [2] != '') {
-					$cadenaSql .= " AND elemento_individual.placa = '" . $variable [2] . "'";
-				}
-				if ($variable [3] != '') {
-					$cadenaSql .= " AND  elemento.serie= '" . $variable [3] . "'";
-				}
+// 				if ($variable [0] != '') {
+// 					$cadenaSql .= " AND elemento.fecha_registro BETWEEN CAST ( '" . $variable [0] . "' AS DATE) ";
+// 					$cadenaSql .= " AND  CAST ( '" . $variable [1] . "' AS DATE)  ";
+// 				}
+// 				if ($variable [2] != '') {
+// 					$cadenaSql .= " AND elemento_individual.placa = '" . $variable [2] . "' ";
+// 				}
+// 				if ($variable [3] != '') {
+// 					$cadenaSql .= " AND  elemento.serie= '" . $variable [3] . "' ";
+// 				}
 				
 				
-				
+				$cadenaSql.="LIMIT 10000";
 				
 				break;
 			
