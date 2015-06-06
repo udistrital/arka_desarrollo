@@ -81,11 +81,11 @@ class registrarForm {
 		)
 		;
 		
-		$cadenaSql = $this->miSql->getCadenaSql ( 'consultarElemento', $arreglo );
+// 		$cadenaSql = $this->miSql->getCadenaSql ( 'consultarElemento', $arreglo );
 		
 		
 		
-		$elementos = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
+// 		$elementos = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
 		
 		
 		// ---------------- SECCION: Parámetros Generales del Formulario ----------------------------------
@@ -157,9 +157,11 @@ class registrarForm {
 			<thead>
                 <tr>
                    <th>Placa</th>
+					<th>Placa</th>
                     <th>Serie</th>
                     <th>Tipo Bien</th>
 					<th>Fecha de Registro</th>
+				  
 			    </tr>
             </thead>
             </table>";

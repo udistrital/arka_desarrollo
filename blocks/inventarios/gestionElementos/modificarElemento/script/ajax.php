@@ -24,35 +24,30 @@ $cadena = $this->miConfigurador->fabricaConexiones->crypto->codificar_url ( $cad
 
 // URL definitiva
 $urlFinal = $url . $cadena;
-echo $urlFinal;
+// echo $urlFinal;
 ?>
 <script type='text/javascript'>
 $(function() {
+         	$('#tablaTitulos').ready(function() {
+        		
+         	    $('#tablaTitulos').dataTable( {
+         	    	  "bProcessing": true,
+         	    	  
+         	         "bServerSide": true,
+         	         "sAjaxSource":'<?php echo $urlFinal?>',
+         	         
+         	        "aoColumns": [
+         	                     { "mData": "engine" },
+         	                    { "mData": "browser" },
+         	                    { "mData": "platform" },
+         	                    { "mData": "version" },
+         	                    { "mData": "grade" }
+         	                    ]
+         	    } );
+         	    
 
-	$('#tablaTitulos').ready(function() {
-		
-    $('#tablaTitulos').dataTable( {
-    	 serverSide: true,
-    	 processing: false,
-         ordering: true,
-         searching: true,
-         ajax:"<?php echo $urlFinal?>",
-        
-         columns: [
-         { data :"placa" },
-         { data :"serie" },
-         { data :"descripcion" },
-         { data :"fecha_registro" }
-     ]
-        	    
+         		});
 
-
-
-
-             
-         } );
-
-	});
 });
 
 </script>

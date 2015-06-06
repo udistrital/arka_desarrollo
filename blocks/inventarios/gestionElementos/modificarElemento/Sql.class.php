@@ -168,7 +168,7 @@ class Sql extends \Sql {
 				
 				$cadenaSql = "SELECT DISTINCT ";
 				$cadenaSql .= "placa,  ";
-				$cadenaSql .= "elemento.serie, tipo_bienes.descripcion, elemento.fecha_registro  ";
+				$cadenaSql .= "elemento.serie, tipo_bienes.descripcion, elemento.fecha_registro as fecharegistro ";
 				$cadenaSql .= "FROM elemento ";
 				$cadenaSql .= "JOIN tipo_bienes ON tipo_bienes.id_tipo_bienes = elemento.tipo_bien ";
 				$cadenaSql .= "JOIN entrada ON entrada.id_entrada = elemento.id_entrada ";
@@ -186,7 +186,8 @@ class Sql extends \Sql {
 // 				}
 				
 				
-				$cadenaSql.="LIMIT 10000";
+				$cadenaSql.="LIMIT 1000 ";
+// 				echo $cadenaSql;
 				
 				break;
 			
