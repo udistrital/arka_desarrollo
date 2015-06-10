@@ -37,11 +37,10 @@ $(function() {
          	         "sAjaxSource":'<?php echo $urlFinal?>',
          	         
          	        "aoColumns": [
-         	                     { "mData": "engine" },
-         	                    { "mData": "browser" },
-         	                    { "mData": "platform" },
-         	                    { "mData": "version" },
-         	                    { "mData": "grade" }
+         	                    { "aaData": "placa" },
+         	                    { "aaData": "serie" },
+         	                    { "aaData": "descripcion" },
+         	                    { "aaData": "fecharegistro" }
          	                    ]
          	    } );
          	    

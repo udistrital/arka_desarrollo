@@ -157,12 +157,10 @@ class registrarForm {
 			<thead>
                 <tr>
                    <th>Placa</th>
-					<th>Placa</th>
-                    <th>Serie</th>
+					<th>Serie</th>
                     <th>Tipo Bien</th>
 					<th>Fecha de Registro</th>
-				  
-			    </tr>
+				  </tr>
             </thead>
             </table>";
 				
