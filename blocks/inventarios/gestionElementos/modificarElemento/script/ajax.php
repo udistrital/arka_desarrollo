@@ -30,21 +30,34 @@ $urlFinal = $url . $cadena;
 $(function() {
          	$('#tablaTitulos').ready(function() {
         		
-         	    $('#tablaTitulos').dataTable( {
-         	    	  "bProcessing": true,
-         	    	  
-         	         "bServerSide": true,
-         	         "sAjaxSource":'<?php echo $urlFinal?>',
-         	         
-         	        "aoColumns": [
-         	                    { "aaData": "placa" },
-         	                    { "aaData": "serie" },
-         	                    { "aaData": "descripcion" },
-         	                    { "aaData": "fecharegistro" }
-         	                    ]
-         	    } );
-         	    
 
+             $('#tablaTitulos').dataTable( {
+//              	 serverSide: true,
+             	 processing: true,
+//                   ordering: true,
+                  searching: true,
+//                   deferRender: true,
+//                   sScrollY: 200	,
+         //          bScrollCollapse: true,
+                  info:true,
+//                   lengthChange:true,
+                  paging: true,
+//                   stateSave: true,
+         //          renderer: "bootstrap",
+         //          retrieve: true,
+                  ajax:{
+                      url:"<?php echo $urlFinal?>",
+                      dataSrc:"data"                      
+                      
+                  },
+                  columns: [
+                  { data :"placa" },
+                  { data :"serie" },
+                  { data :"descripcion" },
+                  { data :"fecharegistro" }
+                            ]
+             });
+                  
          		});
 
 });

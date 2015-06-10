@@ -153,7 +153,7 @@ class registrarForm {
 //             </table>";
 			
 			
-			echo "<table id='tablaTitulos'>
+			echo "<table id='tablaTitulos' class='display'>
 			<thead>
                 <tr>
                    <th>Placa</th>

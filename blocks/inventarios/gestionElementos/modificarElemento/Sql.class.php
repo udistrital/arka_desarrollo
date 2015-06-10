@@ -186,7 +186,7 @@ class Sql extends \Sql {
 // 				}
 				
 				
-				$cadenaSql.="LIMIT 1000 ";
+// 				$cadenaSql.="LIMIT 73000 ";
 // 				echo $cadenaSql;
 				
 				break;

@@ -13,7 +13,9 @@ if ($_REQUEST ['funcion'] == 'Consulta') {
 	$resultado = json_encode ( $resultado );
 	
 	$resultado = '{
-			"aaData":' . $resultado . '}';
+                "recordsTotal":'.$total.',
+                "recordsFiltered":'.$total.',
+				"data":' . $resultado . '}';
 	
 	echo $resultado;
 }
