@@ -7,6 +7,11 @@
 // URL base
 $url = $this->miConfigurador->getVariableConfiguracion ( "host" );
 $url .= $this->miConfigurador->getVariableConfiguracion ( "site" );
+
+$urlDirectorio=$url;
+
+$urlDirectorio =$urlDirectorio."/plugin/scripts/javascript/dataTable/Spanish.json";
+
 $url .= "/index.php?";
 
 // Variables
@@ -58,6 +63,7 @@ $cadenaACodificar .= "&arreglo=" .$arreglo;
 $enlace = $this->miConfigurador->getVariableConfiguracion ( "enlace" );
 $cadena = $this->miConfigurador->fabricaConexiones->crypto->codificar_url ( $cadenaACodificar, $enlace );
 
+
 // URL definitiva
 $urlFinal = $url . $cadena;
 // echo $urlFinal;
@@ -68,11 +74,14 @@ $(function() {
 
              $('#tablaTitulos').dataTable( {
 //              	 serverSide: true,
+				 language: {
+					 url:"<?php echo $urlDirectorio?>",
+            				},
              	 processing: true,
 //                   ordering: true,
                   searching: true,
 //                   deferRender: true,
-//                   sScrollY: 200	,
+                  sScrollY: 200	,
          //          bScrollCollapse: true,
                   info:true,
 //                   lengthChange:true,

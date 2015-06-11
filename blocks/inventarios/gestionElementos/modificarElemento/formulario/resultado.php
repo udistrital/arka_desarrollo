@@ -170,13 +170,15 @@ class registrarForm {
 		$atributos ["leyenda"] = "Consultar y Modificar Elementos";
 		echo $this->miFormulario->marcoAgrupacion ( 'inicio', $atributos );
 			
-		echo "<table id='tablaTitulos' class='display'>
+		echo "<table id='tablaTitulos' class='cell-border'>
 			<thead>
                 <tr>
                    <th>Placa</th>
 					<th>Serie</th>
                     <th>Tipo Bien</th>
 					<th>Fecha de Registro</th>
+				 	<th>Modificar</th>
+					<th>Anular</th>
 				  </tr>
             </thead>
             </table>";
