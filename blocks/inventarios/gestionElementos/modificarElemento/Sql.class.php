@@ -174,21 +174,16 @@ class Sql extends \Sql {
 				$cadenaSql .= "JOIN entrada ON entrada.id_entrada = elemento.id_entrada ";
 				$cadenaSql .= "JOIN elemento_individual ON elemento_individual.id_elemento_gen = elemento.id_elemento ";
 				$cadenaSql .= "WHERE 1=1 AND estado='TRUE' ";
-// 				if ($variable [0] != '') {
-// 					$cadenaSql .= " AND elemento.fecha_registro BETWEEN CAST ( '" . $variable [0] . "' AS DATE) ";
-// 					$cadenaSql .= " AND  CAST ( '" . $variable [1] . "' AS DATE)  ";
-// 				}
-// 				if ($variable [2] != '') {
-// 					$cadenaSql .= " AND elemento_individual.placa = '" . $variable [2] . "' ";
-// 				}
-// 				if ($variable [3] != '') {
-// 					$cadenaSql .= " AND  elemento.serie= '" . $variable [3] . "' ";
-// 				}
-				
-				
-// 				$cadenaSql.="LIMIT 73000 ";
-// 				echo $cadenaSql;
-				
+				if ($variable [0] != '') {
+					$cadenaSql .= " AND elemento.fecha_registro BETWEEN CAST ( '" . $variable [0] . "' AS DATE) ";
+					$cadenaSql .= " AND  CAST ( '" . $variable [1] . "' AS DATE)  ";
+				}
+				if ($variable [2] != '') {
+					$cadenaSql .= " AND elemento_individual.placa = '" . $variable [2] . "' ";
+				}
+				if ($variable [3] != '') {
+					$cadenaSql .= " AND  elemento.serie= '" . $variable [3] . "' ";
+				}
 				break;
 			
 			case "consultarElementoParticular" :
@@ -236,8 +231,6 @@ class Sql extends \Sql {
 				$cadenaSql .= "WHERE tipo_bien='1';";
 				
 				break;
-			
-
 			
 			// SELECT id_elemento, fecha_registro, tipo_bien, descripcion, cantidad,
 			// unidad, valor, iva, ajuste, bodega, subtotal_sin_iva, total_iva,
@@ -474,19 +467,15 @@ class Sql extends \Sql {
 				}
 				
 				break;
-				
-		case "consultar_nivel_inventario" :
+			
+			case "consultar_nivel_inventario" :
 				
 				$cadenaSql = "SELECT elemento_id, elemento_padre||''|| elemento_codigo||' - '||elemento_nombre ";
 				$cadenaSql .= "FROM catalogo.catalogo_elemento ";
 				$cadenaSql .= "WHERE elemento_catalogo=1 ";
 				$cadenaSql .= "ORDER BY elemento_id DESC ;";
 				
-				
 				break;
-			
-				
-				
 		}
 		return $cadenaSql;
 	}
