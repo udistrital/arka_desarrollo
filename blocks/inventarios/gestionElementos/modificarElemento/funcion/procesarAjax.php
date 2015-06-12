@@ -4,75 +4,66 @@ use inventarios\gestionElementos\modificarElemento\Sql;
 $conexion = "inventarios";
 $esteRecursoDB = $this->miConfigurador->fabricaConexiones->getRecursoDB ( $conexion );
 
+$esteBloque = $this->miConfigurador->getVariableConfiguracion ( "esteBloque" );
+$directorio = $this->miConfigurador->getVariableConfiguracion ( "host" );
+$directorio .= $this->miConfigurador->getVariableConfiguracion ( "site" ) . "/index.php?";
+$directorio .= $this->miConfigurador->getVariableConfiguracion ( "enlace" );
+
+$rutaBloque = $this->miConfigurador->getVariableConfiguracion ( "host" );
+$rutaBloque .= $this->miConfigurador->getVariableConfiguracion ( "site" ) . "/blocks/";
+$rutaBloque .= $esteBloque ['grupo'] .'/'. $esteBloque ['nombre'];
+
+$miPaginaActual = $this->miConfigurador->getVariableConfiguracion ( 'pagina' );
+
+
 if ($_REQUEST ['funcion'] == 'Consulta') {
 	$arreglo = unserialize ( $_REQUEST ['arreglo'] );
 	$cadenaSql = $this->sql->getCadenaSql ( 'consultarElemento', $arreglo );
 	$resultado = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
 	
-	
-	$miPaginaActual = $this->miConfigurador->getVariableConfiguracion ( 'pagina' );
 
+	
 	for($i = 0; $i < count ( $resultado ); $i ++) {
 		$variable = "pagina=" . $miPaginaActual; // pendiente la pagina para modificar parametro
-		$variable .= "&id_elemento=" . $elementos [$i] [0];
+		$variable .= "&id_elemento=" . $resultado [$i] ['idelemento'];
 		$variable .= "&opcion=modificar";
 		$variable = $this->miConfigurador->fabricaConexiones->crypto->codificar_url ( $variable, $directorio );
-	
+		
 		$variable2 = "pagina=" . $miPaginaActual; // pendiente la pagina para modificar parametro
-		$variable2 .= "&id_elemento=" . $elementos [$i] [0];
+		$variable2 .= "&id_elemento=" . $resultado [$i] ['idelemento'];
 		$variable2 .= "&opcion=anular";
 		$variable2 = $this->miConfigurador->fabricaConexiones->crypto->codificar_url ( $variable2, $directorio );
-	
-		$anulacion=($elementos[$i][5]==2)?"<a href='" . $variable2. "'>
-                            <img src='" . $rutaBloque . "/css/images/anular.png' width='15px'>
-                        </a>":" " ;
-	
-	
-	
-	
-	
-		$mostrarHtml = "<tr>
-                    <td><center>" . $elementos [$i] [1] . "</center></td>
-                    <td><center>" . $elementos [$i] [2] . "</center></td>
-                    <td><center>" . $elementos [$i] [4] . "</center></td>
-                    <td><center>" . $elementos [$i] [3] . "</center></td>";
-	
-		if ($elementos [$i] [6] == 'f') {
-	
-			$mostrarHtml .= "<td><center>
-			                    	<a href='" . $variable . "'>
-			                            <img src='" . $rutaBloque . "/css/images/edit.png' width='15px'>
-			                        </a>
-                		  			</center> </td>
-			                         <td><center>
-                    					".$anulacion."
-                  						</center> </td>		";
-		} else if ($elementos [$i] [6] == 't') {
-	
-			$mostrarHtml .= "<td><center>Inhabilitado por Cierre Contable</center> </td>
-							         <td><center>Inhabilitado por Cierre Contable</center> </td> ";
+		
+
+		
+		if ($resultado [$i] ['cierrecontable'] == 'f') {
+			
+			$cierreContable = "<center><a href='" . $variable . "'><u>modificar</u></a></center> ";
+			$anulacion = ($resultado [$i] ['estadoentrada'] == 2) ? "<center><a href='" . $variable2 . "'><u>anular</u></a></center>" : " ";
 		}
-		$mostrarHtml .= "</tr>";
+		if ($resultado [$i] ['cierrecontable'] == 't') {
+			
+			$cierreContable = "<center>Inhabilitado por Cierre Contable</center>";
+			
+			$anulacion = "<center>Inhabilitado por Cierre Contable</center>";
+		}
+		
+		
+		$resultadoFinal[]=array(
+				'placa' =>"<center>".$resultado[$i]['placa']."</center>",
+				'serie'=>"<center>".$resultado[$i]['serie']."</center>",
+				'descripcion'=>"<center>".$resultado[$i]['descripcion']."</center>",
+				'fecharegistro'=>"<center>".$resultado[$i]['fecharegistro']."</center>",
+				'modificar'=>"<center>".$cierreContable,
+				'anular'=>"<center>".$anulacion
+					
+		);
+	}
+		
 	
+	$total = count ( $resultadoFinal );
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	$total = count ( $resultado );
-	
-	$resultado = json_encode ( $resultado );
+	$resultado = json_encode ( $resultadoFinal );
 	
 	$resultado = '{
                 "recordsTotal":' . $total . ',

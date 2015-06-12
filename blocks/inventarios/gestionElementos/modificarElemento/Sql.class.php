@@ -168,7 +168,7 @@ class Sql extends \Sql {
 				
 				$cadenaSql = "SELECT DISTINCT ";
 				$cadenaSql .= "placa,  ";
-				$cadenaSql .= "elemento.serie, tipo_bienes.descripcion, elemento.fecha_registro as fecharegistro ";
+				$cadenaSql .= "elemento.serie, tipo_bienes.descripcion, elemento.fecha_registro as fecharegistro, id_elemento as idelemento, estado_entrada as estadoentrada, entrada.cierre_contable as cierrecontable ";
 				$cadenaSql .= "FROM elemento ";
 				$cadenaSql .= "JOIN tipo_bienes ON tipo_bienes.id_tipo_bienes = elemento.tipo_bien ";
 				$cadenaSql .= "JOIN entrada ON entrada.id_entrada = elemento.id_entrada ";
@@ -184,6 +184,10 @@ class Sql extends \Sql {
 				if ($variable [3] != '') {
 					$cadenaSql .= " AND  elemento.serie= '" . $variable [3] . "' ";
 				}
+// 				$cadenaSql .= "LIMIT 50000 ";
+				
+				
+				
 				break;
 			
 			case "consultarElementoParticular" :

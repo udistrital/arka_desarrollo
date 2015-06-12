@@ -74,9 +74,9 @@ $(function() {
 
              $('#tablaTitulos').dataTable( {
 //              	 serverSide: true,
-				 language: {
-					 url:"<?php echo $urlDirectorio?>",
-            				},
+				language: {
+                url: "<?php echo $urlDirectorio?>"
+            			},
              	 processing: true,
 //                   ordering: true,
                   searching: true,
@@ -97,7 +97,9 @@ $(function() {
                   { data :"placa" },
                   { data :"serie" },
                   { data :"descripcion" },
-                  { data :"fecharegistro" }
+                  { data :"fecharegistro" },
+                  { data :"modificar" },
+                  { data :"anular" }
                             ]
              });
                   

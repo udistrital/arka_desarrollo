@@ -49,37 +49,7 @@ class registrarForm {
 		$conexion = "inventarios";
 		$esteRecursoDB = $this->miConfigurador->fabricaConexiones->getRecursoDB ( $conexion );
 		
-		if (isset ( $_REQUEST ['fecha_inicio'] ) && $_REQUEST ['fecha_inicio'] != '') {
-			$fechaInicio = $_REQUEST ['fecha_inicio'];
-		} else {
-			$fechaInicio = '';
-		}
-		
-		if (isset ( $_REQUEST ['fecha_final'] ) && $_REQUEST ['fecha_final'] != '') {
-			$fechaFinal = $_REQUEST ['fecha_final'];
-		} else {
-			$fechaFinal = '';
-		}
-		
-		if (isset ( $_REQUEST ['placa'] ) && $_REQUEST ['placa'] != '') {
-			$placa = $_REQUEST ['placa'];
-		} else {
-			$placa = '';
-		}
-		
-		if (isset ( $_REQUEST ['serie1'] ) && $_REQUEST ['serie1'] != '') {
-			$serie = $_REQUEST ['serie1'];
-		} else {
-			$serie = '';
-		}
-		
-		$arreglo = array (
-				$fechaInicio,
-				$fechaFinal,
-				$placa,
-				$serie 
-		);
-		
+
 
 		// ---------------- SECCION: Parámetros Generales del Formulario ----------------------------------
 		$esteCampo = $esteBloque ['nombre'];
