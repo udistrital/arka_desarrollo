@@ -43,86 +43,98 @@ if ($_REQUEST ['funcion'] == 'Consulta') {
 	 */
 	
 	// DB table to use
-	$table = 'arka_inventarios.elemento el';
-
+	$table = 'arka_inventarios.elemento ';
+	
 	// Table's primary key
 	$primaryKey = 'id_elemento';
 	
-	
 	// DB JOINS
-	$join[] = "JOIN arka_inventarios.tipo_bienes tb ON tb.id_tipo_bienes = el.tipo_bien ";
-	$join[] = "JOIN arka_inventarios.entrada en ON en.id_entrada = el.id_entrada ";
-	$join[] = "JOIN arka_inventarios.elemento_individual ei ON ei.id_elemento_gen = el.id_elemento ";
+	$join [] = " JOIN arka_inventarios.tipo_bienes  ON tipo_bienes.id_tipo_bienes = elemento.tipo_bien ";
+	$join [] = " JOIN arka_inventarios.entrada  ON entrada.id_entrada = elemento.id_entrada ";
+	$join [] = " JOIN arka_inventarios.elemento_individual  ON elemento_individual.id_elemento_gen = elemento.id_elemento ";
 	
-
+	$join = implode ( " ", $join );
 	
 	// DB WHERE
-	
 	
 	$arreglo = unserialize ( $_REQUEST ['arreglo'] );
 	
 	if ($arreglo ['fecha_inicio'] != '') {
-		$where[]= "el.fecha_registro BETWEEN CAST ( '" . $arreglo ['fecha_inicio'] . "' AS DATE) AND  CAST ( '" . $arreglo ['fecha_final'] . "' AS DATE)  ";
+		$where [] = "elemento.fecha_registro BETWEEN CAST ( '" . $arreglo ['fecha_inicio'] . "' AS DATE) AND  CAST ( '" . $arreglo ['fecha_final'] . "' AS DATE)  ";
+	} else {
+		$where [] = '1=1';
 	}
 	if ($arreglo ['placa'] != '') {
-		$where[]= "ei.placa = '" . $arreglo ['placa'] . "' ";
+		$where [] = "elemento_individual.placa = '" . $arreglo ['placa'] . "' ";
+	} else {
+		
+		$where [] = '1=1';
 	}
 	if ($arreglo ['serie'] != '') {
-		$where[]= "el.serie= '" . $arreglo ['serie'] . "' ";
+		$where [] = "elemento.serie= '" . $arreglo ['serie'] . "' ";
+	} else {
+		
+		$where [] = '1=1';
 	}
 	
+	$where = implode ( " AND ", $where );
 	
-
+	if ($arreglo ['fecha_inicio'] == '' && $arreglo ['placa'] == '' && $arreglo ['serie'] == '') {
+		$where = '';
+	}
+	
 	// Array of database columns which should be read and sent back to DataTables.
 	// The `db` parameter represents the column name in the database, while the `dt`
 	// parameter represents the DataTables column identifier. In this case simple
 	// indexes
 	$columns = array (
 			array (
-					'db' => 'ei.placa',
-					'dt' => 'placa' 
+					'db' => 'elemento_individual.placa',
+					'dt' => 0
 			),
 			array (
-					'db' => 'el.serie',
-					'dt' => 'serie' 
+					'db' => 'elemento.serie',
+					'dt' => 1 
 			),
 			array (
-					'db' => 'tb.descripcion',
-					'dt' => 'descripcion' 
+					'db' => 'tipo_bienes.descripcion',
+					'dt' => 2
 			),
 			array (
-					'db' => 'el.fecha_registro',
-					'dt' => 'fecha_registro' 
+					'db' => 'elemento.fecha_registro',
+					'dt' => 3
 			),
 			array (
-					'db' => 'el.id_elemento',
-					'dt' => 'id_elemento' 
+					'db' => 'elemento.id_elemento',
+					'dt' => 4
 			),
 			array (
-					'db' => 'en.estado_entrada',
-					'dt' => 'estado_entrada' 
+					'db' => 'entrada.estado_entrada',
+					'dt' => 5 
 			),
 			array (
-					'db' => 'en.cierre_contable',
-					'dt' => 'cierre_contable' 
+					'db' => 'entrada.cierre_contable',
+					'dt' => 6 
 			) 
 	);
 	
+// 	var_dump($esteRecursoDB);exit;
 	// SQL server connection information
 	$sql_details = array (
-			'user' => $esteRecursoDB ['usuario'],
-			'pass' => $esteRecursoDB ['clave'],
-			'db' => $esteRecursoDB ['db'],
-			'host' => $esteRecursoDB ['servidor'] 
+			'user' => $esteRecursoDB-> usuario,
+			'pass' => $esteRecursoDB->clave,
+			'db' => $esteRecursoDB->db,
+			'host' => $esteRecursoDB->servidor 
 	);
 	
+// 	var_dump($sql_details);exit;
 	/*
 	 * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 	 * If you just want to use the basic configuration for DataTables with PHP
 	 * server-side, there is no need to edit below this line.
 	 */
 	
-	echo json_encode ( SSP::simple ( $_GET, $sql_details, $table, $primaryKey, $columns ) );
+	echo json_encode ( SSP::simple ( $_GET, $sql_details, $table, $primaryKey, $columns,$join,$where ) );
 }
 
 ?>

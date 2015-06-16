@@ -70,9 +70,9 @@ $urlFinal = $url . $cadena;
 ?>
 <script type='text/javascript'>
 $(function() {
-         	$('#tablaTitusdflos').ready(function() {
+         	$('#tablaTitulos').ready(function() {
 
-             $('#tablaTitulsdfos').dataTable( {
+             $('#tablaTitulos').dataTable( {
              	serverSide: true,
 				language: {
                 url: "<?php echo $urlDirectorio?>"
