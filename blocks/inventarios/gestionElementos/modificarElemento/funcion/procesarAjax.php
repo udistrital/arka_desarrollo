@@ -44,21 +44,35 @@ if ($_REQUEST ['funcion'] == 'Consulta') {
 	
 	// DB table to use
 	$table = 'arka_inventarios.elemento el';
-	
-	// DB table to use
-	$join1 = "JOIN arka_inventarios.tipo_bienes tb ON tb.id_tipo_bienes = el.tipo_bien ";
-	$join2 = "JOIN arka_inventarios.entrada en ON en.id_entrada = el.id_entrada ";
-	$join3 = "JOIN arka_inventarios.elemento_individual ei ON ei.id_elemento_gen = el.id_elemento ";
-	
-	$joins = array (
-			$join1,
-			$join2,
-			$join3 
-	);
-	
+
 	// Table's primary key
 	$primaryKey = 'id_elemento';
 	
+	
+	// DB JOINS
+	$join[] = "JOIN arka_inventarios.tipo_bienes tb ON tb.id_tipo_bienes = el.tipo_bien ";
+	$join[] = "JOIN arka_inventarios.entrada en ON en.id_entrada = el.id_entrada ";
+	$join[] = "JOIN arka_inventarios.elemento_individual ei ON ei.id_elemento_gen = el.id_elemento ";
+	
+
+	
+	// DB WHERE
+	
+	
+	$arreglo = unserialize ( $_REQUEST ['arreglo'] );
+	
+	if ($arreglo ['fecha_inicio'] != '') {
+		$where[]= "el.fecha_registro BETWEEN CAST ( '" . $arreglo ['fecha_inicio'] . "' AS DATE) AND  CAST ( '" . $arreglo ['fecha_final'] . "' AS DATE)  ";
+	}
+	if ($arreglo ['placa'] != '') {
+		$where[]= "ei.placa = '" . $arreglo ['placa'] . "' ";
+	}
+	if ($arreglo ['serie'] != '') {
+		$where[]= "el.serie= '" . $arreglo ['serie'] . "' ";
+	}
+	
+	
+
 	// Array of database columns which should be read and sent back to DataTables.
 	// The `db` parameter represents the column name in the database, while the `dt`
 	// parameter represents the DataTables column identifier. In this case simple

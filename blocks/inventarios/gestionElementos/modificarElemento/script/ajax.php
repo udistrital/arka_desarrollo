@@ -48,10 +48,10 @@ if (isset ( $_REQUEST ['serie1'] ) && $_REQUEST ['serie1'] != '') {
 }
 
 $arreglo = array (
-		$fechaInicio,
-		$fechaFinal,
-		$placa,
-		$serie 
+		"fecha_inicio"=>$fechaInicio,
+		"fecha_final"=>$fechaFinal,
+		"placa"=>$placa,
+		"serie"=>$serie 
 );
 
 $arreglo = serialize ( $arreglo );
@@ -70,37 +70,16 @@ $urlFinal = $url . $cadena;
 ?>
 <script type='text/javascript'>
 $(function() {
-         	$('#tablaTitulos').ready(function() {
+         	$('#tablaTitusdflos').ready(function() {
 
-             $('#tablaTitulos').dataTable( {
-//              	 serverSide: true,
+             $('#tablaTitulsdfos').dataTable( {
+             	serverSide: true,
 				language: {
                 url: "<?php echo $urlDirectorio?>"
             			},
-             	 processing: true,
-//                   ordering: true,
-                  searching: true,
-//                   deferRender: true,
-                  sScrollY: 200	,
-         //          bScrollCollapse: true,
-                  info:true,
-//                   lengthChange:true,
-                  paging: true,
-//                   stateSave: true,
-         //          renderer: "bootstrap",
-         //          retrieve: true,
-                  ajax:{
-                      url:"<?php echo $urlFinal?>",
-                      dataSrc:"data"                                                                  
-                  },
-                  columns: [
-                  { data :"placa" },
-                  { data :"serie" },
-                  { data :"descripcion" },
-                  { data :"fecharegistro" },
-                  { data :"modificar" },
-                  { data :"anular" }
-                            ]
+             	processing: true,
+                ajax:"<?php echo $urlFinal?>",
+                  
              });
                   
          		});

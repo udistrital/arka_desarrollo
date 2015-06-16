@@ -49,7 +49,7 @@ class registrarForm {
 		$conexion = "inventarios";
 		$esteRecursoDB = $this->miConfigurador->fabricaConexiones->getRecursoDB ( $conexion );
 		
-
+		var_dump($esteRecursoDB);exit;
 
 		// ---------------- SECCION: Parámetros Generales del Formulario ----------------------------------
 		$esteCampo = $esteBloque ['nombre'];
@@ -147,8 +147,9 @@ class registrarForm {
 					<th>Serie</th>
                     <th>Tipo Bien</th>
 					<th>Fecha de Registro</th>
-				 	<th>Modificar</th>
-					<th>Anular</th>
+				 	<th>Identificador Elemento</th>
+					<th>Estado Entrada </th>
+					<th>Cierre Contable</th>
 				  </tr>
             </thead>
             </table>";

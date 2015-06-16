@@ -184,7 +184,7 @@ class Sql extends \Sql {
 				if ($variable [3] != '') {
 					$cadenaSql .= " AND  elemento.serie= '" . $variable [3] . "' ";
 				}
-// 				$cadenaSql .= "LIMIT 50000 ";
+				$cadenaSql .= "LIMIT 1000 ";	
 				
 				
 				
