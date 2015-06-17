@@ -31,44 +31,43 @@ class SSP {
 	 * @return array Formatted data in a row based format
 	 */
 	static function data_output($columns, $data) {
-// 		var_dump($columns);
-// 		var_dump($data);exit;
+		// var_dump($columns);
+		// var_dump($data);exit;
 		$out = array ();
 		
-		foreach ($data as $key =>$values){
-	
-				$row = array ();
-					
-				for($j = 0, $jen = count ( $columns ); $j < $jen; $j ++) {
-					$column = $columns [$j];
+		foreach ( $data as $key => $values ) {
 			
-					// Is there a formatter?
-					if (isset ( $column ['formatter'] )) {
-						$row [$column ['dt']] = $column ['formatter'] ( $data [$key] [$column ['db']], $data [$key] );
-					} else {
-						$row [$column ['dt']] = $data [$key] [$columns [$j] ['dt']];
-					}
-				}
-					
-				$out [] = $row;
+			$row = array ();
 			
-}
-// 		for($i = 0, $ien = count ( $data ); $i < $ien; $i ++) {
-// 			$row = array ();
-			
-// 			for($j = 0, $jen = count ( $columns ); $j < $jen; $j ++) {
-// 				$column = $columns [$j];
+			for($j = 0, $jen = count ( $columns ); $j < $jen; $j ++) {
+				$column = $columns [$j];
 				
-// 				// Is there a formatter?
-// 				if (isset ( $column ['formatter'] )) {
-// 					$row [$column ['dt']] = $column ['formatter'] ( $data [$i] [$column ['db']], $data [$i] );
-// 				} else {
-// 					$row [$column ['dt']] = $data [$i] [$columns [$j] ['dt']];
-// 				}
-// 			}
+				// Is there a formatter?
+				if (isset ( $column ['formatter'] )) {
+					$row [$column ['dt']] = $column ['formatter'] ( $data [$key] [$column ['db']], $data [$key] );
+				} else {
+					$row [$column ['dt']] = $data [$key] [$columns [$j] ['dt']];
+				}
+			}
 			
-// 			$out [] = $row;
-// 		}
+			$out [] = $row;
+		}
+		// for($i = 0, $ien = count ( $data ); $i < $ien; $i ++) {
+		// $row = array ();
+		
+		// for($j = 0, $jen = count ( $columns ); $j < $jen; $j ++) {
+		// $column = $columns [$j];
+		
+		// // Is there a formatter?
+		// if (isset ( $column ['formatter'] )) {
+		// $row [$column ['dt']] = $column ['formatter'] ( $data [$i] [$column ['db']], $data [$i] );
+		// } else {
+		// $row [$column ['dt']] = $data [$i] [$columns [$j] ['dt']];
+		// }
+		// }
+		
+		// $out [] = $row;
+		// }
 		
 		return $out;
 	}
@@ -174,7 +173,7 @@ class SSP {
 	 *        	sql_exec() function
 	 * @return string SQL where clause
 	 */
-	static function filter($request, $columns, &$bindings) {
+	static function filter($request, $columns, &$bindings, $myWhere) {
 		$globalSearch = array ();
 		$columnSearch = array ();
 		$dtColumns = self::pluck ( $columns, 'dt' );
@@ -221,6 +220,16 @@ class SSP {
 		
 		if ($where !== '') {
 			$where = 'WHERE ' . $where;
+			
+			// add my clause
+			if ($myWhere !== '') {
+				$where .= ' AND ' . $myWhere;
+			}
+		}
+		
+		if ($where == '' && $myWhere !== '') {
+			// add my clause
+			$where = 'WHERE ' . $myWhere;
 		}
 		
 		return $where;
@@ -266,7 +275,6 @@ class SSP {
 		$psql = "SELECT " . implode ( ", ", SSP::pluck ( $columns, 'db' ) ) . ", count(*) OVER() AS total_count
 	         FROM " . $table . $myJoin . $where . $order . $limit;
 		
-			
 		$data = SSP::sql_exec ( $db, $bindings, $psql );
 		
 		// Data set length after filtering
@@ -292,7 +300,8 @@ class SSP {
 				"draw" => intval ( $request ['draw'] ),
 				"recordsTotal" => intval ( $recordsTotal ),
 				"recordsFiltered" => intval ( $recordsFiltered ),
-				"data" => self::data_output ( $columns, $data ) 
+				"data" => self::data_output ( $columns, $data ),
+				"sql" => $psql 
 		);
 	}
 	
