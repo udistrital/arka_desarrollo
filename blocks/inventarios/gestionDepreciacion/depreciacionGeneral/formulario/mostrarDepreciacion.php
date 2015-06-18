@@ -52,6 +52,7 @@ class registrarForm {
         $conexion = "sicapital";
         $esteRecursoDBO = $this->miConfigurador->fabricaConexiones->getRecursoDB($conexion);
 
+        $tab = 1;
 
         $total_valorhistorico = 0;
         $total_ajusteinflacion = 0;
@@ -89,133 +90,142 @@ class registrarForm {
         $cadenaSql = $this->miSql->getCadenaSql('mostrarInfoDepreciar_elemento', $datos);
         $elementoG = $esteRecursoDB->ejecutarAcceso($cadenaSql, "busqueda");
 
-        $arr = array();
-        foreach ($elementoG as $key => $item) {
-            $arr[$item['grupo_cuentasalida']][$key] = $item;
-        }
-
-
-        $a = 0;
-// Calculando la depreciacion
-        foreach ($arr as $llave => $items) {
-
-            $count = 0;
-            foreach ($items as $key => $values) {
-
-                $cadenaSql = $this->miSql->getCadenaSql('mostrarInfoDepreciar_elementoindividual', $items[$key][0]);
-                $elemento = $esteRecursoDB->ejecutarAcceso($cadenaSql, "busqueda");
-
-                $cantidad = 1;
-                $meses = $elemento[0]['grupo_vidautil'];
-                $precio = $elemento[0]['valor'];
-                $inflacion = $elemento[0]['ajuste_inflacionario'];
-
-                $fecha_salida = new \DateTime($elemento[0]['fecha_registro']);
-                $fecha_corte = new \DateTime($_REQUEST['fechaCorte']);
-
-                $periodos = $fecha_corte->diff($fecha_salida);
-                $meses_periodo = $periodos->format("%m");
-                $años_periodo = $periodos->format("%y") * 12;
-
-                $periodos_fecha1 = $meses_periodo + $años_periodo;
-
-                $valor_historico = $precio * $cantidad;
-                $valor_ajustado = $valor_historico + $inflacion;
-
-
-
-//Valor de la Cuota
-                if ($meses == 0) {
-                    $cuota = 0;
-                    $periodos_fecha = 0;
-                } else {
-                    $cuota = $valor_historico / $meses;
-                    $periodos_fecha = $periodos_fecha1;
-                }
-
-
-//DEPRECIACION AUMULADA
-                if ($meses !== 0) {
-                    if ($periodos_fecha >= $meses) {
-
-                        $dep_acumulada = $valor_historico;
-                    } else {
-                        $dep_acumulada = $cuota * $periodos_fecha;
-                    }
-                } else {
-                    $dep_acumulada = 0;
-                }
-
-//CIRCULAR 56
-                $circular56 = $valor_historico + $inflacion;
-
-
-//CUOTAS AJUSTES POR INFLACION 
-                if ($meses == 0) {
-                    $cuota_inflacion = 0;
-                } else {
-                    $cuota_inflacion = $inflacion / $meses;
-                }
-
-//AJUSTE POR INFLACION A LA DEPRECIACION ACUMULADA
-                if ($meses !== 0) {
-                    if ($periodos_fecha >= $meses) {
-                        $api_acumulada = $inflacion;
-                    } else {
-                        $api_acumulada = $cuota_inflacion * $periodos_fecha;
-                    }
-                } else {
-                    $api_acumulada = 0;
-                }
-
-
-//CIRCULAR 56 - DEPRECIACIÓN
-                $circular_depreciacion = $api_acumulada + $dep_acumulada;
-
-//VALOR A LOS LIBROS
-                $valor_libros = $valor_ajustado - $circular_depreciacion;
-
-
-
-                //totalizar los valores de los elementos
-                $total_valorhistorico = $total_valorhistorico + $valor_historico;
-                $total_ajusteinflacion = $total_ajusteinflacion + $inflacion;
-                $total_valorajustado = $total_valorajustado + $valor_ajustado;
-                $total_depreciacion = $total_depreciacion + $dep_acumulada;
-                $total_api = $total_api + $api_acumulada;
-                $total_dep56 = $total_dep56 + $circular_depreciacion;
-                $total_libros = $total_libros + $valor_libros;
-                $nombre_cuenta = $elemento[0]['elemento_nombre'];
-                $count ++;
+        if ($elementoG) {
+            $arr = array();
+            foreach ($elementoG as $key => $item) {
+                $arr[$item['grupo_cuentasalida']][$key] = $item;
             }
 
 
-            $depreciacion_calculada[$a] = array(
-                0 => $llave,
-                'cuenta' => $llave,
-                1 => $nombre_cuenta,
-                'grupo' => $nombre_cuenta,
-                2 => $count,
-                'total_elementos' => $count,
-                3 => $total_valorhistorico,
-                'total_valor_historico' => $total_valorhistorico,
-                4 => $total_ajusteinflacion,
-                'total_ajuste_inflacion' => $total_ajusteinflacion,
-                5 => $total_valorajustado,
-                'total_valor_ajustado' => $total_valorajustado,
-                6 => $total_depreciacion,
-                'total_depreciacion' => $total_depreciacion,
-                7 => $total_api,
-                'total_ajuste_inflacionario' => $total_api,
-                8 => $total_depreciacion,
-                'total_depreciacion_circular56' => $total_dep56,
-                9 => $total_libros,
-                'total_libros' => $total_libros,
-            );
+            $a = 0;
+            $cuota_inflacion = 0;
+// Calculando la depreciacion
+            foreach ($arr as $llave => $items) {
 
-            $a++;
+                $count = 0;
+                foreach ($items as $key => $values) {
+
+                    $cadenaSql = $this->miSql->getCadenaSql('mostrarInfoDepreciar_elementoindividual', $items[$key][0]);
+                    $elemento = $esteRecursoDB->ejecutarAcceso($cadenaSql, "busqueda");
+
+                    $cantidad = 1;
+                    $meses = $elemento[0]['grupo_vidautil'];
+                    $precio = $elemento[0]['valor'];
+                    $inflacion = doubleval($elemento[0]['ajuste_inflacionario']);
+
+                    $fecha_salida = new \DateTime($elemento[0]['fecha_registro']);
+                    $fecha_corte = new \DateTime($_REQUEST['fechaCorte']);
+                    $fecha_limite = new \DateTime('1999-12-31');
+
+                    $periodos = $fecha_corte->diff($fecha_salida);
+                    $meses_periodo = $periodos->format("%m");
+                    $años_periodo = $periodos->format("%y") * 12;
+
+                    $periodos_fecha1 = $meses_periodo + $años_periodo + 1;
+
+                    $valor_historico = $precio * $cantidad;
+
+                    if ($fecha_salida <= $fecha_limite) {
+                        $valor_ajustado = $valor_historico + $inflacion;
+                    } else {
+                        $valor_ajustado = 0;
+                    }
+
+//Valor de la Cuota
+                    if ($meses == 0) {
+                        $cuota = 0;
+                        $periodos_fecha = 0;
+                    } else {
+                        $cuota = $valor_historico / $meses;
+                        $periodos_fecha = $periodos_fecha1;
+                    }
+
+
+//DEPRECIACION AUMULADA
+                    if ($meses !== 0) {
+                        if ($periodos_fecha >= $meses) {
+
+                            $dep_acumulada = $valor_historico;
+                        } else {
+                            $dep_acumulada = $cuota * $periodos_fecha;
+                        }
+                    } else {
+                        $dep_acumulada = 0;
+                    }
+
+//CIRCULAR 56
+                    $circular56 = $valor_historico + $inflacion;
+
+//CUOTAS AJUSTES POR INFLACION 
+                    if ($meses == 0) {
+                        $cuota_inflacion = 0;
+                    } else {
+                        if ($inflacion > 0) {
+                            $cuota_inflacion = $inflacion / $meses;
+                        } else {
+                            $cuota_inflacion = 0;
+                        }
+                    }
+
+//AJUSTE POR INFLACION A LA DEPRECIACION ACUMULADA
+                    if ($meses !== 0) {
+                        if ($periodos_fecha >= $meses) {
+                            $api_acumulada = $inflacion;
+                        } else {
+                            $api_acumulada = $cuota_inflacion * $periodos_fecha;
+                        }
+                    } else {
+                        $api_acumulada = 0;
+                    }
+
+
+//CIRCULAR 56 - DEPRECIACIÓN
+                    $circular_depreciacion = $api_acumulada + $dep_acumulada;
+
+//VALOR A LOS LIBROS
+                    $valor_libros = $circular_depreciacion - $valor_ajustado;
+
+
+
+                    //totalizar los valores de los elementos
+                    $total_valorhistorico = $total_valorhistorico + $valor_historico;
+                    $total_ajusteinflacion = $total_ajusteinflacion + $inflacion;
+                    $total_valorajustado = $total_valorajustado + $valor_ajustado;
+                    $total_depreciacion = $total_depreciacion + $dep_acumulada;
+                    $total_api = $total_api + $api_acumulada;
+                    $total_dep56 = $total_dep56 + $circular_depreciacion;
+                    $total_libros = $total_libros + $valor_libros;
+                    $nombre_cuenta = $elemento[0]['elemento_nombre'];
+                    $count ++;
+                }
+
+
+                $depreciacion_calculada[$a] = array(
+                    0 => $llave,
+                    'cuenta' => $llave,
+                    1 => $nombre_cuenta,
+                    'grupo' => $nombre_cuenta,
+                    2 => $count,
+                    'total_elementos' => $count,
+                    3 => $total_valorhistorico,
+                    'total_valor_historico' => $total_valorhistorico,
+                    4 => $total_ajusteinflacion,
+                    'total_ajuste_inflacion' => $total_ajusteinflacion,
+                    5 => $total_valorajustado,
+                    'total_valor_ajustado' => $total_valorajustado,
+                    6 => $total_depreciacion,
+                    'total_depreciacion' => $total_depreciacion,
+                    7 => $total_api,
+                    'total_ajuste_inflacionario' => $total_api,
+                    8 => $total_depreciacion,
+                    'total_depreciacion_circular56' => $total_dep56,
+                    9 => $total_libros,
+                    'total_libros' => $total_libros,
+                );
+
+                $a++;
+            }
         }
-
         // ---------------- SECCION: Parámetros Globales del Formulario ----------------------------------
         /**
          * Atributos que deben ser aplicados a todos los controles de este formulario.
@@ -239,7 +249,7 @@ class registrarForm {
         // Si no se coloca, entonces toma el valor predeterminado.
         $atributos ['estilo'] = '';
         $atributos ['marco'] = true;
-        $tab = 1;
+
         // ---------------- FIN SECCION: de Parámetros Generales del Formulario ----------------------------
         // ----------------INICIAR EL FORMULARIO ------------------------------------------------------------
         $atributos ['tipoEtiqueta'] = 'inicio';
@@ -271,7 +281,7 @@ class registrarForm {
         $atributos ["leyenda"] = "Depreciación General Realizada a Fecha de Corte " . $_REQUEST['fechaCorte'];
         echo $this->miFormulario->marcoAgrupacion('inicio', $atributos);
 
-        if ($depreciacion_calculada) {
+        if ($elementoG) {
             //Aquí genera la tabla !!!! :D
 
             echo $this->miFormulario->tablaReporte($depreciacion_calculada);

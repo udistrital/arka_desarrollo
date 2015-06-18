@@ -1,136 +1,76 @@
 <?php
-use inventarios\gestionCompras\registrarOrdenCompra\Sql;
-
+use inventarios\gestionElementos\modificarElemento\Sql;
 
 $conexion = "inventarios";
 $esteRecursoDB = $this->miConfigurador->fabricaConexiones->getRecursoDB ( $conexion );
 
-if ($_REQUEST ['funcion'] == 'tablaItems') {
-	$tabla = new stdClass ();
+$esteBloque = $this->miConfigurador->getVariableConfiguracion ( "esteBloque" );
+$directorio = $this->miConfigurador->getVariableConfiguracion ( "host" );
+$directorio .= $this->miConfigurador->getVariableConfiguracion ( "site" ) . "/index.php?";
+$directorio .= $this->miConfigurador->getVariableConfiguracion ( "enlace" );
+
+$rutaBloque = $this->miConfigurador->getVariableConfiguracion ( "host" );
+$rutaBloque .= $this->miConfigurador->getVariableConfiguracion ( "site" ) . "/blocks/";
+$rutaBloque .= $esteBloque ['grupo'] .'/'. $esteBloque ['nombre'];
+
+$miPaginaActual = $this->miConfigurador->getVariableConfiguracion ( 'pagina' );
+
+
+if ($_REQUEST ['funcion'] == 'Consulta') {
+	$arreglo = unserialize ( $_REQUEST ['arreglo'] );
+	$cadenaSql = $this->sql->getCadenaSql ( 'consultarElemento', $arreglo );
+	$resultado = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
 	
-	$page = $_GET ['page'];
+
 	
-	$limit = $_GET ['rows'];
-	
-	$sidx = $_GET ['sidx'];
-	
-	$sord = $_GET ['sord'];
-	
-	if (! $sidx)
-		$sidx = 1;
+	for($i = 0; $i < count ( $resultado ); $i ++) {
+		$variable = "pagina=" . $miPaginaActual; // pendiente la pagina para modificar parametro
+		$variable .= "&id_elemento=" . $resultado [$i] ['idelemento'];
+		$variable .= "&opcion=modificar";
+		$variable = $this->miConfigurador->fabricaConexiones->crypto->codificar_url ( $variable, $directorio );
 		
-		// ------------------
-	
-	$cadenaSql = $this->sql->getCadenaSql ( 'items', $_REQUEST ['tiempo'] );
-	// echo $cadenaSql;
-	$resultadoItems = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
-	
-	// var_dump($resultadoItems);
-	// ---------------------
-	$filas = count ( $resultadoItems );
-	
-	if ($filas > 0 && $limit > 0) {
-		$total_pages = ceil ( $filas / $limit );
-	} else {
-		$total_pages = 0;
-	}
-	
-	if ($page > $total_pages)
-		$page = $total_pages;
-	
-	$start = $limit * $page - $limit;
-	
-	if ($resultadoItems != false) {
-		$tabla->page = $page;
-		$tabla->total = $total_pages;
-		$tabla->records = $filas;
+		$variable2 = "pagina=" . $miPaginaActual; // pendiente la pagina para modificar parametro
+		$variable2 .= "&id_elemento=" . $resultado [$i] ['idelemento'];
+		$variable2 .= "&opcion=anular";
+		$variable2 = $this->miConfigurador->fabricaConexiones->crypto->codificar_url ( $variable2, $directorio );
 		
-		$i = 0;
+
 		
-		foreach ( $resultadoItems as $row ) {
-			$tabla->rows [$i] ['id'] = $row ['id_items'];
-			$tabla->rows [$i] ['cell'] = array (
-					$row ['item'],
-					$row ['unidad_medida'],
-					$row ['cantidad'],
-					$row ['descripcion'],
-					$row ['valor_unitario'],
-					$row ['valor_total'] 
-			);
-			$i ++;
+		if ($resultado [$i] ['cierrecontable'] == 'f') {
+			
+			$cierreContable = "<center><a href='" . $variable . "'><u>modificar</u></a></center> ";
+			$anulacion = ($resultado [$i] ['estadoentrada'] == 2) ? "<center><a href='" . $variable2 . "'><u>anular</u></a></center>" : " ";
+		}
+		if ($resultado [$i] ['cierrecontable'] == 't') {
+			
+			$cierreContable = "<center>Inhabilitado por Cierre Contable</center>";
+			
+			$anulacion = "<center>Inhabilitado por Cierre Contable</center>";
 		}
 		
-		$tabla = json_encode ( $tabla );
 		
-		echo $tabla;
-	} else {
-		
-		$tabla->page = $page;
-		$tabla->total = $total_pages;
-		$tabla->records = $filas;
-		
-		$i = 0;
-		
-		$tabla->rows [0] ['id'] = '0';
-		$tabla->rows [0] ['cell'] = array (
-				' ',
-				' ',
-				'0.00',
-				' ',
-				'0.00',
-				'0.00' 
-		);
-		
-		$tabla = json_encode ( $tabla );
-		
-		echo $tabla;
-	}
-}
-if ($_REQUEST ['funcion'] == 'AgregarItem') {
-	
-	$cadenaSql = $this->sql->getCadenaSql ( 'id_items_temporal' );
-	$idItems = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
-	$id = $idItems [0] [0] + 1;
-	
-	if ($idItems [0] [0] != null) {
-		
-		$datos = array (
-				$id,
-				$_GET ['item'],
-				$_GET ['unidad_medida'],
-				$_GET ['cantidad'],
-				$_GET ['descripcion'],
-				$_GET ['valor_unitario'],
-				$_GET ['valor_total'],
-				$_REQUEST ['tiempo'] 
-		);
-	} else {
-		$datos = array (
-				'1',
-				$_GET ['item'],
-				$_GET ['unidad_medida'],
-				$_GET ['cantidad'],
-				$_GET ['descripcion'],
-				$_GET ['valor_unitario'],
-				$_GET ['valor_total'],
-				$_REQUEST ['tiempo']
+		$resultadoFinal[]=array(
+				'placa' =>"<center>".$resultado[$i]['placa']."</center>",
+				'serie'=>"<center>".$resultado[$i]['serie']."</center>",
+				'descripcion'=>"<center>".$resultado[$i]['descripcion']."</center>",
+				'fecharegistro'=>"<center>".$resultado[$i]['fecharegistro']."</center>",
+				'modificar'=>"<center>".$cierreContable,
+				'anular'=>"<center>".$anulacion
+					
 		);
 	}
+		
 	
-	// ------------------
+	$total = count ( $resultadoFinal );
 	
-	$cadenaSql = $this->sql->getCadenaSql ( 'insertarItem', $datos );
-	$resultadoItems = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "acceso" );
-	echo $resultadoItems;
-	// ---------------------
-}
-
-if ($_REQUEST ['funcion'] == 'EliminarItem') {
+	$resultado = json_encode ( $resultadoFinal );
 	
-	$cadenaSql = $this->sql->getCadenaSql ( 'eliminarItem', $_GET ['id'] );
-	$resultadoItems = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "acceso" );
+	$resultado = '{
+                "recordsTotal":' . $total . ',
+                "recordsFiltered":' . $total . ',
+				"data":' . $resultado . '}';
 	
-	echo $resultadoItems;
+	echo $resultado;
 }
 
 ?>

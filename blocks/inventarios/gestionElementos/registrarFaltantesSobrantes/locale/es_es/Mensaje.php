@@ -323,7 +323,7 @@ $this->idioma ["botonAceptar"] ="Guardar Entrada";
 $this->idioma ["botonCancelar"] ="Cancelar";
 $this->idioma ["botonContinuar"] ="Continuar";
 $this->idioma ["botonConsultar"] ="Consultar";
-$this->idioma ["botonRegresar"] ="Regresar";
+$this->idioma ["botonRegresar"] ="<< Regresar";
 
 
 

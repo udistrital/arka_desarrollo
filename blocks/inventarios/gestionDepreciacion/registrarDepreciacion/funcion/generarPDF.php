@@ -60,7 +60,7 @@ class RegistradorActa {
             $contenido.= " <tr> ";
             $contenido.= "<td style='text-align:right'  >" . $depreciacion[$key]['placa'] . "</td> ";
             $contenido.= "<td style='text-align:right'  >" . $depreciacion[$key]['cuenta'] . "</td> ";
-            $contenido.= "<td style='text-align:right'  >" . wordwrap($depreciacion[$key]['grupo'],30) . "</td> ";
+            $contenido.= "<td style='text-align:right'  >" . wordwrap($depreciacion[$key]['grupo'],20,"<br>") . "</td> ";
             $contenido.= "<td style='text-align:center'  >" . $depreciacion[$key]['meses_depreciar'] . "</td> ";
             $contenido.= "<td style='text-align:center'  >" . $depreciacion[$key]['fechaSalida'] . "</td> ";
             $contenido.= "<td style='text-align:center'  >" . $depreciacion[$key]['fechaCorte'] . "</td> ";
@@ -108,7 +108,7 @@ class RegistradorActa {
         font-size:8.5px
     }
 </style>
-<page backtop='45mm' backbottom='20mm' backleft='12mm' backright='20mm' pagegroup='new'>
+<page backtop='45mm' backbottom='20mm' backleft='10mm' backright='10mm' pagegroup='new'>
 <page_header>
     <table align='right'>
         <thead>
@@ -202,7 +202,7 @@ $contenido = $miRegistrador->armarPDF($resultado);
 
 
 ob_start();
-$html2pdf = new \HTML2PDF('L', 'Letter', 'es', true, 'UTF-8', array(5, 5, 5, 5));
+$html2pdf = new \HTML2PDF('L', 'Letter', 'es', true, 'UTF-8', array(2, 5, 2, 5));
 $html2pdf->WriteHTML($contenido);
 $html2pdf->Output("depreciacionElementos_".  date('d-m-Y').".pdf", "D");
 ?>

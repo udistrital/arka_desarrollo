@@ -624,7 +624,7 @@ class Sql extends \Sql {
 			case "consultarOrden" :
 				
 				$cadenaSql = "SELECT DISTINCT ";
-				$cadenaSql .= "id_orden_servicio, fecha_registro,  ";
+				$cadenaSql .= "id_orden_servicio, orden_servicio.fecha_registro,  ";
 				$cadenaSql .= "dependencia_solicitante ,  cs.identificacion ||' - '|| cs.nombre_razon_social contratista  ";
 				$cadenaSql .= "FROM orden_servicio ";
 				$cadenaSql .= "JOIN contratista_servicios  cs ON cs.id_contratista = orden_servicio.id_contratista ";
@@ -642,7 +642,7 @@ class Sql extends \Sql {
 				}
 				
 				if ($variable [3] != '') {
-					$cadenaSql .= " AND fecha_registro BETWEEN CAST ( '" . $variable [3] . "' AS DATE) ";
+					$cadenaSql .= " AND orden_servicio.fecha_registro BETWEEN CAST ( '" . $variable [3] . "' AS DATE) ";
 					$cadenaSql .= " AND  CAST ( '" . $variable [4] . "' AS DATE)  ";
 				}
 				

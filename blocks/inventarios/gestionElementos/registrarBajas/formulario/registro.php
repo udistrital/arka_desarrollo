@@ -62,6 +62,17 @@ class registrarForm {
 		
 		$seccion ['tiempo'] = $tiempo;
 		
+		$dependencia = unserialize ( $_REQUEST ['dependencia'] );
+		
+		$arreglo = array (
+				'dependencia' => $dependencia [0],
+				'sede' => $dependencia [1] 
+		);
+		
+		
+		
+		$_REQUEST=array_merge($_REQUEST,$arreglo);
+		
 		// ___________________________________________________________________________________
 		// -------------------------------------------------------------------------------------------------
 		
@@ -91,14 +102,14 @@ class registrarForm {
 		echo $this->miFormulario->formulario ( $atributos );
 		{
 			$miPaginaActual = $this->miConfigurador->getVariableConfiguracion ( 'pagina' );
-				
+			
 			$directorio = $this->miConfigurador->getVariableConfiguracion ( "host" );
 			$directorio .= $this->miConfigurador->getVariableConfiguracion ( "site" ) . "/index.php?";
 			$directorio .= $this->miConfigurador->getVariableConfiguracion ( "enlace" );
-				
+			
 			$variable = "pagina=" . $miPaginaActual;
 			$variable = $this->miConfigurador->fabricaConexiones->crypto->codificar_url ( $variable, $directorio );
-				
+			
 			// ---------------- CONTROL: Cuadro de Texto --------------------------------------------------------
 			$esteCampo = 'botonRegresar';
 			$atributos ['id'] = $esteCampo;
@@ -110,9 +121,8 @@ class registrarForm {
 			$atributos ['alto'] = '10%';
 			$atributos ['redirLugar'] = true;
 			echo $this->miFormulario->enlace ( $atributos );
-				
-			unset ( $atributos );
 			
+			unset ( $atributos );
 			
 			$esteCampo = "AgrupacionGeneral";
 			$atributos ['id'] = $esteCampo;
@@ -207,7 +217,7 @@ class registrarForm {
 				$atributos ['id'] = $esteCampo;
 				
 				$atributos ['evento'] = '';
-				$atributos ['deshabilitado'] = true;
+				$atributos ['deshabilitado'] = false;
 				$atributos ["etiquetaObligatorio"] = true;
 				$atributos ['tab'] = $tab;
 				$atributos ['tamanno'] = 1;
@@ -222,7 +232,7 @@ class registrarForm {
 				} else {
 					$atributos ['seleccion'] = - 1;
 				}
-				// $atributos ['cadena_sql'] = $this->miSql->getCadenaSql ( "dependencias" );
+				$atributos ['cadena_sql'] = $this->miSql->getCadenaSql ( "dependenciasGenerales" );
 				
 				$matrizItems = array (
 						array (
@@ -230,6 +240,8 @@ class registrarForm {
 								'Seleccion ... ' 
 						) 
 				);
+				
+				$matrizItems = $esteRecursoDBO->ejecutarAcceso ( $atributos ['cadena_sql'], "busqueda" );
 				
 				$atributos ['matrizItems'] = $matrizItems;
 				

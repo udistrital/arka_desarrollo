@@ -57,9 +57,9 @@ class FormProcessor {
 
             if ($registro) {
 
-
                 if ($registro [0] ['clave'] == $variable ["clave"]) {
-                   
+
+              
                     // 1. Crear una sesión de trabajo
                     $estaSesion = $this->miSesion->crearSesion($registro [0] ["id_usuario"]);
 
@@ -78,45 +78,57 @@ class FormProcessor {
                     );
 
                     // var_dump ( $arreglo );
-                   $cadena_sql = $this->miSql->getCadenaSql("registrarEvento", $arreglo);
+                    $cadena_sql = $this->miSql->getCadenaSql("registrarEvento", $arreglo);
+
                     $registroAcceso = $esteRecursoDB->ejecutarAcceso($cadena_sql, "acceso");
 
                     if ($estaSesion) {
-                        
-                        echo $registro[0]["tipo"];
-                       
 
-                        switch ($registro [0] ["tipo"]) {
-
-                            case '1' :
-                                // Al final se ejecuta la redirección la cual pasará el control a otra página
-                                Redireccionador::redireccionar('indexAlmacen', $registro [0]);
-                                break;
-
-                            case '2' :
-                                // Al final se ejecuta la redirección la cual pasará el control a otra página
-                                Redireccionador::redireccionar('indexInventarios', $registro [0]);
-                                break;
-
-                            case '3' :
-                                // Al final se ejecuta la redirección la cual pasará el control a otra página
-                                Redireccionador::redireccionar('indexContabilidad', $registro [0]);
-                                break;
-
-                            case '0' :
+//                        switch ($registro [0] ["tipo"]) {
+//                             case '0' :
+//                                // Al final se ejecuta la redirección la cual pasará el control a otra página
+//                                Redireccionador::redireccionar('index', $registro [0]);
+//                                break;
+//
+//                            case '3' :
+//                                // Al final se ejecuta la redirección la cual pasará el control a otra página
+//                                Redireccionador::redireccionar('indexContabilidad', $registro [0]);
+//                                break;
+//
+//                            case '2' :
+//                                // Al final se ejecuta la redirección la cual pasará el control a otra página
+//                                Redireccionador::redireccionar('indexCompras', $registro [0]);
+//                                break;
+//                            
+//                            case '4' :
+//                                // Al final se ejecuta la redirección la cual pasará el control a otra página
+//                                Redireccionador::redireccionar('indexAlmacen', $registro [0]);
+//                                break;
+//
+//                            case '1' :
+//                                // Al final se ejecuta la redirección la cual pasará el control a otra página
+//                                Redireccionador::redireccionar('indexAlmacen', $registro [0]);
+//                                break;
+//                            
+//                              default :
                                 // Al final se ejecuta la redirección la cual pasará el control a otra página
                                 Redireccionador::redireccionar('index', $registro [0]);
-                                break;
-                        }
+//                                break;
+
+
+
+
+                           
+//                        }
                     }
                     // Redirigir a la página principal del usuario, en el arreglo $registro se encuentran los datos de la sesion:
                     // $this->funcion->redireccionar("indexUsuario", $registro[0]);
                     return true;
                 } else {
 
+
 //                    echo "no valido";
 //                    exit;
-
                     // Registrar el error por clave no válida
                     $arregloLogin = array(
                         'claveNoValida',

@@ -13,6 +13,7 @@ include_once ("core/manager/Configurador.class.php");
 include_once ("core/builder/InspectorHTML.class.php");
 include_once ("core/builder/Mensaje.class.php");
 include_once ("core/crypto/Encriptador.class.php");
+include_once ("funcion/redireccionar.php");
 
 // Esta clase contiene la logica de negocio del bloque y extiende a la clase funcion general la cual encapsula los
 // metodos mas utilizados en la aplicacion
@@ -45,6 +46,10 @@ class Funcion {
     function funcionEjemplo() {
         include_once ($this->ruta . "/funcion/funcionEjemplo.php");
     }
+    
+     function procesarAjax() {
+        include_once ($this->ruta . "funcion/procesarAjax.php");
+    }
 
     function registrarDepreciacion() {
         include_once ($this->ruta . "/funcion/registrarDepreciacion.php");
@@ -58,9 +63,7 @@ class Funcion {
         include_once ($this->ruta . "/funcion/generarPDF.php");
     }
 
-    function procesarAjax() {
-        include_once ($this->ruta . "funcion/procesarAjax.php");
-    }
+   
 
     function action() {
 // 		
@@ -74,7 +77,9 @@ class Funcion {
         // se recomienda que aqui solo sea el punto de entrada para incluir otros scripts que estarán
         // en la carpeta funcion
         // Importante: Es adecuado que sea una variable llamada opcion o action la que guie el procesamiento:
+        
         if (isset($_REQUEST ['procesarAjax'])) {
+            
             $this->procesarAjax();
         } elseif (isset($_REQUEST ["opcion"])) {
 

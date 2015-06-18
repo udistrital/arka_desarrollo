@@ -71,28 +71,17 @@ $('#<?php echo $this->campoSeguro('fechaCorte') ?>').attr("class", "cuadroTexto 
 
 
 $("#<?php echo $this->campoSeguro('grupo_contable') ?>").select2({
-placeholder: "Search for a repository",
-minimumInputLength: 1,
-});
-
-$("#<?php echo $this->campoSeguro('placa') ?>").select2({
-placeholder: "Search for a repository",
+placeholder: "Seleccione...",
 minimumInputLength: 1,
 });
 
 $("#<?php echo $this->campoSeguro('funcionario') ?>").select2({
-placeholder: "Search for a repository",
+placeholder: "Seleccione...",
 minimumInputLength: 1,
 });
 
 $("#<?php echo $this->campoSeguro('cuenta_salida') ?>").select2({
-placeholder: "Search for a repository",
+placeholder: "Seleccione...",
 minimumInputLength: 1,
 });
-
-
-
-
-
-
 

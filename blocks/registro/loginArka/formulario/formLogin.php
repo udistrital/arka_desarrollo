@@ -27,11 +27,33 @@ class Formulario {
         $directorioImagenes = $this->miConfigurador->getVariableConfiguracion("rutaUrlBloque") . "/imagenes";
         // Rescatar los datos de este bloque
         $esteBloque = $this->miConfigurador->getVariableConfiguracion("esteBloque");
+
+        $rutaBloque = $this->miConfigurador->getVariableConfiguracion("host");
+        $rutaBloque .= $this->miConfigurador->getVariableConfiguracion("site") . "/blocks/";
+        $rutaBloque .= $esteBloque ['grupo'] . "/" . $esteBloque ['nombre'];
         ?>
+
+        <div id="slider1_container" style="position: absolute; top: 0px; left: 0px; width: 100%; height: 50px; overflow: hidden;">
+            <!-- Slides Container -->
+            <div u="slides" style="cursor: move; position: absolute; overflow: hidden; left: 0px; top: 0px; width: 100%; height: 100px; overflow: hidden;">
+                <div><img u="image" src="<?php echo $rutaBloque ?>/imagenes/slide_16.jpg" /></div>
+                <div><img u="image" src="<?php echo $rutaBloque ?>/imagenes/slide_8.jpg" /></div>
+                <div><img u="image" src="<?php echo $rutaBloque ?>/imagenes/slide_1.jpg" /></div>
+                <div><img u="image" src="<?php echo $rutaBloque ?>/imagenes/slide_10.jpg" /></div>
+                <div><img u="image" src="<?php echo $rutaBloque ?>/imagenes/slide_12.jpg" /></div>
+                <div><img u="image" src="<?php echo $rutaBloque ?>/imagenes/slide_2.jpg" /></div>
+                <div><img u="image" src="<?php echo $rutaBloque ?>/imagenes/slide_3.jpg" /></div>
+                <div><img u="image" src="<?php echo $rutaBloque ?>/imagenes/slide_14.png" /></div>
+                <div><img u="image" src="<?php echo $rutaBloque ?>/imagenes/slide_15.jpg" /></div>
+                <div><img u="image" src="<?php echo $rutaBloque ?>/imagenes/slide_6.jpg" /></div>
+                <div><img u="image" src="<?php echo $rutaBloque ?>/imagenes/slide_7.jpg" /></div>
+                <div><img u="image" src="<?php echo $rutaBloque ?>/imagenes/slide_9.jpg" /></div>
+                <div><img u="image" src="<?php echo $rutaBloque ?>/imagenes/slide_11.jpg" /></div>
+                <div><img u="image" src="<?php echo $rutaBloque ?>/imagenes/slide_17.jpg" /></div>
+            </div>
+        </div>
         <header>
             <div id="fondo_base"></div>
-
-
         </header>
         <section>
             <article id="fondo_login"> 
@@ -240,14 +262,14 @@ class Formulario {
         // Si existe algun tipo de error en el login aparece el siguiente mensaje
         $mensaje = $this->miConfigurador->getVariableConfiguracion('mostrarMensaje');
         $this->miConfigurador->setVariableConfiguracion('mostrarMensaje', null);
-  
+
         if (isset($_REQUEST ['error'])) {
             if ($_REQUEST ['error'] == 'formularioExpirado') {
                 $atributos ["estilo"] = 'information';
             } else {
                 $atributos ["estilo"] = 'error';
             }
-            
+
             // -------------Control texto-----------------------
             $esteCampo = 'divMensaje';
             $atributos ['id'] = $esteCampo;
@@ -260,6 +282,7 @@ class Formulario {
         }
         return true;
     }
+
 }
 
 $miFormulario = new Formulario($this->lenguaje, $this->miFormulario);

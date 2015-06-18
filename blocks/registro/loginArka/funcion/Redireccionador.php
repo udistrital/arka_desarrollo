@@ -15,16 +15,15 @@ class Redireccionador {
         $miPaginaActual = $miConfigurador->getVariableConfiguracion("pagina");
 
         switch ($opcion) {
-
-            case "indexAlmacen" :
-                //echo "Bienvenido, perfil Almacén";
-                $variable = 'pagina=indexAlmacen';
+            case "index" :
+                //echo "Bienvenido, perfil Arka, todo poderoso.";
+                $variable = 'pagina=indexARKA';
                 $variable .= '&registro=' . $valor [0];
                 break;
 
-            case "indexInventarios" :
-               // echo "Bienvenido, perfil Inventarios";
-                $variable = 'pagina=indexInventarios';
+            case "indexCompras" :
+                // echo "Bienvenido, perfil Compras";
+                $variable = 'pagina=indexCompras';
                 $variable .= '&registro=' . $valor [0];
                 break;
 
@@ -34,12 +33,14 @@ class Redireccionador {
                 $variable .= '&registro=' . $valor [0];
                 break;
 
-            case "index" :
-                //echo "Bienvenido, perfil Arka, todo poderoso.";
-                $variable = 'pagina=indexARKA';
+            case "indexAlmacen" :
+                //echo "Bienvenido, perfil Asistente Almacén";
+                $variable = 'pagina=indexAlmacen';
                 $variable .= '&registro=' . $valor [0];
                 break;
 
+
+            /** Otros casos */
             case "paginaPrincipal" :
                 $variable = "pagina=" . $miPaginaActual;
                 if (isset($valor) && $valor != '') {

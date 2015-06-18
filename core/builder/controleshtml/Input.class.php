@@ -103,7 +103,9 @@ class Input extends HtmlBase {
         if (isset($this->atributos [self::TEXTOFONDO])&&$this->atributos [self::TEXTOFONDO]!='') {
         	
         	$cadena .=  " placeholder='".$this->atributos [self::TEXTOFONDO]."' ";
-        	        	
+        	
+        	
+        	
         }
         
         

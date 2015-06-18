@@ -1,10 +1,11 @@
 <?php
 
-
+echo "llegamos a guncon";
+exit;
 if (isset ( $_REQUEST ['botonAceptar'] )) {
     
     $this->miConfigurador->fabricaConexiones->crypto->decodificar_url ( $_REQUEST ['campoCadena'] );
-    
+   
     
     echo "<div style='padding:20px;font-family:arial'> <span class='textoElegante textoEnorme textoAzul'>Variables</span><hr>";
     echo '<table  style="table-layout: fixed; width: 100%">';
@@ -64,21 +65,21 @@ if (isset ( $_REQUEST ['botonAceptar'] )) {
                 for($contador = 0; $contador < count ( $registro ); $contador ++) {
                     ?>
                     <tr bgcolor="#ECECEC">
-                		<td><? echo $registro[$contador][0] ?></td>
-                		<td><? echo $registro[$contador][3] ?></td>
-                		<td><? echo $registro[$contador][1] ?></td>
-                		<td><? echo $registro[$contador][2] ?></td>
+                		<td><?php echo $registro[$contador][0] ?></td>
+                		<td><?php echo $registro[$contador][3] ?></td>
+                		<td><?php echo $registro[$contador][1] ?></td>
+                		<td><?php echo $registro[$contador][2] ?></td>
                 	</tr>	
-                    <?
+                    <?php
                 }
                 ?>
                                 </table>
                     </div>
 
-<?
+<?php
             }
         }
     }
-}
+
 
 ?>

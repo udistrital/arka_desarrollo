@@ -26,10 +26,7 @@ class Funciondesenlace
 	var $miInspectorHTML;
 	var $error;
 	var $miRecursoDB;
-	var 
-
-
-$crypto;
+	var $crypto;
 
 function verificarCampos() {
     
@@ -49,13 +46,13 @@ function redireccionar($opcion, $valor = "") {
 }
 
 function desenlace() {
-    
+       
     include_once ($this->ruta . "/funcion/desenlace.php");
 
 }
 
 function action() {
-    
+ 
     // Evitar que se ingrese codigo HTML y PHP en los campos de texto
     // Campos que se quieren excluir de la limpieza de código. Formato: nombreCampo1|nombreCampo2|nombreCampo3
     $excluir = "";
@@ -68,7 +65,7 @@ function action() {
     
     // Importante: Es adecuado que sea una variable llamada opcion o action la que guie el procesamiento:
     if (isset ( $_REQUEST ['action'] )) {
-        
+             
         // Realizar una validación específica para los campos de este formulario:
         $this->desenlace();
     }
@@ -85,7 +82,7 @@ function __construct() {
     
     $this->miMensaje = Mensaje::singleton ();
     
-    $conexion = "aplicativo";
+    $conexion = "estructura";
     $this->miRecursoDB = $this->miConfigurador->fabricaConexiones->getRecursoDB ( $conexion );
     
     if (! $this->miRecursoDB) {

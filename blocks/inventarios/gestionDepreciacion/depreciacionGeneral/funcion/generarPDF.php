@@ -59,7 +59,7 @@ class RegistradorActa {
         foreach ($depreciacion as $key => $values) {
             $contenido.= " <tr> ";
             $contenido.= "<td style='text-align:right'  >" .$depreciacion[$key]['cuenta'] . "</td> ";
-            $contenido.= "<td style='text-align:right'  >" .$depreciacion[$key]['grupo'] . "</td> ";
+            $contenido.= "<td style='text-align:right'  >" .wordwrap($depreciacion[$key]['grupo'],20,"<br>") . "</td> ";
             $contenido.= "<td style='text-align:center'  >" .$depreciacion[$key]['total_elementos'] . "</td> ";
             $contenido.= "<td style='text-align:right' >&nbsp;$&nbsp;" . number_format($depreciacion[$key]['total_valor_historico'], 2, ',', '.') . "</td> ";
             $contenido.= "<td style='text-align:right' >&nbsp;$&nbsp;" . number_format($depreciacion[$key]['total_ajuste_inflacion'], 2, ',', '.') . "</td> ";
@@ -102,7 +102,7 @@ class RegistradorActa {
         font-size:8.5px
     }
 </style>
-<page backtop='45mm' backbottom='20mm' backleft='12mm' backright='20mm' pagegroup='new'>
+<page backtop='45mm' backbottom='20mm' backleft='5mm' backright='5mm' pagegroup='new'>
 <page_header>
     <table align='center'>
         <thead>
@@ -190,7 +190,7 @@ $contenido = $miRegistrador->armarPDF($resultado);
 
 
 ob_start();
-$html2pdf = new \HTML2PDF('L', 'Letter', 'es', true, 'UTF-8', array(5, 5, 5, 5));
+$html2pdf = new \HTML2PDF('L', 'Letter', 'es', true, 'UTF-8', array(1, 5, 1, 5));
 $html2pdf->WriteHTML($contenido);
 $html2pdf->Output('depreciacionGeneral.pdf', 'D');
 ?>

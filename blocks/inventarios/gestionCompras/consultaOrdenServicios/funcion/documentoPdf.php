@@ -239,7 +239,7 @@ class RegistradorOrden {
 			<td style='width:100%;'>Objeto General : </td>
 			</tr>
 			<tr> 
-			<td style='width:100%;text-align:justify;'>".$orden[4]." </td>
+			<td style='width:100%;text-align:justify;font-size: 8px;font-size-adjust: 0.3;'>".$orden[4]." </td>
 			</tr>		
 			</table>			
 			

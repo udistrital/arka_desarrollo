@@ -41,8 +41,6 @@ $cadena16 = $this->miConfigurador->fabricaConexiones->crypto->codificar_url($cad
 $urlFinal16 = $url . $cadena16;
 ?>
 <script type='text/javascript'>
-
-
     $(function () {
 
         $("#<?php echo $this->campoSeguro('sede') ?>").select2({
@@ -67,7 +65,7 @@ $urlFinal16 = $url . $cadena16;
         $.ajax({
             url: "<?php echo $urlFinal16 ?>",
             dataType: "json",
-            data: {valor: $("#<?php echo $this->campoSeguro('sede') ?>").val()},
+            data: {},
             success: function (data) {
 
                 if (data[0] != " ") {

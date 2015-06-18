@@ -25,9 +25,6 @@
             });
         });
 
-                     $('#tablaTitulos').dataTable( {
-                "sPaginationType": "full_numbers"
-                 } );
 
 
     
@@ -43,9 +40,15 @@
  
  $("#<?php echo $this->campoSeguro('placa')?>").select2({
              	 placeholder: "Search for a repository",
-              	 minimumInputLength: 5,
+              	 minimumInputLength: 3,
               	 });
- $("#<?php echo $this->campoSeguro('serie1')?>").select2();
+ $("#<?php echo $this->campoSeguro('serie1')?>").select2({
+             	 placeholder: "Search for a repository",
+              	 minimumInputLength: 3,
+              	 });
+              	 
+              	 
+              	 $("#<?php echo $this->campoSeguro('tipo_poliza')?>").select2();
  $("#<?php echo $this->campoSeguro('nivel')?>").select2();
  $("#<?php echo $this->campoSeguro('tipo_registro')?>").select2();
  $("#<?php echo $this->campoSeguro('tipo_bien')?>").select2();

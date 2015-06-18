@@ -150,7 +150,7 @@ class Sql extends \Sql {
                 break;
 
             case "buscar_placa":
-                $cadenaSql = " SELECT id_elemento_ind, placa FROM elemento_individual;";
+                $cadenaSql = " SELECT placa AS value, id_elemento_ind AS data FROM elemento_individual;";
                 break;
 
 
@@ -173,14 +173,6 @@ class Sql extends \Sql {
                 $cadenaSql.= " AND lista_activo=1 ";
                 //$cadenaSql.= " AND grupo.grupo_descripcion.grupo_depreciacion='t' ";
                 $cadenaSql.= " AND grupo_id='" . $variable . "' ";
-                break;
-
-            case "consultar_grupo_contable" :
-                $cadenaSql = "SELECT elemento_id, elemento_codigo ||' - '||elemento_nombre as nivel ";
-                $cadenaSql.= " FROM catalogo.catalogo_elemento ";
-                $cadenaSql.= " JOIN catalogo.catalogo_lista ON catalogo.catalogo_lista.lista_id=elemento_catalogo ";
-                $cadenaSql.= " WHERE elemento_id>0 ";
-                $cadenaSql.= " AND lista_activo=1";
                 break;
 
             case "consultar_grupo_contable" :
