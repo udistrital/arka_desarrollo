@@ -13,7 +13,7 @@ if ($_REQUEST ['funcion'] == 'SeleccionMeses') {
 }
 
 if ($_REQUEST ['funcion'] == 'placas') {
-    $parametro = array();
+    $parametro = $_REQUEST['query'];
     $cadenaSql = $this->sql->getCadenaSql('buscar_placa', $parametro);
     $resultadoItems = $esteRecursoDB->ejecutarAcceso($cadenaSql, 'busqueda');
 
