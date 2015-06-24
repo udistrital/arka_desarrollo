@@ -36,7 +36,7 @@ class Formulario {
     }
 
     public function validarEntrada() {
-        
+
         //var_dump($_REQUEST);exit;
         //validar request nombre
         if (!isset($_REQUEST['nombreElemento'])) {
@@ -165,10 +165,17 @@ class Formulario {
             'id' => $_REQUEST['id'],
             'idCatalogo' => $_REQUEST['idCatalogo'],
             'nombreElemento' => $_REQUEST['nombreElemento'],
+            'tipoBien' => $_REQUEST['tipoBien'],
         );
 
         $cadena_sql = $this->sql->getCadenaSql("crearElementoCatalogo", $datos);
         $registros = $this->esteRecursoDB->ejecutarAcceso($cadena_sql, 'busqueda');
+
+        if (!$registros) {
+            $this->miConfigurador->setVariableConfiguracion('mostrarMensaje', 'errorCreacion');
+            $this->mensaje();
+            exit;
+        }
 
         $datos2 = array(
             'idCuenta' => $registros[0][0],
@@ -179,7 +186,7 @@ class Formulario {
             'cuentacredito' => (isset($_REQUEST['cuentaCredito']) ? $_REQUEST['cuentaCredito'] : '0'),
             'cuentadebito' => (isset($_REQUEST['cuentaDebito']) ? $_REQUEST['cuentaDebito'] : '0'),
         );
-        
+
         $cadena_sql2 = $this->sql->getCadenaSql("crearElementoCatalogoDescripcion", $datos2);
         $registros2 = $this->esteRecursoDB->ejecutarAcceso($cadena_sql2);
 

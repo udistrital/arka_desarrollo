@@ -421,10 +421,11 @@ $autocompletar = $url . $cadena10;
         return listaNombres['lidPadre'].indexOf(String(valor)) < 0 ? false : true;
     }
 
-    function editarElementoCatalogo(id, padre, codigo, nombre, idCatalogo, cuentaSalida, cuentaEntrada, vidautil, cuentaDebito, cuentaCredito, depreciacion) {
+    function editarElementoCatalogo(id, padre, codigo, nombre, idCatalogo, cuentaSalida, cuentaEntrada, vidautil, cuentaDebito, cuentaCredito, depreciacion, tipobien, codigo_padre) {
         $('#depreciacion').val();
         $("#descripcionDepreciacion").css('display', 'none');
         $('#vidautil').val(0);
+        $('#tipoBien').val(0);
         $('#cuentaDebito').val(0);
         $('#cuentaCredito').val(0);
 
@@ -433,10 +434,11 @@ $autocompletar = $url . $cadena10;
         $('#id').val(codigo);
         $('#nombreElemento').val(nombre);
         $('#idCatalogo').val(idCatalogo);
-        $('#lidPadre').val(padre);
+        $('#lidPadre').val(codigo_padre);
 
         $('#cuentaSalida').val(cuentaSalida);
         $('#cuentaEntrada').val(cuentaEntrada);
+        $('#tipoBien').val(tipobien);
 
         if (depreciacion == 1) {
             $("#descripcionDepreciacion").css('display', 'block');
@@ -448,8 +450,8 @@ $autocompletar = $url . $cadena10;
         $('#cuentaCredito').val(cuentaCredito);
 
         $('#idReg').val(id);
-        $("#agregarA").html("Guardar Cambios sobre el elemento " + codigo + " con Padre " + padre + "")
-        $("#agregarA").val("Guardar Cambios sobre elemento " + codigo + " con Padre " + padre + "");
+        $("#agregarA").html("Guardar Cambios sobre el elemento " + codigo + " con Padre " + codigo_padre + "")
+        $("#agregarA").val("Guardar Cambios sobre elemento " + codigo + " con Padre " + codigo_padre + "");
         $("#agregarA").attr("onclick", "guardarEdicionElementos(" + id + ")");
     }
 

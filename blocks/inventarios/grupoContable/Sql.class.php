@@ -178,11 +178,12 @@ class Sql extends \Sql {
             case "crearElementoCatalogo":
                 $cadenaSql = " INSERT INTO grupo.catalogo_elemento( ";
                 $cadenaSql .= " elemento_padre, elemento_codigo, elemento_catalogo, ";
-                $cadenaSql .= " elemento_nombre)   VALUES ( ";
+                $cadenaSql .= " elemento_nombre, elemento_tipobien)   VALUES ( ";
                 $cadenaSql .= " '" . $variable['idPadre'] . "', ";
                 $cadenaSql .= " '" . $variable['id'] . "', ";
                 $cadenaSql .= " '" . $variable['idCatalogo'] . "', ";
-                $cadenaSql .= " '" . $variable['nombreElemento'] . "')";
+                $cadenaSql .= " '" . $variable['nombreElemento'] . "', ";
+                $cadenaSql .= " '" . $variable['tipoBien'] . "')";
                 $cadenaSql .= " RETURNING elemento_id;";
                 break;
 
@@ -245,15 +246,22 @@ class Sql extends \Sql {
 
             //--- Consultas para los elementos ----//
             case "elementosNivel":
-                $cadenaSql = " SELECT elemento_id , elemento_padre , elemento_codigo, elemento_catalogo , upper(elemento_nombre) as elemento_nombre , elemento_fecha_creacion ";
-                $cadenaSql .= " ,grupo_cuentasalida, grupo_cuentaentrada, cast(grupo_depreciacion as integer) as grupo_depreciacion, grupo_vidautil, grupo_dcuentadebito, grupo_dcuentacredito ";
-                $cadenaSql .= " FROM grupo.catalogo_elemento ";
-                $cadenaSql .= " LEFT JOIN grupo.grupo_descripcion ON cast(elemento_id as character varying)=grupo_id";
-                $cadenaSql .= " WHERE elemento_catalogo ='" . $variable[0] . "' ";
-                $cadenaSql .= " AND elemento_padre='" . $variable[1] . "' AND elemento_id>0 ";
-                $cadenaSql .= " AND elemento_estado=1 ORDER BY elemento_codigo ";
+                $cadenaSql = " SELECT grupo.catalogo_elemento.elemento_tipobien,coalesce(k.elemento_codigo,0) codigo_padre,grupo.catalogo_elemento.elemento_id , grupo.catalogo_elemento.elemento_padre , grupo.catalogo_elemento.elemento_codigo,  ";
+                $cadenaSql .= " grupo.catalogo_elemento.elemento_catalogo, upper(grupo.catalogo_elemento.elemento_nombre) as elemento_nombre ,  ";
+                $cadenaSql .= " grupo.catalogo_elemento.elemento_fecha_creacion,  ";
+                $cadenaSql .= " coalesce(grupo_cuentasalida,'0') as grupo_cuentasalida,  ";
+                $cadenaSql .= " coalesce(grupo_cuentaentrada,'0') as grupo_cuentaentrada, ";
+                $cadenaSql .= " coalesce(cast(grupo_depreciacion as integer),0) as grupo_depreciacion,  ";
+                $cadenaSql .= " coalesce(grupo_vidautil,0) as grupo_vidautil, ";
+                $cadenaSql .= " coalesce(grupo_dcuentadebito,'0') as grupo_dcuentadebito, ";
+                $cadenaSql .= " coalesce(grupo_dcuentacredito,'0') as grupo_dcuentacredito ";
+                $cadenaSql .= " FROM grupo.catalogo_elemento  ";
+                $cadenaSql .= " LEFT JOIN grupo.grupo_descripcion ON cast(elemento_id as character varying)=grupo_id  ";
+                $cadenaSql .= " LEFT JOIN grupo.catalogo_elemento as k ON k.elemento_id=grupo.catalogo_elemento.elemento_padre ";
+                $cadenaSql .= " WHERE grupo.catalogo_elemento.elemento_catalogo ='" . $variable[0] . "' AND grupo.catalogo_elemento.elemento_padre='" . $variable[1] . "' ";
+                $cadenaSql .= " AND grupo.catalogo_elemento.elemento_id >0 AND grupo.catalogo_elemento.elemento_estado=1 ORDER BY grupo.catalogo_elemento.elemento_codigo ";
                 break;
-
+            
             case "eliminarElementoCatalogo":
                 $cadenaSql = "UPDATE grupo.catalogo_elemento SET elemento_estado=0 WHERE elemento_id= '" . $variable . "' ";
                 break;
