@@ -212,11 +212,12 @@ class Sql extends \Sql {
                 break;
 
             case "elementosNivel":
-                $cadenaSql = " SELECT elemento_id , elemento_padre , elemento_codigo, elemento_catalogo , upper(elemento_nombre) as elemento_nombre , elemento_fecha_creacion, elemento_grupoc  ";
+                $cadenaSql = " SELECT coalesce(k.elemento_codigo,0) codigo_padre,catalogo.catalogo_elemento.elemento_id , catalogo.catalogo_elemento.elemento_padre , catalogo.catalogo_elemento.elemento_codigo, catalogo.catalogo_elemento.elemento_catalogo , upper(catalogo.catalogo_elemento.elemento_nombre) as elemento_nombre , catalogo.catalogo_elemento.elemento_fecha_creacion, catalogo.catalogo_elemento.elemento_grupoc  ";
                 $cadenaSql .= " FROM catalogo.catalogo_elemento ";
-                $cadenaSql .= " WHERE elemento_catalogo ='" . $variable[0] . "' ";
-                $cadenaSql .= " AND elemento_padre='" . $variable[1] . "'   AND elemento_id>0  ";
-                $cadenaSql .= " AND elemento_estado=1 ORDER BY elemento_codigo ";
+                $cadenaSql .= " LEFT JOIN catalogo.catalogo_elemento as k ON k.elemento_id=catalogo.catalogo_elemento.elemento_padre ";
+                $cadenaSql .= " WHERE catalogo.catalogo_elemento.elemento_catalogo ='" . $variable[0] . "' ";
+                $cadenaSql .= " AND catalogo.catalogo_elemento.elemento_padre='" . $variable[1] . "'   AND catalogo.catalogo_elemento.elemento_id>0  ";
+                $cadenaSql .= " AND catalogo.catalogo_elemento.elemento_estado=1 ORDER BY elemento_codigo ";
                 break;
 
             case "eliminarElementoCatalogo":
