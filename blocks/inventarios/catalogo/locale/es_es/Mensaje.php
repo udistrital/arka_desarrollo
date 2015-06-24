@@ -60,7 +60,7 @@ $this->idioma["idPadre"]="Código Nivel Padre";
 $this->idioma["idPadreTitulo"]="";
 //$this->idioma["idTitulo"]="Ingrese el Identificador Elemento";
 $this->idioma["idTitulo"]="";
-$this->idioma["idGrupo"]="Grupo Contable";
+$this->idioma["idGrupo"]="Grupo Manejo de Bienes";
 
 
 $this->idioma["reiniciar"]="Reiniciar";
