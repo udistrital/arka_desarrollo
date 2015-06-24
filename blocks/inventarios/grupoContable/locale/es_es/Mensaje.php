@@ -75,6 +75,7 @@ $this->idioma["nombreElemento"]="Nombre Elemento";
 $this->idioma["nombreElementoTitulo"]="";
 $this->idioma["depreciacionTitulo"]="";
 $this->idioma["depreciacion"]="¿Aplica Depreciación?";
+$this->idioma["tipoBien"]="Tipo de Bien";
 
 
 $this->idioma["reiniciar"]="Reiniciar";

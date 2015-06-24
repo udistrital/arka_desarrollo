@@ -112,7 +112,7 @@ class Sql extends \Sql {
             case 'listarCatalogos':
                 $cadenaSql = " SELECT lista_id, lista_nombre, lista_fecha_creacion, ";
                 $cadenaSql .= "CASE WHEN lista_activo=0 ";
-                $cadenaSql .= "THEN 'INACTIVO' ELSE 'ACTIVO' END activo ";
+                $cadenaSql .= "THEN 'INACTIVO' ELSE 'ACTIVO' END ";
                 $cadenaSql .= "FROM grupo.catalogo_lista  ";
                 $cadenaSql .= "ORDER BY 3 DESC  ";
                 break;
@@ -143,12 +143,24 @@ class Sql extends \Sql {
                         . " update  grupo.catalogo_lista SET lista_activo=0 WHERE lista_id!='" . $variable . "';";
                 break;
 
+            case "buscarUltimoIdCatalogo":
+                $cadenaSql = "select max(lista_id) from grupo.catalogo_lista";
+                break;
+
+            case "cambiarNombreCatalogo":
+                $cadenaSql = " UPDATE grupo.catalogo_lista ";
+                $cadenaSql .= " SET lista_nombre='" . $variable[0] . "' ";
+                $cadenaSql .= " WHERE lista_id='" . $variable[1] . "' ";
+                break;
+
+
             case "listarElementos":
                 $cadenaSql = "SELECT elemento_id, elemento_padre, elemento_codigo, elemento_catalogo, ";
                 $cadenaSql.= " elemento_nombre, elemento_fecha_creacion, ";
                 $cadenaSql.= " grupo_cuentasalida, grupo_cuentaentrada, cast(grupo_depreciacion as integer) as grupo_depreciacion, grupo_vidautil, grupo_dcuentadebito, grupo_dcuentacredito ";
                 $cadenaSql.= " FROM grupo.catalogo_elemento ";
                 $cadenaSql.= " JOIN grupo.grupo_descripcion ON cast(elemento_id as character varying)=grupo_id";
+                $cadenaSql.= " WHERE elemento_id >0 ";
                 break;
 
             case "listarElementosID":
@@ -157,18 +169,11 @@ class Sql extends \Sql {
                 $cadenaSql .= " grupo_cuentasalida, grupo_cuentaentrada, cast(grupo_depreciacion as integer) as grupo_depreciacion, grupo_vidautil, grupo_dcuentadebito, grupo_dcuentacredito ";
                 $cadenaSql .= " FROM grupo.catalogo_elemento ";
                 $cadenaSql .= " JOIN grupo.grupo_descripcion ON cast(elemento_id as character varying)=grupo_id";
-                $cadenaSql .= " WHERE elemento_catalogo=" . $variable;
+                $cadenaSql .= " WHERE elemento_catalogo='" . $variable . "' ";
+                $cadenaSql.= " AND elemento_id >0 ";
                 break;
 
-            case "buscarUltimoIdCatalogo":
-                $cadenaSql = "select max(lista_id) from grupo.catalogo_lista";
-                break;
 
-            case "cambiarNombreCatalogo":
-                $cadenaSql = " UPDATE grupo.catalogo_lista ";
-                $cadenaSql .= " SET lista_nombre='" . $variable[0] . "' ";
-                $cadenaSql .= " WHERE lista_id=" . $variable[1] . " ";
-                break;
 
             case "crearElementoCatalogo":
                 $cadenaSql = " INSERT INTO grupo.catalogo_elemento( ";
@@ -207,10 +212,11 @@ class Sql extends \Sql {
                 $cadenaSql = " SELECT elemento_id , elemento_padre , elemento_codigo, elemento_catalogo , elemento_nombre , elemento_fecha_creacion ";
                 $cadenaSql .= " ,grupo_cuentasalida, grupo_cuentaentrada, cast(grupo_depreciacion as integer) as grupo_depreciacion, grupo_vidautil, grupo_dcuentadebito, grupo_dcuentacredito ";
                 $cadenaSql .= " FROM grupo.catalogo_elemento ";
-//                $cadenaSql .= " JOIN grupo.grupo_descripcion ON cast(elemento_id as character varying)=grupo_id";
+                $cadenaSql .= " JOIN grupo.grupo_descripcion ON cast(elemento_id as character varying)=grupo_id";
                 $cadenaSql .= " WHERE elemento_codigo = " . $variable[0];
                 $cadenaSql .= " AND elemento_catalogo =" . $variable[1] . " ";
                 $cadenaSql .= " AND elemento_estado=1 ";
+                $cadenaSql.= " AND elemento_id >0 ";
                 break;
 
             case "buscarIdElemento":
@@ -221,6 +227,7 @@ class Sql extends \Sql {
                 $cadenaSql .= " WHERE elemento_codigo = " . $variable[0] . " ";
                 $cadenaSql .= " AND elemento_padre = " . $variable[1] . " ";
                 $cadenaSql .= " AND elemento_catalogo =" . $variable[2] . " ";
+                $cadenaSql.= " AND elemento_id >0 ";
                 break;
 
             case "buscarNombreElementoNivel":
@@ -229,8 +236,8 @@ class Sql extends \Sql {
                 $cadenaSql .= " FROM grupo.catalogo_elemento ";
                 $cadenaSql .= " JOIN grupo.grupo_descripcion ON cast(elemento_id as character varying)=grupo_id";
                 $cadenaSql .= " WHERE  ";
-                $cadenaSql .= " elemento_padre = " . $variable[1] . " ";
-                $cadenaSql .= " AND elemento_catalogo =" . $variable[2] . " ";
+                $cadenaSql .= " elemento_padre = '" . $variable[1] . "' ";
+                $cadenaSql .= " AND elemento_catalogo ='" . $variable[2] . "' ";
                 $cadenaSql .= " AND elemento_nombre ='" . $variable[3] . "' ";
                 //$cadenaSql .= " AND elemento_estado=1 ";
                 break;
@@ -238,12 +245,12 @@ class Sql extends \Sql {
 
             //--- Consultas para los elementos ----//
             case "elementosNivel":
-                $cadenaSql = " SELECT elemento_id , elemento_padre , elemento_codigo, elemento_catalogo , upper(elemento_nombre) as elemento_nombre , elemento_fecha_creacion, ";
-                $cadenaSql .= " grupo_cuentasalida, grupo_cuentaentrada, cast(grupo_depreciacion as integer) as grupo_depreciacion, grupo_vidautil, grupo_dcuentadebito, grupo_dcuentacredito ";
+                $cadenaSql = " SELECT elemento_id , elemento_padre , elemento_codigo, elemento_catalogo , upper(elemento_nombre) as elemento_nombre , elemento_fecha_creacion ";
+                $cadenaSql .= " ,grupo_cuentasalida, grupo_cuentaentrada, cast(grupo_depreciacion as integer) as grupo_depreciacion, grupo_vidautil, grupo_dcuentadebito, grupo_dcuentacredito ";
                 $cadenaSql .= " FROM grupo.catalogo_elemento ";
-                $cadenaSql .= " JOIN grupo.grupo_descripcion ON cast(elemento_id as character varying)=grupo_id";
-                $cadenaSql .= " WHERE elemento_catalogo =" . $variable[0] . " ";
-                $cadenaSql .= " AND elemento_padre=" . $variable[1] . " ";
+                $cadenaSql .= " LEFT JOIN grupo.grupo_descripcion ON cast(elemento_id as character varying)=grupo_id";
+                $cadenaSql .= " WHERE elemento_catalogo ='" . $variable[0] . "' ";
+                $cadenaSql .= " AND elemento_padre='" . $variable[1] . "' AND elemento_id>0 ";
                 $cadenaSql .= " AND elemento_estado=1 ORDER BY elemento_codigo ";
                 break;
 
@@ -272,6 +279,11 @@ class Sql extends \Sql {
                 $cadenaSql.= "  grupo_dcuentadebito='" . intval($variable['cuentacredito']) . "', ";
                 $cadenaSql.= "  grupo_dcuentacredito='" . intval($variable['cuentadebito']) . "' ";
                 $cadenaSql .= " WHERE grupo_id='" . $variable['idCuenta'] . "' ";
+                break;
+
+            case "tipoBien" :
+                $cadenaSql = "SELECT id_tipo_bienes, descripcion ";
+                $cadenaSql .= "FROM arka_inventarios.tipo_bienes;";
                 break;
         }
         return $cadenaSql;

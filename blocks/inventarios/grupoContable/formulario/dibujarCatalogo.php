@@ -75,8 +75,6 @@ class Formulario {
     public function dibujarCatalogo() {
 
         //consultar elementos 
-
-
         $base = $this->consultarElementosNivel(0);
 
         $this->consultarDatosCatalogo();
@@ -127,8 +125,6 @@ class Formulario {
                 echo 'class="cont contenedor' . $b['elemento_padre'] . '" id="elemento' . $b['elemento_padre'] . '" ';
                 echo ">";
 
-
-
                 echo '<li id="el' . $b['elemento_id'] . '">';
 
                 /////comienzo fila
@@ -140,9 +136,6 @@ class Formulario {
                     echo '<button title="Click para expandir elementos" class="expandir" onclick="cambioHijos(\'contenedor' . $b['elemento_id'] . '\',this)">';
                     echo "</button>";
                 }
-
-
-
 
                 echo "</div>";
 
@@ -197,8 +190,9 @@ class Formulario {
 
     private function consultarElementosNivel($nivel) {
         $cadena_sql = $this->sql->getCadenaSql("elementosNivel", array($_REQUEST['idCatalogo'], $nivel));
+        
         $registros = $this->esteRecursoDB->ejecutarAcceso($cadena_sql, "busqueda");
-    
+      
         return $registros;
     }
 
