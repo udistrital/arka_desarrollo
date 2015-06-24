@@ -42,7 +42,7 @@ $dropdown_menu = array(
             array("reportfile" => "consultarRadicacion_compra.xml", "title" => "Consulta de Radicación por Compra"),
             array("reportfile" => "consultarRadicacion_contrato.xml", "title" => "Consulta de Radicación por Contrato"),
         )
-    ),*/
+    ),
       array(
         "project" => "arka",
         "title" => "Depreciación",
@@ -51,7 +51,7 @@ $dropdown_menu = array(
             array("reportfile" => "consultarDepreciacion_grupo.xml", "title" => "Consulta Depreciación por Grupo Contable"),
             array("reportfile" => "consultarDepreciacion_elemento.xml", "title" => "Consulta Depreciación por Elemento"),
         )
-    ),
+    ),*/
         array(
         "project" => "arka",
         "title" => "Movimientos",
