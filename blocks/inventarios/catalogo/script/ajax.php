@@ -350,6 +350,7 @@ $autocompletar = $url . $cadena10;
 
             data = "idCatalogo=" + $("#idCatalogo").val();
 
+
             $.ajax({
                 url: "<?php echo $autocompletar; ?>",
                 type: "post",
@@ -376,15 +377,18 @@ $autocompletar = $url . $cadena10;
             source: listaNombres['lidPadre']
         });
 
+
         $("#lidPadre").change(function () {
 
-            var indice = listaNombres['lidPadre'].indexOf(this.value);
-            if (typeof listaIds['lidPadre'][indice] == 'undefined')
+            var indice = listaNombres['lidPadre'].indexOf($("#lidPadre").val());
+            if (typeof listaIds['lidPadre'][indice] == 'undefined') {
                 $("#idPadre").val($("#lidPadre").val());
-            else
+
+
+            } else {
                 $("#idPadre").val(listaIds['lidPadre'][indice]);
 
-
+            }
         });
 
         $("#lidPadre").attr('disabled', false);
@@ -395,8 +399,6 @@ $autocompletar = $url . $cadena10;
         else
             $("#idPadre").val(listaIds['lidPadre'][indice]);
 
-
-
         return 0;
 
 
@@ -404,14 +406,15 @@ $autocompletar = $url . $cadena10;
 
 
     function cambiarPadre() {
-
         var indice = listaNombres['lidPadre'].indexOf($("#lidPadre").val());
-
         if (typeof listaIds['lidPadre'][indice] == 'undefined')
             $("#idPadre").val($("#lidPadre").val());
-        else
-            $("#idPadre").val(listaIds['lidPadre'][indice]);
 
+
+        } else {
+            $("#idPadre").val(listaIds['lidPadre'][indice]);
+            
+        }
     }
 
     function validarValorLista(valor, id) {
@@ -502,11 +505,8 @@ $autocompletar = $url . $cadena10;
     }
 
 
-
-
-
-
     function crearCatalogo() {
+    
         $(document).tooltip('destroy');
         if ($("#catalogo").validationEngine('validate') != false) {
 
