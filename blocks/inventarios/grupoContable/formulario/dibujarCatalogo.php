@@ -161,7 +161,7 @@ class Formulario {
 
                     //eliminar
                     echo '<button title="Click para Eliminar" class="eliminar" ';
-                    echo 'onclick="eliminarElementoCatalogo(' . $b['elemento_id'] . ',' . $b['elemento_padre'] . ',' . $b['elemento_codigo'] . ',\'' . $b['elemento_nombre'] . '\',' . $b['elemento_catalogo'] . ',' . $b['grupo_cuentasalida'] . ',' . $b['grupo_cuentaentrada'] . ',' . $b['grupo_vidautil'] . ',' . $b['grupo_dcuentadebito'] . ',' . $b['grupo_dcuentacredito'] . ',' . $b['grupo_depreciacion'] . ', ' . $b['elemento_tipobien'] . ',' . $b['codigo_padre'] . ')">';
+                    echo 'onclick="eliminarElementoCatalogo(' . $b['elemento_id'] . ',' . $b['elemento_padre'] . ',' . $b['elemento_codigo'] . ',' . $b['elemento_catalogo'] . ',' . $b['codigo_padre'] . ')">';
                     echo "</button>";
 
                     //editar

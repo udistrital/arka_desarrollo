@@ -42,7 +42,6 @@ class Formulario {
     }
 
     function eliminar() {
-		
     	//validar request idCatalogo
     	if(!isset($_REQUEST['idCatalogo'])){
     		$this->miConfigurador->setVariableConfiguracion ( 'mostrarMensaje', 'errorId' );

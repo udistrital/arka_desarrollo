@@ -39,9 +39,7 @@ class Formulario {
     }
     
     public function validarEntrada(){
-    	
-    	
-    	 
+    	   	 
     	//validar request idCatalogo
     	if(!isset($_REQUEST['idCatalogo'])){
     		$this->miConfigurador->setVariableConfiguracion ( 'mostrarMensaje', 'errorId' );
