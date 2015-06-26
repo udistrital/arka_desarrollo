@@ -106,6 +106,11 @@ function consultarActa(elem, request, response){
 	            $('#<?php echo $this->campoSeguro('dependencia')?>').width(300);
 	            $("#<?php echo $this->campoSeguro('dependencia')?> option[value="+ data['dependencia'] +"]").attr("selected",true);
 	            $("#<?php echo $this->campoSeguro('dependencia')?>").select2();
+
+
+	            $("#<?php echo $this->campoSeguro('numero_contrato')?>").val(data['numero_contrato']);
+	            $("#<?php echo $this->campoSeguro('fecha_contrato')?>").val(data['fecha_contrato']);
+
 	        	
 	        	$("#<?php echo $this->campoSeguro('asignacionOrdenador')?> option[value="+ data['ordenador_gasto'] +"]").attr("selected",true);
 	        	$("#<?php echo $this->campoSeguro('asignacionOrdenador')?>").select2();
@@ -199,7 +204,7 @@ function estado(elem, request, response){
 		    			$("#<?php echo $this->campoSeguro('nombreOrdenador')?>").val(data[0]);
 		    			$("#<?php echo $this->campoSeguro('id_ordenador')?>").val(data[1]);
 		    			$("#<?php echo $this->campoSeguro('tipo_ordenador')?>").val(data[2]);
-		    			$("#<?php echo $this->campoSeguro('identificacion_ordenador')?>").val
+		    			$("#<?php echo $this->campoSeguro('identificacion_ordenador')?>").val(data[3]); 
 								    			
 			    		}else{
 
@@ -257,6 +262,7 @@ function estado(elem, request, response){
     $("#<?php echo $this->campoSeguro('asignacionOrdenador')?>").change(function(){
     	
     	if($("#<?php echo $this->campoSeguro('asignacionOrdenador')?>").val()!=''){
+        	
     		datosOrdenador();
 		}else{
 			$("#<?php echo $this->campoSeguro('nombreOrdenador')?>").val('');

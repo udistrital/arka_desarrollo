@@ -150,8 +150,11 @@ class Sql extends \Sql {
 			 */
 			
 			case "buscar_entradas" :
-				$cadenaSql = " SELECT consecutivo valor,consecutivo descripcion  ";
-				$cadenaSql .= " FROM entrada; ";
+				
+				$cadenaSql = "SELECT id_entrada, consecutivo||' - ('||vigencia||')' entradas ";
+				$cadenaSql .= "FROM entrada  ";
+				$cadenaSql .= "WHERE consecutivo > 0  ";
+				
 				break;
 			
 			case "funcionarios" :
@@ -182,7 +185,7 @@ class Sql extends \Sql {
 			case "consultarEntrada" :
 				$cadenaSql = "SELECT DISTINCT ";
 				$cadenaSql .= "entrada.id_entrada, entrada.fecha_registro,  ";
-				$cadenaSql .= " clase_entrada.descripcion, proveedor ,consecutivo   ";
+				$cadenaSql .= " clase_entrada.descripcion, proveedor ,consecutivo||' - ('||vigencia||')' consecutivos   ";
 				$cadenaSql .= "FROM entrada ";
 				$cadenaSql .= "JOIN clase_entrada ON clase_entrada.id_clase = entrada.clase_entrada ";
 				$cadenaSql .= "JOIN elemento ON elemento.id_entrada = entrada.id_entrada ";
@@ -327,7 +330,7 @@ class Sql extends \Sql {
 			case "insertar_salida" :
 				$cadenaSql = " INSERT INTO ";
 				$cadenaSql .= " salida( fecha_registro, dependencia, funcionario, observaciones,";
-				$cadenaSql .= " id_entrada,sede,vigencia)";
+				$cadenaSql .= " id_entrada,sede,vigencia,id_salida)";
 				$cadenaSql .= " VALUES (";
 				$cadenaSql .= "'" . $variable [0] . "',";
 				$cadenaSql .= "'" . $variable [1] . "',";
@@ -335,9 +338,15 @@ class Sql extends \Sql {
 				$cadenaSql .= "'" . $variable [3] . "',";
 				$cadenaSql .= "'" . $variable [4] . "',";
 				$cadenaSql .= "'" . $variable [5] . "',";
-				$cadenaSql .= "'" . $variable [6] . "') ";
+				$cadenaSql .= "'" . $variable [6] . "',";
+				$cadenaSql .= "'" . $variable [7] . "') ";
 				$cadenaSql .= "RETURNING  id_salida; ";
 				
+				break;
+			
+			case "id_salida_maximo" :
+				$cadenaSql = " SELECT MAX(id_salida) ";
+				$cadenaSql .= " FROM salida ";
 				break;
 			
 			case "insertar_salida_item" :

@@ -1,7 +1,6 @@
 <?php
 use inventarios\gestionActa\registrarActa\Sql;
 
-
 $conexion = "inventarios";
 $esteRecursoDB = $this->miConfigurador->fabricaConexiones->getRecursoDB ( $conexion );
 
@@ -23,8 +22,8 @@ if ($_REQUEST ['funcion'] == 'tablaItems') {
 	
 	$cadenaSql = $this->sql->getCadenaSql ( 'items', $_REQUEST ['tiempo'] );
 	// echo $cadenaSql;
-	$resultadoItems = $esteRecursoDB->ejecutarAcceso($cadenaSql, "busqueda" );
-
+	$resultadoItems = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
+	
 	// ---------------------
 	$filas = count ( $resultadoItems );
 	
@@ -53,7 +52,7 @@ if ($_REQUEST ['funcion'] == 'tablaItems') {
 					$row ['cantidad'],
 					$row ['descripcion'],
 					$row ['valor_unitario'],
-					$row ['valor_total'],
+					$row ['valor_total'] 
 			);
 			$i ++;
 		}
@@ -84,10 +83,10 @@ if ($_REQUEST ['funcion'] == 'tablaItems') {
 	}
 }
 if ($_REQUEST ['funcion'] == 'AgregarItem') {
-  	
+	
 	$cadenaSql = $this->sql->getCadenaSql ( 'id_items_temporal' );
 	$idItems = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
-	$id = $idItems [0][0] + 1;
+	$id = $idItems [0] [0] + 1;
 	
 	if ($idItems [0] [0] != null) {
 		
@@ -97,7 +96,7 @@ if ($_REQUEST ['funcion'] == 'AgregarItem') {
 				$_GET ['cantidad'],
 				$_GET ['descripcion'],
 				$_GET ['valor_unitario'],
-				$_GET ['cantidad']*$_GET ['valor_unitario'],
+				$_GET ['cantidad'] * $_GET ['valor_unitario'],
 				$_REQUEST ['tiempo'] 
 		);
 	} else {
@@ -107,14 +106,14 @@ if ($_REQUEST ['funcion'] == 'AgregarItem') {
 				$_GET ['cantidad'],
 				$_GET ['descripcion'],
 				$_GET ['valor_unitario'],
-				$_GET ['cantidad']*$_GET ['valor_unitario'],
-				$_REQUEST ['tiempo']
+				$_GET ['cantidad'] * $_GET ['valor_unitario'],
+				$_REQUEST ['tiempo'] 
 		);
 	}
 	
 	// ------------------
 	
-	$cadenaSql = $this->sql->getCadenaSql ('insertarItem', $datos);
+	$cadenaSql = $this->sql->getCadenaSql ( 'insertarItem', $datos );
 	$resultadoItems = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "acceso" );
 	echo $resultadoItems;
 	// ---------------------
@@ -128,55 +127,52 @@ if ($_REQUEST ['funcion'] == 'EliminarItem') {
 	echo $resultadoItems;
 }
 
-
 $conexion2 = "sicapital";
-$esteRecursoDB2 = $this->miConfigurador->fabricaConexiones->getRecursoDB($conexion2);
+$esteRecursoDB2 = $this->miConfigurador->fabricaConexiones->getRecursoDB ( $conexion2 );
 
 if ($_REQUEST ['funcion'] == 'proveedor') {
-    $cadenaSql = $this->sql->getCadenaSql('select_proveedor', $_REQUEST['proveedor']);
-    $resultadoItems = $esteRecursoDB2->ejecutarAcceso($cadenaSql, "busqueda");
-    $resultado = json_encode($resultadoItems[0]);
-    echo $resultado;
+	$cadenaSql = $this->sql->getCadenaSql ( 'select_proveedor', $_REQUEST ['proveedor'] );
+	$resultadoItems = $esteRecursoDB2->ejecutarAcceso ( $cadenaSql, "busqueda" );
+	$resultado = json_encode ( $resultadoItems [0] );
+	echo $resultado;
 }
-
-
 
 if ($_REQUEST ['funcion'] == 'consultarDependencia') {
-
+	
 	$conexion = "sicapital";
-
+	
 	$esteRecursoDBO = $this->miConfigurador->fabricaConexiones->getRecursoDB ( $conexion );
-
-
-	$cadenaSql = $this->sql->getCadenaSql ( 'dependenciasConsultadas', $_REQUEST['valor'] );
+	
+	$cadenaSql = $this->sql->getCadenaSql ( 'dependenciasConsultadas', $_REQUEST ['valor'] );
 	
 	$resultado = $esteRecursoDBO->ejecutarAcceso ( $cadenaSql, "busqueda" );
-
-
-	$resultado = json_encode ( $resultado);
-
+	
+	$resultado = json_encode ( $resultado );
+	
 	echo $resultado;
 }
-
-
-
 
 if ($_REQUEST ['funcion'] == 'SeleccionOrdenador') {
-
+	
 	$conexion = "sicapital";
 	$esteRecursoDBO = $this->miConfigurador->fabricaConexiones->getRecursoDB ( $conexion );
-
+	
 	$cadenaSql = $this->sql->getCadenaSql ( 'informacion_ordenador', $_REQUEST ['ordenador'] );
 	$resultadoItems = $esteRecursoDBO->ejecutarAcceso ( $cadenaSql, "busqueda" );
-
+	
 	$resultado = json_encode ( $resultadoItems [0] );
-
+	
 	echo $resultado;
 }
 
-
-
-
-
+if ($_REQUEST ['funcion'] == 'consultarInfoContrato') {
+	
+	$cadenaSql = $this->sql->getCadenaSql ( 'informacionContrato', $_REQUEST ['valor'] );
+	$resultado = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
+	$resultado=$resultado[0];
+	$resultado = json_encode ( $resultado );
+	
+	echo $resultado;
+}
 
 ?>

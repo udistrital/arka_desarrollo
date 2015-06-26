@@ -173,4 +173,17 @@ if ($_REQUEST ['funcion'] == 'proveedor') {
     $resultado = json_encode($resultadoItems[0]);
     echo $resultado;
 }
+
+
+if ($_REQUEST ['funcion'] == 'consultarInfoContrato') {
+
+	$cadenaSql = $this->sql->getCadenaSql ( 'informacionContrato', $_REQUEST ['valor'] );
+	$resultado = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
+	$resultado=$resultado[0];
+	$resultado = json_encode ( $resultado );
+
+	echo $resultado;
+}
+
+
 ?>

@@ -58,6 +58,10 @@ class registrarForm {
 
 
         $datos_consulta = array(
+            // Filtro 1
+            'sede' => (isset($_REQUEST['sede']) ? $_REQUEST['sede'] : ''),
+            'dependencia' => (isset($_REQUEST['dependencia']) ? $_REQUEST['dependencia'] : ''),
+            'funcionario' => (isset($_REQUEST['nombreFuncionario']) ? $_REQUEST['nombreFuncionario'] : ''),
             //Entrada
             'numero_entrada' => (isset($_REQUEST['numero_entrada']) ? $_REQUEST['numero_entrada'] : ''),
             'vigencia_entrada' => (isset($_REQUEST['vigencia_entrada']) ? $_REQUEST['vigencia_entrada'] : ''),
@@ -103,7 +107,6 @@ class registrarForm {
             case 4:
                 $cadenaSql = $this->miSql->getCadenaSql('consultarTraslados', $datos_consulta);
                 $datos = $esteRecursoDB->ejecutarAcceso($cadenaSql, "busqueda");
-             
                 break;
             //Sobrantes o faltantes
             case 6:
@@ -125,6 +128,7 @@ class registrarForm {
                 $datos = array();
                 break;
         }
+     
 
 // ---------------- SECCION: Parámetros Generales del Formulario ----------------------------------
         $esteCampo = $esteBloque ['nombre'];

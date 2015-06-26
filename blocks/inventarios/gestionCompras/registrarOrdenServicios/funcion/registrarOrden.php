@@ -61,6 +61,7 @@ class RegistradorOrden {
 		
 		// Registro Contratista
 		$cadenaSql = $this->miSql->getCadenaSql ( 'insertarContratista', $datosContratistaC );
+		
 		$id_ContratistaC = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
 		
 		if ($_REQUEST ['iva'] == 1) {
@@ -133,10 +134,13 @@ class RegistradorOrden {
 		$id_orden = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
 		
 		
+		// 		echo $id_orden[0][0];
 		$datos = array (
 				$id_orden [0] [0],
 				$fechaActual 
 		);
+		
+		
 		
 		if ($id_orden) {
 			

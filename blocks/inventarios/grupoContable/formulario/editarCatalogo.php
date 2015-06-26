@@ -263,6 +263,45 @@ class Formulario {
         unset($atributos);
     }
 
+    private function campoTipoBien() {
+        $esteCampo = "tipoBien";
+        $atributos ['nombre'] = $esteCampo;
+        $atributos ['id'] = $esteCampo;
+        $atributos ['etiqueta'] = $this->lenguaje->getCadena($esteCampo);
+        $atributos ["etiquetaObligatorio"] = false;
+        $atributos ['tab'] = 1;
+        $atributos ['seleccion'] = - 1;
+        $atributos ['anchoEtiqueta'] = 200;
+        $atributos ['evento'] = '';
+        if (isset($_REQUEST [$esteCampo])) {
+            $atributos ['valor'] = $_REQUEST [$esteCampo];
+        } else {
+            $atributos ['valor'] = '';
+        }
+        $atributos ['deshabilitado'] = false;
+        $atributos ['columnas'] = 1;
+        $atributos ['tamanno'] = 1;
+        $atributos ['ajax_function'] = "";
+        $atributos ['ajax_control'] = $esteCampo;
+        $atributos ['estilo'] = "jqueryui";
+        $atributos ['validar'] = "required";
+        $atributos ['limitar'] = 1;
+        $atributos ['anchoCaja'] = 49;
+        $atributos ['miEvento'] = '';
+        $atributos ['cadena_sql'] = $this->sql->getCadenaSql("tipoBien");
+        $matrizItems = array(
+            array(
+                0,
+                ' '
+            )
+        );
+        $matrizItems = $this->esteRecursoDB->ejecutarAcceso($atributos ['cadena_sql'], "busqueda");
+        $atributos ['matrizItems'] = $matrizItems;
+        
+        echo $this->miFormulario->campoCuadroLista($atributos);
+        unset($atributos);
+    }
+
     private function campoDepreciacion() {
 
         $esteCampo = "depreciacion";
@@ -288,11 +327,11 @@ class Formulario {
         $atributos ['validar'] = "required";
         $atributos ['limitar'] = 1;
         $atributos ['anchoCaja'] = 49;
-        //$atributos ['miEvento'] = 'onchange';
+        $atributos ['miEvento'] = 'change';
         //$atributos ['cadena_sql'] = $this->sql->getCadenaSql("boolean");
         $matrizItems = array(
+            array(1, 'SI'),
             array(0, 'NO'),
-            array(1, 'SI')
         );
         //$matrizItems = $this->esteRecursoDB2->ejecutarAcceso($atributos ['cadena_sql'], "busqueda");
         $atributos ['matrizItems'] = $matrizItems;
@@ -305,7 +344,8 @@ class Formulario {
         $atributos ["estiloEnLinea"] = "display:none";
         //$atributos = array_merge($atributos, $atributosGlobales);
         echo $this->miFormulario->division("inicio", $atributos);
-        unset($atributos); {
+        unset($atributos);
+        {
             $esteCampo = 'vidautil';
             $atributos ['id'] = $esteCampo;
             $atributos ['nombre'] = $esteCampo;
@@ -423,6 +463,7 @@ class Formulario {
         $this->campoNombre();
         $this->campoEntrada();
         $this->campoSalida();
+        $this->campoTipoBien();
         $this->campoDepreciacion();
 
 

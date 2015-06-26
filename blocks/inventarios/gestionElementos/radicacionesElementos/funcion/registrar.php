@@ -71,9 +71,9 @@ class Registrador {
 				$_REQUEST ['tipo'],
 				$destino1,
 				$archivo1,
-				$fechaActual 
-		)
-		;
+				$fechaActual,
+				$_REQUEST['placa'] 
+		);
 		
 		$cadenaSql = $this->miSql->getCadenaSql ( 'insertarRadicacion', $array );
 		
@@ -83,6 +83,10 @@ class Registrador {
 				$id_movimiento [0] [0],
 				$fechaActual 
 		);
+		
+		
+		
+		
 		
 		if ($id_movimiento) {
 						

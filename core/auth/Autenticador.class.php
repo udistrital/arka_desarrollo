@@ -1,4 +1,4 @@
-<?
+<?php
 
 /**
  * Autenticador.class.php
@@ -68,23 +68,19 @@ class Autenticador {
         
         $resultado = $this->verificarExistenciaPagina ();
         if ($resultado) {
-        	
-        	$resultado = $this->cargarSesionUsuario ();
+            $resultado = $this->cargarSesionUsuario ();
             
             if ($resultado) {
                 // Verificar que el usuario está autorizado para el nivel de acceso de la página
-            	
+                
                 $resultado = $this->verificarAutorizacionUsuario ();
                 if ($resultado) {
-                	
                     $respuesta = true;
                 } else {
-                	
                     $this->tipoError = "usuarioNoAutorizado";
                     $respuesta = false;
                 }
             } else {
-            	
                 $this->tipoError = "sesionNoExiste";
                 $respuesta = false;
             }

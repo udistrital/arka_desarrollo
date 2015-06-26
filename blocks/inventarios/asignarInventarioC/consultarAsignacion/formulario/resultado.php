@@ -61,6 +61,9 @@ class registrarForm {
         // -------------------------------------------------------------------------------------------------
         $conexion = "inventarios";
         $esteRecursoDB = $this->miConfigurador->fabricaConexiones->getRecursoDB($conexion);
+        
+        $conexion2 = "sicapital";
+        $esteRecursoDB2 = $this->miConfigurador->fabricaConexiones->getRecursoDB($conexion2);
 
         if (isset($_REQUEST['documentoContratista']) && $_REQUEST['documentoContratista'] != '') {
             $docContratista = $_REQUEST['documentoContratista'];
@@ -81,6 +84,9 @@ class registrarForm {
         //Consultar Elementos Asignados al contratista
         $cadenaSql = $this->miSql->getCadenaSql('consultarElementosContratista', $variables);
         $elementos_contratista = $esteRecursoDB->ejecutarAcceso($cadenaSql, "busqueda");
+
+        $cadenaSql2 = $this->miSql->getCadenaSql('nombreContratista', $docContratista);
+        $nombreContratista = $esteRecursoDB2->ejecutarAcceso($cadenaSql2, "busqueda");
 
         // ---------------- SECCION: Parámetros Generales del Formulario ----------------------------------
         $esteCampo = $esteBloque ['nombre'];
@@ -107,7 +113,7 @@ class registrarForm {
         $atributos ['id'] = $esteCampo;
         $atributos ["estilo"] = "jqueryui";
         $atributos ['tipoEtiqueta'] = 'inicio';
-        $atributos ["leyenda"] = "Modificar Asignación de Elementos a Contratista " . $docContratista;
+        $atributos ["leyenda"] = "Modificar Asignación de Elementos: " . $docContratista . " - " . $nombreContratista[0][1];
         echo $this->miFormulario->marcoAgrupacion('inicio', $atributos);
 
         if ($elementos_supervisor !== false || $elementos_contratista !== false) {
@@ -312,7 +318,7 @@ class registrarForm {
             echo $this->miFormulario->formulario($atributos);
         } else {
 
-            $mensaje = "No Se Encontraron<br>Elementos Activos para Asignar";
+            $mensaje = "No Se Encontraron<br>Elementos Asignados para Modificar";
 
             // ---------------- CONTROL: Cuadro de Texto --------------------------------------------------------
             $esteCampo = 'mensajeRegistro';

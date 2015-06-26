@@ -43,32 +43,38 @@ $esteRecursoDB = $this->miConfigurador->fabricaConexiones->getRecursoDB ( $conex
 	$verificarFormulario = "1";
 	echo $this->miFormulario->formulario ( $atributos );
 	
+	
+	$miPaginaActual = $this->miConfigurador->getVariableConfiguracion ( 'pagina' );
+		
+	$directorio = $this->miConfigurador->getVariableConfiguracion ( "host" );
+	$directorio .= $this->miConfigurador->getVariableConfiguracion ( "site" ) . "/index.php?";
+	$directorio .= $this->miConfigurador->getVariableConfiguracion ( "enlace" );
+		
+	$variable = "pagina=" . $miPaginaActual;
+	$variable = $this->miConfigurador->fabricaConexiones->crypto->codificar_url ( $variable, $directorio );
+		
+	// ---------------- CONTROL: Cuadro de Texto --------------------------------------------------------
+	$esteCampo = 'botonRegresar';
+	$atributos ['id'] = $esteCampo;
+	$atributos ['enlace'] = $variable;
+	$atributos ['tabIndex'] = 1;
+	$atributos ['estilo'] = 'textoSubtitulo';
+	$atributos ['enlaceTexto'] = $this->lenguaje->getCadena ( $esteCampo );
+	$atributos ['ancho'] = '10%';
+	$atributos ['alto'] = '10%';
+	$atributos ['redirLugar'] = true;
+	echo $this->miFormulario->enlace ( $atributos );
+		
+	unset ( $atributos );
+	
+	
+	
 	$esteCampo = "Agrupacion";
 	$atributos ['id'] = $esteCampo;
 	$atributos ['leyenda'] = "Registro Contratos Vicerectoria";
 	echo $this->miFormulario->agrupacion ( 'inicio', $atributos );
 	
-	// ------------------Division para los botones-------------------------
-	$atributos ["id"] = "botones";
-	$atributos ["estilo"] = "marcoBotones";
-	echo $this->miFormulario->division ( "inicio", $atributos );
-	
-	// -------------Control Boton-----------------------
-	$esteCampo = "botonVolver";
-	$atributos ["id"] = $esteCampo;
-	$atributos ["tabIndex"] = $tab ++;
-	$atributos ["tipo"] = "boton";
-	$atributos ["estiloBoton"] = "jqueryui";
-	$atributos ["verificar"] = ""; // Se coloca true si se desea verificar el formulario antes de pasarlo al servidor.
-	$atributos ["tipoSubmit"] = "jquery"; // Dejar vacio para un submit normal, en este caso se ejecuta la función submit declarada en ready.js
-	$atributos ["valor"] = $this->lenguaje->getCadena ( $esteCampo );
-	$atributos ["nombreFormulario"] = $nombreFormulario;
-	echo $this->miFormulario->campoBoton ( $atributos );
-	unset ( $atributos );
-	
-	// -------------Fin Control Boton----------------------
-	// ------------------Fin Division para los botones-------------------------
-	echo $this->miFormulario->division ( "fin" );
+
 	
 	$valorCodificado = "pagina=" . $miPaginaActual;
 	$valorCodificado .= "&bloque=" . $esteBloque ["id_bloque"];
@@ -218,7 +224,7 @@ if ($resultadoContratos) {
 	echo "<thead>
                 <tr>
 		     <th>Número Contrato</th>
-			 <th>Nombre Contratista</th>
+			 <th>Identificación<br>Contratista</th>
              <th>Fecha Contrato</th>
 			 <th>Fecha Registro</th>
              <th>Documento</th>

@@ -177,3 +177,10 @@ event.preventDefault();
 	   });
 	
 	
+	$('#<?php echo $this->campoSeguro('nombre_contratista')?>').select2({
+   		 placeholder: "Search for a repository",
+   		 minimumInputLength: 3,
+
+       });
+	
+	

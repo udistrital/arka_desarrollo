@@ -28,6 +28,12 @@ class Sql extends \Sql {
 		
 		switch ($tipo) {
 			
+			case "proveedores" :
+				$cadenaSql = " SELECT PRO_NIT,PRO_NIT||' - '||PRO_RAZON_SOCIAL AS proveedor ";
+				$cadenaSql .= " FROM PROVEEDORES ";
+				
+				break;
+			
 			case 'registroContrato' :
 				$cadenaSql = 'INSERT INTO ';
 				$cadenaSql .= 'contratos';

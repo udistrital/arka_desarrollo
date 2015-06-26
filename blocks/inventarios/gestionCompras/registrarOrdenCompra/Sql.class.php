@@ -593,8 +593,7 @@ class Sql extends \Sql {
 				$cadenaSql .= " WHERE ESF_ID_ESPACIO='" . $variable . "' ";
 				$cadenaSql .= " AND  ESF_ESTADO='A'";
 				break;
-				
-				
+			
 			case "consultarItems" :
 				$cadenaSql = " SELECT item, unidad_medida, cantidad, descripcion,
 				                   valor_unitario, valor_total, descuento ";
@@ -626,6 +625,14 @@ class Sql extends \Sql {
 				$cadenaSql .= " FROM ORDENADORES_GASTO ";
 				$cadenaSql .= " WHERE ORG_IDENTIFICADOR ='" . $variable . "' ";
 				$cadenaSql .= " AND ORG_ESTADO='A' ";
+				break;
+			
+			case "funcionarios" :
+				
+				$cadenaSql = "SELECT FUN_IDENTIFICACION, FUN_IDENTIFICACION ||' - '|| FUN_NOMBRE ";
+				$cadenaSql .= "FROM FUNCIONARIOS ";
+				$cadenaSql .= "WHERE FUN_ESTADO='A' ";
+				
 				break;
 		}
 		return $cadenaSql;

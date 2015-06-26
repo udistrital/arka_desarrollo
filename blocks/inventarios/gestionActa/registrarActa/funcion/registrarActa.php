@@ -25,7 +25,6 @@ class RegistradorActa {
 	}
 	function procesarFormulario() {
 		
-		
 		$fechaActual = date ( 'Y-m-d' );
 		
 		$esteBloque = $this->miConfigurador->getVariableConfiguracion ( "esteBloque" );
@@ -41,8 +40,8 @@ class RegistradorActa {
 		$cadenaSql = $this->miSql->getCadenaSql ( 'items', $_REQUEST ['seccion'] );
 		$items = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
 		
-		if ($items == false ) {
-	
+		if ($items == false) {
+			
 			redireccion::redireccionar ( 'noItems' );
 		}
 		
@@ -51,7 +50,8 @@ class RegistradorActa {
 			$archivo = $_FILES [$key];
 		}
 		
-		if ($archivo) {
+		if ($_FILES['documentoSoporte']['name']!='') {
+			
 			// obtenemos los datos del archivo
 			$tamano = $archivo ['size'];
 			$tipo = $archivo ['type'];
@@ -70,9 +70,14 @@ class RegistradorActa {
 			} else {
 				$status = "Error al subir archivo";
 			}
+		} else {
+			
+			$destino1 = 'NULL';
+			$archivo1 = 'NULL';
 		}
 		
-		if (isset($_REQUEST ['tipoOrden'])) {
+		
+		if (isset ( $_REQUEST ['tipoOrden'] )) {
 			
 			switch ($_REQUEST ['tipoOrden']) {
 				
@@ -102,18 +107,15 @@ class RegistradorActa {
 				'observacion' => $_REQUEST ['observacionesActa'],
 				'estado' => 1,
 				'tipo_orden' => $tipoOrden,
-				'numero_orden' => (isset($_REQUEST ['numero_orden']))?$_REQUEST ['numero_orden']:0,
+				'numero_orden' => (isset ( $_REQUEST ['numero_orden'] )) ? $_REQUEST ['numero_orden'] : 0,
 				'enlace_soporte' => $destino1,
-				'nombre_soporte' => $archivo1 
+				'nombre_soporte' => $archivo1,
+				'identificador_contrato' => ($_REQUEST ['numeroContrato']!='') ? $_REQUEST ['numeroContrato'] : 0,
 		);
-		
-		
-		
+
 		$cadenaSql = $this->miSql->getCadenaSql ( 'insertarActa', $datosActa );
 		
-		
 		$id_acta = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
-		
 		
 		// Registro de Items
 		foreach ( $items as $contenido ) {
@@ -124,32 +126,27 @@ class RegistradorActa {
 					$contenido ['descripcion'],
 					$contenido ['cantidad'],
 					$contenido ['valor_unitario'],
-					$contenido ['cantidad']*$contenido ['valor_unitario'] 
+					$contenido ['cantidad'] * $contenido ['valor_unitario'] 
 			);
 			
-		
-			
 			$cadenaSql = $this->miSql->getCadenaSql ( 'insertarItems', $datosItems );
-		
-			$items = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "acceso" );
 			
+			$items = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "acceso" );
 		}
 		
 		$cadenaSql = $this->miSql->getCadenaSql ( 'limpiar_tabla_items', $_REQUEST ['seccion'] );
 		$resultado_secuencia = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "acceso" );
-	
+		
 		$datos = array (
 				$id_acta [0] [0],
 				$fechaActual 
 		);
 		
-		
-		
 		if ($items && $id_acta) {
-		
+			
 			redireccion::redireccionar ( 'inserto', $datos );
 		} else {
-		
+			
 			redireccion::redireccionar ( 'noInserto', $datos );
 		}
 	}

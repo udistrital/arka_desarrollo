@@ -35,7 +35,7 @@ class Formulario {
 
         $this->conteoListas = 0;
 
-        $conexion="inventarios";
+        $conexion = "inventarios";
         $this->esteRecursoDB = $this->miConfigurador->fabricaConexiones->getRecursoDB($conexion);
         if (!$this->esteRecursoDB) {
             //Este se considera un error fatal
@@ -75,8 +75,6 @@ class Formulario {
     public function dibujarCatalogo() {
 
         //consultar elementos 
-
-
         $base = $this->consultarElementosNivel(0);
 
         $this->consultarDatosCatalogo();
@@ -120,14 +118,13 @@ class Formulario {
 
                 //var_dump($this->conteoListas);echo "<br>";
                 $base2 = $this->consultarElementosNivel($b['elemento_id']);
+
                 echo '<div ';
                 if ($hijo)
                     echo 'style="display:none;" ';
 
                 echo 'class="cont contenedor' . $b['elemento_padre'] . '" id="elemento' . $b['elemento_padre'] . '" ';
                 echo ">";
-
-
 
                 echo '<li id="el' . $b['elemento_id'] . '">';
 
@@ -140,9 +137,6 @@ class Formulario {
                     echo '<button title="Click para expandir elementos" class="expandir" onclick="cambioHijos(\'contenedor' . $b['elemento_id'] . '\',this)">';
                     echo "</button>";
                 }
-
-
-
 
                 echo "</div>";
 
@@ -167,14 +161,13 @@ class Formulario {
 
                     //eliminar
                     echo '<button title="Click para Eliminar" class="eliminar" ';
-                    echo 'onclick="eliminarElementoCatalogo(' . $b['elemento_id'] . ',' . $b['elemento_padre'] . ',' . $b['elemento_codigo'] . ',\'' . $b['elemento_nombre'] . '\',' . $b['elemento_catalogo'] . ',' . $b['grupo_cuentasalida'] . ',' . $b['grupo_cuentaentrada'] . ',' . $b['grupo_vidautil'] . ',' . $b['grupo_dcuentadebito'] . ',' . $b['grupo_dcuentacredito'] . ',' . $b['grupo_depreciacion'] . ')">';
+                    echo 'onclick="eliminarElementoCatalogo(' . $b['elemento_id'] . ',' . $b['elemento_padre'] . ',' . $b['elemento_codigo'] . ',' . $b['elemento_catalogo'] . ',' . $b['codigo_padre'] . ')">';
                     echo "</button>";
 
                     //editar
                     echo '<button title="Click para Editar" class="editar" ';
-                    echo 'onclick="editarElementoCatalogo(' . $b['elemento_id'] . ',' . $b['elemento_padre'] . ',' . $b['elemento_codigo'] . ',\'' . $b['elemento_nombre'] . '\',' . $b['elemento_catalogo'] . ',' . $b['grupo_cuentasalida'] . ',' . $b['grupo_cuentaentrada'] . ',' . $b['grupo_vidautil'] . ',' . $b['grupo_dcuentadebito'] . ',' . $b['grupo_dcuentacredito'] . ',' . $b['grupo_depreciacion'] . ')">';
+                    echo 'onclick="editarElementoCatalogo(' . $b['elemento_id'] . ',' . $b['elemento_padre'] . ',' . $b['elemento_codigo'] . ',\'' . $b['elemento_nombre'] . '\',' . $b['elemento_catalogo'] . ',' . $b['grupo_cuentasalida'] . ',' . $b['grupo_cuentaentrada'] . ',' . $b['grupo_vidautil'] . ',' . $b['grupo_dcuentadebito'] . ',' . $b['grupo_dcuentacredito'] . ',' . $b['grupo_depreciacion'] . ', ' . $b['elemento_tipobien'] . ',' . $b['codigo_padre'] . ')">';
                     echo "</button>";
-
 
                     echo '</div>';
                     echo '</div>';
@@ -198,7 +191,7 @@ class Formulario {
     private function consultarElementosNivel($nivel) {
         $cadena_sql = $this->sql->getCadenaSql("elementosNivel", array($_REQUEST['idCatalogo'], $nivel));
         $registros = $this->esteRecursoDB->ejecutarAcceso($cadena_sql, "busqueda");
-    
+
         return $registros;
     }
 

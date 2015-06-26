@@ -65,7 +65,7 @@ define('SW_DB_DATEFORMAT', 'Y-m-d');
 define('SW_PREP_DATEFORMAT', 'Y-m-d');
 define('SW_DB_SERVER', '');
 define('SW_DB_PROTOCOL', '');
-define('SW_DB_ENCODING', 'None');
+define('SW_DB_ENCODING', 'UTF8');
 
 //HTML Output Encoding
 define('SW_OUTPUT_ENCODING', 'UTF8');

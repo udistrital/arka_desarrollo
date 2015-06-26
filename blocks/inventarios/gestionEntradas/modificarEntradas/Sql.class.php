@@ -150,7 +150,7 @@ class Sql extends \Sql {
 			 */
 			
 			case "buscar_entradas" :
-				$cadenaSql = " SELECT id_entrada valor,id_entrada descripcion  ";
+				$cadenaSql = " SELECT id_entrada valor, consecutivo||' - ('||entrada.vigencia||')' descripcion  ";
 				$cadenaSql .= " FROM entrada; ";
 				break;
 			
@@ -186,7 +186,9 @@ class Sql extends \Sql {
 				
 				$cadenaSql = "SELECT ";
 				$cadenaSql .= "id_clase, descripcion  ";
-				$cadenaSql .= "FROM clase_entrada;";
+				$cadenaSql .= "FROM clase_entrada ";
+				$cadenaSql .= "WHERE id_clase > 1 ";
+				$cadenaSql .= "ORDER BY  descripcion ASC  ;";
 				
 				break;
 			
@@ -194,7 +196,8 @@ class Sql extends \Sql {
 				
 				$cadenaSql = "SELECT ";
 				$cadenaSql .= "id_tipo, descripcion  ";
-				$cadenaSql .= "FROM tipo_contrato;";
+				$cadenaSql .= "FROM tipo_contrato ";
+				$cadenaSql .= "WHERE id_tipo > 0;";
 				
 				break;
 			
@@ -208,18 +211,17 @@ class Sql extends \Sql {
 			
 			case "consultarEntrada" :
 				$cadenaSql = "SELECT DISTINCT ";
-				$cadenaSql .= "id_entrada, fecha_registro,  ";
-				$cadenaSql .= " descripcion,proveedor ,consecutivo  ";
+				$cadenaSql .= "entrada.id_entrada, entrada.fecha_registro,  ";
+				$cadenaSql .= " descripcion,proveedor ,consecutivo||' - ('||entrada.vigencia||')' consecutivo , cierre_contable ";
 				$cadenaSql .= "FROM entrada ";
 				$cadenaSql .= "JOIN clase_entrada ON clase_entrada.id_clase = entrada.clase_entrada ";
-				// $cadenaSql .= "JOIN proveedor ON proveedor.id_proveedor = entrada.proveedor ";
 				$cadenaSql .= "WHERE 1=1 ";
 				if ($variable [0] != '') {
-					$cadenaSql .= " AND id_entrada = '" . $variable [0] . "'";
+					$cadenaSql .= " AND entrada.id_entrada = '" . $variable [0] . "'";
 				}
 				
 				if ($variable [1] != '') {
-					$cadenaSql .= " AND fecha_registro BETWEEN CAST ( '" . $variable [1] . "' AS DATE) ";
+					$cadenaSql .= " AND entrada.fecha_registro BETWEEN CAST ( '" . $variable [1] . "' AS DATE) ";
 					$cadenaSql .= " AND  CAST ( '" . $variable [2] . "' AS DATE)  ";
 				}
 				
@@ -257,7 +259,7 @@ class Sql extends \Sql {
 			
 			case "tipoComprador" :
 				
-				$cadenaSql = " 	SELECT ORG_IDENTIFICADOR, ORG_ORDENADOR_GASTO ";
+				$cadenaSql = " 	SELECT ORG_TIPO_ORDENADOR, ORG_ORDENADOR_GASTO ";
 				$cadenaSql .= " FROM ORDENADORES_GASTO ";
 				$cadenaSql .= " WHERE ORG_ESTADO='A' ";
 				
@@ -272,7 +274,15 @@ class Sql extends \Sql {
 			case "informacion_ordenador" :
 				$cadenaSql = " SELECT ORG_NOMBRE,ORG_IDENTIFICADOR,ORG_TIPO_ORDENADOR,ORG_IDENTIFICACION  ";
 				$cadenaSql .= " FROM ORDENADORES_GASTO ";
-				$cadenaSql .= " WHERE  ORG_IDENTIFICADOR='" . $variable . "' ";
+				$cadenaSql .= " WHERE  ORG_IDENTIFICACION='" . $variable [0] . "' ";
+				$cadenaSql .= " AND ORG_TIPO_ORDENADOR='" . $variable [1] . "' ";
+				
+				break;
+			
+			case "informacion_ordenadorConsultados" :
+				$cadenaSql = " SELECT ORG_NOMBRE,ORG_IDENTIFICADOR,ORG_TIPO_ORDENADOR,ORG_IDENTIFICACION  ";
+				$cadenaSql .= " FROM ORDENADORES_GASTO ";
+				$cadenaSql .= " WHERE  ORG_TIPO_ORDENADOR='" . $variable . "' ";
 				$cadenaSql .= " AND ORG_ESTADO='A' ";
 				break;
 			
@@ -400,6 +410,23 @@ class Sql extends \Sql {
 				
 				break;
 			
+			case "insertarInformación" :
+				$cadenaSql = " INSERT INTO info_clase_entrada(  ";
+				$cadenaSql .= " observacion, id_entrada, id_salida, id_hurto,";
+				$cadenaSql .= " num_placa, val_sobrante, ruta_archivo, nombre_archivo)";
+				$cadenaSql .= " VALUES (";
+				$cadenaSql .= "'" . $variable [0] . "',";
+				$cadenaSql .= "'" . $variable [1] . "',";
+				$cadenaSql .= "'" . $variable [2] . "',";
+				$cadenaSql .= "'" . $variable [3] . "',";
+				$cadenaSql .= "'" . $variable [4] . "',";
+				$cadenaSql .= "'" . $variable [5] . "',";
+				$cadenaSql .= "'" . $variable [6] . "',";
+				$cadenaSql .= "'" . $variable [7] . "') ";
+				$cadenaSql .= "RETURNING  id_info_clase; ";
+				
+				break;
+			
 			case "actualizarInformacion" :
 				$cadenaSql = " UPDATE info_clase_entrada ";
 				$cadenaSql .= " SET observacion= '" . $variable [0] . "', ";
@@ -424,15 +451,16 @@ class Sql extends \Sql {
 				$cadenaSql .= "  fecha_factura='" . $variable [7] . "', ";
 				$cadenaSql .= "  observaciones='" . $variable [8] . "', ";
 				$cadenaSql .= "  acta_recibido='" . $variable [10] . "', ";
-				$cadenaSql .= "  ordenador='" . $variable [11] . "', ";
+				$cadenaSql .= "  ordenador=" . $variable [11] . ", ";
 				$cadenaSql .= "  sede='" . $variable [12] . "', ";
 				$cadenaSql .= "  dependencia='" . $variable [13] . "', ";
 				$cadenaSql .= "  supervisor='" . $variable [14] . "', ";
-				$cadenaSql .= "  tipo_ordenador='" . $variable [15] . "', ";
-				$cadenaSql .= "  identificacion_ordenador='" . $variable [16] . "', ";
+				$cadenaSql .= "  tipo_ordenador=" . $variable [15] . ", ";
+				$cadenaSql .= "  identificacion_ordenador=" . $variable [16] . ", ";
+				$cadenaSql .= "  info_clase='" . $variable [17] . "', ";
 				$cadenaSql .= "  estado_entrada='1'  ";
 				$cadenaSql .= "  WHERE id_entrada='" . $variable [9] . "' ";
-				$cadenaSql .= "  RETURNING  id_entrada ";
+				$cadenaSql .= "  RETURNING  consecutivo||' - ('||vigencia||')' entrada ";
 				
 				break;
 			
@@ -504,11 +532,13 @@ class Sql extends \Sql {
 				break;
 			
 			case 'consultarActas' :
-				$cadenaSql = "SELECT *  ";
+				$cadenaSql = "SELECT registro_actarecibido.* , contratos.numero_contrato, contratos.fecha_contrato ";
 				$cadenaSql .= "FROM registro_actarecibido  ";
+				$cadenaSql .= "LEFT JOIN  contratos ON contratos.id_contrato=registro_actarecibido.id_contrato ";
 				$cadenaSql .= "WHERE  id_actarecibido='" . $variable . "';";
 				
 				break;
+			
 			
 			case "funcionarios" :
 				
@@ -516,6 +546,32 @@ class Sql extends \Sql {
 				$cadenaSql .= "FROM FUNCIONARIOS ";
 				$cadenaSql .= "WHERE FUN_ESTADO='A' ";
 				
+				break;
+			
+			case 'consultarEntradas' :
+				$cadenaSql = "SELECT id_entrada, consecutivo||' - ('||vigencia||')' entradas ";
+				$cadenaSql .= "FROM entrada  ";
+				$cadenaSql .= "WHERE consecutivo > 0  ";
+				break;
+			
+			case 'consultarSalidas' :
+				$cadenaSql = "SELECT id_salida, consecutivo||' - ('||vigencia||')' salidas ";
+				$cadenaSql .= "FROM salida  ";
+				$cadenaSql .= "WHERE consecutivo > 0  ";
+				break;
+			
+			case 'consultarHurtos' :
+				$cadenaSql = "SELECT id_estado_elemento, id_hurto||' - ('||fecha_hurto||')' hurtos ";
+				$cadenaSql .= "FROM estado_elemento  ";
+				$cadenaSql .= "WHERE id_hurto > 0  ";
+				$cadenaSql .= "ORDER BY  id_hurto ASC ";
+				
+				break;
+			
+			case 'consultarPlacas' :
+				$cadenaSql = "SELECT id_elemento_ind, placa  ";
+				$cadenaSql .= "FROM elemento_individual  ";
+				$cadenaSql .= "WHERE placa <> '' ";
 				break;
 		}
 		return $cadenaSql;

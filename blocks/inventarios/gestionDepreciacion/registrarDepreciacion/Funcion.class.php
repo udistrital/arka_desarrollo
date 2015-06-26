@@ -13,6 +13,7 @@ include_once ("core/manager/Configurador.class.php");
 include_once ("core/builder/InspectorHTML.class.php");
 include_once ("core/builder/Mensaje.class.php");
 include_once ("core/crypto/Encriptador.class.php");
+include_once ("funcion/redireccionar.php");
 
 // Esta clase contiene la logica de negocio del bloque y extiende a la clase funcion general la cual encapsula los
 // metodos mas utilizados en la aplicacion
@@ -46,15 +47,24 @@ class Funcion {
         include_once ($this->ruta . "/funcion/funcionEjemplo.php");
     }
     
-     function registrarDepreciacion() {
-        include_once ($this->ruta . "/funcion/registrarDepreciacion.php");
-    }
-
-    function procesarAjax() {
+     function procesarAjax() {
         include_once ($this->ruta . "funcion/procesarAjax.php");
     }
 
-  
+    function registrarDepreciacion() {
+        include_once ($this->ruta . "/funcion/registrarDepreciacion.php");
+    }
+
+    function calcularDepreciacion() {
+        include_once ($this->ruta . "/funcion/calcularDepreciacion.php");
+    }
+
+    function generarPDF() {
+        include_once ($this->ruta . "/funcion/generarPDF.php");
+    }
+
+   
+
     function action() {
 // 		
         // Evitar que se ingrese codigo HTML y PHP en los campos de texto
@@ -67,7 +77,9 @@ class Funcion {
         // se recomienda que aqui solo sea el punto de entrada para incluir otros scripts que estarán
         // en la carpeta funcion
         // Importante: Es adecuado que sea una variable llamada opcion o action la que guie el procesamiento:
+        
         if (isset($_REQUEST ['procesarAjax'])) {
+            
             $this->procesarAjax();
         } elseif (isset($_REQUEST ["opcion"])) {
 
@@ -81,20 +93,13 @@ class Funcion {
                 redireccion::redireccionar($_REQUEST['opcion']);
             }
 
-            if ($_REQUEST ['opcion'] == 'ConsultarOrden') {
-
-                $this->consultarOrden();
+            if ($_REQUEST ['opcion'] == 'calcularDepreciacion') {
+                $this->calcularDepreciacion();
             }
 
-// 			if ($validacion == false) {
-// 				// Instanciar a la clase pagina con mensaje de correcion de datos
-// 				echo "Datos Incorrectos";
-// 			} else {
-// 				// Validar las variables para evitar un tipo insercion de SQL
-// 				$_REQUEST = $this->miInspectorHTML->limpiarSQL ( $_REQUEST );
-// 				$this->funcionEjemplo ();
-// 				$this->redireccionar ( "exito" );
-// 			}
+            if ($_REQUEST ['opcion'] == 'generarPDF') {
+                $this->generarPDF();
+            }
         }
     }
 
@@ -138,4 +143,5 @@ class Funcion {
     }
 
 }
+
 ?>

@@ -109,11 +109,64 @@ $cadena16 = $this->miConfigurador->fabricaConexiones->crypto->codificar_url ( $c
 $urlFinal16 = $url . $cadena16;
 
 
+
+
+
+
+// Variables
+$cadenaACodificar17 = "pagina=" . $this->miConfigurador->getVariableConfiguracion ( "pagina" );
+$cadenaACodificar17 .= "&procesarAjax=true";
+$cadenaACodificar17 .= "&action=index.php";
+$cadenaACodificar17 .= "&bloqueNombre=" . $esteBloque ["nombre"];
+$cadenaACodificar17 .= "&bloqueGrupo=" . $esteBloque ["grupo"];
+$cadenaACodificar17 .= $cadenaACodificar17 . "&funcion=consultarInfoContrato";
+$cadenaACodificar17 .= "&tiempo=" . $_REQUEST ['tiempo'];
+
+// Codificar las variables
+$enlace = $this->miConfigurador->getVariableConfiguracion ( "enlace" );
+$cadena17 = $this->miConfigurador->fabricaConexiones->crypto->codificar_url ( $cadenaACodificar17, $enlace );
+
+// URL definitiva
+$urlFinal17 = $url . $cadena17;
+
+
+
+
 // echo $urlFinal;exit;
 // echo $urlFinal2;
 // echo $urlFinal3;
 ?>
 <script type='text/javascript'>
+
+
+
+function consultarContrato(elem, request, response){
+	  $.ajax({
+	    url: "<?php echo $urlFinal17?>",
+	    dataType: "json",
+	    data: { valor:$("#<?php echo $this->campoSeguro('numeroContrato')?>").val()},
+	    success: function(data){ 
+
+
+
+	        if(data[0]!=" "){
+
+	        	$("#documentoContrato").attr("href",data['documento_ruta']);
+	        	$("#documentoContrato").attr("target","_blank");
+
+
+	        	
+	        	$("#<?php echo $this->campoSeguro('nitproveedor')?> option[value="+ data['nombre_contratista'] +"]").attr("selected",true);
+	        	$("#<?php echo $this->campoSeguro('nitproveedor')?>").select2();
+	        	
+		        }
+	    			
+
+	    }
+		                    
+	   });
+	};
+
 
 
 function consultarDependencia(elem, request, response){
@@ -328,6 +381,17 @@ function datosOrdenador(elem, request, response){
         );
 
 
+        $("#<?php echo $this->campoSeguro('numeroContrato')?>").change(function(){
+        	if($("#<?php echo $this->campoSeguro('numeroContrato')?>").val()!=''){
+
+        		consultarContrato();
+    		}else{
+    			
+    			}
+
+    	      });
+
+
         $("#<?php echo $this->campoSeguro('sede')?>").change(function(){
         	if($("#<?php echo $this->campoSeguro('sede')?>").val()!=''){
             	consultarDependencia();
@@ -336,6 +400,7 @@ function datosOrdenador(elem, request, response){
     			}
 
     	      });
+	      
         
         
         $("#<?php echo $this->campoSeguro('asignacionOrdenador')?>").change(function(){

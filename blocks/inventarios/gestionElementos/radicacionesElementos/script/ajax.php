@@ -15,7 +15,7 @@ $cadenaACodificar .= "&procesarAjax=true";
 $cadenaACodificar .= "&action=index.php";
 $cadenaACodificar .= "&bloqueNombre=" . $esteBloque ["nombre"];
 $cadenaACodificar .= "&bloqueGrupo=" . $esteBloque ["grupo"];
-$cadenaACodificar .= $cadenaACodificar . "&funcion=letrasNumeros";
+$cadenaACodificar .= $cadenaACodificar . "&funcion=placas";
 $cadenaACodificar .= "&tiempo=" . $_REQUEST ['tiempo'];
 
 // Codificar las variables
@@ -308,17 +308,8 @@ $(function() {
 
 
 
-    $("#<?php echo $this->campoSeguro('vigencia_contratista')?>").change(function() {
-    	
-		if($("#<?php echo $this->campoSeguro('vigencia_contratista')?>").val()!=''){
 
-			contratistasC();	
-
-		}else{}
-
-
- 		});
-    
+   
     $("#<?php echo $this->campoSeguro('vigencia_disponibilidad')?>").change(function() {
 	
 				if($("#<?php echo $this->campoSeguro('vigencia_disponibilidad')?>").val()!=''){

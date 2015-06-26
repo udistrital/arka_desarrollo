@@ -43,6 +43,13 @@
                         $("#<?php echo $this->campoSeguro('formaPago')?>").select2();
             
             
+               $("#<?php echo $this->campoSeguro('supervision')?>").select2({
+			   	 placeholder: "Search for a repository",
+			   	 minimumInputLength: 3,
+			
+			       }); 	
+            
+            
             
 
         
@@ -50,7 +57,7 @@
          
         $("#<?php echo $this->campoSeguro('selec_proveedor')?>").select2({
    		 placeholder: "Search for a repository",
-   		 minimumInputLength: 5,
+   		 minimumInputLength: 3,
 
        });
     

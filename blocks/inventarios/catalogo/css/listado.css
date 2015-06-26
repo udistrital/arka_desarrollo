@@ -169,7 +169,22 @@ ul
     text-decoration: none;
     vertical-align:text-center;
     color:transparent;
+}
 
+.activar:hover{
+    background:url(../css/images/done.png)	right no-repeat;
+    cursor:pointer;
+    color:transparent;
+
+}
+
+.activar{
+    background:url(../css/images/done.png)	right no-repeat;
+    width:20px;
+    display:inline-block;    
+    text-decoration: none;
+    vertical-align:text-center;
+    color:transparent;
 }
 
 .editarElemento:hover{

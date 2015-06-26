@@ -21,7 +21,6 @@ class registrarForm {
 	}
 	function miForm() {
 		
-		
 		// Rescatar los datos de este bloque
 		$esteBloque = $this->miConfigurador->getVariableConfiguracion ( "esteBloque" );
 		
@@ -35,8 +34,6 @@ class registrarForm {
 		 * $atributos= array_merge($atributos,$atributosGlobales);
 		 */
 		
-		
-		
 		$_REQUEST ['tiempo'] = time ();
 		
 		$atributosGlobales ['campoSeguro'] = 'true';
@@ -44,7 +41,6 @@ class registrarForm {
 		// -------------------------------------------------------------------------------------------------
 		$conexion = "inventarios";
 		$esteRecursoDB = $this->miConfigurador->fabricaConexiones->getRecursoDB ( $conexion );
-		
 		
 		$fechaActual = date ( 'Y-m-d' );
 		// Limpia Items Tabla temporal
@@ -73,6 +69,30 @@ class registrarForm {
 		$atributos ['tipoEtiqueta'] = 'inicio';
 		echo $this->miFormulario->formulario ( $atributos );
 		{
+			$miPaginaActual = $this->miConfigurador->getVariableConfiguracion ( 'pagina' );
+			
+			$directorio = $this->miConfigurador->getVariableConfiguracion ( "host" );
+			$directorio .= $this->miConfigurador->getVariableConfiguracion ( "site" ) . "/index.php?";
+			$directorio .= $this->miConfigurador->getVariableConfiguracion ( "enlace" );
+			
+			$variable = "pagina=" . $miPaginaActual;
+			$variable = $this->miConfigurador->fabricaConexiones->crypto->codificar_url ( $variable, $directorio );
+			
+			// ---------------- CONTROL: Cuadro de Texto --------------------------------------------------------
+			$esteCampo = 'botonRegresar';
+			$atributos ['id'] = $esteCampo;
+			$atributos ['enlace'] = $variable;
+			$atributos ['tabIndex'] = 1;
+			$atributos ['estilo'] = 'textoSubtitulo';
+			$atributos ['enlaceTexto'] = $this->lenguaje->getCadena ( $esteCampo );
+			$atributos ['ancho'] = '10%';
+			$atributos ['alto'] = '10%';
+			$atributos ['redirLugar'] = true;
+			echo $this->miFormulario->enlace ( $atributos );
+			
+			unset ( $atributos );
+			
+			
 			// ---------------- SECCION: Controles del Formulario -----------------------------------------------
 			
 			$esteCampo = "marcoDatosBasicos";
@@ -86,16 +106,10 @@ class registrarForm {
 				
 				if (isset ( $_REQUEST ['mensaje'] ) && $_REQUEST ['mensaje'] == 'confirma') {
 					
-					$variable=$_REQUEST['registro'];
-			
-					
-						
-						$mensaje = "Se Registro la Baja del Elemento <br> # ID Baja : ".$variable[0].".<br>Fecha :".$fechaActual;
-						
+					$variable = $_REQUEST ['registro'];
 					
 					
-					
-					
+					$mensaje = "Se Registro la solicitud de Baja del Elemento <br> # Número Baja por Aprobar : " . $variable. ".<br>Fecha :" . $fechaActual. "<br><br>Se efectuará la Baja al momento de realizar Aprobación de Baja.";
 					
 					// ---------------- CONTROL: Cuadro de Texto --------------------------------------------------------
 					$esteCampo = 'mensajeRegistro';
@@ -114,7 +128,7 @@ class registrarForm {
 				
 				if (isset ( $_REQUEST ['mensaje'] ) && $_REQUEST ['mensaje'] == 'error') {
 					
-					$mensaje = "No Se Pudo Hacer la  Registro de la Baja del Elemento";
+					$mensaje = "No Se Pudo Hacer el Registro de Solicitud de Baja del Elemento";
 					
 					// ---------------- CONTROL: Cuadro de Texto --------------------------------------------------------
 					$esteCampo = 'mensajeRegistro';

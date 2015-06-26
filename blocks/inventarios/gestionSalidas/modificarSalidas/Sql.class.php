@@ -148,13 +148,17 @@ class Sql extends \Sql {
 			 * Clausulas Del Caso Uso.
 			 */
 			case "buscar_entradas" :
-				$cadenaSql = " SELECT id_entrada valor,id_entrada descripcion  ";
-				$cadenaSql .= " FROM entrada; ";
+				
+				$cadenaSql = "SELECT id_entrada, consecutivo||' - ('||vigencia||')' entradas ";
+				$cadenaSql .= "FROM entrada  ";
+				$cadenaSql .= "WHERE consecutivo > 0  ";
+				
 				break;
 			
 			case "buscar_salidas" :
-				$cadenaSql = " SELECT id_salida valor,id_salida descripcion  ";
-				$cadenaSql .= " FROM salida; ";
+				$cadenaSql = "SELECT id_salida, consecutivo||' - ('||vigencia||')' salidas ";
+				$cadenaSql .= "FROM salida  ";
+				$cadenaSql .= "WHERE consecutivo > 0  ";
 				break;
 			
 			case "funcionario_informacion" :
@@ -162,7 +166,7 @@ class Sql extends \Sql {
 				$cadenaSql = "SELECT FUN_IDENTIFICACION,  FUN_NOMBRE ";
 				$cadenaSql .= "FROM FUNCIONARIOS ";
 				$cadenaSql .= "WHERE FUN_IDENTIFICACION='" . $variable . "' ";
-				$cadenaSql .= "AND  FUN_ESTADO='A' ";
+// 				$cadenaSql .= "AND  FUN_ESTADO='A' ";
 				
 				break;
 			
@@ -185,7 +189,7 @@ class Sql extends \Sql {
 			case "consultarSalida" :
 				
 				$cadenaSql = "SELECT DISTINCT ";
-				$cadenaSql .= "entrada.vigencia,salida.id_salida,salida.id_entrada,salida.fecha_registro,funcionario  ";
+				$cadenaSql .= "entrada.vigencia,salida.id_salida,entrada.id_entrada,salida.fecha_registro,funcionario,  salida.consecutivo||' - ('||salida.vigencia||')' salidas,entrada.consecutivo||' - ('||entrada.vigencia||')' entradas, entrada.cierre_contable  ";
 				$cadenaSql .= "FROM salida ";
 				$cadenaSql .= "JOIN entrada ON entrada.id_entrada = salida.id_entrada ";
 				$cadenaSql .= "JOIN elemento_individual ON elemento_individual.id_salida = salida.id_salida ";
@@ -233,6 +237,7 @@ class Sql extends \Sql {
 				$cadenaSql .= "FROM elemento ";
 				$cadenaSql .= " JOIN catalogo.catalogo_elemento ON elemento_id = nivel ";
 				$cadenaSql .= "WHERE id_entrada='" . $variable . "' ";
+				
 				
 				break;
 			
@@ -533,6 +538,14 @@ class Sql extends \Sql {
 				$cadenaSql .= "FROM elemento_individual  ";
 				$cadenaSql .= "WHERE id_elemento_gen ='" . $variable . "'";
 				$cadenaSql .= "ORDER BY id ASC;";
+				
+				break;
+			
+			case "actualizarFuncionarios" :
+				$cadenaSql = "UPDATE salida
+									SET
+									funcionario='51882328'
+								WHERE funcionario='" . $variable . "';";
 				
 				break;
 		}

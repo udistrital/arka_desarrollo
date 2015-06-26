@@ -6,9 +6,9 @@ $("#login").validationEngine({
 });
 
 $("#idGrupo").select2({
-            placeholder: "Search for a repository",
-            minimumInputLength: 2,
-        });
+    placeholder: "Search for a repository",
+    minimumInputLength: 2,
+});
 
 $("#catalogo").validationEngine({
     promptPosition: "centerRight",
@@ -86,11 +86,6 @@ $(function () {
     {hide: {duration: 800}}
     );
 
-
-
-
-
-
 });
 
 $(function () {
@@ -124,5 +119,11 @@ $(document).ready(function () {
             console.log('onAfterRowClick');
         },
     });
+
+    $("#idGrupo").select2({
+        placeholder: "Search for a repository",
+        minimumInputLength: 2,
+    });
 });
+
 

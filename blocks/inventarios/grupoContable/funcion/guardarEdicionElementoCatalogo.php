@@ -37,7 +37,6 @@ class Formulario {
 
     public function validarEntrada() {
 
-        //var_dump($_REQUEST);exit;
         //validar request salida
         if (!isset($_REQUEST['cuentaSalida'])) {
           $this->miConfigurador->setVariableConfiguracion('mostrarMensaje', 'errorSalida');

@@ -260,7 +260,7 @@ $autocompletar = $url . $cadena10;
     }
 
     function eliminarElementoLista(el) {
-        var r = confirm("¿Está seguro de eliminar el Elemento?");
+        var r = confirm("¿Está seguro de Activar el Elemento?");
 
         var id = el.id.substring(2);
         if (r == true) {
@@ -330,7 +330,8 @@ $autocompletar = $url . $cadena10;
 
 
     function autocompletar(elemento) {
-  if (typeof listaIds['lidPadre'] == 'undefined') {
+
+        if (typeof listaIds['lidPadre'] == 'undefined') {
 
 
             $("#lidPadre").attr('disabled', true);
@@ -368,13 +369,18 @@ $autocompletar = $url . $cadena10;
             source: listaNombres['lidPadre']
         });
 
+
         $("#lidPadre").change(function () {
 
-            var indice = listaNombres['lidPadre'].indexOf(this.value);
-            if (typeof listaIds['lidPadre'][indice] == 'undefined')
+            var indice = listaNombres['lidPadre'].indexOf($("#lidPadre").val());
+            if (typeof listaIds['lidPadre'][indice] == 'undefined') {
                 $("#idPadre").val($("#lidPadre").val());
-            else
+
+
+            } else {
                 $("#idPadre").val(listaIds['lidPadre'][indice]);
+
+            }
 
 
         });
@@ -387,8 +393,6 @@ $autocompletar = $url . $cadena10;
         else
             $("#idPadre").val(listaIds['lidPadre'][indice]);
 
-
-
         return 0;
 
 
@@ -397,14 +401,17 @@ $autocompletar = $url . $cadena10;
 
     function cambiarPadre() {
         var indice = listaNombres['lidPadre'].indexOf($("#lidPadre").val());
-        if (typeof listaIds['lidPadre'][indice] == 'undefined')
+        if (typeof listaIds['lidPadre'][indice] == 'undefined') {
             $("#idPadre").val($("#lidPadre").val());
-        else
+
+
+        } else {
             $("#idPadre").val(listaIds['lidPadre'][indice]);
+
+        }
     }
 
     function validarValorLista(valor, id) {
-
 
         if (valor == 0)
             return true;
@@ -414,10 +421,11 @@ $autocompletar = $url . $cadena10;
         return listaNombres['lidPadre'].indexOf(String(valor)) < 0 ? false : true;
     }
 
-    function editarElementoCatalogo(id, padre, codigo, nombre, idCatalogo, cuentaSalida, cuentaEntrada, vidautil, cuentaDebito, cuentaCredito, depreciacion) {
+    function editarElementoCatalogo(id, padre, codigo, nombre, idCatalogo, cuentaSalida, cuentaEntrada, vidautil, cuentaDebito, cuentaCredito, depreciacion, tipobien, codigo_padre) {
         $('#depreciacion').val();
         $("#descripcionDepreciacion").css('display', 'none');
         $('#vidautil').val(0);
+        $('#tipoBien').val(0);
         $('#cuentaDebito').val(0);
         $('#cuentaCredito').val(0);
 
@@ -426,23 +434,24 @@ $autocompletar = $url . $cadena10;
         $('#id').val(codigo);
         $('#nombreElemento').val(nombre);
         $('#idCatalogo').val(idCatalogo);
-        $('#lidPadre').val(padre);
+        $('#lidPadre').val(codigo_padre);
 
         $('#cuentaSalida').val(cuentaSalida);
         $('#cuentaEntrada').val(cuentaEntrada);
+        $('#tipoBien').val(tipobien);
 
         if (depreciacion == 1) {
             $("#descripcionDepreciacion").css('display', 'block');
         }
         $('#depreciacion').val(depreciacion);
-        
+
         $('#vidautil').val(vidautil);
         $('#cuentaDebito').val(cuentaDebito);
         $('#cuentaCredito').val(cuentaCredito);
 
         $('#idReg').val(id);
-        $("#agregarA").html("Guardar Cambios sobre el elemento " + codigo + " con Padre " + padre + "")
-        $("#agregarA").val("Guardar Cambios sobre elemento " + codigo + " con Padre " + padre + "");
+        $("#agregarA").html("Guardar Cambios sobre el elemento " + codigo + " con Padre " + codigo_padre + "")
+        $("#agregarA").val("Guardar Cambios sobre elemento " + codigo + " con Padre " + codigo_padre + "");
         $("#agregarA").attr("onclick", "guardarEdicionElementos(" + id + ")");
     }
 
@@ -539,23 +548,19 @@ $autocompletar = $url . $cadena10;
 
     function cambio()
     {
-        $(document).ready(function () {
-            $("#depreciacion").change(function () {
-                switch ($("#depreciacion").val())
-                {
-                    case '0':
-                        $("#descripcionDepreciacion").css('display', 'none');
-                        $("#cuentaDebito").val("");
-                        $("#cuentaCredito").val("");
-                        $("#vidautil").val("");
-                        break;
+        $("#depreciacion").live('change', function () {
 
-                    case '1':
-                        $("#descripcionDepreciacion").css('display', 'block');
-                        break;
-                }
-            });
+            if ($("#depreciacion").val() == 0)
+            {
+                $("#descripcionDepreciacion").css('display', 'none');
+                $("#cuentaDebito").val("");
+                $("#cuentaCredito").val("");
+                $("#vidautil").val("");
+            } else {
+                $("#descripcionDepreciacion").css('display', 'block');
+            }
         });
+
 
     }
 

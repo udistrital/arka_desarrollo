@@ -46,7 +46,11 @@ class RegistradorOrden {
 		}
 		
 	
+		$cadenaSql = $this->miSql->getCadenaSql ( 'id_salida_maximo');
 		
+		$max_id_salida = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
+		
+		$max_id_salida=$max_id_salida[0][0]+1;
 		
 		$arreglo = array (
 				$fechaActual,
@@ -55,7 +59,8 @@ class RegistradorOrden {
 				$_REQUEST ['observaciones'],
 				$_REQUEST ['numero_entrada'],
 				$_REQUEST ['sede'],
-				$_REQUEST ['vigencia'] 
+				$_REQUEST ['vigencia'],
+				$max_id_salida 
 		);
 		
 		$cadenaSql = $this->miSql->getCadenaSql ( 'insertar_salida', $arreglo );
@@ -106,18 +111,9 @@ class RegistradorOrden {
 			}
 		}
 		
-		// foreach ( $items as $i ) {
+
 		
-		// $arreglo = array (
-		// $i,
-		// $id_salida [0] [0]
-		// );
-		
-		// $cadenaSql = $this->miSql->getCadenaSql ( 'insertar_salida_item', $arreglo );
-		
-		// $inserto = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "acceso" );
-		// }
-		
+
 		$arreglo = array (
 				"salida" => $id_salida [0] [0],
 				"entrada" => $_REQUEST ['numero_entrada'],

@@ -35,7 +35,7 @@ class Formulario {
 
         $this->conteoListas = 0;
 
-        $conexion = "catalogo";
+        $conexion = "inventarios";
         $this->esteRecursoDB = $this->miConfigurador->fabricaConexiones->getRecursoDB($conexion);
         if (!$this->esteRecursoDB) {
             //Este se considera un error fatal
@@ -45,9 +45,12 @@ class Formulario {
 
     private function consultarElementos() {
 
-        $cadena_sql = $this->sql->getCadenaSql("listarElementos", $_REQUEST['idCatalogo']);
+        echo $cadena_sql = $this->sql->getCadenaSql("listarElementos", $_REQUEST['idCatalogo']);
+
         $registros = $this->esteRecursoDB->ejecutarAcceso($cadena_sql, "busqueda");
 
+        var_dump($registros);
+        exit;
 
         if (!$registros) {
             $this->miConfigurador->setVariableConfiguracion('mostrarMensaje', 'catalogoVacio');
@@ -166,11 +169,11 @@ class Formulario {
                     echo '<div class="posiscion">';
 
                     //eliminar
-                    echo '<button title="Click para Eliminar" class="eliminar" onclick="eliminarElementoCatalogo(' . $b['elemento_id'] . ',' . $b['elemento_padre'] . ',' . $b['elemento_codigo'] . ',' . $b['elemento_catalogo'] . '\',' . $b['elemento_grupoc'] . ')">';
+                    echo '<button title="Click para Eliminar" class="eliminar" onclick="eliminarElementoCatalogo(' . $b['elemento_id'] . ',' . $b['elemento_padre'] . ',' . $b['elemento_codigo'] . ',' . $b['elemento_catalogo'] . ',' . $b['elemento_grupoc'] . ',' . $b['codigo_padre'] . ')">';
                     echo "</button>";
 
                     //editar
-                    echo '<button title="Click para Editar" class="editar" onclick="editarElementoCatalogo(' . $b['elemento_id'] . ',' . $b['elemento_padre'] . ',' . $b['elemento_codigo'] . ',\'' . $b['elemento_nombre'] . '\',' . $b['elemento_catalogo'] . ',' . $b['elemento_grupoc'] . ')">';
+                    echo '<button title="Click para Editar" class="editar" onclick="editarElementoCatalogo(' . $b['elemento_id'] . ',' . $b['elemento_padre'] . ',' . $b['elemento_codigo'] . ',\'' . $b['elemento_nombre'] . '\',' . $b['elemento_catalogo'] . ',' . $b['elemento_grupoc'] . ',' . $b['codigo_padre'] . ')">';
                     echo "</button>";
 
 

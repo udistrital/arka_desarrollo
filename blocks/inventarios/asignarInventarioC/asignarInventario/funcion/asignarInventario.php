@@ -47,12 +47,13 @@ class RegistradorActa {
         );
         // asociar super-cont-item
 
-        for ($i = 0; $i <= 200; $i ++) {
+        for ($i = 0; $i <= 1000000; $i ++) {
             if (isset($_REQUEST ['item' . $i])) {
                 $items [] = $_REQUEST ['item' . $i];
             }
         };
 
+        
         foreach ($items as $key => $values) {
             $datosAsignacion = array(
                 $_REQUEST ['contratista'],
@@ -75,7 +76,6 @@ class RegistradorActa {
             $inactivar = $esteRecursoDB->ejecutarAcceso($cadenaSql2, "acceso");
          
         }
-
         //inactivar item para asignar
         if ($inactivar == true && $asignar ==true) {
             redireccion::redireccionar('inserto', $datos);

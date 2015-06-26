@@ -72,9 +72,7 @@ class Bloque implements \Bloque {
 	public function bloque() {
 		if (isset ( $_REQUEST ['botonCancelar'] ) && $_REQUEST ['botonCancelar'] == "true") {
 			redireccion::redireccionar ( "paginaPrincipal" );
-		} else if (isset ( $_REQUEST ['botonContinuar'] ) && $_REQUEST ['botonContinuar'] == "true") {
-			redireccion::redireccionar ( "paginaPrincipal" );
-		}  else {
+		} 	 else {
 			
 			$this->miFrontera->setSql ( $this->miSql );
 			$this->miFrontera->setFuncion ( $this->miFuncion );

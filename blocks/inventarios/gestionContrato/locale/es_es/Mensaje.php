@@ -30,6 +30,8 @@ $this->idioma["fecha_final_r"] = "Fecha Final :";
 $this->idioma["fecha_final_rTitulo"] = "Seleccione Fecha Final ";
 
 
+$this->idioma ["botonRegresar"] ="< < Regresar";
+
 
 $this->idioma["parametroEjemplo"] = "Cadena";
 $this->idioma["usuario"] = "Identificación:";

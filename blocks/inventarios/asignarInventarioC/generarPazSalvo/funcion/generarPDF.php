@@ -33,8 +33,8 @@ class RegistradorActa {
     }
 
     function armarPDF() {
-    
-        
+
+
         date_default_timezone_set('America/Bogota');
         $esteBloque = $this->miConfigurador->getVariableConfiguracion("esteBloque");
         $miPaginaActual = $this->miConfigurador->getVariableConfiguracion('pagina');
@@ -52,6 +52,11 @@ class RegistradorActa {
         $meses = array('Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre');
         $fecha_ps = $dias[date('w')] . ' ' . date('d') . ' de ' . $meses[date('n') - 1] . ' de ' . date('Y');
 
+        $conexion = "sicapital";
+        $esteRecursoDB = $this->miConfigurador->fabricaConexiones->getRecursoDB($conexion);
+       $cadenaSql2 = $this->miSql->getCadenaSql('datosContratista', $_REQUEST['documentoContratista']);
+        $datos_contratista = $esteRecursoDB->ejecutarAcceso($cadenaSql2, "busqueda");
+        
         $ContenidoPdf = "
 <style type=\"text/css\">
     table { 
@@ -132,7 +137,7 @@ class RegistradorActa {
                     </tr>
                     <tr>
                      <td align:justify style=\"font-size:12px;\">
-                            Que el contratista Stiv Verdugo Marquez, con cédula de ciudadanía No. ".$_REQUEST['documentoContratista'].", 
+                            Que el contratista ".$datos_contratista[0]["CON_NOMBRE"]." con cédula de ciudadanía No. ".$datos_contratista[0]["CON_IDENTIFICACION"].", 
                             ha entregado los elementos correspondientes a su relación contraactual, y por lo tanto se encuentra
                             a <b>PAZ Y SALVO</b> con la dependencia.
                             <br><br><br><br><br><br><br>

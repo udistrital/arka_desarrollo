@@ -104,7 +104,7 @@ class registrarForm {
 		unset ( $atributos );
 		
 		$atributos ["id"] = "proveedorDiv";
-		$atributos ["estiloEnLinea"] = "display:none";
+		$atributos ["estiloEnLinea"] = "display:block";
 		$atributos = array_merge ( $atributos, $atributosGlobales );
 		echo $this->miFormulario->division ( "inicio", $atributos );
 		unset ( $atributos );
@@ -117,8 +117,8 @@ class registrarForm {
 			$atributos ['estilo'] = 'jqueryui';
 			$atributos ['marco'] = true;
 			$atributos ['estiloMarco'] = '';
-			$atributos ["etiquetaObligatorio"] = true;
-			$atributos ['columnas'] = 1;
+			$atributos ["etiquetaObligatorio"] = false;
+			$atributos ['columnas'] = 2;
 			$atributos ['dobleLinea'] = 0;
 			$atributos ['tabIndex'] = $tab;
 			$atributos ['etiqueta'] = $this->lenguaje->getCadena ( $esteCampo );
@@ -133,7 +133,7 @@ class registrarForm {
 			$atributos ['deshabilitado'] = false;
 			$atributos ['tamanno'] = 8;
 			$atributos ['maximoTamanno'] = '';
-			$atributos ['anchoEtiqueta'] = 220;
+			$atributos ['anchoEtiqueta'] = 213;
 			$tab ++;
 			
 			// Aplica atributos globales al control
@@ -148,8 +148,8 @@ class registrarForm {
 			$atributos ['estilo'] = 'jqueryui';
 			$atributos ['marco'] = true;
 			$atributos ['estiloMarco'] = '';
-			$atributos ["etiquetaObligatorio"] = true;
-			$atributos ['columnas'] = 1;
+			$atributos ["etiquetaObligatorio"] = false;
+			$atributos ['columnas'] = 2;
 			$atributos ['dobleLinea'] = 0;
 			$atributos ['tabIndex'] = $tab;
 			$atributos ['etiqueta'] = $this->lenguaje->getCadena ( $esteCampo );

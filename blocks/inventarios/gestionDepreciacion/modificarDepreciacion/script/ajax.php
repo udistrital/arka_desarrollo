@@ -25,36 +25,6 @@ $urlFinal = $url . $cadena;
 ?>
 <script type='text/javascript'>
 
-    function datosInfo(elem, request, response) {
-        
-            $("#<?php echo $this->campoSeguro('meses_depreciar') ?>").val('8');
-        
-        $.ajax({
-            url: "<?php echo $urlFinal ?>",
-            dataType: "json",
-            data: {contable: $("#<?php echo $this->campoSeguro('grupo_contable') ?>").val()},
-        
-                    success: function (data) {
-
-                        if (data[0] != 'null') {
-
-                            $("#<?php echo $this->campoSeguro('meses_depreciar') ?>").val(data[0]);
-                        } else {
-                            $("#<?php echo $this->campoSeguro('meses_depreciar') ?>").val('8');
-                        }
-                    }
-        });
-    }
-    ;
-
-    $("#<?php echo $this->campoSeguro('grupo_contable') ?>").select2({
-        placeholder: "Search for a repository",
-        minimumInputLength: 1,
-    });
-
-    $("#<?php echo $this->campoSeguro('grupo_contable')?>").change(function () {
-        datosInfo();
-    });
-
+    
 </script>
 

@@ -1,6 +1,15 @@
 <?php
 $this->idioma ["noDefinido"] = "Etiqueta no esta definida en locale/es_es/Mensaje.php";
 
+$this->idioma ["documentoContrato"] ="Link Documento Contrato";
+
+
+
+
+$this->idioma ["numeroContrato"] ="Número y/o :             <br>Fecha de Contrato";
+$this->idioma ["numeroContratoTitulo"] ="Seleccione Fecha Inicial";
+
+
 $this->idioma ["fecha_inicio"] ="Fecha Inicial : ";
 $this->idioma ["fecha_inicioTitulo"] ="Seleccione Fecha Inicial";
 
@@ -89,7 +98,7 @@ $this->idioma ["botonAceptar"] ="Registrar Acta de Recibido";
 $this->idioma ["botonCancelar"] ="Cancelar";
 $this->idioma ["botonContinuar"] ="Continuar";
 $this->idioma ["botonConsultar"] ="Consultar";
-$this->idioma ["botonRegresar"] ="Regresar";
+$this->idioma ["botonRegresar"] ="< < Regresar";
 
 
 

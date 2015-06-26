@@ -58,9 +58,9 @@ class RegistradorOrden {
 			
 			case '3' :
 				
-				// $observacion = $_REQUEST ['observaciones_sobrante'];
-				$entrada = $_REQUEST ['id_entradaS'];
-				$salida = $_REQUEST ['id_salidaS'];
+// 				// $observacion = $_REQUEST ['observaciones_sobrante'];
+// 				$entrada = $_REQUEST ['id_entradaS'];
+// 				$salida = $_REQUEST ['id_salidaS'];
 				
 				foreach ( $_FILES as $key => $values ) {
 					
@@ -139,38 +139,82 @@ class RegistradorOrden {
 			} else {
 				$status = "Error al subir archivo 2	";
 			}
-			
-			$arreglo_clase = array (
-					$observacion = 'NULL',
-					(isset ( $entrada )) ? $entrada : 0,
-					(isset ( $salida )) ? $salida : 0,
-					($_REQUEST ['clase'] == 1) ? $_REQUEST ['id_hurtoR'] : 0,
-					($_REQUEST ['clase'] == 3) ? $_REQUEST ['num_placa'] : 0,
-					($_REQUEST ['clase'] == 3) ? $_REQUEST ['valor_sobrante'] : 0,
-					(isset ( $destino1 )) ? $destino1 : 'NULL',
-					(isset ( $archivo1 )) ? $archivo1 : 'NULL',
-					$_REQUEST ['clase_info'] 
-			);
-			
-			$cadenaSql = $this->miSql->getCadenaSql ( 'actualizarInformacionArchivo', $arreglo_clase );
-			
-			$info_clase = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
+			if ($_REQUEST ['clase_info'] != '') {
+				
+				$arreglo_clase = array (
+						$observacion = 'NULL',
+						(isset ( $entrada )) ? $entrada : 0,
+						(isset ( $salida )) ? $salida : 0,
+						($_REQUEST ['clase'] == 1) ? $_REQUEST ['id_hurtoR'] : 0,
+						0,
+						0,
+						(isset ( $destino1 )) ? $destino1 : 'NULL',
+						(isset ( $archivo1 )) ? $archivo1 : 'NULL',
+						$_REQUEST ['clase_info'] 
+				);
+				
+				$cadenaSql = $this->miSql->getCadenaSql ( 'actualizarInformacionArchivo', $arreglo_clase );
+				
+				$info_clase = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
+			} else {
+				
+				$arreglo_clase = array (
+						$observacion = 'NULL',
+						(isset ( $entrada )) ? $entrada : 0,
+						(isset ( $salida )) ? $salida : 0,
+						($_REQUEST ['clase'] == 1) ? $_REQUEST ['id_hurtoR'] : 0,
+						($_REQUEST ['clase'] == 3) ? $_REQUEST ['num_placa'] : 0,
+						($_REQUEST ['clase'] == 3) ? $_REQUEST ['valor_sobrante'] : 0,
+						(isset ( $destino1 )) ? $destino1 : 'NULL',
+						(isset ( $archivo1 )) ? $archivo1 : 'NULL' 
+				);
+				
+				$cadenaSql = $this->miSql->getCadenaSql ( 'insertarInformación', $arreglo_clase );
+				$info_clase = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
+				$_REQUEST ['clase_info'] = $info_clase [0] [0];
+			}
 		} else {
 			
-			$arreglo_clase = array (
-					$observacion = 'NULL',
-					(isset ( $entrada )) ? $entrada : 0,
-					(isset ( $salida )) ? $salida : 0,
-					($_REQUEST ['clase'] == 1) ? $_REQUEST ['id_hurtoR'] : 0,
-					($_REQUEST ['clase'] == 3) ? $_REQUEST ['num_placa'] : 0,
-					($_REQUEST ['clase'] == 3) ? $_REQUEST ['valor_sobrante'] : 0,
-					$_REQUEST ['clase_info'] 
-			);
-			
-			$cadenaSql = $this->miSql->getCadenaSql ( 'actualizarInformacion', $arreglo_clase );
-			
-			$info_clase = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
+			if ($_REQUEST ['clase_info'] != '') {
+				
+				$arreglo_clase = array (
+						$observacion = 'NULL',
+						(isset ( $entrada )) ? $entrada : 0,
+						(isset ( $salida )) ? $salida : 0,
+						($_REQUEST ['clase'] == 1) ? $_REQUEST ['id_hurtoR'] : 0,
+						($_REQUEST ['clase'] == 3) ? $_REQUEST ['num_placa'] : 0,
+						($_REQUEST ['clase'] == 3) ? $_REQUEST ['valor_sobrante'] : 0,
+						$_REQUEST ['clase_info'] 
+				);
+				
+				$cadenaSql = $this->miSql->getCadenaSql ( 'actualizarInformacion', $arreglo_clase );
+				
+				$info_clase = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
+				
+				
+				
+			} else {
+				
+				$arreglo_clase = array (
+						$observacion = 'NULL',
+						(isset ( $entrada )) ? $entrada : 0,
+						(isset ( $salida )) ? $salida : 0,
+						($_REQUEST ['clase'] == 1) ? $_REQUEST ['id_hurtoR'] : 0,
+						($_REQUEST ['clase'] == 3) ? $_REQUEST ['num_placa'] : 0,
+						($_REQUEST ['clase'] == 3) ? $_REQUEST ['valor_sobrante'] : 0,
+						(isset ( $destino1 )) ? $destino1 : 'NULL',
+						(isset ( $archivo1 )) ? $archivo1 : 'NULL' 
+				);
+				
+				$cadenaSql = $this->miSql->getCadenaSql ( 'insertarInformación', $arreglo_clase );
+				$info_clase = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
+				$_REQUEST ['clase_info'] = $info_clase [0] [0];
+			}
 		}
+		
+		
+		
+		
 		
 		$arregloDatos = array (
 				$_REQUEST ['vigencia'],
@@ -185,16 +229,19 @@ class RegistradorOrden {
 				$_REQUEST ['numero_entrada'],
 				"Estado_entrada" => '1',
 				(isset ( $_REQUEST ['acta_recibido'] ) && $_REQUEST ['acta_recibido'] != '') ? $_REQUEST ['acta_recibido'] : 0,
-				$_REQUEST ['id_ordenador'],
+				($_REQUEST ['id_ordenador']=='')?'NULL':$_REQUEST ['id_ordenador'],
 				$_REQUEST ['sede'],
 				$_REQUEST ['dependencia'],
 				$_REQUEST ['supervisor'],
-				$_REQUEST ['tipo_ordenador'],
-				$_REQUEST ['identificacion_ordenador'] 
+				($_REQUEST ['tipo_ordenador']=='')?'NULL':$_REQUEST ['tipo_ordenador'],
+				($_REQUEST ['identificacion_ordenador']=='')?'NULL':$_REQUEST ['identificacion_ordenador'],
+				$_REQUEST ['clase_info']
 		);
 		
 		$cadenaSql = $this->miSql->getCadenaSql ( 'actualizarEntrada', $arregloDatos );
+		
 		$id_entrada = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
+		
 		
 		if ($id_entrada) {
 			

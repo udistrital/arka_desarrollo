@@ -3,6 +3,11 @@ $this->idioma ["noDefinido"] = "Etiqueta no esta definida en locale/es_es/Mensaj
 
 $this->idioma ["informacion_numero"] =" # Número de Acta de Recibido : ";
 
+
+$this->idioma ["desicion"] ="&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp¿ Que desea realizar ?";
+
+$this->idioma ["informacion_numero"] =" # Número de Acta de Recibido : ";
+
 $this->idioma ["informacion_fecha"] ="Fecha de Acta de Recibido : ";
 
 $this->idioma ["informacion_nit"] ="Nit de Proveedor : ";
@@ -54,16 +59,16 @@ $this->idioma ["clase"] ="Clase de Entrada : ";
 $this->idioma ["claseTitulo"] ="Seleccione Clase de Entrada";
 
 
-$this->idioma ["id_entradaR"] ="(ID)Número Entrada : ";
+$this->idioma ["id_entradaR"] ="Número Entrada y/o Vigencia : ";
 $this->idioma ["id_entradaRTitulo"] ="Ingrese Id de Entrada";
 
-$this->idioma ["id_salidaS"] ="(ID)Número Salida : ";
+$this->idioma ["id_salidaS"] ="Número Salida y/o Vigencia : ";
 $this->idioma ["id_salidaSTitulo"] ="Ingrese Id de Salida";
 
-$this->idioma ["id_salidaR"] ="(ID)Número Salida : ";
+$this->idioma ["id_salidaR"] ="Número Salida y/o Vigencia : ";
 $this->idioma ["id_salidaRTitulo"] ="Ingrese Id de Salida";
 
-$this->idioma ["id_hurtoR"] ="(ID)Número Hurto : ";
+$this->idioma ["id_hurtoR"] ="Número Hurto y/o Fecha Hurto : ";
 $this->idioma ["id_hurtoRTitulo"] ="Ingrese Id de Hurto	";
 
 $this->idioma ["actoAdministrativo"] ="Acto Administrativo : ";
@@ -76,7 +81,7 @@ $this->idioma ["observaciones_donacion"] ="Observaciones : ";
 $this->idioma ["observaciones_donacionTitulo"] ="Ingrese Observaciones";
 
 
-$this->idioma ["acta_sobrante"] ="Acta : ";
+$this->idioma ["acta_sobrante"] ="&nbspActa : ";
 $this->idioma ["acta_sobranteTitulo"] ="Carge Archivo Acta";
 
 $this->idioma ["observaciones_produccion"] ="Observaciones : ";
@@ -86,8 +91,8 @@ $this->idioma ["observaciones_produccionTitulo"] ="Ingrese Observaciones";
 $this->idioma ["observaciones_reposicion"] ="Observaciones : ";
 $this->idioma ["observaciones_reposicionTitulo"] ="Ingrese Observaciones";
 
-$this->idioma ["id_entradaS"] ="(ID)Número Entrada: ";
-$this->idioma ["id_entradaSTitulo"] ="Ingrese (ID)Número Entrada";
+$this->idioma ["id_entradaS"] ="Número Entrada y/o Vigencia : ";
+$this->idioma ["id_entradaSTitulo"] ="Ingrese Número Entrada";
 
 $this->idioma ["num_placa"] ="Número Placa: ";
 $this->idioma ["num_placaTitulo"] ="Ingrese Número Placa";
@@ -257,9 +262,12 @@ $this->idioma ["ordenadorGasto"] ="Ordenador Gasto";
 
 $this->idioma ["botonAceptar"] ="Guardar Entrada";
 $this->idioma ["botonCancelar"] ="Cancelar";
-$this->idioma ["botonContinuar"] ="Continuar";
+$this->idioma ["botonContinuar"] ="Salir";
 $this->idioma ["botonConsultar"] ="Consultar";
-$this->idioma ["botonRegresar"] ="Regresar";
+$this->idioma ["botonRegresar"] ="<< Regresar";
+$this->idioma ["botonRegistrar"] ="Registrar Nueva Entrada";
+$this->idioma ["botonCargarElemento"] ="Cargar Elementos a Entrada";
+
 
 
 

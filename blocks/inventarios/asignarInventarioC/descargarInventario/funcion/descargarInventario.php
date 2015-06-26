@@ -44,7 +44,7 @@ class RegistradorActa {
         //recuperar datos de la asignacion
         // asociar super-cont-item
 
-        for ($i = 0; $i <= 200; $i ++) {
+        for ($i = 0; $i <= 100000; $i ++) {
             if (isset($_REQUEST ['item' . $i])) {
                 $items [] = $_REQUEST ['item' . $i];
             }

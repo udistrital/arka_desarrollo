@@ -85,7 +85,7 @@ class Formulario {
         foreach ($registros as $fila) {
             $salida[] = array(
                 "id" => $fila['elemento_id'],
-                "nombre" => $fila['elemento_nombre'],
+                "nombre" => $fila['elemento_codigo'],
                 "alias" => $fila['elemento_codigo'],
                 "cuentaSalida" => $fila['grupo_cuentasalida'],
                 "cuentaEntrada" => $fila['grupo_cuentaentrada'],

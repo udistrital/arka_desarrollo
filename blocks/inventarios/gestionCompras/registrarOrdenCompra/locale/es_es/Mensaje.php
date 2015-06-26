@@ -197,7 +197,7 @@ $this->idioma ["botonCalcular"] ="Calcular Total Valor Items";
 $this->idioma ["botonAceptar"] ="Guardar";
 $this->idioma ["botonCancelar"] ="Cancelar";
 $this->idioma ["botonContinuar"] ="Continuar";
-
+$this->idioma ["botonRegresar"] ="< < Regresar";
 
 
 

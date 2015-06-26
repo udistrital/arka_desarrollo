@@ -32,15 +32,17 @@ class RegistradorOrden {
 		$arreglo = array (
 				$_REQUEST ['numero_entrada'],
 				$_REQUEST ['estado'] 
-		)
-		;
+		);
 		$cadenaSql = $this->miSql->getCadenaSql ( 'actualizarEstado', $arreglo );
-		$modificar = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "acceso" );
 		
-		if ($modificar) {
-			\inventarios\gestionEntradas\consultaEntradas\funcion\redireccion::redireccionar ( 'inserto', $_REQUEST ['numero_entrada'] );
+		$modificar = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
+		
+		if ($modificar!=false) {
+		
+			\inventarios\gestionEntradas\consultaEntradas\funcion\redireccion::redireccionar ( 'inserto', $modificar[0][0] );
 			// 
 		} else {
+			
 			\inventarios\gestionEntradas\consultaEntradas\funcion\redireccion::redireccionar ( 'noInserto' );
 
 		}

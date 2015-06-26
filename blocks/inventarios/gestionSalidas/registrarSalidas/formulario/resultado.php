@@ -121,6 +121,32 @@ class registrarForm {
 		echo $this->miFormulario->formulario ( $atributos );
 		// ---------------- SECCION: Controles del Formulario -----------------------------------------------
 		
+
+
+		$miPaginaActual = $this->miConfigurador->getVariableConfiguracion ( 'pagina' );
+			
+		$directorio = $this->miConfigurador->getVariableConfiguracion ( "host" );
+		$directorio .= $this->miConfigurador->getVariableConfiguracion ( "site" ) . "/index.php?";
+		$directorio .= $this->miConfigurador->getVariableConfiguracion ( "enlace" );
+			
+		$variable = "pagina=" . $miPaginaActual;
+		$variable = $this->miConfigurador->fabricaConexiones->crypto->codificar_url ( $variable, $directorio );
+			
+		// ---------------- CONTROL: Cuadro de Texto --------------------------------------------------------
+		$esteCampo = 'botonRegresar';
+		$atributos ['id'] = $esteCampo;
+		$atributos ['enlace'] = $variable;
+		$atributos ['tabIndex'] = 1;
+		$atributos ['estilo'] = 'textoSubtitulo';
+		$atributos ['enlaceTexto'] = $this->lenguaje->getCadena ( $esteCampo );
+		$atributos ['ancho'] = '10%';
+		$atributos ['alto'] = '10%';
+		$atributos ['redirLugar'] = true;
+		echo $this->miFormulario->enlace ( $atributos );
+			
+		unset ( $atributos );
+		
+		
 		$esteCampo = "marcoDatosBasicos";
 		$atributos ['id'] = $esteCampo;
 		$atributos ["estilo"] = "jqueryui";
@@ -136,36 +162,6 @@ class registrarForm {
 			echo $this->miFormulario->agrupacion ( 'inicio', $atributos );
 			{
 				
-				// ------------------Division para los botones-------------------------
-				$atributos ["id"] = "botones";
-				$atributos ["estilo"] = "marcoBotones";
-				echo $this->miFormulario->division ( "inicio", $atributos );
-				
-				// -----------------CONTROL: Botón ----------------------------------------------------------------
-				$esteCampo = 'botonRegresar';
-				$atributos ["id"] = $esteCampo;
-				$atributos ["tabIndex"] = $tab;
-				$atributos ["tipo"] = 'boton';
-				// submit: no se coloca si se desea un tipo button genérico
-				$atributos ['submit'] = true;
-				$atributos ["estiloMarco"] = '';
-				$atributos ["estiloBoton"] = 'jqueryui';
-				// verificar: true para verificar el formulario antes de pasarlo al servidor.
-				$atributos ["verificar"] = '';
-				$atributos ["tipoSubmit"] = 'jquery'; // Dejar vacio para un submit normal, en este caso se ejecuta la función submit declarada en ready.js
-				$atributos ["valor"] = $this->lenguaje->getCadena ( $esteCampo );
-				$atributos ['nombreFormulario'] = $esteBloque ['nombre'];
-				$tab ++;
-				
-				// Aplica atributos globales al control
-				$atributos = array_merge ( $atributos, $atributosGlobales );
-				echo $this->miFormulario->campoBoton ( $atributos );
-				// -----------------FIN CONTROL: Botón -----------------------------------------------------------
-				
-				// ---------------------------------------------------------
-				
-				// ------------------Fin Division para los botones-------------------------
-				echo $this->miFormulario->division ( "fin" );
 				
 				if ($entrada) {
 					
@@ -173,7 +169,7 @@ class registrarForm {
 					
 					echo "<thead>
                 <tr>
-                   <th># Número Entrada</th>
+                   <th>Número Entrada y/o<br>Vigencia</th>
                     <th>Fecha Registro </th>
 					<th>Clase Entrada</th>
 					<th>Nit<br>Proveedor</th>
@@ -215,18 +211,7 @@ class registrarForm {
 									$proveedor [0] [1]
 							);
 						}
-// 						$cadenaSql = $this->miSql->getCadenaSql ( 'proveedor_informacion', $entrada [$i] [3] );
-						
-// 						$proveedor = $esteRecursoDBO->ejecutarAcceso ( $cadenaSql, "busqueda" );
-						
-// 						$arreglo=array(
-// 								$entrada[$i][0],
-// 								$entrada[$i][1],
-// 								$entrada[$i][2],
-// 								$proveedor[0][0],
-// 								$proveedor[0][1]	
-// 						);
-						
+
 						$arreglo=serialize($arreglo);
 						$variable .= "&datosGenerales=" . $arreglo;
 						

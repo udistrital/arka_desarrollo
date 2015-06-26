@@ -2,9 +2,9 @@
 
 namespace registro\loginArka;
 
-if (!isset($GLOBALS["autorizado"])) {
-    include("../index.php");
-    exit;
+if (!isset($GLOBALS ["autorizado"])) {
+    include ("../index.php");
+    exit();
 }
 
 class Formulario {
@@ -12,10 +12,8 @@ class Formulario {
     var $miConfigurador;
     var $lenguaje;
     var $miFormulario;
-    var $miSesion;
 
     function __construct($lenguaje, $formulario) {
-
         $this->miConfigurador = \Configurador::singleton();
 
         $this->miConfigurador->fabricaConexiones->setRecursoDB('principal');
@@ -23,21 +21,39 @@ class Formulario {
         $this->lenguaje = $lenguaje;
 
         $this->miFormulario = $formulario;
-
-        $this->miSesion = \Sesion::singleton();
     }
 
     function formulario() {
-
-        if (isset($_COOKIE[\Sesion::APLICATIVO]))
-            $this->miSesion->terminarSesion($_COOKIE[\Sesion::APLICATIVO]);
-
         $directorioImagenes = $this->miConfigurador->getVariableConfiguracion("rutaUrlBloque") . "/imagenes";
         // Rescatar los datos de este bloque
         $esteBloque = $this->miConfigurador->getVariableConfiguracion("esteBloque");
+
+        $rutaBloque = $this->miConfigurador->getVariableConfiguracion("host");
+        $rutaBloque .= $this->miConfigurador->getVariableConfiguracion("site") . "/blocks/";
+        $rutaBloque .= $esteBloque ['grupo'] . "/" . $esteBloque ['nombre'];
         ?>
+
+        <div id="slider1_container" style="position: absolute; top: 0px; left: 0px; width: 100%; height: 50px; overflow: hidden;">
+            <!-- Slides Container -->
+            <div u="slides" style="cursor: move; position: absolute; overflow: hidden; left: 0px; top: 0px; width: 100%; height: 100px; overflow: hidden;">
+                <div><img u="image" src="<?php echo $rutaBloque ?>/imagenes/slide_16.jpg" /></div>
+                <div><img u="image" src="<?php echo $rutaBloque ?>/imagenes/slide_8.jpg" /></div>
+                <div><img u="image" src="<?php echo $rutaBloque ?>/imagenes/slide_1.jpg" /></div>
+                <div><img u="image" src="<?php echo $rutaBloque ?>/imagenes/slide_10.jpg" /></div>
+                <div><img u="image" src="<?php echo $rutaBloque ?>/imagenes/slide_12.jpg" /></div>
+                <div><img u="image" src="<?php echo $rutaBloque ?>/imagenes/slide_2.jpg" /></div>
+                <div><img u="image" src="<?php echo $rutaBloque ?>/imagenes/slide_3.jpg" /></div>
+                <div><img u="image" src="<?php echo $rutaBloque ?>/imagenes/slide_14.png" /></div>
+                <div><img u="image" src="<?php echo $rutaBloque ?>/imagenes/slide_15.jpg" /></div>
+                <div><img u="image" src="<?php echo $rutaBloque ?>/imagenes/slide_6.jpg" /></div>
+                <div><img u="image" src="<?php echo $rutaBloque ?>/imagenes/slide_7.jpg" /></div>
+                <div><img u="image" src="<?php echo $rutaBloque ?>/imagenes/slide_9.jpg" /></div>
+                <div><img u="image" src="<?php echo $rutaBloque ?>/imagenes/slide_11.jpg" /></div>
+                <div><img u="image" src="<?php echo $rutaBloque ?>/imagenes/slide_17.jpg" /></div>
+            </div>
+        </div>
         <header>
-            <div id="fondo_base"> </div>			
+            <div id="fondo_base"></div>
 
 
         </header>
@@ -45,7 +61,7 @@ class Formulario {
             <article id="fondo_login"> 
                 <?php
                 $atributosGlobales ['campoSeguro'] = 'false';
-                $_REQUEST['tiempo'] = time();
+                $_REQUEST ['tiempo'] = time();
 
                 // -------------------------------------------------------------------------------------------------
                 // ---------------- SECCION: Parámetros Generales del Formulario ----------------------------------
@@ -53,8 +69,8 @@ class Formulario {
                 $atributos ['id'] = $esteCampo;
                 $atributos ['nombre'] = $esteCampo;
                 /**
-                 * Nuevo a partir de la versión 1.0.0.2, se utiliza para crear de manera rápida el js asociado a 
-                 * validationEngine. 
+                 * Nuevo a partir de la versión 1.0.0.2, se utiliza para crear de manera rápida el js asociado a
+                 * validationEngine.
                  */
                 $atributos ['validar'] = true;
 
@@ -139,6 +155,8 @@ class Formulario {
                 echo $this->miFormulario->campoCuadroTexto($atributos);
                 unset($atributos);
 
+                echo $this->miFormulario->division("fin");
+
                 $atributos ["id"] = "botones";
                 $atributos ["estilo"] = "marcoBotones";
                 echo $this->miFormulario->division("inicio", $atributos);
@@ -180,7 +198,7 @@ class Formulario {
                  * Para ello utiliza la hora en que es creado el formulario para
                  * codificar el nombre de cada campo.
                  */
-                $valorCodificado .= "&campoSeguro=" . $_REQUEST['tiempo'];
+                $valorCodificado .= "&campoSeguro=" . $_REQUEST ['tiempo'];
                 // Paso 2: codificar la cadena resultante
                 $valorCodificado = $this->miConfigurador->fabricaConexiones->crypto->codificar($valorCodificado);
 
@@ -212,20 +230,29 @@ class Formulario {
             <div id="fondo_texto">
                 <div id="texto">
                     <h3>SISTEMA DE INFORMACIÓN</h3>
-                    <h3>DE GESTIÓN DE INVENTARIOS Y ALMACÉN</h3><BR>	
+                    <h3>DE GESTIÓN DE INVENTARIOS Y ALMACÉN</h3><BR>
                     <h2>ARKA</h2>
                 </div>
             </div>
         </section>
         <footer>
             <div id="footerLeft">
-                <p style="font-size: 15px;">Universidad Distrital Francisco José de Caldas</p>
-                <p>Todos los derechos reservados. Carrera 8 N. 40-78 Piso 1 / PBX 3238400 - 3239300 <a href="">computo@udistrital.edu.co</a></p>
+                <p style="font-size: 15px;">Universidad Distrital Francisco José de
+                    Caldas</p>
+                <p>
+                    Todos los derechos reservados. Carrera 8 N. 40-78 Piso 1 / PBX
+                    3238400 - 3239300 <a href="">computo@udistrital.edu.co</a>
+                </p>
             </div>
             <div id="footerRight">
-                <a href="https://www.facebook.com/UniversidadDistrital.SedeIngenieria" target="_blank"><img src="<?php echo $directorioImagenes ?>/facebook.png" /></a>
-                <a href="https://plus.google.com/110031223488101566921/about?gl=co&hl=es" target="_blank"><img src="<?php echo $directorioImagenes ?>/google+.png" /></a>
-                <a href="http://www.udistrital.edu.co/" target="_blank"><img src="<?php echo $directorioImagenes ?>/mail.png" /></a>
+                <a href="https://www.facebook.com/UniversidadDistrital.SedeIngenieria"
+                   target="_blank"><img
+                        src="<?php echo $directorioImagenes ?>/facebook.png" /></a> <a
+                    href="https://plus.google.com/110031223488101566921/about?gl=co&hl=es"
+                    target="_blank"><img
+                        src="<?php echo $directorioImagenes ?>/google+.png" /></a> <a
+                    href="http://www.udistrital.edu.co/" target="_blank"><img
+                        src="<?php echo $directorioImagenes ?>/mail.png" /></a>
             </div>
         </footer>
 
@@ -235,15 +262,12 @@ class Formulario {
     function mensaje() {
 
         // Si existe algun tipo de error en el login aparece el siguiente mensaje
-        $mensaje = 'mensaje';
+        $mensaje = $this->miConfigurador->getVariableConfiguracion('mostrarMensaje');
         $this->miConfigurador->setVariableConfiguracion('mostrarMensaje', null);
 
         if (isset($_REQUEST ['error'])) {
-            $tipoMensaje = $this->miConfigurador->getVariableConfiguracion('tipoMensaje');
-
             if ($_REQUEST ['error'] == 'formularioExpirado') {
                 $atributos ["estilo"] = 'information';
-                $atributos ['json'] = true;
             } else {
                 $atributos ["estilo"] = 'error';
             }
@@ -252,14 +276,12 @@ class Formulario {
             $esteCampo = 'divMensaje';
             $atributos ['id'] = $esteCampo;
             $atributos ["tamanno"] = '';
-            $atributos ["estilo"] = 'information';
             $atributos ["etiqueta"] = '';
             $atributos ["columnas"] = ''; // El control ocupa 47% del tamaño del formulario
             $atributos ['mensaje'] = $this->lenguaje->getCadena($_REQUEST ['error']);
             echo $this->miFormulario->campoMensaje($atributos);
             unset($atributos);
         }
-
         return true;
     }
 

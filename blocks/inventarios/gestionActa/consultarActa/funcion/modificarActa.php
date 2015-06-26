@@ -92,7 +92,8 @@ class RegistradorOrden {
 					'estado' => 1,
 					'enlace_soporte' => $destino1,
 					'nombre_soporte' => $archivo1,
-					'id_acta' => $_REQUEST ['id_acta'] 
+					'id_acta' => $_REQUEST ['id_acta'],
+					'identificador_contrato' => ($_REQUEST ['numeroContrato']!='') ? $_REQUEST ['numeroContrato'] : 0, 
 			);
 			
 			$cadenaSql = $this->miSql->getCadenaSql ( 'actualizarActa_soporte', $datosActa );
@@ -112,7 +113,8 @@ class RegistradorOrden {
 					'revisor' => $_REQUEST ['revisor'],
 					'observaciones' => $_REQUEST ['observacionesacta'],
 					'estado' => 1,
-					'id_acta' => $_REQUEST ['id_acta'] 
+					'id_acta' => $_REQUEST ['id_acta'],
+					'identificador_contrato' => ($_REQUEST ['numeroContrato']!='') ? $_REQUEST ['numeroContrato'] : 0,
 			);
 			
 			
@@ -124,7 +126,7 @@ class RegistradorOrden {
 		}
 		
 		
-// 		var_dump($datosActa);exit;
+
 		$cadenaSql = $this->miSql->getCadenaSql ( 'limpiarItems', $_REQUEST ['id_acta'] );
 		$limpiar = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
 		
@@ -143,8 +145,8 @@ class RegistradorOrden {
 			$items = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "acceso" );
 		}
 		
-// 		$cadenaSql = $this->miSql->getCadenaSql('limpiar_tabla_items', $_REQUEST ['seccion']);
-// 		$resultado_secuencia = $esteRecursoDB->ejecutarAcceso($cadenaSql, "acceso");
+		$cadenaSql = $this->miSql->getCadenaSql('limpiar_tabla_items', $_REQUEST ['seccion']);
+		$resultado_secuencia = $esteRecursoDB->ejecutarAcceso($cadenaSql, "acceso");
 		
 		$datos = array (
 				$_REQUEST ['id_acta'],

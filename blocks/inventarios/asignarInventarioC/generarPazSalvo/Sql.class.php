@@ -159,8 +159,14 @@ class Sql extends \Sql {
                 $cadenaSql.= " FROM contratista_servicios ";
                 $cadenaSql.= " WHERE identificacion='" . $variable . "' ";
                 break;
+        
+            case "datosContratista":
+                $cadenaSql = " SELECT CON_IDENTIFICACION,CON_NOMBRE ";
+                $cadenaSql.= " FROM CONTRATISTAS ";
+                $cadenaSql.= " WHERE CON_IDENTIFICACION='" . $variable . "'";
+                break;
 
-                 case "consultarElementosSupervisor" :
+        case "consultarElementosSupervisor" :
                 $cadenaSql = "SELECT id_elemento_ind, nivel, marca, elemento_individual.placa,elemento_individual.serie, valor, subtotal_sin_iva, ";
                 $cadenaSql.= " total_iva, total_iva_con ";
                 $cadenaSql.= " FROM salida , elemento ";

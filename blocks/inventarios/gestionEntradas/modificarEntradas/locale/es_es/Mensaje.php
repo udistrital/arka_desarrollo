@@ -29,7 +29,7 @@ $this->idioma ["nombreOrdenadorTitulo"] =" Nombre y Apellidos Ordenador ";
 $this->idioma ["ordenadorGasto"] ="Ordenador Gasto";
 
 
-$this->idioma ["informacion_numero"] =" # Número de Entrada : ";
+$this->idioma ["informacion_numero"] ="Número de Entrada y/o Vigencia : ";
 
 $this->idioma ["informacion_fecha"] ="Fecha de Entrada : ";
 
@@ -70,10 +70,10 @@ $this->idioma ["fecha_final"] ="Fecha Final : ";
 $this->idioma ["fecha_finalTitulo"] ="Seleccione Fecha Final";
 
 
-$this->idioma ["numero_entrada"] ="(ID)Número Entrada: ";
+$this->idioma ["numero_entrada"] ="Número Entrada y/o Vigencia: ";
 $this->idioma ["numero_entradaTitulo"] ="Ingrese Número Entrada";
 
-$this->idioma ["id_salidaR"] ="(ID)Número Salida : ";
+$this->idioma ["id_salidaR"] ="Número Salida y/o Vigencia : ";
 $this->idioma ["id_salidaRTitulo"] ="Ingrese Id de Salida";
 
 $this->idioma ["observaciones_sobrante"] ="Observaciones : ";
@@ -91,26 +91,26 @@ $this->idioma ["observaciones_produccionTitulo"] ="Ingrese Observaciones";
 $this->idioma ["observaciones_reposicion"] ="Observaciones : ";
 $this->idioma ["observaciones_reposicionTitulo"] ="Ingrese Observaciones";
 
-$this->idioma ["id_entradaS"] ="(ID)Número Entrada: ";
-$this->idioma ["id_entradaSTitulo"] ="Ingrese (ID)Número Entrada";
+$this->idioma ["id_entradaS"] ="Número Entrada y/o Vigencia : ";
+$this->idioma ["id_entradaSTitulo"] ="Ingrese Número Entrada";
 
-$this->idioma ["num_placa"] ="Número Placa: ";
+$this->idioma ["num_placa"] ="Número Placa : ";
 $this->idioma ["num_placaTitulo"] ="Ingrese Número Placa";
 
 
 $this->idioma ["valor_sobrante"] ="Valor ($) : ";
 $this->idioma ["valor_sobranteTitulo"] ="Ingrese Valor Sobrante";
 
-$this->idioma ["id_salidaS"] ="(ID)Número Salida : ";
+$this->idioma ["id_salidaS"] ="Número Salida y/o Vigencia : ";
 $this->idioma ["id_salidaSTitulo"] ="Ingrese Id de Salida";
 
 
-$this->idioma ["id_hurtoR"] ="(ID)Número Hurto : ";
-$this->idioma ["id_hurtoRTitulo"] ="Ingrese Id de Hurto	";
+$this->idioma ["id_hurtoR"] ="Número Hurto y/o Fecha Hurto: ";
+$this->idioma ["id_hurtoRTitulo"] ="Ingrese de Hurto	";
 
 
 
-$this->idioma ["numero_entradaM"] ="(ID)Número Entrada: ";
+$this->idioma ["numero_entradaM"] ="Número Entrada y/o Vigencia : ";
 
 
 
@@ -158,13 +158,13 @@ $this->idioma ["clase"] ="Clase de Entrada : ";
 $this->idioma ["claseTitulo"] ="Seleccione Clase de Entrada";
 
 
-$this->idioma ["id_entradaR"] ="(ID)Número Entrada : ";
-$this->idioma ["id_entradaRTitulo"] ="Ingrese Id de Entrada";
+$this->idioma ["id_entradaR"] ="Número Entrada y/o Vigencia : ";
+$this->idioma ["id_entradaRTitulo"] ="Ingrese Número de Entrada";
 
-$this->idioma ["id_salida"] ="(ID)Número Salida : ";
+$this->idioma ["id_salida"] ="Número Salida y/o Vigencia : ";
 $this->idioma ["id_salidaTitulo"] ="Ingrese Id de Salida";
 
-$this->idioma ["id_hurto"] ="(ID)Número Hurto : ";
+$this->idioma ["id_hurto"] ="Número Hurto y/o Fecha Hurto: ";
 $this->idioma ["id_hurtoTitulo"] ="Ingrese Id de Hurto	";
 
 $this->idioma ["actoAdministrativo"] ="Acto Administrativo : ";
@@ -237,7 +237,7 @@ $this->idioma ["botonAceptar"] ="Actualizar Entrada";
 $this->idioma ["botonCancelar"] ="Cancelar";
 $this->idioma ["botonContinuar"] ="Continuar";
 $this->idioma ["botonConsultar"] ="Consultar";
-$this->idioma ["botonRegresar"] ="Regresar";
+$this->idioma ["botonRegresar"] ="<< Regresar";
 $this->idioma ["botonReporte"] ="Reporte PDF";
 
 

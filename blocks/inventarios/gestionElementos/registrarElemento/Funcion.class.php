@@ -2,6 +2,9 @@
 
 namespace inventarios\gestionElementos\registrarElemento;
 
+
+use inventarios\gestionElementos\registrarElemento\funcion\redireccion;
+
 if (! isset ( $GLOBALS ["autorizado"] )) {
 	include ("../index.php");
 	exit ();
@@ -29,17 +32,8 @@ class Funcion {
 	var 
 
 	$crypto;
-	// function verificarCampos() {
-	// include_once ($this->ruta . "/funcion/verificarCampos.php");
-	// if ($this->error == true) {
-	// return false;
-	// } else {
-	// return true;
-	// }
-	// }
-	function redireccionar($opcion, $valor = "") {
-		include_once ($this->ruta . "/funcion/redireccionar.php");
-	}
+
+
 	function funcionEjemplo() {
 		include_once ($this->ruta . "/funcion/funcionEjemplo.php");
 	}
@@ -51,9 +45,7 @@ class Funcion {
 	}
 	function action() {
 		
-		
-		
-// 		
+		//
 		// Evitar qu44444444rrrre se ingrese codigo HTML y PHP en los campos de texto
 		// Campos que se quieren excluir de la limpieza de código. Formato: nombreCampo1|nombreCampo2|nombreCampo3
 		$excluir = "";
@@ -69,21 +61,29 @@ class Funcion {
 			$this->procesarAjax ();
 		} elseif (isset ( $_REQUEST ["opcion"] )) {
 			
-			// Realizar una validación específica para los campos de este formulario:
-			// $validacion = $this->verificarCampos ();
-			if ($_REQUEST ['opcion'] == 'registrar') {
-				$this->regitrar();
-			}
-// 			if ($validacion == false) {
-// 				// Instanciar a la clase pagina con mensaje de correcion de datos
-// 				echo "Datos Incorrectos";
-// 			} else {
-// 				// Validar las variables para evitar un tipo insercion de SQL
-// 				$_REQUEST = $this->miInspectorHTML->limpiarSQL ( $_REQUEST );
+			switch ($_REQUEST ['opcion']) {
 				
-// 				$this->funcionEjemplo ();
-// 				$this->redireccionar ( "exito" );
-// 			}
+				case "registrar" :
+					$this->regitrar ();
+					break;
+				
+				case "redireccionar" :
+
+					if (isset ( $_REQUEST ["botonContinuar"] ) && $_REQUEST ['botonContinuar'] == 'true') {
+					
+						redireccion::redireccionar ( 'Salir' );
+						exit;
+					}
+					
+					if (isset ( $_REQUEST ["botonSalida"] ) && $_REQUEST ['botonSalida'] == 'true') {
+						
+						redireccion::redireccionar ( 'SalidaElemento', $_REQUEST ['numero_entrada'],$_REQUEST ['datosGenerales'] );
+						exit;
+					}
+					
+					
+					break;
+			}
 		}
 	}
 	function __construct() {

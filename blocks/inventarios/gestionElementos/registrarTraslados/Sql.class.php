@@ -167,7 +167,7 @@ class Sql extends \Sql {
 				
 				$cadenaSql = "SELECT ";
 				$cadenaSql .= "id_elemento_ind, elemento_individual.placa, elemento_individual.serie, funcionario, id_elemento_gen, ";
-				$cadenaSql .= "elemento_individual.id_salida, "; 
+				$cadenaSql .= "elemento_individual.id_salida, ";
 				$cadenaSql .= "tb_descripcion ";
 				$cadenaSql .= "FROM elemento_individual ";
 				$cadenaSql .= "JOIN elemento ON elemento.id_elemento = elemento_individual.id_elemento_gen ";
@@ -181,7 +181,7 @@ class Sql extends \Sql {
 					$cadenaSql .= " AND funcionario = '" . $variable [0] . "'";
 				}
 				if ($variable [1] != '') {
-					$cadenaSql .= " AND  elemento_individual.serial= '" . $variable [1] . "'";
+					$cadenaSql .= " AND  elemento_individual.serie= '" . $variable [1] . "'";
 				}
 				if ($variable [2] != '') {
 					$cadenaSql .= " AND  elemento_individual.placa= '" . $variable [2] . "'";
@@ -222,9 +222,6 @@ class Sql extends \Sql {
 				
 				break;
 			
-				
-	
-				
 			case "funcionario_informacion" :
 				
 				$cadenaSql = "SELECT FUN_IDENTIFICACION,  FUN_NOMBRE ";
@@ -242,7 +239,23 @@ class Sql extends \Sql {
 				$cadenaSql .= "AND FUN_ESTADO='A' ";
 				
 				break;
+			
+			case "buscar_serie" :
+				$cadenaSql = " SELECT DISTINCT serie, serie as series ";
+				$cadenaSql .= "FROM elemento_individual ";
+				$cadenaSql .= "WHERE  serie <> '' ";
+				$cadenaSql .= "ORDER BY serie DESC ";
+				
+				break;
+			
+			case "buscar_placa" :
+				$cadenaSql = " SELECT DISTINCT placa, placa as placas ";
+				$cadenaSql .= "FROM elemento_individual ";
+				$cadenaSql .= "ORDER BY placa DESC ";
+				
+				break;
 		}
 		return $cadenaSql;
 	}
+}
 ?>

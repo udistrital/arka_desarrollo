@@ -42,6 +42,7 @@ class redireccion {
             case "registrar" :
                 $variable = "pagina=" . $miPaginaActual;
                 $variable .= "&opcion=asociarActa";
+                $variable .= "&datos=".$valor;
                 break;
 
             case "paginaPrincipal" :

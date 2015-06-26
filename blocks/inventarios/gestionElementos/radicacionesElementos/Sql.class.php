@@ -157,13 +157,45 @@ class Sql extends \Sql {
 			
 			case "insertarRadicacion" :
 				$cadenaSql = " INSERT INTO movimiento_radicaciones(";
-				$cadenaSql .= " tipo, ruta_radicacion, nombre_radicacion, fecha_registro )";
+				$cadenaSql .= " tipo, ruta_radicacion, nombre_radicacion, fecha_registro, placaelemento)";
 				$cadenaSql .= " VALUES (";
 				$cadenaSql .= "'" . $variable [0] . "',";
 				$cadenaSql .= "'" . $variable [1] . "',";
 				$cadenaSql .= "'" . $variable [2] . "',";
-				$cadenaSql .= "'" . $variable [3] . "') ";
+				$cadenaSql .= "'" . $variable [3] . "',";
+				$cadenaSql .= "'" . $variable [4] . "') ";
 				$cadenaSql .= "RETURNING  id_movimiento; ";
+				break;
+			
+			case "buscar_placa" :
+				$cadenaSql = " SELECT DISTINCT placa, placa as placas ";
+				$cadenaSql .= "FROM elemento_individual ";
+				$cadenaSql .= "ORDER BY placa DESC ";
+				
+				break;
+			
+			case "consultarSoportesMovimientos" :
+				$cadenaSql = "SELECT DISTINCT ";
+				$cadenaSql .= "mr.*, tfs.descripcion tipo_tfs  ";
+				$cadenaSql .= "FROM movimiento_radicaciones mr ";
+				$cadenaSql .= "JOIN tipo_falt_sobr tfs ON tfs.id_tipo_falt_sobr = mr.tipo ";
+				$cadenaSql .= "JOIN elemento_individual ei ON ei.placa = mr.placaelemento ";
+				$cadenaSql .= "WHERE 1 = 1 ";
+				$cadenaSql .= "AND mr.estado = TRUE ";
+				if ($variable ['tipo_inexistencia'] != '') {
+					$cadenaSql .= " AND mr.tipo = '" . $variable ['tipo_inexistencia'] . "' ";
+				}
+				if ($variable ['placa'] != '') {
+					$cadenaSql .= " AND mr.placaelemento = '" . $variable ['placa'] . "' ";
+				}
+				
+				if ($variable ['fecha_inicial'] != '') {
+					$cadenaSql .= " AND mr.fecha_registro BETWEEN CAST ( '" . $variable ['fecha_inicial'] . "' AS DATE) ";
+					$cadenaSql .= " AND  CAST ( '" . $variable ['fecha_final'] . "' AS DATE)  ";
+				}
+				
+				$cadenaSql .= " ; ";
+				
 				break;
 		}
 		return $cadenaSql;

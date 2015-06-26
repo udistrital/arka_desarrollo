@@ -43,8 +43,7 @@ class Bloque implements \Bloque {
     var $miSql;
     var $miConfigurador;
 
-    public
-            function __construct($esteBloque, $lenguaje = "") {
+    public function __construct($esteBloque, $lenguaje = "") {
 
         // El objeto de la clase Configurador debe ser único en toda la aplicación
         $this->miConfigurador = \Configurador::singleton();
