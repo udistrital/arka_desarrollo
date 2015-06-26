@@ -114,6 +114,18 @@ class registrarForm {
             echo $this->miFormulario->campoCuadroTexto($atributos);
             unset($atributos);
             //---------------------------------------------------------------------------------
+            $atributos ["id"] = "id_placa"; // No cambiar este nombre
+            $atributos ["tipo"] = "hidden";
+            $atributos ['estilo'] = '';
+            $atributos ["obligatorio"] = false;
+            $atributos ['marco'] = true;
+            $atributos ["etiqueta"] = "";
+            $atributos ["valor"] = '';
+            $atributos = array_merge($atributos, $atributosGlobales);
+            echo $this->miFormulario->campoCuadroTexto($atributos);
+            unset($atributos);
+
+            //-------------------------------------------------------------------
 
             $esteCampo = "funcionario";
             $atributos ['nombre'] = $esteCampo;
@@ -146,7 +158,7 @@ class registrarForm {
             $atributos = array_merge($atributos, $atributosGlobales);
             echo $this->miFormulario->campoCuadroLista($atributos);
             unset($atributos);
-
+            
 // ---------------- CONTROL: Cuadro Lista --------------------------------------------------------
             $esteCampo = 'grupo_contable';
             $atributos ['columnas'] = 1;

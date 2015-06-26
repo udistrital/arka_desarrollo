@@ -56,6 +56,7 @@ class registrarForm {
         $conexion = "sicapital";
         $esteRecursoDBO = $this->miConfigurador->fabricaConexiones->getRecursoDB($conexion);
 
+
         if (isset($_REQUEST['grupo_contable']) && $_REQUEST['grupo_contable'] != '') {
             $nivel = $_REQUEST['grupo_contable'];
         } else {
@@ -74,8 +75,8 @@ class registrarForm {
             $fechaCorte = date('Y-m-d');
         }
 
-        if (isset($_REQUEST['placa']) && $_REQUEST['placa'] != '') {
-            $placa = $_REQUEST['placa'];
+        if (isset($_REQUEST['id_placa']) && $_REQUEST['id_placa'] != '') {
+            $placa = $_REQUEST['id_placa'];
         } else {
             $placa = '';
         }
@@ -126,10 +127,12 @@ class registrarForm {
                 $valor_historico = $precio * $cantidad;
 
                 if ($fecha_salida <= $fecha_limite) {
-                    $valor_ajustado = $valor_historico + $inflacion;
+                    $inflacion = $inflacion;
                 } else {
-                    $valor_ajustado = 0;
+                    $inflacion = 0;
                 }
+
+                $valor_ajustado = $valor_historico + $inflacion;
 
 //Valor de la Cuota
                 if ($meses == 0) {
@@ -184,7 +187,7 @@ class registrarForm {
                 $circular_depreciacion = $api_acumulada + $dep_acumulada;
 
 //VALOR A LOS LIBROS
-                $valor_libros = $circular_depreciacion - $valor_ajustado;
+                $valor_libros = $valor_ajustado - $circular_depreciacion;
 
                 $depreciacion_calculada[$a] = array(
                     0 => $elemento[0]['placa'],
@@ -238,24 +241,24 @@ class registrarForm {
                     'fechaCorte' => $_REQUEST['fechaCorte'],
                     7 => $periodos_fecha,
                     'periodos_fecha' => $periodos_fecha,
-                    8 => $valor_historico,
-                    'valor_historico' => $valor_historico,
-                    9 => $valor_ajustado,
-                    'valor_ajustado' => $valor_ajustado,
-                    10 => $cuota,
-                    'cuota' => $cuota,
-                    11 => $dep_acumulada,
-                    'depreciacion_acumulada' => $dep_acumulada,
-                    12 => $circular56,
-                    'circular_56' => $circular56,
-                    13 => $cuota_inflacion,
-                    'cuota_inflacion' => $cuota_inflacion,
-                    14 => $api_acumulada,
-                    'ajuste_inflacionario' => $api_acumulada,
-                    15 => $circular_depreciacion,
-                    'circular_depreciacion' => $circular_depreciacion,
-                    16 => $valor_libros,
-                    'valor_libros' => $valor_libros,
+                    8 => number_format($valor_historico, 2, ',', '.'),
+                    'valor_historico' => number_format($valor_historico, 2, ',', '.'),
+                    9 => number_format($valor_ajustado, 2, ',', '.'),
+                    'valor_ajustado' => number_format($valor_ajustado, 2, ',', '.'),
+                    10 => number_format($cuota, 2, ',', '.'),
+                    'cuota' => number_format($cuota, 2, ',', '.'),
+                    11 => number_format($dep_acumulada, 2, ',', '.'),
+                    'depreciacion_acumulada' => number_format($dep_acumulada, 2, ',', '.'),
+                    12 => number_format($circular56, 2, ',', '.'),
+                    'circular_56' => number_format($circular56, 2, ',', '.'),
+                    13 => number_format($cuota_inflacion, 2, ',', '.'),
+                    'cuota_inflacion' => number_format($cuota_inflacion, 2, ',', '.'),
+                    14 => number_format($api_acumulada, 2, ',', '.'),
+                    'ajuste_inflacionario' => number_format($api_acumulada, 2, ',', '.'),
+                    15 => number_format($circular_depreciacion, 2, ',', '.'),
+                    'circular_depreciacion' => number_format($circular_depreciacion, 2, ',', '.'),
+                    16 => number_format($valor_libros, 2, ',', '.'),
+                    'valor_libros' => number_format($valor_libros, 2, ',', '.'),
                 );
                 $a++;
             }

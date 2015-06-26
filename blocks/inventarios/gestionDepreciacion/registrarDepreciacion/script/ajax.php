@@ -33,7 +33,10 @@ $urlFinal = $url . $cadena1;
     $(document).ready(function () {
         $("#<?php echo $this->campoSeguro('placa') ?>").devbridgeAutocomplete({
             minLength: 2,
-            serviceUrl: '<?php echo $urlFinal; ?>'        
+            serviceUrl: '<?php echo $urlFinal; ?>',
+            onSelect: function (suggestion) {
+    	        $("#<?php echo $this->campoSeguro('id_placa') ?>").val(suggestion.data);
+    	    }
         });
     });
 </script>
