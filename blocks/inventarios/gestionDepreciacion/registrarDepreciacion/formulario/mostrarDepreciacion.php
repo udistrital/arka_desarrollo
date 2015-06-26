@@ -306,6 +306,7 @@ class registrarForm {
         $atributos ['enlaceTexto'] = $this->lenguaje->getCadena($esteCampo);
         $atributos ['ancho'] = '10%';
         $atributos ['alto'] = '10%';
+        $atributos ['redirLugar'] = true;
         echo $this->miFormulario->enlace($atributos);
 
         unset($atributos);
