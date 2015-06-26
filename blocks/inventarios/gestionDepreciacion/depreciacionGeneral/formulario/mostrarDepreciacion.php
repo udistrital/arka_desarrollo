@@ -126,10 +126,12 @@ class registrarForm {
                     $valor_historico = $precio * $cantidad;
 
                     if ($fecha_salida <= $fecha_limite) {
-                        $valor_ajustado = $valor_historico + $inflacion;
+                        $inflacion = $inflacion;
                     } else {
-                        $valor_ajustado = 0;
+                        $inflacion = 0;
                     }
+
+                    $valor_ajustado = $valor_historico + $inflacion;
 
 //Valor de la Cuota
                     if ($meses == 0) {
@@ -183,7 +185,7 @@ class registrarForm {
                     $circular_depreciacion = $api_acumulada + $dep_acumulada;
 
 //VALOR A LOS LIBROS
-                    $valor_libros = $circular_depreciacion - $valor_ajustado;
+                    $valor_libros = $valor_ajustado-$circular_depreciacion;
 
 
 
@@ -207,20 +209,20 @@ class registrarForm {
                     'grupo' => $nombre_cuenta,
                     2 => $count,
                     'total_elementos' => $count,
-                    3 => $total_valorhistorico,
-                    'total_valor_historico' => $total_valorhistorico,
-                    4 => $total_ajusteinflacion,
-                    'total_ajuste_inflacion' => $total_ajusteinflacion,
-                    5 => $total_valorajustado,
-                    'total_valor_ajustado' => $total_valorajustado,
-                    6 => $total_depreciacion,
-                    'total_depreciacion' => $total_depreciacion,
-                    7 => $total_api,
-                    'total_ajuste_inflacionario' => $total_api,
-                    8 => $total_depreciacion,
-                    'total_depreciacion_circular56' => $total_dep56,
-                    9 => $total_libros,
-                    'total_libros' => $total_libros,
+                    3 => number_format($total_valorhistorico, 2, ',', '.'),
+                    'total_valor_historico' => number_format($total_valorhistorico, 2, ',', '.'),
+                    4 => number_format($total_ajusteinflacion, 2, ',', '.'),
+                    'total_ajuste_inflacion' => number_format($total_ajusteinflacion, 2, ',', '.'),
+                    5 => number_format($total_valorajustado, 2, ',', '.'),
+                    'total_valor_ajustado' => number_format($total_valorajustado, 2, ',', '.'),
+                    6 => number_format($total_depreciacion, 2, ',', '.'),
+                    'total_depreciacion' => number_format($total_depreciacion, 2, ',', '.'),
+                    7 => number_format($total_api, 2, ',', '.'),
+                    'total_ajuste_inflacionario' => number_format($total_api, 2, ',', '.'),
+                    8 => number_format($total_dep56, 2, ',', '.'),
+                    'total_depreciacion_circular56' => number_format($total_dep56, 2, ',', '.'),
+                    9 => number_format($total_libros, 2, ',', '.'),
+                    'total_libros' => number_format($total_libros, 2, ',', '.'),
                 );
 
                 $a++;
