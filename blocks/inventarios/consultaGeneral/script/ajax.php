@@ -75,7 +75,7 @@ $urlFinal16 = $url . $cadena16;
 
                         $("<option value='" + data[ indice ].ESF_ID_ESPACIO + "'>" + data[ indice ].ESF_NOMBRE_ESPACIO + "</option>").appendTo("#<?php echo $this->campoSeguro('dependencia') ?>");
                     });
-                    $("#<?php echo $this->campoSeguro('dependencia') ?>").removeAttr('disabled');
+                    $("#<?php echo $this->campoSeguro('dependencia') ?>").disable=false;
                     $("#<?php echo $this->campoSeguro('dependencia') ?>").select2();
                 }
             }
@@ -83,7 +83,5 @@ $urlFinal16 = $url . $cadena16;
         });
     }
     ;
-
-
 </script>
 

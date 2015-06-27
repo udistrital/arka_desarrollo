@@ -128,7 +128,7 @@ class registrarForm {
             $atributos ['nombre'] = $esteCampo;
             $atributos ['id'] = $esteCampo;
             $atributos ['evento'] = '';
-            $atributos ['deshabilitado'] = false;
+            $atributos ['deshabilitado'] = true;
             $atributos ["etiquetaObligatorio"] = false;
             $atributos ['tab'] = $tab;
             $atributos ['tamanno'] = 1;
@@ -231,7 +231,7 @@ class registrarForm {
             } else {
                 $atributos ['valor'] = '';
             }
-            $atributos ['deshabilitado'] = false;
+            $atributos ['deshabilitado'] = true;
             $atributos ['columnas'] = 1;
             $atributos ['tamanno'] = 1;
             $atributos ['ajax_function'] = "";

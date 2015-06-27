@@ -29,7 +29,6 @@ $('#tablaReporte').dataTable( {
 } );
 
 
-$("#<?php echo $this->campoSeguro('dependencia') ?>").attr('disabled','');
 
 $('#<?php echo $this->campoSeguro('sede') ?>').select2();
 $('#<?php echo $this->campoSeguro('nombreFuncionario') ?>').select2();
@@ -60,6 +59,12 @@ $("#<?php echo $this->campoSeguro('dependencia') ?>").attr('disabled','');
 }
 });
 
+
+
+$( "#<?php echo $this->campoSeguro('sede') ?>" ).change(function() {
+$("#<?php echo $this->campoSeguro('dependencia') ?>").disable=false;
+$("#<?php echo $this->campoSeguro('selec_tipoConsulta') ?>").disable=false;
+});
 
 
 
