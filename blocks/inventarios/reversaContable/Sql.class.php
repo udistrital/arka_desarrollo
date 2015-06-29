@@ -160,11 +160,18 @@ class Sql extends \Sql {
                     $cadenaSql .= " AND  CAST ( '" . $variable ['fecha_final'] . "' AS DATE)  ";
                 }
                 break;
-                
+
             case "actualizarCierre":
                 $cadenaSql = " UPDATE cierre_contable ";
                 $cadenaSql.= " SET estado_registro='" . $variable['estado'] . "', ";
-                $cadenaSql.= " fecha_cierre='" . $variable['fechaRegistro'] . "' ";
+                $cadenaSql.= " fecha_reversa='" . $variable['fechaRegistro'] . "' ";
+                $cadenaSql.= " WHERE id_cierre='" . $variable['id_cierre'] . "' ";
+                break;
+
+            case "activarCierre":
+                $cadenaSql = " UPDATE cierre_contable ";
+                $cadenaSql.= " SET estado_registro='" . $variable['estado'] . "', ";
+                $cadenaSql.= " fecha_reversa='" . $variable['fechaRegistro'] . "' ";
                 $cadenaSql.= " WHERE id_cierre='" . $variable['id_cierre'] . "' ";
                 break;
 

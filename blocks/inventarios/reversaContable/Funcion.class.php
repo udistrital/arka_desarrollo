@@ -46,8 +46,8 @@ class Funcion {
         include_once ($this->ruta . "/funcion/funcionEjemplo.php");
     }
 
-    function registrarCierre() {
-        include_once ($this->ruta . "/funcion/registrarCierre.php");
+    function reversarCierre() {
+        include_once ($this->ruta . "/funcion/reversarCierre.php");
     }
 
     function procesarAjax() {
@@ -74,8 +74,8 @@ class Funcion {
 
             switch ($_REQUEST ['opcion']) {
 
-                case "registroCierre" :
-                    $this->registrarCierre();
+                case "reversarCierre" :
+                    $this->reversarCierre();
                     break;
             }
 

@@ -14,13 +14,11 @@ class redireccion {
         $miPaginaActual = $miConfigurador->getVariableConfiguracion("pagina");
 
         switch ($opcion) {
+
             case "inserto" :
                 $variable = "pagina=" . $miPaginaActual;
                 $variable .= "&opcion=mensaje";
                 $variable .= "&mensaje=confirma";
-                $variable .= "&vigencia=" . $valor ['vigencia'];
-                $variable .= "&inicio=" . $valor ['f_inicio'];
-                $variable .= "&fin=" . $valor ['f_final'];
                 break;
 
             case "noInserto" :

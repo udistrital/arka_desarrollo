@@ -16,7 +16,7 @@ $this->idioma ["observaciones"] ="&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspObserv
 $this->idioma ["observacionesTitulo"] ="";
 
 
-$this->idioma ["botonAceptar"] ="Registrar Cierre Contable";
+$this->idioma ["botonAceptar"] ="Reversar Cierre Contable";
 $this->idioma ["botonCancelar"] ="Cancelar";
 $this->idioma ["botonContinuar"] ="Continuar";
 $this->idioma ["botonConsultar"] ="Consultar";

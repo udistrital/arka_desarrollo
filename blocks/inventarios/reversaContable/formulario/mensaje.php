@@ -20,7 +20,7 @@ class registrarForm {
 		$this->miSql = $sql;
 	}
 	function miForm() {
-		// Rescatar los datos de este bloque
+    		// Rescatar los datos de este bloque
 		$esteBloque = $this->miConfigurador->getVariableConfiguracion ( "esteBloque" );
 		
 		// ---------------- SECCION: Parámetros Globales del Formulario ----------------------------------
@@ -78,7 +78,7 @@ class registrarForm {
 			{
 				if (isset($_REQUEST ['mensaje'])&&$_REQUEST ['mensaje'] == 'confirma') {
 					
-					$mensaje = "Se Registro el Cierre Contable<br> para la Vigencia: " . $_REQUEST ['vigencia']." entre el periodo ".$_REQUEST['inicio']." a ".$_REQUEST['fin'];
+					$mensaje = "Se Registró la Reversa Contable";
 					
 					// ---------------- CONTROL: Cuadro de Texto --------------------------------------------------------
 					$esteCampo = 'mensajeRegistro';
@@ -96,7 +96,7 @@ class registrarForm {
 				}
 				if (isset($_REQUEST ['mensaje'])&&$_REQUEST ['mensaje'] == 'error') {
 					
-					$mensaje = "No Se Pudo Realizar el Cierre Contable";
+					$mensaje = "No Se Pudo Realizar la Reversa del Cierre Contable";
 					
 					// ---------------- CONTROL: Cuadro de Texto --------------------------------------------------------
 					$esteCampo = 'mensajeRegistro';
@@ -115,7 +115,7 @@ class registrarForm {
 				
 				if (isset($_REQUEST['errores'])&&$_REQUEST ['errores'] == 'noAprobo') {
 					
-					$mensaje = "No se Aprobó el Cierre Contable";
+					$mensaje = "No se realizó la Reversa del Cierre Contable";
 					
 					// ---------------- CONTROL: Cuadro de Texto --------------------------------------------------------
 					$esteCampo = 'mensajeRegistro';

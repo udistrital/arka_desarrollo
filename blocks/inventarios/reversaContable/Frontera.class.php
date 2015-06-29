@@ -56,12 +56,13 @@ class Frontera {
         if (isset($_REQUEST ['opcion'])) {
 
             switch ($_REQUEST ['opcion']) {
-                case "reversaContable":
-                    include_once ($this->ruta . "/formulario/reversaCierre.php");
-                    break;
 
                 case "resultadoCierres":
                     include_once ($this->ruta . "/formulario/resultado.php");
+                    break;
+                
+                case "mensaje":
+                    include_once ($this->ruta . "/formulario/mensaje.php");
                     break;
             }
         } else {
