@@ -15,9 +15,7 @@
             $("#registrarTraslados").submit(function() {
                 $resultado=$("#registrarTraslados").validationEngine("validate");
                    
-                   
-                   
-                if ($resultado) {
+                      if ($resultado) {
                 
                     return true;
                 }
@@ -356,7 +354,12 @@ $("#<?php echo $this->campoSeguro('responsable_reci')?>").select2({
 	   });
 	   
 	          $('#tablaTitulos').dataTable( {
-                "sPaginationType": "full_numbers"
+                "sPaginationType": "full_numbers",
+                  dom: 'T<"clear">lfrtip',
+        tableTools: {
+            "sRowSelect": "multi",
+            "aButtons": [ "select_all", "select_none" ]
+        }
                  } );
 	   
           
