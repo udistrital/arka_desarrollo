@@ -132,7 +132,7 @@ class registrarForm {
 		$atributos ['validar'] = '';
 		$atributos ['limitar'] = true;
 		$atributos ['etiqueta'] = $this->lenguaje->getCadena ( $esteCampo );
-		$atributos ['anchoEtiqueta'] = 170;
+		$atributos ['anchoEtiqueta'] = 135;
 		
 		if (isset ( $_REQUEST [$esteCampo] )) {
 			$atributos ['seleccion'] = $_REQUEST [$esteCampo];
@@ -167,7 +167,7 @@ class registrarForm {
 		$atributos ['limitar'] = 1;
 		$atributos ['anchoCaja'] = 25;
 		$atributos ['etiqueta'] = $this->lenguaje->getCadena ( $esteCampo );
-		$atributos ['anchoEtiqueta'] = 220;
+		$atributos ['anchoEtiqueta'] = 135;
 		if (isset ( $_REQUEST [$esteCampo] )) {
 			$atributos ['seleccion'] = $_REQUEST [$esteCampo];
 		} else {
@@ -200,7 +200,7 @@ class registrarForm {
 		$atributos ["etiquetaObligatorio"] = false;
 		$atributos ['tab'] = $tab ++;
 		$atributos ['seleccion'] = - 1;
-		$atributos ['anchoEtiqueta'] = 170;
+		$atributos ['anchoEtiqueta'] = 135;
 		$atributos ['evento'] = '';
 		if (isset ( $_REQUEST [$esteCampo] )) {
 			$atributos ['valor'] = $_REQUEST [$esteCampo];
@@ -246,7 +246,7 @@ class registrarForm {
 		$atributos ["etiquetaObligatorio"] = false;
 		$atributos ['tab'] = $tab ++;
 		$atributos ['seleccion'] = - 1;
-		$atributos ['anchoEtiqueta'] = 220;
+		$atributos ['anchoEtiqueta'] = 135;
 		$atributos ['evento'] = '';
 		if (isset ( $_REQUEST [$esteCampo] )) {
 			$atributos ['valor'] = $_REQUEST [$esteCampo];

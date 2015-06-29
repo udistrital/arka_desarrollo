@@ -82,9 +82,12 @@ class registrarForm {
 				$dependencia 
 		);
 		
-		$cadenaSql = $this->miSql->getCadenaSql ( 'consultarElemento', $arreglo );
+	 $cadenaSql = $this->miSql->getCadenaSql ( 'consultarElemento', $arreglo );
+        
 		$elemento = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
-		
+        
+                var_dump($elemento);
+                exit;
 		// ---------------- SECCION: Parámetros Generales del Formulario ----------------------------------
 		$esteCampo = $esteBloque ['nombre'];
 		$atributos ['id'] = $esteCampo;
@@ -138,7 +141,7 @@ class registrarForm {
 		
 		$esteCampo = "AgrupacionInformacion";
 		$atributos ['id'] = $esteCampo;
-		$atributos ['leyenda'] = "Información Referente a Elementos";
+		$atributos ['leyenda'] = "Información Referente a Elementos (Baja Elementos)";
 		echo $this->miFormulario->agrupacion ( 'inicio', $atributos );
 // 		var_dump($elemento);
 		if ($elemento) {
@@ -146,18 +149,18 @@ class registrarForm {
 			echo "<table id='tablaTitulos'>";
 			
 			echo "<thead>
-                <tr>
-				  	<th>Número Salida y/o<br>Vigencia</th>	
-					<th># ID Elemento </th>	
-                  	<th># Número Placa</th>
-                    <th># Número Serial</th>
-                    <th>Nombre Funcionario</th>
-					<th>Identificación<br>Funcionario</th>
-					<th>Tipo Bien</th>
-			        <th>Generar Baja<br>Elemento</th>
-                </tr>
-            </thead>
-            <tbody>";
+                        <tr>
+			    <th>Número Salida y/o<br>Vigencia</th>	
+			    <th># Número Placa</th>
+                            <th> Descripción </th>
+                            <th>Nombre Funcionario</th>
+			    <th>Identificación<br>Funcionario</th>
+                            <th>Espacio Físico </th>
+			    <th>Dependencia</th>
+			    <th>Generar Baja<br>Elemento</th>
+                        </tr>
+                        </thead>
+                        <tbody>";
 			
 			for($i = 0; $i < count ( $elemento ); $i ++) {
 				$variable = "pagina=" . $miPaginaActual; // pendiente la pagina para modificar parametro
@@ -175,20 +178,20 @@ class registrarForm {
 				$variable = $this->miConfigurador->fabricaConexiones->crypto->codificar_url ( $variable, $directorio );
 				
 				$mostrarHtml = "<tr>
-		    		<td><center>" . $elemento [$i] [5] . "</center></td>
-                    <td><center>" . $elemento [$i] [4] . "</center></td>
-		  			<td><center>" . $elemento [$i] [1] . "</center></td>
-                    <td><center>" . $elemento [$i] [2] . "</center></td>
-                    <td><center>" . $elemento [$i] ['funcionario'] . "</center></td>
-                    <td><center>" . $elemento [$i] ['fun_nombre'] . "</center></td>
-                    <td><center>" . $elemento [$i] [6] . "</center></td>
-                    <td><center>
-                    	<a href='" . $variable . "'>
-                            <img src='" . $rutaBloque . "/css/images/baja.png' width='15px'>
-                        </a>
-                  	</center> </td>
+		    		<td><center>" . $elemento [$i] ['salidas'] . "</center></td>
+                                <td><center>" . $elemento [$i] ['placa'] . "</center></td>
+		  		<td><center>" . $elemento [$i] ['descripcion_elemento'] . "</center></td>
+                                <td><center>" . $elemento [$i] ['funcionario'] . "</center></td>
+                                <td><center>" . $elemento [$i] ['fun_nombre'] . "</center></td>
+                                <td><center>" . $elemento [$i] [2] . "</center></td>
+                                <td><center>" . $elemento [$i] [6] . "</center></td>
+                                <td><center>
+                                    <a href='" . $variable . "'>
+                                        <img src='" . $rutaBloque . "/css/images/baja.png' width='15px'>
+                                    </a>
+                                    </center></td>
            
-                </tr>";
+                                </tr>";
 				echo $mostrarHtml;
 				unset ( $mostrarHtml );
 				unset ( $variable );
