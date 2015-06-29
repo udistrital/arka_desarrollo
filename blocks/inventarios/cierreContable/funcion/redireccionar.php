@@ -1,6 +1,6 @@
 <?php
 
-namespace inventarios\cierreContable\funcion;
+namespace inventarios\reversaContable\funcion;
 
 if (!isset($GLOBALS ["autorizado"])) {
     include ("index.php");
@@ -13,14 +13,13 @@ class redireccion {
         $miConfigurador = \Configurador::singleton();
         $miPaginaActual = $miConfigurador->getVariableConfiguracion("pagina");
 
+        var_dump($_REQUEST);
+        exit;
         switch ($opcion) {
             case "inserto" :
                 $variable = "pagina=" . $miPaginaActual;
                 $variable .= "&opcion=mensaje";
                 $variable .= "&mensaje=confirma";
-                $variable .= "&vigencia=" . $valor ['vigencia'];
-                $variable .= "&inicio=" . $valor ['f_inicio'];
-                $variable .= "&fin=" . $valor ['f_final'];
                 break;
 
             case "noInserto" :
