@@ -8,6 +8,7 @@ if (!isset($GLOBALS ["autorizado"])) {
     exit();
 }
 
+
 // Todo bloque debe implementar la interfaz Bloque
 include_once ("core/builder/Bloque.interface.php");
 
@@ -22,7 +23,6 @@ include_once ("Funcion.class.php");
 
 // Compilación de clausulas SQL utilizadas por el bloque
 include_once ("Sql.class.php");
-
 // Mensajes
 include_once ("Lenguaje.class.php");
 
@@ -43,8 +43,7 @@ class Bloque implements \Bloque {
     var $miSql;
     var $miConfigurador;
 
-    public
-            function __construct($esteBloque, $lenguaje = "") {
+    public function __construct($esteBloque, $lenguaje = "") {
 
         // El objeto de la clase Configurador debe ser único en toda la aplicación
         $this->miConfigurador = \Configurador::singleton();
@@ -70,6 +69,8 @@ class Bloque implements \Bloque {
     }
 
     public function bloque() {
+        
+      
         if (isset($_REQUEST ['botonCancelar']) && $_REQUEST ['botonCancelar'] == "true") {
             redireccion::redireccionar("paginaPrincipal");
         } else if (isset($_REQUEST ['botonContinuar']) && $_REQUEST ['botonContinuar'] == "true") {
@@ -85,7 +86,7 @@ class Bloque implements \Bloque {
             $this->miFuncion->setLenguaje($this->miLenguaje);
 
             if (!isset($_REQUEST ['action'])) {
-// 				echo "bloque";exit;
+
                 $this->miFrontera->frontera();
             } else {
 

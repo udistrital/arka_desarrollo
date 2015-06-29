@@ -28,6 +28,12 @@ class redireccion {
                 $variable .= "&opcion=mensaje";
                 $variable .= "&mensaje=error";
                 break;
+            
+            case "noCoincide" :
+                $variable = "pagina=" . $miPaginaActual;
+                $variable .= "&opcion=mensaje";
+                $variable .= "&mensaje=error";
+                break;
 
             case "noAprobo" :
                 $variable = "pagina=" . $miPaginaActual;
