@@ -41,12 +41,65 @@ $cadena16 = $this->miConfigurador->fabricaConexiones->crypto->codificar_url($cad
 $urlFinal16 = $url . $cadena16;
 ?>
 <script type='text/javascript'>
-    $(function () {
 
-        $("#<?php echo $this->campoSeguro('sede') ?>").select2({
-            placeholder: "Search for a repository",
-            minimumInputLength: 2,
+
+
+    function consultarDependencia(elem, request, response) {
+        $.ajax({
+            url: "<?php echo $urlFinal16 ?>",
+            dataType: "json",
+            data: {valor: $("#<?php echo $this->campoSeguro('sede') ?>").val()},
+            success: function (data) {
+                if (data[0] != " ") {
+
+                    $("#<?php echo $this->campoSeguro('dependencia') ?>").html('');
+                    $("<option value=''>Seleccione  ....</option>").appendTo("#<?php echo $this->campoSeguro('dependencia') ?>");
+                    $.each(data, function (indice, valor) {
+
+                        $("<option value='" + data[ indice ].ESF_ID_ESPACIO + "'>" + data[ indice ].ESF_NOMBRE_ESPACIO + "</option>").appendTo("#<?php echo $this->campoSeguro('dependencia') ?>");
+
+                    });
+
+                    $("#<?php echo $this->campoSeguro('dependencia') ?>").removeAttr('disabled');
+                    $("#<?php echo $this->campoSeguro('selec_tipoConsulta') ?>").removeAttr('disabled');
+                    $('#<?php echo $this->campoSeguro('dependencia') ?>').width(300);
+                    $("#<?php echo $this->campoSeguro('dependencia') ?>").select2();
+
+
+
+                }
+
+
+            }
+
         });
+    }
+    ;
+
+    $(function () {
+        $("#<?php echo $this->campoSeguro('sede') ?>").change(function () {
+            if ($("#<?php echo $this->campoSeguro('sede') ?>").val() != '') {
+
+                consultarDependencia();
+            } else {
+                $("#<?php echo $this->campoSeguro('dependencia') ?>").attr('disabled', '');
+            }
+
+        });
+
+        $("#<?php echo $this->campoSeguro('nombreFuncionario') ?>").change(function () {
+        
+            if ($("#<?php echo $this->campoSeguro('nombreFuncionario') ?>").val() != '') {
+
+                $("#<?php echo $this->campoSeguro('selec_tipoConsulta') ?>").removeAttr('disabled');
+                $('#<?php echo $this->campoSeguro('selec_tipoConsulta') ?>').select2();
+            } else {
+                $("#<?php echo $this->campoSeguro('dependencia') ?>").attr('disabled', '');
+            }
+        });
+
+
+
         $("#<?php echo $this->campoSeguro('selec_tipoConsulta') ?>").select2({
             placeholder: "Search for a repository",
             minimumInputLength: 2,
@@ -59,29 +112,7 @@ $urlFinal16 = $url . $cadena16;
             placeholder: "Search for a repository",
             minimumInputLength: 2,
         });
+
     });
-
-    function consultarDependencia(elem, request, response) {
-        $.ajax({
-            url: "<?php echo $urlFinal16 ?>",
-            dataType: "json",
-            data: {},
-            success: function (data) {
-
-                if (data[0] != " ") {
-                    $("#<?php echo $this->campoSeguro('dependencia') ?>").html('');
-                    $("<option value=''>Seleccione ...</option>").appendTo("#<?php echo $this->campoSeguro('dependencia') ?>");
-                    $.each(data, function (indice, valor) {
-
-                        $("<option value='" + data[ indice ].ESF_ID_ESPACIO + "'>" + data[ indice ].ESF_NOMBRE_ESPACIO + "</option>").appendTo("#<?php echo $this->campoSeguro('dependencia') ?>");
-                    });
-                    $("#<?php echo $this->campoSeguro('dependencia') ?>").disable=false;
-                    $("#<?php echo $this->campoSeguro('dependencia') ?>").select2();
-                }
-            }
-
-        });
-    }
-    ;
 </script>
 

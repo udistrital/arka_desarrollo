@@ -88,50 +88,51 @@ class registrarForm {
             'IDtraslado' => (isset($_REQUEST['IDtraslado']) ? $_REQUEST['IDtraslado'] : ''),
         );
 
-        switch ($_REQUEST['selec_tipoConsulta']) {
+        if (isset($_REQUEST['selec_tipoConsulta']) && $_REQUEST['selec_tipoConsulta'] != '') {
+            switch ($_REQUEST['selec_tipoConsulta']) {
 
-            //Entradas
-            case 1:
-                $cadenaSql = $this->miSql->getCadenaSql('consultarEntrada', $datos_consulta);
-                $datos = $esteRecursoDB->ejecutarAcceso($cadenaSql, "busqueda");
-                break;
-            //Salidas
-            case 2:
-                $cadenaSql = $this->miSql->getCadenaSql('consultarSalida', $datos_consulta);
-                $datos = $esteRecursoDB->ejecutarAcceso($cadenaSql, "busqueda");
-                break;
-            //Elementos
-            case 3:
-                $cadenaSql = $this->miSql->getCadenaSql('consultarElementos', $datos_consulta);
-                $datos = $esteRecursoDB->ejecutarAcceso($cadenaSql, "busqueda");
-                break;
-            //Traslados
-            case 4:
-                $cadenaSql = $this->miSql->getCadenaSql('consultarTraslados', $datos_consulta);
-                $datos = $esteRecursoDB->ejecutarAcceso($cadenaSql, "busqueda");
-                break;
-            //Sobrantes o faltantes
-            case 6:
-                $cadenaSql = $this->miSql->getCadenaSql('consultarSobranteFaltante', $datos_consulta);
-                $datos = $esteRecursoDB->ejecutarAcceso($cadenaSql, "busqueda");
-                break;
-            //Bajas
-            case 5:
-                $cadenaSql = $this->miSql->getCadenaSql('consultarBajas', $datos_consulta);
-                $datos = $esteRecursoDB->ejecutarAcceso($cadenaSql, "busqueda");
-                break;
-            //Inventario
-            case 7:
-                $cadenaSql = $this->miSql->getCadenaSql('consultarInventario', $datos_consulta);
-                $datos = $esteRecursoDB->ejecutarAcceso($cadenaSql, "busqueda");
-                break;
+                //Entradas
+                case 1:
+                    $cadenaSql = $this->miSql->getCadenaSql('consultarEntrada', $datos_consulta);
+                    $datos = $esteRecursoDB->ejecutarAcceso($cadenaSql, "busqueda");
 
-            default:
-                $datos = array();
-                break;
+                    break;
+                //Salidas
+                case 2:
+                    $cadenaSql = $this->miSql->getCadenaSql('consultarSalida', $datos_consulta);
+                    $datos = $esteRecursoDB->ejecutarAcceso($cadenaSql, "busqueda");
+                    break;
+                //Elementos
+                case 3:
+                    $cadenaSql = $this->miSql->getCadenaSql('consultarElementos', $datos_consulta);
+                    $datos = $esteRecursoDB->ejecutarAcceso($cadenaSql, "busqueda");
+                    break;
+                //Traslados
+                case 4:
+                    $cadenaSql = $this->miSql->getCadenaSql('consultarTraslados', $datos_consulta);
+                    $datos = $esteRecursoDB->ejecutarAcceso($cadenaSql, "busqueda");
+                    break;
+                //Sobrantes o faltantes
+                case 6:
+                    $cadenaSql = $this->miSql->getCadenaSql('consultarSobranteFaltante', $datos_consulta);
+                    $datos = $esteRecursoDB->ejecutarAcceso($cadenaSql, "busqueda");
+                    break;
+                //Bajas
+                case 5:
+                    $cadenaSql = $this->miSql->getCadenaSql('consultarBajas', $datos_consulta);
+                    $datos = $esteRecursoDB->ejecutarAcceso($cadenaSql, "busqueda");
+                    break;
+                //Inventario
+                case 7:
+                    $cadenaSql = $this->miSql->getCadenaSql('consultarInventario', $datos_consulta);
+                    $datos = $esteRecursoDB->ejecutarAcceso($cadenaSql, "busqueda");
+
+                    break;
+
+                default:
+                    $datos = array();
+            }
         }
-
-
 // ---------------- SECCION: Parámetros Generales del Formulario ----------------------------------
         $esteCampo = $esteBloque ['nombre'];
         $atributos ['id'] = $esteCampo;
@@ -188,12 +189,29 @@ class registrarForm {
 // ------------------Fin Division para los botones-------------------------
         echo $this->miFormulario->division("fin");
 
-        if ($datos) {
-            echo $this->miFormulario->tablaReporte($datos);
+        if (isset($_REQUEST['selec_tipoConsulta']) && $_REQUEST['selec_tipoConsulta'] != '') {
+            if ($datos) {
+                echo $this->miFormulario->tablaReporte($datos);
 // Fin de Conjunto de Controles
 // echo $this->miFormulario->marcoAgrupacion("fin");
+            } else {
+                $mensaje = "No Se Encontraron<br>Datos Relacionados con la Búsqueda";
+// ---------------- CONTROL: Cuadro de Texto --------------------------------------------------------
+                $esteCampo = 'mensajeRegistro';
+                $atributos ['id'] = $esteCampo;
+                $atributos ['tipo'] = 'error';
+                $atributos ['estilo'] = 'textoCentrar';
+                $atributos ['mensaje'] = $mensaje;
+
+                $tab ++;
+
+// Aplica atributos globales al control
+                $atributos = array_merge($atributos, $atributosGlobales);
+                echo $this->miFormulario->cuadroMensaje($atributos);
+// --------------- FIN CONTROL : Cuadro de Texto --------------------------------------------------
+            }
         } else {
-            $mensaje = "No Se Encontraron<br>Datos Relacionados con la Búsqueda";
+            $mensaje = "Especifique al menos un criterio de búsqueda";
 // ---------------- CONTROL: Cuadro de Texto --------------------------------------------------------
             $esteCampo = 'mensajeRegistro';
             $atributos ['id'] = $esteCampo;
@@ -201,13 +219,14 @@ class registrarForm {
             $atributos ['estilo'] = 'textoCentrar';
             $atributos ['mensaje'] = $mensaje;
 
-            $tab ++;
+            $tab = 1;
 
 // Aplica atributos globales al control
             $atributos = array_merge($atributos, $atributosGlobales);
             echo $this->miFormulario->cuadroMensaje($atributos);
 // --------------- FIN CONTROL : Cuadro de Texto --------------------------------------------------
         }
+
 
         echo $this->miFormulario->marcoAgrupacion('fin');
 
