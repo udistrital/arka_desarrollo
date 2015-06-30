@@ -400,10 +400,4 @@ $("#<?php echo $this->campoSeguro('responsable_reci')?>").select2();
                 "sPaginationType": "full_numbers"
                  } );
 	   
-          
-
-
-
-
-
-
+         

@@ -85,9 +85,7 @@ class registrarForm {
 	 $cadenaSql = $this->miSql->getCadenaSql ( 'consultarElemento', $arreglo );
         
 		$elemento = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
-        
-                var_dump($elemento);
-                exit;
+       
 		// ---------------- SECCION: Parámetros Generales del Formulario ----------------------------------
 		$esteCampo = $esteBloque ['nombre'];
 		$atributos ['id'] = $esteCampo;
@@ -153,9 +151,8 @@ class registrarForm {
 			    <th>Número Salida y/o<br>Vigencia</th>	
 			    <th># Número Placa</th>
                             <th> Descripción </th>
-                            <th>Nombre Funcionario</th>
-			    <th>Identificación<br>Funcionario</th>
-                            <th>Espacio Físico </th>
+                            <th>ID Funcionario</th>
+			    <th>Nombre<br>Funcionario</th>
 			    <th>Dependencia</th>
 			    <th>Generar Baja<br>Elemento</th>
                         </tr>
@@ -183,8 +180,8 @@ class registrarForm {
 		  		<td><center>" . $elemento [$i] ['descripcion_elemento'] . "</center></td>
                                 <td><center>" . $elemento [$i] ['funcionario'] . "</center></td>
                                 <td><center>" . $elemento [$i] ['fun_nombre'] . "</center></td>
-                                <td><center>" . $elemento [$i] [2] . "</center></td>
-                                <td><center>" . $elemento [$i] [6] . "</center></td>
+                                <td><center>" . $elemento [$i] ['dependeciassalidas'] . "</center></td>
+                                
                                 <td><center>
                                     <a href='" . $variable . "'>
                                         <img src='" . $rutaBloque . "/css/images/baja.png' width='15px'>

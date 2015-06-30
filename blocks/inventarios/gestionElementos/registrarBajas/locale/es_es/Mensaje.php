@@ -44,7 +44,7 @@ $this->idioma ["responsableTitulo"] ="Seleccione Tipo de Mueble";
 
 
 $this->idioma ["radicacion"] ="Cargue Radicación: ";
-$this->idioma ["radicacionTitulo"] ="Seleccione Acrhivpo de Radicación";
+$this->idioma ["radicacionTitulo"] ="Archivo de radicado de bajas y en caso de electrónico concepto de la red datos.";
 
 
 $this->idioma ["responsable_ante"] ="Indentificación y Nombre del Funcionario Actual: ";
@@ -53,7 +53,7 @@ $this->idioma ["responsable_reci"] ="Indentificación y Nombre del Funcionario R
 $this->idioma ["responsable_reciTitulo"] ="Seleccione Funcionario Responsable";
 
 $this->idioma ["dependencia"] ="Dependencia : ";
-$this->idioma ["dependenciaTitulo"] ="Seleccione Dependencia";
+$this->idioma ["dependenciaTitulo"] ="Seleccione Dependencia donde se va alojar el elemento dado de baja";
 
 
 $this->idioma ["dependencia_baja"] ="Dependencia : ";

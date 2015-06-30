@@ -345,7 +345,6 @@ class Sql extends \Sql {
                 $cadenaSql = "SELECT DISTINCT  ESF_ID_SEDE, ESF_SEDE ";
                 $cadenaSql .= " FROM ESPACIOS_FISICOS ";
                 $cadenaSql .= " WHERE   ESF_ESTADO='A'";
-
                 break;
 
             case "buscar_serie" :

@@ -289,13 +289,14 @@ class Sql extends \Sql {
 				$cadenaSql = "SELECT ";
 				$cadenaSql .= "id_elemento_ind, elemento_individual.placa, elemento_individual.serie,funcionario, id_elemento_gen, ";
 				$cadenaSql .= " salida.consecutivo||' - ('||salida.vigencia||')' salidas ,tipo_bienes.descripcion ,dependencia ,salida.id_salida as salida, ";
-				$cadenaSql .= 'arka_parametros.arka_funcionarios."FUN_NOMBRE" as fun_nombre , salida.dependencia dependeciassalidas,salida.sede sedesalidas,  ';
+				$cadenaSql .= 'arka_parametros.arka_funcionarios."FUN_NOMBRE" as fun_nombre , "ESF_NOMBRE_ESPACIO" dependeciassalidas,salida.sede sedesalidas,  ';
 				$cadenaSql .= " elemento.descripcion as descripcion_elemento";
                                 $cadenaSql .= " FROM elemento_individual ";
 				$cadenaSql .= " JOIN elemento ON elemento.id_elemento = elemento_individual.id_elemento_gen ";
 				$cadenaSql .= " JOIN salida ON salida.id_salida = elemento_individual.id_salida ";
 				$cadenaSql .= " JOIN tipo_bienes ON tipo_bienes.id_tipo_bienes = elemento.tipo_bien ";
 				$cadenaSql .= ' JOIN arka_parametros.arka_funcionarios ON arka_parametros.arka_funcionarios."FUN_IDENTIFICACION" = salida.funcionario ';
+                                $cadenaSql.= ' JOIN arka_parametros.arka_espaciosfisicos ON arka_parametros.arka_espaciosfisicos."ESF_ID_ESPACIO"=salida.dependencia ';
 				// $cadenaSql . = "left JOIN dependencia ON dependencia.id_dependencia = funcionario.dependencia ";
 				$cadenaSql .= " WHERE 1=1 ";
 				$cadenaSql .= " AND elemento.tipo_bien <> 1 ";
