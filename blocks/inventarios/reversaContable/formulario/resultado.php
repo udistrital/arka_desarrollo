@@ -83,6 +83,30 @@ class registrarForm {
 // ----------------INICIAR EL FORMULARIO ------------------------------------------------------------
         $atributos ['tipoEtiqueta'] = 'inicio';
         echo $this->miFormulario->formulario($atributos);
+        
+        
+        $miPaginaActual = $this->miConfigurador->getVariableConfiguracion('pagina');
+
+        $directorio = $this->miConfigurador->getVariableConfiguracion("host");
+        $directorio .= $this->miConfigurador->getVariableConfiguracion("site") . "/index.php?";
+        $directorio .= $this->miConfigurador->getVariableConfiguracion("enlace");
+
+        $variable = "pagina=" . $miPaginaActual;
+        $variable = $this->miConfigurador->fabricaConexiones->crypto->codificar_url($variable, $directorio);
+
+        // ---------------- CONTROL: Cuadro de Texto --------------------------------------------------------
+        $esteCampo = 'botonRegresar';
+        $atributos ['id'] = $esteCampo;
+        $atributos ['enlace'] = $variable;
+        $atributos ['tabIndex'] = 1;
+        $atributos ['estilo'] = 'textoSubtitulo';
+        $atributos ['enlaceTexto'] = $this->lenguaje->getCadena($esteCampo);
+        $atributos ['ancho'] = '10%';
+        $atributos ['alto'] = '10%';
+        $atributos ['redirLugar'] = true;
+        echo $this->miFormulario->enlace($atributos);
+
+        unset($atributos);
 // ---------------- SECCION: Controles del Formulario -----------------------------------------------
         $esteCampo = "marcoDatosBasicos";
         $atributos ['id'] = $esteCampo;
@@ -91,34 +115,7 @@ class registrarForm {
         $atributos ["leyenda"] = "Resultado Cierres Contables Activos";
         echo $this->miFormulario->marcoAgrupacion('inicio', $atributos);
 
-// ------------------Division para los botones-------------------------
-        $atributos ["id"] = "botones";
-        $atributos ["estilo"] = "marcoBotones";
-        echo $this->miFormulario->division("inicio", $atributos);
 
-// -----------------CONTROL: Botón ----------------------------------------------------------------
-        $esteCampo = 'botonRegresar';
-        $atributos ["id"] = $esteCampo;
-        $atributos ["tabIndex"] = $tab;
-        $atributos ["tipo"] = 'boton';
-// submit: no se coloca si se desea un tipo button genérico
-        $atributos ['submit'] = true;
-        $atributos ["estiloMarco"] = '';
-        $atributos ["estiloBoton"] = 'jqueryui';
-// verificar: true para verificar el formulario antes de pasarlo al servidor.
-        $atributos ["verificar"] = '';
-        $atributos ["tipoSubmit"] = 'jquery'; // Dejar vacio para un submit normal, en este caso se ejecuta la función submit declarada en ready.js
-        $atributos ["valor"] = $this->lenguaje->getCadena($esteCampo);
-        $atributos ['nombreFormulario'] = $esteBloque ['nombre'];
-        $tab ++;
-
-// Aplica atributos globales al control
-        $atributos = array_merge($atributos, $atributosGlobales);
-        echo $this->miFormulario->campoBoton($atributos);
-// -----------------FIN CONTROL: Botón -----------------------------------------------------------
-// ---------------------------------------------------------
-// ------------------Fin Division para los botones-------------------------
-        echo $this->miFormulario->division("fin");
 
         if ($datos) {
             echo "<table id='tablaTitulos'>";
