@@ -148,7 +148,7 @@ class registrarForm {
             echo "<thead>
                 <tr>
                   <th># Número Placa</th>
-                    <th># Número Serial</th>
+                    <th>Dependencia</th>
                     <th>Nombre Funcionario</th>
 		    <th>Identificación<br>Funcionario</th>
                     <th>Tipo Bien</th>
@@ -164,7 +164,7 @@ class registrarForm {
                 
                 $mostrarHtml = "<tr>
                     <td><center>" . $elemento [$i] [1] . "</center></td>
-                    <td><center>" . $elemento [$i] [2] . "</center></td>
+                    <td><center>" . $elemento [$i] ['dependencia'] . "</center></td>
                     <td><center>" . $funcionario[0][1] . "</center></td>
                     <td><center>" . $funcionario[0][0] . "</center></td>
                     <td><center>" . $elemento [$i] [6] . "</center></td>
@@ -258,7 +258,8 @@ class registrarForm {
             $valorCodificado .= "&pagina=" . $this->miConfigurador->getVariableConfiguracion('pagina');
             $valorCodificado .= "&bloque=" . $esteBloque ['nombre'];
             $valorCodificado .= "&bloqueGrupo=" . $esteBloque ["grupo"];
-            $valorCodificado .= "&opcion=registrar";
+            $valorCodificado .= "&opcion=trasladarElemento";
+            $valorCodificado .= "&funcionario=".$_REQUEST['responsable'];
 
             /*             * supervisor
              * SARA permite que los nombres de los campos sean dinámicos.
