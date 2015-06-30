@@ -169,7 +169,7 @@ class Sql extends \Sql {
                 $cadenaSql .= "id_elemento_ind, elemento_individual.placa, elemento_individual.serie, funcionario, id_elemento_gen, ";
                 $cadenaSql .= "elemento_individual.id_salida ";
                 $cadenaSql .= ", tipo_bienes.descripcion,  ";
-                $cadenaSql .= ' "ESF_NOMBRE_ESPACIO" dependencia ';
+                $cadenaSql .= ' "ESF_NOMBRE_ESPACIO" dependencia,elemento.descripcion descripcion_elemento ';
                 $cadenaSql .= "FROM elemento_individual ";
                 $cadenaSql .= "JOIN elemento ON elemento.id_elemento = elemento_individual.id_elemento_gen ";
                 $cadenaSql .= "JOIN salida ON salida.id_salida = elemento_individual.id_salida ";
@@ -196,7 +196,7 @@ class Sql extends \Sql {
 
                 $cadenaSql = "SELECT ";
                 $cadenaSql .= "id_elemento_ind id, elemento_individual.placa, ";
-                $cadenaSql .= "tipo_bienes.descripcion tipo,  funcionario, ";
+                $cadenaSql .= "tipo_bienes.descripcion tipo, elemento.descripcion,  funcionario, ";
                 $cadenaSql .= ' "ESF_NOMBRE_ESPACIO" dependencia ';
                 $cadenaSql .= "FROM elemento_individual ";
                 $cadenaSql .= "JOIN elemento ON elemento.id_elemento = elemento_individual.id_elemento_gen ";

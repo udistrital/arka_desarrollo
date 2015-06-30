@@ -147,7 +147,8 @@ class registrarForm {
 
             echo "<thead>
                 <tr>
-                  <th># Número Placa</th>
+                    <th># Número Placa</th>
+                    <th>Descripción Elemento</th>
                     <th>Dependencia</th>
                     <th>Nombre Funcionario</th>
 		    <th>Identificación<br>Funcionario</th>
@@ -164,6 +165,7 @@ class registrarForm {
                 
                 $mostrarHtml = "<tr>
                     <td><center>" . $elemento [$i] [1] . "</center></td>
+                    <td><center>" . $elemento [$i] ['descripcion_elemento'] . "</center></td>
                     <td><center>" . $elemento [$i] ['dependencia'] . "</center></td>
                     <td><center>" . $funcionario[0][1] . "</center></td>
                     <td><center>" . $funcionario[0][0] . "</center></td>
