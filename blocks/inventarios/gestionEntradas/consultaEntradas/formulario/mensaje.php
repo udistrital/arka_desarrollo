@@ -102,7 +102,7 @@ class registrarForm {
 				
 				if ($_REQUEST ['mensaje'] == 'actualizo') {
 					
-					$mensaje = "Se Cambio el Estado de la Entrada <br> #Número de Entrada y/o Vigencia: " . $_REQUEST ['numero_entrada'] ." .";
+					$mensaje = "Se Cambio el Estado de la Entrada <br>.";
 					
 					// ---------------- CONTROL: Cuadro de Texto --------------------------------------------------------
 					$esteCampo = 'mensajeRegistro';

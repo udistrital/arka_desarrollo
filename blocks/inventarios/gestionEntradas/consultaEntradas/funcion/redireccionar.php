@@ -16,7 +16,6 @@ class redireccion {
 				$variable = "pagina=" . $miPaginaActual;
 				$variable .= "&opcion=mensaje";
 				$variable .= "&mensaje=actualizo";
-				$variable .= "&numero_entrada=" . $valor ;
 				break;
 			
 			case "noInserto" :

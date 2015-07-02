@@ -186,6 +186,8 @@ class registrarForm {
                         'razonSocial' => '',
                         5 => $entrada [$i] [0],
                         'numeroEntrada' => $entrada [$i] [0],
+                        6 => $entrada [$i] [5],
+                        'estado' => $entrada [$i] [0],
                     );
                 } else {
                     $cadenaSql = $this->miSql->getCadenaSql('proveedor_informacion', $entrada [$i] [3]);
@@ -204,6 +206,8 @@ class registrarForm {
                         'razonSocial' => $proveedor [0] [1],
                         5 => $entrada [$i] [0],
                         'numeroEntrada' => $entrada [$i] [0],
+                        6 => $entrada [$i] [5],
+                        'estado' => $entrada [$i] [0],
                     );
                 }
 

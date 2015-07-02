@@ -29,23 +29,24 @@ class RegistradorOrden {
     }
 
     function procesarFormulario() {
-    
         $conexion = "inventarios";
         $esteRecursoDB = $this->miConfigurador->fabricaConexiones->getRecursoDB($conexion);
-        $arreglo = array(
-            $_REQUEST ['numero_entrada'],
-            $_REQUEST ['estado']
-        );
-        $cadenaSql = $this->miSql->getCadenaSql('actualizarEstado', $arreglo);
 
-        $modificar = $esteRecursoDB->ejecutarAcceso($cadenaSql, "busqueda");
+        $arreglo = unserialize(base64_decode($_REQUEST['datos_entradas']));
+
+        foreach ($arreglo as $key => $values) {
+            $arreglo[$key]['estadoNuevo'] = $_REQUEST['estado'];
+            $cadenaSql = $this->miSql->getCadenaSql('actualizarEstado', $arreglo[$key]);
+            $modificar = $esteRecursoDB->ejecutarAcceso($cadenaSql, "insertar");
+
+            if ($modificar == false) {
+                \inventarios\gestionEntradas\consultaEntradas\funcion\redireccion::redireccionar('noInserto');
+            }
+        }
 
         if ($modificar != false) {
-
-            \inventarios\gestionEntradas\consultaEntradas\funcion\redireccion::redireccionar('inserto', $modificar[0][0]);
-            // 
+            \inventarios\gestionEntradas\consultaEntradas\funcion\redireccion::redireccionar('inserto', false);
         } else {
-
             \inventarios\gestionEntradas\consultaEntradas\funcion\redireccion::redireccionar('noInserto');
         }
     }

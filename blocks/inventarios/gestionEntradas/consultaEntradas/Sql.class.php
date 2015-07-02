@@ -216,9 +216,10 @@ class Sql extends \Sql {
 			
 			case "actualizarEstado" :
 				$cadenaSql = " UPDATE entrada ";
-				$cadenaSql .= " SET estado_entrada='" . $variable [1] . "' ";
-				$cadenaSql .= "  WHERE id_entrada='" . $variable [0] . "' ";
-				$cadenaSql .= "  RETURNING  consecutivo||' - ('||entrada.vigencia||')' entrada ; ";
+				$cadenaSql .= " SET estado_entrada='" . $variable ['estadoNuevo'] . "', ";
+                                $cadenaSql .= " fecha_registro='" . $variable ['fechaRegistro'] . "' ";
+				$cadenaSql .= "  WHERE id_entrada='" . $variable ['numeroEntrada'] . "' ";
+				//$cadenaSql .= "  RETURNING  consecutivo||' - ('||entrada.vigencia||')' entrada ; ";
 				break;
 		}
 		return $cadenaSql;
