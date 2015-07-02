@@ -25,8 +25,13 @@
             });
         });
 
-                     $('#tablaTitulos').dataTable( {
-                "sPaginationType": "full_numbers"
+	          $('#tablaTitulos').dataTable( {
+                "sPaginationType": "full_numbers",
+                  dom: 'T<"clear">lfrtip',
+        tableTools: {
+            "sRowSelect": "multi",
+            "aButtons": [ "select_all", "select_none" ]
+        }
                  } );
 
 

@@ -150,7 +150,7 @@ class Sql extends \Sql {
 			 */
 			
 			case "buscar_entradas" :
-				$cadenaSql = " SELECT id_entrada valor,id_entrada descripcion  ";
+				$cadenaSql = " SELECT id_entrada valor, consecutivo||' - ('||entrada.vigencia||')' descripcion  ";
 				$cadenaSql .= " FROM entrada; ";
 				break;
 			
@@ -166,28 +166,28 @@ class Sql extends \Sql {
 				$cadenaSql .= " FROM PROVEEDORES ";
 				
 				break;
-				
-
 			
 			case "consultarEntrada" :
 				$cadenaSql = "SELECT DISTINCT ";
 				$cadenaSql .= "entrada.id_entrada, entrada.fecha_registro,  ";
-				$cadenaSql .= " clase_entrada.descripcion,proveedor,consecutivo   ";
+				$cadenaSql .= " clase_entrada.descripcion,proveedor,consecutivo||' - ('||entrada.vigencia||')' consecutivo,estado_entrada.descripcion estado_entradas ,cierre_contable  ";
 				$cadenaSql .= "FROM entrada ";
 				$cadenaSql .= "JOIN clase_entrada ON clase_entrada.id_clase = entrada.clase_entrada ";
+				$cadenaSql .= "JOIN estado_entrada ON estado_entrada.id_estado = entrada.estado_entrada ";
 				$cadenaSql .= "JOIN elemento ON elemento.id_entrada = entrada.id_entrada ";
 				$cadenaSql .= "WHERE 1=1 ";
+				
 				if ($variable [0] != '') {
-					$cadenaSql .= " AND id_entrada = '" . $variable [0] . "'";
+					$cadenaSql .= " AND entrada.id_entrada = '" . $variable [0] . "'";
 				}
 				
 				if ($variable [1] != '') {
-					$cadenaSql .= " AND fecha_registro BETWEEN CAST ( '" . $variable [1] . "' AS DATE) ";
+					$cadenaSql .= " AND entrada.fecha_registro BETWEEN CAST ( '" . $variable [1] . "' AS DATE) ";
 					$cadenaSql .= " AND  CAST ( '" . $variable [2] . "' AS DATE)  ";
 				}
 				
 				if ($variable [3] != '') {
-					$cadenaSql .= " AND clase_entrada = '" . $variable [3] . "'";
+					$cadenaSql .= " AND estado_entrada	 = '" . $variable [3] . "'";
 				}
 				if ($variable [4] != '') {
 					$cadenaSql .= " AND entrada.proveedor = '" . $variable [4] . "'";
@@ -203,12 +203,13 @@ class Sql extends \Sql {
 			
 			case "consultarEstadoEntradas" :
 				
-				$cadenaSql = "SELECT DISTINCT ";
-				$cadenaSql .= "id_entrada, fecha_registro,descripcion ";
-				$cadenaSql .= ",estado_entrada ";
-				$cadenaSql .= "FROM entrada ";
-				$cadenaSql .= "JOIN clase_entrada ON clase_entrada.id_clase = entrada.clase_entrada ";
-				$cadenaSql .= "WHERE ";
+				$cadenaSql = " SELECT DISTINCT ";
+				$cadenaSql .= " consecutivo||' - ('||entrada.vigencia||')' entrada, entrada.fecha_registro,clase_entrada.descripcion clase_entrada";
+				$cadenaSql .= " ,estado_entrada.descripcion estado";
+				$cadenaSql .= " FROM entrada ";
+				$cadenaSql .= " JOIN clase_entrada ON clase_entrada.id_clase = entrada.clase_entrada ";
+                                $cadenaSql .= " JOIN estado_entrada ON estado_entrada.id_estado = entrada.estado_entrada ";
+				$cadenaSql .= " WHERE ";
 				$cadenaSql .= " id_entrada = '" . $variable . "';";
 				
 				break;
@@ -216,8 +217,8 @@ class Sql extends \Sql {
 			case "actualizarEstado" :
 				$cadenaSql = " UPDATE entrada ";
 				$cadenaSql .= " SET estado_entrada='" . $variable [1] . "' ";
-				$cadenaSql .= "  WHERE id_entrada='" . $variable [0] . "';";
-				
+				$cadenaSql .= "  WHERE id_entrada='" . $variable [0] . "' ";
+				$cadenaSql .= "  RETURNING  consecutivo||' - ('||entrada.vigencia||')' entrada ; ";
 				break;
 		}
 		return $cadenaSql;

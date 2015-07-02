@@ -1,7 +1,7 @@
 <?php
 $this->idioma ["noDefinido"] = "Etiqueta no esta definida en locale/es_es/Mensaje.php";
 
-$this->idioma ["informacion_numero"] =" # Número de Entrada : ";
+$this->idioma ["informacion_numero"] ="Número de Entrada y/o Vigencia: ";
 
 $this->idioma ["informacion_fecha"] ="Fecha de Entrada : ";
 
@@ -17,8 +17,6 @@ $this->idioma ["acta_recibidoTitulo"] ="Seleccionar Acta Recibido";
 
 
 
-
-
 $this->idioma ["fecha_inicio"] ="Fecha Inicial : ";
 $this->idioma ["fecha_inicioTitulo"] ="Seleccione Fecha Inicial";
 
@@ -26,10 +24,10 @@ $this->idioma ["fecha_final"] ="Fecha Final : ";
 $this->idioma ["fecha_finalTitulo"] ="Seleccione Fecha Final";
 
 
-$this->idioma ["numero_entrada"] ="(ID)Número Entrada: ";
+$this->idioma ["numero_entrada"] ="Número Entrada y/o Vigencia : ";
 $this->idioma ["numero_entradaTitulo"] ="Ingrese Número Entrada";
 
-$this->idioma ["numero_entradaM"] ="(ID)Número Entrada: ";
+$this->idioma ["numero_entradaM"] ="Número Entrada y/o Vigencia : ";
 
 
 
@@ -44,7 +42,7 @@ $this->idioma ["proveedorTitulo"] ="Ingrese Nombre Proveedor";
 
 $this->idioma ["proveedorM"] ="Proveedor:";
 
-$this->idioma ["fecha_registroM"] ="Fecha Registro:";
+$this->idioma ["fecha_registroM"] ="Fecha Registro Modificación:";
 
 
 
@@ -177,7 +175,7 @@ $this->idioma ["botonAceptar"] ="Modificar Estado Entrada";
 $this->idioma ["botonCancelar"] ="Cancelar";
 $this->idioma ["botonContinuar"] ="Continuar";
 $this->idioma ["botonConsultar"] ="Consultar";
-$this->idioma ["botonRegresar"] ="Regresar";
+$this->idioma ["botonRegresar"] ="<< Regresar";
 $this->idioma ["botonReporte"] ="Reporte PDF";
 
 

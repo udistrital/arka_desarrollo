@@ -1,5 +1,4 @@
-<?
-
+<?php
 namespace inventarios\gestionEntradas\consultaEntradas\funcion;
 
 if (! isset ( $GLOBALS ["autorizado"] )) {
@@ -8,6 +7,7 @@ if (! isset ( $GLOBALS ["autorizado"] )) {
 }
 class redireccion {
 	public static function redireccionar($opcion, $valor = "") {
+        
 		$miConfigurador = \Configurador::singleton ();
 		$miPaginaActual = $miConfigurador->getVariableConfiguracion ( "pagina" );
 		
@@ -21,7 +21,7 @@ class redireccion {
 			
 			case "noInserto" :
 				$variable = "pagina=" . $miPaginaActual;
-				$variable .= "&opcion=noactualizo";
+				$variable .= "&opcion=mensaje";
 				$variable .= "&mensaje=error";
 				
 				break;
