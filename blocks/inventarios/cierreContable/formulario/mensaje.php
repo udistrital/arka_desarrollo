@@ -76,6 +76,7 @@ class registrarForm {
 			echo $this->miFormulario->marcoAgrupacion ( 'inicio', $atributos );
 			
 			{
+      
 				if (isset($_REQUEST ['mensaje'])&&$_REQUEST ['mensaje'] == 'confirma') {
 					
 					$mensaje = "Se Registro el Cierre Contable<br> para la Vigencia: " . $_REQUEST ['vigencia']." entre el periodo ".$_REQUEST['inicio']." a ".$_REQUEST['fin'];

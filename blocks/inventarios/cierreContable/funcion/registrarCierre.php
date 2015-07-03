@@ -59,7 +59,7 @@ class RegistradorCierre {
 
         if (isset($_REQUEST['vigencia']) && $_REQUEST['vigencia'] != '' && isset($_REQUEST['fecha_inicio']) && $_REQUEST['fecha_inicio'] != '') {
             if ($anno_i != $_REQUEST['vigencia'] || $anno_f != $_REQUEST['vigencia']) {
-                 redireccion::redireccionar('noCoincide', $datos);
+                redireccion::redireccionar('noCoincide', $datos);
             }
         }
 
@@ -86,7 +86,7 @@ class RegistradorCierre {
             $resultadoActualizacion = $esteRecursoDB->ejecutarAcceso($cadenaSql, "insertar");
 
             if ($resultadoActualizacion == FALSE) {
-                $cadenaSql = $this->miSql->getCadenaSql('eliminarCierre', $datosRegistro2);
+                $cadenaSql = $this->miSql->getCadenaSql('eliminarCierre', $estado_asignar[0][0]);
                 $rollCierre = $esteRecursoDB->ejecutarAcceso($cadenaSql, "insertar");
 
                 redireccion::redireccionar('inserto', $datos);

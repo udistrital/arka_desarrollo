@@ -167,6 +167,7 @@ class Sql extends \Sql {
                 $cadenaSql.= " SET cierre_contable='TRUE', ";
                 $cadenaSql.= " id_cierrecontable='" . $variable ['id_cierre'] . "' ";
                 $cadenaSql.= " WHERE 1=1 ";
+                $cadenaSql.= " AND estado_entrada=2 ";
 
                 if ($variable ['vigencia'] != '') {
                     $cadenaSql .= " AND vigencia = '" . $variable ['vigencia'] . "'";
