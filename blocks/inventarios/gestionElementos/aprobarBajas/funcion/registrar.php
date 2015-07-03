@@ -75,23 +75,31 @@ class RegistradorOrden {
 
                     $cadenaSql = $this->miSql->getCadenaSql("registroDocumento_Aprobacion", $arreglo);
                     $idAprobacion = $esteRecursoDB->ejecutarAcceso($cadenaSql, 'busqueda');
+
+                    if ($idAprobacion == false) {
+                        redireccion::redireccionar('noInserto');
+                    }
                 } else {
                     $status = "Error al subir el archivo";
-                    echo $status;
+                    redireccion::redireccionar('noInserto');
+                    //  echo $status;
                 }
             } else {
                 $status = "Error al subir archivo";
-                echo $status . "2";
+                redireccion::redireccionar('noInserto');
+                //echo $status . "2";
             }
         }
 
 // Ahora a actualizar el estado de los items seleccionados
-
-
         $items [] = unserialize($_REQUEST['items']);
 
         foreach ($items as $nodo => $fila) {
             foreach ($fila as $columna => $valor) {
+                
+                
+                
+                
 
                 $datosAprobar = array(
                     'id_aprobacion' => $idAprobacion[0][0],
@@ -103,10 +111,11 @@ class RegistradorOrden {
             }
         }
 
-        if ($asignar) {
+        if ($asignar==true) {
             redireccion::redireccionar('inserto', $idAprobacion[0][0]);
         } else {
-
+            $cadenaSql = $this->miSql->getCadenaSql('eliminarAprobar', $idAprobacion[0][0]);
+            $asignar = $esteRecursoDB->ejecutarAcceso($cadenaSql, "acceso");
             redireccion::redireccionar('noInserto');
         }
     }

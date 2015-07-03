@@ -81,7 +81,8 @@ class registrarForm {
             'fecha_inicio' => $fecha_inicio,
             'fecha_final' => $fecha_final
         );
-        $cadenaSql = $this->miSql->getCadenaSql('consultarElemento', $arreglo);
+
+         $cadenaSql = $this->miSql->getCadenaSql('consultarElemento', $arreglo);
         $elemento = $esteRecursoDB->ejecutarAcceso($cadenaSql, "busqueda");
 
         // ---------------- SECCION: Parámetros Generales del Formulario ----------------------------------
@@ -135,14 +136,14 @@ class registrarForm {
         $atributos ['id'] = $esteCampo;
         $atributos ["estilo"] = "jqueryui";
         $atributos ['tipoEtiqueta'] = 'inicio';
-        $atributos ["leyenda"] = "Consultar Elementos";
+        $atributos ["leyenda"] = "Consultar Elementos - Aprobar Baja Elementos";
         echo $this->miFormulario->marcoAgrupacion('inicio', $atributos);
 
 
 
         $esteCampo = "AgrupacionInformacion";
         $atributos ['id'] = $esteCampo;
-        $atributos ['leyenda'] = "Información Referente a Elementos";
+        $atributos ['leyenda'] = "Información Referente a Elementos para Aprobar Baja";
         echo $this->miFormulario->agrupacion('inicio', $atributos);
 
         if ($elemento) {
@@ -152,12 +153,11 @@ class registrarForm {
             echo "<thead>
                 <tr>
 		<th>Número Salida y/o<br>Vigencia</th>	
-             		<th># ID Elemento </th>	
-                <th># Número Placa</th>
-                <th># Número Serial</th>
+             	<th># Número Placa</th>
+                <th>Descripcion</th>
                 <th>Identificación<br>Funcionario</th>
 		<th>Nombre<br>Funcionario</th>
-		<th>Tipo Bien</th>
+		<th>Grupo Bien</th>
 		<th>Aprobar Baja<br>Elemento</th>
                 </tr>
             </thead>
@@ -166,13 +166,11 @@ class registrarForm {
             for ($i = 0; $i < count($elemento); $i ++) {
                 $mostrarHtml = "<tr>
 		    <td><center>" . $elemento [$i] [5] . "</center></td>
-                 
-                    <td><center>" . $elemento [$i] [4] . "</center></td>
-		    <td><center>" . $elemento [$i] [1] . "</center></td>
-                    <td><center>" . $elemento [$i] [2] . "</center></td>
+                    <td><center>" . $elemento [$i] [1] . "</center></td>
+                    <td><center>" . $elemento [$i] ['descripcion_elemento'] . "</center></td>
                     <td><center>" . $elemento [$i] ['funcionario'] . "</center></td>
                     <td><center>" . $elemento [$i] ['fun_nombre'] . "</center></td>
-                    <td><center>" . $elemento [$i] [6] . "</center></td>
+                    <td><center>" . $elemento [$i] ['grupo_bien'] . "</center></td>
                     <td><center>";
                 // ---------------- CONTROL: Cuadro de Texto --------------------------------------------------------
                 $nombre = 'item' . $i;
