@@ -10,11 +10,13 @@ $this->idioma ["vigenciaTitulo"] ="Seleccione Vigencia";
 $this->idioma ["sede"] ="Sede : ";
 $this->idioma ["sedeTitulo"] ="Seleccione Sede";
 
+$this->idioma ["ubicacion"] ="Ubicación Especifica : ";
+$this->idioma ["ubicacionTitulo"] ="Seleccione Ubicación";
 
 //-------------------
 $this->idioma ["informacion_anio"] ="Año Vigencia : ";
-$this->idioma ["informacion_numero_salida"] ="# Número Salida : ";
-$this->idioma ["informacion_numero_entrada"] ="# Número Entrada : ";
+$this->idioma ["informacion_numero_salida"] ="Número Salida y/o Vigencia : ";
+$this->idioma ["informacion_numero_entrada"] ="Número Entrada y/o Vigencia : ";
 $this->idioma ["informacion_identificacion"] ="Identificación Funcionario : ";
 $this->idioma ["informacion_funcionario"] ="Nombre Funcionario Elementos : ";
 //----------------
@@ -50,11 +52,11 @@ $this->idioma ["funcionarioTitulo"] ="Seleccione Funcionario o Identificación";
 
 
 
-$this->idioma ["numero_entrada"] ="(ID)Número Entrada: ";
+$this->idioma ["numero_entrada"] ="Número Entrada y/o Vigencia: ";
 $this->idioma ["numero_entradaTitulo"] ="Ingrese Número Entrada";
 
 
-$this->idioma ["numero_salida"] ="(ID)Número Salida: ";
+$this->idioma ["numero_salida"] ="Número Salida y/o Vigencia: ";
 $this->idioma ["numero_salidaTitulo"] ="Ingrese Número Salida";
 
 
@@ -63,7 +65,7 @@ $this->idioma ["numero_salidaTitulo"] ="Ingrese Número Salida";
 //-_______________________________________________________________________________________________
 
 
-$this->idioma ["numero_entradaM"] ="(ID)Número Entrada: ";
+$this->idioma ["numero_entradaM"] ="Número Entrada y/o Vigencia: ";
 
 
 
@@ -190,7 +192,7 @@ $this->idioma ["botonAceptar"] ="Actualizar Salida";
 $this->idioma ["botonCancelar"] ="Cancelar";
 $this->idioma ["botonContinuar"] ="Continuar";
 $this->idioma ["botonConsultar"] ="Consultar";
-$this->idioma ["botonRegresar"] ="Regresar";
+$this->idioma ["botonRegresar"] ="<< Regresar";
 $this->idioma ["botonReporte"] ="Reporte PDF";
 
 

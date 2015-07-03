@@ -127,43 +127,37 @@ class registrarForm {
 		echo $this->miFormulario->formulario ( $atributos );
 		// ---------------- SECCION: Controles del Formulario -----------------------------------------------
 		
+
+		$miPaginaActual = $this->miConfigurador->getVariableConfiguracion ( 'pagina' );
+			
+		$directorio = $this->miConfigurador->getVariableConfiguracion ( "host" );
+		$directorio .= $this->miConfigurador->getVariableConfiguracion ( "site" ) . "/index.php?";
+		$directorio .= $this->miConfigurador->getVariableConfiguracion ( "enlace" );
+			
+		$variable = "pagina=" . $miPaginaActual;
+		$variable = $this->miConfigurador->fabricaConexiones->crypto->codificar_url ( $variable, $directorio );
+			
+		// ---------------- CONTROL: Cuadro de Texto --------------------------------------------------------
+		$esteCampo = 'botonRegresar';
+		$atributos ['id'] = $esteCampo;
+		$atributos ['enlace'] = $variable;
+		$atributos ['tabIndex'] = 1;
+		$atributos ['estilo'] = 'textoSubtitulo';
+		$atributos ['enlaceTexto'] = $this->lenguaje->getCadena ( $esteCampo );
+		$atributos ['ancho'] = '10%';
+		$atributos ['alto'] = '10%';
+		$atributos ['redirLugar'] = true;
+		echo $this->miFormulario->enlace ( $atributos );
+			
+		unset ( $atributos );
+		
 		$esteCampo = "marcoDatosBasicos";
 		$atributos ['id'] = $esteCampo;
 		$atributos ["estilo"] = "jqueryui";
 		$atributos ['tipoEtiqueta'] = 'inicio';
 		$atributos ["leyenda"] = "Consultar y Modificar Salida";
 		echo $this->miFormulario->marcoAgrupacion ( 'inicio', $atributos );
-		
-		// ------------------Division para los botones-------------------------
-		$atributos ["id"] = "botones";
-		$atributos ["estilo"] = "marcoBotones";
-		echo $this->miFormulario->division ( "inicio", $atributos );
-		
-		// -----------------CONTROL: Botón ----------------------------------------------------------------
-		$esteCampo = 'botonRegresar';
-		$atributos ["id"] = $esteCampo;
-		$atributos ["tabIndex"] = $tab;
-		$atributos ["tipo"] = 'boton';
-		// submit: no se coloca si se desea un tipo button genérico
-		$atributos ['submit'] = true;
-		$atributos ["estiloMarco"] = '';
-		$atributos ["estiloBoton"] = 'jqueryui';
-		// verificar: true para verificar el formulario antes de pasarlo al servidor.
-		$atributos ["verificar"] = '';
-		$atributos ["tipoSubmit"] = 'jquery'; // Dejar vacio para un submit normal, en este caso se ejecuta la función submit declarada en ready.js
-		$atributos ["valor"] = $this->lenguaje->getCadena ( $esteCampo );
-		$atributos ['nombreFormulario'] = $esteBloque ['nombre'];
-		$tab ++;
-		
-		// Aplica atributos globales al control
-		$atributos = array_merge ( $atributos, $atributosGlobales );
-		echo $this->miFormulario->campoBoton ( $atributos );
-		// -----------------FIN CONTROL: Botón -----------------------------------------------------------
-		
-		// ---------------------------------------------------------
-		
-		// ------------------Fin Division para los botones-------------------------
-		echo $this->miFormulario->division ( "fin" );
+	
 		 
 		if ($salidas) {
 			
@@ -172,8 +166,8 @@ class registrarForm {
 			echo "<thead>
                 <tr>
                    <th>Año de Vigencia</th>
-                    <th># Número de Salida </th>
-                    <th># Número de Entrada</th>
+                    <th>Número de Salida y/o<br>Vigencia</th>
+                    <th>Número de Entrada y/o<br>Vigencia</th>
 					<th>Fecha Registro</th>
 					<th>Identificación<br>Funcionario</th>
 					<th>Nombre<br>Funcionario</th>
@@ -195,10 +189,14 @@ class registrarForm {
 				$funcionario = $esteRecursoDBO->ejecutarAcceso ( $cadenaSql, "busqueda" );
 				
 				
+		
+				
+				
+				
 				$arreglo=array(
 						$salidas[$i][0],
-						$salidas[$i][1],
-						$salidas[$i][2],
+						$salidas[$i][5],
+						$salidas[$i][6],
 						$funcionario[0][0],
 						$funcionario[0][1]	
 				);
@@ -212,22 +210,43 @@ class registrarForm {
 				
 				$mostrarHtml = "<tr>
                     <td><center>" . $salidas [$i] [0] . "</center></td>
-                    <td><center>" . $salidas [$i] [1] . "</center></td>
-                    <td><center>" . $salidas [$i] [2] . "</center></td>
+                    <td><center>" . $salidas [$i] [5] . "</center></td>
+                    <td><center>" . $salidas [$i] [6] . "</center></td>
                     <td><center>" . $salidas [$i] [3] . "</center></td>
                     <td><center>" . $funcionario[0][0] . "</center></td>
-                    <td><center>" . $funcionario[0][1] . "</center></td>
-                    <td><center>
-                    	<a href='" . $variable . "'>
-                            <img src='" . $rutaBloque . "/css/images/edit.png' width='15px'>
-                        </a>
-                  	</center> </td>
-           
-                </tr>";
+                    <td><center>" . $funcionario[0][1] . "</center></td>";
+				
+				
+
+				if ($salidas [$i] [7] == 'f') {
+						
+					$mostrarHtml .= "<td><center>
+			                    	<a href='" . $variable . "'>
+			                            <img src='" . $rutaBloque . "/css/images/edit.png' width='15px'>
+			                        </a>
+                		  			</center> </td>";
+				} else if ($salidas [$i] [7] == 't') {
+						
+					$mostrarHtml .= "<td><center>Inhabilitado por Cierre Contable</center> </td>";
+				}
+				$mostrarHtml .= "</tr>";
+				
 				echo $mostrarHtml;
 				unset ( $mostrarHtml );
 				unset ( $variable );
 			}
+// 			foreach ($funcionariosErrores as $i){
+				
+
+// 				$cadenaSql = $this->miSql->getCadenaSql ( 'actualizarFuncionarios',$i );
+				
+// 				$funcionario = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
+				
+				
+// 				echo $i."<br>";
+// 			}
+			
+			
 			
 			echo "</tbody>";
 			

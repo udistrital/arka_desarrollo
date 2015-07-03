@@ -1,7 +1,7 @@
 <?php
 $this->idioma ["noDefinido"] = "Etiqueta no esta definida en locale/es_es/Mensaje.php";
 
-$this->idioma ["informacion_numero"] =" # Número de Entrada : ";
+$this->idioma ["informacion_numero"] ="Número de Entrada y/o Vigencia: ";
 
 $this->idioma ["informacion_fecha"] ="Fecha de Entrada : ";
 
@@ -17,11 +17,12 @@ $this->idioma ["vigenciaTitulo"] ="Seleccione Vigencia";
 $this->idioma ["sede"] ="Sede : ";
 $this->idioma ["sedeTitulo"] ="Seleccione Sede";
 
+$this->idioma ["ubicacion"] ="Ubicación Especifica : ";
+$this->idioma ["ubicacionTitulo"] ="Seleccione Ubicación";
 
+$this->idioma ["nombresElementos"] ="Nombre Elemento(s) :  <br>";
 
-
-
-$this->idioma ["numero_entrada"] ="(ID)Número de Entrada : ";
+$this->idioma ["numero_entrada"] ="Número de Entrada y/o Vigencia : ";
 $this->idioma ["numero_entradaTitulo"] ="Ingrese Número de Entrada";
 
 
@@ -50,7 +51,7 @@ $this->idioma ["proveedor"] ="Proveedor : ";
 $this->idioma ["proveedorTitulo"] ="Ingrese Proveedor";
 
 
-$this->idioma ["numero_entrada_c"] ="(ID)Número de Entrada : ";
+$this->idioma ["numero_entrada_c"] ="Número de Entrada y/o Vigencia : ";
 
 $this->idioma ["fecha_entrada"] ="Fecha de Entrada: ";
 
@@ -194,7 +195,7 @@ $this->idioma ["botonAceptar"] ="Generar Salida";
 $this->idioma ["botonCancelar"] ="Cancelar";
 $this->idioma ["botonContinuar"] ="Continuar";
 $this->idioma ["botonConsultar"] ="Consultar";
-$this->idioma ["botonRegresar"] ="Regresar";
+$this->idioma ["botonRegresar"] ="<< Regresar";
 
 
 
