@@ -136,7 +136,7 @@ class registrarForm {
                 $mostrarHtml = "<tr>
                     <td><center>" . $datos[$i]['id_cierre'] . "</center></td>
                     <td><center>" . $datos[$i] ['cierre_fecha_inicio'] . "</center></td>
-                    <td><center>" . $datos[$i] ['cierre_fecha_inicio'] . "</center></td>
+                    <td><center>" . $datos[$i] ['cierre_fecha_final'] . "</center></td>
                     <td><center>" . $datos[$i] ['fecha_cierre'] . "</center></td>
                     <td><center>";
 // ---------------- CONTROL: Cuadro de Texto --------------------------------------------------------
