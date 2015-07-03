@@ -55,13 +55,14 @@ class RegistradorOrden {
             $datos = array(
                 $fechaActual,
                 $elementos_traslado[$key]['id'],
-                $elementos_traslado[$key]['funcionario'],
-                $_REQUEST ['responsable_ante'],
-                $_REQUEST ['dependencia']
+                $_REQUEST ['responsable_reci'],
+                $_REQUEST ['fun_anterior'],
+                $_REQUEST ['dependencia'],
+                $_REQUEST['observaciones']
             );
 
             $cadenaSql = $this->miSql->getCadenaSql('insertar_historico', $datos);
-            $historico = $esteRecursoDB->ejecutarAcceso($cadenaSql, "busqueda");
+            $historico = $esteRecursoDB->ejecutarAcceso($cadenaSql, "insertar");
 
             if ($historico == false) {
                 redireccion::redireccionar('noInserto', false);
@@ -75,11 +76,11 @@ class RegistradorOrden {
             );
 
             $cadenaSql = $this->miSql->getCadenaSql('actualizar_salida', $arreglo_datos);
-            $traslado = $esteRecursoDB->ejecutarAcceso($cadenaSql, "acceso");
+            $traslado = $esteRecursoDB->ejecutarAcceso($cadenaSql, "insertar");
 
             if ($traslado == false) {
                 $cadenaSql = $this->miSql->getCadenaSql('eliminar_historico', $historico[0][0]);
-                $historico = $esteRecursoDB->ejecutarAcceso($cadenaSql, "busqueda");
+                $historico = $esteRecursoDB->ejecutarAcceso($cadenaSql, "insertar");
 
                 redireccion::redireccionar('noInserto');
             }

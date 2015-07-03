@@ -77,6 +77,8 @@ class registrarForm {
             $elementos_info[$key] = $elemento[0];
         }
 
+
+
 // var_dump($funcionario);
         $seccion ['tiempo'] = $tiempo;
 
@@ -105,7 +107,8 @@ class registrarForm {
 // ---------------- FIN SECCION: de Parámetros Generales del Formulario ----------------------------
 // ----------------INICIAR EL FORMULARIO ------------------------------------------------------------
         $atributos ['tipoEtiqueta'] = 'inicio';
-        echo $this->miFormulario->formulario($atributos); {
+        echo $this->miFormulario->formulario($atributos);
+        {
 // ---------------- SECCION: Controles del Formulario -----------------------------------------------
 
 
@@ -137,7 +140,8 @@ class registrarForm {
             $esteCampo = "AgrupacionGeneral";
             $atributos ['id'] = $esteCampo;
             $atributos ['leyenda'] = "Información General del Elemento a Trasladar";
-            echo $this->miFormulario->agrupacion('inicio', $atributos); {
+            echo $this->miFormulario->agrupacion('inicio', $atributos);
+            {
 
                 if ($elementos_info) {
                     echo $this->miFormulario->tablaReporte($elementos_info);
@@ -152,7 +156,8 @@ class registrarForm {
             $atributos ['tipoEtiqueta'] = 'inicio';
             $atributos ["leyenda"] = "Traslado de Elemento Descritos";
             echo $this->miFormulario->marcoAgrupacion('inicio', $atributos);
-            unset($atributos); {
+            unset($atributos);
+            {
 
 // ---------------- CONTROL: Cuadro de Texto --------------------------------------------------------
                 $esteCampo = 'responsable_ante';
@@ -332,7 +337,8 @@ class registrarForm {
                 $atributos ["id"] = "botones";
                 $atributos ["estilo"] = "marcoBotones";
                 echo $this->miFormulario->division("inicio", $atributos);
-                unset($atributos); {
+                unset($atributos);
+                {
 // -----------------CONTROL: Botón ----------------------------------------------------------------
                     $esteCampo = 'botonAceptar';
                     $atributos ["id"] = $esteCampo;
@@ -386,7 +392,8 @@ class registrarForm {
             $valorCodificado .= "&bloque=" . $esteBloque ['nombre'];
             $valorCodificado .= "&bloqueGrupo=" . $esteBloque ["grupo"];
             $valorCodificado .= "&opcion=registrar";
-            $valorCodificado .= "&informacion_elementos=".base64_encode(serialize($elementos_info));
+            $valorCodificado .= "&fun_anterior=" . $funcionario;
+            $valorCodificado .= "&informacion_elementos=" . base64_encode(serialize($elementos_info));
 
             /**
              * SARA permite que los nombres de los campos sean dinámicos.
