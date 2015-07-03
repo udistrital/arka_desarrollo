@@ -101,15 +101,15 @@ $urlFinal16 = $url . $cadena16;
 
 
         $("#<?php echo $this->campoSeguro('selec_tipoConsulta') ?>").select2({
-            placeholder: "Search for a repository",
-            minimumInputLength: 2,
+            placeholder: "Seleccione...",
+            
         });
         $("#<?php echo $this->campoSeguro('dependencia') ?>").select2({
-            placeholder: "Search for a repository",
+            placeholder: "Seleccione...",
             minimumInputLength: 2,
         });
         $("#<?php echo $this->campoSeguro('nombreFuncionario') ?>").select2({
-            placeholder: "Search for a repository",
+            placeholder: " ",
             minimumInputLength: 2,
         });
 
