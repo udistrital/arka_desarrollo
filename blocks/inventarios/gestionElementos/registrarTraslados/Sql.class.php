@@ -242,7 +242,8 @@ class Sql extends \Sql {
             case "actualizar_salida" :
 
                 $cadenaSql = " UPDATE elemento_individual ";
-                $cadenaSql .= "SET funcionario='" . $variable [1] . "' ";
+                $cadenaSql .= " SET funcionario='" . $variable [1] . "', ";
+                $cadenaSql .= " ubicacion_elemento='" . $variable [4] . "' ";
                 $cadenaSql .= " WHERE id_elemento_ind='" . $variable [0] . "' ;";
                 break;
 

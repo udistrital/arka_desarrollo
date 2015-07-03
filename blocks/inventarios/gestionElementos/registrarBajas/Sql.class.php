@@ -287,7 +287,7 @@ class Sql extends \Sql {
 			case "consultarElemento" :
 				
 				$cadenaSql = "SELECT ";
-				$cadenaSql .= "id_elemento_ind, elemento_individual.placa, elemento_individual.serie,funcionario, id_elemento_gen, ";
+				$cadenaSql .= "id_elemento_ind, elemento_individual.placa, elemento_individual.serie,elemento_individual.funcionario as funcionario_encargado, id_elemento_gen, ";
 				$cadenaSql .= " salida.consecutivo||' - ('||salida.vigencia||')' salidas ,tipo_bienes.descripcion ,dependencia ,salida.id_salida as salida, ";
 				$cadenaSql .= 'arka_parametros.arka_funcionarios."FUN_NOMBRE" as fun_nombre , "ESF_NOMBRE_ESPACIO" dependeciassalidas,salida.sede sedesalidas,  ';
 				$cadenaSql .= " elemento.descripcion as descripcion_elemento";
@@ -295,7 +295,7 @@ class Sql extends \Sql {
 				$cadenaSql .= " JOIN elemento ON elemento.id_elemento = elemento_individual.id_elemento_gen ";
 				$cadenaSql .= " JOIN salida ON salida.id_salida = elemento_individual.id_salida ";
 				$cadenaSql .= " JOIN tipo_bienes ON tipo_bienes.id_tipo_bienes = elemento.tipo_bien ";
-				$cadenaSql .= ' JOIN arka_parametros.arka_funcionarios ON arka_parametros.arka_funcionarios."FUN_IDENTIFICACION" = salida.funcionario ';
+				$cadenaSql .= ' JOIN arka_parametros.arka_funcionarios ON arka_parametros.arka_funcionarios."FUN_IDENTIFICACION" = elemento_individual.funcionario ';
                                 $cadenaSql.= ' JOIN arka_parametros.arka_espaciosfisicos ON arka_parametros.arka_espaciosfisicos."ESF_ID_ESPACIO"=salida.dependencia ';
 				// $cadenaSql . = "left JOIN dependencia ON dependencia.id_dependencia = funcionario.dependencia ";
 				$cadenaSql .= " WHERE 1=1 ";
@@ -303,7 +303,7 @@ class Sql extends \Sql {
 				$cadenaSql .= " AND id_elemento_ind NOT IN (SELECT id_elemento_ind FROM baja_elemento) ";
 				
 				if ($variable [0] != '') {
-					$cadenaSql .= " AND funcionario = '" . $variable [0] . "'";
+					$cadenaSql .= " AND elemento_individual.funcionario = '" . $variable [0] . "'";
 				}
 				if ($variable [1] != '') {
 					$cadenaSql .= " AND  elemento_individual.serie= '" . $variable [1] . "'";
@@ -348,7 +348,7 @@ class Sql extends \Sql {
 				$cadenaSql .= "SET funcionario='" . $variable [1] . "',";
 				$cadenaSql .= " observaciones='" . $variable [2] . "' ";
 				$cadenaSql .= " WHERE id_salida=(SELECT id_salida FROM elemento_individual WHERE id_elemento_ind='" . $variable [0] . "' ) ;";
-				
+		
 				break;
 			
 			case "funcionario_informacion" :

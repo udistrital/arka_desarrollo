@@ -72,7 +72,8 @@ class RegistradorOrden {
                 $elementos_traslado[$key]['id'],
                 $_REQUEST ['responsable_reci'],
                 $_REQUEST ['observaciones'],
-                $_REQUEST ['dependencia']
+                $_REQUEST ['dependencia'],
+                $_REQUEST ['ubicacion'],
             );
 
             $cadenaSql = $this->miSql->getCadenaSql('actualizar_salida', $arreglo_datos);
