@@ -34,16 +34,15 @@ $dropdown_menu = array(
             //array("reportfile" => "pazysalvo.xml", "title" => "Generar Paz y Salvo Contratistas"),
         )
     ),
-   /* array(
+   array(
         "project" => "arka",
-        "title" => "Radicación de Documentos",
+        "title" => "Levantamiento Físico",
         "items" => array(
-            array("reportfile" => "consultarRadicacion_avance.xml", "title" => "Consulta de Radicación por Avance"),
-            array("reportfile" => "consultarRadicacion_compra.xml", "title" => "Consulta de Radicación por Compra"),
-            array("reportfile" => "consultarRadicacion_contrato.xml", "title" => "Consulta de Radicación por Contrato"),
+            array("reportfile" => "consultarLevantamiento.xml", "title" => "Consulta Levantamiento Físico"),
+            array("reportfile" => "consultarInventarioAsignadoLevantamiento.xml", "title" => "Consulta Asignación de Inventarios por ARKA"),
         )
     ),
-      array(
+     /* array(
         "project" => "arka",
         "title" => "Depreciación",
         "items" => array(
