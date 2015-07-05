@@ -68,12 +68,13 @@ class RegistradorOrden {
                 redireccion::redireccionar('noInserto', false);
             }
 
+          
             $arreglo_datos = array(
                 $elementos_traslado[$key]['id'],
                 $_REQUEST ['responsable_reci'],
                 $_REQUEST ['observaciones'],
                 $_REQUEST ['dependencia'],
-                $_REQUEST ['ubicacion'],
+                $_REQUEST ['dependencia'],
             );
 
             $cadenaSql = $this->miSql->getCadenaSql('actualizar_salida', $arreglo_datos);
