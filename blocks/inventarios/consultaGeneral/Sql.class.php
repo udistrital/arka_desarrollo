@@ -175,6 +175,18 @@ class Sql extends \Sql {
                 $cadenaSql .= " AND  ESF_ESTADO='A'";
                 break;
 
+            case "dependencias_encargada" :
+                $cadenaSql = 'SELECT DISTINCT "ESF_CODIGO_DEP", "ESF_DEP_ENCARGADA" ';
+                $cadenaSql .= " FROM arka_parametros.arka_dependencia as dependencia ";
+                $cadenaSql .= ' JOIN arka_parametros.arka_espaciosfisicos as espacios ON espacios."ESF_ID_ESPACIO"=dependencia."ESF_ID_ESPACIO" ';
+                $cadenaSql .= ' JOIN arka_parametros.arka_sedes as sedes ON sedes."ESF_COD_SEDE"=espacios."ESF_COD_SEDE" ';
+                $cadenaSql .= ' WHERE 1=1 ';
+                $cadenaSql.= ' AND "ESF_ID_SEDE"=';
+                $cadenaSql.= "'" . $variable . "'";
+                $cadenaSql.= ' AND  dependencia."ESF_ESTADO"=';
+                $cadenaSql.= "'A'";
+                break;
+
 
             case "clase_entrada";
                 $cadenaSql = " SELECT id_clase, descripcion ";
@@ -374,7 +386,7 @@ class Sql extends \Sql {
                 break;
 
             case "consultarElementos":
-                $cadenaSql = "SELECT  elemento_individual.placa, ";
+                $cadenaSql = " SELECT  elemento_individual.placa, ";
                 $cadenaSql.= ' sedes."ESF_SEDE" sede, ';
                 $cadenaSql.= ' dependencias."ESF_DEP_ENCARGADA" dependencia, ';
                 $cadenaSql.= ' espacios."ESF_NOMBRE_ESPACIO" ubicacion, ';
