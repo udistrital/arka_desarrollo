@@ -186,8 +186,6 @@ class Sql extends \Sql {
                 }
 // 				$cadenaSql .= "LIMIT 50000 ";
 
-
-
                 break;
 
             case "consultarElementoParticular" :
@@ -217,7 +215,7 @@ class Sql extends \Sql {
                 $cadenaSql .= " WHERE 1=1 ";
                 $cadenaSql .= ' AND arka_parametros.arka_dependencia."ESF_CODIGO_DEP" ';
                 $cadenaSql .= " LIKE 'DEP%' ";
-                $cadenaSql .= " AND id_elemento = '" . $variable . "'";
+                $cadenaSql .= " AND elemento_individual.placa = '" . $variable . "'";
                 break;
 
             case "consultar_tipo_bien" :
@@ -272,7 +270,7 @@ class Sql extends \Sql {
                 $cadenaSql .= ' JOIN arka_parametros.arka_funcionarios pasado ON cast(pasado."FUN_IDENTIFICACION" as character varying)=historial_elemento_individual.descripcion_funcionario ';
                 $cadenaSql .= ' JOIN arka_parametros.arka_dependencia ON arka_parametros.arka_dependencia."ESF_CODIGO_DEP"=salida.dependencia ';
                 $cadenaSql .= " JOIN catalogo.catalogo_lista ON catalogo.catalogo_elemento.elemento_catalogo=catalogo.catalogo_lista.lista_id";
-                $cadenaSql .= " WHERE elemento_individual.id_elemento_ind='" . $variable . "' ";
+                $cadenaSql .= " WHERE elemento_individual.placa='" . $variable . "' ";
                 $cadenaSql .= " ORDER BY historial_elemento_individual.fecha_registro ASC; ";
                 break;
 
@@ -285,7 +283,7 @@ class Sql extends \Sql {
                 $cadenaSql .= " CASE WHEN id_hurto=0 THEN 'No registra hurto' ELSE 'Registra hurto' END hurto, ";
                 $cadenaSql .= " CASE WHEN id_hurto=0 THEN '' ELSE cast(fecha_registro as character varying) END hurto_fecha ";
                 $cadenaSql .= " FROM estado_elemento ";
-                $cadenaSql .= " WHERE id_elemento_ind='" . $variable . "' ";
+                $cadenaSql .= " WHERE elemento_individual.placa='" . $variable . "' ";
                 break;
 
             case "consultar_baja":
@@ -294,7 +292,7 @@ class Sql extends \Sql {
                 $cadenaSql .= " CASE WHEN estado_registro=TRUE THEN cast(fecha_registro as character varying) ELSE ''  END baja_fecha ";
                 $cadenaSql .= " FROM baja_elemento ";
                 $cadenaSql .= " WHERE estado_aprobacion=TRUE ";
-                $cadenaSql .= " AND id_elemento_ind='" . $variable . "' ";
+                $cadenaSql .= " AND elemento_individual.placa='" . $variable . "' ";
                 break;
 
 //                 case "consultar_traslados" :

@@ -20,7 +20,7 @@ class registrarForm {
 		$this->miSql = $sql;
 	}
 	function miForm() {
-		
+          
 		// Rescatar los datos de este bloque
 		$esteBloque = $this->miConfigurador->getVariableConfiguracion ( "esteBloque" );
 		$miPaginaActual = $this->miConfigurador->getVariableConfiguracion ( 'pagina' );
@@ -117,7 +117,7 @@ class registrarForm {
 		$atributos ["obligatorio"] = false;
 		$atributos ['marco'] = true;
 		$atributos ["etiqueta"] = "";
-		$atributos ["valor"] = $_REQUEST ['placa'];
+		$atributos ["valor"] = $_REQUEST['placa'];
 		// $atributos = array_merge ( $atributos, $atributosGlobales );
 		echo $this->miFormulario->campoCuadroTexto ( $atributos );
 		unset ( $atributos );
@@ -173,7 +173,9 @@ class registrarForm {
 		$valorCodificado .= "&pagina=" . $this->miConfigurador->getVariableConfiguracion ( 'pagina' );
 		$valorCodificado .= "&bloque=" . $esteBloque ['nombre'];
 		$valorCodificado .= "&bloqueGrupo=" . $esteBloque ["grupo"];
-		$valorCodificado .= "&opcion=placas";
+		$valorCodificado .= "&opcion=detalle";
+                $valorCodificado .= "&placa_1=".$_REQUEST['placa'];
+                
 		
 		/**
 		 * SARA permite que los nombres de los campos sean dinámicos.
