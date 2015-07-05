@@ -1,8 +1,8 @@
 <?php
 
-namespace inventarios\gestionElementos\registrarFaltantesSobrantes\funcion;
+namespace inventarios\gestionElementos\registrarBajas\funcion;
 
-use inventarios\gestionElementos\registrarFaltantesSobrantes\funcion\redireccion;
+use inventarios\gestionElementos\registrarBajas\funcion\redireccion;
 
 include_once ('redireccionar.php');
 
@@ -110,6 +110,8 @@ class RegistradorOrden {
             $_REQUEST['sede'],
             $max_id_baja
         );
+        
+        
 
         $cadenaSql = $this->miSql->getCadenaSql('insertar_baja', $arreglo);
         $registro = $esteRecursoDB->ejecutarAcceso($cadenaSql, "busqueda");
@@ -130,7 +132,6 @@ class RegistradorOrden {
             }
         }
     }
-
 }
 
 $miRegistrador = new RegistradorOrden($this->lenguaje, $this->sql, $this->funcion);

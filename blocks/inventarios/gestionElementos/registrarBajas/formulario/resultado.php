@@ -81,10 +81,10 @@ class registrarForm {
         }
 
         $arreglo = array(
-            $funcionario,
-            $serial,
-            $placa,
-            $dependencia
+            'funcionario' => $funcionario,
+            'serie' => $serial,
+            'placa' => $placa,
+            'dependencia' => $dependencia
         );
 
         $cadenaSql = $this->miSql->getCadenaSql('consultarElemento', $arreglo);
@@ -158,6 +158,8 @@ class registrarForm {
                             <th>ID Funcionario</th>
 			    <th>Nombre<br>Funcionario</th>
 			    <th>Dependencia</th>
+                            <th>Sede</th>
+                            <th>Ubicacion</th>
 			    <th>Generar Baja<br>Elemento</th>
                         </tr>
                         </thead>
@@ -168,8 +170,8 @@ class registrarForm {
                 $variable .= "&opcion=trasladarElemento";
 
                 $arreglodependencia = array(
-                    $elemento [$i] ['dependeciassalidas'],
-                    $elemento [$i] ['sedesalidas']
+                    $elemento [$i] ['dependencia'],
+                    $elemento [$i] ['sede']
                 );
 
                 $arreglodependencia = serialize($arreglodependencia);
@@ -183,7 +185,9 @@ class registrarForm {
 		  		<td><center>" . $elemento [$i] ['descripcion_elemento'] . "</center></td>
                                 <td><center>" . $elemento [$i] ['funcionario_encargado'] . "</center></td>
                                 <td><center>" . $elemento [$i] ['fun_nombre'] . "</center></td>
-                                <td><center>" . $elemento [$i] ['dependeciassalidas'] . "</center></td>
+                                <td><center>" . $elemento [$i] ['dependencia'] . "</center></td>
+                                <td><center>" . $elemento [$i] ['sede'] . "</center></td>
+                                <td><center>" . $elemento [$i] ['ubicacion'] . "</center></td>
                                <td><center>";
 // ---------------- CONTROL: Cuadro de Texto --------------------------------------------------------
                 $nombre = 'item_' . $i;
