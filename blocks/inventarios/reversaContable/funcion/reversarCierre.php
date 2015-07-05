@@ -57,7 +57,7 @@ class RegistradorCierre {
             $estado_asignar = $esteRecursoDB->ejecutarAcceso($cadenaSql, "insertar");
 
             if ($estado_asignar == false) {
-                redireccion::redireccionar('inserto', $datosRegistro);
+                redireccion::redireccionar('noInserto', $datosRegistro);
             }
 
             $cadenaSql = $this->miSql->getCadenaSql('actualizarEntrada', $datosRegistro);
@@ -78,7 +78,7 @@ class RegistradorCierre {
 
 
         if ($estado_asignar == true && $resultadoActualizacion == true) {
-              redireccion::redireccionar('inserto', false);
+            redireccion::redireccionar('inserto', false);
         } else {
             redireccion::redireccionar('noInserto', false);
         }
