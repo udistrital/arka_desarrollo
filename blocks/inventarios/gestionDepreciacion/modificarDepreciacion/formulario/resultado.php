@@ -1,6 +1,6 @@
 <?php
 
-use inventarios\gestionDepreciacion\modificarDepreciacion\funcion\redireccion;
+use inventarios\reversaContable\funcion\redireccion;
 
 if (!isset($GLOBALS ["autorizado"])) {
     include ("../index.php");

@@ -271,7 +271,7 @@ class Sql extends \Sql {
 
 
                 if ($variable ['placa'] != '') {
-                    $cadenaSql .= " AND id_elemento = '" . $variable ['placa'] . "'";
+                    $cadenaSql .= " AND id_elemento_ind= '" . $variable ['placa'] . "'";
                 }
 
                 if ($variable ['grupo'] != '') {
