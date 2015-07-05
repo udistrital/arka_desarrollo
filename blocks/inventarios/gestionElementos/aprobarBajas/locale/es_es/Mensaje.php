@@ -27,13 +27,4 @@ $this->idioma ["botonRegresar"] ="<< Regresar";
 
 
 
-
-
-//________________________________________________
-$this->idioma ["botonAceptar"] = "Guardar";
-$this->idioma ["botonCancelar"] = "Cancelar";
-$this->idioma ["botonContinuar"] = "Continuar";
-
-$this->idioma ["division1Titulo"] = "Seleccione Fecha Disponibilidad Presupuestal";
-
 ?>

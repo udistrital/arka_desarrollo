@@ -82,9 +82,9 @@ class registrarForm {
             'fecha_final' => $fecha_final
         );
 
-         $cadenaSql = $this->miSql->getCadenaSql('consultarElemento', $arreglo);
+        $cadenaSql = $this->miSql->getCadenaSql('consultarElemento', $arreglo);
         $elemento = $esteRecursoDB->ejecutarAcceso($cadenaSql, "busqueda");
-
+       
         // ---------------- SECCION: Parámetros Generales del Formulario ----------------------------------
         $esteCampo = $esteBloque ['nombre'];
         $atributos ['id'] = $esteCampo;
@@ -154,6 +154,9 @@ class registrarForm {
                 <tr>
 		<th>Número Salida y/o<br>Vigencia</th>	
              	<th># Número Placa</th>
+                <th>Sede</th>
+                <th>Dependencia</th>
+                <th>Ubicación</th>
                 <th>Descripcion</th>
                 <th>Identificación<br>Funcionario</th>
 		<th>Nombre<br>Funcionario</th>
@@ -167,6 +170,9 @@ class registrarForm {
                 $mostrarHtml = "<tr>
 		    <td><center>" . $elemento [$i] [5] . "</center></td>
                     <td><center>" . $elemento [$i] [1] . "</center></td>
+                    <td><center>" . $elemento [$i] ['sede'] . "</center></td>
+                    <td><center>" . $elemento [$i] ['dependencia'] . "</center></td>
+                    <td><center>" . $elemento [$i] ['ubicacion'] . "</center></td>
                     <td><center>" . $elemento [$i] ['descripcion_elemento'] . "</center></td>
                     <td><center>" . $elemento [$i] ['funcionario'] . "</center></td>
                     <td><center>" . $elemento [$i] ['fun_nombre'] . "</center></td>
