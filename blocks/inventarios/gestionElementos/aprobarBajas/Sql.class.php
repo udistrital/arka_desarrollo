@@ -318,6 +318,102 @@ class Sql extends \Sql {
 
                 break;
 
+            case "mostrarInfoDepreciar":
+                $cadenaSql = " SELECT DISTINCT   ";
+                $cadenaSql.= " id_elemento_ind,  ";
+                $cadenaSql.= " placa, ";
+                $cadenaSql.= " elemento.descripcion, ";
+                $cadenaSql.= " elemento_nombre grupo, ";
+                $cadenaSql.= " grupo_vidautil,  ";
+                $cadenaSql.= " elemento.valor, ";
+                $cadenaSql.= " salida.fecha_registro  ";
+                $cadenaSql.= " FROM elemento_individual  ";
+                $cadenaSql.= " JOIN elemento ON elemento.id_elemento=elemento_individual.id_elemento_gen  ";
+                $cadenaSql.= " JOIN catalogo.catalogo_elemento ON catalogo.catalogo_elemento.elemento_id=nivel  ";
+                $cadenaSql.= " JOIN salida ON salida.id_salida=elemento_individual.id_salida  ";
+                $cadenaSql.= " JOIN catalogo.catalogo_lista ON catalogo.catalogo_lista.lista_id=elemento_catalogo   ";
+                $cadenaSql.= " INNER JOIN grupo.grupo_descripcion ON grupo.grupo_descripcion.grupo_id=cast(elemento_id as character varying)  ";
+                $cadenaSql.= " WHERE catalogo.catalogo_elemento.elemento_id>0   ";
+                $cadenaSql.= " AND catalogo.catalogo_lista.lista_activo=1  ";
+                //$cadenaSql.= " AND grupo.grupo_descripcion.grupo_depreciacion='t'  ";
+                $cadenaSql.= " AND elemento.estado=TRUE   ";
+                $cadenaSql.= " AND id_elemento_ind NOT IN (    ";
+                $cadenaSql.= " SELECT dep_idelemento   ";
+                $cadenaSql.= " FROM registro_depreciacion   ";
+                $cadenaSql.= " )  ";
+                $cadenaSql.= " AND id_elemento_ind NOT IN (    ";
+                $cadenaSql.= " SELECT id_elemento_ind   ";
+                $cadenaSql.= " FROM estado_elemento  ";
+                $cadenaSql.= " )  ";
+                $cadenaSql.= " AND id_elemento_ind='" . $variable . "'  ";
+
+                break;
+
+            case "mostrarInfoDepreciar_elemento":
+                $cadenaSql = " SELECT DISTINCT   ";
+                $cadenaSql.= " id_elemento_ind,placa,descripcion,salida.consecutivo,  ";
+                $cadenaSql.= " elemento_id grupo, ";
+                $cadenaSql.= " elemento_codigo grupo_codigo, grupo_cuentasalida,";
+                $cadenaSql.= " grupo_vidautil,  ";
+                $cadenaSql.= " elemento.valor, ";
+                $cadenaSql.= " salida.fecha_registro,ajuste_inflacionario,catalogo.catalogo_elemento.elemento_nombre   ";
+                $cadenaSql.= " FROM elemento_individual  ";
+                $cadenaSql.= " JOIN elemento ON elemento.id_elemento=elemento_individual.id_elemento_gen  ";
+                $cadenaSql.= " JOIN catalogo.catalogo_elemento ON catalogo.catalogo_elemento.elemento_id=nivel  ";
+                $cadenaSql.= " JOIN salida ON salida.id_salida=elemento_individual.id_salida  ";
+                $cadenaSql.= " JOIN catalogo.catalogo_lista ON catalogo.catalogo_lista.lista_id=elemento_catalogo   ";
+                $cadenaSql.= " INNER JOIN grupo.grupo_descripcion ON grupo.grupo_descripcion.grupo_id=cast(elemento_id as character varying)  ";
+                $cadenaSql.= " WHERE catalogo.catalogo_elemento.elemento_id>0   ";
+                $cadenaSql.= " AND catalogo.catalogo_lista.lista_activo=1  ";
+                // $cadenaSql.= " AND grupo.grupo_descripcion.grupo_depreciacion='t'  ";
+                $cadenaSql.= " AND elemento.estado=TRUE   ";
+                $cadenaSql.= " AND id_elemento_ind='" . $variable . "'";
+                break;
+
+            case "registrarDepreciacion":
+                $cadenaSql = " INSERT INTO registro_depreciacion( ";
+                $cadenaSql.= " dep_idelemento, ";
+                $cadenaSql.= " dep_grupocontable, ";
+                $cadenaSql.= " dep_meses, ";
+                $cadenaSql.= " dep_fechasalida, ";
+                $cadenaSql.= " dep_fechacorte, ";
+                $cadenaSql.= " dep_cantidad, ";
+                $cadenaSql.= " dep_precio, ";
+                $cadenaSql.= " dep_valorhistorico, ";
+                $cadenaSql.= " dep_valorajustado, ";
+                $cadenaSql.= " dep_cuota, ";
+                $cadenaSql.= " dep_periodo, ";
+                $cadenaSql.= " dep_depacumulada, ";
+                $cadenaSql.= " dep_circular56, ";
+                $cadenaSql.= " dep_cuotainflacion, ";
+                $cadenaSql.= " dep_apicacumulada, ";
+                $cadenaSql.= " dep_circulardeprecia, ";
+                $cadenaSql.= " dep_libros, ";
+                $cadenaSql.= " dep_estado, ";
+                $cadenaSql.= " dep_registro) ";
+                $cadenaSql.= " VALUES ( ";
+                $cadenaSql.= "'" . $variable['id_elemento'] . "', ";
+                $cadenaSql.= "'" . $variable['grupo_contable'] . "', ";
+                $cadenaSql.= "'" . $variable['meses_depreciar'] . "', ";
+                $cadenaSql.= "'" . $variable['fechaSalida'] . "', ";
+                $cadenaSql.= "'" . $variable['fechaCorte'] . "', ";
+                $cadenaSql.= "'" . $variable['cantidad'] . "', ";
+                $cadenaSql.= "'" . $variable['precio'] . "', ";
+                $cadenaSql.= "'" . $variable['valor_historico'] . "', ";
+                $cadenaSql.= "'" . $variable['valor_ajustado'] . "', ";
+                $cadenaSql.= "'" . $variable['cuota'] . "', ";
+                $cadenaSql.= "'" . $variable['periodos_fecha'] . "', ";
+                $cadenaSql.= "'" . $variable['depreciacion_acumulada'] . "', ";
+                $cadenaSql.= "'" . $variable['circular_56'] . "', ";
+                $cadenaSql.= "'" . $variable['cuota_inflacion'] . "', ";
+                $cadenaSql.= "'" . $variable['api_acumulada'] . "', ";
+                $cadenaSql.= "'" . $variable['circular_depreciacion'] . "', ";
+                $cadenaSql.= "'" . $variable['valor_libros'] . "', ";
+                $cadenaSql.= "'" . $variable['estado'] . "', ";
+                $cadenaSql.= "'" . $variable['fregistro'] . "') ";
+                $cadenaSql.= " RETURNING dep_id; ";
+                break;
+
             case "insertar_historico" :
 
                 $cadenaSql = " INSERT INTO historial_elemento_individual( ";
@@ -393,7 +489,8 @@ class Sql extends \Sql {
             case "actualizarAprobar":
                 $cadenaSql = " UPDATE baja_elemento ";
                 $cadenaSql.= " SET estado_aprobacion='" . $variable['estado'] . "', ";
-                $cadenaSql.= "  id_aprobacion='" . $variable['id_aprobacion'] . "' ";
+                $cadenaSql.= "  id_aprobacion='" . $variable['id_aprobacion'] . "', ";
+                $cadenaSql.= "  id_depreciacion='" . $variable['id_depreciacion'] . "' ";
                 $cadenaSql.= " WHERE id_elemento_ind='" . $variable['id_elemento'] . "' ";
                 break;
         }
