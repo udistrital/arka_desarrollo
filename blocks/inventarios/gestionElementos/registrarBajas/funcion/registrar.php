@@ -36,6 +36,7 @@ class RegistradorOrden {
 
     function procesarFormulario() {
 
+        $elementos = unserialize($_REQUEST['items']);
 
         $esteBloque = $this->miConfigurador->getVariableConfiguracion("esteBloque");
 
@@ -48,16 +49,14 @@ class RegistradorOrden {
         $esteRecursoDB = $this->miConfigurador->fabricaConexiones->getRecursoDB($conexion);
 
         $fechaActual = date('Y-m-d');
-
-
-
-
         $i = 0;
+
         foreach ($_FILES as $key => $values) {
 
             $archivo [$i] = $_FILES [$key];
             $i ++;
         }
+
         $archivo = $archivo[0];
 
 
@@ -90,34 +89,43 @@ class RegistradorOrden {
         }
 
 
-        $cadenaSql = $this->miSql->getCadenaSql('max_id_baja');
+//        $cadenaSql = $this->miSql->getCadenaSql('max_id_baja');
+//
+//        $max_id_baja = $esteRecursoDB->ejecutarAcceso($cadenaSql, "busqueda");
+//        $max_id_baja = $max_id_baja[0][0] + 1;
 
-        $max_id_baja = $esteRecursoDB->ejecutarAcceso($cadenaSql, "busqueda");
-        $max_id_baja = $max_id_baja[0][0] + 1;
-        $_REQUEST['estado_baja'] = '';
-        $_REQUEST['tipo_mueble'] = '';
+        $count = 0;
 
-        $arreglo = array(
-            $_REQUEST['dependencia'],
-            $_REQUEST['estado_baja'],
-            ($_REQUEST['tramite_baja'] <> '') ? $_REQUEST['tramite_baja'] : 0,
-            $_REQUEST['tipo_mueble'],
-            $destino1,
-            $archivo1,
-            $_REQUEST['observaciones'],
-            $_REQUEST['elemento_ind'],
-            $fechaActual,
-            $_REQUEST['sede'],
-            $max_id_baja
-        );
-        
-        
+        foreach ($elementos as $key => $values) {
+            $cadenaSql = $this->miSql->getCadenaSql('consultar_informacion', $elementos[$key]);
+            $elemento = $esteRecursoDB->ejecutarAcceso($cadenaSql, "busqueda");
 
-        $cadenaSql = $this->miSql->getCadenaSql('insertar_baja', $arreglo);
-        $registro = $esteRecursoDB->ejecutarAcceso($cadenaSql, "busqueda");
+            $arreglo = array(
+                'dependencia' => $elemento[0]['cod_dependencia'],
+                'funcionario' => $elemento[0]['funcionario_encargado'],
+                'ruta' => $destino1,
+                'radicado' => $archivo1,
+                'observaciones' => $_REQUEST['observaciones'],
+                'id_elemento' => $elemento[0]['id_elemento_ind'],
+                'fecha' => $fechaActual,
+                'sede' => $elemento[0]['cod_sede'],
+                'ubicacion' => $elemento[0]['cod_ubicacion'],
+            );
+            
+            $cadenaSql = $this->miSql->getCadenaSql('insertar_baja', $arreglo);
+            $registro = $esteRecursoDB->ejecutarAcceso($cadenaSql, "busqueda");
+
+            $cadenaSql = $this->miSql->getCadenaSql('actualizar_asignacion_funcionario', $arreglo);
+            $funcionario = $esteRecursoDB->ejecutarAcceso($cadenaSql, "busqueda");
+
+            $cadenaSql = $this->miSql->getCadenaSql('actualizar_asignacion_contratista', $arreglo);
+            $contratista = $esteRecursoDB->ejecutarAcceso($cadenaSql, "busqueda");
+            
+            $count ++;
+        }
 
         if ($registro) {
-            redireccion::redireccionar('inserto', $registro[0][0]);
+            redireccion::redireccionar('inserto', $count);
         } else {
 
             redireccion::redireccionar('noInserto');
@@ -132,6 +140,7 @@ class RegistradorOrden {
             }
         }
     }
+
 }
 
 $miRegistrador = new RegistradorOrden($this->lenguaje, $this->sql, $this->funcion);

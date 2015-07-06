@@ -182,20 +182,18 @@ class Sql extends \Sql {
             case "insertar_baja" :
 
                 $cadenaSql = "INSERT INTO baja_elemento( ";
-                $cadenaSql .= "dependencia_funcionario, estado_funcional, tramite, ";
-                $cadenaSql .= "tipo_mueble, ruta_radicacion, nombre_radicacion, observaciones, id_elemento_ind,fecha_registro,sede,id_baja ) ";
+                $cadenaSql .= "dependencia_funcionario,funcionario_dependencia,  ";
+                $cadenaSql .= "ruta_radicacion, nombre_radicacion, observaciones, id_elemento_ind,fecha_registro,sede, ubicacion) ";
                 $cadenaSql .= " VALUES (";
-                $cadenaSql .= "'" . $variable [0] . "',";
-                $cadenaSql .= "'" . $variable [1] . "',";
-                $cadenaSql .= "'" . $variable [2] . "',";
-                $cadenaSql .= "'" . $variable [3] . "',";
-                $cadenaSql .= "'" . $variable [4] . "',";
-                $cadenaSql .= "'" . $variable [5] . "',";
-                $cadenaSql .= "'" . $variable [6] . "',";
-                $cadenaSql .= "'" . $variable [7] . "',";
-                $cadenaSql .= "'" . $variable [8] . "',";
-                $cadenaSql .= "'" . $variable [9] . "',";
-                $cadenaSql .= "'" . $variable [10] . "') ";
+                $cadenaSql .= "'" . $variable ['dependencia'] . "',";
+                $cadenaSql .= "'" . $variable ['funcionario'] . "',";
+                $cadenaSql .= "'" . $variable ['ruta'] . "',";
+                $cadenaSql .= "'" . $variable ['radicado'] . "',";
+                $cadenaSql .= "'" . $variable ['observaciones'] . "',";
+                $cadenaSql .= "'" . $variable ['id_elemento'] . "',";
+                $cadenaSql .= "'" . $variable ['fecha'] . "',";
+                $cadenaSql .= "'" . $variable ['sede'] . "',";
+                $cadenaSql .= "'" . $variable ['ubicacion'] . "') ";
                 $cadenaSql .= "RETURNING  id_baja; ";
 
                 break;
@@ -218,6 +216,7 @@ class Sql extends \Sql {
                 $cadenaSql = " SELECT id_tipo_falt_sobr, descripcion ";
                 $cadenaSql .= " FROM tipo_falt_sobr;";
                 break;
+
             case "funcionarios" :
 
                 $cadenaSql = "SELECT FUN_IDENTIFICACION, FUN_IDENTIFICACION ||' - '|| FUN_NOMBRE ";
@@ -327,15 +326,34 @@ class Sql extends \Sql {
 
                 break;
 
-            case "seleccion_funcionario_anterior" :
+            case "consultar_informacion":
 
-                $cadenaSql = "SELECT id_elemento_ind,identificacion ||'  -  '||nombre AS funcionario ,id_funcionario ";
-                $cadenaSql .= "FROM elemento_individual ";
-                $cadenaSql .= "JOIN salida ON salida.id_salida = elemento_individual.id_salida ";
-                $cadenaSql .= "JOIN funcionario  ON funcionario.id_funcionario = salida.funcionario ";
-                $cadenaSql .= "WHERE  id_elemento_ind='" . $variable . "';";
-
+                $cadenaSql = " SELECT elemento_individual.id_elemento_ind, elemento_individual.placa, elemento_individual.funcionario as funcionario_encargado, ";
+                $cadenaSql.= ' arka_parametros.arka_funcionarios."FUN_NOMBRE" as fun_nombre, id_elemento_gen, ';
+                $cadenaSql.= ' sedes."ESF_SEDE" sede, ';
+                $cadenaSql.= ' dependencias."ESF_DEP_ENCARGADA" dependencia, ';
+                $cadenaSql.= ' espacios."ESF_NOMBRE_ESPACIO" ubicacion, ';
+                $cadenaSql.= ' sedes."ESF_ID_SEDE" cod_sede, ';
+                $cadenaSql.= ' dependencias."ESF_CODIGO_DEP" cod_dependencia, ';
+                $cadenaSql.= ' espacios."ESF_ID_ESPACIO" cod_ubicacion ';
+//$cadenaSql.= "
+                $cadenaSql.= " FROM elemento  ";
+                $cadenaSql.= " JOIN entrada ON elemento.id_entrada=entrada.id_entrada  ";
+                $cadenaSql.= " JOIN catalogo.catalogo_elemento ON catalogo.catalogo_elemento.elemento_id=nivel  ";
+//$cadenaSql.= " JOIN tipo_bienes ON tipo_bienes.id_tipo_bienes=tipo_bien  ";
+                $cadenaSql.= " JOIN elemento_individual ON elemento_individual.id_elemento_gen=elemento.id_elemento  ";
+                $cadenaSql.= ' JOIN arka_parametros.arka_espaciosfisicos as espacios ON espacios."ESF_ID_ESPACIO"=elemento_individual.ubicacion_elemento ';
+                $cadenaSql.= ' JOIN arka_parametros.arka_dependencia as dependencias ON dependencias."ESF_ID_ESPACIO"=elemento_individual.ubicacion_elemento ';
+                $cadenaSql.= ' JOIN arka_parametros.arka_sedes as sedes ON sedes."ESF_COD_SEDE"=espacios."ESF_COD_SEDE" ';
+                $cadenaSql .= " JOIN tipo_bienes ON tipo_bienes.id_tipo_bienes = elemento.tipo_bien ";
+                $cadenaSql.= " JOIN salida ON elemento_individual.id_salida=salida.id_salida ";
+                $cadenaSql .= ' JOIN arka_parametros.arka_funcionarios ON arka_parametros.arka_funcionarios."FUN_IDENTIFICACION" = elemento_individual.funcionario ';
+                $cadenaSql .= " WHERE elemento.estado='1'  AND elemento.tipo_bien <> 1 ";
+                $cadenaSql .= " AND id_elemento_ind NOT IN (SELECT id_elemento_ind FROM baja_elemento) ";
+                $cadenaSql .= " AND id_elemento_ind='" . $variable . "' ";
                 break;
+
+
 
             case "insertar_historico" :
 
@@ -356,11 +374,21 @@ class Sql extends \Sql {
                 $cadenaSql .= "SET funcionario='" . $variable [1] . "',";
                 $cadenaSql .= " observaciones='" . $variable [2] . "' ";
                 $cadenaSql .= " WHERE id_salida=(SELECT id_salida FROM elemento_individual WHERE id_elemento_ind='" . $variable [0] . "' ) ;";
+                break;
 
+            case "actualizar_asignacion_funcionario" :
+                $cadenaSql = " UPDATE elemento_individual ";
+                $cadenaSql .= "SET funcionario='0' ";
+                $cadenaSql .= " WHERE id_elemento_ind='" . $variable ['id_elemento'] . "' ;";
+                break;
+            
+            case "actualizar_asignacion_contratista" :
+                $cadenaSql = " UPDATE asignar_elementos ";
+                $cadenaSql .= "SET estado='0' ";
+                $cadenaSql .= " WHERE id_elemento='" . $variable ['id_elemento'] . "' ;";
                 break;
 
             case "funcionario_informacion" :
-
                 $cadenaSql = "SELECT FUN_IDENTIFICACION,  FUN_NOMBRE  ";
                 $cadenaSql .= "FROM FUNCIONARIOS ";
                 $cadenaSql .= "WHERE FUN_ESTADO='A' ";

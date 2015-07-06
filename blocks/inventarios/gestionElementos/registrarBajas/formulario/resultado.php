@@ -160,25 +160,13 @@ class registrarForm {
 			    <th>Dependencia</th>
                             <th>Sede</th>
                             <th>Ubicacion</th>
-			    <th>Generar Baja<br>Elemento</th>
+			    <th>Solicitar Baja<br>Elemento</th>
                         </tr>
                         </thead>
                         <tbody>";
 
             for ($i = 0; $i < count($elemento); $i ++) {
-                $variable = "pagina=" . $miPaginaActual; // pendiente la pagina para modificar parametro
-                $variable .= "&opcion=trasladarElemento";
-
-                $arreglodependencia = array(
-                    $elemento [$i] ['dependencia'],
-                    $elemento [$i] ['sede']
-                );
-
-                $arreglodependencia = serialize($arreglodependencia);
-                $variable .= "&dependencia=" . $arreglodependencia;
-                $variable .= "&id_elemento_ind=" . $elemento [$i] [0];
-                $variable = $this->miConfigurador->fabricaConexiones->crypto->codificar_url($variable, $directorio);
-
+              
                 $mostrarHtml = "<tr>
 		    		<td><center>" . $elemento [$i] ['salidas'] . "</center></td>
                                 <td><center>" . $elemento [$i] ['placa'] . "</center></td>
@@ -190,7 +178,7 @@ class registrarForm {
                                 <td><center>" . $elemento [$i] ['ubicacion'] . "</center></td>
                                <td><center>";
 // ---------------- CONTROL: Cuadro de Texto --------------------------------------------------------
-                $nombre = 'item_' . $i;
+                 $nombre = 'item_' . $i;
                 $atributos ['id'] = $nombre;
                 $atributos ['nombre'] = $nombre;
                 $atributos ['marco'] = true;
@@ -203,7 +191,7 @@ class registrarForm {
                 if (isset($_REQUEST [$esteCampo])) {
                     $atributos ['valor'] = $_REQUEST [$esteCampo];
                 } else {
-                    $atributos ['valor'] = $elemento[$i][0];
+                    $atributos ['valor'] = $elemento[$i] [0];
                 }
 
                 $atributos ['deshabilitado'] = false;

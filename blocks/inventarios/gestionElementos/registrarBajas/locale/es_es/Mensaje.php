@@ -349,7 +349,7 @@ $this->idioma ["contratista"] = "Contratista";
 $this->idioma ["ordenadorGasto"] = "Ordenador Gasto";
 
 
-$this->idioma ["botonAceptar"] ="Guardar Entrada";
+$this->idioma ["botonAceptar"] ="Solicitar Baja Elementos";
 $this->idioma ["botonCancelar"] ="Cancelar";
 $this->idioma ["botonContinuar"] ="Continuar";
 $this->idioma ["botonConsultar"] ="Consultar";
@@ -358,12 +358,5 @@ $this->idioma ["botonRegresar"] ="<< Regresar";
 
 
 
-
-//________________________________________________
-$this->idioma ["botonAceptar"] = "Guardar";
-$this->idioma ["botonCancelar"] = "Cancelar";
-$this->idioma ["botonContinuar"] = "Continuar";
-
-$this->idioma ["division1Titulo"] = "Seleccione Fecha Disponibilidad Presupuestal";
 
 ?>
