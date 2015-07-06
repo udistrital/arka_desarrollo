@@ -30,7 +30,6 @@ $('#tablaTitulos').dataTable( {
 
 $("#<?php echo $this->campoSeguro('vigencia') ?>").select2({
 placeholder: "Search for a repository",
-minimumInputLength: 2,
 });
 
 $("#<?php echo $this->campoSeguro('aprobacion') ?>").select2();

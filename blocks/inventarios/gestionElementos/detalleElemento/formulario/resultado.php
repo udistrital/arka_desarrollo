@@ -20,8 +20,7 @@ class registrarForm {
 		$this->miSql = $sql;
 	}
 	function miForm() {
-	
-		var_dump($_REQUEST);
+          
 		// Rescatar los datos de este bloque
 		$esteBloque = $this->miConfigurador->getVariableConfiguracion ( "esteBloque" );
 		$miPaginaActual = $this->miConfigurador->getVariableConfiguracion ( 'pagina' );
@@ -51,7 +50,6 @@ class registrarForm {
 		$esteRecursoDB = $this->miConfigurador->fabricaConexiones->getRecursoDB ( $conexion );
 		
 
-		
 
 		// ---------------- SECCION: Parámetros Generales del Formulario ----------------------------------
 		$esteCampo = $esteBloque ['nombre'];
@@ -119,7 +117,7 @@ class registrarForm {
 		$atributos ["obligatorio"] = false;
 		$atributos ['marco'] = true;
 		$atributos ["etiqueta"] = "";
-		$atributos ["valor"] = $_REQUEST ['placa'];
+		$atributos ["valor"] = $_REQUEST['placa'];
 		// $atributos = array_merge ( $atributos, $atributosGlobales );
 		echo $this->miFormulario->campoCuadroTexto ( $atributos );
 		unset ( $atributos );
@@ -139,19 +137,17 @@ class registrarForm {
 		$atributos ['id'] = $esteCampo;
 		$atributos ["estilo"] = "jqueryui";
 		$atributos ['tipoEtiqueta'] = 'inicio';
-		$atributos ["leyenda"] = "Consultar y Modificar Elementos";
+		$atributos ["leyenda"] = "Resultado Elemento a Consultar Detalle";
 		echo $this->miFormulario->marcoAgrupacion ( 'inicio', $atributos );
 			
 		echo "<table id='tablaTitulos' class='cell-border'>
 			<thead>
                 <tr>
                    <th>Placa</th>
-					<th>Serie</th>
+		   <th>Serie</th>
                     <th>Tipo Bien</th>
 					<th>Fecha de Registro</th>
-				 	<th>Identificador Elemento</th>
-					<th>Estado Entrada </th>
-					<th>Cierre Contable</th>
+				 	<th>Detalle</th>
 				  </tr>
             </thead>
             </table>";
@@ -177,7 +173,9 @@ class registrarForm {
 		$valorCodificado .= "&pagina=" . $this->miConfigurador->getVariableConfiguracion ( 'pagina' );
 		$valorCodificado .= "&bloque=" . $esteBloque ['nombre'];
 		$valorCodificado .= "&bloqueGrupo=" . $esteBloque ["grupo"];
-		$valorCodificado .= "&opcion=placas";
+		$valorCodificado .= "&opcion=detalle";
+                $valorCodificado .= "&placa_1=".$_REQUEST['placa'];
+                
 		
 		/**
 		 * SARA permite que los nombres de los campos sean dinámicos.

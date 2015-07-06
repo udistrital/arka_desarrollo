@@ -13,6 +13,13 @@ $miSesion = Sesion::singleton();
 
 $nivel = $miSesion->nivelSesion();
 
+$enlacePrincipal ['enlace'] = "pagina=indexARKA";
+$enlacePrincipal ['enlace'] .= "&usuario=" . $miSesion->getSesionUsuarioId();
+
+$enlacePrincipal ['urlCodificada'] = $this->miConfigurador->fabricaConexiones->crypto->codificar_url($enlacePrincipal ['enlace'], $directorio);
+$enlacePrincipal ['nombre'] = "Inicio";
+
+
 // Consulta General
 $enlaceConsultaGeneral ['enlace'] = "pagina=consultaGeneral";
 $enlaceConsultaGeneral ['enlace'] .= "&usuario=" . $miSesion->getSesionUsuarioId();
@@ -104,12 +111,19 @@ $enlaceRegistroElementos ['enlace'] .= "&usuario=" . $miSesion->getSesionUsuario
 $enlaceRegistroElementos ['urlCodificada'] = $this->miConfigurador->fabricaConexiones->crypto->codificar_url($enlaceRegistroElementos ['enlace'], $directorio);
 $enlaceRegistroElementos ['nombre'] = "Cargar Elementos";
 
-// Consultar y Modificar Elementos
+//Modificar Elementos
 $enlaceModificarElementos ['enlace'] = "pagina=modificarElemento";
 $enlaceModificarElementos['enlace'] .= "&usuario=" . $miSesion->getSesionUsuarioId();
 
 $enlaceModificarElementos ['urlCodificada'] = $this->miConfigurador->fabricaConexiones->crypto->codificar_url($enlaceModificarElementos ['enlace'], $directorio);
-$enlaceModificarElementos ['nombre'] = "Consultar y Modificar Elementos";
+$enlaceModificarElementos ['nombre'] = "Modificar y Anular Elementos";
+
+// Consultar Elementos
+$enlaceHojaVida ['enlace'] = "pagina=detalleElemento";
+$enlaceHojaVida['enlace'] .= "&usuario=" . $miSesion->getSesionUsuarioId();
+
+$enlaceHojaVida ['urlCodificada'] = $this->miConfigurador->fabricaConexiones->crypto->codificar_url($enlaceHojaVida ['enlace'], $directorio);
+$enlaceHojaVida ['nombre'] = "Consultar Detalle del Elemento";
 
 // Registro Salidas
 $enlaceRegistroSalidas ['enlace'] = "pagina=registrarSalidas";
@@ -297,6 +311,12 @@ $enlaceCierreContable ['enlace'] .= "&usuario=" . $miSesion->getSesionUsuarioId(
 $enlaceCierreContable ['urlCodificada'] = $this->miConfigurador->fabricaConexiones->crypto->codificar_url($enlaceCierreContable ['enlace'], $directorio);
 $enlaceCierreContable ['nombre'] = "Registrar Cierre Contable";
 
+// Reversa Contable
+$enlaceReversaContable ['enlace'] = "pagina=reversaContable";
+$enlaceReversaContable ['enlace'] .= "&usuario=" . $miSesion->getSesionUsuarioId();
+
+$enlaceReversaContable ['urlCodificada'] = $this->miConfigurador->fabricaConexiones->crypto->codificar_url($enlaceReversaContable ['enlace'], $directorio);
+$enlaceReversaContable ['nombre'] = "Consultar y Reversar Cierre Contable";
 
 
 // Fin de la sesión
@@ -310,8 +330,9 @@ $enlaceFinSesion['nombre'] = "Cerrar Sesión";
 //Full acceso
 if ($nivel == '0') {
     ?>
-    <nav id="cbp-hrmenu" class="cbp-hrmenu">
+  <nav id="cbp-hrmenu" class="cbp-hrmenu">
         <ul>
+            <li style="font-family: Lato;color:#2c3670; font-weight: 700;" onclick="location.href ='<?php echo $enlacePrincipal['urlCodificada'] ?>'"><?php echo $enlacePrincipal['nombre'] ?></li>
             <li>
                 <a href="#">Gestión de Compras</a>
                 <div class="cbp-hrsub">
@@ -373,6 +394,7 @@ if ($nivel == '0') {
                             <h4>Gestión Contable</h4>
                             <ul>
                                 <li><a href="<?php echo $enlaceCierreContable['urlCodificada'] ?>"><?php echo $enlaceCierreContable['nombre'] ?></a></li>
+                                <li><a href="<?php echo $enlaceReversaContable['urlCodificada'] ?>"><?php echo $enlaceReversaContable['nombre'] ?></a></li>
                             </ul>
                         </div>
                     </div><!-- /cbp-hrsub-inner -->
@@ -388,6 +410,7 @@ if ($nivel == '0') {
                             <ul>
                                 <li><a href="<?php echo $enlaceRegistroElementos['urlCodificada'] ?>"><?php echo $enlaceRegistroElementos['nombre'] ?></a></li>
                                 <li><a href="<?php echo $enlaceModificarElementos['urlCodificada'] ?>"><?php echo $enlaceModificarElementos['nombre'] ?></a></li>
+                                <li><a href="<?php echo $enlaceHojaVida['urlCodificada'] ?>"><?php echo $enlaceHojaVida['nombre'] ?></a></li>
                                 <li><a href="<?php echo $enlaceImpresionPlacas['urlCodificada'] ?>"><?php echo $enlaceImpresionPlacas['nombre'] ?></a></li> 
                             </ul>
                         </div>
@@ -480,6 +503,12 @@ if ($nivel == '0') {
                                 <li><a href="http://10.20.0.38/ws_arka_android/com.arkamovil.android-2%20(2).apk">Obtener ARKA MOVIL</a></li>
                             </ul>
                         </div>
+    <div>
+                            <h4>Ayuda</h4>
+                            <ul>
+                                <li><a target="_blank" href="https://drive.google.com/folderview?id=0BzG7rdBcnWhofk9Fa0lyZ1V5Zl83VF9DU2o3ZXZ1anhiS005aFdVUEpEX0VwcWhVSnNtZUU&usp=sharing_eid">Manuales de Usuario</a></li>
+                            </ul>
+                        </div>
                     </div><!-- /cbp-hrsub-inner -->
                 </div><!-- /cbp-hrsub -->
             </li>
@@ -490,8 +519,9 @@ if ($nivel == '0') {
 //Perfil Jefe de Almacén
 if ($nivel == '1') {
     ?>
-    <nav id="cbp-hrmenu" class="cbp-hrmenu">
+<nav id="cbp-hrmenu" class="cbp-hrmenu">
         <ul>
+            <li style="font-family: Lato;color:#2c3670; font-weight: 700;" onclick="location.href ='<?php echo $enlacePrincipal['urlCodificada'] ?>'"><?php echo $enlacePrincipal['nombre'] ?></li>
             <li>
                 <a href="#">Gestión de Compras</a>
                 <div class="cbp-hrsub">
@@ -560,6 +590,7 @@ if ($nivel == '1') {
                             <ul>
                                 <li><a href="<?php echo $enlaceRegistroElementos['urlCodificada'] ?>"><?php echo $enlaceRegistroElementos['nombre'] ?></a></li>
                                 <li><a href="<?php echo $enlaceModificarElementos['urlCodificada'] ?>"><?php echo $enlaceModificarElementos['nombre'] ?></a></li> 
+                                <li><a href="<?php echo $enlaceHojaVida['urlCodificada'] ?>"><?php echo $enlaceHojaVida['nombre'] ?></a></li>
                             </ul>
                         </div>
                         <div>
@@ -650,6 +681,12 @@ if ($nivel == '1') {
                                 <li><a href="http://10.20.0.38/ws_arka_android/com.arkamovil.android-2%20(2).apk">Obtener ARKA MOVIL</a></li>
                             </ul>
                         </div>
+    <div>
+                            <h4>Ayuda</h4>
+                            <ul>
+                                <li><a target="_blank" href="https://drive.google.com/folderview?id=0BzG7rdBcnWhofk9Fa0lyZ1V5Zl83VF9DU2o3ZXZ1anhiS005aFdVUEpEX0VwcWhVSnNtZUU&usp=sharing_eid">Manuales de Usuario</a></li>
+                            </ul>
+                        </div>
                     </div><!-- /cbp-hrsub-inner -->
                 </div><!-- /cbp-hrsub -->
             </li>
@@ -660,8 +697,9 @@ if ($nivel == '1') {
 //Perfil Contabilidad
 if ($nivel == '3') {
     ?>
-    <nav id="cbp-hrmenu" class="cbp-hrmenu">
+<nav id="cbp-hrmenu" class="cbp-hrmenu">
         <ul>
+            <li style="font-family: Lato;color:#2c3670; font-weight: 700;" onclick="location.href ='<?php echo $enlacePrincipal['urlCodificada'] ?>'"><?php echo $enlacePrincipal['nombre'] ?></li>
             <li>
                 <a href="#">Gestión Entrada y Salida</a>
                 <div class="cbp-hrsub">
@@ -670,6 +708,7 @@ if ($nivel == '3') {
                             <h4>Gestión Contable</h4>
                             <ul>
                                 <li><a href="<?php echo $enlaceCierreContable['urlCodificada'] ?>"><?php echo $enlaceCierreContable['nombre'] ?></a></li>
+                                <li><a href="<?php echo $enlaceReversaContable['urlCodificada'] ?>"><?php echo $enlaceReversaContable['nombre'] ?></a></li>
                             </ul>
                         </div>
                     </div><!-- /cbp-hrsub-inner -->
@@ -719,6 +758,12 @@ if ($nivel == '3') {
                                 <li><a href="<?php echo$enlaceFinSesion['urlCodificada'] ?>">Cerrar Sesión Contabilidad</a></li>
                             </ul>
                         </div>
+    <div>
+                            <h4>Ayuda</h4>
+                            <ul>
+                                <li><a target="_blank" href="https://drive.google.com/folderview?id=0BzG7rdBcnWhofk9Fa0lyZ1V5Zl83VF9DU2o3ZXZ1anhiS005aFdVUEpEX0VwcWhVSnNtZUU&usp=sharing_eid">Manuales de Usuario</a></li>
+                            </ul>
+                        </div>
                     </div><!-- /cbp-hrsub-inner -->
                 </div><!-- /cbp-hrsub -->
             </li>
@@ -732,6 +777,7 @@ if ($nivel == '2') {
     ?>
     <nav id="cbp-hrmenu" class="cbp-hrmenu">
         <ul>
+            <li style="font-family: Lato;color:#2c3670; font-weight: 700;" onclick="location.href ='<?php echo $enlacePrincipal['urlCodificada'] ?>'"><?php echo $enlacePrincipal['nombre'] ?></li>
             <li>
                 <a href="#">Gestión de Compras</a>
                 <div class="cbp-hrsub">
@@ -785,6 +831,12 @@ if ($nivel == '2') {
                                 <li><a href="<?php echo$enlaceFinSesion['urlCodificada'] ?>">Cerrar Sesión Asistente Compras</a></li>
                             </ul>
                         </div>
+    <div>
+                            <h4>Ayuda</h4>
+                            <ul>
+                                <li><a target="_blank" href="https://drive.google.com/folderview?id=0BzG7rdBcnWhofk9Fa0lyZ1V5Zl83VF9DU2o3ZXZ1anhiS005aFdVUEpEX0VwcWhVSnNtZUU&usp=sharing_eid">Manuales de Usuario</a></li>
+                            </ul>
+                        </div>
                     </div><!-- /cbp-hrsub-inner -->
                 </div><!-- /cbp-hrsub -->
             </li>
@@ -795,8 +847,9 @@ if ($nivel == '2') {
 //Perfil Asistente Almacén
 if ($nivel == '4') {
     ?>
-    <nav id="cbp-hrmenu" class="cbp-hrmenu">
+   <nav id="cbp-hrmenu" class="cbp-hrmenu">
         <ul>
+            <li style="font-family: Lato;color:#2c3670; font-weight: 700;" onclick="location.href ='<?php echo $enlacePrincipal['urlCodificada'] ?>'"><?php echo $enlacePrincipal['nombre'] ?></li>
 
             <li>
                 <a href="#">Gestión Entrada y Salida</a>
@@ -839,6 +892,7 @@ if ($nivel == '4') {
                             <ul>
                                 <li><a href="<?php echo $enlaceRegistroElementos['urlCodificada'] ?>"><?php echo $enlaceRegistroElementos['nombre'] ?></a></li>
                                 <li><a href="<?php echo $enlaceModificarElementos['urlCodificada'] ?>"><?php echo $enlaceModificarElementos['nombre'] ?></a></li> 
+                                <li><a href="<?php echo $enlaceHojaVida['urlCodificada'] ?>"><?php echo $enlaceHojaVida['nombre'] ?></a></li>
                             </ul>
                         </div>
                         <div>
@@ -904,6 +958,12 @@ if ($nivel == '4') {
                                 <li><a href="http://10.20.0.38/ws_arka_android/com.arkamovil.android-2%20(2).apk">Obtener ARKA MOVIL</a></li>
                             </ul>
                         </div>
+    <div>
+                            <h4>Ayuda</h4>
+                            <ul>
+                                <li><a target="_blank" href="https://drive.google.com/folderview?id=0BzG7rdBcnWhofk9Fa0lyZ1V5Zl83VF9DU2o3ZXZ1anhiS005aFdVUEpEX0VwcWhVSnNtZUU&usp=sharing_eid">Manuales de Usuario</a></li>
+                            </ul>
+                        </div>
                     </div><!-- /cbp-hrsub-inner -->
                 </div><!-- /cbp-hrsub -->
             </li>
@@ -914,8 +974,9 @@ if ($nivel == '4') {
 //Perfil Asistente Jurídica
 if ($nivel == '5') {
     ?>
-    <nav id="cbp-hrmenu" class="cbp-hrmenu">
+<nav id="cbp-hrmenu" class="cbp-hrmenu">
         <ul>
+            <li style="font-family: Lato;color:#2c3670; font-weight: 700;" onclick="location.href ='<?php echo $enlacePrincipal['urlCodificada'] ?>'"><?php echo $enlacePrincipal['nombre'] ?></li>
             <li>
                 <a href="#">Gestión de Compras</a>
                 <div class="cbp-hrsub">
@@ -937,6 +998,12 @@ if ($nivel == '5') {
                             <h4>Usuarios</h4>
                             <ul>
                                 <li><a href="<?php echo$enlaceFinSesion['urlCodificada'] ?>">Cerrar Sesión Asistente Jurídica</a></li>
+                            </ul>
+                        </div>
+    <div>
+                            <h4>Ayuda</h4>
+                            <ul>
+                                <li><a target="_blank" href="https://drive.google.com/folderview?id=0BzG7rdBcnWhofk9Fa0lyZ1V5Zl83VF9DU2o3ZXZ1anhiS005aFdVUEpEX0VwcWhVSnNtZUU&usp=sharing_eid">Manuales de Usuario</a></li>
                             </ul>
                         </div>
                     </div><!-- /cbp-hrsub-inner -->
@@ -983,6 +1050,12 @@ if ($nivel == '6') {
                                 <li><a href="<?php echo$enlaceFinSesion['urlCodificada'] ?>">Cerrar Sesión Analista</a></li>
                             </ul>
                         </div>
+    <div>
+                            <h4>Ayuda</h4>
+                            <ul>
+                                <li><a target="_blank" href="https://drive.google.com/folderview?id=0BzG7rdBcnWhofk9Fa0lyZ1V5Zl83VF9DU2o3ZXZ1anhiS005aFdVUEpEX0VwcWhVSnNtZUU&usp=sharing_eid">Manuales de Usuario</a></li>
+                            </ul>
+                        </div>
                     </div><!-- /cbp-hrsub-inner -->
                 </div><!-- /cbp-hrsub -->
             </li>
@@ -993,10 +1066,9 @@ if ($nivel == '6') {
 //Perfil Supervisor
 if ($nivel == '7') {
     ?>
-    <nav id="cbp-hrmenu" class="cbp-hrmenu">
+<nav id="cbp-hrmenu" class="cbp-hrmenu">
         <ul>
-
-
+            <li style="font-family: Lato;color:#2c3670; font-weight: 700;" onclick="location.href ='<?php echo $enlacePrincipal['urlCodificada'] ?>'"><?php echo $enlacePrincipal['nombre'] ?></li>
             <li>
                 <a href="#">Gestión de Elementos</a>
                 <div class="cbp-hrsub">
@@ -1039,6 +1111,12 @@ if ($nivel == '7') {
                                 <li><a href="<?php echo$enlaceFinSesion['urlCodificada'] ?>">Cerrar Sesión Supervisor</a></li>
                             </ul>
                         </div>
+    <div>
+                            <h4>Ayuda</h4>
+                            <ul>
+                                <li><a target="_blank" href="https://drive.google.com/folderview?id=0BzG7rdBcnWhofk9Fa0lyZ1V5Zl83VF9DU2o3ZXZ1anhiS005aFdVUEpEX0VwcWhVSnNtZUU&usp=sharing_eid">Manuales de Usuario</a></li>
+                            </ul>
+                        </div>
                     </div><!-- /cbp-hrsub-inner -->
                 </div><!-- /cbp-hrsub -->
             </li>
@@ -1049,8 +1127,9 @@ if ($nivel == '7') {
 //Perfil Contratista
 if ($nivel == '8') {
     ?>
-    <nav id="cbp-hrmenu" class="cbp-hrmenu">
+ <nav id="cbp-hrmenu" class="cbp-hrmenu">
         <ul>
+            <li style="font-family: Lato;color:#2c3670; font-weight: 700;" onclick="location.href ='<?php echo $enlacePrincipal['urlCodificada'] ?>'"><?php echo $enlacePrincipal['nombre'] ?></li>
             <li>
                 <a href="#">Gestor Reportes</a>
                 <div class="cbp-hrsub">
@@ -1076,6 +1155,12 @@ if ($nivel == '8') {
                                 <li><a href="<?php echo$enlaceFinSesion['urlCodificada'] ?>">Cerrar Sesión Contratista</a></li>
                             </ul>
                         </div>
+    <div>
+                            <h4>Ayuda</h4>
+                            <ul>
+                                <li><a target="_blank" href="https://drive.google.com/folderview?id=0BzG7rdBcnWhofk9Fa0lyZ1V5Zl83VF9DU2o3ZXZ1anhiS005aFdVUEpEX0VwcWhVSnNtZUU&usp=sharing_eid">Manuales de Usuario</a></li>
+                            </ul>
+                        </div>
                     </div><!-- /cbp-hrsub-inner -->
                 </div><!-- /cbp-hrsub -->
             </li>
@@ -1086,8 +1171,9 @@ if ($nivel == '8') {
 //Perfil Funcionario
 if ($nivel == '9') {
     ?>
-    <nav id="cbp-hrmenu" class="cbp-hrmenu">
+<nav id="cbp-hrmenu" class="cbp-hrmenu">
         <ul>
+            <li style="font-family: Lato;color:#2c3670; font-weight: 700;" onclick="location.href ='<?php echo $enlacePrincipal['urlCodificada'] ?>'"><?php echo $enlacePrincipal['nombre'] ?></li>
             <li>
                 <a href="#">Gestor Reportes</a>
                 <div class="cbp-hrsub">
@@ -1110,6 +1196,12 @@ if ($nivel == '9') {
                             <h4>Usuarios</h4>
                             <ul>
                                 <li><a href="<?php echo$enlaceFinSesion['urlCodificada'] ?>">Cerrar Sesión Funcionario</a></li>
+                            </ul>
+                        </div>
+    <div>
+                            <h4>Ayuda</h4>
+                            <ul>
+                                <li><a target="_blank" href="https://drive.google.com/folderview?id=0BzG7rdBcnWhofk9Fa0lyZ1V5Zl83VF9DU2o3ZXZ1anhiS005aFdVUEpEX0VwcWhVSnNtZUU&usp=sharing_eid">Manuales de Usuario</a></li>
                             </ul>
                         </div>
                     </div><!-- /cbp-hrsub-inner -->

@@ -13,17 +13,24 @@ class redireccion {
         $miConfigurador = \Configurador::singleton();
         $miPaginaActual = $miConfigurador->getVariableConfiguracion("pagina");
 
+      
         switch ($opcion) {
             case "inserto" :
                 $variable = "pagina=" . $miPaginaActual;
                 $variable .= "&opcion=mensaje";
                 $variable .= "&mensaje=confirma";
-                $variable .= "&vigencia=" . $valor ['vigencia'];
-                $variable .= "&inicio=" . $valor ['f_inicio'];
-                $variable .= "&fin=" . $valor ['f_final'];
+                $variable .= "&inicio=".$_REQUEST['fecha_inicio'];
+                $variable .= "&fin=".$_REQUEST['fecha_final'];
+                $variable .= "&vigencia=".$_REQUEST['vigencia'];
                 break;
 
             case "noInserto" :
+                $variable = "pagina=" . $miPaginaActual;
+                $variable .= "&opcion=mensaje";
+                $variable .= "&mensaje=error";
+                break;
+
+            case "noCoincide" :
                 $variable = "pagina=" . $miPaginaActual;
                 $variable .= "&opcion=mensaje";
                 $variable .= "&mensaje=error";

@@ -44,8 +44,6 @@ function consultarDependencia(elem, request, response){
 	    data: { valor:$("#<?php echo $this->campoSeguro('sede')?>").val()},
 	    success: function(data){ 
 
-
-
 	        if(data[0]!=" "){
 
 	            $("#<?php echo $this->campoSeguro('dependencia')?>").html('');

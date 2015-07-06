@@ -334,11 +334,12 @@ class Sql extends \Sql {
 			
 			case "consultarActa" :
 				$cadenaSql = "SELECT DISTINCT ";
-				$cadenaSql .= "id_actarecibido, dependencia, fecha_recibido, ";
-				$cadenaSql .= " tb_descripcion , proveedor,";
+				$cadenaSql .= "id_actarecibido,se.\"ESF_SEDE\" as sede, dep.\"ESF_DEP_ENCARGADA\" as dependencia, fecha_recibido, apr.\"PRO_NIT\" ||' - '|| apr.\"PRO_RAZON_SOCIAL\" as  proveedor,";
 				$cadenaSql .= "fecha_revision,revisor,observacionesacta ";
-				$cadenaSql .= "FROM registro_actarecibido ";
-				$cadenaSql .= "JOIN tipo_bien ON tb_idbien = tipo_bien ";
+				$cadenaSql .= "FROM registro_actarecibido ar ";
+				$cadenaSql .= "JOIN arka_parametros.arka_proveedor apr ON apr.\"PRO_NIT\" =  CAST(ar.proveedor AS CHAR(50))  ";
+				$cadenaSql .= "JOIN  arka_parametros.arka_dependencia dep ON dep.\"ESF_CODIGO_DEP\" = ar.dependencia	 ";
+				$cadenaSql .= "JOIN  arka_parametros.arka_sedes se ON se.\"ESF_ID_SEDE\" = ar.sede	 ";
 				$cadenaSql .= "WHERE 1 = 1 ";
 				$cadenaSql .= "AND estado_registro = 1 ";
 				if ($variable ['numero_acta'] != '') {
@@ -386,7 +387,8 @@ class Sql extends \Sql {
 			
 			case "consultar_id_acta" :
 				$cadenaSql = " SELECT id_actarecibido, id_actarecibido as acta_serial";
-				$cadenaSql .= " FROM registro_actarecibido; ";
+				$cadenaSql .= " FROM registro_actarecibido ";
+				$cadenaSql .= " ORDER BY  id_actarecibido ASC;  ";
 				break;
 			
 			case "inactivarActa" :
@@ -457,52 +459,55 @@ class Sql extends \Sql {
 			// ---------------
 			
 			case "dependenciasConsultadas" :
-				$cadenaSql = "SELECT DISTINCT  ESF_ID_ESPACIO, ESF_NOMBRE_ESPACIO ";
-				$cadenaSql .= " FROM ESPACIOS_FISICOS ";
-				$cadenaSql .= " WHERE ESF_ID_SEDE='" . $variable . "' ";
-				$cadenaSql .= " AND  ESF_ESTADO='A'";
-				
+				$cadenaSql = "SELECT DISTINCT  \"ESF_CODIGO_DEP\" , \"ESF_DEP_ENCARGADA\" ";
+				$cadenaSql .= " FROM arka_parametros.arka_dependencia ad ";
+				$cadenaSql .= " JOIN  arka_parametros.arka_espaciosfisicos ef ON  ef.\"ESF_ID_ESPACIO\"=ad.\"ESF_ID_ESPACIO\" ";
+				$cadenaSql .= " JOIN  arka_parametros.arka_sedes sa ON sa.\"ESF_COD_SEDE\"=ef.\"ESF_COD_SEDE\" ";
+				$cadenaSql .= " WHERE sa.\"ESF_ID_SEDE\"='" . $variable . "' ";
+				$cadenaSql .= " AND  ad.\"ESF_ESTADO\"='A'";
 				break;
 			
 			case "sede" :
-				$cadenaSql = "SELECT DISTINCT  ESF_ID_SEDE, ESF_SEDE ";
-				$cadenaSql .= " FROM ESPACIOS_FISICOS ";
-				$cadenaSql .= " WHERE   ESF_ESTADO='A'";
-				
+				$cadenaSql = "SELECT DISTINCT  \"ESF_ID_SEDE\", \"ESF_SEDE\" ";
+				$cadenaSql .= " FROM arka_parametros.arka_sedes ";
+				$cadenaSql .= " WHERE   \"ESF_ESTADO\"='A' ";
+				$cadenaSql .= " AND    \"ESF_COD_SEDE\" >  0 ";
 				break;
 			case "dependencias" :
-				$cadenaSql = "SELECT DISTINCT  ESF_ID_ESPACIO, ESF_NOMBRE_ESPACIO ";
-				$cadenaSql .= " FROM ESPACIOS_FISICOS ";
-				$cadenaSql .= " WHERE  ESF_ESTADO='A' ";
+				$cadenaSql = "SELECT DISTINCT  \"ESF_CODIGO_DEP\" , \"ESF_DEP_ENCARGADA\" ";
+				$cadenaSql .= " FROM arka_parametros.arka_dependencia ad ";
+				$cadenaSql .= " JOIN  arka_parametros.arka_espaciosfisicos ef ON  ef.\"ESF_ID_ESPACIO\"=ad.\"ESF_ID_ESPACIO\" ";
+				$cadenaSql .= " JOIN  arka_parametros.arka_sedes sa ON sa.\"ESF_COD_SEDE\"=ef.\"ESF_COD_SEDE\" ";
+				$cadenaSql .= " WHERE ad.\"ESF_ESTADO\"='A'";
+				
 				break;
 			
 			case "consultaDependencia" :
 				$cadenaSql = "SELECT DISTINCT  ESF_ID_ESPACIO, ESF_NOMBRE_ESPACIO ";
 				$cadenaSql .= " FROM ESPACIOS_FISICOS ";
 				$cadenaSql .= " WHERE  ESF_ESTADO='A' ";
-				$cadenaSql .= " AND  ESF_ID_ESPACIO='".$variable."' ";
+				$cadenaSql .= " AND  ESF_ID_ESPACIO='" . $variable . "' ";
 				break;
 			
 			case "proveedores" :
-				
-				$cadenaSql = " SELECT PRO_NIT,PRO_NIT||' - '||PRO_RAZON_SOCIAL AS proveedor ";
-				$cadenaSql .= " FROM PROVEEDORES ";
+				$cadenaSql = " SELECT \"PRO_NIT\",\"PRO_NIT\"||' - '||\"PRO_RAZON_SOCIAL\" AS proveedor ";
+				$cadenaSql .= " FROM arka_parametros.arka_proveedor ";
 				
 				break;
 			
 			case "tipoComprador" :
 				
-				$cadenaSql = " 	SELECT ORG_IDENTIFICADOR, ORG_ORDENADOR_GASTO ";
-				$cadenaSql .= " FROM ORDENADORES_GASTO ";
-				$cadenaSql .= " WHERE ORG_ESTADO='A' ";
+				$cadenaSql = " 	SELECT \"ORG_IDENTIFICACION\", \"ORG_ORDENADOR_GASTO\" ";
+				$cadenaSql .= " FROM arka_parametros.arka_ordenadores ";
+				$cadenaSql .= " WHERE \"ORG_ESTADO\"='A' ";
 				
 				break;
 			
 			case "informacion_ordenador" :
-				$cadenaSql = " SELECT ORG_NOMBRE,ORG_IDENTIFICADOR  ";
-				$cadenaSql .= " FROM ORDENADORES_GASTO ";
-				$cadenaSql .= " WHERE  ORG_IDENTIFICADOR='" . $variable . "' ";
-				$cadenaSql .= " AND ORG_ESTADO='A' ";
+				$cadenaSql = " SELECT \"ORG_NOMBRE\",\"ORG_IDENTIFICACION\"  ";
+				$cadenaSql .= " FROM arka_parametros.arka_ordenadores ";
+				$cadenaSql .= " WHERE  \"ORG_IDENTIFICACION\"='" . $variable . "' ";
+				$cadenaSql .= " AND \"ORG_ESTADO\"='A' ";
 				break;
 			
 			case "consultarContratos" :

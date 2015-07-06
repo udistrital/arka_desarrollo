@@ -147,39 +147,6 @@ class Sql extends \Sql {
                 break;
 
 //-----------------------------** Cláusulas del caso de uso**----------------------------------//
-//**************** Para Compras *******************//
-            case "registroDocumento_compra":
-                $cadenaSql = " INSERT INTO documento_radicarasignar_compra( ";
-                $cadenaSql .=" compra_idunico, ";
-                $cadenaSql .=" compra_idcompra, ";
-                $cadenaSql .=" compra_nombre, ";
-                $cadenaSql .=" compra_tipodoc,  ";
-                $cadenaSql .=" compra_ruta, ";
-                $cadenaSql .=" compra_fechar, ";
-                $cadenaSql .=" compra_estado) ";
-                $cadenaSql .=" VALUES ( ";
-                $cadenaSql .= "'" . $variable ['id_unico'] . "',";
-                $cadenaSql .= "'" . $variable ['id_asignar'] . "',";
-                $cadenaSql .= "'" . $variable ['nombre_archivo'] . "',";
-                $cadenaSql .= "'" . $variable ['tipo'] . "',";
-                $cadenaSql .= "'" . $variable ['ruta'] . "',";
-                $cadenaSql .= "'" . $variable ['fecha_registro'] . "',";
-                $cadenaSql .= "'" . $variable ['estado'] . "' ); ";
-                break;
-
-            case "actualizarDocumento_compra":
-                $cadenaSql = " UPDATE documento_radicarasignar_compra ";
-                $cadenaSql .=" SET compra_idunico='" . $variable ['id_unico'] . "', ";
-                $cadenaSql .=" compra_idcompra='" . $variable ['id_asignar'] . "', ";
-                $cadenaSql .=" compra_nombre='" . $variable ['nombre_archivo'] . "', ";
-                $cadenaSql .=" compra_tipodoc='" . $variable ['tipo'] . "',  ";
-                $cadenaSql .=" compra_ruta='" . $variable ['ruta'] . "', ";
-                $cadenaSql .=" compra_fechar='" . $variable ['fecha_registro'] . "' ";
-                $cadenaSql .= " WHERE  ";
-                $cadenaSql.= " compra_idcompra='" . $variable ['id_asignar'] . "' ";
-                $cadenaSql .= "RETURNING  compra_idcompra; ";
-                break;
-
             case "registrarCierre":
                 $cadenaSql = " INSERT INTO cierre_contable( ";
                 $cadenaSql.= "vigencia_cierre, cierre_fecha_inicio, cierre_fecha_final,  ";
@@ -192,15 +159,32 @@ class Sql extends \Sql {
                 $cadenaSql.= " '" . $variable['observaciones'] . "',";
                 $cadenaSql.= " '" . $variable['estado'] . "',";
                 $cadenaSql.= " '" . $variable['fechaRegistro'] . "')";
+                $cadenaSql.= " RETURNING id_cierre ";
                 break;
 
             case "actualizarEntrada":
                 $cadenaSql = " UPDATE entrada ";
-                $cadenaSql.= " SET cierre_contable='TRUE' ";
-                $cadenaSql.= " AND fecha_registro BETWEEN CAST ( '" . $variable ['fecha_inicio'] . "' AS DATE) ";
-                $cadenaSql.= " AND  CAST ( '" . $variable ['fecha_final'] . "' AS DATE)  ";
+                $cadenaSql.= " SET cierre_contable='TRUE', ";
+                $cadenaSql.= " id_cierrecontable='" . $variable ['id_cierre'] . "' ";
+                $cadenaSql.= " WHERE 1=1 ";
+                $cadenaSql.= " AND estado_entrada=2 ";
+
+                if ($variable ['vigencia'] != '') {
+                    $cadenaSql .= " AND vigencia = '" . $variable ['vigencia'] . "'";
+                }
+
+                if ($variable['fecha_inicio'] != '' && $variable ['fecha_final'] != '') {
+                    $cadenaSql .= " AND fecha_registro BETWEEN CAST ( '" . $variable ['fecha_inicio'] . "' AS DATE) ";
+                    $cadenaSql .= " AND  CAST ( '" . $variable ['fecha_final'] . "' AS DATE)  ";
+                }
                 break;
-            
+
+            case "eliminaCierre":
+                $cadenaSql = " DELETE FROM cierre_contable ";
+                $cadenaSql.= " WHERE ";
+                $cadenaSql.= " id_cierrecontable='" . $variable ['id_cierre'] . "' ";
+                break;
+
             case "vigencia":
                 $cadenaSql = " SELECT DISTINCT vigencia, vigencia as nombrevigencia ";
                 $cadenaSql.= "FROM entrada; ";

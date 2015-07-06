@@ -68,20 +68,21 @@ class registrarForm {
 		
 		$elementos = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
 		
-		
 		$cadenaSql = $this->miSql->getCadenaSql ( 'consulta_elementos_validar', $_REQUEST ['numero_entrada'] );
 		
 		$elementos_validacion = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
 		
-		$datosgenerales=unserialize($_REQUEST['datosGenerales']);
-		
-		
+		$datosgenerales = unserialize ( $_REQUEST ['datosGenerales'] );
 		
 		$entrada = array (
-				'numero_entrada_c' =>$datosgenerales[0],
-				'fecha_entrada' => $datosgenerales[1],
-				'clase' =>$datosgenerales[2] 
+				'numero_entrada_c' => $datosgenerales [0],
+				'fecha_entrada' => $datosgenerales [1],
+				'clase' => $datosgenerales [2] 
 		);
+		
+		
+		
+		
 		
 		$_REQUEST = array_merge ( $_REQUEST, $entrada );
 		// ---------------- SECCION: Parámetros Generales del Formulario ----------------------------------
@@ -106,14 +107,14 @@ class registrarForm {
 		echo $this->miFormulario->formulario ( $atributos );
 		{
 			$miPaginaActual = $this->miConfigurador->getVariableConfiguracion ( 'pagina' );
-				
+			
 			$directorio = $this->miConfigurador->getVariableConfiguracion ( "host" );
 			$directorio .= $this->miConfigurador->getVariableConfiguracion ( "site" ) . "/index.php?";
 			$directorio .= $this->miConfigurador->getVariableConfiguracion ( "enlace" );
-				
+			
 			$variable = "pagina=" . $miPaginaActual;
 			$variable = $this->miConfigurador->fabricaConexiones->crypto->codificar_url ( $variable, $directorio );
-				
+			
 			// ---------------- CONTROL: Cuadro de Texto --------------------------------------------------------
 			$esteCampo = 'botonRegresar';
 			$atributos ['id'] = $esteCampo;
@@ -125,7 +126,7 @@ class registrarForm {
 			$atributos ['alto'] = '10%';
 			$atributos ['redirLugar'] = true;
 			echo $this->miFormulario->enlace ( $atributos );
-				
+			
 			unset ( $atributos );
 			
 			// ---------------- SECCION: Controles del Formulario -----------------------------------------------
@@ -137,7 +138,7 @@ class registrarForm {
 			$atributos ["leyenda"] = "Registrar Salida";
 			echo $this->miFormulario->marcoAgrupacion ( 'inicio', $atributos );
 			
-			if ($elementos_validacion[0][0]== false) {
+			if ($elementos_validacion [0] [0] == false) {
 				
 				$mensaje = "No Existen Elementos Asociados a la Entrada";
 				
@@ -188,8 +189,12 @@ class registrarForm {
 				$valorCodificado .= "&bloqueGrupo=" . $esteBloque ["grupo"];
 				$valorCodificado .= "&opcion=regresar";
 				$valorCodificado .= "&redireccionar=regresar";
-				
 			} else {
+				
+				
+				
+// 				var_dump(unserialize($_REQUEST['datosGenerales']));
+				
 				
 				unset ( $atributos );
 				{
@@ -286,6 +291,8 @@ class registrarForm {
 					$atributos ['leyenda'] = "Elementos Referentes a las Entrada";
 					echo $this->miFormulario->agrupacion ( 'inicio', $atributos );
 					
+					
+					
 					{
 						$cantidaditems = count ( $elementos );
 						
@@ -295,10 +302,10 @@ class registrarForm {
 							
 							echo "<thead>
 				                <tr>
-				                   <th>Item</th>
+				                   <th>Nivel Inventarios</th>
 				                    <th>Cantidad</th>
 									<th>Cantidad Asignar</th>			
-				                    <th>Descripción</th>
+				                    <th>Nombre</th>
 									<th>Selección Items</th>
 							    </tr>
 					            </thead>
@@ -313,6 +320,9 @@ class registrarForm {
 								$cantidad_sobrante = count ( $elementos_restantes );
 								
 								if ($elementos_restantes) {
+									
+									$arreglo_nombreItems [] = $elementos [$i] [1];
+									
 									$mostrarHtml = "<tr>
 						                    <td><center>" . $elementos [$i] [1] . "</center></td>
 						                    <td><center>" . $cantidad_sobrante . "</center></td>
@@ -424,6 +434,11 @@ class registrarForm {
 					
 					echo $this->miFormulario->marcoAgrupacion ( 'fin' );
 					
+					
+					
+					
+					
+					
 					$valorCodificado = "actionBloque=" . $esteBloque ["nombre"];
 					$valorCodificado .= "&pagina=" . $this->miConfigurador->getVariableConfiguracion ( 'pagina' );
 					$valorCodificado .= "&bloque=" . $esteBloque ['nombre'];
@@ -432,6 +447,9 @@ class registrarForm {
 					$valorCodificado .= "&numero_entrada=" . $_REQUEST ['numero_entrada'];
 					$valorCodificado .= "&datosGenerales=" . $_REQUEST ['datosGenerales'];
 					$valorCodificado .= "&cantidadItems=" . $cantidaditems;
+					if (isset ( $arreglo_nombreItems )) {
+						$valorCodificado.="&nombreItems=".serialize($arreglo_nombreItems);
+					}
 				}
 				
 				// ---------------- FIN SECCION: Controles del Formulario -------------------------------------------

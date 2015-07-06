@@ -140,25 +140,25 @@ function consultarDependencia(elem, request, response){
 
 
 
+
 	        if(data[0]!=" "){
 
 	            $("#<?php echo $this->campoSeguro('dependencia')?>").html('');
 	            $("<option value=''>Seleccione  ....</option>").appendTo("#<?php echo $this->campoSeguro('dependencia')?>");
 	            $.each(data , function(indice,valor){
 
-	            	$("<option value='"+data[ indice ].ESF_ID_ESPACIO+"'>"+data[ indice ].ESF_NOMBRE_ESPACIO+"</option>").appendTo("#<?php echo $this->campoSeguro('dependencia')?>");
+	            	$("<option value='"+data[ indice ].ESF_CODIGO_DEP+"'>"+data[ indice ].ESF_DEP_ENCARGADA+"</option>").appendTo("#<?php echo $this->campoSeguro('dependencia')?>");
 	            	
 	            });
 	            
 	            $("#<?php echo $this->campoSeguro('dependencia')?>").removeAttr('disabled');
 	            
-	            $('#<?php echo $this->campoSeguro('dependencia')?>').width(350);
+	            $('#<?php echo $this->campoSeguro('dependencia')?>').width(300);
 	            $("#<?php echo $this->campoSeguro('dependencia')?>").select2();
 	            
 	          
 	            
 		        }
-	    			
 
 	    }
 		                    
@@ -208,7 +208,7 @@ function estado(elem, request, response){
 		    			$("#<?php echo $this->campoSeguro('nombreOrdenador')?>").val(data[0]);
 		    			$("#<?php echo $this->campoSeguro('id_ordenador')?>").val(data[1]);
 		    			$("#<?php echo $this->campoSeguro('tipo_ordenador')?>").val(data[2]);
-		    			$("#<?php echo $this->campoSeguro('identificacion_ordenador')?>").val(data[3]);		    			
+		    			$("#<?php echo $this->campoSeguro('identificacion_ordenador')?>").val(data[1]);		    			
 			    		}else{
 
 					
@@ -252,6 +252,8 @@ function estado(elem, request, response){
       			}
 
       	      });
+
+    	  $("#<?php echo $this->campoSeguro('dependencia')?>").select2(); 
 
         $("#<?php echo $this->campoSeguro('sede')?>").change(function(){
         	if($("#<?php echo $this->campoSeguro('sede')?>").val()!=''){

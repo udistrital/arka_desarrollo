@@ -48,20 +48,49 @@ class RegistradorCierre {
             'estado' => 1,
         );
 
+        $datos = array(
+            'vigencia' => $_REQUEST['vigencia'],
+            'f_inicio' => $_REQUEST['fecha_inicio'],
+            'f_final' => $_REQUEST['fecha_final'],
+        );
+
+        $anno_i = date("Y", strtotime($_REQUEST['fecha_inicio']));
+        $anno_f = date("Y", strtotime($_REQUEST['fecha_final']));
+
+        if (isset($_REQUEST['vigencia']) && $_REQUEST['vigencia'] != '' && isset($_REQUEST['fecha_inicio']) && $_REQUEST['fecha_inicio'] != '') {
+            if ($anno_i != $_REQUEST['vigencia'] || $anno_f != $_REQUEST['vigencia']) {
+                redireccion::redireccionar('noCoincide', $datos);
+            }
+        }
+
+
         if ($_REQUEST['aprobacion'] == 1) {
+
             //consultar si la vigencia y la entrada existen
             $cadenaSql = $this->miSql->getCadenaSql('registrarCierre', $datosRegistro);
-            $estado_asignar = $esteRecursoDB->ejecutarAcceso($cadenaSql, "insertar");
+            $estado_asignar = $esteRecursoDB->ejecutarAcceso($cadenaSql, "busqueda");
 
+            $datosRegistro2 = array(
+                'fecha_inicio' => $_REQUEST ['fecha_inicio'],
+                'fecha_final' => $_REQUEST ['fecha_final'],
+                'vigencia' => $_REQUEST ['vigencia'],
+                'estado' => 1,
+                'id_cierre' => $estado_asignar[0][0]
+            );
 
-            $cadenaSql = $this->miSql->getCadenaSql('actualizarEntrada', $datosRegistro);
+            if ($estado_asignar == false) {
+                redireccion::redireccionar('noInserto', $datos);
+            }
+
+            $cadenaSql = $this->miSql->getCadenaSql('actualizarEntrada', $datosRegistro2);
             $resultadoActualizacion = $esteRecursoDB->ejecutarAcceso($cadenaSql, "insertar");
 
-              $datos = array(
-                'vigencia' => $_REQUEST['vigencia'],
-                'f_inicio' => $_REQUEST['fecha_inicio'],
-                'f_final' => $_REQUEST['fecha_final'],
-            );
+            if ($resultadoActualizacion == FALSE) {
+                $cadenaSql = $this->miSql->getCadenaSql('eliminarCierre', $estado_asignar[0][0]);
+                $rollCierre = $esteRecursoDB->ejecutarAcceso($cadenaSql, "insertar");
+
+                redireccion::redireccionar('inserto', $datos);
+            }
 
             if ($estado_asignar == true && $resultadoActualizacion == true) {
                 redireccion::redireccionar('inserto', $datos);

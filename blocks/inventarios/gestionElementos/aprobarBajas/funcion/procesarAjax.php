@@ -1,17 +1,17 @@
 <?php
-use inventarios\gestionCompras\registrarOrdenCompra\Sql;
+use inventarios\gestionElementos\aprobarBajas\Sql;
 
 $conexion = "inventarios";
 $esteRecursoDB = $this->miConfigurador->fabricaConexiones->getRecursoDB ( $conexion );
 if ($_REQUEST ['funcion'] == 'consultarDependencia') {
 
-	$conexion = "sicapital";
+	$conexion = "inventarios";
 
-	$esteRecursoDBO = $this->miConfigurador->fabricaConexiones->getRecursoDB ( $conexion );
+	$esteRecursoDB = $this->miConfigurador->fabricaConexiones->getRecursoDB ( $conexion );
 
 
-	$cadenaSql = $this->sql->getCadenaSql ( 'dependencias', $_REQUEST['valor'] );
-	$resultado = $esteRecursoDBO->ejecutarAcceso ( $cadenaSql, "busqueda" );
+	$cadenaSql = $this->sql->getCadenaSql ( 'dependencias_encargada', $_REQUEST['valor'] );
+	$resultado = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
 
 
 	$resultado = json_encode ( $resultado);

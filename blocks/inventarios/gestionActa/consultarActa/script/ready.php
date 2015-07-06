@@ -55,6 +55,8 @@
         $("#<?php echo $this->campoSeguro('numero_acta') ?>").select2();
          $("#<?php echo $this->campoSeguro('numeroContrato') ?>").select2();
           $("#<?php echo $this->campoSeguro('tipocomprador') ?>").select2();
+          $("#<?php echo $this->campoSeguro('asignacionOrdenador') ?>").select2();
+          
         
         $("#<?php echo $this->campoSeguro('nitproveedor') ?>").change(function () {
 		datosInfo();

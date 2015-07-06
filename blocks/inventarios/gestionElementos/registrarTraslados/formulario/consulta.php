@@ -81,7 +81,7 @@ class registrarForm {
 		$atributos ['nombre'] = $esteCampo;
 		$atributos ['id'] = $esteCampo;
 		$atributos ['etiqueta'] = $this->lenguaje->getCadena ( $esteCampo );
-		$atributos ["etiquetaObligatorio"] = false;
+		$atributos ["etiquetaObligatorio"] = true;
 		$atributos ['tab'] = $tab ++;
 		$atributos ['anchoEtiqueta'] = 300;
 		$atributos ['evento'] = '';
@@ -96,7 +96,7 @@ class registrarForm {
 		$atributos ['ajax_function'] = "";
 		$atributos ['ajax_control'] = $esteCampo;
 		$atributos ['estilo'] = "jqueryui";
-		$atributos ['validar'] = "";
+		$atributos ['validar'] = "required";
 		$atributos ['limitar'] = true;
 		$atributos ['anchoCaja'] = 52;
 		$atributos ['miEvento'] = '';
@@ -126,7 +126,7 @@ class registrarForm {
 		$atributos ["etiquetaObligatorio"] = false;
 		$atributos ['tab'] = $tab ++;
 		$atributos ['seleccion'] = - 1;
-		$atributos ['anchoEtiqueta'] = 220;
+		$atributos ['anchoEtiqueta'] = 135;
 		$atributos ['evento'] = '';
 		if (isset ( $_REQUEST [$esteCampo] )) {
 			$atributos ['valor'] = $_REQUEST [$esteCampo];
@@ -171,7 +171,7 @@ class registrarForm {
 		$atributos ["etiquetaObligatorio"] = false;
 		$atributos ['tab'] = $tab ++;
 		$atributos ['seleccion'] = - 1;
-		$atributos ['anchoEtiqueta'] = 220;
+		$atributos ['anchoEtiqueta'] = 135;
 		$atributos ['evento'] = '';
 		if (isset ( $_REQUEST [$esteCampo] )) {
 			$atributos ['valor'] = $_REQUEST [$esteCampo];

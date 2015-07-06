@@ -2,7 +2,7 @@
 
 namespace inventarios\cierreContable;
 
-use inventarios\radicarAsignar\funcion\redireccion;
+use inventarios\reversaContable\funcion\redireccion;
 
 if (!isset($GLOBALS ["autorizado"])) {
     include ("../index.php");
@@ -30,14 +30,6 @@ class Funcion {
     var $miRecursoDB;
     var $crypto;
 
-    // function verificarCampos() {
-    // include_once ($this->ruta . "/funcion/verificarCampos.php");
-    // if ($this->error == true) {
-    // return false;
-    // } else {
-    // return true;
-    // }
-    // }
     function redireccionar($opcion, $valor = "") {
         include_once ($this->ruta . "/funcion/redireccionar.php");
     }

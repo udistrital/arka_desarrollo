@@ -60,8 +60,6 @@ class Frontera {
                 case "mensaje" :
                     include_once ($this->ruta . "/formulario/mensaje.php");
                     break;
-
-                                   break;
             }
         } else {
             $_REQUEST ['opcion'] = "mostrar";

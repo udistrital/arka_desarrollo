@@ -1,6 +1,6 @@
-<?
+<?php
 
-namespace inventarios\gestionElementos\modificarElemento\funcion;
+namespace inventarios\gestionElementos\detalleElemento\funcion;
 
 if (! isset ( $GLOBALS ["autorizado"] )) {
 	include ("index.php");

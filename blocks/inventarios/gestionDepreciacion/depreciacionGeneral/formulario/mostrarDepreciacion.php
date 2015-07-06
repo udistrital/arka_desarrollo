@@ -258,8 +258,7 @@ class registrarForm {
         echo $this->miFormulario->formulario($atributos);
         // ---------------- SECCION: Controles del Formulario -----------------------------------------------
 	
-		
-		
+			
 		$variable = "pagina=" . $miPaginaActual;
 		$variable = $this->miConfigurador->fabricaConexiones->crypto->codificar_url ( $variable, $directorio );
 		

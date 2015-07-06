@@ -43,25 +43,6 @@ $urlFinal16 = $url . $cadena16;
 <script type='text/javascript'>
 
 
-    $(function () {
-
-        $("#<?php echo $this->campoSeguro('sede') ?>").select2({
-            placeholder: "Search for a repository",
-            minimumInputLength: 2,
-        });
-        $("#<?php echo $this->campoSeguro('selec_tipoConsulta') ?>").select2({
-            placeholder: "Search for a repository",
-            minimumInputLength: 2,
-        });
-        $("#<?php echo $this->campoSeguro('dependencia') ?>").select2({
-            placeholder: "Search for a repository",
-            minimumInputLength: 2,
-        });
-        $("#<?php echo $this->campoSeguro('nombreFuncionario') ?>").select2({
-            placeholder: "Search for a repository",
-            minimumInputLength: 2,
-        });
-    });
 
     function consultarDependencia(elem, request, response) {
         $.ajax({
@@ -69,23 +50,69 @@ $urlFinal16 = $url . $cadena16;
             dataType: "json",
             data: {valor: $("#<?php echo $this->campoSeguro('sede') ?>").val()},
             success: function (data) {
-
                 if (data[0] != " ") {
+
                     $("#<?php echo $this->campoSeguro('dependencia') ?>").html('');
-                    $("<option value=''>Seleccione ...</option>").appendTo("#<?php echo $this->campoSeguro('dependencia') ?>");
+                    $("<option value=''>Seleccione  ....</option>").appendTo("#<?php echo $this->campoSeguro('dependencia') ?>");
                     $.each(data, function (indice, valor) {
 
-                        $("<option value='" + data[ indice ].ESF_ID_ESPACIO + "'>" + data[ indice ].ESF_NOMBRE_ESPACIO + "</option>").appendTo("#<?php echo $this->campoSeguro('dependencia') ?>");
+                        $("<option value='" + data[ indice ].ESF_CODIGO_DEP + "'>" + data[ indice ].ESF_DEP_ENCARGADA + "</option>").appendTo("#<?php echo $this->campoSeguro('dependencia') ?>");
+
                     });
+
                     $("#<?php echo $this->campoSeguro('dependencia') ?>").removeAttr('disabled');
+                    $("#<?php echo $this->campoSeguro('selec_tipoConsulta') ?>").removeAttr('disabled');
+                    $('#<?php echo $this->campoSeguro('dependencia') ?>').width(300);
                     $("#<?php echo $this->campoSeguro('dependencia') ?>").select2();
+
+
+
                 }
+
+
             }
 
         });
     }
     ;
 
+    $(function () {
+        $("#<?php echo $this->campoSeguro('sede') ?>").change(function () {
+            if ($("#<?php echo $this->campoSeguro('sede') ?>").val() != '') {
 
+                consultarDependencia();
+            } else {
+                $("#<?php echo $this->campoSeguro('dependencia') ?>").attr('disabled', '');
+            }
+
+        });
+
+        $("#<?php echo $this->campoSeguro('nombreFuncionario') ?>").change(function () {
+        
+            if ($("#<?php echo $this->campoSeguro('nombreFuncionario') ?>").val() != '') {
+
+                $("#<?php echo $this->campoSeguro('selec_tipoConsulta') ?>").removeAttr('disabled');
+                $('#<?php echo $this->campoSeguro('selec_tipoConsulta') ?>').select2();
+            } else {
+                $("#<?php echo $this->campoSeguro('dependencia') ?>").attr('disabled', '');
+            }
+        });
+
+
+
+        $("#<?php echo $this->campoSeguro('selec_tipoConsulta') ?>").select2({
+            placeholder: "Seleccione...",
+            
+        });
+        $("#<?php echo $this->campoSeguro('dependencia') ?>").select2({
+            placeholder: "Seleccione...",
+            minimumInputLength: 2,
+        });
+        $("#<?php echo $this->campoSeguro('nombreFuncionario') ?>").select2({
+            placeholder: " ",
+            minimumInputLength: 2,
+        });
+
+    });
 </script>
 
