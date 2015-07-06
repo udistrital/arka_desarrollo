@@ -350,11 +350,13 @@ class Sql extends \Sql {
 
                 $cadenaSql.= " WHERE 1=1 ";
                 if ($variable ['dependencia'] != '') {
-                    $cadenaSql .= " AND dependencias.dependencia = '" . $variable ['dependencia'] . "'";
+                    $cadenaSql .= ' AND dependencias."ESF_CODIGO_DEP" = ';
+                    $cadenaSql .= " '" . $variable ['dependencia'] . "' ";
                 }
 
                 if ($variable ['sede'] != '') {
-                    $cadenaSql .= " AND sedes.sede = '" . $variable ['sede'] . "'";
+                    $cadenaSql .= ' AND sedes."ESF_ID_SEDE" = ';
+                    $cadenaSql .= " '" . $variable ['sede'] . "' ";
                 }
 
                 if ($variable ['funcionario'] != '') {
@@ -381,7 +383,7 @@ class Sql extends \Sql {
                     $cadenaSql .= " AND salida.fecha BETWEEN CAST ( '" . $variable ['fecha_inicio'] . "' AS DATE) ";
                     $cadenaSql .= " AND  CAST ( '" . $variable ['fecha_final'] . "' AS DATE)  ";
                 }
-                $cadenaSql .= 'GROUP BY salida.id_salida, salida.fecha_registro, salida.dependencia, salida.sede, salida.funcionario,salida.observaciones, entrada.consecutivo,arka_parametros.arka_funcionarios."FUN_NOMBRE", sedes."ESF_SEDE", dependencias."ESF_DEP_ENCARGADA", espacios."ESF_NOMBRE_ESPACIO" ';
+                $cadenaSql .= ' GROUP BY salida.id_salida, salida.fecha_registro, salida.dependencia, salida.sede, salida.funcionario,salida.observaciones, entrada.consecutivo,arka_parametros.arka_funcionarios."FUN_NOMBRE", sedes."ESF_SEDE", dependencias."ESF_DEP_ENCARGADA", espacios."ESF_NOMBRE_ESPACIO" ';
 
                 break;
 
@@ -404,7 +406,7 @@ class Sql extends \Sql {
                 $cadenaSql.= " JOIN salida ON elemento_individual.id_salida=salida.id_salida WHERE elemento.estado='1' ";
 
                 if ($variable ['dependencia'] != '') {
-                    $cadenaSql .= ' AND dependencia."ESF_CODIGO_DEP" = ';
+                    $cadenaSql .= ' AND dependencias."ESF_CODIGO_DEP" = ';
                     $cadenaSql .= " '" . $variable ['dependencia'] . "' ";
                 }
 
@@ -474,7 +476,7 @@ class Sql extends \Sql {
                 }
 
                 if ($variable ['dependencia'] != '') {
-                    $cadenaSql .= ' AND dependencia."ESF_CODIGO_DEP" = ';
+                    $cadenaSql .= ' AND dependencias."ESF_CODIGO_DEP" = ';
                     $cadenaSql .= " '" . $variable ['dependencia'] . "' ";
                 }
 

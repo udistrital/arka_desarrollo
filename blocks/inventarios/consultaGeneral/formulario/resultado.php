@@ -101,6 +101,7 @@ class registrarForm {
                 case 2:
                     $cadenaSql = $this->miSql->getCadenaSql('consultarSalida', $datos_consulta);
                     $datos = $esteRecursoDB->ejecutarAcceso($cadenaSql, "busqueda");
+
                     $nombreReporte = "Reporte de Salidas";
                     break;
                 //Elementos
@@ -166,7 +167,7 @@ class registrarForm {
         $atributos ['id'] = $esteCampo;
         $atributos ["estilo"] = "jqueryui";
         $atributos ['tipoEtiqueta'] = 'inicio';
-        $atributos ["leyenda"] = "Resultado Consulta General - ".$nombreReporte;
+        $atributos ["leyenda"] = "Resultado Consulta General - " . $nombreReporte;
         echo $this->miFormulario->marcoAgrupacion('inicio', $atributos);
 
 // ------------------Division para los botones-------------------------
