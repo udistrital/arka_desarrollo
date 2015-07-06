@@ -159,7 +159,10 @@ class Select extends HtmlBase {
         if ($this->atributos [self::COLUMNAS] == 2) {
 
             $ancho = 26;
-        } else if (isset($this->atributos [self::ANCHOCAJA])) {
+        } if ($this->atributos [self::COLUMNAS] == 3) {
+
+            $ancho = 13;
+        }  else if (isset($this->atributos [self::ANCHOCAJA])) {
 
             $ancho = $this->atributos [self::ANCHOCAJA];
         } else {
