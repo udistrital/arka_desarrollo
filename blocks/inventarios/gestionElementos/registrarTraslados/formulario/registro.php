@@ -53,6 +53,7 @@ class registrarForm {
 
 
         $funcionario = $_REQUEST['funcionario'];
+    
         $cadenaSql = $this->miSql->getCadenaSql('funcionario_informacion_fn', $funcionario);
         $funcionario_inf = $esteRecursoDBO->ejecutarAcceso($cadenaSql, "busqueda");
 

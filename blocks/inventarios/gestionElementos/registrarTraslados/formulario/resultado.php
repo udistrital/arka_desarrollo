@@ -80,7 +80,8 @@ class registrarForm {
             $placa
         );
 
-      $cadenaSql = $this->miSql->getCadenaSql('consultarElemento', $arreglo);
+     echo $cadenaSql = $this->miSql->getCadenaSql('consultarElemento', $arreglo);
+     exit;
         $elemento = $esteRecursoDB->ejecutarAcceso($cadenaSql, "busqueda");
     
         // ---------------- SECCION: Parámetros Generales del Formulario ----------------------------------

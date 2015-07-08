@@ -285,6 +285,11 @@ class Sql extends \Sql {
                 $cadenaSql .= " WHERE   ESF_ESTADO='A'";
                 break;
 
+            case "proveedores" :
+                $cadenaSql = " SELECT \"PRO_NIT\",\"PRO_NIT\"||' - '||\"PRO_RAZON_SOCIAL\" AS proveedor ";
+                $cadenaSql .= " FROM arka_parametros.arka_proveedor ";
+                break;
+
 
             case "dependencias" :
                 $cadenaSql = "SELECT DISTINCT  ESF_ID_ESPACIO, ESF_NOMBRE_ESPACIO ";
