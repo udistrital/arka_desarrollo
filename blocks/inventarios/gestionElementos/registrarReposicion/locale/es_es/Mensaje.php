@@ -9,6 +9,12 @@ $this->idioma ["sede"] ="Sede : ";
 $this->idioma ["sedeTitulo"] ="Seleccione Sede";
 
 
+$this->idioma ["sede_salida"] ="Sede : ";
+$this->idioma ["sede_salidaTitulo"] ="Seleccione Sede";
+
+$this->idioma ["supervisor"] = "Supervisor:";
+
+
 $this->idioma ["observaciones"] ="Observaciones: ";
 $this->idioma ["observacionesTitulo"] ="Ingrese Observaciones ";
 
@@ -56,8 +62,8 @@ $this->idioma ["dependencia"] ="Dependencia : ";
 $this->idioma ["dependenciaTitulo"] ="Seleccione Dependencia donde se va alojar el elemento dado de baja";
 
 
-$this->idioma ["dependencia_baja"] ="Dependencia : ";
-$this->idioma ["dependencia_bajaTitulo"] ="Seleccione dependencia donde se va alojar <br> el elementos dado de baja. ";
+$this->idioma ["dependencia_salida"] ="Dependencia : ";
+$this->idioma ["dependencia_salidaTitulo"] ="Seleccione dependencia donde se va alojar <br> el elemento";
 
 
 $this->idioma ["informacion_destino"] ="&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspDependencia donde se va alojar el elementos dado de baja. ";
@@ -240,9 +246,14 @@ $this->idioma ["fecha_factura"] ="Fecha de Factura: ";
 $this->idioma ["fecha_facturaTitulo"] ="Seleccione Fecha de Factura";
 
 
-$this->idioma ["observaciones_entrada"] ="Observaciones: ";
+$this->idioma ["observaciones_entrada"] ="Observaciones de la Entrada: ";
 $this->idioma ["observaciones_entradaTitulo"] ="Ingrse Observaciones de Entrada";
 
+
+$this->idioma ["ubicacion"] ="Ubicación: "; 
+$this->idioma ["ubicacion_salida"] ="Ubicación: "; 
+$this->idioma ["funcionario"] ="Funcionario: "; 
+$this->idioma ["funcionario_salida"] ="Funcionario: "; 
 
 //__________________________________________________________________________________________________________
 
@@ -336,10 +347,10 @@ $this->idioma ["nombreContratistaTitulo"] = "Ingrese Nombre y Apellidos ";
 $this->idioma ["identificacionContratista"] = "&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspIdentificación : ";
 $this->idioma ["nombreContratistaTitulo"] = "Ingrese Identificación del Contratista ";
 
-$this->idioma ["nombreOrdenador"] = "&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspNombre y Apellidos : ";
+$this->idioma ["nombreOrdenador"] = "Nombre y Apellidos : ";
 $this->idioma ["nombreOrdenadorTitulo"] = "Ingrese Nombre y Apellidos ";
 
-$this->idioma ["asignacionOrdenador"] = "&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspAsignación : ";
+$this->idioma ["asignacionOrdenador"] = "Asignación : ";
 $this->idioma ["asignacionOrdenadorTitulo"] = "Ingrese Asignación de Ordenador del Gasto";
 
 $this->idioma ["jefeSeccion"] = "Jefe de Sección";

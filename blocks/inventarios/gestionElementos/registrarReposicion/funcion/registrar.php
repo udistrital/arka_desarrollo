@@ -1,8 +1,8 @@
 <?php
 
-namespace inventarios\gestionElementos\registrarBajas\funcion;
+namespace inventarios\gestionElementos\registrarReposicion\funcion;
 
-use inventarios\gestionElementos\registrarBajas\funcion\redireccion;
+use inventarios\gestionElementos\registrarReposicion\funcion\redireccion;
 
 include_once ('redireccionar.php');
 
@@ -36,6 +36,8 @@ class RegistradorOrden {
 
     function procesarFormulario() {
 
+        var_dump($_REQUEST);
+        exit;
         $elementos = unserialize($_REQUEST['items']);
 
         $esteBloque = $this->miConfigurador->getVariableConfiguracion("esteBloque");
@@ -49,80 +51,65 @@ class RegistradorOrden {
         $esteRecursoDB = $this->miConfigurador->fabricaConexiones->getRecursoDB($conexion);
 
         $fechaActual = date('Y-m-d');
-        $i = 0;
 
-        foreach ($_FILES as $key => $values) {
+        //Registrar la Entrada Nueva
+        $arreglo_clase = array(
+            $observacion = 'NULL',
+            $elemento['entrada'],
+            $elemento['salida'],
+            $elemento['baja'],
+            0,
+            0,
+            'NULL',
+            'NULL'
+        );
 
-            $archivo [$i] = $_FILES [$key];
-            $i ++;
-        }
+        $cadenaSql = $this->miSql->getCadenaSql('insertarInformación', $arreglo_clase);
+        $info_clase = $esteRecursoDB->ejecutarAcceso($cadenaSql, "busqueda");
 
-        $archivo = $archivo[0];
+        $cadenaSql = $this->miSql->getCadenaSql('idMaximoEntrada');
+        $idEntradamax = $esteRecursoDB->ejecutarAcceso($cadenaSql, "busqueda");
 
+        $idEntradamax = $idEntradamax[0][0] + 1;
 
-        if (isset($archivo)) {
-            // obtenemos los datos del archivo
-            $tamano = $archivo ['size'];
-            $tipo = $archivo ['type'];
-            $archivo1 = $archivo ['name'];
-            $prefijo = substr(md5(uniqid(rand())), 0, 6);
+        $fechaActual = date('Y-m-d');
+        $anio_vigencia = date('Y');
 
-            if ($archivo1 != "") {
-                // guardamos el archivo a la carpeta files
-                $destino1 = $rutaBloque . "/documento_radicacion/" . $prefijo . "_" . $archivo1;
-                if (copy($archivo ['tmp_name'], $destino1)) {
-                    $status = "Archivo subido: <b>" . $archivo1 . "</b>";
-                    $destino1 = $host . "/documento_radicacion/" . $prefijo . "_" . $archivo1;
-                } else {
-                    $status = "Error al subir el archivo";
-                    echo $status;
-                }
-            } else {
-                $status = "Error al subir archivo";
-                echo $status . "2";
-            }
-
-            $arreglo = array(
-                $destino1,
-                $archivo1
-            );
-        }
+        $arregloDatos = array(
+            $fechaActual,
+            $anio_vigencia,
+            1,
+            $info_clase [0] [0],
+            ($_REQUEST ['tipo_contrato'] != '') ? $_REQUEST ['tipo_contrato'] : 0,
+            ($_REQUEST ['numero_contrato'] != '') ? $_REQUEST ['numero_contrato'] : 0,
+            ($_REQUEST ['fecha_contrato'] != '') ? $_REQUEST ['fecha_contrato'] : '0001-01-01',
+            ($_REQUEST ['proveedor'] != '') ? $_REQUEST ['proveedor'] : 0,
+            ($_REQUEST ['numero_factura'] != '') ? $_REQUEST ['numero_factura'] : 0,
+            ($_REQUEST ['fecha_factura'] != '') ? $_REQUEST ['fecha_factura'] : '0001-01-01',
+            $_REQUEST ['observaciones_entrada'],
+            (isset($_REQUEST ['acta_recibido']) && $_REQUEST ['acta_recibido'] != '') ? $_REQUEST ['acta_recibido'] : 0,
+            ($_REQUEST ['id_ordenador'] == '') ? 'NULL' : $_REQUEST ['id_ordenador'],
+            $_REQUEST ['sede'],
+            $_REQUEST ['dependencia'],
+            $_REQUEST ['supervisor'],
+            ($_REQUEST ['tipo_ordenador'] == '') ? 'NULL' : $_REQUEST ['tipo_ordenador'],
+            ($_REQUEST ['identificacion_ordenador'] == '') ? 'NULL' : $_REQUEST ['identificacion_ordenador'],
+            $idEntradamax
+        );
 
 
-//        $cadenaSql = $this->miSql->getCadenaSql('max_id_baja');
-//
-//        $max_id_baja = $esteRecursoDB->ejecutarAcceso($cadenaSql, "busqueda");
-//        $max_id_baja = $max_id_baja[0][0] + 1;
+        $cadenaSql = $this->miSql->getCadenaSql('insertarEntrada', $arregloDatos);
 
-        $count = 0;
+        $id_entrada = $esteRecursoDB->ejecutarAcceso($cadenaSql, "busqueda");
 
-        foreach ($elementos as $key => $values) {
-            $cadenaSql = $this->miSql->getCadenaSql('consultar_informacion', $elementos[$key]);
-            $elemento = $esteRecursoDB->ejecutarAcceso($cadenaSql, "busqueda");
 
-            $arreglo = array(
-                'dependencia' => $elemento[0]['cod_dependencia'],
-                'funcionario' => $elemento[0]['funcionario_encargado'],
-                'ruta' => $destino1,
-                'radicado' => $archivo1,
-                'observaciones' => $_REQUEST['observaciones'],
-                'id_elemento' => $elemento[0]['id_elemento_ind'],
-                'fecha' => $fechaActual,
-                'sede' => $elemento[0]['cod_sede'],
-                'ubicacion' => $elemento[0]['cod_ubicacion'],
-            );
-            
-            $cadenaSql = $this->miSql->getCadenaSql('insertar_baja', $arreglo);
-            $registro = $esteRecursoDB->ejecutarAcceso($cadenaSql, "busqueda");
 
-            $cadenaSql = $this->miSql->getCadenaSql('actualizar_asignacion_funcionario', $arreglo);
-            $funcionario = $esteRecursoDB->ejecutarAcceso($cadenaSql, "busqueda");
 
-            $cadenaSql = $this->miSql->getCadenaSql('actualizar_asignacion_contratista', $arreglo);
-            $contratista = $esteRecursoDB->ejecutarAcceso($cadenaSql, "busqueda");
-            
-            $count ++;
-        }
+
+        //Crear Elemento
+        //Crear Salida
+
+
 
         if ($registro) {
             redireccion::redireccionar('inserto', $count);
