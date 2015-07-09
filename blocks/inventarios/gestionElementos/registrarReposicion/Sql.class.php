@@ -159,7 +159,7 @@ class Sql extends \Sql {
                 $cadenaSql.=' salida.consecutivo consecutivosalida,salida.id_salida, ';
                 $cadenaSql.=' entrada.consecutivo consecutivoentrada, entrada.id_entrada,';
                 $cadenaSql.=' placa, ';
-                $cadenaSql.=' descripcion, ';
+                $cadenaSql.=' descripcion, nivel, tipo_bien, id_baja, ';
                 $cadenaSql.=' baja_elemento.fecha_registro, baja_elemento.id_elemento_ind , fecha_factura, numero_factura';
                 $cadenaSql.=' FROM arka_inventarios.baja_elemento ';
                 $cadenaSql.=' JOIN arka_inventarios.elemento_individual ON elemento_individual.id_elemento_ind=baja_elemento.id_elemento_ind ';
@@ -552,6 +552,213 @@ class Sql extends \Sql {
                 $cadenaSql.= " FROM arka_inventarios.salida ";
                 $cadenaSql.= " WHERE id_salida='" . $variable . "' ";
                 break;
+
+
+
+            //Clásulas Registro tipo Entrada
+
+            case 'consultaConsecutivo' :
+                $cadenaSql = "SELECT consecutivo ";
+                $cadenaSql .= "FROM entrada  ";
+                $cadenaSql .= "WHERE  fecha_registro='" . $variable . "';";
+
+                break;
+
+            case 'reiniciarConsecutivo' :
+                $cadenaSql = "SELECT SETVAL((SELECT pg_get_serial_sequence('entrada', 'consecutivo')), 1, false);";
+                break;
+
+            case "insertarInformación" :
+                $cadenaSql = " INSERT INTO info_clase_entrada(  ";
+                $cadenaSql .= " observacion, id_entrada, id_salida, id_hurto,";
+                $cadenaSql .= " num_placa, val_sobrante, ruta_archivo, nombre_archivo)";
+                $cadenaSql .= " VALUES (";
+                $cadenaSql .= "'" . $variable [0] . "',";
+                $cadenaSql .= "'" . $variable [1] . "',";
+                $cadenaSql .= "'" . $variable [2] . "',";
+                $cadenaSql .= "'" . $variable [3] . "',";
+                $cadenaSql .= "'" . $variable [4] . "',";
+                $cadenaSql .= "'" . $variable [5] . "',";
+                $cadenaSql .= "'" . $variable [6] . "',";
+                $cadenaSql .= "'" . $variable [7] . "') ";
+                $cadenaSql .= "RETURNING  id_info_clase; ";
+                break;
+
+            case "insertarEntrada" :
+                $cadenaSql = " INSERT INTO ";
+                $cadenaSql .= " entrada(";
+                $cadenaSql .= " fecha_registro, vigencia, clase_entrada, info_clase, ";
+                $cadenaSql .= " tipo_contrato, numero_contrato, fecha_contrato, proveedor, numero_factura, ";
+                $cadenaSql .= " fecha_factura, observaciones, acta_recibido,ordenador,sede,dependencia,supervisor,tipo_ordenador,identificacion_ordenador,id_entrada )";
+                $cadenaSql .= " VALUES (";
+                $cadenaSql .= "'" . $variable [0] . "',";
+                $cadenaSql .= "'" . $variable [1] . "',";
+                $cadenaSql .= "'" . $variable [2] . "',";
+                $cadenaSql .= "'" . $variable [3] . "',";
+                $cadenaSql .= "'" . $variable [4] . "',";
+                $cadenaSql .= "'" . $variable [5] . "',";
+                $cadenaSql .= "'" . $variable [6] . "',";
+                $cadenaSql .= "'" . $variable [7] . "',";
+                $cadenaSql .= "'" . $variable [8] . "',";
+                $cadenaSql .= "'" . $variable [9] . "',";
+                $cadenaSql .= "'" . $variable [10] . "',";
+                $cadenaSql .= "'" . $variable [11] . "',";
+                $cadenaSql .= " " . $variable [12] . ",";
+                $cadenaSql .= "'" . $variable [13] . "',";
+                $cadenaSql .= "'" . $variable [14] . "',";
+                $cadenaSql .= "'" . $variable [15] . "',";
+                $cadenaSql .= " " . $variable [16] . " ,";
+                $cadenaSql .= " " . $variable [17] . " ,";
+                $cadenaSql .= "'" . $variable [18] . "') ";
+                $cadenaSql .= "RETURNING  consecutivo; ";
+
+                break;
+
+
+            case 'idMaximoEntrada' :
+                $cadenaSql = "SELECT max(id_entrada)  ";
+                $cadenaSql .= "FROM entrada  ";
+                break;
+
+
+            //Clásulas Registro tipo Elemento
+            case "ingresar_elemento_individual" :
+
+                $cadenaSql = " 	INSERT INTO elemento_individual(";
+                $cadenaSql .= "fecha_registro, placa, serie, id_elemento_gen,id_elemento_ind) ";
+                $cadenaSql .= " VALUES (";
+                $cadenaSql .= "'" . $variable [0] . "',";
+                $cadenaSql .= ((is_null($variable [1])) ? 'null' . "," : "'" . $variable [1] . "',");
+                $cadenaSql .= ((is_null($variable [2])) ? 'null' . "," : "'" . $variable [2] . "',");
+                $cadenaSql .= "'" . $variable [3] . "',";
+                $cadenaSql .= "'" . $variable [4] . "') ";
+                $cadenaSql .= "RETURNING id_elemento_ind; ";
+
+                break;
+
+            case "ingresar_elemento" :
+                $cadenaSql = " INSERT INTO ";
+                $cadenaSql .= " elemento(";
+                $cadenaSql .= "fecha_registro,nivel, tipo_bien, descripcion, cantidad, ";
+                $cadenaSql .= "unidad, valor, iva, ajuste, bodega, subtotal_sin_iva, total_iva, ";
+                $cadenaSql .= "total_iva_con,marca,serie,id_entrada, id_elemento ) ";
+                $cadenaSql .= " VALUES (";
+                $cadenaSql .= "'" . $variable ['fecha_actual'] . "',";
+                $cadenaSql .= "'" . $variable ['nivel'] . "',";
+                $cadenaSql .= "'" . $variable ['tipo_bien'] . "',";
+                $cadenaSql .= "'" . $variable ['descripcion'] . "',";
+                $cadenaSql .= "'" . $variable ['cantidad'] . "',";
+                $cadenaSql .= "'" . $variable ['unidad'] . "',";
+                $cadenaSql .= "'" . $variable ['valor'] . "',";
+                $cadenaSql .= "'" . $variable ['iva'] . "',";
+                $cadenaSql .= "'" . $variable ['ajuste'] . "',";
+                $cadenaSql .= "'" . $variable ['bodega'] . "',";
+                $cadenaSql .= "'" . $variable ['subtotal_sin_iva'] . "',";
+                $cadenaSql .= "'" . $variable ['total_iva'] . "',";
+                $cadenaSql .= "'" . $variable ['total_iva_con'] . "',";
+                $cadenaSql .= "'" . $variable ['marca'] . "',";
+                $cadenaSql .= "'" . $variable ['serie'] . "',";
+                $cadenaSql .= "'" . $variable ['id_entrada'] . "',";
+                $cadenaSql .= "'" . $variable ['id_elemento'] . "') ";
+                $cadenaSql .= "RETURNING  id_elemento; ";
+
+                break;
+
+
+            case "idElementoMax" :
+                $cadenaSql = "SELECT max(id_elemento) ";
+                $cadenaSql .= "FROM elemento  ";
+                break;
+
+            case "idElementoMaxIndividual" :
+                $cadenaSql = "SELECT max(id_elemento_ind) ";
+                $cadenaSql .= "FROM elemento_individual  ";
+                break;
+
+            case "buscar_placa_maxima" :
+                $cadenaSql = " SELECT  MAX(placa::FLOAT) placa_max ";
+                $cadenaSql .= " FROM elemento_individual ";
+                break;
+
+            case "buscar_repetida_placa" :
+                $cadenaSql = " SELECT  count (placa) ";
+                $cadenaSql .= " FROM elemento_individual ";
+                $cadenaSql .= " WHERE placa ='" . $variable . "';";
+                break;
+            //Clásulas Registro tipo Salida
+
+            case 'consultaConsecutivo_Salida' :
+                $cadenaSql = "SELECT consecutivo ";
+                $cadenaSql .= "FROM salida  ";
+                $cadenaSql .= "WHERE  fecha_registro='" . $variable . "';";
+
+                break;
+
+            case 'reiniciarConsecutivo_salida' :
+                $cadenaSql = "SELECT SETVAL((SELECT pg_get_serial_sequence('salida', 'consecutivo')), 1, false);";
+                break;
+
+            case "id_salida_maximo" :
+                $cadenaSql = " SELECT MAX(id_salida) ";
+                $cadenaSql .= " FROM salida ";
+                break;
+
+
+            case "actualizar_elementos_individuales" :
+                $cadenaSql = "UPDATE elemento_individual ";
+                $cadenaSql .= "SET id_salida='" . $variable [1] . "', ";
+                $cadenaSql .= " funcionario='" . $variable [2] . "', ";
+                $cadenaSql .= " ubicacion_elemento='" . $variable [3] . "' ";
+                $cadenaSql .= "WHERE id_elemento_ind ='" . $variable [0] . "';";
+                break;
+
+
+            case 'SalidaContableVigencia' :
+                $cadenaSql = "SELECT max(consecutivo) ";
+                $cadenaSql .= "FROM salida_contable  ";
+                $cadenaSql .= "WHERE  tipo_bien='" . $variable [1] . "' ";
+                $cadenaSql .= "AND  vigencia='" . $variable [0] . "' ";
+
+                break;
+
+            case "InsertarSalidaContable" :
+                $cadenaSql = " INSERT INTO ";
+                $cadenaSql .= " salida_contable(
+						        fecha_registro, salida_general, tipo_bien, 
+            					vigencia, consecutivo)";
+                $cadenaSql .= " VALUES (";
+                $cadenaSql .= "'" . $variable [0] . "',";
+                $cadenaSql .= "'" . $variable [1] . "',";
+                $cadenaSql .= "'" . $variable [2] . "',";
+                $cadenaSql .= "'" . $variable [3] . "',";
+                $cadenaSql .= "'" . $variable [4] . "') ";
+                $cadenaSql .= "RETURNING  id_salida_contable; ";
+
+                break;
+            
+            case "insertar_salida" :
+				$cadenaSql = " INSERT INTO ";
+				$cadenaSql .= " salida( fecha_registro, dependencia, funcionario, observaciones,";
+				$cadenaSql .= " id_entrada,sede,ubicacion,vigencia,id_salida)";
+				$cadenaSql .= " VALUES (";
+				$cadenaSql .= "'" . $variable [0] . "',";
+				$cadenaSql .= "'" . $variable [1] . "',";
+				$cadenaSql .= "'" . $variable [2] . "',";
+				$cadenaSql .= "'" . $variable [3] . "',";
+				$cadenaSql .= "'" . $variable [4] . "',";
+				$cadenaSql .= "'" . $variable [5] . "',";
+				$cadenaSql .= "'" . $variable [6] . "',";
+				$cadenaSql .= "'" . $variable [7] . "',";
+				$cadenaSql .= "'" . $variable [8] . "') ";
+				$cadenaSql .= "RETURNING  id_salida; ";
+				
+				break;
+			
+			case "id_salida_maximo" :
+				$cadenaSql = " SELECT MAX(id_salida) ";
+				$cadenaSql .= " FROM salida ";
+				break;
+			
         }
         return $cadenaSql;
     }

@@ -109,7 +109,7 @@ class registrarForm {
 					$variable = $_REQUEST ['registro'];
 					
 					
-					$mensaje = "Se realizó un número de " . $variable. " solicitudes de Bajas para Aprobar.<br>Fecha :" . $fechaActual. "<br><br>Se efectuará la Baja al momento de realizar Aprobación de Baja.";
+					$mensaje = "Se realizó la reposición del elemento '".$_REQUEST['placa']."'.<br>Fecha :" . date('Y-m-d'). ".";
 					
 					// ---------------- CONTROL: Cuadro de Texto --------------------------------------------------------
 					$esteCampo = 'mensajeRegistro';
@@ -128,7 +128,7 @@ class registrarForm {
 				
 				if (isset ( $_REQUEST ['mensaje'] ) && $_REQUEST ['mensaje'] == 'error') {
 					
-					$mensaje = "No Se Pudo Hacer el Registro de Solicitud de Baja del Elemento";
+					$mensaje = "No Se Pudo Hacer el Registro de Reposición del Elemento";
 					
 					// ---------------- CONTROL: Cuadro de Texto --------------------------------------------------------
 					$esteCampo = 'mensajeRegistro';

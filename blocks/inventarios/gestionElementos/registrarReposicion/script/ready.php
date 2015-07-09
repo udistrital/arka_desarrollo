@@ -32,6 +32,13 @@ $("#<?php echo $this->campoSeguro('proveedor') ?>").select2({
 placeholder: "",
 });
 
+$("#<?php echo $this->campoSeguro('funcionario_salida') ?>").select2({
+placeholder: "",
+});
+
+$("#<?php echo $this->campoSeguro('responsable') ?>").select2({
+placeholder: "",
+});
 
 $("#<?php echo $this->campoSeguro('supervisor') ?>").select2({
 placeholder: "",

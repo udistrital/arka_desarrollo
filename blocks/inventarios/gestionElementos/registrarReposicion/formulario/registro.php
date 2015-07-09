@@ -25,8 +25,6 @@ class registrarForm {
     }
 
     function miForm() {
-
-        $elemento = unserialize(base64_decode($_REQUEST['elemento']));
 // Rescatar los datos de este bloque
         $esteBloque = $this->miConfigurador->getVariableConfiguracion("esteBloque");
 
@@ -80,8 +78,7 @@ class registrarForm {
 // ---------------- FIN SECCION: de Parámetros Generales del Formulario ----------------------------
 // ----------------INICIAR EL FORMULARIO ------------------------------------------------------------
         $atributos ['tipoEtiqueta'] = 'inicio';
-        echo $this->miFormulario->formulario($atributos);
-        {
+        echo $this->miFormulario->formulario($atributos); {
             $miPaginaActual = $this->miConfigurador->getVariableConfiguracion('pagina');
 
             $directorio = $this->miConfigurador->getVariableConfiguracion("host");
@@ -115,15 +112,13 @@ class registrarForm {
             $atributos ['tipoEtiqueta'] = 'inicio';
             $atributos ["leyenda"] = "Registrar Reposición";
             echo $this->miFormulario->marcoAgrupacion('inicio', $atributos);
-            unset($atributos);
-            {
+            unset($atributos); {
                 $esteCampo = "marcoDatosBasicos";
                 $atributos ['id'] = $esteCampo;
                 $atributos ["estilo"] = "jqueryui";
                 $atributos ['tipoEtiqueta'] = 'inicio';
                 $atributos ["leyenda"] = "Datos para Registrar Nueva Entrada ";
-                echo $this->miFormulario->marcoAgrupacion('inicio', $atributos);
-                {
+                echo $this->miFormulario->marcoAgrupacion('inicio', $atributos); {
 
 
 
@@ -131,7 +126,7 @@ class registrarForm {
                     $atributos ['nombre'] = $esteCampo;
                     $atributos ['id'] = $esteCampo;
                     $atributos ['etiqueta'] = $this->lenguaje->getCadena($esteCampo);
-                    $atributos ["etiquetaObligatorio"] = false;
+                    $atributos ["etiquetaObligatorio"] = true;
                     $atributos ['tab'] = $tab ++;
                     $atributos ['seleccion'] = - 1;
                     $atributos ['anchoEtiqueta'] = 218;
@@ -265,7 +260,7 @@ class registrarForm {
                     $atributos ['id'] = $esteCampo;
 
                     $atributos ['evento'] = '';
-                    $atributos ['deshabilitado'] = false;
+                    $atributos ['deshabilitado'] = true;
                     $atributos ["etiquetaObligatorio"] = true;
                     $atributos ['tab'] = $tab;
                     $atributos ['tamanno'] = 1;
@@ -368,14 +363,12 @@ class registrarForm {
                     $atributos ["estiloEnLinea"] = "display:block";
                     $atributos = array_merge($atributos, $atributosGlobales);
                     echo $this->miFormulario->division("inicio", $atributos);
-                    unset($atributos);
-                    {
+                    unset($atributos); {
 
                         $esteCampo = "ordenadorGasto";
                         $atributos ['id'] = $esteCampo;
                         $atributos ['leyenda'] = $this->lenguaje->getCadena($esteCampo);
-                        echo $this->miFormulario->agrupacion('inicio', $atributos);
-                        {
+                        echo $this->miFormulario->agrupacion('inicio', $atributos); {
 
 // ---------------- CONTROL: Cuadro de Texto --------------------------------------------------------
                             $esteCampo = 'asignacionOrdenador';
@@ -457,8 +450,8 @@ class registrarForm {
                             $atributos ["obligatorio"] = false;
                             $atributos ['marco'] = true;
                             $atributos ["etiqueta"] = "";
-                            if (isset($entrada[0]['identificacion_ordenador'])) {
-                                $atributos ['valor'] = $entrada[0]['identificacion_ordenador'];
+                            if (isset($entrada[0]['ordenador'])) {
+                                $atributos ['valor'] = $entrada[0]['ordenador'];
                             } else {
                                 $atributos ['valor'] = '';
                             }
@@ -489,8 +482,8 @@ class registrarForm {
                             $atributos ["obligatorio"] = false;
                             $atributos ['marco'] = true;
                             $atributos ["etiqueta"] = "";
-                            if (isset($_REQUEST [$esteCampo])) {
-                                $atributos ['valor'] = $_REQUEST [$esteCampo];
+                            if (isset($entrada[0]['identificacion_ordenador'])) {
+                                $atributos ['valor'] = $entrada[0]['identificacion_ordenador'];
                             } else {
                                 $atributos ['valor'] = '';
                             }
@@ -513,8 +506,7 @@ class registrarForm {
                 echo $this->miFormulario->marcoAgrupacion('inicio', $atributos);
 
 
-                unset($atributos);
-                {
+                unset($atributos); {
 
                     $esteCampo = 'serie';
                     $atributos ['id'] = $esteCampo;
@@ -839,8 +831,7 @@ class registrarForm {
                 $atributos ['tipoEtiqueta'] = 'inicio';
                 $atributos ["leyenda"] = "Datos para Registrar  Salida ";
                 echo $this->miFormulario->marcoAgrupacion('inicio', $atributos);
-                unset($atributos);
-                {
+                unset($atributos); {
 
                     $esteCampo = 'vigencia';
                     $atributos ['id'] = $esteCampo;
@@ -913,7 +904,7 @@ class registrarForm {
                     $atributos ['id'] = $esteCampo;
 
                     $atributos ['evento'] = '';
-                    $atributos ['deshabilitado'] = false;
+                    $atributos ['deshabilitado'] = true;
                     $atributos ["etiquetaObligatorio"] = true;
                     $atributos ['tab'] = $tab;
                     $atributos ['tamanno'] = 1;
@@ -947,7 +938,7 @@ class registrarForm {
                     $atributos ['nombre'] = $esteCampo;
                     $atributos ['id'] = $esteCampo;
                     $atributos ['evento'] = '';
-                    $atributos ['deshabilitado'] = false;
+                    $atributos ['deshabilitado'] = true;
                     $atributos ["etiquetaObligatorio"] = false;
                     $atributos ['tab'] = $tab;
                     $atributos ['tamanno'] = 1;
@@ -1064,8 +1055,7 @@ class registrarForm {
                 $atributos ["id"] = "botones";
                 $atributos ["estilo"] = "marcoBotones";
                 echo $this->miFormulario->division("inicio", $atributos);
-                unset($atributos);
-                {
+                unset($atributos); {
 // -----------------CONTROL: Botón ----------------------------------------------------------------
                     $esteCampo = 'botonAceptar';
                     $atributos ["id"] = $esteCampo;
@@ -1119,7 +1109,7 @@ class registrarForm {
             $valorCodificado .= "&bloque=" . $esteBloque ['nombre'];
             $valorCodificado .= "&bloqueGrupo=" . $esteBloque ["grupo"];
             $valorCodificado .= "&opcion=registrar";
-//  $valorCodificado .= "&items=" . serialize($items);
+            $valorCodificado .= "&elemento=" . $_REQUEST['elemento'];
 // $valorCodificado .= "&funcionario=" . $funcionario ['responsable_ante'];
 // $valorCodificado .= "&idfuncionario=" . $funcionario ['id_funcionario'];
 
