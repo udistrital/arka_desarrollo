@@ -758,6 +758,13 @@ class Sql extends \Sql {
 				$cadenaSql = " SELECT MAX(id_salida) ";
 				$cadenaSql .= " FROM salida ";
 				break;
+                            
+                            //Reposición
+                        case "reposicionRegistro" :
+				$cadenaSql = " UPDATE baja_elemento ";
+				$cadenaSql .= " SET id_reposicion='".$variable['id_info']."' ";
+                                $cadenaSql .= " WHERE id_baja='".$variable['id_baja']."' ";
+				break;    
 			
         }
         return $cadenaSql;

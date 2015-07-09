@@ -60,7 +60,7 @@ class RegistradorOrden {
                 $consecutivo = $esteRecursoDB->ejecutarAcceso($cadenaSql, "acceso");
             }
         }
- 
+
         $seleccion = unserialize(base64_decode($_REQUEST['elemento']));
 
         $entrada = array(
@@ -277,7 +277,7 @@ class RegistradorOrden {
             $id_entrada[0][0],
             $_REQUEST ['sede_salida'] ? $_REQUEST ['sede_salida'] : 'null',
             ($_REQUEST ['ubicacion_salida'] != '') ? $_REQUEST ['ubicacion_salida'] : 'null',
-           date('Y'),
+            date('Y'),
             $max_id_salida
         );
 
@@ -291,7 +291,7 @@ class RegistradorOrden {
             $_REQUEST ['ubicacion_salida']
         );
 
-       $cadenaSql = $this->miSql->getCadenaSql('actualizar_elementos_individuales', $arreglo);
+        $cadenaSql = $this->miSql->getCadenaSql('actualizar_elementos_individuales', $arreglo);
         $actualizo_elem = $esteRecursoDB->ejecutarAcceso($cadenaSql, "acceso");
 
         // ----- Salidas Contables ----------
@@ -387,7 +387,15 @@ class RegistradorOrden {
                 break;
         }
 
-        if ($actualizo_elem==true) {
+        $repo=array(
+            'id_baja'=>$seleccion['id_baja'],
+            'id_info'=>$info_clase[0][0]
+        );
+        
+        $cadenaSql = $this->miSql->getCadenaSql('reposicionRegistro', $repo);
+        $reposicion = $esteRecursoDB->ejecutarAcceso($cadenaSql, "insertar");
+
+        if ($actualizo_elem == true && $reposicion == TRUE) {
             redireccion::redireccionar('inserto', $seleccion['placa']);
         } else {
             redireccion::redireccionar('noInserto');

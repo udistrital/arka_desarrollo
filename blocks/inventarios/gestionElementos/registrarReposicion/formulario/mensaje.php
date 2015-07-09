@@ -105,9 +105,7 @@ class registrarForm {
 			{
 				
 				if (isset ( $_REQUEST ['mensaje'] ) && $_REQUEST ['mensaje'] == 'confirma') {
-					
-					$variable = $_REQUEST ['registro'];
-					
+							
 					
 					$mensaje = "Se realizó la reposición del elemento '".$_REQUEST['placa']."'.<br>Fecha :" . date('Y-m-d'). ".";
 					

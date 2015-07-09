@@ -1,6 +1,6 @@
 <?php
 
-namespace inventarios\gestionElementos\registrarBajas\funcion;
+namespace inventarios\gestionElementos\registrarReposicion\funcion;
 
 if (! isset ( $GLOBALS ["autorizado"] )) {
 	include ("index.php");
@@ -17,7 +17,7 @@ class redireccion {
 				$variable = "pagina=" . $miPaginaActual;
 				$variable .= "&opcion=mensaje";
 				$variable .= "&mensaje=confirma";
-				$variable .= "&registro=".$valor;
+				$variable .= "&placa=".$valor;
 				
 				
 				
