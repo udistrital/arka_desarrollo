@@ -48,5 +48,22 @@ if ($_REQUEST ['funcion'] == 'consultarUbicacion') {
 
     echo $resultado;
 }
+
+if ($_REQUEST ['funcion'] == 'proveedor') {
+    $parametro = $_REQUEST['query'];
+    $cadenaSql = $this->sql->getCadenaSql('proveedores', $parametro);
+    $resultadoItems = $esteRecursoDB->ejecutarAcceso($cadenaSql, 'busqueda');
+
+
+    foreach ($resultadoItems as $key => $values) {
+        $keys = array('value', 'data');
+        $resultado[$key] = array_intersect_key($resultadoItems[$key], array_flip($keys));
+    }
+
+//    var_dump($resultado)
+
+
+    echo '{"suggestions":'.json_encode($resultado).'}';
+}
 ?>
 

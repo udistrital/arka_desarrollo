@@ -75,7 +75,26 @@ $cadena16 = $this->miConfigurador->fabricaConexiones->crypto->codificar_url($cad
 
 // URL definitiva
 $urlFinal16 = $url . $cadena16;
+
+
+//Cadena codificada para listar Catalogos
+$cadenaACodificar1 = $cadenaACodificar . "&funcion=proveedor";
+$cadena1 = $this->miConfigurador->fabricaConexiones->crypto->codificar_url($cadenaACodificar1, $enlace);
+
+$urlFinal = $url . $cadena1;
 ?>
+<script type='text/javascript'>
+    $(document).ready(function () {
+        $("#<?php echo $this->campoSeguro('nombre_proveedor') ?>").devbridgeAutocomplete({
+            minLength: 2,
+            serviceUrl: '<?php echo $urlFinal; ?>',
+            onSelect: function (suggestion) {
+    	        $("#<?php echo $this->campoSeguro('proveedor') ?>").val(suggestion.data);
+    	    }
+        });
+    });
+</script>
+
 <script type='text/javascript'>
 
 

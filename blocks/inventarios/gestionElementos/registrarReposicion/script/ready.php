@@ -219,3 +219,18 @@ break;
 
 });  
 
+
+	   
+	          $('#tablaTitulos').dataTable( {
+                "sPaginationType": "full_numbers"
+                 } );
+	   
+          
+                 var table = $('#tablaTitulos').DataTable();
+
+   $(function(){$("#tablaTitulos").click(function(){$('.case').attr('checked',this.checked);});$(".case").click(function(){if($(".case").length==$(".case:checked").length){$("#tablaTitulos").attr("checked","checked");}else{$("#tablaTitulos").removeAttr("checked");}});});
+
+
+
+
+

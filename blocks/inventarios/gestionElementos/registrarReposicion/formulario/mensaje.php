@@ -101,13 +101,16 @@ class registrarForm {
 			$atributos ['tipoEtiqueta'] = 'inicio';
 			// $atributos ["leyenda"] = "Regitrar Orden Compra";
 			echo $this->miFormulario->marcoAgrupacion ( 'inicio', $atributos );
-			
+		
 			{
 				
 				if (isset ( $_REQUEST ['mensaje'] ) && $_REQUEST ['mensaje'] == 'confirma') {
 							
 					
-					$mensaje = "Se realizó la reposición del elemento '".$_REQUEST['placa']."'.<br>Fecha :" . date('Y-m-d'). ".";
+					$mensaje = "Se realizó la reposición del elemento.<br> PLACA: '".$_REQUEST['elemento']."'."
+                                                . "<br>No. Entrada: '".$_REQUEST['entrada']."'"
+                                                . "<br>No. Salida: '".$_REQUEST['salida']."'
+                                            <br>Fecha :" . date('Y-m-d'). ".";
 					
 					// ---------------- CONTROL: Cuadro de Texto --------------------------------------------------------
 					$esteCampo = 'mensajeRegistro';

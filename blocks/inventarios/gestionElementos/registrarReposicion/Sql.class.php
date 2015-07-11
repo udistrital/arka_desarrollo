@@ -158,8 +158,8 @@ class Sql extends \Sql {
                 $cadenaSql.=' "FUN_NOMBRE" funcionario_nombre, ';
                 $cadenaSql.=' salida.consecutivo consecutivosalida,salida.id_salida, ';
                 $cadenaSql.=' entrada.consecutivo consecutivoentrada, entrada.id_entrada,';
-                $cadenaSql.=' placa, ';
-                $cadenaSql.=' descripcion, nivel, tipo_bien, id_baja, ';
+                $cadenaSql.=' placa, marca, elemento.serie, cantidad, valor,unidad, iva, ajuste,total_iva, subtotal_sin_iva, total_iva_con,';
+                $cadenaSql.=' descripcion, nivel, tipo_bien, id_baja, "PRO_RAZON_SOCIAL" as nombre_proveedor, proveedor, ';
                 $cadenaSql.=' baja_elemento.fecha_registro, baja_elemento.id_elemento_ind , fecha_factura, numero_factura';
                 $cadenaSql.=' FROM arka_inventarios.baja_elemento ';
                 $cadenaSql.=' JOIN arka_inventarios.elemento_individual ON elemento_individual.id_elemento_ind=baja_elemento.id_elemento_ind ';
@@ -170,9 +170,12 @@ class Sql extends \Sql {
                 $cadenaSql.=' JOIN arka_parametros.arka_espaciosfisicos as espacios ON espacios."ESF_ID_ESPACIO"=elemento_individual.ubicacion_elemento ';
                 $cadenaSql.=' JOIN arka_parametros.arka_dependencia as dependencias ON dependencias."ESF_ID_ESPACIO"=elemento_individual.ubicacion_elemento ';
                 $cadenaSql.=' JOIN arka_parametros.arka_sedes as sedes ON sedes."ESF_COD_SEDE"=espacios."ESF_COD_SEDE"  ';
+                $cadenaSql.=' JOIN arka_parametros.arka_proveedor proveedores ON proveedores."PRO_NIT"=cast(proveedor as character varying)  ';
                 $cadenaSql.=' WHERE 1=1 ';
                 $cadenaSql.=' AND baja_elemento.estado_registro=TRUE ';
                 $cadenaSql.=' AND baja_elemento.estado_aprobacion=TRUE ';
+                $cadenaSql.=" AND baja_elemento.id_reposicion=0 ";
+                $cadenaSql.=" AND estado_entrada=1 ";
 
                 if ($variable ['numero_entrada'] != '') {
                     $cadenaSql .= " AND salida.id_entrada = '" . $variable ['numero_entrada'] . "'";
@@ -382,7 +385,7 @@ class Sql extends \Sql {
                 $cadenaSql.= ' dependencias."ESF_DEP_ENCARGADA" dependencia, ';
                 $cadenaSql.= ' espacios."ESF_NOMBRE_ESPACIO" ubicacion, ';
 //$cadenaSql.= "  tipo_bienes.descripcion, ";
-                $cadenaSql.= " elemento_nombre, elemento.descripcion descripcion_elemento, marca, elemento.serie, cantidad, valor, iva, ajuste, total_iva_con, bodega,(elemento_individual.id_salida || '-('|| salida.vigencia || ')') salidas ";
+                $cadenaSql.= " elemento_nombre, elemento.descripcion descripcion_elemento, marca, elemento.serie, cantidad, valor,unidad, iva, ajuste,total_iva, subtotal_sin_iva, total_iva_con, bodega,(elemento_individual.id_salida || '-('|| salida.vigencia || ')') salidas ";
 
                 $cadenaSql.= " FROM elemento  ";
                 $cadenaSql.= " JOIN entrada ON elemento.id_entrada=entrada.id_entrada  ";
@@ -458,9 +461,11 @@ class Sql extends \Sql {
                 break;
 
             case "proveedores" :
-                $cadenaSql = " SELECT \"PRO_NIT\",\"PRO_NIT\"||' - '||\"PRO_RAZON_SOCIAL\" AS proveedor ";
+                $cadenaSql = ' SELECT "PRO_NIT" as data,"PRO_RAZON_SOCIAL" AS value';
                 $cadenaSql .= " FROM arka_parametros.arka_proveedor ";
-                $cadenaSql .= " LIMIT 20 ";
+                $cadenaSql .= ' WHERE "PRO_RAZON_SOCIAL" ';
+                $cadenaSql .= " ILIKE '%".$variable."%';";
+                //$cadenaSql .= " LIMIT 200 ";
 
                 break;
 
@@ -735,37 +740,36 @@ class Sql extends \Sql {
                 $cadenaSql .= "RETURNING  id_salida_contable; ";
 
                 break;
-            
+
             case "insertar_salida" :
-				$cadenaSql = " INSERT INTO ";
-				$cadenaSql .= " salida( fecha_registro, dependencia, funcionario, observaciones,";
-				$cadenaSql .= " id_entrada,sede,ubicacion,vigencia,id_salida)";
-				$cadenaSql .= " VALUES (";
-				$cadenaSql .= "'" . $variable [0] . "',";
-				$cadenaSql .= "'" . $variable [1] . "',";
-				$cadenaSql .= "'" . $variable [2] . "',";
-				$cadenaSql .= "'" . $variable [3] . "',";
-				$cadenaSql .= "'" . $variable [4] . "',";
-				$cadenaSql .= "'" . $variable [5] . "',";
-				$cadenaSql .= "'" . $variable [6] . "',";
-				$cadenaSql .= "'" . $variable [7] . "',";
-				$cadenaSql .= "'" . $variable [8] . "') ";
-				$cadenaSql .= "RETURNING  id_salida; ";
-				
-				break;
-			
-			case "id_salida_maximo" :
-				$cadenaSql = " SELECT MAX(id_salida) ";
-				$cadenaSql .= " FROM salida ";
-				break;
-                            
-                            //Reposición
-                        case "reposicionRegistro" :
-				$cadenaSql = " UPDATE baja_elemento ";
-				$cadenaSql .= " SET id_reposicion='".$variable['id_info']."' ";
-                                $cadenaSql .= " WHERE id_baja='".$variable['id_baja']."' ";
-				break;    
-			
+                $cadenaSql = " INSERT INTO ";
+                $cadenaSql .= " salida( fecha_registro, dependencia, funcionario, observaciones,";
+                $cadenaSql .= " id_entrada,sede,ubicacion,vigencia,id_salida)";
+                $cadenaSql .= " VALUES (";
+                $cadenaSql .= "'" . $variable [0] . "',";
+                $cadenaSql .= "'" . $variable [1] . "',";
+                $cadenaSql .= "'" . $variable [2] . "',";
+                $cadenaSql .= "'" . $variable [3] . "',";
+                $cadenaSql .= "'" . $variable [4] . "',";
+                $cadenaSql .= "'" . $variable [5] . "',";
+                $cadenaSql .= "'" . $variable [6] . "',";
+                $cadenaSql .= "'" . $variable [7] . "',";
+                $cadenaSql .= "'" . $variable [8] . "') ";
+                $cadenaSql .= "RETURNING  consecutivo; ";
+
+                break;
+
+            case "id_salida_maximo" :
+                $cadenaSql = " SELECT MAX(id_salida) ";
+                $cadenaSql .= " FROM salida ";
+                break;
+
+            //Reposición
+            case "reposicionRegistro" :
+                $cadenaSql = " UPDATE baja_elemento ";
+                $cadenaSql .= " SET id_reposicion='" . $variable['id_info'] . "' ";
+                $cadenaSql .= " WHERE id_baja='" . $variable['id_baja'] . "' ";
+                break;
         }
         return $cadenaSql;
     }

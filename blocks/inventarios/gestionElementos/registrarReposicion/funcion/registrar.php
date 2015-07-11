@@ -173,7 +173,7 @@ class RegistradorOrden {
             'poliza' => 0,
             'marca' => $_REQUEST['marca'],
             'serie' => $_REQUEST['serie'],
-            'id_entrada' => $id_entrada[0][0],
+            'id_entrada' =>   $idEntradamax,
         );
 
         if ($seleccion['tipo_bien'] == 1) {
@@ -274,7 +274,7 @@ class RegistradorOrden {
             $_REQUEST ['dependencia_salida'],
             $_REQUEST ['funcionario_salida'],
             $_REQUEST ['observaciones'],
-            $id_entrada[0][0],
+             $idEntradamax,
             $_REQUEST ['sede_salida'] ? $_REQUEST ['sede_salida'] : 'null',
             ($_REQUEST ['ubicacion_salida'] != '') ? $_REQUEST ['ubicacion_salida'] : 'null',
             date('Y'),
@@ -286,7 +286,7 @@ class RegistradorOrden {
 
         $arreglo = array(
             $elemento_id_max_indiv[0][0],
-            $id_salida [0] [0],
+            $max_id_salida,
             $_REQUEST ['funcionario_salida'],
             $_REQUEST ['ubicacion_salida']
         );
@@ -315,7 +315,7 @@ class RegistradorOrden {
 
                 $arreglo_salida_contable = array(
                     $fechaActual,
-                    $id_salida [0] [0],
+                    $max_id_salida,
                     $seleccion['tipo_bien'],
                     date('Y'),
                     $salidaConsecutiva
@@ -347,7 +347,7 @@ class RegistradorOrden {
 
                 $arreglo_salida_contable = array(
                     $fechaActual,
-                    $id_salida [0] [0],
+                    $max_id_salida,
                     $seleccion['tipo_bien'],
                     date('Y'),
                     $salidaConsecutiva
@@ -376,7 +376,7 @@ class RegistradorOrden {
 
                 $arreglo_salida_contable = array(
                     $fechaActual,
-                    $id_salida [0] [0],
+                  $max_id_salida,
                     $seleccion ['tipo_bien'],
                     date('Y'),
                     $salidaConsecutiva
@@ -389,14 +389,20 @@ class RegistradorOrden {
 
         $repo=array(
             'id_baja'=>$seleccion['id_baja'],
-            'id_info'=>$info_clase[0][0]
+            'id_info'=>$info_clase[0][0],
+            'id_entrada'=>$id_entrada[0][0],
+            'id_salida'=>$id_salida[0][0],
+            'id_elemento'=>$arregloElementosInv[1],
         );
+        
+        
         
         $cadenaSql = $this->miSql->getCadenaSql('reposicionRegistro', $repo);
         $reposicion = $esteRecursoDB->ejecutarAcceso($cadenaSql, "insertar");
 
+        
         if ($actualizo_elem == true && $reposicion == TRUE) {
-            redireccion::redireccionar('inserto', $seleccion['placa']);
+            redireccion::redireccionar('inserto', $repo);
         } else {
             redireccion::redireccionar('noInserto');
         }

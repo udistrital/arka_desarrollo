@@ -116,7 +116,7 @@ class registrarForm {
             'sede' => $sede
         );
 
-       $cadenaSql = $this->miSql->getCadenaSql('consultarAprobadas', $arreglo);
+        $cadenaSql = $this->miSql->getCadenaSql('consultarAprobadas', $arreglo);
         $elemento = $esteRecursoDB->ejecutarAcceso($cadenaSql, "busqueda");
 
 // ---------------- SECCION: Parámetros Generales del Formulario ----------------------------------
@@ -198,7 +198,7 @@ class registrarForm {
             for ($i = 0; $i < count($elemento); $i ++) {
                 $variable = "pagina=" . $miPaginaActual; // pendiente la pagina para modificar parametro
                 $variable .= "&opcion=registrarReposicion";
-                $variable .= "&elemento=" .base64_encode(serialize($elemento [$i]));
+                $variable .= "&elemento=" . base64_encode(serialize($elemento [$i]));
                 $variable = $this->miConfigurador->fabricaConexiones->crypto->codificar_url($variable, $directorio);
 
 
@@ -227,7 +227,7 @@ class registrarForm {
             echo "</tbody>";
 
             echo "</table>"; // ------------------Division para los botones-------------------------
-          
+
             echo $this->miFormulario->marcoAgrupacion('fin');
 
             $atributos ['marco'] = true;

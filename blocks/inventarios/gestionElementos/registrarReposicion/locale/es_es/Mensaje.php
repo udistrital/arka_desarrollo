@@ -185,8 +185,8 @@ $this->idioma ["numero_actaTitulo"] ="Ingrese Número Acta de Recibido";
 $this->idioma ["nit"] ="Nit : ";
 $this->idioma ["nitTitulo"] ="Ingrese Nit";
 
-$this->idioma ["proveedor"] ="Proveedor : ";
-$this->idioma ["proveedorTitulo"] ="Ingrese Proveedor";
+$this->idioma ["nombre_proveedor"] ="Proveedor : ";
+$this->idioma ["nombre_proveedorTitulo"] ="Ingrese Proveedor";
 
 
 $this->idioma ["vigencia"] ="Vigencia : ";
@@ -242,7 +242,7 @@ $this->idioma ["numero_factura"] ="Número de Factura: ";
 $this->idioma ["numero_facturaTitulo"] ="Ingrese Número de Factura";
 
 
-$this->idioma ["fecha_factura"] ="Fecha de Factura: ";
+$this->idioma ["fecha_factura"] ="Fecha Factura: ";
 $this->idioma ["fecha_facturaTitulo"] ="Seleccione Fecha de Factura";
 
 
