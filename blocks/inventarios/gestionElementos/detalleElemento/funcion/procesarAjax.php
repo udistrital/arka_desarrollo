@@ -15,34 +15,29 @@ $rutaBloque .= $this->miConfigurador->getVariableConfiguracion("site") . "/block
 $rutaBloque .= $esteBloque ['grupo'] . '/' . $esteBloque ['nombre'];
 
 $miPaginaActual = $this->miConfigurador->getVariableConfiguracion('pagina');
-
+//var_dump($_REQUEST);
 
 if ($_REQUEST ['funcion'] == 'Consulta') {
-    $arreglo = unserialize($_REQUEST ['arreglo']);
-    $cadenaSql = $this->sql->getCadenaSql('consultarElemento', $arreglo);
+    //$arreglo = unserialize($_REQUEST['arreglo']);
+    //$cadenaSql = $this->sql->getCadenaSql('consultarElemento', $arreglo);
+    $cadenaSql = $this->sql->getCadenaSql('consultarElemento', false);
     $resultado = $esteRecursoDB->ejecutarAcceso($cadenaSql, "busqueda");
 
-
-
-    for ($i = 0; $i < count($resultado); $i ++) {
+    foreach ($resultado as $key => $values) {
         $variable = "pagina=" . $miPaginaActual; // pendiente la pagina para modificar parametro
-        $variable .= "&id_elemento=" . $resultado [$i] ['idelemento'];
         $variable .= "&opcion=detalle";
+        $variable .= "&elemento=" . $resultado[$key]['id_elemento_ind'];
         $variable = $this->miConfigurador->fabricaConexiones->crypto->codificar_url($variable, $directorio);
 
-        $variable2 = "pagina=" . $miPaginaActual; // pendiente la pagina para modificar parametro
-        $variable2 .= "&id_elemento=" . $resultado [$i] ['idelemento'];
-        $variable2 .= "&opcion=anular";
-        $variable2 = $this->miConfigurador->fabricaConexiones->crypto->codificar_url($variable2, $directorio);
-
-        $cierreContable = "<center><a href='" . $variable . "'><u>Ver Detalle</u></a></center> ";
+        $detalle = "<center><a href='" . $variable . "'><u>Ver Detalle</u></a></center> ";
 
         $resultadoFinal[] = array(
-            'placa' => "<center>" . $resultado[$i]['placa'] . "</center>",
-            'serie' => "<center>" . $resultado[$i]['serie'] . "</center>",
-            'descripcion' => "<center>" . $resultado[$i]['descripcion'] . "</center>",
-            'fecharegistro' => "<center>" . $resultado[$i]['fecharegistro'] . "</center>",
-            'detalle' => "<center>" . $cierreContable,
+            'placa' => "<center>" . $resultado[$key]['placa'] . "</center>",
+            'descripcion' => "<center>" . $resultado[$key]['descripcion'] . "</center>",
+            'sede' => "<center>" . $resultado[$key]['sede_nombre'] . "</center>",
+            'dependencia' => "<center>" . $resultado[$key]['dependencia_nombre'] . "</center>",
+            'funcionario' => "<center>" . $resultado[$key]['fun_nombre'] . "</center>",
+            'detalle' => "<center>" . $detalle
         );
     }
 
@@ -54,7 +49,51 @@ if ($_REQUEST ['funcion'] == 'Consulta') {
     $resultado = '{
                 "recordsTotal":' . $total . ',
                 "recordsFiltered":' . $total . ',
-				"data":' . $resultado . '}';
+		"data":' . $resultado . '}';
+
+    echo $resultado;
+}
+
+if ($_REQUEST ['funcion'] == 'placas') {
+    $parametro = $_REQUEST['query'];
+    $cadenaSql = $this->sql->getCadenaSql('buscar_placa', $parametro);
+    $resultadoItems = $esteRecursoDB->ejecutarAcceso($cadenaSql, 'busqueda');
+
+
+    foreach ($resultadoItems as $key => $values) {
+        $keys = array('value', 'data');
+        $resultado[$key] = array_intersect_key($resultadoItems[$key], array_flip($keys));
+    }
+
+//    var_dump($resultado);
+
+
+    echo '{"suggestions":' . json_encode($resultado) . '}';
+}
+
+if ($_REQUEST ['funcion'] == 'consultarDependencia') {
+
+
+
+
+    $cadenaSql = $this->sql->getCadenaSql('dependenciasConsultadas', $_REQUEST['valor']);
+    $resultado = $esteRecursoDB->ejecutarAcceso($cadenaSql, "busqueda");
+
+
+    $resultado = json_encode($resultado);
+
+    echo $resultado;
+}
+
+
+if ($_REQUEST ['funcion'] == 'consultarUbicacion') {
+
+
+    $cadenaSql = $this->sql->getCadenaSql('ubicacionesConsultadas', $_REQUEST['valor']);
+    $resultado = $esteRecursoDB->ejecutarAcceso($cadenaSql, "busqueda");
+
+
+    $resultado = json_encode($resultado);
 
     echo $resultado;
 }

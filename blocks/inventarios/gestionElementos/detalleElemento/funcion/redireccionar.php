@@ -25,6 +25,13 @@ class redireccion {
 				$variable .= "&mensaje=error";
 				
 				break;
+                            
+                            case "noExiste" :
+				$variable = "pagina=" . $miPaginaActual;
+				$variable .= "&opcion=mensaje";
+				$variable .= "&mensaje=error";
+				
+				break;
 			
 			case "anulado" :
 				$variable = "pagina=" . $miPaginaActual;
