@@ -25,6 +25,7 @@ $funcion [$indice ++] = "fileinput.js";
 $funcion [$indice ++] = "fileinput.min.js";
 $funcion [$indice ++] = "fileinput_locale_es.js";
 $funcion [$indice ++] = "bootstrap.min.js";
+$funcion [$indice ++] = "bootstrap.js";
 
 $rutaBloque = $this->miConfigurador->getVariableConfiguracion ( "host" );
 $rutaBloque .= $this->miConfigurador->getVariableConfiguracion ( "site" );

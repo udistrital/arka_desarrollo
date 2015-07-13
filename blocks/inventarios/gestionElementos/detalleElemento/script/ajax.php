@@ -169,7 +169,7 @@ $cadenaACodificar5 .= "&tiempo=" . $_REQUEST ['tiempo'];
 
 // Codificar las variables
 $enlace = $this->miConfigurador->getVariableConfiguracion("enlace");
-$cadena5 = $this->miConfigurador->fabricaConexiones->crypto->codificar_url($cadenaACodificar16, $enlace);
+$cadena5 = $this->miConfigurador->fabricaConexiones->crypto->codificar_url($cadenaACodificar5, $enlace);
 
 // URL definitiva
 $urlFinal5 = $url . $cadena5;
