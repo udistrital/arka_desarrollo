@@ -36,11 +36,12 @@
 $("#<?php echo $this->campoSeguro('sede')?>").select2(); 
 $('#<?php echo $this->campoSeguro('dependencia')?>').width(210);
 $("#<?php echo $this->campoSeguro('dependencia')?>").select2(); 
+$("#<?php echo $this->campoSeguro('ubicacion')?>").select2();
 
 $('#<?php echo $this->campoSeguro('selecc_registros')?>').width(250);
              	$("#<?php echo $this->campoSeguro('selecc_registros')?>").select2();
 
-$("#<?php echo $this->campoSeguro('ubicacion')?>").select2();
+
          
                 
                         
