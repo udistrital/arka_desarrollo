@@ -107,9 +107,10 @@ class registrarForm {
             'dependencia' => $dependencia,
             'ubicacion' => $ubicacion,
             'funcionario' => $funcionario,
-            'fecha_inicial' => $fecha_inicio,
-            'fecha_final' => $fecha_final,
+            'fechainicial' => $fecha_inicio,
+            'fechafinal' => $fecha_final,
             'elemento' => $elemento,
+            'numero_entrada' => $entrada,
         );
 
 

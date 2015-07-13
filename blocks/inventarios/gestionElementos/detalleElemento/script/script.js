@@ -7,7 +7,7 @@ function closePhotoPreview() {
 
 // display photo preview block
 function getPhotoPreviewAjx(id) {
-    $.post('photos_ajx.php', {action: 'get_info', id: id},
+    $.post('/arka/blocks/inventarios/gestionElementos/detalleElemento/funcion/procesarAjax.php', {action: 'get_info', id: id},
         function(data){
             $('#photo_preview .pleft').html(data.data1);
             $('#photo_preview .pright').html(data.data2);
@@ -22,7 +22,7 @@ function submitComment(id) {
     var sText = $('#text').val();
 
     if (sName && sText) {
-        $.post('index.php', { action: 'accept_comment', name: sName, text: sText, id: id }, 
+        $.post('/arka/blocks/inventarios/gestionElementos/detalleElemento/formulario/detalle.php', { action: 'accept_comment', name: sName, text: sText, id: id }, 
             function(data){ 
                 if (data != '1') {
                     $('#comments_list').fadeOut(1000, function () { 

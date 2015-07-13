@@ -19,7 +19,12 @@ $estilo[$indice++]="jquery.dataTables_themeroller.css";
 $estilo[$indice++]="documentoPlacas.css";
 $estilo[$indice++]="jquery.auto-complete.css";
 
+
+$estilo[$indice++]="fileinput.css";
+$estilo[$indice++]="fileinput.min.css";
 $estilo[$indice++]="main.css";
+$estilo[$indice++]="bootstrap.css";
+$estilo[$indice++]="bootstrap.min.css";
 
 $rutaBloque=$this->miConfigurador->getVariableConfiguracion("host");
 $rutaBloque.=$this->miConfigurador->getVariableConfiguracion("site");

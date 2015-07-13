@@ -1,22 +1,30 @@
 <?php
 
+use inventarios\gestionElementos\detalleElemento\Sql;
+
 class CMyComments {
 
     // constructor
     function CMyComments() {
+        
     }
 
     // return comments block
     function getComments($i) {
-        // draw last 10 comments
+        $conexion = "inventarios";
+        $esteRecursoDB = $this->miConfigurador->fabricaConexiones->getRecursoDB($conexion);
+       
+        // draw last 10 comments -- Con el numero de registro de la foto en arka_movil
         $sComments = '';
-        $aComments = $GLOBALS['MySQL']->getAll("SELECT * FROM `s281_items_cmts` WHERE `c_item_id` = '{$i}' ORDER BY `c_when` DESC LIMIT 10");
+        $cadenaSql = $this->sql->getCadenaSql('consultarComentario_foto', $i);
+        $aComments = $esteRecursoDB->ejecutarAcceso($cadenaSql, "busqueda");
+       
         foreach ($aComments as $i => $aCmtsInfo) {
             $sWhen = date('F j, Y H:i', $aCmtsInfo['c_when']);
             $sComments .= <<<EOF
-<div class="comment" id="{$aCmtsInfo['c_id']}">
-    <p>Comment from {$aCmtsInfo['c_name']} <span>({$sWhen})</span>:</p>
-    <p>{$aCmtsInfo['c_text']}</p>
+<div class="comment" id="{$aCmtsInfo['id_comentario']}">
+    <p>Comment from {$aCmtsInfo['usuario']} <span>({$sWhen})</span>:</p>
+    <p>{$aCmtsInfo['comentario']}</p>
 </div>
 EOF;
         }
@@ -39,7 +47,7 @@ EOF;
     }
 
     function acceptComment() {
-        $iItemId = (int)$_POST['id']; // prepare necessary information
+        $iItemId = (int) $_POST['id']; // prepare necessary information
         $sIp = $this->getVisitorIP();
         $sName = $GLOBALS['MySQL']->escape(strip_tags($_POST['name']));
         $sText = $GLOBALS['MySQL']->escape(strip_tags($_POST['text']));
@@ -47,7 +55,7 @@ EOF;
         if ($sName && $sText) {
             // check - if there is any recent post from you or not
             $iOldId = $GLOBALS['MySQL']->getOne("SELECT `c_item_id` FROM `s281_items_cmts` WHERE `c_item_id` = '{$iItemId}' AND `c_ip` = '{$sIp}' AND `c_when` >= UNIX_TIMESTAMP() - 600 LIMIT 1");
-            if (! $iOldId) {
+            if (!$iOldId) {
                 // if everything is fine - allow to add comment
                 $GLOBALS['MySQL']->res("INSERT INTO `s281_items_cmts` SET `c_item_id` = '{$iItemId}', `c_ip` = '{$sIp}', `c_when` = UNIX_TIMESTAMP(), `c_name` = '{$sName}', `c_text` = '{$sText}'");
                 $GLOBALS['MySQL']->res("UPDATE `s281_photos` SET `comments_count` = `comments_count` + 1 WHERE `id` = '{$iItemId}'");
@@ -73,20 +81,20 @@ EOF;
     // get visitor IP
     function getVisitorIP() {
         $ip = "0.0.0.0";
-        if( ( isset( $_SERVER['HTTP_X_FORWARDED_FOR'] ) ) && ( !empty( $_SERVER['HTTP_X_FORWARDED_FOR'] ) ) ) {
+        if (( isset($_SERVER['HTTP_X_FORWARDED_FOR']) ) && (!empty($_SERVER['HTTP_X_FORWARDED_FOR']) )) {
             $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
-        } elseif( ( isset( $_SERVER['HTTP_CLIENT_IP'])) && (!empty($_SERVER['HTTP_CLIENT_IP'] ) ) ) {
-            $ip = explode(".",$_SERVER['HTTP_CLIENT_IP']);
-            $ip = $ip[3].".".$ip[2].".".$ip[1].".".$ip[0];
-        } elseif((!isset( $_SERVER['HTTP_X_FORWARDED_FOR'])) || (empty($_SERVER['HTTP_X_FORWARDED_FOR']))) {
-            if ((!isset( $_SERVER['HTTP_CLIENT_IP'])) && (empty($_SERVER['HTTP_CLIENT_IP']))) {
+        } elseif (( isset($_SERVER['HTTP_CLIENT_IP'])) && (!empty($_SERVER['HTTP_CLIENT_IP']) )) {
+            $ip = explode(".", $_SERVER['HTTP_CLIENT_IP']);
+            $ip = $ip[3] . "." . $ip[2] . "." . $ip[1] . "." . $ip[0];
+        } elseif ((!isset($_SERVER['HTTP_X_FORWARDED_FOR'])) || (empty($_SERVER['HTTP_X_FORWARDED_FOR']))) {
+            if ((!isset($_SERVER['HTTP_CLIENT_IP'])) && (empty($_SERVER['HTTP_CLIENT_IP']))) {
                 $ip = $_SERVER['REMOTE_ADDR'];
             }
         }
         return $ip;
     }
+
 }
 
 $GLOBALS['MyComments'] = new CMyComments();
-
 ?>

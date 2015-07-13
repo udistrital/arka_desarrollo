@@ -8,7 +8,7 @@ function closePhotoPreview() {
 
 // display photo preview block
 function getPhotoPreviewAjx(id) {
-    $.post('/blocks/inventarios/gestionElementos/script/sources281/photos_ajx.php', {action: 'get_info', id: id},
+    $.post('/blocks/inventarios/gestionElementos/detalleElemento/script/sources281/photos_ajx.php', {action: 'get_info', id: id},
     function (data) {
         $('#photo_preview .pleft').html(data.data1);
         $('#photo_preview .pright').html(data.data2);
@@ -24,7 +24,7 @@ function submitComment(id) {
     var sText = $('#text').val();
 
     if (sName && sText) {
-        $.post('/blocks/inventarios/gestionElementos/formulario/detalle.php', {action: 'accept_comment', name: sName, text: sText, id: id},
+        $.post('/blocks/inventarios/gestionElementos/detalleElemento/formulario/detalle.php', {action: 'accept_comment', name: sName, text: sText, id: id},
         function (data) {
             if (data != '1') {
                 $('#comments_list').fadeOut(1000, function () {

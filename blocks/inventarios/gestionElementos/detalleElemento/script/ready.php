@@ -89,3 +89,13 @@ $('#<?php echo $this->campoSeguro('fecha_inicio') ?>').attr("class", "cuadroText
 
 
 
+
+$("#test-upload").fileinput({
+'showPreview' : false,
+'allowedFileExtensions' : ['jpg', 'png','gif'],
+'elErrorContainer': '#errorBlock'
+});
+
+$("#test-upload").on('fileloaded', function(event, file, previewId, index) {
+alert('i = ' + index + ', id = ' + previewId + ', file = ' + file.name);
+});

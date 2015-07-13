@@ -1,6 +1,6 @@
 <?php
 
-use inventarios\gestionElementos\detalleElemento\Sql;
+namespace inventarios\gestionElementos\detalleElemento;
 
 $conexion = "inventarios";
 $esteRecursoDB = $this->miConfigurador->fabricaConexiones->getRecursoDB($conexion);
@@ -15,7 +15,107 @@ $rutaBloque .= $this->miConfigurador->getVariableConfiguracion("site") . "/block
 $rutaBloque .= $esteBloque ['grupo'] . '/' . $esteBloque ['nombre'];
 
 $miPaginaActual = $this->miConfigurador->getVariableConfiguracion('pagina');
-//var_dump($_REQUEST);
+
+
+if ($_REQUEST ['funcion'] == 'subeFoto') {
+
+    if (empty($_FILES['images'])) {
+        echo json_encode(['error' => 'No files found for upload.']);
+        // or you can throw an exception 
+        return; // terminate
+    }
+
+// get the files posted
+    $images = $_FILES['images'];
+
+// get user id posted
+    $userid = empty($_POST['userid']) ? '' : $_POST['userid'];
+
+// get user name posted
+    $username = empty($_POST['username']) ? '' : $_POST['username'];
+
+// a flag to see if everything is ok
+    $success = null;
+
+// file paths to store
+    $paths = [];
+
+// get file names
+    $filenames = $images['name'];
+
+// loop and process files
+    for ($i = 0; $i < count($filenames); $i++) {
+//        $ext = explode('.', basename($filenames[$i]));
+//        $target = "uploads" . DIRECTORY_SEPARATOR . md5(uniqid()) . "." . array_pop($ext);
+
+        $arreglo = base64_encode($filenames[$i]);
+        $parametro = array(
+            'id_elemento' => 333,
+            'prioridad' => 0,
+            'imagen' => $arreglo,
+        );
+
+        $cadenaSql = $this->sql->getCadenaSql('guardar_foto', $parametro);
+        $resultadoItems = $esteRecursoDB->ejecutarAcceso($cadenaSql, 'insertar');
+
+        if ($resultadoItems == true) {
+            $success = true;
+            break;
+        } else {
+            $success = false;
+            break;
+        }
+//    }
+//
+//// check and process based on successful status 
+//    if ($success === true) {
+//        // call the function to save all data to database
+//        // code for the following function `save_data` is not 
+//        // mentioned in this example
+//        //save_data($userid, $username, $paths);
+//
+//        $parametro = array(
+//            'id_elemento' => 1,
+//            'prioridad' => 0,
+//            'imagen' => 'imagen',
+//        );
+//
+//        $cadenaSql = $this->sql->getCadenaSql('guardar_foto', $parametro);
+//        $resultadoItems = $esteRecursoDB->ejecutarAcceso($cadenaSql, 'busqueda');
+//
+//        // store a successful response (default at least an empty array). You
+//        // could return any additional response info you need to the plugin for
+//        // advanced implementations.
+//        // for example you can get the list of files uploaded this way
+//        $output = ['uploaded' => $paths];
+        if ($success === false) {
+            $output = ['error' => 'Error while uploading images. Contact the system administrator'];
+            // delete any uploaded files
+        } else {
+            $output = ['uploaded' => 'Foto registrada'];
+        }
+
+// return a json encoded response for plugin to process successfully
+        echo json_encode($output);
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 if ($_REQUEST ['funcion'] == 'Consulta') {
     //$arreglo = unserialize($_REQUEST['arreglo']);
@@ -41,11 +141,8 @@ if ($_REQUEST ['funcion'] == 'Consulta') {
         );
     }
 
-
     $total = count($resultadoFinal);
-
     $resultado = json_encode($resultadoFinal);
-
     $resultado = '{
                 "recordsTotal":' . $total . ',
                 "recordsFiltered":' . $total . ',
@@ -59,42 +156,72 @@ if ($_REQUEST ['funcion'] == 'placas') {
     $cadenaSql = $this->sql->getCadenaSql('buscar_placa', $parametro);
     $resultadoItems = $esteRecursoDB->ejecutarAcceso($cadenaSql, 'busqueda');
 
-
     foreach ($resultadoItems as $key => $values) {
         $keys = array('value', 'data');
         $resultado[$key] = array_intersect_key($resultadoItems[$key], array_flip($keys));
     }
-
-//    var_dump($resultado);
-
-
     echo '{"suggestions":' . json_encode($resultado) . '}';
 }
 
 if ($_REQUEST ['funcion'] == 'consultarDependencia') {
-
-
-
-
-    $cadenaSql = $this->sql->getCadenaSql('dependenciasConsultadas', $_REQUEST['valor']);
+    $cadenaSql = $this->sql->getCadenaSql('dependenciasConsultadas', isset($_REQUEST['valor']));
     $resultado = $esteRecursoDB->ejecutarAcceso($cadenaSql, "busqueda");
 
-
     $resultado = json_encode($resultado);
-
     echo $resultado;
 }
 
 
 if ($_REQUEST ['funcion'] == 'consultarUbicacion') {
-
-
-    $cadenaSql = $this->sql->getCadenaSql('ubicacionesConsultadas', $_REQUEST['valor']);
+    $cadenaSql = $this->sql->getCadenaSql('ubicacionesConsultadas', isset($_REQUEST['valor']));
     $resultado = $esteRecursoDB->ejecutarAcceso($cadenaSql, "busqueda");
 
-
     $resultado = json_encode($resultado);
-
     echo $resultado;
 }
-?>
+//
+//if ($_POST['action'] == 'get_info' && (int) $_POST['id'] > 0) {
+//    // get photo info ->>> Este es el numero de registro
+//    $iPid = (int) $_POST['id'];
+//
+//  echo  $cadenaSql = $this->sql->getCadenaSql('consultarElemento_foto', $iPid);
+//    $aImageInfo = $esteRecursoDB->ejecutarAcceso($cadenaSql, "busqueda");
+//    var_dump($aImageInfo);
+//    
+//    exit;
+//    // prepare last 10 comments con el numero de registro
+//    //$sCommentsBlock = $GLOBALS['MyComments']->getComments($iPid);
+//
+//    $cadenaSql = $this->sql->getCadenaSql('consultar_fotos', $aImageInfo[0]['numero_registro']);
+//    $aItems = $esteRecursoDB->ejecutarAcceso($cadenaSql, "busqueda"); // get photos info
+//    // Prev & Next navigation
+//    $sNext = $sPrev = '';
+//
+//    $cadenaSql = $this->sql->getCadenaSql('consultarElemento_foto_antes', $aImageInfo[0]['numero_registro']);
+//    $iPrev = $esteRecursoDB->ejecutarAcceso($cadenaSql, "busqueda"); // get photos info
+//
+//    $cadenaSql = $this->miSql->getCadenaSql('consultarElemento_foto_despues', $aImageInfo[0]['numero_registro']);
+//    $iNext = $esteRecursoDB->ejecutarAcceso($cadenaSql, "busqueda"); // get photos info
+//
+//    $iPrev = (int) $iPrev[0][0];
+//    $iNext = (int) $iNext[0][0];
+//    $sPrevBtn = ($iPrev) ? '<div class="preview_prev" onclick="getPhotoPreviewAjx(\'' . $iPrev . '\')"><img src=' . $rutaBloque . '"/script/sources281/images/prev.png" alt="prev" /></div>' : '';
+//    $sNextBtn = ($iNext) ? '<div class="preview_next" onclick="getPhotoPreviewAjx(\'' . $iNext . '\')"><img src=' . $rutaBloque . '"/script/sources281images/next.png" alt="next" /></div>' : '';
+//
+//    require_once($rutaBloque . '/script/sources281/classes/Services_JSON.php');
+//
+//    $oJson = new Services_JSON();
+//    header('Content-Type:text/javascript');
+//    echo $oJson->encode(array(
+//        'data1' => '<img class="fileUnitSpacer" src="data:image/gif;base64,' . $aImageInfo[0]['imagen'] . '">' . $sPrevBtn . $sNextBtn,
+//            //   'data2' => $sCommentsBlock,
+//    ));
+//    exit;
+//}
+
+
+//    if ($_REQUEST ['funcion'] == 'eliminaFoto') {
+//        $output = ['error' => 'No files were processed.'];
+//        echo json_encode($output);
+//    }
+

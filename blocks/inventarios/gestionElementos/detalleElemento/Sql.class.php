@@ -290,7 +290,7 @@ class Sql extends \Sql {
                 break;
 
             case "consultar_estado":
-                $cadenaSql = " SELECT  ";
+                $cadenaSql = " SELECT DISTINCT ";
                 $cadenaSql .= " CASE WHEN id_faltante=0 THEN 'No registra faltante' ELSE 'Registra faltante' END faltante, ";
                 $cadenaSql .= " CASE WHEN id_faltante=0 THEN '' ELSE cast(fecha_registro as character varying) END faltante_fecha, ";
                 $cadenaSql .= " CASE WHEN id_sobrante=0 THEN 'No registra sobrante' ELSE 'Registra sobrante' END sobrante, ";
@@ -302,7 +302,7 @@ class Sql extends \Sql {
                 break;
 
             case "consultar_baja":
-                $cadenaSql = " SELECT  ";
+                $cadenaSql = " SELECT DISTINCT ";
                 $cadenaSql .= " CASE WHEN estado_registro=TRUE THEN 'Registra baja' ELSE 'No Registra baja' END baja, ";
                 $cadenaSql .= " CASE WHEN estado_registro=TRUE THEN cast(fecha_registro as character varying) ELSE ''  END baja_fecha ";
                 $cadenaSql .= " FROM arka_inventarios.baja_elemento ";
@@ -310,20 +310,6 @@ class Sql extends \Sql {
                 $cadenaSql .= " AND id_elemento_ind='" . $variable . "' ";
                 break;
 
-            case "consultar_imagenperfil":
-                $cadenaSql = " SELECT imagen ";
-                $cadenaSql .= " FROM arka_movil.asignar_imagen ";
-                $cadenaSql .= " WHERE estado_registro='TRUE' ";
-                $cadenaSql .= " AND prioridad=1 ";
-                $cadenaSql .= " AND id_elemento='" . $variable . "' ";
-                break;
-
-            case "consultar_fotos":
-                $cadenaSql = " SELECT imagen, num_registro ";
-                $cadenaSql .= " FROM arka_movil.asignar_imagen ";
-                $cadenaSql .= " WHERE estado_registro='TRUE' ";
-                $cadenaSql .= " AND id_elemento='" . $variable . "' ";
-                break;
 
             case "consultar_nivel_inventario" :
                 $cadenaSql = "SELECT elemento_id, elemento_padre||''|| elemento_codigo||' - '||elemento_nombre ";
@@ -382,6 +368,59 @@ class Sql extends \Sql {
                 $cadenaSql.= ' WHERE "FUN_ESTADO" ';
                 $cadenaSql.= " ='A' ";
                 //$cadenaSql .= "AND FUN_IDENTIFICACION='" . $variable . "' ";
+                break;
+
+
+            //-------------------- Cláusulas de todo lo de imágenes  ---------------/
+            case "consultar_imagenperfil":
+                $cadenaSql = " SELECT imagen ";
+                $cadenaSql .= " FROM arka_movil.asignar_imagen ";
+                $cadenaSql .= " WHERE estado_registro='TRUE' ";
+                $cadenaSql .= " AND prioridad=1 ";
+                $cadenaSql .= " AND id_elemento='" . $variable . "' ";
+                break;
+
+            case "consultar_fotos":
+                $cadenaSql = " SELECT imagen, num_registro,id_elemento ";
+                $cadenaSql .= " FROM arka_movil.asignar_imagen ";
+                $cadenaSql .= " WHERE estado_registro='TRUE' ";
+                $cadenaSql .= " AND id_elemento='" . $variable . "' ";
+                break;
+
+            case "consultarElemento_foto":
+                $cadenaSql = " SELECT imagen, num_registro ";
+                $cadenaSql .= " FROM arka_movil.asignar_imagen ";
+                $cadenaSql .= " WHERE estado_registro='TRUE' ";
+                $cadenaSql .= " AND num_registro='" . $variable . "' ";
+                break;
+
+            case "consultarComentario_foto":
+                $cadenaSql = " SELECT id_comentario, id_numfoto, usuario, comentario, fecha_registro ";
+                $cadenaSql .= " FROM arka_movil.asignar_imagen_comentarios ";
+                $cadenaSql .= " WHERE estado_registro='TRUE' ";
+                $cadenaSql .= " AND id_num_foto='" . $variable . "' ORDER BY fecha_registro DESC LIMIT 10";
+                break;
+
+            case "consultarElemento_foto_antes":
+                $cadenaSql = " SELECT num_registro ";
+                $cadenaSql .= " FROM arka_movil.asignar_imagen ";
+                $cadenaSql .= " WHERE estado_registro='TRUE' ";
+                $cadenaSql .= " AND num_registro < '" . $variable . "' ";
+                $cadenaSql .= " ORDER BY num_registro LIMIT 1 ";
+                break;
+
+            case "consultarElemento_foto_despues":
+                $cadenaSql = " SELECT num_registro ";
+                $cadenaSql .= " FROM arka_movil.asignar_imagen ";
+                $cadenaSql .= " WHERE estado_registro='TRUE' ";
+                $cadenaSql .= " AND num_registro > '" . $variable . "' ";
+                $cadenaSql .= " ORDER BY num_registro LIMIT 1 ";
+                break;
+
+            case "guardar_foto":
+                $cadenaSql = " INSERT INTO arka_movil.asignar_imagen( ";
+                $cadenaSql.= " id_elemento, prioridad, imagen) ";
+                $cadenaSql.= " VALUES ('".$variable['id_elemento']."', '".$variable['prioridad']."', '".$variable['imagen']."'); ";
                 break;
         }
         return $cadenaSql;

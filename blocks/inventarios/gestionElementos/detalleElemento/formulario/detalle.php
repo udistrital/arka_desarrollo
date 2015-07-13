@@ -2,18 +2,8 @@
 
 use inventarios\gestionElementos\detalleElemento\funcion\redireccion;
 
-$esteBloque = $this->miConfigurador->getVariableConfiguracion("esteBloque");
-$rutaBloque = $this->miConfigurador->getVariableConfiguracion("host");
-$rutaBloque .= $this->miConfigurador->getVariableConfiguracion("site") . "/blocks/";
-$rutaBloque .= $esteBloque ['grupo'] . "/" . $esteBloque ['nombre'];
-
 //include_once($rutaBloque.'/script/gallery/ki_include.php');
-require_once($rutaBloque . '/script/sources281/classes/CMyComments.php');
 
-if ($_POST['action'] == 'accept_comment') {
-    echo $GLOBALS['MyComments']->acceptComment();
-    exit;
-}
 
 if (!isset($GLOBALS ["autorizado"])) {
     include ("../index.php");
@@ -46,6 +36,8 @@ class registrarForm {
         $rutaBloque = $this->miConfigurador->getVariableConfiguracion("host");
         $rutaBloque .= $this->miConfigurador->getVariableConfiguracion("site") . "/blocks/";
         $rutaBloque .= $esteBloque ['grupo'] . "/" . $esteBloque ['nombre'];
+
+        require_once($rutaBloque . '/script/sources281/classes/CMyComments.php');
         // ---------------- SECCION: Parámetros Globales del Formulario ----------------------------------
         /**
          * Atributos que deben ser aplicados a todos los controles de este formulario.
@@ -68,6 +60,11 @@ class registrarForm {
 
         $seccion ['tiempo'] = $tiempo;
 
+        if (isset($_POST['action']) == 'accept_comment') {
+            echo $GLOBALS['MyComments']->acceptComment();
+            exit;
+        }
+
         // ___________________________________________________________________________________
         // -------------------------------------------------------------------------------------------------
 
@@ -75,13 +72,18 @@ class registrarForm {
         $cadenaSql = $this->miSql->getCadenaSql('consultar_imagenperfil', $_REQUEST ['elemento']);
         $foto = $esteRecursoDB->ejecutarAcceso($cadenaSql, "busqueda");
 
+        $imagen = $rutaBloque . "/images/upload.png";
 
         $sPhotos = '';
         $cadenaSql = $this->miSql->getCadenaSql('consultar_fotos', $_REQUEST ['elemento']);
         $aItems = $esteRecursoDB->ejecutarAcceso($cadenaSql, "busqueda");
 
-        foreach ($aItems as $i => $aItemInfo) {
-            $sPhotos .= '<div class="photo"><img src="data:image/gif;base64,' . $aItems[$i][0] . '" id="' . $aItems[$i]['num_registro'] . '" /><p>' . $aItems[$i]['num_registro'] . ' item</p><i>' . $aItems[$i]['num_registro'] . '</i></div>';
+        if ($aItems) {
+            foreach ($aItems as $i => $aItemInfo) {
+                $sPhotos .= '<div class="photo"><img src="data:image/gif;base64,' . $aItems[$i][0] . '" id="' . $aItems[$i]['num_registro'] . '" /><p>' . $aItems[$i]['num_registro'] . ' item</p><i>' . $aItems[$i]['num_registro'] . '</i></div>';
+            }
+        } else {
+            $aItems = '';
         }
 
         //echo "data:image/gif;base64,'" . base64_decode($foto[0][0]) . "' ";
@@ -195,7 +197,12 @@ class registrarForm {
                             $esteCampo = 'perfil';
                             $atributos ['nombre'] = $esteCampo;
                             $atributos ['id'] = $esteCampo;
-                            $atributos['imagen'] = 'data:image/gif;base64,' . $foto[0][0] . ''; //ruta de la imagen (requerido)
+                            //
+                            if ($foto == null) {
+                                $atributos['imagen'] = $imagen; //ruta de la imagen (requerido)
+                            } else {
+                                $atributos['imagen'] = 'data:image/gif;base64,' . $foto[0][0] . ''; //ruta de la imagen (requerido)
+                            }
                             $atributos['borde'] = 'solid'; //Borde decorativo de la imagen (opcional)
                             $atributos['ancho'] = 150; //Ancho de la imagen (opcional)
                             $atributos['alto'] = 150; //Altura de la imagen (opcional)
@@ -273,7 +280,7 @@ class registrarForm {
                                 }
                             }
 
-                            foreach ($elemento_baja[0] as $key => $values) {
+                            foreach ($elemento_baja as $key => $values) {
                                 if (!is_numeric($key)) {
                                     //----- CONTROL texto Simple ------------------------
                                     $esteCampo = $encabezado[$key];
@@ -284,7 +291,7 @@ class registrarForm {
                                     $atributos ['marco'] = true;
                                     $atributos ['estiloMarco'] = '';
                                     $atributos ['etiqueta'] = ucfirst($esteCampo);
-                                    $atributos ['texto'] = $elemento_baja[0][$key];
+                                    $atributos ['texto'] = $elemento_baja[$key][0];
                                     $atributos ["etiquetaObligatorio"] = false;
                                     $atributos ['columnas'] = 1;
                                     $atributos ['dobleLinea'] = 0;
@@ -415,22 +422,26 @@ class registrarForm {
                                 echo $this->miFormulario->division("inicio", $atributos);
                                 unset($atributos); {
                                     ?>
-
+<!--
                                     <div class="container">
-                                        <h1>Last photos:</h1>
-                                    <?= $sPhotos ?>
+                                        <h2>Galería del Elemento</h2>
+                                    <?php //$sPhotos ?>
                                     </div>
 
-                                    <!-- Hidden preview block -->
+                                     Hidden preview block 
                                     <div id="photo_preview" style="display:none">
                                         <div class="photo_wrp">
-                                            <img class="close" src="<?php echo $rutaBloque?>/script/sources281/images/close.gif" />
+                                            <img class="close" src="<?php //echo $rutaBloque ?>/script/sources281/images/close.gif" />
                                             <div style="clear:both"></div>
                                             <div class="pleft">test1</div>
                                             <div class="pright">test2</div>
                                             <div style="clear:both"></div>
                                         </div>
-                                    </div>
+                                    </div>-->
+                                    
+                                    
+                                    <input id="images" name="images[]" type="file" multiple=true class="file-loading">
+                                    
                                     <?php
                                 }
                             }
