@@ -37,6 +37,7 @@ class RegistradorOrden {
     function procesarFormulario() {
 
         $elementos = unserialize($_REQUEST['items']);
+        
 
         $esteBloque = $this->miConfigurador->getVariableConfiguracion("esteBloque");
 
@@ -98,8 +99,9 @@ class RegistradorOrden {
 
         foreach ($elementos as $key => $values) {
             $cadenaSql = $this->miSql->getCadenaSql('consultar_informacion', $elementos[$key]);
+            
             $elemento = $esteRecursoDB->ejecutarAcceso($cadenaSql, "busqueda");
-
+            
             $arreglo = array(
                 'dependencia' => $elemento[0]['cod_dependencia'],
                 'funcionario' => $elemento[0]['funcionario_encargado'],
@@ -112,7 +114,9 @@ class RegistradorOrden {
                 'ubicacion' => $elemento[0]['cod_ubicacion'],
             );
             
+            
             $cadenaSql = $this->miSql->getCadenaSql('insertar_baja', $arreglo);
+            
             $registro = $esteRecursoDB->ejecutarAcceso($cadenaSql, "busqueda");
 
             $cadenaSql = $this->miSql->getCadenaSql('actualizar_asignacion_funcionario', $arreglo);
@@ -123,12 +127,15 @@ class RegistradorOrden {
             
             $count ++;
         }
+        
 
         if ($registro) {
             redireccion::redireccionar('inserto', $count);
+            exit();
         } else {
 
             redireccion::redireccionar('noInserto');
+            exit();
         }
     }
 
