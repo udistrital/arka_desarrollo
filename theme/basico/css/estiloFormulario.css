@@ -415,6 +415,7 @@ div.campoImagen {
 	border-spacing: 0px;
 }
 
+
 div.marcoControles {
 	width: 90%;
 	border-collapse: collapse;
@@ -563,7 +564,7 @@ div.espacioBlanco {
 	border-style: solid;
 	border-color: #000000;
 	border-spacing: 0px;
-	margin: 5px 0 5px 0;
+	margin: 50px 0 5px 0;
 	display: block;
 }
 
