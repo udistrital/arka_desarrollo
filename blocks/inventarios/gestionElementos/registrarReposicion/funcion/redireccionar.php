@@ -20,8 +20,8 @@ class redireccion {
                 $variable .= "&opcion=mensaje";
                 $variable .= "&mensaje=confirma";
                 $variable .= "&elemento=" . $valor['id_elemento'];
-                $variable .= "&salida=" . $valor['id_entrada'];
-                $variable .= "&entrada=" . $valor['id_salida'];
+                $variable .= "&entrada=" . $valor['id_entrada'];
+                $variable .= "&salida=" . $valor['id_salida'];
                 break;
 
             case "inserto_M" :
