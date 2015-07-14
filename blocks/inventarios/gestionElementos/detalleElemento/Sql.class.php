@@ -167,13 +167,15 @@ class Sql extends \Sql {
                 $cadenaSql .= " elemento.descripcion, ";
                 $cadenaSql .= ' sedes."ESF_SEDE" sede_nombre, ';
                 $cadenaSql .= ' dependencias."ESF_DEP_ENCARGADA" dependencia_nombre, ';
+
                 $cadenaSql .= ' funcionarios."FUN_NOMBRE" fun_nombre ';
                 $cadenaSql .= ' FROM arka_inventarios.elemento   ';
                 $cadenaSql .= ' JOIN arka_inventarios.entrada ON entrada.id_entrada = elemento.id_entrada  ';
                 $cadenaSql .= ' JOIN arka_inventarios.elemento_individual ON elemento_individual.id_elemento_gen = elemento.id_elemento  ';
-                $cadenaSql .= ' LEFT JOIN arka_parametros.arka_dependencia dependencias ON dependencias."ESF_CODIGO_DEP"=dependencia ';
-                $cadenaSql .= ' LEFT JOIN arka_parametros.arka_sedes sedes ON sedes."ESF_ID_SEDE"=sede ';
-                $cadenaSql .= ' LEFT JOIN arka_parametros.arka_funcionarios funcionarios ON funcionarios."FUN_IDENTIFICACION"=elemento_individual.funcionario ';
+                $cadenaSql .= ' LEFT JOIN arka_parametros.arka_funcionarios funcionarios ON funcionarios."FUN_IDENTIFICACION" = elemento_individual.funcionario ';
+                $cadenaSql .= ' left join arka_parametros.arka_espaciosfisicos ubicacion ON ubicacion."ESF_ID_ESPACIO"=elemento_individual.ubicacion_elemento ';
+                $cadenaSql .= ' left JOIN arka_parametros.arka_dependencia dependencias ON dependencias."ESF_ID_ESPACIO"=ubicacion."ESF_ID_ESPACIO" ';
+                $cadenaSql .= ' LEFT JOIN arka_parametros.arka_sedes as sedes ON sedes."ESF_COD_SEDE"=ubicacion."ESF_COD_SEDE"  ';
                 $cadenaSql .= " WHERE 1=1 AND estado='TRUE' ";
 
                 if ($variable ['dependencia'] != '') {
@@ -190,8 +192,8 @@ class Sql extends \Sql {
                     $cadenaSql .= " AND elemento_individual.funcionario = '" . $variable ['funcionario'] . "'";
                 }
 
-                if ($variable ['numero_entrada'] != '') {
-                    $cadenaSql .= " AND entrada.id_entrada = '" . $variable ['numero_entrada'] . "'";
+                if ($variable ['entrada'] != '') {
+                    $cadenaSql .= " AND entrada.id_entrada = '" . $variable ['entrada'] . "'";
                 }
 
                 if ($variable['fechainicial'] != '' && $variable ['fechafinal'] != '') {
@@ -383,7 +385,9 @@ class Sql extends \Sql {
                 break;
 
             case "funcionarios" :
-                $cadenaSql = ' SELECT "FUN_IDENTIFICACION", "FUN_NOMBRE" ';
+                $cadenaSql = ' SELECT "FUN_IDENTIFICACION", "FUN_IDENTIFICACION" ';
+                $cadenaSql.= " ||'-'|| ";
+                $cadenaSql.= ' "FUN_NOMBRE" ';
                 $cadenaSql.= ' FROM arka_parametros.arka_funcionarios ';
                 $cadenaSql.= ' WHERE "FUN_ESTADO" ';
                 $cadenaSql.= " ='A' ";
@@ -405,6 +409,12 @@ class Sql extends \Sql {
                 $cadenaSql .= " FROM arka_movil.asignar_imagen ";
                 $cadenaSql .= " WHERE estado_registro='TRUE' ";
                 $cadenaSql .= " AND id_elemento='" . $variable . "' ";
+                break;
+            
+              case "eliminar_fotos":
+                $cadenaSql = " DELETE ";
+                $cadenaSql .= " FROM arka_movil.asignar_imagen ";
+                $cadenaSql .= " WHERE num_registro='" . $variable . "' ";
                 break;
 
             case "consultarElemento_foto":

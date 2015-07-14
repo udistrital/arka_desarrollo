@@ -1,4 +1,6 @@
 <?php
+$conexion = "inventarios";
+$esteRecursoDB = $this->miConfigurador->fabricaConexiones->getRecursoDB($conexion);
 /**
  *
  * Los datos del bloque se encuentran en el arreglo $esteBloque.
@@ -9,19 +11,8 @@ $url = $this->miConfigurador->getVariableConfiguracion("host");
 $url .= $this->miConfigurador->getVariableConfiguracion("site");
 
 $urlDirectorio = $url;
-
 $urlDirectorio = $urlDirectorio . "/plugin/scripts/javascript/dataTable/Spanish.json";
-
 $url .= "/index.php?";
-
-// Variables
-$cadenaACodificar = "pagina=" . $this->miConfigurador->getVariableConfiguracion("pagina");
-$cadenaACodificar .= "&procesarAjax=true";
-$cadenaACodificar .= "&action=index.php";
-$cadenaACodificar .= "&bloqueNombre=" . $esteBloque ["nombre"];
-$cadenaACodificar .= "&bloqueGrupo=" . $esteBloque ["grupo"];
-$cadenaACodificar .= $cadenaACodificar . "&funcion=Consulta";
-$cadenaACodificar .= "&tiempo=" . $_REQUEST ['tiempo'];
 
 if (isset($_REQUEST ['fecha_inicio']) && $_REQUEST ['fecha_inicio'] != '') {
     $fecha_inicio = $_REQUEST ['fecha_inicio'];
@@ -84,9 +75,16 @@ $datos = array(
 
 $arreglo = serialize($datos);
 
+
+// Variables
+$cadenaACodificar = "pagina=" . $this->miConfigurador->getVariableConfiguracion("pagina");
+$cadenaACodificar .= "&procesarAjax=true";
+$cadenaACodificar .= "&action=index.php";
+$cadenaACodificar .= "&bloqueNombre=" . $esteBloque ["nombre"];
+$cadenaACodificar .= "&bloqueGrupo=" . $esteBloque ["grupo"];
+$cadenaACodificar .= $cadenaACodificar . "&funcion=Consulta";
+$cadenaACodificar .= "&tiempo=" . $_REQUEST ['tiempo'];
 $cadenaACodificar .= $cadenaACodificar . "&arreglo=" . $arreglo;
-
-
 
 // Codificar las variables
 $enlace = $this->miConfigurador->getVariableConfiguracion("enlace");
@@ -124,6 +122,24 @@ $urlFinal16 = $url . $cadena16;
 
 
 // Variables
+$cadenaACodificar6 = "pagina=" . $this->miConfigurador->getVariableConfiguracion("pagina");
+$cadenaACodificar6 .= "&procesarAjax=true";
+$cadenaACodificar6 .= "&action=index.php";
+$cadenaACodificar6 .= "&bloqueNombre=" . $esteBloque ["nombre"];
+$cadenaACodificar6 .= "&bloqueGrupo=" . $esteBloque ["grupo"];
+$cadenaACodificar6 .= $cadenaACodificar6 . "&funcion=galeriaFoto";
+$cadenaACodificar6 .= "&tiempo=" . $_REQUEST ['tiempo'];
+$cadenaACodificar6 .= "&elemento=" . isset($_REQUEST['elemento']);
+
+// Codificar las variables
+$enlace = $this->miConfigurador->getVariableConfiguracion("enlace");
+$cadena6 = $this->miConfigurador->fabricaConexiones->crypto->codificar_url($cadenaACodificar6, $enlace);
+
+// URL definitiva
+$urlFinal6 = $url . $cadena6;
+
+
+// Variables
 $cadenaACodificar4 = "pagina=" . $this->miConfigurador->getVariableConfiguracion("pagina");
 $cadenaACodificar4 .= "&procesarAjax=true";
 $cadenaACodificar4 .= "&action=index.php";
@@ -140,7 +156,6 @@ $cadena4 = $this->miConfigurador->fabricaConexiones->crypto->codificar_url($cade
 $urlFinal4 = $url . $cadena4;
 
 
-
 // Variables
 $cadenaACodificar3 = "pagina=" . $this->miConfigurador->getVariableConfiguracion("pagina");
 $cadenaACodificar3 .= "&procesarAjax=true";
@@ -149,6 +164,7 @@ $cadenaACodificar3 .= "&bloqueNombre=" . $esteBloque ["nombre"];
 $cadenaACodificar3 .= "&bloqueGrupo=" . $esteBloque ["grupo"];
 $cadenaACodificar3 .= $cadenaACodificar3 . "&funcion=subeFoto";
 $cadenaACodificar3 .= "&tiempo=" . $_REQUEST ['tiempo'];
+$cadenaACodificar3.= "&elemento=" . isset($_REQUEST['elemento']);
 
 // Codificar las variables
 $enlace = $this->miConfigurador->getVariableConfiguracion("enlace");
@@ -159,20 +175,50 @@ $urlFinal3 = $url . $cadena3;
 
 
 // Variables
-$cadenaACodificar5 = "pagina=" . $this->miConfigurador->getVariableConfiguracion("pagina");
-$cadenaACodificar5 .= "&procesarAjax=true";
-$cadenaACodificar5 .= "&action=index.php";
-$cadenaACodificar5 .= "&bloqueNombre=" . $esteBloque ["nombre"];
-$cadenaACodificar5 .= "&bloqueGrupo=" . $esteBloque ["grupo"];
-$cadenaACodificar5 .= $cadenaACodificar5 . "&funcion=eliminaFoto";
-$cadenaACodificar5 .= "&tiempo=" . $_REQUEST ['tiempo'];
+
+
+
+$sPhotos = '';
+$sPhotos_info = '';
+$cadenaSql = " SELECT imagen, num_registro,id_elemento ";
+$cadenaSql .= " FROM arka_movil.asignar_imagen ";
+$cadenaSql .= " WHERE estado_registro='TRUE' ";
+$cadenaSql .= " AND id_elemento='" . isset($_REQUEST['elemento']) . "' ";
+$aItems = $esteRecursoDB->ejecutarAcceso($cadenaSql, "busqueda");
+
+if (isset($_REQUEST['elemento'])) {
+    foreach ($aItems as $i => $aItemInfo) {
+        $sPhotos.="'";
+        $sPhotos.= '<img width="250px" src="data:image/gif;base64,' . $aItems[$i][0] . '">';
+        $sPhotos.="',";
+    }
+
+    foreach ($aItems as $i => $aItemInfo) {
+
+        $cadenaACodificar5 = "pagina=" . $this->miConfigurador->getVariableConfiguracion("pagina");
+        $cadenaACodificar5 .= "&procesarAjax=true";
+        $cadenaACodificar5 .= "&action=index.php";
+        $cadenaACodificar5 .= "&bloqueNombre=" . $esteBloque ["nombre"];
+        $cadenaACodificar5 .= "&bloqueGrupo=" . $esteBloque ["grupo"];
+        $cadenaACodificar5 .= $cadenaACodificar5 . "&funcion=eliminaFoto";
+        $cadenaACodificar5 .= "&tiempo=" . $_REQUEST ['tiempo'];
+        $cadenaACodificar5 .= "&num_registro=" . $aItems[$i]['num_registro'];
 
 // Codificar las variables
-$enlace = $this->miConfigurador->getVariableConfiguracion("enlace");
-$cadena5 = $this->miConfigurador->fabricaConexiones->crypto->codificar_url($cadenaACodificar5, $enlace);
+        $enlace = $this->miConfigurador->getVariableConfiguracion("enlace");
+        $cadena5 = $this->miConfigurador->fabricaConexiones->crypto->codificar_url($cadenaACodificar5, $enlace);
 
 // URL definitiva
-$urlFinal5 = $url . $cadena5;
+        $urlFinal5 = $url . $cadena5;
+
+        $sPhotos_info.="{";
+        $sPhotos_info.= 'caption:"' . $aItems[$i]['num_registro'] . '",';
+        $sPhotos_info.= "width: '50px',";
+        $sPhotos_info.= 'url:"' . $urlFinal5 . '",';
+        $sPhotos_info.= 'key:' . $aItems[$i]['num_registro'] . ',extra: {id: ' . $aItems[$i]['num_registro'] . '}';
+        $sPhotos_info.="},";
+    }
+}
 ?>
 <script type='text/javascript'>
     $(document).ready(function () {
@@ -187,27 +233,36 @@ $urlFinal5 = $url . $cadena5;
 
 </script>
 
+
+
 <script type='text/javascript'>
     $(function () {
 
 
         $("#images").fileinput({
-            uploadUrl:"<?php echo $urlFinal3?>", // server upload action
+            uploadUrl: "<?php echo $urlFinal3 ?>", // server upload action
             uploadAsync: true,
             showUpload: true,
             minFileCount: 1,
             maxFileCount: 10,
             overwriteInitial: false,
             'allowedFileExtensions': ['jpg', 'png'],
-            initialPreview: [
-                "<img src='http://placeimg.com/200/150/people/1'>",
-                "<img src='http://placeimg.com/200/150/people/2'>",
-            ],
-            initialPreviewConfig: [
-                {caption: "People-1.jpg", width: "120px", url: "<?php echo $urlFinal5 ?>", key: 1},
-                {caption: "People-2.jpg", width: "120px", url: "<?php echo $urlFinal5 ?>", key: 2},
-            ]
+            initialPreview: [<?php echo $sPhotos ?>],
+            initialPreviewConfig: [<?php echo $sPhotos_info ?>]
         });
+
+
+        $('#images').on('fileclear', function (event) {
+            console.log("fileclear");
+        });
+
+        $('#images').on('filedeleted', function (event, key) {
+            console.log('Key = ' + key);
+        });
+
+
+
+
 
         $('#tablaTitulos').ready(function () {
             $('#tablaTitulos').dataTable({

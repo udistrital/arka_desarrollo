@@ -41,58 +41,27 @@ if ($_REQUEST ['funcion'] == 'subeFoto') {
     $paths = [];
 
 // get file names
-    $filenames = $images['name'];
+    $filenames = $images['tmp_name'];
 
 // loop and process files
     for ($i = 0; $i < count($filenames); $i++) {
 //        $ext = explode('.', basename($filenames[$i]));
 //        $target = "uploads" . DIRECTORY_SEPARATOR . md5(uniqid()) . "." . array_pop($ext);
 
-        $arreglo = base64_encode($filenames[$i]);
+        $data = base64_encode(file_get_contents($filenames[$i]));
         $parametro = array(
-            'id_elemento' => 333,
+            'id_elemento' => $_REQUEST['elemento'],
             'prioridad' => 0,
-            'imagen' => $arreglo,
+            'imagen' => $data,
         );
 
         $cadenaSql = $this->sql->getCadenaSql('guardar_foto', $parametro);
         $resultadoItems = $esteRecursoDB->ejecutarAcceso($cadenaSql, 'insertar');
 
         if ($resultadoItems == true) {
-            $success = true;
-            break;
-        } else {
-            $success = false;
-            break;
-        }
-//    }
-//
-//// check and process based on successful status 
-//    if ($success === true) {
-//        // call the function to save all data to database
-//        // code for the following function `save_data` is not 
-//        // mentioned in this example
-//        //save_data($userid, $username, $paths);
-//
-//        $parametro = array(
-//            'id_elemento' => 1,
-//            'prioridad' => 0,
-//            'imagen' => 'imagen',
-//        );
-//
-//        $cadenaSql = $this->sql->getCadenaSql('guardar_foto', $parametro);
-//        $resultadoItems = $esteRecursoDB->ejecutarAcceso($cadenaSql, 'busqueda');
-//
-//        // store a successful response (default at least an empty array). You
-//        // could return any additional response info you need to the plugin for
-//        // advanced implementations.
-//        // for example you can get the list of files uploaded this way
-//        $output = ['uploaded' => $paths];
-        if ($success === false) {
-            $output = ['error' => 'Error while uploading images. Contact the system administrator'];
-            // delete any uploaded files
-        } else {
             $output = ['uploaded' => 'Foto registrada'];
+        } else {
+            $output = ['error' => 'Error while uploading images. Contact the system administrator'];
         }
 
 // return a json encoded response for plugin to process successfully
@@ -102,25 +71,49 @@ if ($_REQUEST ['funcion'] == 'subeFoto') {
 
 
 
+if ($_REQUEST ['funcion'] == 'galeriaFoto') {
+
+    $sPhotos = '';
+    $cadenaSql = $this->miSql->getCadenaSql('consultar_fotos', $_REQUEST ['elemento']);
+    $aItems = $esteRecursoDB->ejecutarAcceso($cadenaSql, "busqueda");
+
+    if ($aItems) {
+        foreach ($aItems as $i => $aItemInfo) {
+            $sPhotos .= '<img src="data:image/gif;base64,' . $aItems[$i][0] . '">, ';
+        }
+    } else {
+        $sPhotos = ['error' => 'No files were processed.'];
+    }
+
+    echo json_encode($sPhotos);
+}
 
 
 
+if ($_REQUEST ['funcion'] == 'eliminaFoto') {
+    //var_dump($_REQUEST);
 
+    $foto = $_REQUEST['num_registro'];
+    
+    $cadenaSql = $this->sql->getCadenaSql('eliminar_fotos', $foto);
+    $eliminar = $esteRecursoDB->ejecutarAcceso($cadenaSql, "insertar");
 
-
-
-
-
-
-
-
+    
+     if ($eliminar == true) {
+            $output = ['uploaded' => 'Foto eliminada'];
+        } else {
+            $output = ['error' => 'Error eliminando la foto'];
+        }
+    echo json_encode($output);
+}
 
 
 
 if ($_REQUEST ['funcion'] == 'Consulta') {
-    //$arreglo = unserialize($_REQUEST['arreglo']);
-    //$cadenaSql = $this->sql->getCadenaSql('consultarElemento', $arreglo);
-    $cadenaSql = $this->sql->getCadenaSql('consultarElemento', false);
+    $arreglo = unserialize($_REQUEST['arreglo']);
+
+    $cadenaSql = $this->sql->getCadenaSql('consultarElemento', $arreglo);
+//    $cadenaSql = $this->sql->getCadenaSql('consultarElemento', false);
     $resultado = $esteRecursoDB->ejecutarAcceso($cadenaSql, "busqueda");
 
     foreach ($resultado as $key => $values) {
@@ -164,7 +157,7 @@ if ($_REQUEST ['funcion'] == 'placas') {
 }
 
 if ($_REQUEST ['funcion'] == 'consultarDependencia') {
-    $cadenaSql = $this->sql->getCadenaSql('dependenciasConsultadas', isset($_REQUEST['valor']));
+    $cadenaSql = $this->sql->getCadenaSql('dependenciasConsultadas', $_REQUEST['valor']);
     $resultado = $esteRecursoDB->ejecutarAcceso($cadenaSql, "busqueda");
 
     $resultado = json_encode($resultado);
@@ -173,7 +166,7 @@ if ($_REQUEST ['funcion'] == 'consultarDependencia') {
 
 
 if ($_REQUEST ['funcion'] == 'consultarUbicacion') {
-    $cadenaSql = $this->sql->getCadenaSql('ubicacionesConsultadas', isset($_REQUEST['valor']));
+    $cadenaSql = $this->sql->getCadenaSql('ubicacionesConsultadas', $_REQUEST['valor']);
     $resultado = $esteRecursoDB->ejecutarAcceso($cadenaSql, "busqueda");
 
     $resultado = json_encode($resultado);
@@ -220,8 +213,5 @@ if ($_REQUEST ['funcion'] == 'consultarUbicacion') {
 //}
 
 
-//    if ($_REQUEST ['funcion'] == 'eliminaFoto') {
-//        $output = ['error' => 'No files were processed.'];
-//        echo json_encode($output);
-//    }
+
 

@@ -67,7 +67,7 @@ class registrarForm {
 
 // ___________________________________________________________________________________
 // -------------------------------------------------------------------------------------------------
-
+        $_REQUEST['elemento_seleccionado'] = $_REQUEST['elemento'];
 
         $cadenaSql = $this->miSql->getCadenaSql('consultar_imagenperfil', $_REQUEST ['elemento']);
         $foto = $esteRecursoDB->ejecutarAcceso($cadenaSql, "busqueda");
@@ -119,7 +119,7 @@ class registrarForm {
             $elemento_estado[0] = array('Estado Elemento' => 'Sin movimientos adicionales registrados');
         }
 
-       $cadenaSql = $this->miSql->getCadenaSql('consultar_baja', $_REQUEST ['elemento']);
+        $cadenaSql = $this->miSql->getCadenaSql('consultar_baja', $_REQUEST ['elemento']);
         $elemento_baja = $esteRecursoDB->ejecutarAcceso($cadenaSql, "busqueda");
 
         if ($elemento_baja == false) {
@@ -144,7 +144,8 @@ class registrarForm {
 // ---------------- FIN SECCION: de Parámetros Generales del Formulario ----------------------------
 // ----------------INICIAR EL FORMULARIO ------------------------------------------------------------
         $atributos ['tipoEtiqueta'] = 'inicio';
-        echo $this->miFormulario->formulario($atributos); {
+        echo $this->miFormulario->formulario($atributos);
+        {
 // ---------------- SECCION: Controles del Formulario -----------------------------------------------
 
             $miPaginaActual = $this->miConfigurador->getVariableConfiguracion('pagina');
@@ -176,24 +177,28 @@ class registrarForm {
             $atributos ['tipoEtiqueta'] = 'inicio';
             $atributos ["leyenda"] = "Detalle Elemento Placa " . $elemento[0]['placa'];
             echo $this->miFormulario->marcoAgrupacion('inicio', $atributos);
-            unset($atributos); {
+            unset($atributos);
+            {
 
                 $atributos ["id"] = "cargar_elemento";
                 $atributos ["estiloEnLinea"] = "display:block";
                 $atributos = array_merge($atributos, $atributosGlobales);
                 echo $this->miFormulario->division("inicio", $atributos);
-                unset($atributos); {
+                unset($atributos);
+                {
 
                     $esteCampo = "AgrupacionInformacion";
                     $atributos ['id'] = $esteCampo;
                     $atributos ['leyenda'] = "Imagen Principal";
-                    echo $this->miFormulario->agrupacion('inicio', $atributos); {
+                    echo $this->miFormulario->agrupacion('inicio', $atributos);
+                    {
 
                         $atributos ["id"] = "informacion";
                         $atributos ["estiloEnLinea"] = "display:block";
                         $atributos = array_merge($atributos, $atributosGlobales);
                         echo $this->miFormulario->division("inicio", $atributos);
-                        unset($atributos); {
+                        unset($atributos);
+                        {
 
 // ---------------- CONTROL: Cuadro Lista --------------------------------------------------------
 
@@ -261,7 +266,8 @@ class registrarForm {
                         $esteCampo = "AgrupacionInformacion";
                         $atributos ['id'] = $esteCampo;
                         $atributos ['leyenda'] = "Información Respecto al Elemento";
-                        echo $this->miFormulario->agrupacion('inicio', $atributos); {
+                        echo $this->miFormulario->agrupacion('inicio', $atributos);
+                        {
 
 
 // ---------------- CONTROL: Cuadro de Texto --------------------------------------------------------
@@ -793,34 +799,32 @@ class registrarForm {
                         $esteCampo = "AgrupacionInformacion";
                         $atributos ['id'] = $esteCampo;
                         $atributos ['leyenda'] = "Galería del Elemento";
-                        echo $this->miFormulario->agrupacion('inicio', $atributos); {
+                        echo $this->miFormulario->agrupacion('inicio', $atributos);
+                        {
 
                             $atributos ["id"] = "informacion";
                             $atributos ["estiloEnLinea"] = "display:block";
                             $atributos = array_merge($atributos, $atributosGlobales);
                             echo $this->miFormulario->division("inicio", $atributos);
-                            unset($atributos); {
+                            unset($atributos);
+                            {
                                 ?>
-                                <!--
-                                                                    <div class="container">
-                                                                        <h2>Galería del Elemento</h2>
-                                <?php //$sPhotos        ?>
-                                                                    </div>
 
-                                                                     Hidden preview block 
-                                                                    <div id="photo_preview" style="display:none">
-                                                                        <div class="photo_wrp">
-                                                                            <img class="close" src="<?php //echo $rutaBloque        ?>/script/sources281/images/close.gif" />
-                                                                            <div style="clear:both"></div>
-                                                                            <div class="pleft">test1</div>
-                                                                            <div class="pright">test2</div>
-                                                                            <div style="clear:both"></div>
-                                                                        </div>
-                                                                    </div>-->
+                                <input id="images" name="images[]" type="file" multiple=true class="file-loading"><!--
 
-
-                                <input id="images" name="images[]" type="file" multiple=true class="file-loading">
-
+                                <div class="container">
+                                    <h3>Galería del Elemento</h3>
+                                <?php echo $sPhotos ?>
+                                </div>-->
+                                <!--div id="photo_preview" style="display:none">
+                                    <div class="photo_wrp">
+                                        <img class="close" src="<?php //echo $rutaBloque           ?>/script/sources281/images/close.gif" />
+                                        <div style="clear:both"></div>
+                                        <div class="pleft">test1</div>
+                                        <div class="pright">test2</div>
+                                        <div style="clear:both"></div>
+                                    </div>
+                                </div-->
                                 <?php
                             }
                         }
