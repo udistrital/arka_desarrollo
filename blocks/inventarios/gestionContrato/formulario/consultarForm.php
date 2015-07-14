@@ -71,7 +71,9 @@ $esteRecursoDB = $this->miConfigurador->fabricaConexiones->getRecursoDB ( $conex
 	
 	$esteCampo = "Agrupacion";
 	$atributos ['id'] = $esteCampo;
-	$atributos ['leyenda'] = "Registro Contratos Vicerectoria";
+	$atributos ["estilo"] = "jqueryui";
+	$atributos ['tipoEtiqueta'] = 'inicio';
+	$atributos ['leyenda'] = "Registro Contratos";
 	echo $this->miFormulario->agrupacion ( 'inicio', $atributos );
 	
 
@@ -212,11 +214,14 @@ $resultadoContratos = $esteRecursoDB->ejecutarAcceso ( $cadena_sql, "busqueda" )
 
 if ($resultadoContratos) {
 	
+	
+	
+	
 	// -----------------Inicio de Conjunto de Controles----------------------------------------
 	$esteCampo = "marcoDatosResultadoParametrizar";
 	$atributos ["estilo"] = "jqueryui";
-	$atributos ["leyenda"] = $this->lenguaje->getCadena ( $esteCampo );
-	// echo $this->miFormulario->marcoAgrupacion("inicio", $atributos);
+// 	$atributos ["leyenda"] = $this->lenguaje->getCadena ( $esteCampo );
+	echo $this->miFormulario->marcoAgrupacion("inicio", $atributos);
 	unset ( $atributos );
 	
 	echo "<table id='tablaContratos'>";

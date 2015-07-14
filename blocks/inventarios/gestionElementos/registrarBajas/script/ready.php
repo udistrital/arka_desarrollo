@@ -25,22 +25,32 @@
             });
         });
 
-        
+        $('#<?php echo $this->campoSeguro('placa')?>').width(370);
          $("#<?php echo $this->campoSeguro('placa')?>").select2({
-             	 placeholder: "",
+             	 placeholder: "Ingrese Mínimo 3 Caracteres de Búsqueda",
               	 minimumInputLength: 3,
               	 });
+              	 $('#<?php echo $this->campoSeguro('serial')?>').width(370);
  $("#<?php echo $this->campoSeguro('serial')?>").select2({
-             	 placeholder: "Seleccione...",
+             	 placeholder: "Ingrese Mínimo 3 Caracteres de Búsqueda",
               	 minimumInputLength: 3,
               	 });
+ 
         
-        
+ $("#<?php echo $this->campoSeguro('tipoBaja')?>").select2();
+               
               
 $("#<?php echo $this->campoSeguro('inexistencia')?>").select2();
  $("#<?php echo $this->campoSeguro('responsable')?>").select2();
+ $('#<?php echo $this->campoSeguro('sede')?>').width(210);
 $("#<?php echo $this->campoSeguro('sede')?>").select2(); 
+$('#<?php echo $this->campoSeguro('dependencia')?>').width(210);
 $("#<?php echo $this->campoSeguro('dependencia')?>").select2(); 
+
+$('#<?php echo $this->campoSeguro('selecc_registros')?>').width(250);
+             	$("#<?php echo $this->campoSeguro('selecc_registros')?>").select2();
+
+$("#<?php echo $this->campoSeguro('ubicacion')?>").select2(); 
 $("#<?php echo $this->campoSeguro('responsable_reci')?>").select2();
 
 $("#<?php echo $this->campoSeguro('dependencia_baja')?>").select2();

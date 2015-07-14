@@ -1,7 +1,7 @@
 <?php
 $this->idioma ["noDefinido"] = "Etiqueta no esta definida en locale/es_es/Mensaje.php";
 
-$this->idioma ["documentoContrato"] ="Link Documento Contrato";
+$this->idioma ["documentoContrato"] ="Ver Documento Contrato";
 
 
 

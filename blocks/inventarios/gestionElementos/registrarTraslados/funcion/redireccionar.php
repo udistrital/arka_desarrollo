@@ -43,6 +43,15 @@ class redireccion {
 				
 				break;
 			
+				
+				case "noItems" :
+					$variable = "pagina=" . $miPaginaActual;
+					$variable .= "&opcion=mensaje";
+					$variable .= "&mensaje=noitems";
+				
+					break;
+						
+				
 			case "noCargarElemento" :
 				
 				$variable = "pagina=" . $miPaginaActual;

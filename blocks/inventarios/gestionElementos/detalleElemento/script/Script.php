@@ -16,6 +16,16 @@ $funcion [$indice ++] = "jquery.dataTables.js";
 $funcion [$indice ++] = "jquery.dataTables.min.js";
 $funcion [$indice ++] = "timepicker.js";
 $funcion [$indice ++] = "jquery.dlmenu.js";
+$funcion [$indice ++] = "script.js";
+$funcion [$indice ++] = "jquery.autocomplete.js";
+
+
+$funcion [$indice ++] = "google.js";
+$funcion [$indice ++] = "fileinput.js";
+$funcion [$indice ++] = "fileinput.min.js";
+$funcion [$indice ++] = "fileinput_locale_es.js";
+$funcion [$indice ++] = "bootstrap.min.js";
+$funcion [$indice ++] = "bootstrap.js";
 
 $rutaBloque = $this->miConfigurador->getVariableConfiguracion ( "host" );
 $rutaBloque .= $this->miConfigurador->getVariableConfiguracion ( "site" );
@@ -41,5 +51,6 @@ if (isset ( $funcion [0] )) {
 }
 
 include ("ajax.php");
+
 
 ?>

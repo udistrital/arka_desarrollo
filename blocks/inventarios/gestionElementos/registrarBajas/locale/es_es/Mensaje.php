@@ -5,6 +5,11 @@ $this->idioma ["noDefinido"] = "Etiqueta no esta definida en locale/es_es/Mensaj
 $this->idioma ["informacion"] ="&nbsp&nbsp&nbspInformacion General: ";
 
 
+
+$this->idioma ["tipoBaja"] ="Tipo de Baja : ";
+$this->idioma ["tipoBajaTitulo"] ="Seleccione Tipo de  Baja";
+
+
 $this->idioma ["sede"] ="Sede : ";
 $this->idioma ["sedeTitulo"] ="Seleccione Sede";
 
@@ -12,6 +17,11 @@ $this->idioma ["sedeTitulo"] ="Seleccione Sede";
 $this->idioma ["observaciones"] ="Observaciones: ";
 $this->idioma ["observacionesTitulo"] ="Ingrese Observaciones ";
 
+$this->idioma ["ubicacion"] ="Ubicación Especifica : ";
+$this->idioma ["ubicacionTitulo"] ="Seleccione Ubicación";
+
+
+$this->idioma ["selecc_registros"] ="Selección Registros: ";
 
 
 $this->idioma ["documento"] ="Documento Denuncia: ";

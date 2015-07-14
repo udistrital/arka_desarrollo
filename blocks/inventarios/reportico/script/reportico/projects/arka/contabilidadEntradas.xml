@@ -17,7 +17,7 @@ FROM entrada
 JOIN estado_entrada on estado_entrada.id_estado=estado_entrada
 JOIN tipo_contrato ON tipo_contrato.id_tipo=tipo_contrato
 JOIN clase_entrada ON clase_entrada.id_clase=entrada.clase_entrada
-JOIN arka_parametros.arka_proveedor ON arka_parametros.arka_proveedor.&quot;PRO_NIT&quot;=cast(proveedor as character varying)
+LEFT JOIN arka_parametros.arka_proveedor ON arka_parametros.arka_proveedor.&quot;PRO_NIT&quot;=cast(proveedor as character varying)
 JOIN elemento ON elemento.id_entrada=entrada.id_entrada
 JOIN catalogo.catalogo_elemento ON catalogo.catalogo_elemento.elemento_id=nivel
 JOIN grupo.grupo_descripcion ON grupo.grupo_descripcion.grupo_id=cast(nivel as character varying)

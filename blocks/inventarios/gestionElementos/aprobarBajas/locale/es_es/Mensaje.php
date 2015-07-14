@@ -1,6 +1,21 @@
 <?php
 $this->idioma ["noDefinido"] = "Etiqueta no esta definida en locale/es_es/Mensaje.php";
 
+
+
+$this->idioma ["sede"] ="Sede : ";
+$this->idioma ["sedeTitulo"] ="Seleccione Sede";
+
+
+$this->idioma ["ubicacion"] ="Ubicación Especifica : ";
+$this->idioma ["ubicacionTitulo"] ="Seleccione Ubicación";
+
+$this->idioma ["dependencia"] ="Dependencia : ";
+$this->idioma ["dependenciaTitulo"] ="Seleccione Dependencia";
+
+$this->idioma ["selecc_registros"] ="Selección Registros: ";
+
+
 $this->idioma ["informacion"] ="&nbsp&nbsp&nbspInformacion General: ";
 
 $this->idioma ["observaciones"] ="Observaciones: ";

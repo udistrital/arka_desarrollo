@@ -67,7 +67,8 @@ class registrarForm {
 // ---------------- FIN SECCION: de Parámetros Generales del Formulario ----------------------------
 // ----------------INICIAR EL FORMULARIO ------------------------------------------------------------
         $atributos ['tipoEtiqueta'] = 'inicio';
-        echo $this->miFormulario->formulario($atributos); {
+        echo $this->miFormulario->formulario($atributos);
+        {
 // ---------------- SECCION: Controles del Formulario -----------------------------------------------
 
             $esteCampo = "marcoDatosBasicos";
@@ -76,14 +77,16 @@ class registrarForm {
             $atributos ['tipoEtiqueta'] = 'inicio';
             $atributos ["leyenda"] = "Registrar Cierre Contable";
             echo $this->miFormulario->marcoAgrupacion('inicio', $atributos);
-            unset($atributos); {
+            unset($atributos);
+            {
 
 
 //------------------------------ Nueva Agrupación -------------------------------------------------//
                 $esteCampo = "AgrupacionActa";
                 $atributos ['id'] = $esteCampo;
                 $atributos ['leyenda'] = "Registro de Información";
-                echo $this->miFormulario->agrupacion('inicio', $atributos); {
+                echo $this->miFormulario->agrupacion('inicio', $atributos);
+                {
 // ---------------- CONTROL: Cuadro de Texto --------------------------------------------------------
                     $esteCampo = 'fecha_registro';
                     $atributos ['id'] = $esteCampo;
@@ -134,6 +137,14 @@ class registrarForm {
                     $atributos ['anchoEtiqueta'] = 220;
                     $atributos ['cadena_sql'] = $this->miSql->getCadenaSql("vigencia");
                     $matrizItems = $esteRecursoDB->ejecutarAcceso($atributos ['cadena_sql'], "busqueda");
+                    $arreglo = array(
+                        array(
+                            '',
+                            'Sin Entradas Registradas'
+                        )
+                    );
+
+                    $matrizItems = $matrizItems[0][0] != '' ? $matrizItems : $arreglo;
                     $atributos ['matrizItems'] = $matrizItems;
 
                     // Utilizar lo siguiente cuando no se pase un arreglo:

@@ -26,11 +26,23 @@
         });
 
         
+         $('#<?php echo $this->campoSeguro('vigencia')?>').width(370);
          $("#<?php echo $this->campoSeguro('vigencia')?>").select2({
-             	 placeholder: "Search for a repository",
+             	 placeholder: "Ingrese Mínimo 2 Caracteres de Búsqueda",
               	 minimumInputLength: 2,
               	 });
 
+         
+          $('#<?php echo $this->campoSeguro('sede')?>').width(210);
+$("#<?php echo $this->campoSeguro('sede')?>").select2(); 
+$('#<?php echo $this->campoSeguro('dependencia')?>').width(210);
+$("#<?php echo $this->campoSeguro('dependencia')?>").select2(); 
+
+$('#<?php echo $this->campoSeguro('selecc_registros')?>').width(250);
+             	$("#<?php echo $this->campoSeguro('selecc_registros')?>").select2();
+
+$("#<?php echo $this->campoSeguro('ubicacion')?>").select2();
+         
                 
                         
         $('#<?php echo $this->campoSeguro('fecha_inicio')?>').datepicker({

@@ -20,6 +20,14 @@ $enlacePrincipal ['urlCodificada'] = $this->miConfigurador->fabricaConexiones->c
 $enlacePrincipal ['nombre'] = "Inicio";
 
 
+// Reposición Elementos
+$enlacereposicionElementos ['enlace'] = "pagina=registrarReposicion";
+$enlacereposicionElementos ['enlace'] .= "&usuario=" . $miSesion->getSesionUsuarioId();
+
+$enlacereposicionElementos ['urlCodificada'] = $this->miConfigurador->fabricaConexiones->crypto->codificar_url($enlacereposicionElementos ['enlace'], $directorio);
+$enlacereposicionElementos ['nombre'] = "Reposición Elemento";
+
+
 // Consulta General
 $enlaceConsultaGeneral ['enlace'] = "pagina=consultaGeneral";
 $enlaceConsultaGeneral ['enlace'] .= "&usuario=" . $miSesion->getSesionUsuarioId();
@@ -63,7 +71,7 @@ $enlacegestionContrato['enlace'] = "pagina=gestionContrato";
 $enlacegestionContrato['enlace'] .= "&usuario=" . $miSesion->getSesionUsuarioId();
 
 $enlacegestionContrato['urlCodificada'] = $this->miConfigurador->fabricaConexiones->crypto->codificar_url($enlacegestionContrato ['enlace'], $directorio);
-$enlacegestionContrato['nombre'] = "Contratos Vicerrectoría";
+$enlacegestionContrato['nombre'] = "Contratos";
 
 // Gestionar Acta de Recibido
 
@@ -352,7 +360,7 @@ if ($nivel == '0') {
                             </ul>
                         </div>
                         <div>
-                            <h4>Contratos Vicerrectoría</h4>
+                            <h4>Contratos</h4>
                             <ul>
                                 <li><a href="<?php echo $enlacegestionContrato['urlCodificada'] ?>"><?php echo $enlacegestionContrato['nombre'] ?></a></li>
                             </ul>
@@ -421,6 +429,7 @@ if ($nivel == '0') {
                                 <li><a href="<?php echo $enlaceSobranteFlatanteElementos['urlCodificada'] ?>"><?php echo $enlaceSobranteFlatanteElementos['nombre'] ?></a></li>
                                 <li><a href="<?php echo $enlaceBajasElementos['urlCodificada'] ?>"><?php echo $enlaceBajasElementos['nombre'] ?></a></li>
                                 <li><a href="<?php echo $enlaceAprobarBajas['urlCodificada'] ?>"><?php echo $enlaceAprobarBajas['nombre'] ?></a></li>
+<li><a href="<?php echo $enlacereposicionElementos['urlCodificada'] ?>"><?php echo $enlacereposicionElementos['nombre'] ?></a></li>
                             </ul>
                         </div>
 
