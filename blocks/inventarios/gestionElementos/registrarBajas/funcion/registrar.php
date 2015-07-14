@@ -96,7 +96,7 @@ class RegistradorOrden {
 //        $max_id_baja = $max_id_baja[0][0] + 1;
 
         $count = 0;
-
+ 
         foreach ($elementos as $key => $values) {
             $cadenaSql = $this->miSql->getCadenaSql('consultar_informacion', $elementos[$key]);
             
@@ -112,8 +112,8 @@ class RegistradorOrden {
                 'fecha' => $fechaActual,
                 'sede' => $elemento[0]['cod_sede'],
                 'ubicacion' => $elemento[0]['cod_ubicacion'],
+            	'tipo_baja'=>$_REQUEST['tipoBaja']	
             );
-            
             
             $cadenaSql = $this->miSql->getCadenaSql('insertar_baja', $arreglo);
             
