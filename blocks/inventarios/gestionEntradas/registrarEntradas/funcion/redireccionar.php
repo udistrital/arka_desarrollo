@@ -16,7 +16,8 @@ class redireccion {
 				$variable = "pagina=" . $miPaginaActual;
 				$variable .= "&opcion=mensaje";
 				$variable .= "&mensaje=inserto";
-				$variable .= "&numero_entrada=" . $valor;
+				$variable .= "&consecutivo=" . $valor [1];
+				$variable .= "&numero_entrada=" . $valor [0];
 				break;
 			
 			case "noInserto" :
@@ -26,7 +27,6 @@ class redireccion {
 				
 				break;
 			
-						
 			case "NoObservaciones" :
 				$variable = "pagina=" . $miPaginaActual;
 				$variable .= "&opcion=mensaje";
@@ -41,6 +41,27 @@ class redireccion {
 			
 			case "paginaPrincipal" :
 				$variable = "pagina=" . $miPaginaActual;
+				
+				break;
+			
+			case "Registrar" :
+				
+				$variable = "pagina=" . $miPaginaActual;
+				$variable .= "&opcion=Entrada";
+				break;
+			
+			case "Salir" :
+				
+				$variable = "pagina=" . $miPaginaActual;
+				$variable .= "&opcion=indexAlmacen";
+				break;
+			
+			case "CargarElemento" :
+				
+				$variable = "pagina=registrarElemento";
+				$variable .= "&opcion=cargarElemento";
+				$variable .= "&entradaDirecta=".TRUE;
+				$variable .= "&numero_entrada=".$valor;
 				break;
 		}
 		

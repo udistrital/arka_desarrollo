@@ -1,5 +1,5 @@
 <?php
-use inventarios\gestionCompras\registrarOrdenCompra\Sql;
+
 
 $conexion = "inventarios";
 $esteRecursoDB = $this->miConfigurador->fabricaConexiones->getRecursoDB ( $conexion );
@@ -34,11 +34,10 @@ if (isset ( $_REQUEST ['funcion'] ) && $_REQUEST ['funcion'] == 'estado') {
 
 if ($_REQUEST ['funcion'] == 'SeleccionOrdenador') {
 
-	$conexion = "sicapital";
-	$esteRecursoDBO = $this->miConfigurador->fabricaConexiones->getRecursoDB ( $conexion );
+	
 
-	$cadenaSql = $this->sql->getCadenaSql ( 'informacion_ordenador', $_REQUEST ['ordenador'] );
-	$resultadoItems = $esteRecursoDBO->ejecutarAcceso ( $cadenaSql, "busqueda" );
+	$cadenaSql = $this->sql->getCadenaSql ( 'informacion_ordenadorConsultados', $_REQUEST ['ordenador'] );
+	$resultadoItems = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
 
 	$resultado = json_encode ( $resultadoItems [0] );
 
@@ -47,14 +46,12 @@ if ($_REQUEST ['funcion'] == 'SeleccionOrdenador') {
 
 if ($_REQUEST ['funcion'] == 'consultarDependencia') {
 
-	$conexion = "sicapital";
 
-	$esteRecursoDBO = $this->miConfigurador->fabricaConexiones->getRecursoDB ( $conexion );
 
 
 	$cadenaSql = $this->sql->getCadenaSql ( 'dependenciasConsultadas', $_REQUEST['valor'] );
 
-	$resultado = $esteRecursoDBO->ejecutarAcceso ( $cadenaSql, "busqueda" );
+	$resultado = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
 
 
 	$resultado = json_encode ( $resultado);
@@ -79,6 +76,31 @@ if ($_REQUEST ['funcion'] == 'consultarActa') {
 
 	echo $resultado;
 }
+
+
+if ($_REQUEST ['funcion'] == 'consultaProveedor') {
+
+
+
+
+	$cadenaSql = $this->sql->getCadenaSql ( 'buscar_Proveedores', $_GET ['query'] );
+
+	$resultadoItems = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
+
+	foreach ( $resultadoItems as $key => $values ) {
+		$keys = array (
+				'value',
+				'data'
+		);
+		$resultado [$key] = array_intersect_key ( $resultadoItems [$key], array_flip ( $keys ) );
+	}
+
+	echo '{"suggestions":' . json_encode ( $resultado ) . '}';
+}
+
+
+
+
 
 
 

@@ -1,0 +1,21 @@
+$atributos ["id"] = "nombre_div";
+$atributos ["estiloEnLinea"] = "display:none";
+$atributos = array_merge ( $atributos, $atributosGlobales );
+echo $this->miFormulario->division ( "inicio", $atributos );
+unset ( $atributos );
+	{
+
+**cualquier campo texto o select 
+
+
+
+
+	}
+echo $this->miFormulario->division ( "fin" );
+				
+
+
+En el Ready.js
+
+$("#<?php echo $this->campoSeguro('nombre_div')?>").css('display','none');  
+$("#<?php echo $this->campoSeguro('nombre_div')?>").css('display','block');

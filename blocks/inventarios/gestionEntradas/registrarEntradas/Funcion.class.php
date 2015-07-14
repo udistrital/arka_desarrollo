@@ -51,13 +51,10 @@ class Funcion {
 	function ConsultarOrden() {
 		include_once ($this->ruta . "funcion/ConsultarOrden.php");
 	}
-	function registrarEntrada () {
-		
+	function registrarEntrada() {
 		include_once ($this->ruta . "funcion/registrar.php");
 	}
-	
 	function action() {
-		 
 		
 		// Evitar qu44444444rrrre se ingrese codigo HTML y PHP en los campos de texto
 		// Campos que se quieren excluir de la limpieza de código. Formato: nombreCampo1|nombreCampo2|nombreCampo3
@@ -73,18 +70,38 @@ class Funcion {
 		if (isset ( $_REQUEST ['procesarAjax'] )) {
 			$this->procesarAjax ();
 		} elseif (isset ( $_REQUEST ["opcion"] )) {
-		 
-			if (isset ( $_REQUEST ["redireccionar"])&&$_REQUEST ['redireccionar'] == 'regresar') {
-				redireccion::redireccionar($_REQUEST['opcion']);
+			
+			if (isset ( $_REQUEST ["redireccionar"] ) && $_REQUEST ['redireccionar'] == 'regresar') {
+				redireccion::redireccionar ( $_REQUEST ['opcion'] );
 			}
 			
-			
-			if ($_REQUEST ['opcion'] == 'registrar') {
-				 			
-				$this->registrarEntrada ();
+			switch ($_REQUEST ['opcion']) {
+				
+				case 'registrar' :
+					$this->registrarEntrada ();
+					break;
+				
+				case 'redireccionar' :
+					
+					if (isset ( $_REQUEST ["botonRegistrar"] ) && $_REQUEST ['botonRegistrar'] == 'true') {
+						
+						redireccion::redireccionar ( 'Registrar' );
+					}
+					
+					if (isset ( $_REQUEST ["botonContinuar"] ) && $_REQUEST ['botonContinuar'] == 'true') {
+						
+						redireccion::redireccionar ( 'Salir' );
+						exit;
+					}
+					
+					if (isset ( $_REQUEST ["botonCargarElemento"] ) && $_REQUEST ['botonCargarElemento'] == 'true') {
+						
+						redireccion::redireccionar ( 'CargarElemento', $_REQUEST ['id_entrada'] );
+						exit;
+					}
+					
+					break;
 			}
-
-
 		}
 	}
 	function __construct() {

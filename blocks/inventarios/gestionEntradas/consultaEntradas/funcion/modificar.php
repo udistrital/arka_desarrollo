@@ -29,13 +29,15 @@ class RegistradorOrden {
     }
 
     function procesarFormulario() {
+    	     
         $conexion = "inventarios";
         $esteRecursoDB = $this->miConfigurador->fabricaConexiones->getRecursoDB($conexion);
 
         $arreglo = unserialize(base64_decode($_REQUEST['datos_entradas']));
-
+        
         foreach ($arreglo as $key => $values) {
             $arreglo[$key]['estadoNuevo'] = $_REQUEST['estado'];
+            $arreglo[$key]['estadoRegistro'] = ($_REQUEST['estado']==3)?'false':'true';
             $cadenaSql = $this->miSql->getCadenaSql('actualizarEstado', $arreglo[$key]);
             $modificar = $esteRecursoDB->ejecutarAcceso($cadenaSql, "insertar");
 
@@ -44,21 +46,18 @@ class RegistradorOrden {
             }
         }
 
+        
+        
         if ($modificar != false) {
+        	
             \inventarios\gestionEntradas\consultaEntradas\funcion\redireccion::redireccionar('inserto', false);
+            exit;
         } else {
             \inventarios\gestionEntradas\consultaEntradas\funcion\redireccion::redireccionar('noInserto');
+            exit;
         }
     }
 
-    function resetForm() {
-        foreach ($_REQUEST as $clave => $valor) {
-
-            if ($clave != 'pagina' && $clave != 'development' && $clave != 'jquery' && $clave != 'tiempo') {
-                unset($_REQUEST [$clave]);
-            }
-        }
-    }
 
 }
 

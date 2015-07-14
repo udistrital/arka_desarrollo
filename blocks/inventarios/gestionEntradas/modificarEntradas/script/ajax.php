@@ -82,6 +82,31 @@ $urlFinal17 = $url . $cadena17;
 
 
 
+
+
+// Variables
+$cadenaACodificarProveedor = "pagina=" . $this->miConfigurador->getVariableConfiguracion ( "pagina" );
+$cadenaACodificarProveedor .= "&procesarAjax=true";
+$cadenaACodificarProveedor .= "&action=index.php";
+$cadenaACodificarProveedor .= "&bloqueNombre=" . $esteBloque ["nombre"];
+$cadenaACodificarProveedor .= "&bloqueGrupo=" . $esteBloque ["grupo"];
+$cadenaACodificarProveedor .= "&funcion=consultaProveedor";
+$cadenaACodificarProveedor .= "&tiempo=" . $_REQUEST ['tiempo'];
+
+
+
+// Codificar las variables
+$enlace = $this->miConfigurador->getVariableConfiguracion ( "enlace" );
+$cadena = $this->miConfigurador->fabricaConexiones->crypto->codificar_url ( $cadenaACodificarProveedor, $enlace );
+
+// URL definitiva
+$urlFinalProveedor = $url . $cadena;
+
+
+
+
+
+
 ?>
 <script type='text/javascript'>
 
@@ -106,6 +131,11 @@ function consultarActa(elem, request, response){
 	            $('#<?php echo $this->campoSeguro('dependencia')?>').width(300);
 	            $("#<?php echo $this->campoSeguro('dependencia')?> option[value="+ data['dependencia'] +"]").attr("selected",true);
 	            $("#<?php echo $this->campoSeguro('dependencia')?>").select2();
+
+
+	            $("#<?php echo $this->campoSeguro('numero_contrato')?>").val(data['numero_contrato']);
+	            $("#<?php echo $this->campoSeguro('fecha_contrato')?>").val(data['fecha_contrato']);
+
 	        	
 	        	$("#<?php echo $this->campoSeguro('asignacionOrdenador')?> option[value="+ data['ordenador_gasto'] +"]").attr("selected",true);
 	        	$("#<?php echo $this->campoSeguro('asignacionOrdenador')?>").select2();
@@ -136,7 +166,7 @@ function consultarDependencia(elem, request, response){
 	            $("<option value=''>Seleccione  ....</option>").appendTo("#<?php echo $this->campoSeguro('dependencia')?>");
 	            $.each(data , function(indice,valor){
 
-	            	$("<option value='"+data[ indice ].ESF_ID_ESPACIO+"'>"+data[ indice ].ESF_NOMBRE_ESPACIO+"</option>").appendTo("#<?php echo $this->campoSeguro('dependencia')?>");
+	            	$("<option value='"+data[ indice ].ESF_CODIGO_DEP+"'>"+data[ indice ].ESF_DEP_ENCARGADA+"</option>").appendTo("#<?php echo $this->campoSeguro('dependencia')?>");
 	            	
 	            });
 	            
@@ -194,21 +224,19 @@ function estado(elem, request, response){
 		    data: { ordenador:$("#<?php echo $this->campoSeguro('asignacionOrdenador')?>").val()},
 		    success: function(data){ 
 
-		    		if(data[0]!='null'){
+		    	if(data[0]!='null'){
 
-		    			$("#<?php echo $this->campoSeguro('nombreOrdenador')?>").val(data[0]);
-		    			$("#<?php echo $this->campoSeguro('id_ordenador')?>").val(data[1]);
-		    			$("#<?php echo $this->campoSeguro('tipo_ordenador')?>").val(data[2]);
-		    			$("#<?php echo $this->campoSeguro('identificacion_ordenador')?>").val
-								    			
-			    		}else{
+	    			$("#<?php echo $this->campoSeguro('nombreOrdenador')?>").val(data[0]);
+	    			$("#<?php echo $this->campoSeguro('id_ordenador')?>").val(data[1]);
+	    			$("#<?php echo $this->campoSeguro('tipo_ordenador')?>").val(data[2]);
+	    			$("#<?php echo $this->campoSeguro('identificacion_ordenador')?>").val(data[1]);		    			
+		    		}else{
 
-					
+				
 
 
-				    		
-			    		}
-
+			    		
+		    		}
 		    }
 			                    
 		   });
@@ -216,6 +244,32 @@ function estado(elem, request, response){
 	
     $(function () {
 
+
+
+        $( "#<?php echo $this->campoSeguro('proveedor')?>" ).keyup(function() {
+
+        	
+    	$('#<?php echo $this->campoSeguro('proveedor') ?>').val($('#<?php echo $this->campoSeguro('proveedor') ?>').val().toUpperCase());
+
+    	
+            });
+
+
+
+
+        $("#<?php echo $this->campoSeguro('proveedor') ?>").autocomplete({
+        	minChars: 3,
+        	serviceUrl: '<?php echo $urlFinalProveedor; ?>',
+        	onSelect: function (suggestion) {
+            	
+        	        $("#<?php echo $this->campoSeguro('id_proveedor') ?>").val(suggestion.data);
+        	    }
+                    
+        });
+        
+  
+
+    	
 
     	 $("#<?php echo $this->campoSeguro('acta_recibido')?>").change(function(){
            	if($("#<?php echo $this->campoSeguro('acta_recibido')?>").val()!=''){
@@ -257,6 +311,7 @@ function estado(elem, request, response){
     $("#<?php echo $this->campoSeguro('asignacionOrdenador')?>").change(function(){
     	
     	if($("#<?php echo $this->campoSeguro('asignacionOrdenador')?>").val()!=''){
+        	
     		datosOrdenador();
 		}else{
 			$("#<?php echo $this->campoSeguro('nombreOrdenador')?>").val('');

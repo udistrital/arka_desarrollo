@@ -150,8 +150,10 @@ class Sql extends \Sql {
 			 */
 			
 			case "buscar_entradas" :
-				$cadenaSql = " SELECT id_entrada valor, consecutivo||' - ('||entrada.vigencia||')' descripcion  ";
-				$cadenaSql .= " FROM entrada; ";
+				$cadenaSql = " SELECT DISTINCT id_entrada valor, consecutivo||' - ('||entrada.vigencia||')' descripcion  ";
+				$cadenaSql .= " FROM entrada  ";
+				$cadenaSql .= "WHERE entrada.cierre_contable='f' ";
+				$cadenaSql .= "ORDER BY id_entrada DESC ;";
 				break;
 			
 			case "proveedor_informacion" :
@@ -162,8 +164,8 @@ class Sql extends \Sql {
 				break;
 			
 			case "proveedores" :
-				$cadenaSql = " SELECT PRO_NIT,PRO_NIT||' - '||PRO_RAZON_SOCIAL AS proveedor ";
-				$cadenaSql .= " FROM PROVEEDORES ";
+				$cadenaSql = " SELECT \"PRO_NIT\",\"PRO_NIT\"||' - '||\"PRO_RAZON_SOCIAL\" AS proveedor ";
+				$cadenaSql .= " FROM arka_parametros.arka_proveedor ";
 				
 				break;
 			
@@ -174,8 +176,9 @@ class Sql extends \Sql {
 				$cadenaSql .= "FROM entrada ";
 				$cadenaSql .= "JOIN clase_entrada ON clase_entrada.id_clase = entrada.clase_entrada ";
 				$cadenaSql .= "JOIN estado_entrada ON estado_entrada.id_estado = entrada.estado_entrada ";
-				$cadenaSql .= "JOIN elemento ON elemento.id_entrada = entrada.id_entrada ";
+// 				$cadenaSql .= "JOIN elemento ON elemento.id_entrada = entrada.id_entrada ";
 				$cadenaSql .= "WHERE 1=1 ";
+				$cadenaSql .= "AND entrada.cierre_contable='".$variable[5]."' ";
 				
 				if ($variable [0] != '') {
 					$cadenaSql .= " AND entrada.id_entrada = '" . $variable [0] . "'";
@@ -192,6 +195,8 @@ class Sql extends \Sql {
 				if ($variable [4] != '') {
 					$cadenaSql .= " AND entrada.proveedor = '" . $variable [4] . "'";
 				}
+				$cadenaSql .= "ORDER BY entrada.id_entrada DESC ; ";
+				
 				
 				break;
 			
@@ -208,7 +213,7 @@ class Sql extends \Sql {
 				$cadenaSql .= " ,estado_entrada.descripcion estado";
 				$cadenaSql .= " FROM entrada ";
 				$cadenaSql .= " JOIN clase_entrada ON clase_entrada.id_clase = entrada.clase_entrada ";
-                                $cadenaSql .= " JOIN estado_entrada ON estado_entrada.id_estado = entrada.estado_entrada ";
+				$cadenaSql .= " JOIN estado_entrada ON estado_entrada.id_estado = entrada.estado_entrada ";
 				$cadenaSql .= " WHERE ";
 				$cadenaSql .= " id_entrada = '" . $variable . "';";
 				
@@ -217,9 +222,10 @@ class Sql extends \Sql {
 			case "actualizarEstado" :
 				$cadenaSql = " UPDATE entrada ";
 				$cadenaSql .= " SET estado_entrada='" . $variable ['estadoNuevo'] . "', ";
-                                $cadenaSql .= " fecha_registro='" . $variable ['fechaRegistro'] . "' ";
+				$cadenaSql .= " fecha_registro='" . $variable ['fechaRegistro'] . "', ";
+				$cadenaSql .= " estado_registro='" . $variable ['estadoRegistro'] . "' ";
 				$cadenaSql .= "  WHERE id_entrada='" . $variable ['numeroEntrada'] . "' ";
-				//$cadenaSql .= "  RETURNING  consecutivo||' - ('||entrada.vigencia||')' entrada ; ";
+				// $cadenaSql .= " RETURNING consecutivo||' - ('||entrada.vigencia||')' entrada ; ";
 				break;
 		}
 		return $cadenaSql;

@@ -16,6 +16,16 @@ $this->idioma ["acta_recibido"] ="Acta Recibido: ";
 $this->idioma ["acta_recibidoTitulo"] ="Seleccionar Acta Recibido";
 
 
+$this->idioma ["estado_contable"] ="Estado Contabilidad: ";
+$this->idioma ["estado_contableTitulo"] ="Seleccionar Estado Contabilidad";
+
+
+$this->idioma ["selecc_registros"] ="Selección Registros: ";
+
+
+
+
+
 
 $this->idioma ["fecha_inicio"] ="Fecha Inicial : ";
 $this->idioma ["fecha_inicioTitulo"] ="Seleccione Fecha Inicial";

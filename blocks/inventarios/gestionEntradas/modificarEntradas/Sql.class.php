@@ -149,15 +149,21 @@ class Sql extends \Sql {
 			 * Clausulas Del Caso Uso.
 			 */
 			
-			case "buscar_entradas" :
-				$cadenaSql = " SELECT id_entrada valor,id_entrada descripcion  ";
-				$cadenaSql .= " FROM entrada; ";
+			case "buscar_Proveedores" :
+				$cadenaSql = " SELECT \"PRO_NIT\"||' - ('||\"PRO_RAZON_SOCIAL\"||')' AS  value,\"PRO_NIT\"  AS data  ";
+				$cadenaSql .= " FROM arka_parametros.arka_proveedor  ";
+				$cadenaSql .= "WHERE cast(\"PRO_NIT\" as text) LIKE '%" . $variable . "%' ";
+				$cadenaSql .= "OR \"PRO_RAZON_SOCIAL\" LIKE '%" . $variable . "%' LIMIT 10; ";
+				
 				break;
 			
-			case "proveedor_informacion" :
-				$cadenaSql = " SELECT PRO_NIT,PRO_RAZON_SOCIAL  ";
-				$cadenaSql .= " FROM PROVEEDORES ";
-				$cadenaSql .= " WHERE PRO_NIT='" . $variable . "'";
+			case "buscar_entradas" :
+				$cadenaSql = "SELECT DISTINCT entrada.id_entrada, entrada.consecutivo||' - ('||entrada.vigencia||')' entradas ";
+				$cadenaSql .= "FROM entrada  ";
+				$cadenaSql .= "WHERE cierre_contable ='f' ";
+				$cadenaSql .= "AND   estado_entrada = 1  ";
+				$cadenaSql .= "AND estado_registro='t' ";
+				$cadenaSql .= "ORDER BY id_entrada DESC ";
 				
 				break;
 			
@@ -170,8 +176,8 @@ class Sql extends \Sql {
 				break;
 			
 			case "proveedores" :
-				$cadenaSql = " SELECT PRO_NIT,PRO_NIT||' - '||PRO_RAZON_SOCIAL AS proveedor ";
-				$cadenaSql .= " FROM PROVEEDORES ";
+				$cadenaSql = " SELECT \"PRO_NIT\",\"PRO_NIT\"||' - '||\"PRO_RAZON_SOCIAL\" AS proveedor ";
+				$cadenaSql .= " FROM arka_parametros.arka_proveedor ";
 				
 				break;
 			case "tipo_contrato_avance" :
@@ -186,7 +192,19 @@ class Sql extends \Sql {
 				
 				$cadenaSql = "SELECT ";
 				$cadenaSql .= "id_clase, descripcion  ";
-				$cadenaSql .= "FROM clase_entrada;";
+				$cadenaSql .= "FROM clase_entrada ";
+				$cadenaSql .= "WHERE id_clase > 1 ";
+				$cadenaSql .= "ORDER BY  descripcion ASC  ;";
+				
+				break;
+			
+			case "clase_entrada_consulta" :
+				
+				$cadenaSql = "SELECT ";
+				$cadenaSql .= "id_clase, descripcion  ";
+				$cadenaSql .= "FROM clase_entrada ";
+// 				$cadenaSql .= "WHERE id_clase > 1 ";
+				$cadenaSql .= "ORDER BY  descripcion ASC  ;";
 				
 				break;
 			
@@ -194,32 +212,29 @@ class Sql extends \Sql {
 				
 				$cadenaSql = "SELECT ";
 				$cadenaSql .= "id_tipo, descripcion  ";
-				$cadenaSql .= "FROM tipo_contrato;";
-				
-				break;
-			
-			case "proveedor" :
-				
-				$cadenaSql = "SELECT ";
-				$cadenaSql .= "id_proveedor, razon_social ";
-				$cadenaSql .= "FROM proveedor;";
+				$cadenaSql .= "FROM tipo_contrato ";
+				$cadenaSql .= "WHERE id_tipo > 0;";
 				
 				break;
 			
 			case "consultarEntrada" :
 				$cadenaSql = "SELECT DISTINCT ";
-				$cadenaSql .= "id_entrada, fecha_registro,  ";
-				$cadenaSql .= " descripcion,proveedor ,consecutivo  ";
+				$cadenaSql .= "entrada.id_entrada, entrada.fecha_registro,  ";
+				$cadenaSql .= " descripcion,pr.\"PRO_NIT\" as nit ,consecutivo||' - ('||entrada.vigencia||')' consecutivo , cierre_contable, pr.\"PRO_RAZON_SOCIAL\" as razon_social ";
 				$cadenaSql .= "FROM entrada ";
 				$cadenaSql .= "JOIN clase_entrada ON clase_entrada.id_clase = entrada.clase_entrada ";
-				// $cadenaSql .= "JOIN proveedor ON proveedor.id_proveedor = entrada.proveedor ";
+				$cadenaSql .= "LEFT JOIN arka_parametros.arka_proveedor pr ON pr.\"PRO_NIT\" = CAST(entrada.proveedor AS CHAR(50)) ";
 				$cadenaSql .= "WHERE 1=1 ";
+				$cadenaSql .= "AND entrada.cierre_contable='f' ";
+				$cadenaSql .= "AND entrada.estado_entrada = 1 ";
+				$cadenaSql .= "AND entrada.estado_registro='t' ";
+				
 				if ($variable [0] != '') {
-					$cadenaSql .= " AND id_entrada = '" . $variable [0] . "'";
+					$cadenaSql .= " AND entrada.id_entrada = '" . $variable [0] . "'";
 				}
 				
 				if ($variable [1] != '') {
-					$cadenaSql .= " AND fecha_registro BETWEEN CAST ( '" . $variable [1] . "' AS DATE) ";
+					$cadenaSql .= " AND entrada.fecha_registro BETWEEN CAST ( '" . $variable [1] . "' AS DATE) ";
 					$cadenaSql .= " AND  CAST ( '" . $variable [2] . "' AS DATE)  ";
 				}
 				
@@ -243,8 +258,10 @@ class Sql extends \Sql {
 				$cadenaSql = "SELECT DISTINCT ";
 				$cadenaSql .= " vigencia, clase_entrada, info_clase , ";
 				$cadenaSql .= "	tipo_contrato, numero_contrato, fecha_contrato, proveedor,";
-				$cadenaSql .= "numero_factura, fecha_factura, observaciones, acta_recibido , ordenador, sede, dependencia, supervisor ,tipo_ordenador, identificacion_ordenador ";
+				$cadenaSql .= "numero_factura, fecha_factura, observaciones, acta_recibido , ordenador, sede, dependencia, supervisor ,tipo_ordenador, identificacion_ordenador,
+						 \"PRO_NIT\"||' - ('||\"PRO_RAZON_SOCIAL\"||')' AS  nom_razon ";
 				$cadenaSql .= "FROM entrada ";
+				$cadenaSql .= "LEFT JOIN arka_parametros.arka_proveedor ap ON ap.\"PRO_NIT\"=CAST(entrada.proveedor AS CHAR(50))";
 				$cadenaSql .= "WHERE id_entrada='" . $variable . "';";
 				
 				break;
@@ -255,31 +272,42 @@ class Sql extends \Sql {
 				
 				break;
 			
-			case "tipoComprador" :
-				
-				$cadenaSql = " 	SELECT ORG_IDENTIFICADOR, ORG_ORDENADOR_GASTO ";
-				$cadenaSql .= " FROM ORDENADORES_GASTO ";
-				$cadenaSql .= " WHERE ORG_ESTADO='A' ";
-				
-				break;
-			
 			case "sede" :
-				$cadenaSql = "SELECT DISTINCT  ESF_ID_SEDE, ESF_SEDE ";
-				$cadenaSql .= " FROM ESPACIOS_FISICOS ";
-				$cadenaSql .= " WHERE   ESF_ESTADO='A'";
+				$cadenaSql = "SELECT DISTINCT  \"ESF_ID_SEDE\", \"ESF_SEDE\" ";
+				$cadenaSql .= " FROM arka_parametros.arka_sedes ";
+				$cadenaSql .= " WHERE   \"ESF_ESTADO\"='A' ";
+				$cadenaSql .= " AND    \"ESF_COD_SEDE\" >  0 ";
 				
 				break;
 			case "informacion_ordenador" :
-				$cadenaSql = " SELECT ORG_NOMBRE,ORG_IDENTIFICADOR,ORG_TIPO_ORDENADOR,ORG_IDENTIFICACION  ";
-				$cadenaSql .= " FROM ORDENADORES_GASTO ";
-				$cadenaSql .= " WHERE  ORG_IDENTIFICADOR='" . $variable . "' ";
-				$cadenaSql .= " AND ORG_ESTADO='A' ";
+				$cadenaSql = " SELECT \"ORG_NOMBRE\",\"ORG_IDENTIFICACION\",\"ORG_TIPO_ORDENADOR\",\"ORG_IDENTIFICACION\" as identificacion   ";
+				$cadenaSql .= " FROM arka_parametros.arka_ordenadores ";
+				$cadenaSql .= " WHERE  \"ORG_IDENTIFICACION\"='" . $variable [0] . "' ";
+				$cadenaSql .= " AND \"ORG_TIPO_ORDENADOR\"='" . $variable [1] . "' ";
+				
+				break;
+			
+			case "tipoComprador" :
+				
+				$cadenaSql = " 	SELECT \"ORG_IDENTIFICACION\", \"ORG_ORDENADOR_GASTO\" ";
+				$cadenaSql .= " FROM arka_parametros.arka_ordenadores ";
+				$cadenaSql .= " WHERE \"ORG_ESTADO\"='A' ";
+				
+				break;
+			
+			case "informacion_ordenadorConsultados" :
+				$cadenaSql = " SELECT \"ORG_NOMBRE\",\"ORG_IDENTIFICACION\",\"ORG_TIPO_ORDENADOR\",\"ORG_IDENTIFICACION\" as identificacion   ";
+				$cadenaSql .= " FROM arka_parametros.arka_ordenadores ";
+				$cadenaSql .= " WHERE  \"ORG_IDENTIFICACION\"='" . $variable . "' ";
+				$cadenaSql .= " AND \"ORG_ESTADO\"='A' ";
 				break;
 			
 			case "dependencias" :
-				$cadenaSql = "SELECT DISTINCT  ESF_ID_ESPACIO, ESF_NOMBRE_ESPACIO ";
-				$cadenaSql .= " FROM ESPACIOS_FISICOS ";
-				$cadenaSql .= " WHERE  ESF_ESTADO='A' ";
+				$cadenaSql = "SELECT DISTINCT  \"ESF_CODIGO_DEP\" , \"ESF_DEP_ENCARGADA\" ";
+				$cadenaSql .= " FROM arka_parametros.arka_dependencia ad ";
+				$cadenaSql .= " JOIN  arka_parametros.arka_espaciosfisicos ef ON  ef.\"ESF_ID_ESPACIO\"=ad.\"ESF_ID_ESPACIO\" ";
+				$cadenaSql .= " JOIN  arka_parametros.arka_sedes sa ON sa.\"ESF_COD_SEDE\"=ef.\"ESF_COD_SEDE\" ";
+				$cadenaSql .= " WHERE ad.\"ESF_ESTADO\"='A'";
 				break;
 			case "consultarReposicion" :
 				
@@ -400,6 +428,23 @@ class Sql extends \Sql {
 				
 				break;
 			
+			case "insertarInformación" :
+				$cadenaSql = " INSERT INTO info_clase_entrada(  ";
+				$cadenaSql .= " observacion, id_entrada, id_salida, id_hurto,";
+				$cadenaSql .= " num_placa, val_sobrante, ruta_archivo, nombre_archivo)";
+				$cadenaSql .= " VALUES (";
+				$cadenaSql .= "'" . $variable [0] . "',";
+				$cadenaSql .= "'" . $variable [1] . "',";
+				$cadenaSql .= "'" . $variable [2] . "',";
+				$cadenaSql .= "'" . $variable [3] . "',";
+				$cadenaSql .= "'" . $variable [4] . "',";
+				$cadenaSql .= "'" . $variable [5] . "',";
+				$cadenaSql .= "'" . $variable [6] . "',";
+				$cadenaSql .= "'" . $variable [7] . "') ";
+				$cadenaSql .= "RETURNING  id_info_clase; ";
+				
+				break;
+			
 			case "actualizarInformacion" :
 				$cadenaSql = " UPDATE info_clase_entrada ";
 				$cadenaSql .= " SET observacion= '" . $variable [0] . "', ";
@@ -424,15 +469,16 @@ class Sql extends \Sql {
 				$cadenaSql .= "  fecha_factura='" . $variable [7] . "', ";
 				$cadenaSql .= "  observaciones='" . $variable [8] . "', ";
 				$cadenaSql .= "  acta_recibido='" . $variable [10] . "', ";
-				$cadenaSql .= "  ordenador='" . $variable [11] . "', ";
+				$cadenaSql .= "  ordenador=" . $variable [11] . ", ";
 				$cadenaSql .= "  sede='" . $variable [12] . "', ";
 				$cadenaSql .= "  dependencia='" . $variable [13] . "', ";
 				$cadenaSql .= "  supervisor='" . $variable [14] . "', ";
-				$cadenaSql .= "  tipo_ordenador='" . $variable [15] . "', ";
-				$cadenaSql .= "  identificacion_ordenador='" . $variable [16] . "', ";
+				$cadenaSql .= "  tipo_ordenador=" . $variable [15] . ", ";
+				$cadenaSql .= "  identificacion_ordenador=" . $variable [16] . ", ";
+				$cadenaSql .= "  info_clase='" . $variable [17] . "', ";
 				$cadenaSql .= "  estado_entrada='1'  ";
 				$cadenaSql .= "  WHERE id_entrada='" . $variable [9] . "' ";
-				$cadenaSql .= "  RETURNING  id_entrada ";
+				$cadenaSql .= "  RETURNING  consecutivo||' - ('||vigencia||')' entrada ";
 				
 				break;
 			
@@ -496,26 +542,55 @@ class Sql extends \Sql {
 				break;
 			
 			case "dependenciasConsultadas" :
-				$cadenaSql = "SELECT DISTINCT  ESF_ID_ESPACIO, ESF_NOMBRE_ESPACIO ";
-				$cadenaSql .= " FROM ESPACIOS_FISICOS ";
-				$cadenaSql .= " WHERE ESF_ID_SEDE='" . $variable . "' ";
-				$cadenaSql .= " AND  ESF_ESTADO='A'";
+				$cadenaSql = "SELECT DISTINCT  \"ESF_CODIGO_DEP\" , \"ESF_DEP_ENCARGADA\" ";
+				$cadenaSql .= " FROM arka_parametros.arka_dependencia ad ";
+				$cadenaSql .= " JOIN  arka_parametros.arka_espaciosfisicos ef ON  ef.\"ESF_ID_ESPACIO\"=ad.\"ESF_ID_ESPACIO\" ";
+				$cadenaSql .= " JOIN  arka_parametros.arka_sedes sa ON sa.\"ESF_COD_SEDE\"=ef.\"ESF_COD_SEDE\" ";
+				$cadenaSql .= " WHERE sa.\"ESF_ID_SEDE\"='" . $variable . "' ";
+				$cadenaSql .= " AND  ad.\"ESF_ESTADO\"='A'";
 				
 				break;
 			
 			case 'consultarActas' :
-				$cadenaSql = "SELECT *  ";
+				$cadenaSql = "SELECT registro_actarecibido.* , contratos.numero_contrato, contratos.fecha_contrato ";
 				$cadenaSql .= "FROM registro_actarecibido  ";
+				$cadenaSql .= "LEFT JOIN  contratos ON contratos.id_contrato=registro_actarecibido.id_contrato ";
 				$cadenaSql .= "WHERE  id_actarecibido='" . $variable . "';";
 				
 				break;
 			
 			case "funcionarios" :
 				
-				$cadenaSql = "SELECT FUN_IDENTIFICACION, FUN_IDENTIFICACION ||' - '|| FUN_NOMBRE ";
-				$cadenaSql .= "FROM FUNCIONARIOS ";
-				$cadenaSql .= "WHERE FUN_ESTADO='A' ";
+				$cadenaSql = "SELECT \"FUN_IDENTIFICACION\", \"FUN_IDENTIFICACION\" ||' - '|| \"FUN_NOMBRE\" ";
+				$cadenaSql .= "FROM arka_parametros.arka_funcionarios ";
+				$cadenaSql .= "WHERE \"FUN_ESTADO\"='A' ";
 				
+				break;
+			
+			case 'consultarEntradas' :
+				$cadenaSql = "SELECT id_entrada, consecutivo||' - ('||vigencia||')' entradas ";
+				$cadenaSql .= "FROM entrada  ";
+				$cadenaSql .= "WHERE consecutivo > 0  ";
+				break;
+			
+			case 'consultarSalidas' :
+				$cadenaSql = "SELECT id_salida, consecutivo||' - ('||vigencia||')' salidas ";
+				$cadenaSql .= "FROM salida  ";
+				$cadenaSql .= "WHERE consecutivo > 0  ";
+				break;
+			
+			case 'consultarHurtos' :
+				$cadenaSql = "SELECT id_estado_elemento, id_hurto||' - ('||fecha_hurto||')' hurtos ";
+				$cadenaSql .= "FROM estado_elemento  ";
+				$cadenaSql .= "WHERE id_hurto > 0  ";
+				$cadenaSql .= "ORDER BY  id_hurto ASC ";
+				
+				break;
+			
+			case 'consultarPlacas' :
+				$cadenaSql = "SELECT id_elemento_ind, placa  ";
+				$cadenaSql .= "FROM elemento_individual  ";
+				$cadenaSql .= "WHERE placa <> '' ";
 				break;
 		}
 		return $cadenaSql;
