@@ -97,19 +97,19 @@ class RegistradorOrden {
 
 
 
-        foreach ($salidas as $tipo) {
-
-            $arreglo = array(
-                $tipo[0] ['salida'],
-                $_REQUEST ['responsable_reci'],
-                $_REQUEST ['sede'],
-                $_REQUEST ['dependencia'],
-                $_REQUEST ['ubicacion']
-            );
-
-            $cadenaSql = $this->miSql->getCadenaSql('actualizar_registro_salida', $arreglo);
-            $ActualizarRegistroSalida = $esteRecursoDB->ejecutarAcceso($cadenaSql, "acceso");
-        }
+//        foreach ($salidas as $tipo) {
+//
+//            $arreglo = array(
+//                $tipo[0] ['salida'],
+//                $_REQUEST ['responsable_reci'],
+//                $_REQUEST ['sede'],
+//                $_REQUEST ['dependencia'],
+//                $_REQUEST ['ubicacion']
+//            );
+//
+//            $cadenaSql = $this->miSql->getCadenaSql('actualizar_registro_salida', $arreglo);
+//            $ActualizarRegistroSalida = $esteRecursoDB->ejecutarAcceso($cadenaSql, "acceso");
+//        }
 
         $cadenaSql = $this->miSql->getCadenaSql('dependencia_nombre', $_REQUEST ['ubicacion']);
         $dep_nombre = $esteRecursoDB->ejecutarAcceso($cadenaSql, "busqueda");
@@ -119,7 +119,7 @@ class RegistradorOrden {
             'dependencia' => $dep_nombre [0] [0]
         );
 
-        if ($ActualizarRegistroSalida) {
+        if ($traslado==true) {
             redireccion::redireccionar('inserto', $datos);
             exit();
         } else {

@@ -41,8 +41,6 @@ class registrarForm {
 		$conexion = "inventarios";
 		$esteRecursoDB = $this->miConfigurador->fabricaConexiones->getRecursoDB ( $conexion );
 		
-		$conexion2 = "sicapital";
-		$esteRecursoDB2 = $this->miConfigurador->fabricaConexiones->getRecursoDB ( $conexion2 );
 		
 		// Limpia Items Tabla temporal
 		$cadenaSql = $this->miSql->getCadenaSql ( 'limpiar_tabla_items' );
@@ -56,12 +54,7 @@ class registrarForm {
 		
 		$seccion ['tiempo'] = $tiempo;
 		
-		foreach ( $items as $valor => $key ) {
-			$key = array_merge ( $key, $seccion );
-			$cadenaSql = $this->miSql->getCadenaSql ( 'insertarItemTemporal', $key );
-			
-			$insertados = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "acceso" );
-		}
+
 		$cadenaSql = $this->miSql->getCadenaSql ( 'consultarActaM', $_REQUEST ['numero_acta'] );
 		
 		$Acta = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
@@ -449,24 +442,24 @@ class registrarForm {
 					
 					// ----------------------------------------------- Items ------------------------------------//
 					
-					$esteCampo = "descripcionFactura";
-					$atributos ['id'] = $esteCampo;
-					$atributos ['leyenda'] = $this->lenguaje->getCadena ( $esteCampo );
-					echo $this->miFormulario->agrupacion ( 'inicio', $atributos );
-					{
-						?>
-<center>
+// 					$esteCampo = "descripcionFactura";
+// 					$atributos ['id'] = $esteCampo;
+// 					$atributos ['leyenda'] = $this->lenguaje->getCadena ( $esteCampo );
+// 					echo $this->miFormulario->agrupacion ( 'inicio', $atributos );
+// 					{
+// 						?>
+<!--  <center>
 	<table id="tablaContenido">
 		<tr>
 			<td>&nbsp</td>
 		</tr>
 	</table>
 	<div id="barraNavegacion"></div>
-</center>
+</center> -->
 <?php
-					}
-					echo $this->miFormulario->agrupacion ( 'fin' );
-					unset ( $atributos );
+// 					}
+// 					echo $this->miFormulario->agrupacion ( 'fin' );
+// 					unset ( $atributos );
 					
 					$esteCampo = "ordenadorGasto";
 					$atributos ['id'] = $esteCampo;

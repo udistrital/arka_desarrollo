@@ -90,6 +90,20 @@ $enlaceconsultaActa['urlCodificada'] = $this->miConfigurador->fabricaConexiones-
 $enlaceconsultaActa['nombre'] = "Consultar y Modificar Acta de Recibido";
 
 
+
+// Gestionar Acta de Recibido Elementos
+
+$enlaceElementosActa ['enlace'] = "pagina=registrarElementoActa";
+$enlaceElementosActa['enlace'] .= "&usuario=" . $miSesion->getSesionUsuarioId();
+
+$enlaceElementosActa['urlCodificada'] = $this->miConfigurador->fabricaConexiones->crypto->codificar_url($enlaceElementosActa['enlace'], $directorio);
+$enlaceElementosActa['nombre'] = "Cargar Elementos Acta de Recibido";
+
+
+
+
+
+
 // Registro Entradas
 $enlaceRegistroEntradas ['enlace'] = "pagina=registrarEntradas";
 $enlaceRegistroEntradas ['enlace'] .= "&usuario=" . $miSesion->getSesionUsuarioId();
@@ -378,6 +392,7 @@ if ($nivel == '0') {
                             <ul>
                                 <li><a href="<?php echo $enlacegestionActa['urlCodificada'] ?>"><?php echo $enlacegestionActa['nombre'] ?></a></li>
                                 <li><a href="<?php echo$enlaceconsultaActa['urlCodificada'] ?>"><?php echo $enlaceconsultaActa['nombre'] ?></a></li>
+                                <li><a href="<?php echo$enlaceElementosActa['urlCodificada'] ?>"><?php echo $enlaceElementosActa['nombre'] ?></a></li>
                             </ul>
                         </div>
 
