@@ -76,6 +76,14 @@ $datos = array(
 $arreglo = serialize($datos);
 
 
+$elemento_id = '';
+
+if (!empty($_REQUEST['elemento'])) {
+    $elemento_id = $_REQUEST['elemento'];
+} else {
+    $elemento_id = '';
+}
+
 // Variables
 $cadenaACodificar = "pagina=" . $this->miConfigurador->getVariableConfiguracion("pagina");
 $cadenaACodificar .= "&procesarAjax=true";
@@ -164,7 +172,7 @@ $cadenaACodificar3 .= "&bloqueNombre=" . $esteBloque ["nombre"];
 $cadenaACodificar3 .= "&bloqueGrupo=" . $esteBloque ["grupo"];
 $cadenaACodificar3 .= $cadenaACodificar3 . "&funcion=subeFoto";
 $cadenaACodificar3 .= "&tiempo=" . $_REQUEST ['tiempo'];
-$cadenaACodificar3.= "&elemento=" . isset($_REQUEST['elemento']);
+$cadenaACodificar3.= "&elemento=" . $elemento_id;
 
 // Codificar las variables
 $enlace = $this->miConfigurador->getVariableConfiguracion("enlace");
@@ -175,25 +183,28 @@ $urlFinal3 = $url . $cadena3;
 
 
 // Variables
+//var_dump($_REQUEST);
 
 
-
+//echo $_REQUEST['elemento'];
 $sPhotos = '';
 $sPhotos_info = '';
 $cadenaSql = " SELECT imagen, num_registro,id_elemento ";
 $cadenaSql .= " FROM arka_movil.asignar_imagen ";
 $cadenaSql .= " WHERE estado_registro='TRUE' ";
-$cadenaSql .= " AND id_elemento='" . isset($_REQUEST['elemento']) . "' ";
+$cadenaSql .= " AND id_elemento='" .$elemento_id. "' ";
+
 $aItems = $esteRecursoDB->ejecutarAcceso($cadenaSql, "busqueda");
 
-if (isset($_REQUEST['elemento'])) {
-    foreach ($aItems as $i => $aItemInfo) {
+
+if (isset($_REQUEST['elemento']) && empty($aItems) == FALSE) {
+    foreach ($aItems as $i => $values) {
         $sPhotos.="'";
         $sPhotos.= '<img width="250px" src="data:image/gif;base64,' . $aItems[$i][0] . '">';
         $sPhotos.="',";
     }
 
-    foreach ($aItems as $i => $aItemInfo) {
+    foreach ($aItems as $i => $values) {
 
         $cadenaACodificar5 = "pagina=" . $this->miConfigurador->getVariableConfiguracion("pagina");
         $cadenaACodificar5 .= "&procesarAjax=true";
@@ -353,10 +364,6 @@ if (isset($_REQUEST['elemento'])) {
     ;
 
 
-
-
-
-
     function consultarEspacio(elem, request, response) {
         $.ajax({
             url: "<?php echo $urlFinal4 ?>",
@@ -387,25 +394,6 @@ if (isset($_REQUEST['elemento'])) {
         });
     }
     ;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 </script>
 

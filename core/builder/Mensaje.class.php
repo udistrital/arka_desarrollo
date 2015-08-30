@@ -35,7 +35,7 @@
  * mesnajes al vuelo:
  * $cadenaAlVuelo = 'mensaje al vuelo';
  * Mensaje->addMensaje("cod",':'.$cadenaAlVuelo,'information');
- * echo Mensaje->getLastMensaje();//retornara el mensaje en formato html o el predefinido en la creación del objeto
+ * echo Mensaje->getLastMensaje();//retornara el mensaje en formato html o el predefinido en la creaciï¿½n del objeto
  */
 
 use \SoapFault;
@@ -88,7 +88,7 @@ function __construct($salidaTipo = '', $lenguaje = '') {
     }
     
     function mostrarMensaje($mensaje, $tipoMensaje = "warning") {
-        
+        echo $mensaje;exit;
         if ($mensaje != '' && $tipoMensaje != '') {
             include_once ('Mensaje.page.php');
         }
@@ -96,7 +96,7 @@ function __construct($salidaTipo = '', $lenguaje = '') {
     }
     
     function mostrarMensajeRedireccion($mensaje, $tipoMensaje = "warning", $url) {
-        
+        echo $mensaje;exit;
         if ($mensaje != '' && $tipoMensaje != '' && $url != '') {
             include_once ('Mensaje.page.php');
         }
@@ -106,7 +106,7 @@ function __construct($salidaTipo = '', $lenguaje = '') {
     /*
      *
     * funcion para configurar el tipo de salida
-    * html, json, soap, texto ó objeto
+    * html, json, soap, texto ï¿½ objeto
     */
     public function setDefaultSalidaTipo($salidaTipo = ''){
     

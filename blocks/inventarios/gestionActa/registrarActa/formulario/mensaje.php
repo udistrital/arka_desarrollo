@@ -101,9 +101,24 @@ class registrarForm {
 			
 			{
 				if (isset ( $_REQUEST ['mensaje'] ) && $_REQUEST ['mensaje'] == 'confirma') {
-					
+			
 					$mensaje = "Se Registro el Acta de Recibido <br> Número de Acta: " . $_REQUEST ['numero_acta'] . "  
 							<br>Fecha Acta: " . $_REQUEST ['fecha_acta'];
+					
+					
+					
+					if($_REQUEST['orden']!=0){
+						
+						
+						$nombre=($_REQUEST['orden']== 1)?'Servicios.':'Compra.';
+						
+						
+						$mensaje .="<br> Se han Cargado los Elementos Registrados en la Orden de ".$nombre;
+						
+						
+						
+						
+					}
 					
 					// ---------------- CONTROL: Cuadro de Texto --------------------------------------------------------
 					$esteCampo = 'mensajeRegistro';
@@ -258,26 +273,29 @@ class registrarForm {
 				echo $this->miFormulario->enlace ( $atributos );
 				unset ( $atributos );
 				
-				$miPaginaActual = $this->miConfigurador->getVariableConfiguracion ( 'pagina' );
-				$variable = "pagina=registrarElementoActa";
-				$variable .= "&opcion=cargarElemento";
-				$variable .= "&numero_acta=" . $_REQUEST ['numero_acta'];
-				
-				$variable = $this->miConfigurador->fabricaConexiones->crypto->codificar_url ( $variable, $directorio );
-				
-				echo "&nbsp&nbsp&nbsp&nbsp&nbsp";
-				// -----------------CONTROL: Botón ----------------------------------------------------------------
-				$esteCampo = 'botonSalida';
-				$atributos ['id'] = $esteCampo;
-				$atributos ['enlace'] = $variable;
-				$atributos ['tabIndex'] = 1;
-				$atributos ['estilo'] = 'textoSubtitulo';
-				$atributos ['enlaceTexto'] = "<< Cargar Elementos Acta >>";
-				$atributos ['ancho'] = '10%';
-				$atributos ['alto'] = '10%';
-				$atributos ['redirLugar'] = true;
-				echo $this->miFormulario->enlace ( $atributos );
-				unset ( $atributos );
+				if (isset ( $_REQUEST ['mensaje'] ) && $_REQUEST ['mensaje'] == 'confirma') {
+					
+					$miPaginaActual = $this->miConfigurador->getVariableConfiguracion ( 'pagina' );
+					$variable = "pagina=registrarElementoActa";
+					$variable .= "&opcion=cargarElemento";
+					$variable .= "&numero_acta=" . $_REQUEST ['numero_acta'];
+					
+					$variable = $this->miConfigurador->fabricaConexiones->crypto->codificar_url ( $variable, $directorio );
+					
+					echo "&nbsp&nbsp&nbsp&nbsp&nbsp";
+					// -----------------CONTROL: Botón ----------------------------------------------------------------
+					$esteCampo = 'botonSalida';
+					$atributos ['id'] = $esteCampo;
+					$atributos ['enlace'] = $variable;
+					$atributos ['tabIndex'] = 1;
+					$atributos ['estilo'] = 'textoSubtitulo';
+					$atributos ['enlaceTexto'] = "<< Cargar Elementos Acta >>";
+					$atributos ['ancho'] = '10%';
+					$atributos ['alto'] = '10%';
+					$atributos ['redirLugar'] = true;
+					echo $this->miFormulario->enlace ( $atributos );
+					unset ( $atributos );
+				}
 			}
 			
 			echo $this->miFormulario->division ( 'fin' );

@@ -116,7 +116,7 @@ class registrarForm {
             'sede' => $sede
         );
 
-        $cadenaSql = $this->miSql->getCadenaSql('consultarAprobadas', $arreglo);
+         $cadenaSql = $this->miSql->getCadenaSql('consultarAprobadas', $arreglo);
         $elemento = $esteRecursoDB->ejecutarAcceso($cadenaSql, "busqueda");
 
 // ---------------- SECCION: Parámetros Generales del Formulario ----------------------------------
@@ -172,7 +172,7 @@ class registrarForm {
 
         $esteCampo = "AgrupacionInformacion";
         $atributos ['id'] = $esteCampo;
-        $atributos ['leyenda'] = "Información Referente a Elementos (Baja Elementos)";
+        $atributos ['leyenda'] = "Información Referente a Elementos para Reponer";
         echo $this->miFormulario->agrupacion('inicio', $atributos);
 // 		var_dump($elemento);
         if ($elemento) {
@@ -207,7 +207,7 @@ class registrarForm {
                                 <td><center>" . $elemento [$i] ['dependencia'] . "</center></td>
                                 <td><center>" . $elemento [$i] ['sede'] . "</center></td>
                                 <td><center>" . $elemento [$i] ['ubicacion'] . "</center></td>
-                                <td><center>" . $elemento [$i] ['funcionario_dependencia'] . "</center></td>
+                                <td><center>" . $elemento [$i] ['funcionario'] . "</center></td>
                                 <td><center>" . $elemento [$i] ['funcionario_nombre'] . "</center></td>
                                 <td><center>" . $elemento [$i] ['consecutivosalida'] . "</center></td>
                                 <td><center>" . $elemento [$i] ['consecutivoentrada'] . "</center></td>

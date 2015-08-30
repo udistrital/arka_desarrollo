@@ -21,7 +21,7 @@ class Img extends HtmlBase {
 
         $this->cadenaHTML .= "id ='" . $atributos [self::ID] . "' ";
 
-        $this->cadenaHTML .= " src='" . $atributos ["imagen"] . "' ";
+        $this->cadenaHTML .= " src=" . $atributos ["imagen"] . " ";
 
         if (isset($atributos [self::ETIQUETA]) && $atributos [self::ETIQUETA] != "") {
             $this->cadenaHTML .= "alt='" . $atributos [self::ETIQUETA] . "' ";

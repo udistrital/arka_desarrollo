@@ -82,6 +82,7 @@ class RegistradorOrden {
             'asignacion_ordenador' => $_REQUEST['asignacionOrdenador'],
         );
 
+
         //Registrar la Entrada Nueva
         $arreglo_clase = array(
             $observacion = 'reposición del elemento ' . $seleccion['placa'] . ' de la entrada ' . $seleccion['consecutivoentrada'],
@@ -173,7 +174,7 @@ class RegistradorOrden {
             'poliza' => 0,
             'marca' => $_REQUEST['marca'],
             'serie' => $_REQUEST['serie'],
-            'id_entrada' =>   $idEntradamax,
+            'id_entrada' => $idEntradamax,
         );
 
         if ($seleccion['tipo_bien'] == 1) {
@@ -196,6 +197,7 @@ class RegistradorOrden {
         $cadenaSql = $this->miSql->getCadenaSql('idElementoMaxIndividual');
         $elemento_id_max_indiv = $esteRecursoDB->ejecutarAcceso($cadenaSql, "busqueda");
 
+        $num_placa[0][0];
         $sumaplaca = 0;
 
         if ($num_placa [0] [0] == 0) {
@@ -205,7 +207,7 @@ class RegistradorOrden {
                     ($seleccion['tipo_bien'] == 1) ? NULL : $placa + $sumaplaca,
                     ($_REQUEST ['serie'] != '') ? $_REQUEST ['serie'] : null,
                     $elemento [0] [0],
-                    $elemento_id_max_indiv[0][0]
+                        //$elemento_id_max_indiv[0][0]
                 );
 
                 $sumaplaca = ($seleccion['tipo_bien'] == 1) ? $sumaplaca : $sumaplaca++;
@@ -226,7 +228,7 @@ class RegistradorOrden {
                     ($seleccion['tipo_bien'] == 1) ? NULL : $placa + $sumaplaca,
                     ($_REQUEST ['serie'] != '') ? $_REQUEST ['serie'] : null,
                     $elemento [0] [0],
-                    $elemento_id_max_indiv[0][0]
+                        //$elemento_id_max_indiv[0][0]
                 );
 
                 $sumaplaca = ($seleccion['tipo_bien'] == 1) ? $sumaplaca : $sumaplaca++;
@@ -235,6 +237,7 @@ class RegistradorOrden {
                 $elemento_id [$i] = $esteRecursoDB->ejecutarAcceso($cadenaSql, "busqueda");
             }
         }
+
 
         //-------------------------------------- Crear Salida
 
@@ -267,14 +270,14 @@ class RegistradorOrden {
 
         $max_id_salida = $esteRecursoDB->ejecutarAcceso($cadenaSql, "busqueda");
 
-        $max_id_salida = $max_id_salida [0] [0] + 1;
+       $max_id_salida = $max_id_salida [0] [0] + 1;
 
         $arreglo = array(
             $fechaActual,
             $_REQUEST ['dependencia_salida'],
             $_REQUEST ['funcionario_salida'],
             $_REQUEST ['observaciones'],
-             $idEntradamax,
+            $idEntradamax,
             $_REQUEST ['sede_salida'] ? $_REQUEST ['sede_salida'] : 'null',
             ($_REQUEST ['ubicacion_salida'] != '') ? $_REQUEST ['ubicacion_salida'] : 'null',
             date('Y'),
@@ -376,7 +379,7 @@ class RegistradorOrden {
 
                 $arreglo_salida_contable = array(
                     $fechaActual,
-                  $max_id_salida,
+                    $max_id_salida,
                     $seleccion ['tipo_bien'],
                     date('Y'),
                     $salidaConsecutiva
@@ -387,20 +390,18 @@ class RegistradorOrden {
                 break;
         }
 
-        $repo=array(
-            'id_baja'=>$seleccion['id_baja'],
-            'id_info'=>$info_clase[0][0],
-            'id_entrada'=>$id_entrada[0][0],
-            'id_salida'=>$id_salida[0][0],
-            'id_elemento'=>$arregloElementosInv[1],
+        $repo = array(
+            'id_estado_elemento' => $seleccion['id_estado_elemento'],
+            'id_info' => $info_clase[0][0],
+            'id_entrada' => $id_entrada[0][0],
+            'id_salida' => $id_salida[0][0],
+            'id_elemento' => $arregloElementosInv[1],
         );
-        
-        
-        
+
         $cadenaSql = $this->miSql->getCadenaSql('reposicionRegistro', $repo);
         $reposicion = $esteRecursoDB->ejecutarAcceso($cadenaSql, "insertar");
 
-        
+
         if ($actualizo_elem == true && $reposicion == TRUE) {
             redireccion::redireccionar('inserto', $repo);
         } else {

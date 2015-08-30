@@ -148,35 +148,56 @@ class Sql extends \Sql {
 
             /**
              * Clausulas Del Caso Uso.
-             */
-            case"consultarAprobadas":
-                $cadenaSql = ' SELECT ';
-                $cadenaSql.=' sedes."ESF_SEDE" sede, ';
-                $cadenaSql.=' dependencias."ESF_DEP_ENCARGADA" dependencia, ';
-                $cadenaSql.=' espacios."ESF_NOMBRE_ESPACIO" ubicacion, ';
-                $cadenaSql.=' funcionario_dependencia, ';
-                $cadenaSql.=' "FUN_NOMBRE" funcionario_nombre, ';
-                $cadenaSql.=' salida.consecutivo consecutivosalida,salida.id_salida, ';
-                $cadenaSql.=' entrada.consecutivo consecutivoentrada, entrada.id_entrada,';
-                $cadenaSql.=' placa, marca, elemento.serie, cantidad, valor,unidad, iva, ajuste,total_iva, subtotal_sin_iva, total_iva_con,';
-                $cadenaSql.=' descripcion, nivel, tipo_bien, id_baja, "PRO_RAZON_SOCIAL" as nombre_proveedor, proveedor, ';
-                $cadenaSql.=' baja_elemento.fecha_registro, baja_elemento.id_elemento_ind , fecha_factura, numero_factura';
-                $cadenaSql.=' FROM arka_inventarios.baja_elemento ';
-                $cadenaSql.=' JOIN arka_inventarios.elemento_individual ON elemento_individual.id_elemento_ind=baja_elemento.id_elemento_ind ';
-                $cadenaSql.=' JOIN arka_inventarios.salida On elemento_individual.id_salida=salida.id_salida ';
-                $cadenaSql.=' JOIN arka_inventarios.entrada On entrada.id_entrada=salida.id_entrada ';
-                $cadenaSql.=' JOIN arka_inventarios.elemento On elemento_individual.id_elemento_gen=elemento.id_elemento ';
-                $cadenaSql.=' JOIN arka_parametros.arka_funcionarios fun ON fun."FUN_IDENTIFICACION"=baja_elemento.funcionario_dependencia ';
-                $cadenaSql.=' JOIN arka_parametros.arka_espaciosfisicos as espacios ON espacios."ESF_ID_ESPACIO"=elemento_individual.ubicacion_elemento ';
-                $cadenaSql.=' JOIN arka_parametros.arka_dependencia as dependencias ON dependencias."ESF_ID_ESPACIO"=elemento_individual.ubicacion_elemento ';
-                $cadenaSql.=' JOIN arka_parametros.arka_sedes as sedes ON sedes."ESF_COD_SEDE"=espacios."ESF_COD_SEDE"  ';
-                $cadenaSql.=' JOIN arka_parametros.arka_proveedor proveedores ON proveedores."PRO_NIT"=cast(proveedor as character varying)  ';
-                $cadenaSql.=' WHERE 1=1 ';
-                $cadenaSql.=' AND baja_elemento.estado_registro=TRUE ';
-                $cadenaSql.=' AND baja_elemento.estado_aprobacion=TRUE ';
-                $cadenaSql.=" AND baja_elemento.id_reposicion=0 ";
-                $cadenaSql.=" AND estado_entrada=1 ";
 
+              case"consultarAprobadas":
+              $cadenaSql = ' SELECT ';
+              $cadenaSql.=' sedes."ESF_SEDE" sede, ';
+              $cadenaSql.=' dependencias."ESF_DEP_ENCARGADA" dependencia, ';
+              $cadenaSql.=' espacios."ESF_NOMBRE_ESPACIO" ubicacion, ';
+              $cadenaSql.=' funcionario_dependencia, ';
+              $cadenaSql.=' "FUN_NOMBRE" funcionario_nombre, ';
+              $cadenaSql.=' salida.consecutivo consecutivosalida,salida.id_salida, ';
+              $cadenaSql.=' entrada.consecutivo consecutivoentrada, entrada.id_entrada,';
+              $cadenaSql.=' placa, marca, elemento.serie, cantidad, valor,unidad, iva, ajuste,total_iva, subtotal_sin_iva, total_iva_con,';
+              $cadenaSql.=' descripcion, nivel, tipo_bien, id_baja, "PRO_RAZON_SOCIAL" as nombre_proveedor, proveedor, ';
+              $cadenaSql.=' baja_elemento.fecha_registro, baja_elemento.id_elemento_ind , fecha_factura, numero_factura';
+              $cadenaSql.=' FROM arka_inventarios.baja_elemento ';
+              $cadenaSql.=' JOIN arka_inventarios.elemento_individual ON elemento_individual.id_elemento_ind=baja_elemento.id_elemento_ind ';
+              $cadenaSql.=' JOIN arka_inventarios.salida On elemento_individual.id_salida=salida.id_salida ';
+              $cadenaSql.=' JOIN arka_inventarios.entrada On entrada.id_entrada=salida.id_entrada ';
+              $cadenaSql.=' JOIN arka_inventarios.elemento On elemento_individual.id_elemento_gen=elemento.id_elemento ';
+              $cadenaSql.=' JOIN arka_parametros.arka_funcionarios fun ON fun."FUN_IDENTIFICACION"=baja_elemento.funcionario_dependencia ';
+              $cadenaSql.=' JOIN arka_parametros.arka_espaciosfisicos as espacios ON espacios."ESF_ID_ESPACIO"=elemento_individual.ubicacion_elemento ';
+              $cadenaSql.=' JOIN arka_parametros.arka_dependencia as dependencias ON dependencias."ESF_ID_ESPACIO"=elemento_individual.ubicacion_elemento ';
+              $cadenaSql.=' JOIN arka_parametros.arka_sedes as sedes ON sedes."ESF_COD_SEDE"=espacios."ESF_COD_SEDE"  ';
+              $cadenaSql.=' JOIN arka_parametros.arka_proveedor proveedores ON proveedores."PRO_NIT"=cast(proveedor as character varying)  ';
+              $cadenaSql.=' WHERE 1=1 ';
+              $cadenaSql.=' AND baja_elemento.estado_registro=TRUE ';
+              $cadenaSql.=' AND baja_elemento.estado_aprobacion=TRUE ';
+              $cadenaSql.=" AND baja_elemento.id_reposicion=0 ";
+              $cadenaSql.=" AND estado_entrada=1 ";
+             */
+            case "consultarAprobadas":
+                $cadenaSql = 'SELECT ';
+                $cadenaSql.=' sedes."ESF_SEDE" sede, dependencias."ESF_DEP_ENCARGADA" dependencia, elemento_individual.id_elemento_ind, id_estado_elemento, ';
+                $cadenaSql.=' espacios."ESF_NOMBRE_ESPACIO" ubicacion, elemento_individual.funcionario, "FUN_NOMBRE"  ';
+                $cadenaSql.=' funcionario_nombre, salida.consecutivo consecutivosalida,salida.id_salida,  ';
+                $cadenaSql.=' entrada.consecutivo consecutivoentrada, entrada.id_entrada, placa, marca, elemento.serie,  ';
+                $cadenaSql.=' cantidad, valor,unidad, iva, ajuste,total_iva, subtotal_sin_iva, total_iva_con, descripcion, ';
+                $cadenaSql.=' nivel, tipo_bien, "PRO_RAZON_SOCIAL" as nombre_proveedor, proveedor, fecha_factura, numero_factura  ';
+                $cadenaSql.=' FROM arka_inventarios.estado_elemento  ';
+                $cadenaSql.=' JOIN arka_inventarios.elemento_individual ON elemento_individual.id_elemento_ind=estado_elemento.id_elemento_ind  ';
+                $cadenaSql.=' JOIN arka_inventarios.salida On elemento_individual.id_salida=salida.id_salida  ';
+                $cadenaSql.=' JOIN arka_inventarios.entrada On entrada.id_entrada=salida.id_entrada  ';
+                $cadenaSql.=' JOIN arka_inventarios.elemento On elemento_individual.id_elemento_gen=elemento.id_elemento ';
+                $cadenaSql.=' JOIN arka_parametros.arka_funcionarios fun ON fun."FUN_IDENTIFICACION"=elemento_individual.funcionario ';
+                $cadenaSql.=' JOIN arka_parametros.arka_espaciosfisicos as espacios ON espacios."ESF_ID_ESPACIO"=elemento_individual.ubicacion_elemento  ';
+                $cadenaSql.=' JOIN arka_parametros.arka_dependencia as dependencias ON dependencias."ESF_ID_ESPACIO"=elemento_individual.ubicacion_elemento  ';
+                $cadenaSql.=' JOIN arka_parametros.arka_sedes as sedes ON sedes."ESF_COD_SEDE"=espacios."ESF_COD_SEDE"  ';
+                $cadenaSql.=' LEFT JOIN arka_parametros.arka_proveedor proveedores ON proveedores."PRO_NIT"=cast(proveedor as character varying) ';
+                $cadenaSql.=' WHERE 1=1   ';
+                $cadenaSql.=' AND tipo_faltsobr IN(2,3)  ';
+                $cadenaSql.=' AND estado_entrada = 1 AND id_reposicion=0 ';
                 if ($variable ['numero_entrada'] != '') {
                     $cadenaSql .= " AND salida.id_entrada = '" . $variable ['numero_entrada'] . "'";
                 }
@@ -223,13 +244,13 @@ class Sql extends \Sql {
             case "max_id_baja" :
 
                 $cadenaSql = "SELECT MAX(id_baja) ";
-                $cadenaSql .= "FROM baja_elemento ";
+                $cadenaSql .= "FROM arka_inventarios.baja_elemento ";
 
                 break;
 
             case "insertar_baja" :
 
-                $cadenaSql = "INSERT INTO baja_elemento( ";
+                $cadenaSql = "INSERT INTO arka_inventarios.baja_elemento( ";
                 $cadenaSql .= "dependencia_funcionario, funcionario_dependencia, ";
                 $cadenaSql .= "ruta_radicacion, nombre_radicacion, observaciones, id_elemento_ind, fecha_registro, sede, ubicacion) ";
                 $cadenaSql .= " VALUES (";
@@ -249,24 +270,24 @@ class Sql extends \Sql {
 
             case "id_sobrante" :
                 $cadenaSql = " SELECT MAX(id_sobrante) ";
-                $cadenaSql .= " FROM estado_elemento;
+                $cadenaSql .= " FROM arka_inventarios.estado_elemento;
                 ";
                 break;
 
             case "id_hurto" :
                 $cadenaSql = " SELECT MAX(id_hurto) ";
-                $cadenaSql .= " FROM estado_elemento;
+                $cadenaSql .= " FROM arka_inventarios.estado_elemento;
                 ";
                 break;
 
             case "id_faltante" :
                 $cadenaSql = " SELECT MAX(id_faltante) ";
-                $cadenaSql .= " FROM estado_elemento;
+                $cadenaSql .= " FROM arka_inventarios.estado_elemento;
                 ";
                 break;
             case "tipo_faltante" :
                 $cadenaSql = " SELECT id_tipo_falt_sobr, descripcion ";
-                $cadenaSql .= " FROM tipo_falt_sobr;
+                $cadenaSql .= " FROM arka_inventarios.tipo_falt_sobr;
                 ";
                 break;
 
@@ -450,7 +471,7 @@ class Sql extends \Sql {
 
             case "insertar_historico" :
 
-                $cadenaSql = " INSERT INTO historial_elemento_individual( ";
+                $cadenaSql = " INSERT INTO arka_inventarios.historial_elemento_individual( ";
                 $cadenaSql .= "fecha_registro, elemento_individual, funcionario,descripcion_funcionario)  ";
                 $cadenaSql .= " VALUES (";
                 $cadenaSql .= "'" . $variable [0] . "',";
@@ -464,7 +485,7 @@ class Sql extends \Sql {
                 $cadenaSql = ' SELECT "PRO_NIT" as data,"PRO_RAZON_SOCIAL" AS value';
                 $cadenaSql .= " FROM arka_parametros.arka_proveedor ";
                 $cadenaSql .= ' WHERE "PRO_RAZON_SOCIAL" ';
-                $cadenaSql .= " ILIKE '%".$variable."%';";
+                $cadenaSql .= " ILIKE '%" . $variable . "%';";
                 //$cadenaSql .= " LIMIT 200 ";
 
                 break;
@@ -574,7 +595,7 @@ class Sql extends \Sql {
                 break;
 
             case "insertarInformación" :
-                $cadenaSql = " INSERT INTO info_clase_entrada(  ";
+                $cadenaSql = " INSERT INTO arka_inventarios.info_clase_entrada(  ";
                 $cadenaSql .= " observacion, id_entrada, id_salida, id_hurto,";
                 $cadenaSql .= " num_placa, val_sobrante, ruta_archivo, nombre_archivo)";
                 $cadenaSql .= " VALUES (";
@@ -591,7 +612,7 @@ class Sql extends \Sql {
 
             case "insertarEntrada" :
                 $cadenaSql = " INSERT INTO ";
-                $cadenaSql .= " entrada(";
+                $cadenaSql .= " arka_inventarios.entrada(";
                 $cadenaSql .= " fecha_registro, vigencia, clase_entrada, info_clase, ";
                 $cadenaSql .= " tipo_contrato, numero_contrato, fecha_contrato, proveedor, numero_factura, ";
                 $cadenaSql .= " fecha_factura, observaciones, acta_recibido,ordenador,sede,dependencia,supervisor,tipo_ordenador,identificacion_ordenador,id_entrada )";
@@ -622,28 +643,27 @@ class Sql extends \Sql {
 
             case 'idMaximoEntrada' :
                 $cadenaSql = "SELECT max(id_entrada)  ";
-                $cadenaSql .= "FROM entrada  ";
+                $cadenaSql .= "FROM arka_inventarios.entrada  ";
                 break;
 
 
             //Clásulas Registro tipo Elemento
             case "ingresar_elemento_individual" :
 
-                $cadenaSql = " 	INSERT INTO elemento_individual(";
-                $cadenaSql .= "fecha_registro, placa, serie, id_elemento_gen,id_elemento_ind) ";
+                $cadenaSql = " 	INSERT INTO arka_inventarios.elemento_individual(";
+                $cadenaSql .= "fecha_registro, placa, serie, id_elemento_gen) ";
                 $cadenaSql .= " VALUES (";
                 $cadenaSql .= "'" . $variable [0] . "',";
                 $cadenaSql .= ((is_null($variable [1])) ? 'null' . "," : "'" . $variable [1] . "',");
                 $cadenaSql .= ((is_null($variable [2])) ? 'null' . "," : "'" . $variable [2] . "',");
-                $cadenaSql .= "'" . $variable [3] . "',";
-                $cadenaSql .= "'" . $variable [4] . "') ";
+                $cadenaSql .= "'" . $variable [3] . "') ";
                 $cadenaSql .= "RETURNING id_elemento_ind; ";
 
                 break;
 
             case "ingresar_elemento" :
                 $cadenaSql = " INSERT INTO ";
-                $cadenaSql .= " elemento(";
+                $cadenaSql .= " arka_inventarios.elemento(";
                 $cadenaSql .= "fecha_registro,nivel, tipo_bien, descripcion, cantidad, ";
                 $cadenaSql .= "unidad, valor, iva, ajuste, bodega, subtotal_sin_iva, total_iva, ";
                 $cadenaSql .= "total_iva_con,marca,serie,id_entrada, id_elemento ) ";
@@ -672,29 +692,29 @@ class Sql extends \Sql {
 
             case "idElementoMax" :
                 $cadenaSql = "SELECT max(id_elemento) ";
-                $cadenaSql .= "FROM elemento  ";
+                $cadenaSql .= "FROM arka_inventarios.elemento  ";
                 break;
 
             case "idElementoMaxIndividual" :
                 $cadenaSql = "SELECT max(id_elemento_ind) ";
-                $cadenaSql .= "FROM elemento_individual  ";
+                $cadenaSql .= "FROM arka_inventarios.elemento_individual  ";
                 break;
 
             case "buscar_placa_maxima" :
                 $cadenaSql = " SELECT  MAX(placa::FLOAT) placa_max ";
-                $cadenaSql .= " FROM elemento_individual ";
+                $cadenaSql .= " FROM arka_inventarios.elemento_individual ";
                 break;
 
             case "buscar_repetida_placa" :
                 $cadenaSql = " SELECT  count (placa) ";
-                $cadenaSql .= " FROM elemento_individual ";
+                $cadenaSql .= " FROM arka_inventarios.elemento_individual ";
                 $cadenaSql .= " WHERE placa ='" . $variable . "';";
                 break;
             //Clásulas Registro tipo Salida
 
             case 'consultaConsecutivo_Salida' :
                 $cadenaSql = "SELECT consecutivo ";
-                $cadenaSql .= "FROM salida  ";
+                $cadenaSql .= "FROM arka_inventarios.salida  ";
                 $cadenaSql .= "WHERE  fecha_registro='" . $variable . "';";
 
                 break;
@@ -705,12 +725,12 @@ class Sql extends \Sql {
 
             case "id_salida_maximo" :
                 $cadenaSql = " SELECT MAX(id_salida) ";
-                $cadenaSql .= " FROM salida ";
+                $cadenaSql .= " FROM arka_inventarios.salida ";
                 break;
 
 
             case "actualizar_elementos_individuales" :
-                $cadenaSql = "UPDATE elemento_individual ";
+                $cadenaSql = "UPDATE arka_inventarios.elemento_individual ";
                 $cadenaSql .= "SET id_salida='" . $variable [1] . "', ";
                 $cadenaSql .= " funcionario='" . $variable [2] . "', ";
                 $cadenaSql .= " ubicacion_elemento='" . $variable [3] . "' ";
@@ -720,7 +740,7 @@ class Sql extends \Sql {
 
             case 'SalidaContableVigencia' :
                 $cadenaSql = "SELECT max(consecutivo) ";
-                $cadenaSql .= "FROM salida_contable  ";
+                $cadenaSql .= "FROM arka_inventarios.salida_contable  ";
                 $cadenaSql .= "WHERE  tipo_bien='" . $variable [1] . "' ";
                 $cadenaSql .= "AND  vigencia='" . $variable [0] . "' ";
 
@@ -728,7 +748,7 @@ class Sql extends \Sql {
 
             case "InsertarSalidaContable" :
                 $cadenaSql = " INSERT INTO ";
-                $cadenaSql .= " salida_contable(
+                $cadenaSql .= " arka_inventarios.salida_contable(
 						        fecha_registro, salida_general, tipo_bien, 
             					vigencia, consecutivo)";
                 $cadenaSql .= " VALUES (";
@@ -743,7 +763,7 @@ class Sql extends \Sql {
 
             case "insertar_salida" :
                 $cadenaSql = " INSERT INTO ";
-                $cadenaSql .= " salida( fecha_registro, dependencia, funcionario, observaciones,";
+                $cadenaSql .= " arka_inventarios.salida ( fecha_registro, dependencia, funcionario, observaciones,";
                 $cadenaSql .= " id_entrada,sede,ubicacion,vigencia,id_salida)";
                 $cadenaSql .= " VALUES (";
                 $cadenaSql .= "'" . $variable [0] . "',";
@@ -761,14 +781,14 @@ class Sql extends \Sql {
 
             case "id_salida_maximo" :
                 $cadenaSql = " SELECT MAX(id_salida) ";
-                $cadenaSql .= " FROM salida ";
+                $cadenaSql .= " FROM arka_inventarios.salida ";
                 break;
 
             //Reposición
             case "reposicionRegistro" :
-                $cadenaSql = " UPDATE baja_elemento ";
+                $cadenaSql = " UPDATE arka_inventarios.estado_elemento ";
                 $cadenaSql .= " SET id_reposicion='" . $variable['id_info'] . "' ";
-                $cadenaSql .= " WHERE id_baja='" . $variable['id_baja'] . "' ";
+                $cadenaSql .= " WHERE id_estado_elemento='" . $variable['id_estado_elemento'] . "' ";
                 break;
         }
         return $cadenaSql;

@@ -66,9 +66,33 @@ class RegistradorCierre {
 
         if ($_REQUEST['aprobacion'] == 1) {
 
+            //Seleccionar las entradas que entran a la vigencia
+            $consultar1 = array(
+                'fecha_inicio' => $_REQUEST ['fecha_inicio'],
+                'fecha_final' => $_REQUEST ['fecha_final'],
+                'vigencia' => $_REQUEST ['vigencia'],
+            );
+
+            $cadenaSql = $this->miSql->getCadenaSql('consultarEntradas', $consultar1);
+            $entradas = $esteRecursoDB->ejecutarAcceso($cadenaSql, "busqueda");
+
+            //Verificar que todas las entradas estén aprobadas
+
+            foreach ($entradas as $key => $values) {
+                if ($entradas[$key]['estado_entrada'] != 2) {
+                    redireccion::redireccionar('noAprobadaEntrada', false);
+                }
+            }
+            //Si alguna no, debe redireccionar informando el error
             //consultar si la vigencia y la entrada existen
             $cadenaSql = $this->miSql->getCadenaSql('registrarCierre', $datosRegistro);
             $estado_asignar = $esteRecursoDB->ejecutarAcceso($cadenaSql, "busqueda");
+
+
+
+            if ($estado_asignar == false) {
+                redireccion::redireccionar('noInserto', $datos);
+            }
 
             $datosRegistro2 = array(
                 'fecha_inicio' => $_REQUEST ['fecha_inicio'],
@@ -77,10 +101,6 @@ class RegistradorCierre {
                 'estado' => 1,
                 'id_cierre' => $estado_asignar[0][0]
             );
-
-            if ($estado_asignar == false) {
-                redireccion::redireccionar('noInserto', $datos);
-            }
 
             $cadenaSql = $this->miSql->getCadenaSql('actualizarEntrada', $datosRegistro2);
             $resultadoActualizacion = $esteRecursoDB->ejecutarAcceso($cadenaSql, "insertar");

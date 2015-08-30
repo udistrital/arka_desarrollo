@@ -170,9 +170,10 @@ class registrarForm {
 		    <th>Número Salida y/o<br>Vigencia</th>
                     <th># Número Placa</th>
                     <th># Número Serial</th>
+                    <th>Descripción</th>
                     <th>Nombre Funcionario</th>
 		    <th>Identificación<br>Funcionario</th>
-					<th>Dependencia</th>
+                    <th>Dependencia</th>
                     <th>Ubicación Especifica</th>
         	    <th>Tipo Bien</th>
                     <th>Estado Elemento</th>
@@ -194,6 +195,7 @@ class registrarForm {
                     <td><center>" . $elemento [$i] ['salidas'] . "</center></td>
                     <td><center>" . $elemento [$i] ['placa'] . "</center></td>
                     <td><center>" . $elemento [$i] ['serie'] . "</center></td>
+                        <td><center>" . $elemento [$i] ['descripcion_elemento'] . "</center></td>
                     <td><center>" . $elemento [$i] ['nombre_funcionario'] . "</center></td>
                     <td><center>" . $elemento [$i] ['funcionario_encargado'] . "</center></td>
                     <td><center>" . $elemento [$i] ['dependencia_encargada'] . "</center></td>		

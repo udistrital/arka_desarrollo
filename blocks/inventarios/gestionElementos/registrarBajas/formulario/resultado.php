@@ -158,7 +158,7 @@ class registrarForm {
 		
 		$esteCampo = "AgrupacionInformacion";
 		$atributos ['id'] = $esteCampo;
-		$atributos ['leyenda'] = "Información Referente a Elementos (Baja Elementos)";
+		$atributos ['leyenda'] = "Información Referente a Elementos (Solicitud Baja Elementos)";
 		echo $this->miFormulario->agrupacion ( 'inicio', $atributos );
 		// var_dump($elemento);
 		
@@ -223,6 +223,7 @@ class registrarForm {
 			    <th>Dependencia</th>
                             <th>Sede</th>
                             <th>Ubicacion</th>
+                            <th>Estado</th>
 			    <th>Solicitar Baja<br>Elemento</th>
                         </tr>
                         </thead>
@@ -239,6 +240,7 @@ class registrarForm {
                                 <td><center>" . $elemento [$i] ['dependencia'] . "</center></td>
                                 <td><center>" . $elemento [$i] ['sede'] . "</center></td>
                                 <td><center>" . $elemento [$i] ['ubicacion'] . "</center></td>
+                                <td><center>" . $elemento [$i] ['estado_elemento'] . "</center></td>
                                <td><center>";
 				// ---------------- CONTROL: Cuadro de Texto --------------------------------------------------------
 				$nombre = 'item_' . $i;

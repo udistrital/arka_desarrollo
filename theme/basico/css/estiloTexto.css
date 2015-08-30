@@ -34,6 +34,12 @@
     text-decoration: underline;
 }
 
+.textoNotasFormulario {
+    font-size: 13px;
+    font-family: "Arial";
+    text-align: justify;
+}
+
 .textoSubtitulo {
     border-width: 0px;
     font-size: 14px;

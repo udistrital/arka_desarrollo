@@ -1,7 +1,7 @@
 
 #pie{
     border: 0;
-    height: 100px;
+    height: 150px;
     display: block;
     background-image: url(../imagen/pie_arka.png);
     background-size: 100% ;
@@ -81,18 +81,6 @@ element.style {
 }
 
 
-#colm3 {
-
-    background: none repeat;
-    width: 35%; 
-    float: right;
-    display: block;
-    margin: auto;
-    margin-top: 20px;
-    margin-bottom: 20px;
-
-
-}
 
 .fecha{
     margin-bottom: 10px;
@@ -100,29 +88,43 @@ element.style {
 }
 
 #colm1 { 
-
-    width: 8%; 
+    width: 10%; 
     float: left; 
     display: block; 
     height: 50px;
     left: 0;
     margin: 0%;
-
-
-
-
 }
 
 
 #colm2{ 
 
-    width: 35%; 
+    width: 65%; 
     float: left; 
     display: block; 
     height: 50px;
     left: 0;
     margin: 0%;
+}
 
+
+#colm3 {
+    width: 25%; 
+    float: right; 
+    display: block; 
+    left: 0;
+    margin-top: 0.1%;
+}
+
+
+#colm4 {
+    width: 15%; 
+    float: right; 
+    display: block; 
+    height: 50px;
+    left: 0;
+    right: 80%;
+    margin-left: 95%;
 }
 
 
@@ -133,6 +135,5 @@ element.style {
     height: 85px;
     display: block;
     margin: auto;
-    background: url(../imagen/escudo.jpg) no-repeat;
-    background-image: url(../imagen/wall.png);
 }
+

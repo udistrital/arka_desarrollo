@@ -148,7 +148,7 @@ class Sql extends \Sql {
 
 //-----------------------------** Cláusulas del caso de uso**----------------------------------//
             case "registrarCierre":
-                $cadenaSql = " INSERT INTO cierre_contable( ";
+                $cadenaSql = " INSERT INTO arka_inventarios.cierre_contable( ";
                 $cadenaSql.= "vigencia_cierre, cierre_fecha_inicio, cierre_fecha_final,  ";
                 $cadenaSql.= "aprobacion, cierre_observaciones, estado_registro, fecha_cierre) ";
                 $cadenaSql.= "VALUES ( ";
@@ -163,7 +163,7 @@ class Sql extends \Sql {
                 break;
 
             case "actualizarEntrada":
-                $cadenaSql = " UPDATE entrada ";
+                $cadenaSql = " UPDATE arka_inventarios.entrada ";
                 $cadenaSql.= " SET cierre_contable='TRUE', ";
                 $cadenaSql.= " id_cierrecontable='" . $variable ['id_cierre'] . "' ";
                 $cadenaSql.= " WHERE 1=1 ";
@@ -179,15 +179,27 @@ class Sql extends \Sql {
                 }
                 break;
 
+            case "consultarEntradas":
+                $cadenaSql = " SELECT id_entrada, fecha_registro, vigencia,cierre_contable  , estado_entrada ";
+                $cadenaSql.= " FROM arka_inventarios.entrada";
+                $cadenaSql.= " WHERE estado_registro = true ";
+                $cadenaSql.= " AND vigencia = '" . $variable ['vigencia'] . "'";
+                $cadenaSql.= " AND cierre_contable = FALSE ";
+                $cadenaSql.= " AND fecha_registro BETWEEN CAST ( '" . $variable ['fecha_inicio'] . "' AS DATE) ";
+                $cadenaSql.= " AND CAST ( '" . $variable ['fecha_final'] . "' AS DATE) ORDER BY estado_entrada DESC";
+                break;
+
+
             case "eliminaCierre":
-                $cadenaSql = " DELETE FROM cierre_contable ";
+                $cadenaSql = " DELETE FROM arka_inventarios.cierre_contable ";
                 $cadenaSql.= " WHERE ";
-                $cadenaSql.= " id_cierrecontable='" . $variable ['id_cierre'] . "' ";
+                $cadenaSql.= " id_cierrecontable = '" . $variable ['id_cierre'] . "' ";
                 break;
 
             case "vigencia":
                 $cadenaSql = " SELECT DISTINCT vigencia, vigencia as nombrevigencia ";
-                $cadenaSql.= "FROM entrada; ";
+                $cadenaSql.= "FROM arka_inventarios.entrada;
+                        ";
                 break;
         }
         return $cadenaSql;

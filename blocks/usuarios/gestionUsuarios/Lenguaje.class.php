@@ -1,11 +1,11 @@
 <?php
-
-namespace bloquesModelo\bloqueModelo1;
+namespace usuarios\gestionUsuarios;
 
 if (! isset ( $GLOBALS ["autorizado"] )) {
     include ("../index.php");
     exit ();
 }
+
 
 class Lenguaje{
 
@@ -21,6 +21,7 @@ function __construct() {
     
     $esteBloque = $this->miConfigurador->getVariableConfiguracion ( "esteBloque" );
     $this->nombreBloque = $esteBloque ["nombre"];
+    
     $this->ruta = $this->miConfigurador->getVariableConfiguracion ( "rutaBloque" );
     
     if ($this->miConfigurador->getVariableConfiguracion ( "idioma" )) {
@@ -28,8 +29,7 @@ function __construct() {
     } else {
         $idioma = "es_es";
     }
-    
-    include ($this->ruta . "locale/" . $idioma . "/Mensaje.php");
+    include ($this->ruta . "/locale/" . $idioma . "/Mensaje.php");
 
 }
 	

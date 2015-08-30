@@ -75,7 +75,7 @@ class registrarForm {
         $atributos ['id'] = $esteCampo;
         $atributos ["estilo"] = "jqueryui";
         $atributos ['tipoEtiqueta'] = 'inicio';
-        $atributos ["leyenda"] = "Consultar Bajas a Reponer";
+        $atributos ["leyenda"] = "Consultar Faltantes a Reponer";
         echo $this->miFormulario->marcoAgrupacion('inicio', $atributos);
 
         // ---------------- CONTROL: Cuadro de Texto --------------------------------------------------------

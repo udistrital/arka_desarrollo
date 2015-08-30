@@ -56,6 +56,7 @@ class registrarForm {
 		
 		$entrada = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
 		
+		
 		// $cadenaSql = $this->miSql->getCadenaSql ( 'clase_entrada_descrip', $entrada [0] [2] );
 		
 		// $Clase = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
@@ -67,6 +68,10 @@ class registrarForm {
 		$cadenaSql = $this->miSql->getCadenaSql ( 'consulta_elementos', $_REQUEST ['numero_entrada'] );
 		
 		$elementos = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
+		
+		
+		
+		
 		
 		$cadenaSql = $this->miSql->getCadenaSql ( 'consulta_elementos_validar', $_REQUEST ['numero_entrada'] );
 		

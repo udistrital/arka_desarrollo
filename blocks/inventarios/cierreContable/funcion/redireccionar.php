@@ -13,15 +13,15 @@ class redireccion {
         $miConfigurador = \Configurador::singleton();
         $miPaginaActual = $miConfigurador->getVariableConfiguracion("pagina");
 
-      
+
         switch ($opcion) {
             case "inserto" :
                 $variable = "pagina=" . $miPaginaActual;
                 $variable .= "&opcion=mensaje";
                 $variable .= "&mensaje=confirma";
-                $variable .= "&inicio=".$_REQUEST['fecha_inicio'];
-                $variable .= "&fin=".$_REQUEST['fecha_final'];
-                $variable .= "&vigencia=".$_REQUEST['vigencia'];
+                $variable .= "&inicio=" . $_REQUEST['fecha_inicio'];
+                $variable .= "&fin=" . $_REQUEST['fecha_final'];
+                $variable .= "&vigencia=" . $_REQUEST['vigencia'];
                 break;
 
             case "noInserto" :
@@ -41,6 +41,14 @@ class redireccion {
                 $variable .= "&opcion=mensaje";
                 $variable .= "&mensaje=otros";
                 $variable .= "&errores=noAprobo";
+                break;
+
+            //Existen entradas en el cierre contable que aún no han sido aprobadas
+            case "noAprobadaEntrada" :
+                $variable = "pagina=" . $miPaginaActual;
+                $variable.= "&opcion=mensaje";
+                $variable.= "&mensaje=otros";
+                $variable.= "&errores=noAprobadaEntrada";
                 break;
 
             case "regresar" :

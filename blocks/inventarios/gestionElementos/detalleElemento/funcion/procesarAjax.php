@@ -19,6 +19,7 @@ $miPaginaActual = $this->miConfigurador->getVariableConfiguracion('pagina');
 
 if ($_REQUEST ['funcion'] == 'subeFoto') {
 
+    //echo "aqui>".$_REQUEST['elemento'];
     if (empty($_FILES['images'])) {
         echo json_encode(['error' => 'No files found for upload.']);
         // or you can throw an exception 
@@ -55,7 +56,7 @@ if ($_REQUEST ['funcion'] == 'subeFoto') {
             'imagen' => $data,
         );
 
-        $cadenaSql = $this->sql->getCadenaSql('guardar_foto', $parametro);
+       $cadenaSql = $this->sql->getCadenaSql('guardar_foto', $parametro);
         $resultadoItems = $esteRecursoDB->ejecutarAcceso($cadenaSql, 'insertar');
 
         if ($resultadoItems == true) {
