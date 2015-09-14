@@ -72,7 +72,7 @@ class Formulario {
     	
     	$cadena_sql = $this->sql->getCadenaSql("eliminarCatalogo",$_REQUEST['idCatalogo']);
     	
-    	$registros = $this->esteRecursoDB->ejecutarAcceso($cadena_sql);
+    	$registros = $this->esteRecursoDB->ejecutarAcceso($cadena_sql, "acceso",$_REQUEST['idCatalogo'],'eliminarCatalogo' ); 
     	
     	if(!$registros){
     		$this->miConfigurador->setVariableConfiguracion ( 'mostrarMensaje', 'errorEliminar' );

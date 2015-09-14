@@ -264,7 +264,8 @@ class Sql extends \Sql {
 				$cadenaSql .= (($variable [8] == 1) ? ' JOIN ' : ' LEFT JOIN ');
 				$cadenaSql .= "salida sl ON sl.id_salida = elemento_individual.id_salida  ";
 				$cadenaSql .= "JOIN entrada ON entrada.id_entrada = elemento.id_entrada ";
-				$cadenaSql .= "LEFT JOIN arka_parametros.arka_funcionarios fn ON fn.\"FUN_IDENTIFICACION\"= elemento_individual.funcionario ";
+				$cadenaSql .= (($variable [8] == 1) ? ' JOIN ' : ' LEFT JOIN ');
+				$cadenaSql .= " arka_parametros.arka_funcionarios fn ON fn.\"FUN_IDENTIFICACION\"= elemento_individual.funcionario ";
 				$cadenaSql .= ' LEFT JOIN arka_parametros.arka_espaciosfisicos as espacios ON espacios."ESF_ID_ESPACIO"=elemento_individual.ubicacion_elemento ';
 				$cadenaSql .= ' LEFT JOIN arka_parametros.arka_dependencia as ad ON ad."ESF_ID_ESPACIO"=elemento_individual.ubicacion_elemento ';
 				$cadenaSql .= ' LEFT JOIN arka_parametros.arka_sedes as sas ON sas."ESF_COD_SEDE"=espacios."ESF_COD_SEDE" ';
@@ -276,7 +277,7 @@ class Sql extends \Sql {
 				$cadenaSql .= "AND entrada.cierre_contable='f' ";
 				$cadenaSql .= "AND elemento_individual.estado_registro='TRUE' ";
 				$cadenaSql .= "AND   entrada.estado_registro='t' ";
-
+				
 				if ($variable [0] != '') {
 					$cadenaSql .= " AND elemento.fecha_registro BETWEEN CAST ( '" . $variable [0] . "' AS DATE) ";
 					$cadenaSql .= " AND  CAST ( '" . $variable [1] . "' AS DATE)  ";
@@ -619,6 +620,33 @@ class Sql extends \Sql {
 				$cadenaSql .= "FROM grupo.catalogo_elemento ce ";
 				$cadenaSql .= "JOIN  arka_inventarios.tipo_bienes tb ON tb.id_tipo_bienes = ce.elemento_tipobien  ";
 				$cadenaSql .= "WHERE ce.elemento_id = '" . $variable . "';";
+				
+				break;
+			
+			case 'consultarExistenciaImagen' :
+				
+				$cadenaSql = "SELECT num_registro  ";
+				$cadenaSql .= "FROM  arka_movil.asignar_imagen ";
+				$cadenaSql .= "WHERE  id_elemento ='" . $variable . "';";
+				
+				break;
+			
+			case "RegistrarElementoImagen" :
+				
+				$cadenaSql = " 	INSERT INTO arka_movil.asignar_imagen(";
+				$cadenaSql .= " id_elemento, imagen ,prioridad) ";
+				$cadenaSql .= " VALUES (";
+				$cadenaSql .= "'" . $variable ['elemento'] . "',";
+				$cadenaSql .= "'" . $variable ['imagen'] . "',";
+				$cadenaSql .= "1) ";
+				$cadenaSql .= "RETURNING num_registro; ";
+				
+				break;
+			case "ActualizarElementoImagen" :
+				
+				$cadenaSql = " UPDATE arka_movil.asignar_imagen  ";
+				$cadenaSql .= "SET  id_elemento='" . $variable ['elemento'] . "', imagen='" . $variable ['imagen'] . "' ";
+				$cadenaSql .= "WHERE num_registro='" . $variable ['id_imagen'] . "';";
 				
 				break;
 		}

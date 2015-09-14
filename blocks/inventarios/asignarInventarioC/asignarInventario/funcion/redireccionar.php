@@ -20,6 +20,7 @@ class redireccion {
                 $variable .= "&mensaje=confirma";
                 $variable .= "&supervisor=" . $valor[1];
                 $variable .= "&contratista=" . $valor[0];
+                $variable .= "&usuario=" . $valor[2];
                 break;
 
             case "noInserto" :

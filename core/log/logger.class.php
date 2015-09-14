@@ -3,6 +3,9 @@
 require_once ("core/log/loggerSql.class.php");
 require_once ("core/log/loggerBase.class.php");
 
+
+
+
 class logger extends loggerBase {
 
     private static $instancia;
@@ -15,7 +18,7 @@ class logger extends loggerBase {
      * @name sesiones
      *       constructor
      */
-    private function __construct() {
+    public function __construct() {
         $this->miSql = new loggerSql (); 
         $this->miConfigurador = \Configurador::singleton ();
         $this->setPrefijoTablas($this->miConfigurador->getVariableConfiguracion ("prefijo"));
@@ -47,7 +50,7 @@ class logger extends loggerBase {
         $log['fecha_log']=date("F j, Y, g:i:s a");         
         $log['host']=$this->obtenerIP(); 
         $cadenaSql = $this->miSql->getCadenaSql("registroLogUsuario", $log);
-        $resultado = $this->miConexion->ejecutarAcceso($cadenaSql, self::ACCEDER);
+        $resultado = $this->miConexion->ejecutarAcceso($cadenaSql, self::ACCEDER ,'','registroLogUsuario');
     }
     
     function obtenerIP() {

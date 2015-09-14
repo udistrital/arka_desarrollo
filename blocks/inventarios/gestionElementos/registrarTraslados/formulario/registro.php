@@ -144,7 +144,7 @@ class registrarForm {
 			{
 				
 				if ($elementos_info) {
-					echo $this->miFormulario->tablaReporte ( $elementos_info );
+					echo $this->miFormulario->tablaReporte ( $elementos_info,true);
 				}
 			}
 			
@@ -424,6 +424,7 @@ class registrarForm {
 			$valorCodificado .= "&bloqueGrupo=" . $esteBloque ["grupo"];
 			$valorCodificado .= "&opcion=registrar";
 			$valorCodificado .= "&fun_anterior=" . $funcionario;
+			$valorCodificado .= "&usuario=".$_REQUEST['usuario']; 
 			$valorCodificado .= "&informacion_elementos=" . base64_encode ( serialize ( $elementos_info ) );
 			
 			/**

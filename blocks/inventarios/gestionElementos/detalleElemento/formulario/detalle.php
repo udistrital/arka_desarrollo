@@ -30,7 +30,7 @@ class registrarForm {
     }
 
     function miForm() {
-
+$this->miConfigurador->setVariableConfiguracion('cache',true);
 // Rescatar los datos de este bloque
         $esteBloque = $this->miConfigurador->getVariableConfiguracion("esteBloque");
         $rutaBloque = $this->miConfigurador->getVariableConfiguracion("host");

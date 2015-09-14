@@ -23,36 +23,41 @@ return false;
 });
 });
 
-
 $("#<?php echo $this->campoSeguro('placa') ?>").select2({
 placeholder: "",
 });
-
-$("#<?php echo $this->campoSeguro('proveedor') ?>").select2({
-placeholder: "",
-});
-
-$("#<?php echo $this->campoSeguro('funcionario_salida') ?>").select2({
-placeholder: "",
-});
-
-$("#<?php echo $this->campoSeguro('responsable') ?>").select2({
-placeholder: "",
-});
-
-$("#<?php echo $this->campoSeguro('supervisor') ?>").select2({
-placeholder: "",
-});
-
-
-$("#<?php echo $this->campoSeguro('serial') ?>").select2({
-placeholder: "Seleccione...",
-});
+ 
 
 $("#<?php echo $this->campoSeguro('numero_entrada') ?>").select2({
 placeholder: "Seleccione...",
 });
 
+$("#<?php echo $this->campoSeguro('iva') ?>").select2(); 
+$("#<?php echo $this->campoSeguro('supervisor') ?>").select2({
+placeholder: "",
+});
+
+$("#<?php echo $this->campoSeguro('sede_salida') ?>").select2(); 
+$("#<?php echo $this->campoSeguro('dependencia_salida') ?>").select2(); 
+$("#<?php echo $this->campoSeguro('ubicacion_salida') ?>").select2(); 
+
+
+  $("#<?php echo $this->campoSeguro('asignacionOrdenador')?>").select2();
+$("#<?php echo $this->campoSeguro('sede') ?>").select2(); 
+$("#<?php echo $this->campoSeguro('dependencia') ?>").select2(); 
+$("#<?php echo $this->campoSeguro('funcionario_salida') ?>").select2({
+placeholder: "",
+});
+
+$("#<?php echo $this->campoSeguro('serial') ?>").select2({
+placeholder: "Seleccione...",
+});
+
+$("#<?php echo $this->campoSeguro('responsable') ?>").select2({
+placeholder: "",
+});
+ 
+ 
 
 $('#<?php echo $this->campoSeguro('fecha_factura') ?>').datepicker({
 dateFormat: 'yy-mm-dd',
@@ -69,15 +74,6 @@ dayNamesMin: ['Do','Lu','Ma','Mi','Ju','Vi','Sa'],
 
 });
 
-
-$("#<?php echo $this->campoSeguro('sede') ?>").select2(); 
-$("#<?php echo $this->campoSeguro('dependencia') ?>").select2(); 
-
-$("#<?php echo $this->campoSeguro('sede_salida') ?>").select2(); 
-$("#<?php echo $this->campoSeguro('dependencia_salida') ?>").select2(); 
-$("#<?php echo $this->campoSeguro('ubicacion_salida') ?>").select2(); 
-
-  $("#<?php echo $this->campoSeguro('asignacionOrdenador')?>").select2();
 
 $( "#<?php echo $this->campoSeguro('cantidad') ?>" ).keyup(function() {
 

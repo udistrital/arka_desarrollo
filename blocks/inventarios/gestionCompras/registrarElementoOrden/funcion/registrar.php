@@ -35,7 +35,6 @@ class RegistradorOrden {
 		$esteRecursoDB = $this->miConfigurador->fabricaConexiones->getRecursoDB ( $conexion );
 		
 		$fechaActual = date ( 'Y-m-d' );
-		
 		switch ($_REQUEST ['tipo_registro']) {
 			
 			case '1' :
@@ -50,7 +49,8 @@ class RegistradorOrden {
 				if ($archivoImagen ['error'] == 0) {
 					
 					if ($archivoImagen ['type'] != 'image/jpeg') {
-						redireccion::redireccionar ( 'noFormatoImagen' );
+// 						redireccion::redireccionar ( 'noFormatoImagen' );
+						\inventarios\gestionActa\registrarElementoOrden\funcion\redireccion::redireccionar ( 'noFormatoImagen', $_REQUEST['usuario'] );
 						exit ();
 					}
 				}
@@ -84,7 +84,7 @@ class RegistradorOrden {
 					
 					$cadenaSql = $this->miSql->getCadenaSql ( 'ingresar_elemento_tipo_1', $arreglo );
 					
-					$elemento = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
+					$elemento = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda",$arreglo,'ingresar_elemento_tipo_1'); 
 				} else if ($_REQUEST ['id_tipo_bien'] == 2) {
 					
 					$arreglo = array (
@@ -106,7 +106,7 @@ class RegistradorOrden {
 					
 					$cadenaSql = $this->miSql->getCadenaSql ( 'ingresar_elemento_tipo_1', $arreglo );
 					
-					$elemento = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
+					$elemento = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" ,$arreglo,'ingresar_elemento_tipo_1');
 				} else if ($_REQUEST ['id_tipo_bien'] == 3) {
 					
 					if ($_REQUEST ['tipo_poliza'] == 0) {
@@ -153,13 +153,15 @@ class RegistradorOrden {
 					
 					$cadenaSql = $this->miSql->getCadenaSql ( 'ingresar_elemento_tipo_2', $arreglo );
 					
-					$elemento = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
+					$elemento = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" ,$arreglo,'ingresar_elemento_tipo_2');
 				}
 				
 				$datos = array (
 						$_REQUEST ['mensaje_titulo'],
 						$_REQUEST ['id_orden'],
-						$fechaActual 
+						$fechaActual,
+						(! isset ( $_REQUEST ['registroOrden'] )) ? $_REQUEST ['arreglo'] : $_REQUEST ['registroOrden'],
+						$_REQUEST['usuario'],
 				);
 				
 				//
@@ -181,11 +183,11 @@ class RegistradorOrden {
 					
 					$cadenaSql = $this->miSql->getCadenaSql ( 'ElementoImagen', $arreglo );
 					
-					$imagen = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
+					$imagen = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" ,$arreglo,'ElementoImagen');
 				}
 				
 				if ($elemento) {
-					
+					$this->miConfigurador->setVariableConfiguracion("cache",true);
 					\inventarios\gestionActa\registrarElementoOrden\funcion\redireccion::redireccionar ( 'inserto', $datos );
 					
 					exit ();
@@ -273,23 +275,60 @@ class RegistradorOrden {
 							$objWorksheet = $objPHPExcel->setActiveSheetIndex ( 0 );
 							
 							$highestRow = $objWorksheet->getHighestRow ();
+							$datos_enviar = array (
+									$_REQUEST ['mensaje_titulo'],
+									$_REQUEST ['id_orden'],
+									$fechaActual,
+									(! isset ( $_REQUEST ['registroOrden'] )) ? $_REQUEST ['arreglo'] : $_REQUEST ['registroOrden'] 
+							);
 							
 							for($i = 2; $i <= $highestRow; $i ++) {
 								
 								$datos [$i] ['Nivel'] = $objPHPExcel->getActiveSheet ()->getCell ( 'A' . $i )->getCalculatedValue ();
+								if (is_null ( $datos [$i] ['Nivel'] ) == true) {
+									
+									\inventarios\gestionActa\registrarElementoOrden\funcion\redireccion::redireccionar ( 'datosVacios', $datos_enviar );
+									
+									exit ();
+								}
 								
 								$datos [$i] ['Tipo_Bien'] = $objPHPExcel->getActiveSheet ()->getCell ( 'B' . $i )->getCalculatedValue ();
-								
+								if (is_null ( $datos [$i] ['Tipo_Bien'] ) == true) {
+									
+									\inventarios\gestionActa\registrarElementoOrden\funcion\redireccion::redireccionar ( 'datosVacios', $datos_enviar );
+									exit ();
+								}
 								$datos [$i] ['Descripcion'] = $objPHPExcel->getActiveSheet ()->getCell ( 'C' . $i )->getCalculatedValue ();
-								
+								if (is_null ( $datos [$i] ['Descripcion'] ) == true) {
+									
+									\inventarios\gestionActa\registrarElementoOrden\funcion\redireccion::redireccionar ( 'datosVacios', $datos_enviar );
+									exit ();
+								}
 								$datos [$i] ['Cantidad'] = $objPHPExcel->getActiveSheet ()->getCell ( 'D' . $i )->getCalculatedValue ();
-								
+								if (is_null ( $datos [$i] ['Cantidad'] ) == true) {
+									
+									\inventarios\gestionActa\registrarElementoOrden\funcion\redireccion::redireccionar ( 'datosVacios', $datos_enviar );
+									exit ();
+								}
 								$datos [$i] ['Unidad_Medida'] = $objPHPExcel->getActiveSheet ()->getCell ( 'E' . $i )->getCalculatedValue ();
-								
+								if (is_null ( $datos [$i] ['Unidad_Medida'] ) == true) {
+									
+									\inventarios\gestionActa\registrarElementoOrden\funcion\redireccion::redireccionar ( 'datosVacios', $datos_enviar );
+									exit ();
+								}
 								$datos [$i] ['Valor_Precio'] = $objPHPExcel->getActiveSheet ()->getCell ( 'F' . $i )->getCalculatedValue ();
-								
+								if (is_null ( $datos [$i] ['Valor_Precio'] ) == true) {
+									
+									\inventarios\gestionActa\registrarElementoOrden\funcion\redireccion::redireccionar ( 'datosVacios', $datos_enviar );
+									exit ();
+								}
 								$datos [$i] ['Iva'] = $objPHPExcel->getActiveSheet ()->getCell ( 'G' . $i )->getCalculatedValue ();
 								
+								if (is_null ( $datos [$i] ['Iva'] ) == true) {
+									
+									\inventarios\gestionActa\registrarElementoOrden\funcion\redireccion::redireccionar ( 'datosVacios', $datos_enviar );
+									exit ();
+								}
 								$datos [$i] ['Tipo_poliza'] = $objPHPExcel->getActiveSheet ()->getCell ( 'H' . $i )->getCalculatedValue ();
 								
 								$datos [$i] ['Fecha_Inicio_Poliza_Anio'] = $objPHPExcel->getActiveSheet ()->getCell ( 'I' . $i )->getCalculatedValue ();
@@ -376,7 +415,7 @@ class RegistradorOrden {
 									);
 									$cadenaSql = $this->miSql->getCadenaSql ( 'ingresar_elemento_tipo_1', $arreglo );
 									
-									$elemento_id = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
+									$elemento_id = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" ,$arreglo,'ingresar_elemento_tipo_1'); 
 								} else if ($datos [$i] ['Tipo_Bien'] == 2) {
 									
 									$arreglo = array (
@@ -398,7 +437,7 @@ class RegistradorOrden {
 									
 									$cadenaSql = $this->miSql->getCadenaSql ( 'ingresar_elemento_tipo_1', $arreglo );
 									
-									$elemento_id = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
+									$elemento_id = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda",$arreglo,'ingresar_elemento_tipo_1'); 
 								} else if ($datos [$i] ['Tipo_Bien'] == 3) {
 									
 									if ($datos [$i] ['Tipo_poliza'] == 0) {
@@ -420,7 +459,7 @@ class RegistradorOrden {
 												NULL,
 												(is_null ( $datos [$i] ['Marca'] ) == true) ? null : trim ( $datos [$i] ['Marca'], "'" ),
 												(is_null ( $datos [$i] ['Serie'] ) == true) ? null : trim ( $datos [$i] ['Serie'], "'" ),
-												$_REQUEST ['numero_acta'] 
+												$_REQUEST ['id_orden'] 
 										);
 									} else if ($datos [$i] ['Tipo_poliza'] == 1) {
 										
@@ -447,31 +486,32 @@ class RegistradorOrden {
 									
 									$cadenaSql = $this->miSql->getCadenaSql ( 'ingresar_elemento_tipo_2', $arreglo );
 									
-									$elemento_id = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
+									$elemento_id = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda",$arreglo,'ingresar_elemento_tipo_2');
 								}
 							}
 							
 							$datos = array (
 									$_REQUEST ['mensaje_titulo'],
 									$_REQUEST ['id_orden'],
-									$fechaActual 
+									date ( 'Y-m-d' ),
+									(! isset ( $_REQUEST ['registroOrden'] )) ? $_REQUEST ['arreglo'] : $_REQUEST ['registroOrden'],
+									$_REQUEST['usuario'] 
+									
 							);
 							
-							
 							if ($elemento_id && $_REQUEST ['id_orden']) {
-								
+								$this->miConfigurador->setVariableConfiguracion("cache",true);
 								\inventarios\gestionActa\registrarElementoOrden\funcion\redireccion::redireccionar ( 'inserto_cargue_masivo', $datos );
 								exit ();
 							} else {
 								
-								\inventarios\gestionActa\registrarElementoOrden\funcion\redireccion::redireccionar ( 'noInserto', $datos );
+								\inventarios\gestionActa\registrarElementoOrden\funcion\redireccion::redireccionar ( 'noInsertoMasivo', $datos );
 								exit ();
 							}
 						}
 					} else {
 						
-						
-						\inventarios\gestionActa\registrarElementoOrden\funcion\redireccion::redireccionar ( 'noExtension');
+						\inventarios\gestionActa\registrarElementoOrden\funcion\redireccion::redireccionar ( 'noExtension' );
 						
 						exit ();
 					}

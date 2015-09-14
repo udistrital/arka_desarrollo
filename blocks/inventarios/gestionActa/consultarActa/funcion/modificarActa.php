@@ -117,13 +117,14 @@ class RegistradorOrden {
 
 		$datos = array (
 				$_REQUEST ['id_acta'],
-				$fechaActual 
+				$fechaActual ,
+				$_REQUEST['arreglo']
 		);
 
 		
 
 		if ($id_acta) {
-			
+			$this->miConfigurador->setVariableConfiguracion("cache",true);
 			redireccion::redireccionar ( 'inserto', $datos );
 			exit();
 		} else {

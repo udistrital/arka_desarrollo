@@ -54,6 +54,7 @@ class registrarForm {
 //        var_dump($seleccion);
         //COnsultar datos de la entrada
         $cadenaSql = $this->miSql->getCadenaSql('consultarEntrada', $seleccion['id_entrada']);
+        
         $entrada = $esteRecursoDB->ejecutarAcceso($cadenaSql, "busqueda");
 
 
@@ -88,6 +89,7 @@ class registrarForm {
             $directorio .= $this->miConfigurador->getVariableConfiguracion("enlace");
 
             $variable = "pagina=" . $miPaginaActual;
+            $variable .= "&usuario=" . $_REQUEST['usuario']; 
             $variable = $this->miConfigurador->fabricaConexiones->crypto->codificar_url($variable, $directorio);
 
 // ---------------- CONTROL: Cuadro de Texto --------------------------------------------------------
@@ -264,6 +266,7 @@ class registrarForm {
                     $atributos = array_merge($atributos, $atributosGlobales);
                     echo $this->miFormulario->campoCuadroLista($atributos);
                     unset($atributos);
+
 
 // ---------------- CONTROL: Cuadro de Texto --------------------------------------------------------
                     $esteCampo = 'dependencia';
@@ -1081,7 +1084,7 @@ class registrarForm {
                     $esteCampo = 'botonAceptar';
                     $atributos ["id"] = $esteCampo;
                     $atributos ["tabIndex"] = $tab;
-                    $atributos ["tipo"] = '';
+                    $atributos ["tipo"] = 'boton';
 // submit: no se coloca si se desea un tipo button genérico
                     $atributos ['submit'] = 'true';
                     $atributos ["estiloMarco"] = '';
@@ -1130,7 +1133,8 @@ class registrarForm {
             $valorCodificado .= "&bloque=" . $esteBloque ['nombre'];
             $valorCodificado .= "&bloqueGrupo=" . $esteBloque ["grupo"];
             $valorCodificado .= "&opcion=registrar";
-            $valorCodificado .= "&elemento=" . $_REQUEST['elemento'];
+            $valorCodificado .= "&elemento=" . $_REQUEST['elemento']; 
+            $valorCodificado .= "&usuario=" . $_REQUEST['usuario'];
 // $valorCodificado .= "&funcionario=" . $funcionario ['responsable_ante'];
 // $valorCodificado .= "&idfuncionario=" . $funcionario ['id_funcionario'];
 

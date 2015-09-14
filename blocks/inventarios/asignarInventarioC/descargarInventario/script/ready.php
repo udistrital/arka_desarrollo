@@ -1,6 +1,6 @@
 
 // Asociar el widget de validación al formulario
-     $("#asignarInventario").validationEngine({
+     $("#descargarInventario").validationEngine({
             promptPosition : "centerRight", 
             scroll: false,
             autoHidePrompt: true,
@@ -9,8 +9,8 @@
 	
 
         $(function() {
-            $("#asignarInventario").submit(function() {
-                $resultado=$("#asignarInventario").validationEngine("validate");
+            $("#descargarInventario").submit(function() {
+                $resultado=$("#descargarInventario").validationEngine("validate");
                    
                 if ($resultado) {
                 

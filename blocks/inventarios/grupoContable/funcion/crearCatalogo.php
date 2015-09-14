@@ -71,7 +71,7 @@ class Formulario {
     	
     	$cadena_sql = $this->sql->getCadenaSql("crearCatalogo",$_REQUEST['nombre']);
     	
-    	$registros = $this->esteRecursoDB->ejecutarAcceso($cadena_sql);
+    	$registros = $this->esteRecursoDB->ejecutarAcceso($cadena_sql,"acceso",$_REQUEST['nombre'],"crearCatalogo"); 
     	
     	if(!$registros){
     		$this->miConfigurador->setVariableConfiguracion ( 'mostrarMensaje', 'errorCreacion' );

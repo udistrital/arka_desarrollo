@@ -75,7 +75,7 @@ class Sesion extends SesionBase {
                     /**
                      * Ejecutar una consulta
                      */
-                    $resultado = $this->miConexion->ejecutarAcceso($cadenaSql, self::ACCEDER);
+                    $resultado = $this->miConexion->ejecutarAcceso($cadenaSql, self::ACCEDER, $parametro, 'actualizarSesion');
                 }
             } else {
                 $resultado = false;
@@ -380,6 +380,23 @@ class Sesion extends SesionBase {
         $resultadoRoles = $this->miConexion->ejecutarAcceso($cadenaSql, self::BUSCAR);
         return $resultadoRoles;
     }
+    
+    
+         /**
+     * @METHOD obtener_roles
+     * Devuelve los roles de usuario en la base de datos sin el valor de la aplicacion
+     * @PARAM 
+     *
+     * @return valor
+     * @access public
+     */
+    function RolesSesion_unico() {
+        $this->sesionUsuarioId = trim($this->getValorSesion('idUsuario'));
+      $cadenaSql = $this->miSql->getCadenaSql("verificarRolesUsuario_unico", $this->sesionUsuarioId);
+        $resultadoRoles = $this->miConexion->ejecutarAcceso($cadenaSql, self::BUSCAR);
+        return $resultadoRoles;
+    }
+
 
 
     /**

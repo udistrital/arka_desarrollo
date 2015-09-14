@@ -11,6 +11,10 @@
 	         });
 	
         
+        
+        
+        
+        
         $(function() {
             $("#funcionarioElemento").submit(function() {
                 $resultado=$("#funcionarioElemento").validationEngine("validate");
@@ -25,6 +29,27 @@
             });
         });
 
+         $(function() {
+         
+         
+    $( "#ventanaEmergente" ).dialog({
+						  height: 470,
+						  width: 900,
+						  title: "Información Levantamiento Físico",
+						  autoOpen: false,
+						  
+				});
+				
+				
+				$("#abrir").button().click(function () {
+							$("#ventanaEmergente").dialog("open");
+						});
+
+				
+				
+  });
+        
+        
                $('#tablaTitulos').dataTable( {
 					"sScrollY": "350px",
 					 "bScrollCollapse": true,
@@ -34,53 +59,13 @@
 
     $('#<?php echo $this->campoSeguro('botonAprobar')?>').attr('disabled','disabled');
              
- $('#<?php echo $this->campoSeguro('numero_entrada_c')?>').attr('disabled','');
- $('#<?php echo $this->campoSeguro('fecha_entrada')?>').attr('disabled','');
- $('#<?php echo $this->campoSeguro('clase_entrada')?>').attr('disabled','');
- $('#<?php echo $this->campoSeguro('razon_social')?>').attr('disabled','');
- $('#<?php echo $this->campoSeguro('nit_proveedor')?>').attr('disabled','');
- $('#<?php echo $this->campoSeguro('numero_factura')?>').attr('disabled','');
- $('#<?php echo $this->campoSeguro('fecha_factura')?>').attr('disabled','');
  
- $('#<?php echo $this->campoSeguro('placa')?>').width(380);   
- $("#<?php echo $this->campoSeguro('placa')?>").select2({
-             	 placeholder: "Ingrese Mínimo 3 Caracteres de Búsqueda",
-              	 minimumInputLength: 3,
-              	 });
-              	 
- $('#<?php echo $this->campoSeguro('serie1')?>').width(261);              	 
- $("#<?php echo $this->campoSeguro('serie1')?>").select2({
-             	 placeholder: "Ingrese Mínimo 3 Caracteres de Búsqueda",
-              	 minimumInputLength: 3,
-              	 });
-
- $('#<?php echo $this->campoSeguro('registro_salidas')?>').width(390);  
-  $("#<?php echo $this->campoSeguro('registro_salidas')?>").select2();
- 
-              	 
+$('#<?php echo $this->campoSeguro('funcionario')?>').width(500);                 	 
  $("#<?php echo $this->campoSeguro('funcionario')?>").select2({
              	 placeholder: "Ingrese Mínimo 3 Caracteres de Búsqueda",
               	 minimumInputLength: 3,
               	 });
-$('#<?php echo $this->campoSeguro('sede')?>').width(380);              	 
- $("#<?php echo $this->campoSeguro('sede')?>").select2({
-             	 placeholder: "Ingrese Mínimo 3 Caracteres de Búsqueda",
-              	 minimumInputLength: 3,
-              	 });  
- 
- $("#<?php echo $this->campoSeguro('dependencia')?>").select2({
-             	 placeholder: "Ingrese Mínimo 3 Caracteres de Búsqueda",
-              	 minimumInputLength: 3,
-              	 });              	            
-              	 
-              	 
-              	 
-$('#<?php echo $this->campoSeguro('numero_entrada')?>').width(380);              	 	 
- $("#<?php echo $this->campoSeguro('numero_entrada')?>").select2({
-             	 placeholder: "Ingrese Mínimo 3 Caracteres de Búsqueda",
-              	 minimumInputLength: 3,
-              	 });           
-              	 
+
               	 
               	            	            	 
               	               	 

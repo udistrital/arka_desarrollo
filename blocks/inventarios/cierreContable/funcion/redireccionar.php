@@ -22,18 +22,22 @@ class redireccion {
                 $variable .= "&inicio=" . $_REQUEST['fecha_inicio'];
                 $variable .= "&fin=" . $_REQUEST['fecha_final'];
                 $variable .= "&vigencia=" . $_REQUEST['vigencia'];
+                $variable .= "&usuario=" . $_REQUEST['usuario'];
                 break;
 
             case "noInserto" :
                 $variable = "pagina=" . $miPaginaActual;
                 $variable .= "&opcion=mensaje";
                 $variable .= "&mensaje=error";
+                $variable .= "&usuario=".$valor['usuario'];
                 break;
 
             case "noCoincide" :
                 $variable = "pagina=" . $miPaginaActual;
                 $variable .= "&opcion=mensaje";
                 $variable .= "&mensaje=error";
+                $variable .= "&usuario=".$valor['usuario'];
+                
                 break;
 
             case "noAprobo" :
@@ -41,6 +45,7 @@ class redireccion {
                 $variable .= "&opcion=mensaje";
                 $variable .= "&mensaje=otros";
                 $variable .= "&errores=noAprobo";
+                $variable .= "&usuario=".$valor['usuario'];
                 break;
 
             //Existen entradas en el cierre contable que aún no han sido aprobadas
@@ -49,6 +54,7 @@ class redireccion {
                 $variable.= "&opcion=mensaje";
                 $variable.= "&mensaje=otros";
                 $variable.= "&errores=noAprobadaEntrada";
+                $variable .= "&usuario=".$valor;
                 break;
 
             case "regresar" :

@@ -49,11 +49,7 @@ class registrarForm {
 		
                 $miSesion = \Sesion::singleton();
                 //identifca lo roles para la busqueda de subsistemas
-                
-                
                 $roles=$miSesion->RolesSesion();
-                
-           
                 $aux=0;
                 foreach ($roles as $key => $value) {
                     if($roles[$key]['cod_rol']==1 && $roles[$key]['cod_app']>1)
@@ -67,7 +63,6 @@ class registrarForm {
                         }      
                     
                 }
-                
 		
 		// ---------------- SECCION: Parámetros Generales del Formulario ----------------------------------
 		$esteCampo = $esteBloque ['nombre'];

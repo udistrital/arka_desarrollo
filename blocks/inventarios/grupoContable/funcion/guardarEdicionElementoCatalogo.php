@@ -132,8 +132,8 @@ class Formulario {
         );
         
         $cadena_sql2 = $this->sql->getCadenaSql("guardarEdicionElementoCatalogoDescripcion", $datos2);
-        $registros2 = $this->esteRecursoDB->ejecutarAcceso($cadena_sql2);
-
+        $registros2 = $this->esteRecursoDB->ejecutarAcceso($cadena_sql2,"acceso",$datos2,"guardarEdicionElementoCatalogoDescripcion");
+  
         if (!$registros2) {
             $this->miConfigurador->setVariableConfiguracion('mostrarMensaje', 'errorCreacion');
             $this->mensaje();

@@ -131,7 +131,7 @@ class Formulario {
     	foreach($valores as $val){
 
     		$cadena_sql = $this->sql->getCadenaSql("eliminarElementoCatalogo",$val);
-    		$registros = $this->esteRecursoDB->ejecutarAcceso($cadena_sql);
+    		$registros = $this->esteRecursoDB->ejecutarAcceso($cadena_sql,"acceso",$val,"eliminarElementoCatalogo"); 
     		 
     		if(!$registros){
     			$this->miConfigurador->setVariableConfiguracion ( 'mostrarMensaje', 'errorCreacion' );

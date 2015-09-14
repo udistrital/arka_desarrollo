@@ -57,7 +57,7 @@ if ($_REQUEST ['funcion'] == 'subeFoto') {
         );
 
        $cadenaSql = $this->sql->getCadenaSql('guardar_foto', $parametro);
-        $resultadoItems = $esteRecursoDB->ejecutarAcceso($cadenaSql, 'insertar');
+        $resultadoItems = $esteRecursoDB->ejecutarAcceso($cadenaSql, 'insertar',$parametro,"guardar_foto");
 
         if ($resultadoItems == true) {
             $output = ['uploaded' => 'Foto registrada'];
@@ -97,7 +97,7 @@ if ($_REQUEST ['funcion'] == 'eliminaFoto') {
     $foto = $_REQUEST['num_registro'];
     
     $cadenaSql = $this->sql->getCadenaSql('eliminar_fotos', $foto);
-    $eliminar = $esteRecursoDB->ejecutarAcceso($cadenaSql, "insertar");
+    $eliminar = $esteRecursoDB->ejecutarAcceso($cadenaSql, "insertar",$foto,"eliminar_fotos");
 
     
      if ($eliminar == true) {
@@ -121,6 +121,7 @@ if ($_REQUEST ['funcion'] == 'Consulta') {
         $variable = "pagina=" . $miPaginaActual; // pendiente la pagina para modificar parametro
         $variable .= "&opcion=detalle";
         $variable .= "&elemento=" . $resultado[$key]['id_elemento_ind'];
+        $variable .= "&usuario=" . $_REQUEST['usuario'];
         $variable = $this->miConfigurador->fabricaConexiones->crypto->codificar_url($variable, $directorio);
 
         $detalle = "<center><a href='" . $variable . "'><u>Ver Detalle</u></a></center> ";

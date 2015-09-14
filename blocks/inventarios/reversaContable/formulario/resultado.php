@@ -92,6 +92,7 @@ class registrarForm {
         $directorio .= $this->miConfigurador->getVariableConfiguracion("enlace");
 
         $variable = "pagina=" . $miPaginaActual;
+        $variable .= "&usuario=".$_REQUEST['usuario'];
         $variable = $this->miConfigurador->fabricaConexiones->crypto->codificar_url($variable, $directorio);
 
         // ---------------- CONTROL: Cuadro de Texto --------------------------------------------------------
@@ -100,13 +101,14 @@ class registrarForm {
         $atributos ['enlace'] = $variable;
         $atributos ['tabIndex'] = 1;
         $atributos ['estilo'] = 'textoSubtitulo';
-        $atributos ['enlaceTexto'] = $this->lenguaje->getCadena($esteCampo);
+        $atributos ['enlaceTexto'] = "<< Regresar";
         $atributos ['ancho'] = '10%';
         $atributos ['alto'] = '10%';
         $atributos ['redirLugar'] = true;
         echo $this->miFormulario->enlace($atributos);
 
         unset($atributos);
+
 // ---------------- SECCION: Controles del Formulario -----------------------------------------------
         $esteCampo = "marcoDatosBasicos";
         $atributos ['id'] = $esteCampo;
@@ -184,7 +186,7 @@ class registrarForm {
             $esteCampo = 'botonAceptar';
             $atributos ["id"] = $esteCampo;
             $atributos ["tabIndex"] = $tab;
-            $atributos ["tipo"] = '';
+            $atributos ["tipo"] = 'boton';
             // submit: no se coloca si se desea un tipo button genérico
             $atributos ['submit'] = 'true';
             $atributos ["estiloMarco"] = '';
@@ -230,6 +232,7 @@ class registrarForm {
             $valorCodificado .= "&bloque=" . $esteBloque ['nombre'];
             $valorCodificado .= "&bloqueGrupo=" . $esteBloque ["grupo"];
             $valorCodificado .= "&opcion=reversarCierre";
+            $valorCodificado .= "&usuario=".$_REQUEST['usuario'];
 
             /*             * supervisor
              * SARA permite que los nombres de los campos sean dinámicos.

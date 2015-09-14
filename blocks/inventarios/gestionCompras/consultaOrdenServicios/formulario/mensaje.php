@@ -76,7 +76,30 @@ class registrarForm {
 			$directorio .= $this->miConfigurador->getVariableConfiguracion ( "site" ) . "/index.php?";
 			$directorio .= $this->miConfigurador->getVariableConfiguracion ( "enlace" );
 			
+			switch ($_REQUEST ['mensaje']) {
+				case 'actualizo' :
+					$opcion = "&opcion=modificarOrden";
+					$opcion .= "&id_orden=" . $_REQUEST ['numero_orden'];
+					$opcion .= "&mensaje_titulo=" . $_REQUEST ['mensaje_titulo'];
+					$opcion .= "&arreglo=" . $_REQUEST ['arreglo'];
+					
+					break;
+				
+				case 'ActualizoElemento' :
+					
+					$opcion = "&opcion=modificarElementos";
+					$opcion .= "&id_orden=" . $_REQUEST ['id_orden'];
+					$opcion .= "&mensaje_titulo=" . $_REQUEST ['mensaje_titulo'];
+					$opcion .= "&arreglo=" . $_REQUEST ['arreglo'];
+					$opcion .= "&id_elemento_acta=" . $_REQUEST ['id_elemento_acta'];
+					
+					break;
+			}
+			
+			
 			$variable = "pagina=" . $miPaginaActual;
+			$variable .= $opcion;
+			
 			$variable = $this->miConfigurador->fabricaConexiones->crypto->codificar_url ( $variable, $directorio );
 			
 			// ---------------- CONTROL: Cuadro de Texto --------------------------------------------------------
@@ -103,18 +126,18 @@ class registrarForm {
 			{
 				
 				if ($_REQUEST ['mensaje'] == 'noActualizoElemento') {
-				
+					
 					$mensaje = "NO SE REALIZO LA ACTUALIZACION DEL ELEMENTO";
-				
+					
 					// ---------------- CONTROL: Cuadro de Texto --------------------------------------------------------
 					$esteCampo = 'mensajeRegistro';
 					$atributos ['id'] = $esteCampo;
 					$atributos ['tipo'] = 'error';
 					$atributos ['estilo'] = 'textoCentrar';
 					$atributos ['mensaje'] = $mensaje;
-				
+					
 					$tab ++;
-				
+					
 					// Aplica atributos globales al control
 					$atributos = array_merge ( $atributos, $atributosGlobales );
 					echo $this->miFormulario->cuadroMensaje ( $atributos );
@@ -139,54 +162,47 @@ class registrarForm {
 					// --------------- FIN CONTROL : Cuadro de Texto --------------------------------------------------
 				}
 				
-				
-				
 				if ($_REQUEST ['mensaje'] == 'eliminoElemento') {
-				
+					
 					$mensaje = "SE ELIMINO EL ELEMENTO DE LA ORDEN.";
-				
+					
 					// ---------------- CONTROL: Cuadro de Texto --------------------------------------------------------
 					$esteCampo = 'mensajeRegistro';
 					$atributos ['id'] = $esteCampo;
 					$atributos ['tipo'] = 'success';
 					$atributos ['estilo'] = 'textoCentrar';
 					$atributos ['mensaje'] = $mensaje;
-				
+					
 					$tab ++;
-				
+					
 					// Aplica atributos globales al control
 					$atributos = array_merge ( $atributos, $atributosGlobales );
 					echo $this->miFormulario->cuadroMensaje ( $atributos );
 					// --------------- FIN CONTROL : Cuadro de Texto --------------------------------------------------
 				}
 				
-				
-				
-				
-				
 				if ($_REQUEST ['mensaje'] == 'noeliminoElemento') {
-				
+					
 					$mensaje = "NO SE PUDO ELIMINAR ELEMENTO DE LA ORDEN";
-				
+					
 					// ---------------- CONTROL: Cuadro de Texto --------------------------------------------------------
 					$esteCampo = 'mensajeRegistro';
 					$atributos ['id'] = $esteCampo;
 					$atributos ['tipo'] = 'error';
 					$atributos ['estilo'] = 'textoCentrar';
 					$atributos ['mensaje'] = $mensaje;
-				
+					
 					$tab ++;
-				
+					
 					// Aplica atributos globales al control
 					$atributos = array_merge ( $atributos, $atributosGlobales );
 					echo $this->miFormulario->cuadroMensaje ( $atributos );
 					// --------------- FIN CONTROL : Cuadro de Texto --------------------------------------------------
 				}
 				
-				
 				if ($_REQUEST ['mensaje'] == 'actualizo') {
 					
-					$mensaje = "SE ACTUALIZO LA ".$_REQUEST['mensaje_titulo'];
+					$mensaje = "SE ACTUALIZO LA " . $_REQUEST ['mensaje_titulo'];
 					
 					// ---------------- CONTROL: Cuadro de Texto --------------------------------------------------------
 					$esteCampo = 'mensajeRegistro';

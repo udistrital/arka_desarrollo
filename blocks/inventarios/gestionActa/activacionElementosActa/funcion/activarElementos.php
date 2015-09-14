@@ -76,7 +76,7 @@ class RegistradorOrden {
 
             $cadenaSql = $this->miSql->getCadenaSql('ingresar_elemento', $arreglo);
 
-            $elemento = $esteRecursoDB->ejecutarAcceso($cadenaSql, "busqueda");
+            $elemento = $esteRecursoDB->ejecutarAcceso($cadenaSql, "busqueda",$arreglo,"ingresar_elemento");
 
 //                        if (is_null($elementos_particulares ['imagen']) == false) {
 //                        $arreglo = array(
@@ -117,7 +117,7 @@ class RegistradorOrden {
                     $sumaplaca = ($elementos_particulares ['tipo_bien'] == 1) ? $sumaplaca : $sumaplaca ++;
 
                     $cadenaSql = $this->miSql->getCadenaSql('ingresar_elemento_individual', $arregloElementosInv);
-                    $elemento_id [$i] = $esteRecursoDB->ejecutarAcceso($cadenaSql, "busqueda");
+                    $elemento_id [$i] = $esteRecursoDB->ejecutarAcceso($cadenaSql, "busqueda",$arregloElementosInv,"ingresar_elemento_individual"); 
 
                     $elemento_id_max_indiv = $elemento_id_max_indiv + 1;
 
@@ -154,7 +154,7 @@ class RegistradorOrden {
 
                     $cadenaSql = $this->miSql->getCadenaSql('ingresar_elemento_individual', $arregloElementosInv);
 
-                    $elemento_id [$i] = $esteRecursoDB->ejecutarAcceso($cadenaSql, "busqueda");
+                    $elemento_id [$i] = $esteRecursoDB->ejecutarAcceso($cadenaSql, "busqueda",$arregloElementosInv,"ingresar_elemento_individual");
 
 
                     if (is_null($elementos_particulares ['imagen']) == false) {
@@ -164,7 +164,7 @@ class RegistradorOrden {
                         );
 
                         $cadenaSql = $this->miSql->getCadenaSql('ElementoImagen', $arreglo);
-                        $imagen = $esteRecursoDB->ejecutarAcceso($cadenaSql, "busqueda");
+                        $imagen = $esteRecursoDB->ejecutarAcceso($cadenaSql, "busqueda",$arreglo,"ElementoImagen"); 
                     }
 
                     $elemento_id_max_indiv = $elemento_id_max_indiv + 1;
@@ -173,7 +173,7 @@ class RegistradorOrden {
 
             $cadenaSql = $this->miSql->getCadenaSql('anular_elementos_acta', $id_elemento_acta);
 
-            $elemento_anulado = $esteRecursoDB->ejecutarAcceso($cadenaSql, "acceso");
+            $elemento_anulado = $esteRecursoDB->ejecutarAcceso($cadenaSql, "acceso",$id_elemento_acta,"anular_elementos_acta");
         }
 
 
@@ -187,7 +187,7 @@ class RegistradorOrden {
 
 
         if ($elemento && $elemento_id) {
-
+$this->miConfigurador->setVariableConfiguracion("cache",true);
             redireccion::redireccionar('inserto', $datos);
             exit();
         } else {
@@ -204,7 +204,7 @@ class RegistradorOrden {
                 unset($_REQUEST [$clave]);
             }
         }
-    }
+    } 
 
 }
 

@@ -196,7 +196,8 @@ class Sql extends \Sql {
                 $cadenaSql.=' JOIN arka_parametros.arka_sedes as sedes ON sedes."ESF_COD_SEDE"=espacios."ESF_COD_SEDE"  ';
                 $cadenaSql.=' LEFT JOIN arka_parametros.arka_proveedor proveedores ON proveedores."PRO_NIT"=cast(proveedor as character varying) ';
                 $cadenaSql.=' WHERE 1=1   ';
-                $cadenaSql.=' AND tipo_faltsobr IN(2,3)  ';
+                $cadenaSql.=' AND tipo_faltsobr=3  ';
+                $cadenaSql.=' OR tipo_faltsobr=2  ';
                 $cadenaSql.=' AND estado_entrada = 1 AND id_reposicion=0 ';
                 if ($variable ['numero_entrada'] != '') {
                     $cadenaSql .= " AND salida.id_entrada = '" . $variable ['numero_entrada'] . "'";
@@ -204,7 +205,7 @@ class Sql extends \Sql {
 
                 if ($variable['fecha_inicio'] != '' && $variable ['fecha_final'] != '') {
                     $cadenaSql .= " AND baja_elemento.fecha_registro BETWEEN CAST ( '" . $variable ['fecha_inicio'] . "' AS DATE) ";
-                    $cadenaSql .= " AND  CAST ( '" . $variable ['fecha_final'] . "' AS DATE)  ";
+	                    $cadenaSql .= " AND  CAST ( '" . $variable ['fecha_final'] . "' AS DATE)  ";
                 }
 
                 if ($variable ['dependencia'] != '') {
@@ -230,15 +231,23 @@ class Sql extends \Sql {
                 break;
 
             case "consultarEntrada" :
-                $cadenaSql = "SELECT DISTINCT entrada.proveedor, entrada.numero_factura,  entrada.fecha_factura,  entrada.observaciones, ";
+                $cadenaSql = "SELECT  entrada.proveedor, entrada.numero_factura,  entrada.fecha_factura,  entrada.observaciones, ";
                 $cadenaSql .= " entrada.ordenador, entrada.tipo_ordenador,  entrada.identificacion_ordenador, sede, dependencia, ";
-                $cadenaSql .= ' supervisor, descripcion,pr."PRO_NIT" as nit , pr."PRO_RAZON_SOCIAL" as razon_social,"FUN_NOMBRE" ordenador_nombre';
+                $cadenaSql .= " supervisor , descripcion, fn. \"FUN_NOMBRE\" ordenador_nombre ,pr.\"PRO_NIT\" as nit ,pr.\"PRO_RAZON_SOCIAL\" as razon_social ";
+//                 		
+//                 		 pr.\"PRO_RAZON_SOCIAL\" as razon_social,
+//                 		"FUN_NOMBRE" ordenador_nombre';
                 $cadenaSql .= " FROM arka_inventarios.entrada ";
                 $cadenaSql .= " JOIN arka_inventarios.clase_entrada ON clase_entrada.id_clase = entrada.clase_entrada ";
-                $cadenaSql .= ' LEFT JOIN arka_parametros.arka_proveedor pr ON pr."PRO_NIT" = CAST(entrada.proveedor AS CHAR(50)) ';
-                $cadenaSql .= ' JOIN arka_parametros.arka_funcionarios ON entrada.identificacion_ordenador=arka_parametros.arka_funcionarios."FUN_IDENTIFICACION" ';
-                $cadenaSql .= " WHERE 1=1 AND entrada.cierre_contable='f' AND entrada.estado_entrada = 1 AND entrada.estado_registro='t' ";
-                $cadenaSql .= " AND entrada.id_entrada='" . $variable . "' ";
+                $cadenaSql .= 'LEFT JOIN arka_parametros.arka_proveedor pr ON pr."PRO_NIT" = entrada.proveedor::text ';
+                $cadenaSql .= " LEFT JOIN arka_parametros.arka_funcionarios fn ON fn.\"FUN_IDENTIFICACION\" =entrada.identificacion_ordenador ";
+                $cadenaSql .= " WHERE  ";
+//                 $cadenaSql .= " entrada.cierre_contable='f' ";
+//                 $cadenaSql .= "	AND entrada.estado_entrada = 1 "; 
+                $cadenaSql .= "	 entrada.estado_registro='t' ";
+                $cadenaSql .= " AND  entrada.id_entrada='" . $variable . "' "; 
+                
+                
                 break;
 
             case "max_id_baja" :

@@ -60,10 +60,10 @@ class RegistradorOrden {
          $cadenaSql = $this->miSql->getCadenaSql('inactivarItems', $datosActa);
             $items = $esteRecursoDB->ejecutarAcceso($cadenaSql, "acceso");
 
-
+            $datosActa=array($datosActa,$_REQUEST['arreglo']);
 //redireccionar
         if ($items == 1) {
-
+$this->miConfigurador->setVariableConfiguracion("cache",true);
             redireccion::redireccionar('elimino', $datosActa);
             exit();
         } else {

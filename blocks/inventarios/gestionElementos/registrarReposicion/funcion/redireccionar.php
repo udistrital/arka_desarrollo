@@ -22,6 +22,7 @@ class redireccion {
                 $variable .= "&elemento=" . $valor['id_elemento'];
                 $variable .= "&entrada=" . $valor['id_entrada'];
                 $variable .= "&salida=" . $valor['id_salida'];
+                $variable .= "&usuario=" . $valor['usuario'];
                 break;
 
             case "inserto_M" :
@@ -42,7 +43,7 @@ class redireccion {
                 $variable = "pagina=" . $miPaginaActual;
                 $variable .= "&opcion=mensaje";
                 $variable .= "&mensaje=error";
-
+                $variable .= "&usuario=" . $valor;  
                 break;
 
             case "noCargarElemento" :

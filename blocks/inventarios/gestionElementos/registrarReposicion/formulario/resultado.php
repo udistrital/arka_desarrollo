@@ -117,7 +117,10 @@ class registrarForm {
         );
 
          $cadenaSql = $this->miSql->getCadenaSql('consultarAprobadas', $arreglo);
+         
+                  
         $elemento = $esteRecursoDB->ejecutarAcceso($cadenaSql, "busqueda");
+        
 
 // ---------------- SECCION: Parámetros Generales del Formulario ----------------------------------
         $esteCampo = $esteBloque ['nombre'];
@@ -147,6 +150,7 @@ class registrarForm {
         $directorio .= $this->miConfigurador->getVariableConfiguracion("enlace");
 
         $variable = "pagina=" . $miPaginaActual;
+        $variable .= "&usuario=".$_REQUEST['usuario']; 
         $variable = $this->miConfigurador->fabricaConexiones->crypto->codificar_url($variable, $directorio);
 
 // ---------------- CONTROL: Cuadro de Texto --------------------------------------------------------
@@ -198,6 +202,7 @@ class registrarForm {
             for ($i = 0; $i < count($elemento); $i ++) {
                 $variable = "pagina=" . $miPaginaActual; // pendiente la pagina para modificar parametro
                 $variable .= "&opcion=registrarReposicion";
+                $variable .= "&usuario=" . $_REQUEST['usuario'];
                 $variable .= "&elemento=" . base64_encode(serialize($elemento [$i]));
                 $variable = $this->miConfigurador->fabricaConexiones->crypto->codificar_url($variable, $directorio);
 

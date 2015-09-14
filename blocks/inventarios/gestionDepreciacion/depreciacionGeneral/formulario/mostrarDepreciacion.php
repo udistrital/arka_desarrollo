@@ -288,7 +288,7 @@ class registrarForm {
         if ($elementoG) {
             //Aquí genera la tabla !!!! :D
 
-            echo $this->miFormulario->tablaReporte($depreciacion_calculada);
+            echo $this->miFormulario->tablaReporte($depreciacion_calculada,$estilo=true);
 
             //Aquí termina la tabla
 

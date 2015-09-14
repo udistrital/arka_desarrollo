@@ -21,7 +21,6 @@ class RegistradorOrden {
 		$this->miFuncion = $funcion;
 	}
 	function procesarFormulario() {
-			
 		$conexion = "inventarios";
 		$esteRecursoDB = $this->miConfigurador->fabricaConexiones->getRecursoDB ( $conexion );
 		// ------- Registro de Imagen
@@ -55,7 +54,7 @@ class RegistradorOrden {
 				
 				$cadenaSql = $this->miSql->getCadenaSql ( 'ActualizarElementoImagen', $arreglo );
 				
-				$imagen = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "acceso" );
+				$imagen = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "acceso", $arreglo,'ActualizarElementoImagen' );
 			} else if ($ExistenciaImagen == false) {
 				
 				$data = base64_encode ( file_get_contents ( $archivoImagen ['tmp_name'] ) );
@@ -67,14 +66,10 @@ class RegistradorOrden {
 				
 				$cadenaSql = $this->miSql->getCadenaSql ( 'RegistrarElementoImagen', $arreglo );
 				
-				$imagen = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "acceso" );
+				$imagen = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "acceso",$arreglo,'RegistrarElementoImagen' );
 			}
 		}
 		
-		
-		
-		
-
 		// -------------------------------------
 		
 		$cadenaSql = $this->miSql->getCadenaSql ( 'consultar_iva', $_REQUEST ['iva'] );
@@ -103,7 +98,7 @@ class RegistradorOrden {
 			
 			$cadenaSql = $this->miSql->getCadenaSql ( 'actualizar_elemento_tipo_1', $arreglo );
 			
-			$elemento = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "acceso" );
+			$elemento = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "acceso",$arreglo,'actualizar_elemento_tipo_1' );
 		} else if ($_REQUEST ['id_tipo_bien'] == 2) {
 			
 			$arreglo = array (
@@ -124,7 +119,7 @@ class RegistradorOrden {
 			
 			$cadenaSql = $this->miSql->getCadenaSql ( 'actualizar_elemento_tipo_1', $arreglo );
 			
-			$elemento = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "acceso" );
+			$elemento = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "acceso",$arreglo,'actualizar_elemento_tipo_1' );
 		} else if ($_REQUEST ['id_tipo_bien'] == 3) {
 			
 			if ($_REQUEST ['tipo_poliza'] == 0) {
@@ -170,7 +165,7 @@ class RegistradorOrden {
 			
 			$cadenaSql = $this->miSql->getCadenaSql ( 'actualizar_elemento_tipo_2', $arreglo );
 			
-			$elemento = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "acceso" );
+			$elemento = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "acceso",$arreglo,'actualizar_elemento_tipo_2' );
 		}
 		// echo $cadenaSql;exit;
 		
@@ -188,13 +183,21 @@ class RegistradorOrden {
 		// $imagen = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
 		// }
 		
+		$arreglo = array (
+				$_REQUEST ['id_orden'],
+				$_REQUEST ['mensaje_titulo'],
+				$_REQUEST ['arreglo'],
+				$_REQUEST['id_elemento_acta'] 
+		)
+		;
+		
 		if ($elemento) {
-			
-			redireccion::redireccionar ( 'ActualizoElemento' );
+			$this->miConfigurador->setVariableConfiguracion("cache",true);
+			redireccion::redireccionar ( 'ActualizoElemento', $arreglo );
 			exit ();
 		} else {
 			
-			redireccion::redireccionar ( 'noActualizoElemento' );
+			redireccion::redireccionar ( 'noActualizoElemento', $arreglo );
 			exit ();
 		}
 	}

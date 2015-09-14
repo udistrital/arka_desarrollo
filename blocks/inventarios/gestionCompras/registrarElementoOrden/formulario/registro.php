@@ -20,8 +20,7 @@ class registrarForm {
 		$this->miSql = $sql;
 	}
 	function miForm() {
-		 
-		 
+		
 		// Rescatar los datos de este bloque
 		$esteBloque = $this->miConfigurador->getVariableConfiguracion ( "esteBloque" );
 		
@@ -54,7 +53,6 @@ class registrarForm {
 		
 		$seccion ['tiempo'] = $tiempo;
 		
-		
 		$conexion = "inventarios";
 		
 		$esteRecursoDB = $this->miConfigurador->fabricaConexiones->getRecursoDB ( $conexion );
@@ -75,7 +73,7 @@ class registrarForm {
 		$atributos ['marco'] = false;
 		$tab = 1;
 		// ---------------- FIN SECCION: de Parámetros Generales del Formulario ----------------------------
-		
+		 
 		// ----------------INICIAR EL FORMULARIO ------------------------------------------------------------
 		$atributos ['tipoEtiqueta'] = 'inicio';
 		echo $this->miFormulario->formulario ( $atributos );
@@ -85,8 +83,29 @@ class registrarForm {
 			$directorio .= $this->miConfigurador->getVariableConfiguracion ( "site" ) . "/index.php?";
 			$directorio .= $this->miConfigurador->getVariableConfiguracion ( "enlace" );
 			
-			$miPaginaActual = $this->miConfigurador->getVariableConfiguracion ( 'pagina' );
-			$variable = "pagina=" . $miPaginaActual;
+			if (isset ( $_REQUEST ['registroOrden'] ) && $_REQUEST ['registroOrden'] = 'true') {
+				
+				$miPaginaActual = $this->miConfigurador->getVariableConfiguracion ( 'pagina' );
+				$variable = "pagina=registrarOrdenServicios";
+				$variable .= "&opcion=mensaje";
+				$variable .= "&mensaje=confirma";
+				$variable .= "&id_orden=" . $_REQUEST ['id_orden'];
+				$variable .= "&mensaje_titulo=" . $_REQUEST ['mensaje_titulo'];
+			} else {
+				$arreglo = unserialize ( $_REQUEST ['arreglo'] );
+				$miPaginaActual = $this->miConfigurador->getVariableConfiguracion ( 'pagina' );
+				$variable = "pagina=" . $miPaginaActual;
+				$variable .= "&opcion=ConsultarActa";
+				$variable .= "&numero_orden=" . $arreglo ['numero_orden'];
+				$variable .= "&tipo_orden=" . $arreglo ['tipo_orden'];
+				$variable .= "&id_proveedor=" . $arreglo ['nit'];
+				$variable .= "&sedeConsulta=" . $arreglo ['sede'];
+				$variable .= "&dependenciaConsulta=" . $arreglo ['dependencia'];
+				$variable .= "&fecha_inicio=" . $arreglo ['fecha_inicial'];
+				$variable .= "&fecha_final=" . $arreglo ['fecha_final'];
+				$variable .= "&usuario=" . $_REQUEST ['usuario'];
+			}
+			
 			$variable = $this->miConfigurador->fabricaConexiones->crypto->codificar_url ( $variable, $directorio );
 			
 			// ---------------- CONTROL: Cuadro de Texto --------------------------------------------------------
@@ -105,7 +124,7 @@ class registrarForm {
 			$atributos ['id'] = $esteCampo;
 			$atributos ["estilo"] = "jqueryui";
 			$atributos ['tipoEtiqueta'] = 'inicio';
-			$atributos ["leyenda"] = $_REQUEST['mensaje_titulo'];
+			$atributos ["leyenda"] = $_REQUEST ['mensaje_titulo'];
 			echo $this->miFormulario->marcoAgrupacion ( 'inicio', $atributos );
 			unset ( $atributos );
 			{
@@ -162,7 +181,7 @@ class registrarForm {
 						
 						$mensaje = "- El Archivo Tiene que Ser Tipo Excel.
 								<br>- Solo Se Cargaran de forma Correcta de Acuerdo al Plantilla Preedeterminada.
-								<br>- Para Verificar El Cargue Masivo Consulte los Elementos en el Modulo \"Consultar Y Modificar Elementos\".
+								<br>- Para Verificar El Cargue Masivo Consulte los Elementos en el Modulo \"Consultar Y Modificar Orden\".
 								<br>- Enlace de Archivo Plantilla : <A HREF=" . $host . "> Archivo Plantilla </A>";
 						
 						// ---------------- CONTROL: Cuadro de Texto --------------------------------------------------------
@@ -908,8 +927,13 @@ class registrarForm {
 			$valorCodificado .= "&opcion=registrar";
 			$valorCodificado .= "&id_orden=" . $_REQUEST ['id_orden'];
 			$valorCodificado .= "&mensaje_titulo=" . $_REQUEST ['mensaje_titulo'];
+			$valorCodificado .= "&usuario=" . $_REQUEST['usuario'];
 			
-			
+			if (! isset ( $_REQUEST ['registroOrden'] )) {
+				$valorCodificado .= "&arreglo=" . $_REQUEST ['arreglo'];
+			} else {
+				$valorCodificado .= "&registroOrden='true'";
+			}
 			/**
 			 * SARA permite que los nombres de los campos sean dinámicos.
 			 * Para ello utiliza la hora en que es creado el formulario para
@@ -1006,7 +1030,7 @@ class registrarForm {
 				{
 					
 					if ($_REQUEST ['mensaje'] == 'registro') {
-						$atributos ['mensaje'] = "<center>SE CARGO ELEMENTO ". $_REQUEST ['mensaje_titulo'] . "<br>Fecha : " . date('Y-m-d') . "</center>";
+						$atributos ['mensaje'] = "<center>SE CARGO ELEMENTO " . $_REQUEST ['mensaje_titulo'] . "<br>Fecha : " . date ( 'Y-m-d' ) . "</center>";
 						$atributos ["estilo"] = 'success';
 					} else {
 						$atributos ['mensaje'] = "<center>Error al Cargar Elemento Verifique los Datos</center>";
@@ -1083,14 +1107,16 @@ class registrarForm {
 					$atributos ['redirLugar'] = true;
 					echo $this->miFormulario->enlace ( $atributos );
 					unset ( $atributos );
-				
-					$miPaginaActual = $this->miConfigurador->getVariableConfiguracion ( 'pagina' );
-					$variable = "pagina=registrarActa";
-					$variable .= "&opcion=asociarActa";
-					$variable .= "&numero_orden=".$_REQUEST['id_orden'];
-					$variable .= "&fecha_orden=".$_REQUEST['fecha_orden'];
-					$variable .= "&mensaje_titulo=".$_REQUEST['mensaje_titulo'];
 					
+					$miPaginaActual = $this->miConfigurador->getVariableConfiguracion ( 'pagina' );
+					
+					$variable = "action=consultaOrdenServicios";
+					$variable .= "&pagina=consultaOrdenServicios";
+					$variable .= "&bloque=consultaOrdenServicios";
+					$variable .= "&bloqueGrupo=inventarios/gestionCompras/";
+					$variable .= "&opcion=generarDocumento";
+					$variable .= "&id_orden=" . $_REQUEST ['id_orden'];
+					$variable .= "&mensaje_titulo=" . $_REQUEST ['mensaje_titulo'];
 					
 					$variable = $this->miConfigurador->fabricaConexiones->crypto->codificar_url ( $variable, $directorio );
 					
@@ -1101,13 +1127,12 @@ class registrarForm {
 					$atributos ['enlace'] = $variable;
 					$atributos ['tabIndex'] = 1;
 					$atributos ['estilo'] = 'textoSubtitulo';
-					$atributos ['enlaceTexto'] = "<< Registrar  Acta de  Recibido >>";
+					$atributos ['enlaceTexto'] = "<< Generar PDF Documento Orden >>";
 					$atributos ['ancho'] = '10%';
 					$atributos ['alto'] = '10%';
 					$atributos ['redirLugar'] = true;
-// 					echo $this->miFormulario->enlace ( $atributos );
+					echo $this->miFormulario->enlace ( $atributos );
 					unset ( $atributos );
-					
 					
 					// -----------------FIN CONTROL: Botón -----------------------------------------------------------
 					
@@ -1124,6 +1149,7 @@ class registrarForm {
 			$valorCodificado .= "&bloque=" . $esteBloque ['nombre'];
 			$valorCodificado .= "&bloqueGrupo=" . $esteBloque ["grupo"];
 			$valorCodificado .= "&opcion=redireccionar";
+			$valorCodificado .= "&usuario=" . $_REQUEST['usuario'];
 			
 			/**
 			 * SARA permite que los nombres de los campos sean dinámicos.

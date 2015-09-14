@@ -19,6 +19,7 @@ class redireccion {
 				$variable .= "&mensaje=registro";
 				$variable .= "&numero_acta=" . $valor [0];
 				$variable .= "&fecha_orden=" . $valor [1];
+				$variable .= "&usuario=" . $valor [2];  
 				break;
 			
 			case "inserto_cargue_masivo" :
@@ -26,7 +27,8 @@ class redireccion {
 				$variable = "pagina=" . $miPaginaActual;
 				$variable .= "&opcion=mensaje";
 				$variable .= "&mensaje=confirmaMasivo";
-				$variable .= "&numero_acta=".$valor[0];
+				$variable .= "&numero_acta=" . $valor [0];
+				$variable .= "&usuario=" . $valor [2]; 
 				break;
 			
 			case "noFormatoImagen" :
@@ -48,13 +50,14 @@ class redireccion {
 				$variable = "pagina=" . $miPaginaActual;
 				$variable .= "&opcion=mensaje";
 				$variable .= "&mensaje=noArchivoCarga";
+				$variable .= "&usuario=".$valor;
 				break;
 			
 			case "noInserto" :
 				$variable = "pagina=" . $miPaginaActual;
 				$variable .= "&opcion=mensaje";
 				$variable .= "&mensaje=error";
-				
+				$variable .= "&usuario=".$valor; 
 				break;
 			
 			case "noCargarElemento" :
@@ -85,6 +88,14 @@ class redireccion {
 				$variable .= "&opcion=Salida";
 				$variable .= "&numero_entrada=" . $valor;
 				$variable .= "&datosGenerales=" . $valor1;
+				break;
+			
+			case "datosVacios" :
+				
+				$variable = "pagina=" . $miPaginaActual;
+				$variable .= "&opcion=mensaje";
+				$variable .= "&mensaje=datosVacios";
+				$variable .= "&usuario=".$valor[1]; 
 				break;
 		}
 		

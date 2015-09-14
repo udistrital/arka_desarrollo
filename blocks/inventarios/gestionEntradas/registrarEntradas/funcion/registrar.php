@@ -211,7 +211,7 @@ class RegistradorOrden {
 		);
 		
 		$cadenaSql = $this->miSql->getCadenaSql ( 'insertarInformación', $arreglo_clase );
-		$info_clase = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
+		$info_clase = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda",$arreglo_clase,"insertarInformación");  
 		
 		$cadenaSql = $this->miSql->getCadenaSql ( 'idMaximoEntrada' );
 		$idEntradamax = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
@@ -232,7 +232,7 @@ class RegistradorOrden {
 				($_REQUEST ['id_proveedor'] != '') ? $_REQUEST ['id_proveedor'] : NULL, // donacion
 				($_REQUEST ['numero_factura'] != '') ? $_REQUEST ['numero_factura'] : NULL, // donacion
 				($_REQUEST ['fecha_factura'] != '') ? $_REQUEST ['fecha_factura'] : NULL, // donacion
-				$_REQUEST ['observaciones_entrada'],
+				($_REQUEST['observaciones_entrada']=='')?"NULL":"'".$_REQUEST ['observaciones_entrada']."'",
 				$_REQUEST ['numero_acta'],
 				($_REQUEST ['id_ordenador'] == '') ? NULL : $_REQUEST ['id_ordenador'], // obligatorio donacion
 				$_REQUEST ['sede'], // obligatorio
@@ -245,7 +245,7 @@ class RegistradorOrden {
 		
 		$cadenaSql = $this->miSql->getCadenaSql ( 'insertarEntrada', $arregloDatos );
 		
-		$id_entrada = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
+		$id_entrada = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda",$arregloDatos,"insertarEntrada" );
 		
 		$arreglo = array (
 				$idEntradamax,
@@ -255,7 +255,7 @@ class RegistradorOrden {
 		
 		
 		if ($id_entrada) {
-			
+			$this->miConfigurador->setVariableConfiguracion("cache",true);
 			redireccion::redireccionar ( 'inserto', $arreglo );
 			exit ();
 		} else {

@@ -20,7 +20,6 @@ class registrarForm {
 		$this->miSql = $sql;
 	}
 	function miForm() {
-		
 		// Rescatar los datos de este bloque
 		$esteBloque = $this->miConfigurador->getVariableConfiguracion ( "esteBloque" );
 		$miPaginaActual = $this->miConfigurador->getVariableConfiguracion ( 'pagina' );
@@ -75,6 +74,7 @@ class registrarForm {
 		// ---------------- SECCION: Controles del Formulario -----------------------------------------------
 		
 		$variable = "pagina=" . $miPaginaActual;
+		$variable .= "&usuario=".$_REQUEST['usuario'];
 		$variable = $this->miConfigurador->fabricaConexiones->crypto->codificar_url ( $variable, $directorio );
 		
 		// ---------------- CONTROL: Cuadro de Texto --------------------------------------------------------
@@ -96,6 +96,11 @@ class registrarForm {
 		
 		$resultado = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
 		
+		// ------------------Division para los botones-------------------------
+		$atributos ["id"] = "ventanaEmergente";
+		$atributos ["estilo"] = " ";
+		echo $this->miFormulario->division ( "inicio", $atributos );
+		
 		// ---------------- CONTROL: Cuadro de Texto --------------------------------------------------------
 		$esteCampo = 'encabezado';
 		$atributos ['id'] = $esteCampo;
@@ -108,6 +113,12 @@ class registrarForm {
 		// Aplica atributos globales al control
 		$atributos = array_merge ( $atributos, $atributosGlobales );
 		echo $this->miFormulario->cuadroMensaje ( $atributos );
+		unset ( $atributos );
+		
+		echo $this->miFormulario->division ( "fin" );
+		unset ( $atributos );
+		
+		echo "<button id=\"abrir\">Ver Instrucciones</button>";
 		
 		$esteCampo = "marcoDatosBasicos";
 		$atributos ['id'] = $esteCampo;
@@ -229,6 +240,8 @@ class registrarForm {
 					$VariableDetalles .= "&opcion=detalle";
 					$VariableDetalles .= "&elemento=" . $resultado [$i] ['identificador_elemento_individual'];
 					$VariableDetalles .= "&funcionario=" . $funcionario;
+					$VariableDetalles .= "&usuario=" . $_REQUEST ['usuario']; 
+					$VariableDetalles .= "&periodo=" .$resultado_periodo[0][0];
 					$VariableDetalles = $this->miConfigurador->fabricaConexiones->crypto->codificar_url ( $VariableDetalles, $directorio );
 					
 					$VariableObservaciones = "pagina=" . $miPaginaActual; // pendiente la pagina para modificar parametro
@@ -236,6 +249,8 @@ class registrarForm {
 					$VariableObservaciones .= "&elemento_individual=" . $resultado [$i] ['identificador_elemento_individual'];
 					$VariableObservaciones .= "&funcionario=" . $funcionario;
 					$VariableObservaciones .= "&placa=" . $resultado [$i] ['placa'];
+					$VariableObservaciones .= "&usuario=" . $_REQUEST ['usuario'];
+					$VariableObservaciones .= "&periodo=" .$resultado_periodo[0][0];
 					$VariableObservaciones = $this->miConfigurador->fabricaConexiones->crypto->codificar_url ( $VariableObservaciones, $directorio );
 					
 					$identificaciones_elementos [] = $resultado [$i] ['identificador_elemento_individual'];
@@ -424,6 +439,7 @@ class registrarForm {
 		$valorCodificado .= "&bloqueGrupo=" . $esteBloque ["grupo"];
 		$valorCodificado .= "&opcion=Accion";
 		$valorCodificado .= "&funcionario=" . $_REQUEST ['funcionario'];
+		$valorCodificado .= "&usuario=".$_REQUEST['usuario'];
 		if ($resultado_periodo) {
 			if ($resultado) {
 				

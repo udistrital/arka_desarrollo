@@ -51,6 +51,7 @@ $esteRecursoDB = $this->miConfigurador->fabricaConexiones->getRecursoDB ( $conex
 	$directorio .= $this->miConfigurador->getVariableConfiguracion ( "enlace" );
 		
 	$variable = "pagina=" . $miPaginaActual;
+	$variable .= "&usuario=".$_REQUEST['usuario'];
 	$variable = $this->miConfigurador->fabricaConexiones->crypto->codificar_url ( $variable, $directorio );
 		
 	// ---------------- CONTROL: Cuadro de Texto --------------------------------------------------------
@@ -245,6 +246,7 @@ if ($resultadoContratos) {
 		$variable .= "&contrato=" . $resultadoContratos [$i] [4];
 		$variable .= "&nombre_contrato=" . $resultadoContratos [$i] [0];
 		$variable .= "&identificador_contrato=" . $resultadoContratos [$i] [9];
+		$variable .= "&usuario=".$_REQUEST['usuario'];
 		$variable = $this->miConfigurador->fabricaConexiones->crypto->codificar_url ( $variable, $directorio );
 		
 		$mostrarHtml = "<tr>

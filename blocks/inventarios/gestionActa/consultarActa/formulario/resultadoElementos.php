@@ -78,10 +78,12 @@ class registrarForm {
 		
 		$directorio = $this->miConfigurador->getVariableConfiguracion ( "host" );
 		$directorio .= $this->miConfigurador->getVariableConfiguracion ( "site" ) . "/index.php?";
+		$directorio .= $this->miConfigurador->getVariableConfiguracion ( "enlace" );
 		
 		$variable = "pagina=" . $miPaginaActual;
-		$directorio .= $this->miConfigurador->getVariableConfiguracion ( "enlace" );
+		$variable .= "&usuario=" . $_REQUEST ['usuario'];  
 		$variable = $this->miConfigurador->fabricaConexiones->crypto->codificar_url ( $variable, $directorio );
+		 
 		
 		// ---------------- CONTROL: Cuadro de Texto --------------------------------------------------------
 		$esteCampo = 'botonRegresar';
@@ -94,7 +96,6 @@ class registrarForm {
 		$atributos ['alto'] = '10%';
 		$atributos ['redirLugar'] = true;
 		echo $this->miFormulario->enlace ( $atributos );
-		
 		unset ( $atributos );
 		
 		// ---------------- SECCION: Controles del Formulario -----------------------------------------------
@@ -103,7 +104,7 @@ class registrarForm {
 		$atributos ['id'] = $esteCampo;
 		$atributos ["estilo"] = "jqueryui";
 		$atributos ['tipoEtiqueta'] = 'inicio';
-		$atributos ["leyenda"] = "Modificar Elementos  Acta Recibido  N# " .$_REQUEST ['numero_acta'];
+		$atributos ["leyenda"] = "Modificar Elementos  Acta Recibido  N# " . $_REQUEST ['numero_acta'];
 		echo $this->miFormulario->marcoAgrupacion ( 'inicio', $atributos );
 		
 		if ($ActaElementos) {
@@ -129,12 +130,14 @@ class registrarForm {
 				$variable .= "&opcion=modificarElementos";
 				$variable .= "&id_elemento_acta=" . $ActaElementos [$i] ['id_elemento_ac'];
 				$variable .= "&numero_acta=" . $_REQUEST ['numero_acta'];
+				$variable .= "&usuario=" . $_REQUEST['usuario'];
 				$variable = $this->miConfigurador->fabricaConexiones->crypto->codificar_url ( $variable, $directorio );
 				
 				$variable1 = "pagina=" . $miPaginaActual; // pendiente la pagina para modificar parametro
 				$variable1 .= "&opcion=eliminarElementos";
 				$variable1 .= "&id_elemento_acta=" . $ActaElementos [$i] ['id_elemento_ac'];
-				$variable1 .= "&numero_acta=" .$_REQUEST ['numero_acta'];
+				$variable1 .= "&numero_acta=" . $_REQUEST ['numero_acta'];
+				$variable1 .= "&usuario=" . $_REQUEST['usuario']; 
 				$variable1 = $this->miConfigurador->fabricaConexiones->crypto->codificar_url ( $variable1, $directorio );
 				
 				$mostrarHtml = "<tr>

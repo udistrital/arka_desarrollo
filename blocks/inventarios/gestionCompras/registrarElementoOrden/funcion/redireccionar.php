@@ -5,13 +5,31 @@ namespace inventarios\gestionActa\registrarElementoOrden\funcion;
 if (! isset ( $GLOBALS ["autorizado"] )) {
 	include ("index.php");
 	exit ();
-}
+} 
 class redireccion {
 	public static function redireccionar($opcion, $valor = "", $valor1 = "") {
 		$miConfigurador = \Configurador::singleton ();
 		$miPaginaActual = $miConfigurador->getVariableConfiguracion ( "pagina" );
 		
 		switch ($opcion) {
+			case "datosVacios" :
+				
+				$variable = "pagina=" . $miPaginaActual;
+				$variable .= "&opcion=mensaje";
+				$variable .= "&mensaje=datosVacios";
+				$variable .= "&id_orden=" . $valor [1];
+				$variable .= "&mensaje_titulo=" . $valor [0];
+				$variable .= "&fecha_orden=" . $valor [2];
+				
+				if ($valor [3] == '') {
+					$variable .= "&registroOrden=true";
+				} else {
+					
+					$variable .= "&arreglo=" . $valor [3];
+				}
+				
+				break;
+			
 			case "inserto" :
 				
 				$variable = "pagina=" . $miPaginaActual;
@@ -20,6 +38,14 @@ class redireccion {
 				$variable .= "&mensaje_titulo=" . $valor [0];
 				$variable .= "&id_orden=" . $valor [1];
 				$variable .= "&fecha_orden=" . $valor [2];
+				if ($valor [3] == '\'true\'') {
+					$variable .= "&registroOrden=true";
+				} else {
+					
+					$variable .= "&arreglo=" . $valor [3];
+				}
+				$variable .= "&usuario=" . $valor [4];
+				
 				break;
 			
 			case "inserto_cargue_masivo" :
@@ -30,6 +56,14 @@ class redireccion {
 				$variable .= "&id_orden=" . $valor [1];
 				$variable .= "&mensaje_titulo=" . $valor [0];
 				$variable .= "&fecha_orden=" . $valor [2];
+				$variable .= "&usuario=" . $valor [4];
+				
+				if ($valor [3] == '') {
+					$variable .= "&registroOrden=true";
+				} else {
+					
+					$variable .= "&arreglo=" . $valor [3];
+				}
 				break;
 			
 			case "noFormatoImagen" :
@@ -37,6 +71,7 @@ class redireccion {
 				$variable = "pagina=" . $miPaginaActual;
 				$variable .= "&opcion=mensaje";
 				$variable .= "&mensaje=noFormatoImagen";
+				$variable .= "&usuario=".$valor;
 				break;
 			
 			case "noExtension" :
@@ -51,6 +86,23 @@ class redireccion {
 				$variable = "pagina=" . $miPaginaActual;
 				$variable .= "&opcion=mensaje";
 				$variable .= "&mensaje=noArchivoCarga";
+				break;
+			
+			case "noInsertoMasivo" :
+				$variable = "pagina=" . $miPaginaActual;
+				$variable .= "&opcion=mensaje";
+				$variable .= "&mensaje=error";
+				$variable .= "&id_orden=" . $valor [1];
+				$variable .= "&mensaje_titulo=" . $valor [0];
+				// $variable .= "&fecha_orden=" . $valor [2];
+				
+				if ($valor [3] == '') {
+					$variable .= "&registroOrden=true";
+				} else {
+					
+					$variable .= "&arreglo=" . $valor [3];
+				}
+				
 				break;
 			
 			case "noInserto" :
@@ -98,7 +150,7 @@ class redireccion {
 				$variable .= "&opcion=asociarActa";
 				$variable .= "&mensaje_titulo=" . $valor ['mensaje_titulo'];
 				$variable .= "&numero_orden=" . $valor ['id_orden'];
-				$variable .= "&fecha_orden=" . date('Y-m-d');
+				$variable .= "&fecha_orden=" . date ( 'Y-m-d' );
 				break;
 		}
 		

@@ -35,7 +35,7 @@ class RegistradorActa {
     function armarPDF() {
       
         $depreciacion = unserialize(base64_decode($_REQUEST['depreciacion']));
-       
+          
         date_default_timezone_set('America/Bogota');
         $esteBloque = $this->miConfigurador->getVariableConfiguracion("esteBloque");
         $miPaginaActual = $this->miConfigurador->getVariableConfiguracion('pagina');
@@ -61,13 +61,13 @@ class RegistradorActa {
             $contenido.= "<td style='text-align:right'  >" .$depreciacion[$key]['cuenta'] . "</td> ";
             $contenido.= "<td style='text-align:right'  >" .wordwrap($depreciacion[$key]['grupo'],20,"<br>") . "</td> ";
             $contenido.= "<td style='text-align:center'  >" .$depreciacion[$key]['total_elementos'] . "</td> ";
-            $contenido.= "<td style='text-align:right' >&nbsp;$&nbsp;" . number_format($depreciacion[$key]['total_valor_historico'], 2, ',', '.') . "</td> ";
-            $contenido.= "<td style='text-align:right' >&nbsp;$&nbsp;" . number_format($depreciacion[$key]['total_ajuste_inflacion'], 2, ',', '.') . "</td> ";
-            $contenido.= "<td style='text-align:right' >&nbsp;$&nbsp;" . number_format($depreciacion[$key]['total_valor_ajustado'], 2, ',', '.') . "</td> ";
-            $contenido.= "<td style='text-align:right' >&nbsp;$&nbsp;" . number_format($depreciacion[$key]['total_depreciacion'], 2, ',', '.') . "</td> ";
-            $contenido.= "<td style='text-align:right' >&nbsp;$&nbsp;" . number_format($depreciacion[$key]['total_ajuste_inflacionario'], 2, ',', '.') . "</td> ";
-            $contenido.= "<td style='text-align:right' >&nbsp;$&nbsp;" . number_format($depreciacion[$key]['total_depreciacion_circular56'], 2, ',', '.') . "</td> ";
-            $contenido.= "<td style='text-align:right' >&nbsp;$&nbsp;" . number_format($depreciacion[$key]['total_libros'], 2, ',', '.') . "</td> ";
+            $contenido.= "<td style='text-align:right' >&nbsp;$&nbsp;" . $depreciacion[$key]['total_valor_historico']. "</td> ";
+            $contenido.= "<td style='text-align:right' >&nbsp;$&nbsp;" . $depreciacion[$key]['total_ajuste_inflacion'] . "</td> ";
+            $contenido.= "<td style='text-align:right' >&nbsp;$&nbsp;" . $depreciacion[$key]['total_valor_ajustado']. "</td> ";
+            $contenido.= "<td style='text-align:right' >&nbsp;$&nbsp;" . $depreciacion[$key]['total_depreciacion'] . "</td> ";
+            $contenido.= "<td style='text-align:right' >&nbsp;$&nbsp;" . $depreciacion[$key]['total_ajuste_inflacionario'] . "</td> ";
+            $contenido.= "<td style='text-align:right' >&nbsp;$&nbsp;" . $depreciacion[$key]['total_depreciacion_circular56']. "</td> ";
+            $contenido.= "<td style='text-align:right' >&nbsp;$&nbsp;" . $depreciacion[$key]['total_libros']. "</td> ";
             $contenido.= "</tr> ";
         }
         

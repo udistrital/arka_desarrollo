@@ -4,7 +4,7 @@ require_once ("core/builder/HtmlBase.class.php");
 
 class CrearTabla extends HtmlBase {
 
-    function tablaReporte($datos, $estilo) {
+    function tablaReporte($datos, $estilo=' ') {
         $this->cadenaHTML = "";
         $this->setAtributos($datos);
         $this->campoSeguro();
