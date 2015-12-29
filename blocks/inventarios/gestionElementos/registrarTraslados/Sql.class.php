@@ -151,7 +151,9 @@ class Sql extends \Sql {
 				$cadenaSql = "SELECT DISTINCT  ef.\"ESF_ID_ESPACIO\" , ef.\"ESF_NOMBRE_ESPACIO\" ";
 				$cadenaSql .= " FROM arka_parametros.arka_espaciosfisicos ef  ";
 				$cadenaSql .= " JOIN arka_parametros.arka_dependencia ad ON ad.\"ESF_ID_ESPACIO\"=ef.\"ESF_ID_ESPACIO\" ";
-				$cadenaSql .= " WHERE ad.\"ESF_CODIGO_DEP\"='" . $variable . "' ";
+				$cadenaSql .= " JOIN  arka_parametros.arka_sedes sa ON sa.\"ESF_COD_SEDE\"=ef.\"ESF_COD_SEDE\" ";
+				$cadenaSql .= " WHERE ad.\"ESF_CODIGO_DEP\"='" . $variable [0] . "' ";
+				$cadenaSql .= " AND  sa.\"ESF_ID_SEDE\"='" . $variable [1] . "' ";
 				$cadenaSql .= " AND  ef.\"ESF_ESTADO\"='A'";
 				
 				break;
@@ -192,7 +194,7 @@ class Sql extends \Sql {
 			case "funcionarios" :
 				$cadenaSql = "SELECT \"FUN_IDENTIFICACION\", \"FUN_IDENTIFICACION\" ||' - '||  \"FUN_NOMBRE\" ";
 				$cadenaSql .= "FROM  arka_parametros.arka_funcionarios ";
-				$cadenaSql .= "WHERE \"FUN_ESTADO\"='A' ";
+				$cadenaSql .= "WHERE \"FUN_IDENTIFICACION\"<>'899999230' ";
 				
 				break;
 			
@@ -224,7 +226,7 @@ class Sql extends \Sql {
 				$cadenaSql .= ' JOIN arka_parametros.arka_funcionarios as funcionario ON funcionario."FUN_IDENTIFICACION" = elemento_individual.funcionario  ';
 				$cadenaSql .= ' JOIN arka_parametros.arka_espaciosfisicos as espacios ON espacios."ESF_ID_ESPACIO"=elemento_individual.ubicacion_elemento ';
 				
-				$cadenaSql .= " JOIN  arka_parametros.arka_sedes sedes ON sedes.\"ESF_COD_SEDE\"=espacios.\"ESF_COD_SEDE\" ";
+				$cadenaSql .= " LEFT JOIN  arka_parametros.arka_sedes sedes ON sedes.\"ESF_COD_SEDE\"=espacios.\"ESF_COD_SEDE\" ";
 				$cadenaSql .= " JOIN   arka_parametros.arka_dependencia dependencias ON dependencias.\"ESF_ID_ESPACIO\"=espacios.\"ESF_ID_ESPACIO\" ";
 				
 				$cadenaSql .= ' JOIN tipo_bienes ON tipo_bienes.id_tipo_bienes = elemento.tipo_bien  ';
@@ -366,6 +368,14 @@ class Sql extends \Sql {
 				$cadenaSql .= ' WHERE "ESF_ID_ESPACIO"=';
 				$cadenaSql .= "'" . $variable . "'";
 				
+				break;
+			
+			case "ConsultasPlacas" :
+				$cadenaSql = " SELECT DISTINCT placa AS value, placa as data ";
+				$cadenaSql .= "FROM elemento_individual ";
+				$cadenaSql .= "WHERE placa IS NOT NULL  ";
+				$cadenaSql .= " AND placa LIKE '" . $variable . "%' ";
+				$cadenaSql .= "ORDER BY placa ASC ;";
 				break;
 		}
 		return $cadenaSql;

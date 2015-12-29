@@ -20,11 +20,11 @@ $this->idioma ["fecha_finalTitulo"] = "Seleccione Fecha Final Registro";
 
 
 
-$this->idioma ["placa"] = "Placa a Relacionar: ";
-$this->idioma ["placaTitulo"] = "Seleccione Placa a Relacionar";
+$this->idioma ["selec_placa"] = "Placa a Relacionar: ";
+$this->idioma ["selec_placaTitulo"] = "Seleccione Placa a Relacionar";
 
-$this->idioma ["placaConsulta"] = "Placa a Relacionar: ";
-$this->idioma ["placaConsultaTitulo"] = "Seleccione Placa a Relacionar";
+$this->idioma ["selec_placaConsultas"] = "Placa:<br> a Relacionar";
+$this->idioma ["selec_placaConsultasTitulo"] = "Seleccione Placa a Relacionar";
 
 
 

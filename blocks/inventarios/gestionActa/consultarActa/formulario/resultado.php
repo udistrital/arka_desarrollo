@@ -33,7 +33,7 @@ class registrarForm {
 		
 		$rutaBloque = $this->miConfigurador->getVariableConfiguracion ( "host" );
 		$rutaBloque .= $this->miConfigurador->getVariableConfiguracion ( "site" ) . "/blocks/";
-		$rutaBloque .= $esteBloque ['grupo'] . "/".$esteBloque ['nombre'];
+		$rutaBloque .= $esteBloque ['grupo'] . "/" . $esteBloque ['nombre'];
 		
 		// ---------------- SECCION: Parámetros Globales del Formulario ----------------------------------
 		/**
@@ -45,7 +45,7 @@ class registrarForm {
 		 * $atributos= array_merge($atributos,$atributosGlobales);
 		 */
 		$atributosGlobales ['campoSeguro'] = 'true';
-		 
+		
 		// -------------------------------------------------------------------------------------------------
 		
 		$conexion = "inventarios";
@@ -106,7 +106,7 @@ class registrarForm {
 		$cadenaSql = $this->miSql->getCadenaSql ( 'consultarActa', $arreglo );
 		
 		$Acta = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
-		$arreglo=serialize($arreglo);
+		$arreglo = serialize ( $arreglo );
 		// ---------------- SECCION: Parámetros Generales del Formulario ----------------------------------
 		$esteCampo = $esteBloque ['nombre'];
 		$atributos ['id'] = $esteCampo;
@@ -171,6 +171,7 @@ class registrarForm {
                                 <th>Fecha Recibido</th>
                                  <th>Proveedor</th>
                                 <th>Observaciones</th>
+								<th>Archivo<br>Soporte Acta</th>
 			        			<th>ModificarActa</th>
             					<th>Modificar<br>Elementos </th>
                                 <th>Eliminar</th>
@@ -182,22 +183,22 @@ class registrarForm {
 				$variable = "pagina=" . $miPaginaActual; // pendiente la pagina para modificar parametro
 				$variable .= "&opcion=modificar";
 				$variable .= "&numero_acta=" . $Acta [$i] [0];
-				$variable .= "&arreglo=" .$arreglo;
-				$variable .= "&usuario=".$_REQUEST['usuario'];
+				$variable .= "&arreglo=" . $arreglo;
+				$variable .= "&usuario=" . $_REQUEST ['usuario'];
 				$variable = $this->miConfigurador->fabricaConexiones->crypto->codificar_url ( $variable, $directorio );
 				
 				$variable2 = "pagina=" . $miPaginaActual; // pendiente la pagina para modificar parametro
 				$variable2 .= "&opcion=eliminarActa";
 				$variable2 .= "&numero_acta=" . $Acta [$i] [0];
-				$variable2 .= "&arreglo=" .$arreglo;
-				$variable2 .= "&usuario=".$_REQUEST['usuario'];
+				$variable2 .= "&arreglo=" . $arreglo;
+				$variable2 .= "&usuario=" . $_REQUEST ['usuario'];
 				$variable2 = $this->miConfigurador->fabricaConexiones->crypto->codificar_url ( $variable2, $directorio );
 				
 				$variable1 = "pagina=" . $miPaginaActual; // pendiente la pagina para modificar parametro
 				$variable1 .= "&opcion=consultarElementosActa";
 				$variable1 .= "&numero_acta=" . $Acta [$i] [0];
-				$variable1 .= "&arreglo=" .$arreglo;
-				$variable1 .= "&usuario=".$_REQUEST['usuario'];
+				$variable1 .= "&arreglo=" . $arreglo;
+				$variable1 .= "&usuario=" . $_REQUEST ['usuario'];
 				$variable1 = $this->miConfigurador->fabricaConexiones->crypto->codificar_url ( $variable1, $directorio );
 				
 				$cadenaSql = $this->miSql->getCadenaSql ( 'consultarActaElementos', $Acta [$i] [0] );
@@ -215,28 +216,47 @@ class registrarForm {
 				                                            </center> </td>";
 				}
 				
+				$enlace_archivo = (is_null ( $Acta [$i] ['enlace'] ) != true) ? "<center><a href='" . $Acta [$i] ['enlace'] . "' target=\"_blank\" ><u>" . $Acta [$i] ['nombre_archivo'] . "</u></a></center> " : "<center></center>";
+				
 				$mostrarHtml = "<tr>
                     <td><center>" . $Acta [$i] ['id_actarecibido'] . "</center></td>
                     <td><center>" . $Acta [$i] ['sede'] . "</center></td>		
                     <td><center>" . $Acta [$i] ['dependencia'] . "</center></td>
                     <td><center>" . $Acta [$i] ['fecha_recibido'] . "</center></td>
                     <td><center>" . $Acta [$i] ['proveedor'] . "</center></td>
-                    <td><center>" . $Acta [$i] ['observacionesacta'] . "</center></td>
-                    <td><center>
+                    <td><center>" . $Acta [$i] ['observacionesacta'] . "</center></td>";
+				$mostrarHtml .= "<td>" . $enlace_archivo . "</td>";
+				$mostrarmodificarActa = "<td><center>
                     	<a href='" . $variable . "'>
                             <img src='" . $rutaBloque . "/css/images/edit.png' width='15px'>
                         </a>
                   	</center> </td>";
 				
-				$mostrarHtml .= $validacion_elementos;
 				
-				$mostrarHtml .= "  <td><center>
+				
+				$mostrarModificar = (is_null ( $Acta [$i] ['id_entrada'] ) == true) ? $mostrarmodificarActa : "<td><center></center></td>";
+				$mostrarHtml.=$mostrarModificar;
+				
+				
+				
+				$mostrarElementos = (is_null ( $Acta [$i] ['id_entrada'] ) == true) ? $validacion_elementos : "<td><center></center></td>";
+				
+				
+				$mostrarHtml .= $mostrarElementos;
+				
+				
+				$mostrarEliminar = "<td><center>
                     	<a href='" . $variable2 . "'>
                             <img src='" . $rutaBloque . "/css/images/delete.png' width='15px'>
                         </a>
-                  	</center> </td>
-           
-                </tr>";
+                  	</center> </td>";
+				
+				$eliminar = (is_null ( $Acta [$i] ['id_entrada'] ) == true) ? $mostrarEliminar : "<td><center></center></td>";
+				
+				$mostrarHtml .= $eliminar;
+				
+				$mostrarHtml .= "</tr>";
+				
 				echo $mostrarHtml;
 				unset ( $mostrarHtml );
 				unset ( $variable );

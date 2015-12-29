@@ -96,7 +96,7 @@ class registrarForm {
 		$atributos ['ajax_function'] = "";
 		$atributos ['ajax_control'] = $esteCampo;
 		$atributos ['estilo'] = "jqueryui";
-		$atributos ['validar'] = "";
+		$atributos ['validar'] = "required";
 		$atributos ['limitar'] = true;
 		$atributos ['anchoCaja'] = 52;
 		$atributos ['miEvento'] = '';
@@ -223,97 +223,145 @@ class registrarForm {
 		echo $this->miFormulario->campoCuadroLista ( $atributos );
 		unset ( $atributos );
 		
-		// ---------------- CONTROL: Cuadro de Texto --------------------------------------------------------
+// 		// ---------------- CONTROL: Cuadro de Texto --------------------------------------------------------
+// 		$esteCampo = 'placa';
+// 		$atributos ['nombre'] = $esteCampo;
+// 		$atributos ['id'] = $esteCampo;
+// 		$atributos ['etiqueta'] = $this->lenguaje->getCadena ( $esteCampo );
+// 		$atributos ["etiquetaObligatorio"] = false;
+// 		$atributos ['tab'] = $tab ++;
+// 		$atributos ['seleccion'] = - 1;
+// 		$atributos ['anchoEtiqueta'] = 135;
+// 		$atributos ['evento'] = '';
+// 		if (isset ( $_REQUEST [$esteCampo] )) {
+// 			$atributos ['valor'] = $_REQUEST [$esteCampo];
+// 		} else {
+// 			$atributos ['valor'] = '';
+// 		}
+// 		$atributos ['deshabilitado'] = false;
+// 		$atributos ['columnas'] = 2;
+// 		$atributos ['tamanno'] = 1;
+// 		$atributos ['ajax_function'] = "";
+// 		$atributos ['ajax_control'] = $esteCampo;
+// 		$atributos ['estilo'] = "jqueryui";
+// 		$atributos ['validar'] = "";
+// 		$atributos ['limitar'] = true;
+// 		$atributos ['anchoCaja'] = 24;
+// 		$atributos ['miEvento'] = '';
+// 		$atributos ['cadena_sql'] = $this->miSql->getCadenaSql ( "buscar_placa" );
+// 		$matrizItems = $esteRecursoDB->ejecutarAcceso ( $atributos ['cadena_sql'], "busqueda" );
+		
+// 		$arreglo = array (
+// 				array (
+// 						'',
+// 						'Sin Entradas Registradas' 
+// 				) 
+// 		);
+		
+// 		$matrizItems = $matrizItems [0] [0] != '' ? $matrizItems : $arreglo;
+// 		$atributos ['matrizItems'] = $matrizItems;
+// 		// $atributos['miniRegistro']=;
+// 		$atributos ['baseDatos'] = "inventarios";
+// 		// $atributos ['cadena_sql'] = $this->miSql->getCadenaSql ( "clase_entrada" );
+		
+// 		// Aplica atributos globales al control
+// 		$atributos = array_merge ( $atributos, $atributosGlobales );
+// 		echo $this->miFormulario->campoCuadroLista ( $atributos );
+// 		unset ( $atributos );
+
+		
+		
+
+
+		$esteCampo = "selec_placa";
+		$atributos ['id'] = $esteCampo;
+		$atributos ['nombre'] = $esteCampo;
+		$atributos ['tipo'] = 'text';
+		$atributos ['estilo'] = 'jqueryui';
+		$atributos ['marco'] = true;
+		$atributos ['estiloMarco'] = '';
+		$atributos ["etiquetaObligatorio"] = false;
+		$atributos ['columnas'] = 1;
+		$atributos ['dobleLinea'] = 0;
+		$atributos ['tabIndex'] = $tab;
+		$atributos ['etiqueta'] = $this->lenguaje->getCadena ( $esteCampo );
+		$atributos ['validar'] = 'custom[onlyNumberSp]';
+		$atributos ['textoFondo'] = 'Ingrese Mínimo 3 Caracteres de Búsqueda';
+			
+		if (isset ( $_REQUEST [$esteCampo] )) {
+			$atributos ['valor'] = $_REQUEST [$esteCampo];
+		} else {
+			$atributos ['valor'] = '';
+		}
+		$atributos ['titulo'] = $this->lenguaje->getCadena ( $esteCampo . 'Titulo' );
+		$atributos ['deshabilitado'] = false;
+		$atributos ['tamanno'] = 35;
+		$atributos ['maximoTamanno'] = '';
+		$atributos ['anchoEtiqueta'] = 135;
+		$tab ++;
+			
+		// Aplica atributos globales al control
+		$atributos = array_merge ( $atributos, $atributosGlobales );
+		echo $this->miFormulario->campoCuadroTexto ( $atributos );
+		unset ( $atributos );
+			
 		$esteCampo = 'placa';
-		$atributos ['nombre'] = $esteCampo;
-		$atributos ['id'] = $esteCampo;
-		$atributos ['etiqueta'] = $this->lenguaje->getCadena ( $esteCampo );
-		$atributos ["etiquetaObligatorio"] = false;
-		$atributos ['tab'] = $tab ++;
-		$atributos ['seleccion'] = - 1;
-		$atributos ['anchoEtiqueta'] = 135;
-		$atributos ['evento'] = '';
-		if (isset ( $_REQUEST [$esteCampo] )) {
-			$atributos ['valor'] = $_REQUEST [$esteCampo];
-		} else {
-			$atributos ['valor'] = '';
-		}
-		$atributos ['deshabilitado'] = false;
-		$atributos ['columnas'] = 2;
-		$atributos ['tamanno'] = 1;
-		$atributos ['ajax_function'] = "";
-		$atributos ['ajax_control'] = $esteCampo;
-		$atributos ['estilo'] = "jqueryui";
-		$atributos ['validar'] = "";
-		$atributos ['limitar'] = true;
-		$atributos ['anchoCaja'] = 24;
-		$atributos ['miEvento'] = '';
-		$atributos ['cadena_sql'] = $this->miSql->getCadenaSql ( "buscar_placa" );
-		$matrizItems = $esteRecursoDB->ejecutarAcceso ( $atributos ['cadena_sql'], "busqueda" );
-		
-		$arreglo = array (
-				array (
-						'',
-						'Sin Entradas Registradas' 
-				) 
-		);
-		
-		$matrizItems = $matrizItems [0] [0] != '' ? $matrizItems : $arreglo;
-		$atributos ['matrizItems'] = $matrizItems;
-		// $atributos['miniRegistro']=;
-		$atributos ['baseDatos'] = "inventarios";
-		// $atributos ['cadena_sql'] = $this->miSql->getCadenaSql ( "clase_entrada" );
-		
-		// Aplica atributos globales al control
+		$atributos ["id"] = $esteCampo; // No cambiar este nombre
+		$atributos ["tipo"] = "hidden";
+		$atributos ['estilo'] = '';
+		$atributos ["obligatorio"] = false;
+		$atributos ['marco'] = true;
+		$atributos ["etiqueta"] = "";
+		$atributos ['valor'] = '';
 		$atributos = array_merge ( $atributos, $atributosGlobales );
-		echo $this->miFormulario->campoCuadroLista ( $atributos );
+		echo $this->miFormulario->campoCuadroTexto ( $atributos );
 		unset ( $atributos );
 		
-		// ---------------- CONTROL: Cuadro de Texto --------------------------------------------------------
-		$esteCampo = 'serial';
-		$atributos ['nombre'] = $esteCampo;
-		$atributos ['id'] = $esteCampo;
-		$atributos ['etiqueta'] = $this->lenguaje->getCadena ( $esteCampo );
-		$atributos ["etiquetaObligatorio"] = false;
-		$atributos ['tab'] = $tab ++;
-		$atributos ['seleccion'] = - 1;
-		$atributos ['anchoEtiqueta'] = 135;
-		$atributos ['evento'] = '';
-		if (isset ( $_REQUEST [$esteCampo] )) {
-			$atributos ['valor'] = $_REQUEST [$esteCampo];
-		} else {
-			$atributos ['valor'] = '';
-		}
-		$atributos ['deshabilitado'] = false;
-		$atributos ['columnas'] = 2;
-		$atributos ['tamanno'] = 1;
-		$atributos ['ajax_function'] = "";
-		$atributos ['ajax_control'] = $esteCampo;
-		$atributos ['estilo'] = "jqueryui";
-		$atributos ['validar'] = "";
-		$atributos ['limitar'] = true;
-		$atributos ['anchoCaja'] = 24;
-		$atributos ['miEvento'] = '';
-		$atributos ['cadena_sql'] = $this->miSql->getCadenaSql ( "buscar_serie" );
-		$matrizItems = $esteRecursoDB->ejecutarAcceso ( $atributos ['cadena_sql'], "busqueda" );
+// 		// ---------------- CONTROL: Cuadro de Texto --------------------------------------------------------
+// 		$esteCampo = 'serial';
+// 		$atributos ['nombre'] = $esteCampo;
+// 		$atributos ['id'] = $esteCampo;
+// 		$atributos ['etiqueta'] = $this->lenguaje->getCadena ( $esteCampo );
+// 		$atributos ["etiquetaObligatorio"] = false;
+// 		$atributos ['tab'] = $tab ++;
+// 		$atributos ['seleccion'] = - 1;
+// 		$atributos ['anchoEtiqueta'] = 135;
+// 		$atributos ['evento'] = '';
+// 		if (isset ( $_REQUEST [$esteCampo] )) {
+// 			$atributos ['valor'] = $_REQUEST [$esteCampo];
+// 		} else {
+// 			$atributos ['valor'] = '';
+// 		}
+// 		$atributos ['deshabilitado'] = false;
+// 		$atributos ['columnas'] = 2;
+// 		$atributos ['tamanno'] = 1;
+// 		$atributos ['ajax_function'] = "";
+// 		$atributos ['ajax_control'] = $esteCampo;
+// 		$atributos ['estilo'] = "jqueryui";
+// 		$atributos ['validar'] = "";
+// 		$atributos ['limitar'] = true;
+// 		$atributos ['anchoCaja'] = 24;
+// 		$atributos ['miEvento'] = '';
+// 		$atributos ['cadena_sql'] = $this->miSql->getCadenaSql ( "buscar_serie" );
+// 		$matrizItems = $esteRecursoDB->ejecutarAcceso ( $atributos ['cadena_sql'], "busqueda" );
 		
-		$arreglo = array (
-				array (
-						'',
-						'Sin SERIES Registradas' 
-				) 
-		);
+// 		$arreglo = array (
+// 				array (
+// 						'',
+// 						'Sin SERIES Registradas' 
+// 				) 
+// 		);
 		
-		$matrizItems = $matrizItems [0] [0] != '' ? $matrizItems : $arreglo;
-		$atributos ['matrizItems'] = $matrizItems;
-		// $atributos['miniRegistro']=;
-		$atributos ['baseDatos'] = "inventarios";
-		// $atributos ['cadena_sql'] = $this->miSql->getCadenaSql ( "clase_entrada" );
+// 		$matrizItems = $matrizItems [0] [0] != '' ? $matrizItems : $arreglo;
+// 		$atributos ['matrizItems'] = $matrizItems;
+// 		// $atributos['miniRegistro']=;
+// 		$atributos ['baseDatos'] = "inventarios";
+// 		// $atributos ['cadena_sql'] = $this->miSql->getCadenaSql ( "clase_entrada" );
 		
-		// Aplica atributos globales al control
-		$atributos = array_merge ( $atributos, $atributosGlobales );
-		echo $this->miFormulario->campoCuadroLista ( $atributos );
-		unset ( $atributos );
+// 		// Aplica atributos globales al control
+// 		$atributos = array_merge ( $atributos, $atributosGlobales );
+// 		echo $this->miFormulario->campoCuadroLista ( $atributos );
+// 		unset ( $atributos );
 		// ------------------Division para los botones-------------------------
 		$atributos ["id"] = "botones";
 		$atributos ["estilo"] = "marcoBotones";

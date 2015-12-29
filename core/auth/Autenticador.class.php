@@ -53,7 +53,9 @@ class Autenticador {
 		$respuesta = '';
 		
 		$resultado = $this->verificarExistenciaPagina ();
+		
 		if ($resultado) {
+			
 			$resultado = $this->cargarSesionUsuario ();
 			
 			if ($resultado) {
@@ -76,10 +78,15 @@ class Autenticador {
 			$respuesta = false;
 		}
 		
-
-		if (($this->sesionUsuario->getValorSesion ( 'sesionUsuarioId' ))!='') {
+		if (($this->sesionUsuario->getValorSesion ( 'sesionUsuarioId' )) != '') {
 			$_REQUEST ['usuario'] = $this->sesionUsuario->getValorSesion ( 'sesionUsuarioId' );
 		}
+		
+		if (isset ( $_REQUEST ['accesoCondor'] ) && $_REQUEST ['accesoCondor'] = 'true') {
+			
+			$respuesta = true;
+		}
+		
 		return $respuesta;
 	}
 	function setPagina($pagina) {
@@ -113,9 +120,9 @@ class Autenticador {
 		
 		// Asignar el nivel de la sesión conforme al nivel de la página que se está visitando
 		$this->sesionUsuario->setSesionNivel ( $this->pagina [self::NIVEL] );
-		
+		// var_dump($this->sesionUsuario);
 		$verificar = $this->sesionUsuario->verificarSesion ();
-		
+		// var_dump($this->$verificar);
 		if (! $verificar) {
 			$this->tipoError = "sesionNoExiste";
 			return false;

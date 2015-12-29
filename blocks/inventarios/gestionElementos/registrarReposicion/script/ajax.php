@@ -82,6 +82,25 @@ $cadenaACodificar1 = $cadenaACodificar . "&funcion=proveedor";
 $cadena1 = $this->miConfigurador->fabricaConexiones->crypto->codificar_url($cadenaACodificar1, $enlace);
 
 $urlFinal = $url . $cadena1;
+
+// Variables
+$cadenaACodificarPlaca = "pagina=" . $this->miConfigurador->getVariableConfiguracion ( "pagina" );
+$cadenaACodificarPlaca .= "&procesarAjax=true";
+$cadenaACodificarPlaca .= "&action=index.php";
+$cadenaACodificarPlaca .= "&bloqueNombre=" . $esteBloque ["nombre"];
+$cadenaACodificarPlaca .= "&bloqueGrupo=" . $esteBloque ["grupo"];
+$cadenaACodificarPlaca .= "&funcion=consultaPlaca";
+$cadenaACodificarPlaca .= "&tiempo=" . $_REQUEST ['tiempo'];
+
+// Codificar las variables
+$enlace = $this->miConfigurador->getVariableConfiguracion ( "enlace" );
+$cadena = $this->miConfigurador->fabricaConexiones->crypto->codificar_url ( $cadenaACodificarPlaca, $enlace );
+
+// URL definitiva
+$urlFinalPlaca = $url . $cadena;
+
+
+
 ?>
 <script type='text/javascript'>
     $(document).ready(function () {
@@ -156,7 +175,8 @@ $urlFinal = $url . $cadena1;
         $.ajax({
             url: "<?php echo $urlFinal4 ?>",
             dataType: "json",
-            data: {valor: $("#<?php echo $this->campoSeguro('dependencia_salida') ?>").val()},
+            data: {valorD: $("#<?php echo $this->campoSeguro('dependencia_salida') ?>").val(),
+            	valorS: $("#<?php echo $this->campoSeguro('sede_salida') ?>").val()},
             success: function (data) {
 
                 if (data[0] != " ") {
@@ -180,6 +200,21 @@ $urlFinal = $url . $cadena1;
 
 
     $(function () {
+
+
+    	 $("#<?php echo $this->campoSeguro('selec_placa') ?>").autocomplete({
+    	    	minChars: 3,
+    	    	serviceUrl: '<?php echo $urlFinalPlaca; ?>',
+    	    	onSelect: function (suggestion) {
+    	        	
+    	    	        $("#<?php echo $this->campoSeguro('placa') ?>").val(suggestion.data);
+
+    	       	        
+    	    	    }
+    	                
+    	    });
+
+        
         $("#<?php echo $this->campoSeguro('sede') ?>").change(function () {
             if ($("#<?php echo $this->campoSeguro('sede') ?>").val() != '') {
                 consultarDependencia();

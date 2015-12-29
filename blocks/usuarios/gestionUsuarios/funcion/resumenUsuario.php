@@ -79,19 +79,18 @@ contraseña  </span></p>
 mso-bidi-font-size:11.0pt;line-height:107%'> &nbsp; </span></p>
 
 <div align=center>
-
+ 
 <table align='center' class=MsoTableGrid border=1 cellspacing=0 cellpadding=0
- style='border-collapse:collapse;border:none;mso-border-alt:solid windowtext .5pt;
- mso-yfti-tbllook:1184;mso-padding-alt:0cm 5.4pt 0cm 5.4pt'>
+ style='width:80%;border-collapse:collapse;border:none;'>   
  <tr style='mso-yfti-irow:0;mso-yfti-firstrow:yes'>
-  <td width=123 valign=top style='width:92.1pt;border:solid windowtext 1.0pt;
+  <td width=123 valign=top style='width:12%;border:solid windowtext 1.0pt; 
   mso-border-alt:solid windowtext .5pt;background:#BDD6EE;mso-background-themecolor:
   accent1;mso-background-themetint:102;padding:0cm 5.4pt 0cm 5.4pt'>
-  <p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+  <p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;line-height: 
   normal'><b style='mso-bidi-font-weight:normal'><span style='font-size:12.0pt;
   mso-bidi-font-size:11.0pt'>Identificación  </span></b></p>
   </td>
-  <td width=236 valign=top style='width:177.25pt;border:solid windowtext 1.0pt;
+  <td width=236 valign=top style='width:95%;border:solid windowtext 1.0pt;  
   border-left:none;mso-border-left-alt:solid windowtext .5pt;mso-border-alt:
   solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt'>
   <p class=MsoNormal align=center style='margin-bottom:0cm;margin-bottom:.0001pt;
@@ -206,14 +205,14 @@ normal'><span style='font-size:18.0pt;mso-bidi-font-size:11.0pt;line-height:
  style='border-collapse:collapse;border:none;mso-border-alt:solid windowtext .5pt;
  mso-yfti-tbllook:1184;mso-padding-alt:0cm 5.4pt 0cm 5.4pt'>
  <tr style='mso-yfti-irow:0;mso-yfti-firstrow:yes'>
-  <td width=123 valign=top style='width:92.1pt;border:solid windowtext 1.0pt;
+  <td width=123 valign=top style='width:12%;border:solid windowtext 1.0pt;
   mso-border-alt:solid windowtext .5pt;background:#BDD6EE;mso-background-themecolor:
   accent1;mso-background-themetint:102;padding:0cm 5.4pt 0cm 5.4pt'>
   <p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;line-height:
   normal'><b style='mso-bidi-font-weight:normal'><span style='font-size:12.0pt;
   mso-bidi-font-size:11.0pt'>Dirección </span></b></p>
   </td>
-  <td width=236 valign=top style='width:177.25pt;border:solid windowtext 1.0pt;
+  <td width=236 valign=top style='width:75%;border:solid windowtext 1.0pt; 
   border-left:none;mso-border-left-alt:solid windowtext .5pt;mso-border-alt:
   solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt'>
   <p class=MsoNormal align=center style='margin-bottom:0cm;margin-bottom:.0001pt;

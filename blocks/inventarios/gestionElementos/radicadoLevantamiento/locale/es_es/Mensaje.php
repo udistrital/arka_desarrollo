@@ -4,7 +4,7 @@ $this->idioma ["noDefinido"] = "Etiqueta no esta definida en locale/es_es/Mensaj
 
 $this->idioma ["botonGuadar"] ="Guardar";
 $this->idioma ["botonAprobar"] ="Aprobar";
-$this->idioma ["botonGenerarPdf"] ="Generar PDF";
+$this->idioma ["botonGenerarPdf"] ="Reporte General Radicados";
 
 
 $this->idioma ["encabezado"] ="

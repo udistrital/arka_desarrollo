@@ -28,21 +28,7 @@
 
 
   $("#<?php echo $this->campoSeguro('tipo_impresion')?>").select2();
- 
- $("#<?php echo $this->campoSeguro('placaInicial')?>").select2({
-             	 placeholder: "Seleccione...",
-              	 minimumInputLength: 3,
-              	 });
-              	 
-              	 
-              	 
-$("#<?php echo $this->campoSeguro('placaFinal')?>").select2({
-             	 placeholder: "Seleccione...",
-              	 minimumInputLength: 3,
-              	 });
-              	 
- 
-                  
+
      
      $( "#<?php echo $this->campoSeguro('tipo_impresion')?>" ).change(function() {
         

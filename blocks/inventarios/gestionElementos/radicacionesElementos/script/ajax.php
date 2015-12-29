@@ -159,6 +159,21 @@ $cadena15 = $this->miConfigurador->fabricaConexiones->crypto->codificar_url ( $c
 $urlFinal15 = $url . $cadena15;
 
 
+// Variables
+$cadenaACodificarPlaca = "pagina=" . $this->miConfigurador->getVariableConfiguracion ( "pagina" );
+$cadenaACodificarPlaca .= "&procesarAjax=true";
+$cadenaACodificarPlaca .= "&action=index.php";
+$cadenaACodificarPlaca .= "&bloqueNombre=" . $esteBloque ["nombre"];
+$cadenaACodificarPlaca .= "&bloqueGrupo=" . $esteBloque ["grupo"];
+$cadenaACodificarPlaca .= "&funcion=consultaPlaca";
+$cadenaACodificarPlaca .= "&tiempo=" . $_REQUEST ['tiempo'];
+
+// Codificar las variables
+$enlace = $this->miConfigurador->getVariableConfiguracion ( "enlace" );
+$cadena = $this->miConfigurador->fabricaConexiones->crypto->codificar_url ( $cadenaACodificarPlaca, $enlace );
+
+// URL definitiva
+$urlFinalPlaca = $url . $cadena;
 
 ?>
 <script type='text/javascript'>
@@ -305,6 +320,32 @@ function valorLetras(elem, request, response){
 
 $(function() {
 
+
+    $("#<?php echo $this->campoSeguro('selec_placa') ?>").autocomplete({
+    	minChars: 3,
+    	serviceUrl: '<?php echo $urlFinalPlaca; ?>',
+    	onSelect: function (suggestion) {
+        	
+    	        $("#<?php echo $this->campoSeguro('placa') ?>").val(suggestion.data);
+
+       	        
+    	    }
+                
+    });
+
+
+
+    $("#<?php echo $this->campoSeguro('selec_placaConsultas') ?>").autocomplete({
+    	minChars: 3,
+    	serviceUrl: '<?php echo $urlFinalPlaca; ?>',
+    	onSelect: function (suggestion) {
+        	
+    	        $("#<?php echo $this->campoSeguro('placaConsulta') ?>").val(suggestion.data);
+
+       	        
+    	    }
+                
+    });
 
 
 

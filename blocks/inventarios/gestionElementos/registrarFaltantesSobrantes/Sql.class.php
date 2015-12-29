@@ -151,7 +151,9 @@ class Sql extends \Sql {
 				$cadenaSql = "SELECT DISTINCT  ef.\"ESF_ID_ESPACIO\" , ef.\"ESF_NOMBRE_ESPACIO\" ";
 				$cadenaSql .= " FROM arka_parametros.arka_espaciosfisicos ef  ";
 				$cadenaSql .= " JOIN arka_parametros.arka_dependencia ad ON ad.\"ESF_ID_ESPACIO\"=ef.\"ESF_ID_ESPACIO\" ";
-				$cadenaSql .= " WHERE ad.\"ESF_CODIGO_DEP\"='" . $variable . "' ";
+				$cadenaSql .= " JOIN  arka_parametros.arka_sedes sa ON sa.\"ESF_COD_SEDE\"=ef.\"ESF_COD_SEDE\" ";
+				$cadenaSql .= " WHERE ad.\"ESF_CODIGO_DEP\"='" . $variable [0] . "' ";
+				$cadenaSql .= " AND  sa.\"ESF_ID_SEDE\"='" . $variable [1] . "' ";
 				$cadenaSql .= " AND  ef.\"ESF_ESTADO\"='A'";
 				
 				break;
@@ -292,7 +294,7 @@ class Sql extends \Sql {
 			case "funcionarios" :
 				$cadenaSql = "SELECT \"FUN_IDENTIFICACION\", \"FUN_IDENTIFICACION\" ||' - '||  \"FUN_NOMBRE\" ";
 				$cadenaSql .= "FROM  arka_parametros.arka_funcionarios ";
-				$cadenaSql .= "WHERE \"FUN_ESTADO\"='A' ";
+				// $cadenaSql .= "WHERE \"FUN_ESTADO\"='A' ";
 				
 				break;
 			
@@ -342,7 +344,7 @@ class Sql extends \Sql {
 					$cadenaSql .= " AND  sa.ubicacion= '" . $variable [4] . "'";
 				}
 				
-// 				$cadenaSql .= " LIMIT 1000 ";
+				// $cadenaSql .= " LIMIT 1000 ";
 				
 				// $cadenaSql = "SELECT * FROM ((SELECT elemento_individual.id_elemento_ind, elemento_individual.placa,";
 				// $cadenaSql .= " elemento_individual.serie,elemento_individual.funcionario, id_elemento_gen, salida.consecutivo||' - ('||salida.vigencia||')' salidas ,";
@@ -477,6 +479,14 @@ class Sql extends \Sql {
 				$cadenaSql .= "WHERE  placa IS NOT NULL  ";
 				$cadenaSql .= "ORDER BY placa DESC ";
 				
+				break;
+			
+			case "ConsultasPlacas" :
+				$cadenaSql = " SELECT DISTINCT placa AS value, placa as data ";
+				$cadenaSql .= "FROM elemento_individual ";
+				$cadenaSql .= "WHERE placa IS NOT NULL  ";
+				$cadenaSql .= " AND placa LIKE '%" . $variable . "%' ";
+				$cadenaSql .= "ORDER BY placa DESC ;";
 				break;
 		}
 		return $cadenaSql;

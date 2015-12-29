@@ -23,10 +23,7 @@ return false;
 });
 });
 
-$("#<?php echo $this->campoSeguro('placa') ?>").select2({
-placeholder: "",
-});
- 
+
 
 $("#<?php echo $this->campoSeguro('numero_entrada') ?>").select2({
 placeholder: "Seleccione...",

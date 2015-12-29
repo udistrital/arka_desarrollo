@@ -35,12 +35,15 @@ $this->idioma ["fecha_inicioTitulo"] ="Seleccione Fecha Inicial";
 $this->idioma ["fecha_final"] ="Fecha Final : ";
 $this->idioma ["fecha_finalTitulo"] ="Seleccione Fecha Final";
 
-$this->idioma ["placaInicial"] ="Placa Inicial : ";
-$this->idioma ["placaInicialTitulo"] ="Seleccione Placa del Elemento";
 
 
-$this->idioma ["placaFinal"] ="Placa Final : ";
-$this->idioma ["placaFinalTitulo"] ="Seleccione Placa del Elemento";
+
+$this->idioma ["selec_placaInicial"] ="Placa Inicial : ";
+$this->idioma ["selec_placaInicialTitulo"] ="Seleccione Placa del Elemento";
+
+
+$this->idioma ["selec_placaFinal"] ="Placa Final : ";
+$this->idioma ["selec_placaTitulo"] ="Seleccione Placa del Elemento";
 
 $this->idioma ["serie"] ="Serie : ";
 $this->idioma ["serieTitulo"] ="Ingrese Serie del Elemento";

@@ -198,6 +198,14 @@ class Sql extends \Sql {
 				$cadenaSql .= " ; ";
 				
 				break;
+			
+			case "ConsultasPlacas" :
+				$cadenaSql = " SELECT DISTINCT placa AS value, placa as data ";
+				$cadenaSql .= "FROM elemento_individual ";
+				$cadenaSql .= "WHERE placa IS NOT NULL  ";
+				$cadenaSql .= " AND placa LIKE '%" . $variable . "%' ";
+				$cadenaSql .= "ORDER BY placa DESC ;";
+				break;
 		}
 		return $cadenaSql;
 	}

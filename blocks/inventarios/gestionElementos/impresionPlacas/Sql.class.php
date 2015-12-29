@@ -470,15 +470,21 @@ class Sql extends \Sql {
 				
 				break;
 			
-
-			
 			case "buscarMaxPlacas" :
 				$cadenaSql = " SELECT DISTINCT id_elemento_ind, placa as placas ";
 				$cadenaSql .= "FROM elemento_individual ";
-				$cadenaSql .= "WHERE id_elemento_ind >= ".$variable." ";
+				$cadenaSql .= "WHERE id_elemento_ind >= " . $variable . " ";
 				$cadenaSql .= "AND estado_registro='t' ";
 				$cadenaSql .= "ORDER BY placa ASC ";
 				
+				break;
+			
+			case "ConsultasPlacas" :
+				$cadenaSql = " SELECT DISTINCT placa AS value, id_elemento_ind as data ";
+				$cadenaSql .= "FROM elemento_individual ";
+				$cadenaSql .= "WHERE placa IS NOT NULL  ";
+				$cadenaSql .= " AND placa LIKE '%" . $variable . "%' ";
+				$cadenaSql .= "ORDER BY placa DESC ;";
 				break;
 		}
 		return $cadenaSql;

@@ -34,7 +34,8 @@ class RegistradorPerfil {
 
         $conexion="estructura";
 	$esteRecursoDB=$this->miConfigurador->fabricaConexiones->getRecursoDB($conexion);
-        $hoy = date("Y-m-d");   
+        $hoy = date("Y-m-d");  
+        $_REQUEST['usuario']=$_REQUEST['id_usuario'];
         
 	$arregloDatos = array(
                               'id_usuario'=>$_REQUEST['id_usuario'],

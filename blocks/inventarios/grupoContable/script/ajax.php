@@ -25,43 +25,53 @@ $cadena0 = $this->miConfigurador->fabricaConexiones->crypto->codificar_url($pagi
 
 //Cadena codificada para listar Catalogos
 $cadenaACodificar1 = $cadenaACodificar . "&funcion=agregar";
+$cadenaACodificar1 .="&usuario=".$_REQUEST['usuario'];
 $cadena1 = $this->miConfigurador->fabricaConexiones->crypto->codificar_url($cadenaACodificar1, $enlace);
 
 //Cadena codificada para listar Catalogos
 $cadenaACodificar2 = $cadenaACodificar . "&funcion=crearCatalogo";
+$cadenaACodificar2 .="&usuario=".$_REQUEST['usuario'];
 $cadena2 = $this->miConfigurador->fabricaConexiones->crypto->codificar_url($cadenaACodificar2, $enlace);
 
 //Cadena codificada para listar Catalogos
 $cadenaACodificar3 = $cadenaACodificar . "&funcion=eliminarCatalogo";
+$cadenaACodificar3 .="&usuario=".$_REQUEST['usuario'];
 $cadena3 = $this->miConfigurador->fabricaConexiones->crypto->codificar_url($cadenaACodificar3, $enlace);
 
 //Cadena codificada para listar Catalogos
 $cadenaACodificar4 = $cadenaACodificar . "&funcion=editarCatalogo";
+$cadenaACodificar4 .="&usuario=".$_REQUEST['usuario'];
 $cadena4 = $this->miConfigurador->fabricaConexiones->crypto->codificar_url($cadenaACodificar4, $enlace);
 
 
 $cadenaACodificar5 = $cadenaACodificar . "&funcion=agregarElementoCatalogo";
+$cadenaACodificar5 .="&usuario=".$_REQUEST['usuario'];
 $cadena5 = $this->miConfigurador->fabricaConexiones->crypto->codificar_url($cadenaACodificar5, $enlace);
 
 
 $cadenaACodificar6 = $cadenaACodificar . "&funcion=guardarEdicionElementoCatalogo";
+$cadenaACodificar6 .="&usuario=".$_REQUEST['usuario'];
 $cadena6 = $this->miConfigurador->fabricaConexiones->crypto->codificar_url($cadenaACodificar6, $enlace);
 
 
 $cadenaACodificar7 = $cadenaACodificar . "&funcion=cambiarNombreCatalogo";
+$cadenaACodificar7 .="&usuario=".$_REQUEST['usuario'];
 $cadena7 = $this->miConfigurador->fabricaConexiones->crypto->codificar_url($cadenaACodificar7, $enlace);
 
 
 
 $cadenaACodificar8 = $cadenaACodificar . "&funcion=mostrarCatalogo";
+$cadenaACodificar8 .="&usuario=".$_REQUEST['usuario'];
 $cadena8 = $this->miConfigurador->fabricaConexiones->crypto->codificar_url($cadenaACodificar8, $enlace);
 
 
 $cadenaACodificar9 = $cadenaACodificar . "&funcion=eliminarElementoCatalogo";
+$cadenaACodificar9 .="&usuario=".$_REQUEST['usuario'];
 $cadena9 = $this->miConfigurador->fabricaConexiones->crypto->codificar_url($cadenaACodificar9, $enlace);
 
 
 $cadenaACodificar10 = $cadenaACodificar . "&funcion=autocompletar";
+$cadenaACodificar10 .="&usuario=".$_REQUEST['usuario'];
 $cadena10 = $this->miConfigurador->fabricaConexiones->crypto->codificar_url($cadenaACodificar10, $enlace);
 
 

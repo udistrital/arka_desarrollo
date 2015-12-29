@@ -37,8 +37,8 @@ $this->idioma ["informacion_mueble"] ="&nbsp&nbsp&nbsp&nbsp&nbsp&nbspArchivo de 
 
 
 
-$this->idioma ["placa"] ="Número de Placa: ";
-$this->idioma ["placaTitulo"] ="Ingrese Número Placa";
+$this->idioma ["selec_placa"] ="Número de Placa: ";
+$this->idioma ["selec_placaTitulo"] ="Ingrese Número Placa";
 
 
 $this->idioma ["serial"] ="Número de Serial: ";

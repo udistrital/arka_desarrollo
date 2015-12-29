@@ -100,7 +100,7 @@ class RegistradorOrden {
 				
 				$cadenaSql = $this->miSql->getCadenaSql ( 'mostrarInfoDepreciar_elemento', $valor );
 				$elemento = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
-				
+			
 				$cantidad = 1;
 				$meses = intval ( $elemento [0] ['grupo_vidautil'] );
 				$precio = $elemento [0] ['valor'];
@@ -221,7 +221,7 @@ class RegistradorOrden {
 				
 				$cadenaSql = $this->miSql->getCadenaSql ( 'registrarDepreciacion', $datos_calculada );
 				$registro_depreciacion = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda", $datos_calculada, "registrarDepreciacion" );
-				
+			
 				$datosAprobar = array (
 						'id_aprobacion' => $idAprobacion [0] [0],
 						'id_elemento' => $valor,
@@ -229,10 +229,11 @@ class RegistradorOrden {
 						'id_depreciacion' => $registro_depreciacion [0] [0] 
 				);
 				
-				$cadenaSql = $this->miSql->getCadenaSql ( 'actualizarAprobar', $datosAprobar );
+			$cadenaSql = $this->miSql->getCadenaSql ( 'actualizarAprobar', $datosAprobar );
 				 
 				$asignar = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "acceso", $datosAprobar, "actualizarAprobar" );
 				$a ++;
+                                
 			}
 		}
 		

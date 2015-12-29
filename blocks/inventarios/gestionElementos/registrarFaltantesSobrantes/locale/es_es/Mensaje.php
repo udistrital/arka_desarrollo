@@ -32,8 +32,8 @@ $this->idioma ["fecha_denunciaTitulo"] ="Seleccione Fecha Denuncia";
 
 
 
-$this->idioma ["placa"] ="Número de Placa: ";
-$this->idioma ["placaTitulo"] ="Ingrese Número Placa";
+$this->idioma ["selec_placa"] ="Número de Placa: ";
+$this->idioma ["selec_placaTitulo"] ="Ingrese Número Placa";
 
 
 $this->idioma ["serial"] ="Número de Serial: ";

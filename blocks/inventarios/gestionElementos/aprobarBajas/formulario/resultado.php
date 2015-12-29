@@ -95,10 +95,10 @@ class registrarForm {
 				'ubicacion' => $ubicacion,
 				'sede' => $sede 
 		);
-		
+	
 		$cadenaSql = $this->miSql->getCadenaSql ( 'consultarElemento', $arreglo );
 		$elemento = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
-		
+      
 		// ---------------- SECCION: Parámetros Generales del Formulario ----------------------------------
 		$esteCampo = $esteBloque ['nombre'];
 		$atributos ['id'] = $esteCampo;
@@ -214,7 +214,6 @@ class registrarForm {
                 <th>Dependencia</th>
                 <th>Ubicación</th>
                 <th>Descripcion</th>
-		<th>Grupo Bien</th>
 		<th>Aprobar Baja<br>Elemento</th>
                 </tr>
             </thead>
@@ -228,7 +227,7 @@ class registrarForm {
                     <td><center>" . $elemento [$i] ['dependencia'] . "</center></td>
                     <td><center>" . $elemento [$i] ['ubicacion'] . "</center></td>
                     <td><center>" . $elemento [$i] ['descripcion_elemento'] . "</center></td>
-                    <td><center>" . $elemento [$i] ['grupo_bien'] . "</center></td>
+                   
                     <td><center>";
 				// ---------------- CONTROL: Cuadro de Texto --------------------------------------------------------
 				$nombre = 'item' . $i;

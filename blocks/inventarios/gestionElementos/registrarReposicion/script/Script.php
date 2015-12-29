@@ -11,9 +11,11 @@ $funcion [$indice++]="select2_locale_es.js";
 $funcion [$indice ++] = "jquery.dataTables.js";
 $funcion [$indice ++] = "jquery.dataTables.min.js";
 $funcion [$indice ++] = "timepicker.js";
+$funcion [$indice ++] = "jquery.autocomplete.js";
+$funcion [$indice ++] = "jquery.autocomplete.min.js";
 
 $funcion[$indice ++]="jquery.dlmenu.js";
-$funcion [$indice ++] = "jquery.autocomplete.js";
+
 
 $rutaBloque = $this->miConfigurador->getVariableConfiguracion ( "host" );
 $rutaBloque .= $this->miConfigurador->getVariableConfiguracion ( "site" );

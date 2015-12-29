@@ -37,15 +37,8 @@
         
 $("#<?php echo $this->campoSeguro('tipoConsulta')?>").select2();
 $("#<?php echo $this->campoSeguro('tipo')?>").select2();
- $("#<?php echo $this->campoSeguro('placa')?>").select2({
-             	 placeholder: "Search for a repository",
-              	 minimumInputLength: 3,
-              	 });
 
- $("#<?php echo $this->campoSeguro('placaConsulta')?>").select2({
-             	 placeholder: "Search for a repository",
-              	 minimumInputLength: 3,
-              	 });
+
 
     $('#<?php echo $this->campoSeguro('fecha_inicio')?>').datepicker({
 		dateFormat: 'yy-mm-dd',

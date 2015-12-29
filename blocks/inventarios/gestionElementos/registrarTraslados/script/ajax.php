@@ -9,7 +9,6 @@ $url = $this->miConfigurador->getVariableConfiguracion ( "host" );
 $url .= $this->miConfigurador->getVariableConfiguracion ( "site" );
 $url .= "/index.php?";
 
-
 // Variables
 $cadenaACodificar16 = "pagina=" . $this->miConfigurador->getVariableConfiguracion ( "pagina" );
 $cadenaACodificar16 .= "&procesarAjax=true";
@@ -42,6 +41,21 @@ $cadena4 = $this->miConfigurador->fabricaConexiones->crypto->codificar_url ( $ca
 // URL definitiva
 $urlFinal4 = $url . $cadena4;
 
+// Variables
+$cadenaACodificarPlaca = "pagina=" . $this->miConfigurador->getVariableConfiguracion ( "pagina" );
+$cadenaACodificarPlaca .= "&procesarAjax=true";
+$cadenaACodificarPlaca .= "&action=index.php";
+$cadenaACodificarPlaca .= "&bloqueNombre=" . $esteBloque ["nombre"];
+$cadenaACodificarPlaca .= "&bloqueGrupo=" . $esteBloque ["grupo"];
+$cadenaACodificarPlaca .= "&funcion=consultaPlaca";
+$cadenaACodificarPlaca .= "&tiempo=" . $_REQUEST ['tiempo'];
+
+// Codificar las variables
+$enlace = $this->miConfigurador->getVariableConfiguracion ( "enlace" );
+$cadena = $this->miConfigurador->fabricaConexiones->crypto->codificar_url ( $cadenaACodificarPlaca, $enlace );
+
+// URL definitiva
+$urlFinalPlaca = $url . $cadena;
 
 ?>
 
@@ -109,7 +123,8 @@ function consultarDependencia(elem, request, response){
 		  $.ajax({
 		    url: "<?php echo $urlFinal4?>",
 		    dataType: "json",
-		    data: { valor:$("#<?php echo $this->campoSeguro('dependencia')?>").val()},
+		    data: { valorD:$("#<?php echo $this->campoSeguro('dependencia')?>").val(),
+	    		valorS:$("#<?php echo $this->campoSeguro('sede')?>").val(),},
 		    success: function(data){ 
 
 
@@ -142,6 +157,46 @@ function consultarDependencia(elem, request, response){
 
 	    $(function () {
 
+
+
+
+	    	$("#<?php echo $this->campoSeguro('selec_placa')?>").blur(function(){
+
+	    		
+
+	    		if ($("#<?php echo $this->campoSeguro('placa') ?>").val()==''){
+				
+
+	    			$("#<?php echo $this->campoSeguro('selec_placa') ?>").val('Placa No Registrada');
+	    			$("#<?php echo $this->campoSeguro('placa') ?>").val('');
+		    	}
+
+	    	      });
+	    
+
+	    	
+	        $("#<?php echo $this->campoSeguro('selec_placa') ?>").autocomplete({
+	        	minChars: 3,
+	        	serviceUrl: '<?php echo $urlFinalPlaca; ?>',
+	        	onSelect: function (suggestion) {
+
+
+
+	            	if(suggestion!='null'){
+	        	        $("#<?php echo $this->campoSeguro('placa') ?>").val(suggestion.data);
+	        	        if($("#<?php echo $this->campoSeguro('placa') ?>").val()!=''){
+	        	        $("#<?php echo $this->campoSeguro('responsable') ?>").attr("class", "selectboxdiv  validate[ ]  select2-hidden-accessible");
+	        	        }else{
+	        	        	$("#<?php echo $this->campoSeguro('responsable') ?>").attr("class", "selectboxdiv  validate[required]  select2-hidden-accessible");
+	        	        	
+		        	        }
+	           	        
+	        	    }
+	        	}
+	                    
+	        });
+
+	    	
 
 	    	$("#<?php echo $this->campoSeguro('selecc_registros')?>").change(function(){
 
