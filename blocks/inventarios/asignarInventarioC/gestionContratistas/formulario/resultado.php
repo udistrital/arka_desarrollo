@@ -94,8 +94,14 @@ class registrarForm {
 		if (isset ( $_REQUEST ['mensaje'] )) {
 			switch ($_REQUEST ['mensaje']) {
 				case 'registro' :
-					$atributos ['mensaje'] = "<center>SE REGISTRO CON EXITO LOS CONTRATISTAS</center>";
+					$atributos ['mensaje'] = "<center>SE REGISTRO N#".$_REQUEST['num_exito']." CON EXITO LOS CONTRATISTAS VALIDOS </center>";
 					$atributos ["estilo"] = 'success';
+					
+					break;
+				
+				case 'error' :
+					$atributos ['mensaje'] = "<center>Error al Procesar Archivo Verifique Los Datos.</center>";
+					$atributos ["estilo"] = 'error';
 					
 					break;
 				
@@ -119,9 +125,57 @@ class registrarForm {
 					$atributos ['mensaje'] = "<center>ERROR EN LA EXTENSION DEL ACRHIVO A CARGAR<br>Verifique los Datos que se xls o xlsx.</center>";
 					$atributos ["estilo"] = 'error';
 					break;
+				
+				case 'errorTipoContrato' :
+					$atributos ['mensaje'] = "<center>ERROR AL ACTUALIZAR EL TIPO DE CONTRATO.<BR>YA EXISTE UN CONTRATO VIGENTE DE ORDEN DE PRESTACIÓN DE SERVICIOS (OPS) CON EL CONTRATISTA.</center>";
+					$atributos ["estilo"] = 'error';
+					break;
 			}
 			
 			if ($resultado != false) {
+				
+				if (isset ( $_REQUEST ['log_error'] ) == true && $_REQUEST ['log_error'] != false) {
+					
+					$Log_errores = unserialize ( $_REQUEST ['log_error'] );
+					
+					foreach ( $Log_errores as $valor => $key ) {
+						
+						$atributos ['mensaje'] .= "<br>" . $valor . " en los Siguientes Datos en el Archivo: ";
+						$atributos ['mensaje'] .= "<center><table>
+								<thead>
+					                <tr>
+					                   <th>Vigencia</th>
+					                    <th>Tipo de Contrato</th>
+										<th>Número de Contrato</th>
+					                    <th>Identificación<br>Contratista</th>
+										<th>Nombre y Apellidos<br>Contratistas</th>
+										<th>Fecha de Inicio<br>Contrato</th>
+								        <th>Fecha de Final<br>Contrato</th>
+									</tr>
+					            </thead>";
+						
+						foreach ( $key as $val ) {
+							
+							if ($val ['tipo_contrato'] == '2') {
+								$val ['tipo_contrato'] = 'CPS';
+							} else {
+								
+								$val ['tipo_contrato'] = 'OPS';
+							}
+							$atributos ['mensaje'] .= "<tr>
+	                   					 		<td><center>" . $val ['vigencia'] . "</center></td>
+							                    <td><center>" . $val ['tipo_contrato'] . "</center></td>
+         					                    <td><center>" . $val ['numero'] . "</center></td> 		
+							                   	<td><center>" . $val ['identificacion'] . "</center></td>
+							                    <td><center>" . $val ['nombres'] . "</center></td>
+							                    <td><center>" . $val ['fecha_inicial'] . "</center></td>
+							                    <td><center>" . $val ['fecha_final'] . "</center></td>				
+						                    </tr>";
+						}
+						
+						$atributos ['mensaje'] .= "</table></center><br>";
+					}
+				}
 				
 				// -------------Control texto-----------------------
 				$esteCampo = 'divMensaje';
@@ -151,7 +205,7 @@ class registrarForm {
 			if ($resultado == false) {
 				
 				$atributos ['mensaje'] = "<center>No Existen Contratistas Registrados<br><br>Seleccione la Opcion Registrar Contratistas</center>";
-				if (isset ( $_REQUEST ['mensaje'] ) == true) { 
+				if (isset ( $_REQUEST ['mensaje'] ) == true) {
 					switch ($_REQUEST ['mensaje']) {
 						
 						case 'noExtension' :
@@ -169,7 +223,7 @@ class registrarForm {
 						case 'error' :
 							$atributos ['mensaje'] = "<center>No Existen Contratistas Registrados<br><br>Seleccione la Opcion Registrar Contratistas</center><br>";
 							$atributos ['mensaje'] .= "<center>ERROR EXISTEN CELDAS VACIAS EN EL ARCHIVO<BR>Todos los Campos son Obligatorios.Verifique los Datos</center>";
-					 			
+							
 							break;
 					}
 				}
@@ -353,7 +407,8 @@ class registrarForm {
 					<thead>
 		                <tr>
 		                   <th>Vigencia</th>
-		                    <th>Número de Contrato</th>
+		                    <th>Tipo de Contrato</th>
+							<th>Número de Contrato</th>
 		                    <th>Identificación<br>Contratista</th>
 							<th>Nombre y Apellidos<br>Contratistas</th>
 							<th>Fecha de Inicio<br>Contrato</th>

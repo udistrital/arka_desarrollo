@@ -18,6 +18,7 @@ class redireccion {
 				$variable .= "&mensaje=registro";
 				$variable .= "&usuario=" . $_REQUEST ['usuario'];
 				$variable .= "&log_error=" . $valor;
+				$variable .= "&num_exito=" . $valor1;
 				
 				break;
 			
@@ -52,6 +53,13 @@ class redireccion {
 			case "NoActualizo" :
 				$variable = "pagina=" . $miPaginaActual;
 				$variable .= "&mensaje=errorActualizacion";
+				$variable .= "&usuario=" . $_REQUEST ['usuario'];
+				
+				break;
+			
+			case "ErrorTipoContrato" :
+				$variable = "pagina=" . $miPaginaActual;
+				$variable .= "&mensaje=errorTipoContrato";
 				$variable .= "&usuario=" . $_REQUEST ['usuario'];
 				
 				break;

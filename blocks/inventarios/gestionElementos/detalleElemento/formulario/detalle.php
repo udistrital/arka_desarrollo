@@ -362,7 +362,7 @@ class registrarForm {
 										$encabezado [$key] = (str_replace ( "_", " ", $key ));
 									}
 								}
-								
+								 
 								foreach ( $elemento [0] as $key => $values ) {
 									if (! is_numeric ( $key )) {
 										// ----- CONTROL texto Simple ------------------------

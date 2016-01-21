@@ -1,14 +1,7 @@
 <?php
 
 /*
- * ----------------------------------------------------------------------------------------
- * | Control Versiones |
- * -----------------------------------------------------------------------------------------
- * | fecha | Autor | version | Detalle |
- * -----------------------------------------------------------------------------------------
- * | 2015/12/13 | Stiv Verdugo | 0.0.0.1 | |
- * -----------------------------------------------------------------------------------------
- *
+ * ---------------------------------------------------------------------------------------- | Control Versiones | ----------------------------------------------------------------------------------------- | fecha | Autor | version | Detalle | ----------------------------------------------------------------------------------------- | 2015/12/13 | Stiv Verdugo | 0.0.0.1 | | -----------------------------------------------------------------------------------------
  */
 use inventarios\asignarInventarioC\gestionContratista\funcion\redireccion;
 
@@ -39,6 +32,7 @@ class Registrador {
 		$this->miFuncion = $funcion;
 	}
 	function procesarFormulario() {
+		$k = 0;
 		$conexion = "inventarios";
 		$esteRecursoDB = $this->miConfigurador->fabricaConexiones->getRecursoDB ( $conexion );
 		
@@ -135,7 +129,15 @@ class Registrador {
 						exit ();
 					}
 					
-					$datos [$i] ['numero'] = $objPHPExcel->getActiveSheet ()->getCell ( 'B' . $i )->getCalculatedValue ();
+					$datos [$i] ['tipo_contrato'] = $objPHPExcel->getActiveSheet ()->getCell ( 'B' . $i )->getCalculatedValue ();
+					
+					if (is_null ( $datos [$i] ['tipo_contrato'] ) == true) {
+						
+						redireccion::redireccionar ( 'datosVacios', $fechaActual );
+						exit ();
+					}
+					
+					$datos [$i] ['numero'] = $objPHPExcel->getActiveSheet ()->getCell ( 'C' . $i )->getCalculatedValue ();
 					
 					if (is_null ( $datos [$i] ['numero'] ) == true) {
 						
@@ -143,7 +145,7 @@ class Registrador {
 						exit ();
 					}
 					
-					$datos [$i] ['identificacion'] = $objPHPExcel->getActiveSheet ()->getCell ( 'C' . $i )->getCalculatedValue ();
+					$datos [$i] ['identificacion'] = $objPHPExcel->getActiveSheet ()->getCell ( 'D' . $i )->getCalculatedValue ();
 					
 					if (is_null ( $datos [$i] ['identificacion'] ) == true) {
 						
@@ -151,14 +153,14 @@ class Registrador {
 						exit ();
 					}
 					
-					$datos [$i] ['nombres'] = $objPHPExcel->getActiveSheet ()->getCell ( 'D' . $i )->getCalculatedValue ();
+					$datos [$i] ['nombres'] = $objPHPExcel->getActiveSheet ()->getCell ( 'E' . $i )->getCalculatedValue ();
 					
 					if (is_null ( $datos [$i] ['nombres'] ) == true) {
 						
 						redireccion::redireccionar ( 'datosVacios', $fechaActual );
 						exit ();
 					}
-					$datos [$i] ['apellidos'] = $objPHPExcel->getActiveSheet ()->getCell ( 'E' . $i )->getCalculatedValue ();
+					$datos [$i] ['apellidos'] = $objPHPExcel->getActiveSheet ()->getCell ( 'F' . $i )->getCalculatedValue ();
 					
 					if (is_null ( $datos [$i] ['apellidos'] ) == true) {
 						
@@ -166,7 +168,7 @@ class Registrador {
 						exit ();
 					}
 					
-					$datos [$i] ['Fecha_Inicio__Anio'] = $objPHPExcel->getActiveSheet ()->getCell ( 'F' . $i )->getCalculatedValue ();
+					$datos [$i] ['Fecha_Inicio__Anio'] = $objPHPExcel->getActiveSheet ()->getCell ( 'G' . $i )->getCalculatedValue ();
 					
 					if (is_null ( $datos [$i] ['Fecha_Inicio__Anio'] ) == true) {
 						
@@ -174,7 +176,7 @@ class Registrador {
 						exit ();
 					}
 					
-					$datos [$i] ['Fecha_Inicio__Mes'] = $objPHPExcel->getActiveSheet ()->getCell ( 'G' . $i )->getCalculatedValue ();
+					$datos [$i] ['Fecha_Inicio__Mes'] = $objPHPExcel->getActiveSheet ()->getCell ( 'H' . $i )->getCalculatedValue ();
 					
 					if (is_null ( $datos [$i] ['Fecha_Inicio__Mes'] ) == true) {
 						
@@ -182,7 +184,7 @@ class Registrador {
 						exit ();
 					}
 					
-					$datos [$i] ['Fecha_Inicio__Dia'] = $objPHPExcel->getActiveSheet ()->getCell ( 'H' . $i )->getCalculatedValue ();
+					$datos [$i] ['Fecha_Inicio__Dia'] = $objPHPExcel->getActiveSheet ()->getCell ( 'I' . $i )->getCalculatedValue ();
 					
 					if (is_null ( $datos [$i] ['Fecha_Inicio__Dia'] ) == true) {
 						
@@ -190,14 +192,14 @@ class Registrador {
 						exit ();
 					}
 					
-					$datos [$i] ['Fecha_Final__Anio'] = $objPHPExcel->getActiveSheet ()->getCell ( 'I' . $i )->getCalculatedValue ();
+					$datos [$i] ['Fecha_Final__Anio'] = $objPHPExcel->getActiveSheet ()->getCell ( 'J' . $i )->getCalculatedValue ();
 					
 					if (is_null ( $datos [$i] ['Fecha_Final__Anio'] ) == true) {
 						
 						redireccion::redireccionar ( 'datosVacios', $fechaActual );
 						exit ();
 					}
-					$datos [$i] ['Fecha_Final__Mes'] = $objPHPExcel->getActiveSheet ()->getCell ( 'J' . $i )->getCalculatedValue ();
+					$datos [$i] ['Fecha_Final__Mes'] = $objPHPExcel->getActiveSheet ()->getCell ( 'K' . $i )->getCalculatedValue ();
 					
 					if (is_null ( $datos [$i] ['Fecha_Final__Mes'] ) == true) {
 						
@@ -205,7 +207,7 @@ class Registrador {
 						exit ();
 					}
 					
-					$datos [$i] ['Fecha_Final__Dia'] = $objPHPExcel->getActiveSheet ()->getCell ( 'K' . $i )->getCalculatedValue ();
+					$datos [$i] ['Fecha_Final__Dia'] = $objPHPExcel->getActiveSheet ()->getCell ( 'L' . $i )->getCalculatedValue ();
 					if (is_null ( $datos [$i] ['Fecha_Final__Dia'] ) == true) {
 						
 						redireccion::redireccionar ( 'datosVacios', $fechaActual );
@@ -213,7 +215,7 @@ class Registrador {
 					}
 				}
 				
-				if (isset($datos)==true&&$datos != false) {
+				if (isset ( $datos ) == true && $datos != false) {
 					foreach ( $datos as $valor ) {
 						$registrar = true;
 						$fechaInicio = date ( 'Y-m-d', mktime ( 0, 0, 0, $valor ['Fecha_Inicio__Mes'], $valor ['Fecha_Inicio__Dia'], $valor ['Fecha_Inicio__Anio'] ) );
@@ -224,6 +226,7 @@ class Registrador {
 								"identificacion" => $valor ['identificacion'],
 								"nombres" => $valor ['nombres'] . " " . $valor ['apellidos'],
 								"vigencia" => $valor ['vigencia'],
+								"tipo_contrato" => $valor ['tipo_contrato'],
 								"numero" => $valor ['numero'],
 								"fecha_inicial" => $fechaInicio,
 								"fecha_final" => $fechaFinal 
@@ -232,21 +235,51 @@ class Registrador {
 						if ($fechaFinal <= $fechaInicio) {
 							
 							$registrar = false;
-							$log_error [] = $arreglo;
+							$log_error ['Error_Fechas'] [] = $arreglo;
+						}
+						
+						if ($valor ['tipo_contrato'] == 1 && $registrar != false) {
+							
+							$cadenaSql = $this->miSql->getCadenaSql ( 'Consultar_Tipo_Contrato_Particular', $valor ['identificacion'] );
+							
+							$contratos_tipo = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
+							
+							if ($contratos_tipo) {
+								foreach ( $contratos_tipo as $valores ) {
+									
+									if ($valores ['tipo_contrato'] == '1') {
+										
+										$registrar = false;
+										$log_error ['Error_Tipo_Contratos(Duplicidad_de_OPS)'] [] = $arreglo;
+									}
+								}
+							} else {
+								
+								$registrar = true;
+							}
 						}
 						
 						$cadenaSql = $this->miSql->getCadenaSql ( 'registrarContratista', $arreglo );
 						
-						if ($registrar = true) {
-							$resultado = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
+						if ($registrar == true) {
+							
+							$resultado = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "acceso", $arreglo, "registrarContratista" );
 							
 							if ($resultado == false) {
+								$registrado = false;
+								$registrar = false;
+								$log_error ['Error_Registro'] [] = $arreglo;
+							} else {
 								
-								$log_error [] = $arreglo;
+								$k = $k + 1;
+								
+								if (isset ( $registrado_unico ) != true) {
+									$registrado_unico = true;
+								}
 							}
 						}
 					}
-				} else {
+				} else { 
 					
 					$datos = false;
 				}
@@ -259,9 +292,9 @@ class Registrador {
 					$log_error = false;
 				}
 				
-				if ($datos != false) {
+				if (isset ( $registrado_unico ) == true) {
 					$this->miConfigurador->setVariableConfiguracion ( "cache", true );
-					redireccion::redireccionar ( 'inserto', $log_error );
+					redireccion::redireccionar ( 'inserto', $log_error,$k );
 					exit ();
 				} else {
 					

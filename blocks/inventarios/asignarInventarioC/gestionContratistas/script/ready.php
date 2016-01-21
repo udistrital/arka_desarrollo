@@ -39,14 +39,22 @@ $("#tabs").tabs();
 
          });
 
-         $("#VentanaA a").click(function(event) {
+
+
+   
+   
+   
+      $("#divMensaje").click(function(event) {
 
              event.preventDefault();
 
-             $("#VentanaA").slideUp();
+             $("#divMensaje").slideToggle();
 
          });
 
+   
+   
+   
 
 
 $(function() {
@@ -56,11 +64,11 @@ $( "input[type=submit], button" )
 event.preventDefault();
 });
 });
-
+ 
 
     setTimeout(function() {
     		$('#divMensaje').hide( "drop", { direction: "up" }, "slow" );
-			}, 1000); // <-- time in milliseconds
+			}, 50000); // <-- time in milliseconds
         
         
         
@@ -78,6 +86,8 @@ event.preventDefault();
 
 $('#<?php echo $this->campoSeguro('vigencia')?>').width(100);                
 $("#<?php echo $this->campoSeguro('vigencia')?>").select2();
+$('#<?php echo $this->campoSeguro('tipo_contrato')?>').width(100);
+$("#<?php echo $this->campoSeguro('tipo_contrato')?>").select2();
 
 
         

@@ -39,17 +39,37 @@ class RegistradorOrden {
         $conexion = "inventarios";
         $esteRecursoDB = $this->miConfigurador->fabricaConexiones->getRecursoDB($conexion);
 
-        if ($fechaActual == $fechaReinicio) {
+//         if ($fechaActual == $fechaReinicio) {
 
-            $cadenaSql = $this->miSql->getCadenaSql('consultaConsecutivo', $fechaReinicio);
-            $consecutivo = $esteRecursoDB->ejecutarAcceso($cadenaSql, "busqueda");
+//             $cadenaSql = $this->miSql->getCadenaSql('consultaConsecutivo', $fechaReinicio);
+//             $consecutivo = $esteRecursoDB->ejecutarAcceso($cadenaSql, "busqueda");
 
-            if (isset($consecutivo) && $consecutivo == false) {
-                $cadenaSql = $this->miSql->getCadenaSql('reiniciarConsecutivo');
-                $consecutivo = $esteRecursoDB->ejecutarAcceso($cadenaSql, "acceso");
-            }
+//             if (isset($consecutivo) && $consecutivo == false) {
+//                 $cadenaSql = $this->miSql->getCadenaSql('reiniciarConsecutivo');
+//                 $consecutivo = $esteRecursoDB->ejecutarAcceso($cadenaSql, "acceso");
+//             }
+//         }
+
+        
+        
+        
+        $AnioActual = date ( 'Y' );
+        $cadenaSql = $this->miSql->getCadenaSql ( 'consultaConsecutivo', $AnioActual );
+        
+        $consecutivo = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
+        
+        if ($consecutivo == false) {
+        		
+        	$cadenaSql = $this->miSql->getCadenaSql ( 'reiniciarConsecutivo' );
+        		
+        	$consecutivo = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "acceso" );
         }
-
+        
+        
+        
+        
+        
+        
         $cadenaSql = $this->miSql->getCadenaSql('id_salida_maximo');
 
         $max_id_salida = $esteRecursoDB->ejecutarAcceso($cadenaSql, "busqueda");
@@ -259,7 +279,7 @@ class RegistradorOrden {
                     );
 
                     $cadenaSql = $this->miSql->getCadenaSql('SalidaContableVigencia', $arreglo);
-
+                    
                     $max_consecutivo = $esteRecursoDB->ejecutarAcceso($cadenaSql, "busqueda");
 
                     if (is_null($max_consecutivo [0] [0])) {
@@ -292,7 +312,7 @@ class RegistradorOrden {
                     );
 
                     $cadenaSql = $this->miSql->getCadenaSql('SalidaContableVigencia', $arreglo);
-
+                    
                     $max_consecutivo = $esteRecursoDB->ejecutarAcceso($cadenaSql, "busqueda");
 
                     if (is_null($max_consecutivo [0] [0])) {

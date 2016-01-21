@@ -71,11 +71,13 @@ if ($_REQUEST ['funcion'] == 'ConsultarContratistas') {
 		$VariableModificar = "pagina=" . $miPaginaActual; // pendiente la pagina para modificar parametro
 		$VariableModificar .= "&opcion=modificarContratista";
 		$VariableModificar .= "&identificador_contratista=" . $valor ['CON_IDENTIFICADOR'];
+		$VariableModificar .= "&tipo_contrato=" . $valor ['CON_TIPO_CONTRATO'];
 		$VariableModificar .= "&usuario=" . $_REQUEST ['usuario'];
 		$VariableModificar = $this->miConfigurador->fabricaConexiones->crypto->codificar_url ( $VariableModificar, $directorio );
 		
 		$resultadoFinal [] = array (
 				'vigencia' => "<center>" . $valor ['CON_VIGENCIA_FISCAL'] . "</center>",
+				'tipo_contrato' => "<center>" . $valor ['tc_descripcion'] . "</center>",
 				'numero' => "<center>" . $valor ['CON_NUMERO_CONTRATO'] . "</center>",
 				'identificacion' => "<center>" . $valor ['CON_IDENTIFICACION'] . "</center>",
 				'nombre' => "<center>" . $valor ['CON_NOMBRE'] . "</center>",
