@@ -71,6 +71,9 @@ class Formulario {
 				$_REQUEST ['nombreCatalogo'],
 				$_REQUEST ['idCatalogo'] 
 		), "cambiarNombreCatalogo" );
+                
+       
+        
 		
 		if (! $registros) {
 			$this->miConfigurador->setVariableConfiguracion ( 'mostrarMensaje', 'errorCambioNombre' );

@@ -22,14 +22,14 @@ $this->idioma ["observacionesActa"] ="Observaciones: ";
 
 $this->idioma ["aprobacionCheck"] ="&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp¿Aprobado?:";
 $this->idioma ["aprobacionCheckTitulo"] ="Seleccione en caso de ser aprobado";
-
+$this->idioma ["selec_nivel"] ="Selección Nivel de Inventarios: ";
 
 $this->idioma ["botonAceptar"] ="Asignar Elementos";
 $this->idioma ["botonCancelar"] ="Cancelar";
 $this->idioma ["botonContinuar"] ="Continuar";
 $this->idioma ["botonConsultar"] ="Consultar";
 $this->idioma ["botonRegresar"] ="Regresar";
-
+$this->idioma ["botonConsulta"] ="Consultar";
 
 
 

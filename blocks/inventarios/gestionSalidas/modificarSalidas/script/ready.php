@@ -49,7 +49,10 @@
  $("#<?php echo $this->campoSeguro('sede')?>").select2();
  
  $("#<?php echo $this->campoSeguro('numero_salida')?>").select2();
- $("#<?php echo $this->campoSeguro('numero_entrada')?>").select2();
+$("#<?php echo $this->campoSeguro('numero_entrada')?>").select2({
+             	 placeholder: "Ingrese Mínimo 1 Caracter de Búsqueda",
+              	 minimumInputLength: 1,
+              	 });
  $("#<?php echo $this->campoSeguro('dependencia')?>").select2();
  
  

@@ -1,13 +1,12 @@
-<?
+<?php
+ini_set("memory_limit", "2048M");
 $ruta = $this->miConfigurador->getVariableConfiguracion ( "raizDocumento" );
 
 $host = $this->miConfigurador->getVariableConfiguracion ( "host" ) . $this->miConfigurador->getVariableConfiguracion ( "site" ) . "/plugin/html2pfd/";
 
 include ($ruta . "/plugin/html2pdf/html2pdf.class.php");
 
-if (! isset ( $GLOBALS ["autorizado"]funcionarioElemento/index.php");
-	exit ();
-}
+
 class RegistradorOrden {
 	var $miConfigurador;
 	var $lenguaje;
@@ -122,7 +121,7 @@ $html2pdf->pdf->SetDisplayMode ( 'fullpage' );
 $html2pdf->WriteHTML ( $textos );
 
 $html2pdf->Output ( 'Placas' . '_' . date ( "Y-m-d" ) . '.pdf', 'D' );
-
+ini_restore("memory_limit");
 ?>
 
 

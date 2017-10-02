@@ -1,4 +1,5 @@
 <?php
+
 use inventarios\asignarInventarioC\descargarInventario\Sql;
 
 $conexion = "inventarios";
@@ -127,5 +128,4 @@ if ($_REQUEST ['funcion'] == 'EliminarItem') {
 	
 	echo $resultadoItems;
 }
-
 ?>

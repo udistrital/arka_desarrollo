@@ -1,5 +1,6 @@
 <?php
 
+
 namespace arka\grupoContable;
 
 if (!isset($GLOBALS ["autorizado"])) {
@@ -185,6 +186,7 @@ class Sql extends \Sql {
                 $cadenaSql .= " '" . $variable['nombreElemento'] . "', ";
                 $cadenaSql .= " '" . $variable['tipoBien'] . "')";
                 $cadenaSql .= " RETURNING elemento_id;";
+           
                 break;
 
             case "crearElementoCatalogoDescripcion":
@@ -203,6 +205,7 @@ class Sql extends \Sql {
                 $cadenaSql.= " '" . intval($variable['vidautil']) . "', ";
                 $cadenaSql.= " '" . intval($variable['cuentacredito']) . "', ";
                 $cadenaSql.= " '" . intval($variable['cuentadebito']) . "')";
+               
                 break;
 
             case "buscarElementoId":
@@ -270,7 +273,7 @@ class Sql extends \Sql {
                 $cadenaSql = " UPDATE grupo.catalogo_elemento ";
                 $cadenaSql .= " SET  elemento_padre='" . $variable['idPadre'] . "', ";
                 $cadenaSql .= " elemento_codigo='" . $variable['id'] . "', ";
-                //$cadenaSql .= " elemento_catalogo='" . $variable['idCatalogo'] . "', ";
+                $cadenaSql .= " elemento_tipobien='" . intval($variable['tipoBien']). "', ";
                 $cadenaSql .= " elemento_nombre='" . $variable['nombreElemento'] . "' ";
                 $cadenaSql .= " WHERE elemento_id='" . $variable['idElemento'] . "' ";
 
@@ -282,7 +285,10 @@ class Sql extends \Sql {
                 $cadenaSql .= " SET  ";
                 $cadenaSql.= "  grupo_cuentasalida='" . $variable['cuentasalida'] . "', ";
                 $cadenaSql.= "  grupo_cuentaentrada='" . $variable['cuentaentrada'] . "', ";
-                $cadenaSql.= "  grupo_depreciacion='" . $variable['depreciacion'] . "', ";
+                if( $variable['depreciacion']!=''){
+                    $cadenaSql.= "  grupo_depreciacion='" . $variable['depreciacion'] . "', ";
+                }
+                
                 $cadenaSql.= "  grupo_vidautil='" . intval($variable['vidautil']) . "', ";
                 $cadenaSql.= "  grupo_dcuentadebito='" . intval($variable['cuentacredito']) . "', ";
                 $cadenaSql.= "  grupo_dcuentacredito='" . intval($variable['cuentadebito']) . "' ";

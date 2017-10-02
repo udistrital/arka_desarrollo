@@ -20,6 +20,7 @@ class redireccion {
 				$variable .= "&estado=" . $valor [2];
 				$variable .= "&usuario=" . $valor [3];
 				$variable .= "&funcionario=" . $valor [3];
+                                $variable .= "&ver_pazsalvo=" . $valor [4];
 				if (isset ( $_REQUEST ['accesoCondor'] ) && $_REQUEST ['accesoCondor'] == 'true') {
 					
 					$variable .= "&accesoCondor=true";

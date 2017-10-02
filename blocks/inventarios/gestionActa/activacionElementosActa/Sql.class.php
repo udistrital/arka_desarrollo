@@ -553,9 +553,9 @@ class Sql extends \Sql {
             case "consultarElementosActa" :
                 $cadenaSql = "SELECT  ela.*, ct.elemento_nombre nivel_nombre, tb.descripcion nombre_tipo, iv.descripcion nombre_iva ";
                 $cadenaSql .= "FROM elemento_acta_recibido ela ";
-                $cadenaSql .= "JOIN  catalogo.catalogo_elemento ct ON ct.elemento_id=ela.nivel ";
-                $cadenaSql .= "JOIN  tipo_bienes tb ON tb.id_tipo_bienes=ela.tipo_bien ";
-                $cadenaSql .= "JOIN  aplicacion_iva iv ON iv.id_iva=ela.iva  ";
+                $cadenaSql .= "LEFT JOIN  catalogo.catalogo_elemento ct ON ct.elemento_id=ela.nivel ";
+                $cadenaSql .= "LEFT JOIN  tipo_bienes tb ON tb.id_tipo_bienes=ela.tipo_bien ";
+                $cadenaSql .= "LEFT JOIN  aplicacion_iva iv ON iv.id_iva=ela.iva  ";
                 $cadenaSql .= "WHERE id_acta ='" . $variable . "'  ";
                 $cadenaSql .= "AND  ela.estado=true ";
 

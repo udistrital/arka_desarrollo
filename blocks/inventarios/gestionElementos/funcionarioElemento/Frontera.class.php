@@ -1,4 +1,4 @@
-<?
+<?php
 
 namespace inventarios\gestionElementos\funcionarioElemento;
 
@@ -53,9 +53,20 @@ class Frontera {
 					break;
 				
 				case "Consultar" :
-					include_once ($this->ruta . "/formulario/resultado.php");
+                                   
+                                        if($_REQUEST['funcionario']=='41762709'){
+                                            include_once ($this->ruta . "/formulario/resultadoParticular.php");
+                                        }
+                                        else{
+                                            include_once ($this->ruta . "/formulario/resultado.php");
+                                        }
+					
 					break;
-				
+                                        
+                                case "ConsultarParticular" :
+					include_once ($this->ruta . "/formulario/resultado.php");
+		        	break;
+                               
 				case "observaciones" :
 					include_once ($this->ruta . "/formulario/modificar.php");
 					break;

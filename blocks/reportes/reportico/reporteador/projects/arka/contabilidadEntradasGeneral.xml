@@ -12,14 +12,16 @@ round(SUM (subtotal_sin_iva)) as subtotal,
 round(SUM (total_iva)) as iva,
 round(SUM (total_iva_con)) as total
 FROM arka_inventarios.entrada ae
-JOIN arka_inventarios.elemento aele ON ae.id_entrada=aele.id_entrada
-JOIN arka_inventarios.estado_entrada on estado_entrada.id_estado=estado_entrada
+LEFT JOIN arka_inventarios.elemento aele ON ae.id_entrada=aele.id_entrada
+LEFT JOIN arka_inventarios.estado_entrada on estado_entrada.id_estado=estado_entrada
 LEFT JOIN arka_inventarios.tipo_contrato ON tipo_contrato.id_tipo=tipo_contrato
-JOIN arka_inventarios.clase_entrada ON clase_entrada.id_clase=ae.clase_entrada
+LEFT JOIN arka_inventarios.clase_entrada ON clase_entrada.id_clase=ae.clase_entrada
 LEFT JOIN arka_parametros.arka_proveedor ON arka_parametros.arka_proveedor.&quot;PRO_NIT&quot;=cast(proveedor as character varying)
-JOIN catalogo.catalogo_elemento ON catalogo.catalogo_elemento.elemento_id=aele.nivel
-JOIN grupo.grupo_descripcion ON grupo.grupo_descripcion.grupo_id=catalogo.catalogo_elemento.elemento_grupoc
-JOIN arka_inventarios.aplicacion_iva ON id_iva=aele.iva
+LEFT JOIN catalogo.catalogo_elemento ON catalogo.catalogo_elemento.elemento_id=aele.nivel
+LEFT JOIN grupo.grupo_descripcion ON grupo.grupo_descripcion.grupo_id=catalogo.catalogo_elemento.elemento_grupoc
+LEFT JOIN arka_inventarios.aplicacion_iva ON id_iva=aele.iva
+WHERE 1=1
+AND ae.estado_entrada &lt;&gt; 3
 GROUP BY consecutivo, 
 proveedor,
 grupo_cuentaentrada,

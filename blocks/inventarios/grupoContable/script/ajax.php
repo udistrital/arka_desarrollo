@@ -20,8 +20,9 @@ $cadenaACodificar.="&bloqueGrupo=" . $esteBloque["grupo"];
 $enlace = $this->miConfigurador->getVariableConfiguracion("enlace");
 
 //Cadena codificada para listar Catalogos
-
-$cadena0 = $this->miConfigurador->fabricaConexiones->crypto->codificar_url($pagina, $enlace);
+$cadenaACodificar11 = $pagina;
+$cadenaACodificar11 .="&usuario=".$_REQUEST['usuario'];
+$cadena0 = $this->miConfigurador->fabricaConexiones->crypto->codificar_url($cadenaACodificar11, $enlace);
 
 //Cadena codificada para listar Catalogos
 $cadenaACodificar1 = $cadenaACodificar . "&funcion=agregar";
@@ -85,11 +86,18 @@ $ediCatal = $url . $cadena6;
 $nomCatal = $url . $cadena7;
 $mosLista = $url . $cadena8;
 $delCatal = $url . $cadena9;
+
 $casa = $url . $cadena0;
 $autocompletar = $url . $cadena10;
 ?>
 
 <script type='text/javascript'>
+
+              
+
+    
+
+
 
     var listaIds = [];
     var listaNombres = [];
@@ -425,13 +433,18 @@ $autocompletar = $url . $cadena10;
 
         if (valor == 0)
             return true;
-        autocompletar();
+            autocompletar();
         if (typeof listaNombres['lidPadre'] == 'undefined')
             autocompletar();
         return listaNombres['lidPadre'].indexOf(String(valor)) < 0 ? false : true;
     }
 
     function editarElementoCatalogo(id, padre, codigo, nombre, idCatalogo, cuentaSalida, cuentaEntrada, vidautil, cuentaDebito, cuentaCredito, depreciacion, tipobien, codigo_padre) {
+        
+        
+        
+        
+        
         $('#depreciacion').val();
         $("#descripcionDepreciacion").css('display', 'none');
         $('#vidautil').val(0);
@@ -449,10 +462,22 @@ $autocompletar = $url . $cadena10;
         $('#cuentaSalida').val(cuentaSalida);
         $('#cuentaEntrada').val(cuentaEntrada);
         $('#tipoBien').val(tipobien);
-
+        
+        
         if (depreciacion == 1) {
             $("#descripcionDepreciacion").css('display', 'block');
+            
         }
+        
+        if(tipobien == 1){
+            $("#depreciacion").val(0);
+            $("#depreciacion").attr('disabled', '');
+        }
+        
+         
+        
+                
+       
         $('#depreciacion').val(depreciacion);
 
         $('#vidautil').val(vidautil);
@@ -460,7 +485,11 @@ $autocompletar = $url . $cadena10;
         $('#cuentaCredito').val(cuentaCredito);
 
         $('#idReg').val(id);
-        $("#agregarA").html("Guardar Cambios sobre el elemento " + codigo + " con Padre " + codigo_padre + "")
+        
+        
+   
+        
+        $("#agregarA").html("Guardar Cambios sobre el elemento " + codigo + "")
         $("#agregarA").val("Guardar Cambios sobre elemento " + codigo + " con Padre " + codigo_padre + "");
         $("#agregarA").attr("onclick", "guardarEdicionElementos(" + id + ")");
     }
@@ -559,7 +588,7 @@ $autocompletar = $url . $cadena10;
     function cambio()
     {
         $("#depreciacion").live('change', function () {
-
+     
             if ($("#depreciacion").val() == 0)
             {
                 $("#descripcionDepreciacion").css('display', 'none');
@@ -573,6 +602,30 @@ $autocompletar = $url . $cadena10;
 
 
     }
+    function cambioTipo()
+    {
+        $("#tipoBien").live('change', function () {
+        
+            if ($("#tipoBien").val() == 1)
+            {
+              
+                $("#depreciacion").val(0);
+                $("#descripcionDepreciacion").css('display', 'none');
+                $("#cuentaDebito").val("");
+                $("#cuentaCredito").val("");
+                $("#vidautil").val("");
+                $("#depreciacion").attr('disabled', '');
+            
+            }
+            else{
+                 $("#depreciacion").removeAttr('disabled');
+            }
+        });
+
+
+    }
+    
+
 
 
 </script>

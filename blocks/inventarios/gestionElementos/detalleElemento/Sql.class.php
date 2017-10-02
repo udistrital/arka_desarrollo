@@ -164,10 +164,11 @@ class Sql extends \Sql {
                 $cadenaSql = "SELECT DISTINCT ";
                 $cadenaSql .= " entrada.consecutivo, id_elemento_ind,";
                 $cadenaSql .= " placa, ";
+                $cadenaSql .= " elemento.serie serie, ";
                 $cadenaSql .= " elemento.descripcion, ";
                 $cadenaSql .= ' sedes."ESF_SEDE" sede_nombre, ';
                 $cadenaSql .= ' dependencias."ESF_DEP_ENCARGADA" dependencia_nombre, ';
-
+                
                 $cadenaSql .= ' funcionarios."FUN_NOMBRE" fun_nombre ';
                 $cadenaSql .= ' FROM arka_inventarios.elemento   ';
                 $cadenaSql .= ' JOIN arka_inventarios.entrada ON entrada.id_entrada = elemento.id_entrada  ';
@@ -176,7 +177,7 @@ class Sql extends \Sql {
                 $cadenaSql .= ' left join arka_parametros.arka_espaciosfisicos ubicacion ON ubicacion."ESF_ID_ESPACIO"=elemento_individual.ubicacion_elemento ';
                 $cadenaSql .= ' left JOIN arka_parametros.arka_dependencia dependencias ON dependencias."ESF_ID_ESPACIO"=ubicacion."ESF_ID_ESPACIO" ';
                 $cadenaSql .= ' LEFT JOIN arka_parametros.arka_sedes as sedes ON sedes."ESF_COD_SEDE"=ubicacion."ESF_COD_SEDE"  ';
-                $cadenaSql .= " WHERE 1=1 AND estado='TRUE' ";
+                $cadenaSql .= " WHERE 1=1 AND elemento.tipo_bien <> 1 AND estado='TRUE' ";
 
                 if ($variable ['dependencia'] != '') {
                     $cadenaSql .= ' AND dependencias."ESF_CODIGO_DEP" = ';
@@ -195,6 +196,10 @@ class Sql extends \Sql {
                 if ($variable ['entrada'] != '') {
                     $cadenaSql .= " AND entrada.id_entrada = '" . $variable ['entrada'] . "'";
                 }
+                
+                if ($variable ['serie'] != '') {
+                    $cadenaSql .= " AND elemento.serie ilike '" . $variable ['serie'] . "'";
+                }
 
                 if ($variable['fechainicial'] != '' && $variable ['fechafinal'] != '') {
                     $cadenaSql .= " AND entrada.fecha_registro BETWEEN CAST ( '" . $variable ['fechainicial'] . "' AS DATE) ";
@@ -204,7 +209,7 @@ class Sql extends \Sql {
                 if ($variable['elemento'] != '') {
                     $cadenaSql .= " AND elemento_individual.id_elemento_ind='" . $variable ['elemento'] . "' ";
                 }
-
+              
                 break;
 
             case "consultarElementoParticular" :
@@ -236,13 +241,27 @@ class Sql extends \Sql {
                 $cadenaSql .= ' left JOIN arka_parametros.arka_dependencia dependencia ON dependencia."ESF_ID_ESPACIO"=ubicacion."ESF_ID_ESPACIO" ';
                 $cadenaSql .= " WHERE 1=1 ";
                 $cadenaSql .= " AND elemento_individual.id_elemento_ind= '" . $variable . "'";
+                
                 break;
-
+            case "consultar_clasificacion":
+                $cadenaSql = " SELECT ";
+                $cadenaSql .= " tipo_cambio_bien.observacion Observación, ";
+                $cadenaSql .= " tipo_cambio_bien.date_cambio Fecha_cambio ";
+                $cadenaSql .= " FROM arka_inventarios.elemento   ";
+                $cadenaSql .= " JOIN arka_inventarios.elemento_individual ON arka_inventarios.elemento_individual.id_elemento_gen=arka_inventarios.elemento.id_elemento ";
+                $cadenaSql .= " JOIN arka_inventarios.tipo_cambio_bien ON arka_inventarios.tipo_cambio_bien.id_elemento=arka_inventarios.elemento.id_elemento ";
+                $cadenaSql .= " WHERE 1=1 ";
+                $cadenaSql .= " AND elemento_individual.id_elemento_ind= '" . $variable . "'";
+                $cadenaSql .= " ORDER BY tipo_cambio_bien.id_tipo_cambio DESC";
+                
+                
+                break;
             case "consultarElementoParticular_dep" :
                 $cadenaSql = " SELECT DISTINCT ";
                 $cadenaSql .= " elemento_individual.funcionario as funcionario_Documento, ";
                 $cadenaSql .= 'arka_parametros.arka_funcionarios."FUN_NOMBRE" funcionario_Nombre, ';
-                $cadenaSql .= ' dependencia."ESF_DEP_ENCARGADA" dependencia';
+                $cadenaSql .= ' dependencia."ESF_DEP_ENCARGADA" dependencia, ';  
+                $cadenaSql .= ' ubicacion."ESF_NOMBRE_ESPACIO" espacio'; 
                 $cadenaSql .= " FROM arka_inventarios.elemento   ";
                 $cadenaSql .= " JOIN arka_inventarios.elemento_individual ON arka_inventarios.elemento_individual.id_elemento_gen=arka_inventarios.elemento.id_elemento ";
                 $cadenaSql .= " LEFT JOIN salida ON salida.id_salida=elemento_individual.id_salida ";
@@ -257,7 +276,7 @@ class Sql extends \Sql {
                 $cadenaSql .= " WHERE 1=1 ";
                 $cadenaSql .= " AND elemento_individual.id_elemento_ind= '" . $variable . "'";
                 break;
-
+            
             case "consultar_tipo_bien" :
 
                 $cadenaSql = "SELECT id_tipo_bienes, descripcion ";
@@ -299,7 +318,9 @@ class Sql extends \Sql {
                 $cadenaSql .= ' arka_parametros.arka_dependencia."ESF_DEP_ENCARGADA" dependencia, ';
                 $cadenaSql .= ' pasado."FUN_NOMBRE" as funcionario_anterior, ';
                 $cadenaSql .= ' actual."FUN_NOMBRE" as funcionario_siguiente, ';
-                $cadenaSql .= " historial_elemento_individual.observaciones observaciones_traslados ";
+                $cadenaSql .= " historial_elemento_individual.observaciones observaciones_traslados, ";
+                $cadenaSql .= " historial_elemento_individual.id_evento,  ";
+                $cadenaSql .= " historial_elemento_individual.observaciones as observacion ";
                 $cadenaSql .= " FROM arka_inventarios.elemento_individual";
                 $cadenaSql .= " JOIN arka_inventarios.elemento ON id_elemento_gen = elemento.id_elemento";
                 $cadenaSql .= " JOIN arka_inventarios.historial_elemento_individual ON historial_elemento_individual.elemento_individual = elemento_individual.id_elemento_ind ";
@@ -310,7 +331,7 @@ class Sql extends \Sql {
                 $cadenaSql .= ' JOIN arka_parametros.arka_dependencia ON arka_parametros.arka_dependencia."ESF_CODIGO_DEP" = salida.dependencia ';
                 $cadenaSql .= " JOIN catalogo.catalogo_lista ON catalogo.catalogo_elemento.elemento_catalogo=catalogo.catalogo_lista.lista_id";
                 $cadenaSql .= " WHERE elemento_individual.id_elemento_ind='" . $variable . "' ";
-                $cadenaSql .= " ORDER BY historial_elemento_individual.fecha_registro ASC; ";
+                $cadenaSql .= " ORDER BY historial_elemento_individual.id_evento DESC; ";
                 break;
 
             case "consultar_estado":
@@ -320,18 +341,22 @@ class Sql extends \Sql {
                 $cadenaSql .= " CASE WHEN id_sobrante=0 THEN 'No registra sobrante' ELSE 'Registra sobrante' END sobrante, ";
                 $cadenaSql .= " CASE WHEN id_sobrante=0 THEN '' ELSE cast(fecha_registro as character varying) END sobrante_fecha, ";
                 $cadenaSql .= " CASE WHEN id_hurto=0 THEN 'No registra hurto' ELSE 'Registra hurto' END hurto, ";
-                $cadenaSql .= " CASE WHEN id_hurto=0 THEN '' ELSE cast(fecha_registro as character varying) END hurto_fecha ";
+                $cadenaSql .= " CASE WHEN id_hurto=0 THEN '' ELSE cast(fecha_hurto as character varying) END hurto_fecha, ";
+                $cadenaSql .= " observaciones ";
                 $cadenaSql .= " FROM arka_inventarios.estado_elemento ";
                 $cadenaSql .= " WHERE id_elemento_ind='" . $variable . "' ";
+             
                 break;
 
-            case "consultar_baja":
+           
+           case "consultar_baja":
                 $cadenaSql = " SELECT DISTINCT ";
-                $cadenaSql .= " CASE WHEN estado_registro=TRUE THEN 'Registra baja' ELSE 'No Registra baja' END baja, ";
+                $cadenaSql .= " CASE WHEN estado_registro=TRUE AND estado_aprobacion=TRUE THEN 'Registra baja' WHEN estado_registro=TRUE AND  estado_aprobacion=FALSE  THEN 'Solicitud de baja' ELSE 'No Registra baja' END baja, ";
                 $cadenaSql .= " CASE WHEN estado_registro=TRUE THEN cast(fecha_registro as character varying) ELSE ''  END baja_fecha ";
                 $cadenaSql .= " FROM arka_inventarios.baja_elemento ";
-                $cadenaSql .= " WHERE estado_aprobacion=TRUE ";
-                $cadenaSql .= " AND id_elemento_ind='" . $variable . "' ";
+                $cadenaSql .= " WHERE ";
+                $cadenaSql .= " id_elemento_ind='" . $variable . "' ";
+
                 break;
 
             case "consultar_levantamiento":

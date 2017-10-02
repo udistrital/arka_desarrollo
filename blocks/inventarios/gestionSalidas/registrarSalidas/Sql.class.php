@@ -298,8 +298,8 @@ class Sql extends \Sql {
 						        CASE e.marca WHEN 'null' THEN ' ' ELSE e.marca END marca,
 						        CASE e.serie WHEN 'null' THEN ' '  ELSE e.serie END serie ";
 				$cadenaSql .= " FROM arka_inventarios.elemento e";
-				$cadenaSql .= " JOIN  catalogo.catalogo_elemento  ce ON ce.elemento_id = e.nivel ";
-				$cadenaSql .= "JOIN catalogo.catalogo_lista cl ON cl.lista_id = ce.elemento_catalogo  ";
+				$cadenaSql .= " LEFT JOIN  catalogo.catalogo_elemento  ce ON ce.elemento_id = e.nivel ";
+				$cadenaSql .= " LEFT JOIN catalogo.catalogo_lista cl ON cl.lista_id = ce.elemento_catalogo  ";
 				$cadenaSql .= "WHERE e.id_entrada='" . $variable . "' ";
 				$cadenaSql .= "AND cantidad_por_asignar <> 0 ;";
 				

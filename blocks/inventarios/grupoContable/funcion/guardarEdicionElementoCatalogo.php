@@ -107,6 +107,8 @@ class Formulario {
     }
 
     function guardarEdicionElementoCatalogo() {
+        
+
 
         $datos = array(
             'idPadre' => $_REQUEST['idPadre'],
@@ -114,26 +116,33 @@ class Formulario {
             'idCatalogo' => $_REQUEST['idCatalogo'],
             'nombreElemento' => $_REQUEST['nombreElemento'],
             'idElemento' => $_REQUEST['idElementoEd'],
+            'tipoBien' => $_REQUEST ['tipoBien'] 
         );
 
         $cadena_sql = $this->sql->getCadenaSql("guardarEdicionElementoCatalogo", $datos);
+      
+        
         $registros = $this->esteRecursoDB->ejecutarAcceso($cadena_sql, "busqueda");
-
+ 
         // para la descripción del grupo contable
+        
+      
 
         $datos2 = array(
             'idCuenta' => $registros[0][0],
             'cuentasalida' => (isset($_REQUEST['cuentaSalida']) ? $_REQUEST['cuentaSalida'] : ''),
             'cuentaentrada' => (isset($_REQUEST['cuentaEntrada']) ? $_REQUEST['cuentaEntrada'] : ''),
-            'depreciacion' => (isset($_REQUEST['depreciacion']) ? $_REQUEST['depreciacion'] : ''),
+            'depreciacion' => (isset($_REQUEST['depreciacion']) ? $_REQUEST['depreciacion'] : '0'),
             'vidautil' => (isset($_REQUEST['vidautil']) ? $_REQUEST['vidautil'] : ''),
             'cuentacredito' => (isset($_REQUEST['cuentaCredito']) ? $_REQUEST['cuentaCredito'] : '0'),
             'cuentadebito' => (isset($_REQUEST['cuentaDebito']) ? $_REQUEST['cuentaDebito'] : '0'),
         );
         
         $cadena_sql2 = $this->sql->getCadenaSql("guardarEdicionElementoCatalogoDescripcion", $datos2);
+       
         $registros2 = $this->esteRecursoDB->ejecutarAcceso($cadena_sql2,"acceso",$datos2,"guardarEdicionElementoCatalogoDescripcion");
-  
+      
+        
         if (!$registros2) {
             $this->miConfigurador->setVariableConfiguracion('mostrarMensaje', 'errorCreacion');
             $this->mensaje();

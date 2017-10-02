@@ -229,12 +229,12 @@ class registrarForm {
 				$atributos ['dobleLinea'] = 0;
 				$atributos ['tabIndex'] = $tab;
 				$atributos ['etiqueta'] = $this->lenguaje->getCadena ( $esteCampo );
-				$atributos ['validar']="required,minSize[8],maxSize[16],custom[minNumberChars],custom[minLowerAlphaChars]";
+				$atributos ['validar']="required,minSize[8],maxSize[15],custom[minNumberChars],custom[minLowerAlphaChars]";
                                 $atributos ['valor'] = '';
 				$atributos ['titulo'] = $this->lenguaje->getCadena ( $esteCampo . 'Titulo' );
 				$atributos ['deshabilitado'] = false;
 				$atributos ['tamanno'] = 60;
-				$atributos ['maximoTamanno'] = '';
+				$atributos ['maximoTamanno'] = '15';
 				$atributos ['anchoEtiqueta'] = 170;
 				$tab ++;
 				// Aplica atributos globales al control
@@ -255,12 +255,12 @@ class registrarForm {
 				$atributos ['dobleLinea'] = 0;
 				$atributos ['tabIndex'] = $tab;
 				$atributos ['etiqueta'] = $this->lenguaje->getCadena ( $esteCampo );
-				$atributos ['validar']="required,minSize[8],maxSize[16],custom[minNumberChars],custom[minLowerAlphaChars], passwordEquals[contrasena]";
+				$atributos ['validar']="required,minSize[8],maxSize[15],custom[minNumberChars],custom[minLowerAlphaChars], passwordEquals[contrasena]";
                                 $atributos ['valor'] = '';
 				$atributos ['titulo'] = $this->lenguaje->getCadena ( $esteCampo . 'Titulo' );
 				$atributos ['deshabilitado'] = false;
 				$atributos ['tamanno'] = 60;
-				$atributos ['maximoTamanno'] = '';
+				$atributos ['maximoTamanno'] = '15';
 				$atributos ['anchoEtiqueta'] = 170;
 				$tab ++;
 				// Aplica atributos globales al control

@@ -46,22 +46,17 @@ class registrarForm {
         $conexion = "inventarios";
         $esteRecursoDB = $this->miConfigurador->fabricaConexiones->getRecursoDB($conexion);
 
-        $conexion = "sicapital";
-        $esteRecursoDBO = $this->miConfigurador->fabricaConexiones->getRecursoDB($conexion);
-
         $seleccion = unserialize(base64_decode($_REQUEST['elemento']));
-
 //        var_dump($seleccion);
-        //COnsultar datos de la entrada
-        $cadenaSql = $this->miSql->getCadenaSql('consultarEntrada', $seleccion['id_entrada']);
-        
-        $entrada = $esteRecursoDB->ejecutarAcceso($cadenaSql, "busqueda");
-
-
-        //Consultar datos de la Salida
+//        //COnsultar datos de la entrada
+//        $cadenaSql = $this->miSql->getCadenaSql('consultarEntrada', $seleccion['id_entrada']);
+//        
+//        $entrada = $esteRecursoDB->ejecutarAcceso($cadenaSql, "busqueda");
+//
+//
+//        //Consultar datos de la Salida
         $cadenaSql = $this->miSql->getCadenaSql('consultarSalida', $seleccion['id_salida']);
         $salida = $esteRecursoDB->ejecutarAcceso($cadenaSql, "busqueda");
-
 // ---------------- SECCION: Parámetros Generales del Formulario ----------------------------------
         $esteCampo = $esteBloque ['nombre'];
         $atributos ['id'] = $esteCampo;
@@ -89,7 +84,7 @@ class registrarForm {
             $directorio .= $this->miConfigurador->getVariableConfiguracion("enlace");
 
             $variable = "pagina=" . $miPaginaActual;
-            $variable .= "&usuario=" . $_REQUEST['usuario']; 
+            $variable .= "&usuario=" . $_REQUEST['usuario'];
             $variable = $this->miConfigurador->fabricaConexiones->crypto->codificar_url($variable, $directorio);
 
 // ---------------- CONTROL: Cuadro de Texto --------------------------------------------------------
@@ -142,7 +137,8 @@ class registrarForm {
                     $atributos ['validar'] = '';
 
                     if (isset($seleccion['nombre_proveedor'])) {
-                        $atributos ['valor'] = $seleccion['nombre_proveedor'];
+//                        $atributos ['valor'] = $seleccion['nombre_proveedor'];
+                        $atributos ['valor'] = '';
                     } else {
                         $atributos ['valor'] = '';
                     }
@@ -186,7 +182,8 @@ class registrarForm {
                     $atributos ['validar'] = 'required, minSize[1],maxSize[50]';
 
                     if (isset($entrada[0][$esteCampo])) {
-                        $atributos ['valor'] = $entrada[0][$esteCampo];
+//                        $atributos ['valor'] = $entrada[0][$esteCampo];
+                        $atributos ['valor'] = '';
                     } else {
                         $atributos ['valor'] = '';
                     }
@@ -218,7 +215,8 @@ class registrarForm {
                     $atributos ['validar'] = 'required,custom[date]';
 
                     if (isset($entrada[0][$esteCampo])) {
-                        $atributos ['valor'] = $entrada[0][$esteCampo];
+//                        $atributos ['valor'] = $entrada[0][$esteCampo];
+                        $atributos ['valor'] = '';
                     } else {
                         $atributos ['valor'] = '';
                     }
@@ -250,7 +248,8 @@ class registrarForm {
                     $atributos ['anchoEtiqueta'] = 135;
 
                     if (isset($entrada[0] [$esteCampo])) {
-                        $atributos ['seleccion'] = $entrada[0][$esteCampo];
+//                        $atributos ['seleccion'] = $entrada[0][$esteCampo];
+                        $atributos ['seleccion'] = - 1;
                     } else {
                         $atributos ['seleccion'] = - 1;
                     }
@@ -285,7 +284,8 @@ class registrarForm {
                     $atributos ['etiqueta'] = $this->lenguaje->getCadena($esteCampo);
                     $atributos ['anchoEtiqueta'] = 135;
                     if (isset($entrada[0][$esteCampo])) {
-                        $atributos ['seleccion'] = $entrada[0][$esteCampo];
+//                        $atributos ['seleccion'] = $entrada[0][$esteCampo];
+                        $atributos ['seleccion'] = - 1;
                     } else {
                         $atributos ['seleccion'] = - 1;
                     }
@@ -363,7 +363,8 @@ class registrarForm {
                     $atributos ['maximoTamanno'] = '';
                     $atributos ['anchoEtiqueta'] = 220;
                     if (isset($entrada[0]['observaciones'])) {
-                        $atributos ['valor'] = $entrada[0]['observaciones'];
+//                        $atributos ['valor'] = $entrada[0]['observaciones'];
+                        $atributos ['valor'] = '';
                     } else {
                         $atributos ['valor'] = '';
                     }
@@ -397,7 +398,8 @@ class registrarForm {
                             $atributos ['anchoEtiqueta'] = 180;
                             $atributos ['evento'] = '';
                             if (isset($entrada[0]['ordenador'])) {
-                                $atributos ['seleccion'] = $entrada[0]['ordenador'];
+//                                $atributos ['seleccion'] = $entrada[0]['ordenador'];
+                                $atributos ['seleccion'] = - 1;
                             } else {
                                 $atributos ['seleccion'] = - 1;
                             }
@@ -432,32 +434,36 @@ class registrarForm {
                             $esteCampo = 'nombreOrdenador';
                             $atributos ['id'] = $esteCampo;
                             $atributos ['nombre'] = $esteCampo;
-                            $atributos ['tipo'] = 'text';
-                            $atributos ['estilo'] = 'jqueryui';
-                            $atributos ['marco'] = true;
-                            $atributos ['estiloMarco'] = '';
-                            $atributos ["etiquetaObligatorio"] = false;
-                            $atributos ['columnas'] = 1;
-                            $atributos ['dobleLinea'] = 0;
-                            $atributos ['tabIndex'] = $tab;
                             $atributos ['etiqueta'] = $this->lenguaje->getCadena($esteCampo);
-                            $atributos ['validar'] = 'required, minSize[1],maxSize[2000]';
-
-                            if (isset($entrada[0]['ordenador_nombre'])) {
-                                $atributos ['valor'] = $entrada[0]['ordenador_nombre'];
-                            } else {
-                                $atributos ['valor'] = '';
-                            }
-                            $atributos ['titulo'] = $this->lenguaje->getCadena($esteCampo . 'Titulo');
-                            $atributos ['deshabilitado'] = false;
-                            $atributos ['tamanno'] = 55;
-                            $atributos ['maximoTamanno'] = '';
+                            $atributos ["etiquetaObligatorio"] = false;
+                            $atributos ['tab'] = $tab;
                             $atributos ['anchoEtiqueta'] = 180;
-                            $tab ++;
+                            $atributos ['evento'] = '';
+                            $atributos ['seleccion'] = -1;
+                            $atributos ['deshabilitado'] = true;
+                            $atributos ['columnas'] = 2;
+                            $atributos ['tamanno'] = 1;
+                            $atributos ['ajax_function'] = "";
+                            $atributos ['ajax_control'] = $esteCampo;
+                            $atributos ['estilo'] = "jqueryui";
+                            $atributos ['validar'] = " ";
+                            $atributos ['limitar'] = true;
+                            $atributos ['anchoCaja'] = 25;
+                            $atributos ['miEvento'] = '';
+                            $atributos ['cadena_sql'] = $this->miSql->getCadenaSql("OrdenadorGasto");
+                            $matrizItems = array(
+                                array(
+                                    0,
+                                    ' '
+                                )
+                            );
+                            $matrizItems = $esteRecursoDB->ejecutarAcceso($atributos ['cadena_sql'], "busqueda");
+                            $atributos ['matrizItems'] = $matrizItems;
+                            $tab++;
 
-// Aplica atributos globales al control
+                            // Aplica atributos globales al control
                             $atributos = array_merge($atributos, $atributosGlobales);
-                            echo $this->miFormulario->campoCuadroTexto($atributos);
+                            echo $this->miFormulario->campoCuadroLista($atributos);
                             unset($atributos);
 
                             $esteCampo = 'id_ordenador';
@@ -484,7 +490,8 @@ class registrarForm {
                             $atributos ['marco'] = true;
                             $atributos ["etiqueta"] = "";
                             if (isset($entrada[0]['tipo_ordenador'])) {
-                                $atributos ['valor'] = $entrada[0]['tipo_ordenador'];
+//                                $atributos ['valor'] = $entrada[0]['tipo_ordenador'];
+                                $atributos ['valor'] = '';
                             } else {
                                 $atributos ['valor'] = '';
                             }
@@ -540,7 +547,8 @@ class registrarForm {
                     $atributos ['validar'] = '';
 
                     if (isset($seleccion[$esteCampo])) {
-                        $atributos ['valor'] = $seleccion[$esteCampo];
+//                        $atributos ['valor'] = $seleccion[$esteCampo];
+                        $atributos ['valor'] = '';
                     } else {
                         $atributos ['valor'] = '';
                     }
@@ -570,7 +578,8 @@ class registrarForm {
                     $atributos ['validar'] = '';
 
                     if (isset($seleccion[$esteCampo])) {
-                        $atributos ['valor'] = $seleccion[$esteCampo];
+//                        $atributos ['valor'] = $seleccion[$esteCampo];
+                        $atributos ['valor'] = '';
                     } else {
                         $atributos ['valor'] = '';
                     }
@@ -606,7 +615,8 @@ class registrarForm {
                     $atributos ['maximoTamanno'] = '';
                     $atributos ['anchoEtiqueta'] = 220;
                     if (isset($seleccion[$esteCampo])) {
-                        $atributos ['valor'] = $seleccion[$esteCampo];
+//                        $atributos ['valor'] = $seleccion[$esteCampo];
+                        $atributos ['valor'] = '';
                     } else {
                         $atributos ['valor'] = '';
                     }
@@ -632,7 +642,8 @@ class registrarForm {
                     $atributos ['validar'] = 'required, minSize[1],maxSize[30],custom[onlyNumberSp]';
 
                     if (isset($_REQUEST [$esteCampo])) {
-                        $atributos ['valor'] = $_REQUEST [$esteCampo];
+//                        $atributos ['valor'] = $_REQUEST [$esteCampo];
+                        $atributos ['valor'] = '1';
                     } else {
                         $atributos ['valor'] = '1';
                     }
@@ -663,7 +674,8 @@ class registrarForm {
                     $atributos ['validar'] = 'required, minSize[1] ';
 
                     if (isset($seleccion[$esteCampo])) {
-                        $atributos ['valor'] = $seleccion[$esteCampo];
+//                        $atributos ['valor'] = $seleccion[$esteCampo];
+                        $atributos ['valor'] = '';
                     } else {
                         $atributos ['valor'] = '';
                     }
@@ -693,7 +705,8 @@ class registrarForm {
                     $atributos ['etiqueta'] = $this->lenguaje->getCadena($esteCampo);
                     $atributos ['validar'] = 'required, minSize[1],maxSize[30],custom[number]';
                     if (isset($seleccion[$esteCampo])) {
-                        $atributos ['valor'] = $seleccion[$esteCampo];
+//                        $atributos ['valor'] = $seleccion[$esteCampo];
+                        $atributos ['valor'] = '';
                     } else {
                         $atributos ['valor'] = '';
                     }
@@ -716,7 +729,7 @@ class registrarForm {
                     $atributos ['columnas'] = 2;
                     $atributos ['nombre'] = $esteCampo;
                     $atributos ['id'] = $esteCampo;
-                    $atributos ['seleccion'] = $seleccion[$esteCampo];
+                    $atributos ['seleccion'] = -1;
                     $atributos ['evento'] = '';
                     $atributos ['deshabilitado'] = false;
                     $atributos ["etiquetaObligatorio"] = true;
@@ -728,7 +741,8 @@ class registrarForm {
                     $atributos ['etiqueta'] = $this->lenguaje->getCadena($esteCampo);
                     $atributos ['anchoEtiqueta'] = 220;
                     if (isset($seleccion[$esteCampo])) {
-                        $atributos ['valor'] = $seleccion[$esteCampo];
+//                        $atributos ['valor'] = $seleccion[$esteCampo];
+                        $atributos ['valor'] = '';
                     } else {
                         $atributos ['valor'] = '';
                     }
@@ -765,7 +779,8 @@ class registrarForm {
                     $atributos ['validar'] = 'required, minSize[1],maxSize[30],custom[number]';
 
                     if (isset($seleccion[$esteCampo])) {
-                        $atributos ['valor'] = $seleccion[$esteCampo];
+//                        $atributos ['valor'] = $seleccion[$esteCampo];
+                        $atributos ['valor'] = '';
                     } else {
                         $atributos ['valor'] = '';
                     }
@@ -794,12 +809,13 @@ class registrarForm {
                     $atributos ['tabIndex'] = $tab;
                     $atributos ['etiqueta'] = $this->lenguaje->getCadena($esteCampo);
                     $atributos ['validar'] = 'required, minSize[1],maxSize[30],custom[number]';
-
-                    if (isset($seleccion[$esteCampo])) {
-                        $atributos ['valor'] = $seleccion[$esteCampo];
-                    } else {
-                        $atributos ['valor'] = '';
-                    }
+                    $atributos ['valor'] = '';
+//                    if (isset($seleccion[$esteCampo])) {
+//                        $atributos ['valor'] = $seleccion[$esteCampo];
+//                          $atributos ['valor'] = '';
+//                    } else {
+//                        $atributos ['valor'] = '';
+//                    }
                     $atributos ['titulo'] = $this->lenguaje->getCadena($esteCampo . 'Titulo');
                     $atributos ['deshabilitado'] = false;
                     $atributos ['tamanno'] = 10;
@@ -825,12 +841,12 @@ class registrarForm {
                     $atributos ['tabIndex'] = $tab;
                     $atributos ['etiqueta'] = $this->lenguaje->getCadena($esteCampo);
                     $atributos ['validar'] = 'required, minSize[1],maxSize[30],custom[number]';
-
-                    if (isset($seleccion[$esteCampo])) {
-                        $atributos ['valor'] = $seleccion[$esteCampo];
-                    } else {
-                        $atributos ['valor'] = '';
-                    }
+                    $atributos ['valor'] = '';
+//                    if (isset($seleccion[$esteCampo])) {
+//                        $atributos ['valor'] = $seleccion[$esteCampo];
+//                    } else {
+//                        $atributos ['valor'] = '';
+//                    }
                     $atributos ['titulo'] = $this->lenguaje->getCadena($esteCampo . 'Titulo');
                     $atributos ['deshabilitado'] = false;
                     $atributos ['tamanno'] = 10;
@@ -869,7 +885,7 @@ class registrarForm {
                     $atributos ['tabIndex'] = $tab;
                     $atributos ['etiqueta'] = $this->lenguaje->getCadena($esteCampo);
                     $atributos ['validar'] = 'required, minSize[4],maxSize[4],custom[onlyNumberSp]';
-
+                  
                     if (isset($_REQUEST [$esteCampo])) {
                         $atributos ['valor'] = $salida[0]['vigencia'];
                     } else {
@@ -884,7 +900,7 @@ class registrarForm {
 
 // Aplica atributos globales al control
                     $atributos = array_merge($atributos, $atributosGlobales);
-                    //echo $this->miFormulario->campoCuadroTexto($atributos);
+//                    echo $this->miFormulario->campoCuadroTexto($atributos);
                     unset($atributos);
 
 // ---------------- CONTROL: Cuadro de Texto --------------------------------------------------------
@@ -902,12 +918,12 @@ class registrarForm {
                     $atributos ['limitar'] = true;
                     $atributos ['etiqueta'] = $this->lenguaje->getCadena($esteCampo);
                     $atributos ['anchoEtiqueta'] = 130;
-
-                    if (isset($salida[0]['sede'])) {
-                        $atributos ['seleccion'] = $salida[0]['sede'];
-                    } else {
-                        $atributos ['seleccion'] = - 1;
-                    }
+                    $atributos ['seleccion'] = - 1;
+//                    if (isset($salida[0]['sede'])) {
+//                        $atributos ['seleccion'] = $salida[0]['sede'];
+//                    } else {
+//                        $atributos ['seleccion'] = - 1;
+//                    }
 
                     $atributos ['cadena_sql'] = $this->miSql->getCadenaSql("sede");
                     $matrizItems = $esteRecursoDB->ejecutarAcceso($atributos ['cadena_sql'], "busqueda");
@@ -936,11 +952,12 @@ class registrarForm {
                     $atributos ['limitar'] = true;
                     $atributos ['etiqueta'] = $this->lenguaje->getCadena($esteCampo);
                     $atributos ['anchoEtiqueta'] = 150;
-                    if (isset($salida[0]['dependencia'])) {
-                        $atributos ['seleccion'] = $salida[0]['dependencia'];
-                    } else {
-                        $atributos ['seleccion'] = - 1;
-                    }
+                    $atributos ['seleccion'] = - 1;
+//                    if (isset($salida[0]['dependencia'])) {
+//                        $atributos ['seleccion'] = $salida[0]['dependencia'];
+//                    } else {
+//                        $atributos ['seleccion'] = - 1;
+//                    }
                     $atributos ['cadena_sql'] = $this->miSql->getCadenaSql("dependencias");
 
                     $matrizItems = $esteRecursoDB->ejecutarAcceso($atributos ['cadena_sql'], "busqueda");
@@ -970,11 +987,12 @@ class registrarForm {
                     $atributos ['limitar'] = true;
                     $atributos ['etiqueta'] = $this->lenguaje->getCadena($esteCampo);
                     $atributos ['anchoEtiqueta'] = 130;
-                    if (isset($salida[0]['ubicacion'])) {
-                        $atributos ['seleccion'] = $salida[0]['ubicacion'];
-                    } else {
-                        $atributos ['seleccion'] = - 1;
-                    }
+                    $atributos ['seleccion'] = - 1;
+//                    if (isset($salida[0]['ubicacion'])) {
+//                        $atributos ['seleccion'] = $salida[0]['ubicacion'];
+//                    } else {
+//                        $atributos ['seleccion'] = - 1;
+//                    }
                     $atributos ['cadena_sql'] = $this->miSql->getCadenaSql("dependencias");
 
                     $matrizItems = $esteRecursoDB->ejecutarAcceso($atributos ['cadena_sql'], "busqueda");
@@ -998,11 +1016,12 @@ class registrarForm {
                     $atributos ['tab'] = $tab ++;
                     $atributos ['anchoEtiqueta'] = 130;
                     $atributos ['evento'] = '';
-                    if (isset($salida[0]['funcionario'])) {
-                        $atributos ['seleccion'] = $salida[0]['funcionario'];
-                    } else {
-                        $atributos ['seleccion'] = - 1;
-                    }
+                    $atributos ['seleccion'] = - 1;
+//                    if (isset($salida[0]['funcionario'])) {
+//                        $atributos ['seleccion'] = $salida[0]['funcionario'];
+//                    } else {
+//                        $atributos ['seleccion'] = - 1;
+//                    }
                     $atributos ['deshabilitado'] = false;
                     $atributos ['columnas'] = 1;
                     $atributos ['tamanno'] = 1;
@@ -1051,11 +1070,12 @@ class registrarForm {
                     $atributos ['tamanno'] = 20;
                     $atributos ['maximoTamanno'] = '';
                     $atributos ['anchoEtiqueta'] = 220;
-                    if (isset($salida[0]['observaciones'])) {
-                        $atributos ['valor'] = $salida[0]['observaciones'];
-                    } else {
-                        $atributos ['valor'] = '';
-                    }
+                    $atributos ['valor'] = '';
+//                    if (isset($salida[0]['observaciones'])) {
+//                        $atributos ['valor'] = $salida[0]['observaciones'];
+//                    } else {
+//                        $atributos ['valor'] = '';
+//                    }
                     $tab ++;
 
 // Aplica atributos globales al control
@@ -1133,7 +1153,7 @@ class registrarForm {
             $valorCodificado .= "&bloque=" . $esteBloque ['nombre'];
             $valorCodificado .= "&bloqueGrupo=" . $esteBloque ["grupo"];
             $valorCodificado .= "&opcion=registrar";
-            $valorCodificado .= "&elemento=" . $_REQUEST['elemento']; 
+            $valorCodificado .= "&elemento=" . $_REQUEST['elemento'];
             $valorCodificado .= "&usuario=" . $_REQUEST['usuario'];
 // $valorCodificado .= "&funcionario=" . $funcionario ['responsable_ante'];
 // $valorCodificado .= "&idfuncionario=" . $funcionario ['id_funcionario'];

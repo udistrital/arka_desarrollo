@@ -24,10 +24,7 @@
             });
         });
 
-                               $('#tablaTitulos').dataTable( {
-                "sPaginationType": "full_numbers"
-                 } );
-
+                    
                  
                  $("#<?php echo $this->campoSeguro('supervisor')?>").select2({
              	 placeholder: "Ingrese Mínimo 3 Caracteres de Búsqueda",
@@ -236,7 +233,7 @@
           
           $("#<?php echo $this->campoSeguro('sede')?>").select2();
           
-          $("#<?php echo $this->campoSeguro('asignacionOrdenador')?>").select2();
+          
           
                  
              $('#<?php echo $this->campoSeguro('fecha_contrato')?>').datepicker({

@@ -57,14 +57,15 @@ class RegistradorActa {
 //         var_dump($_REQUEST);
         $conexion = "inventarios";
         $esteRecursoDB = $this->miConfigurador->fabricaConexiones->getRecursoDB ( $conexion );
-        
-        
-       	$cadenaSql2 = $this->miSql->getCadenaSql('datosContratista', $_REQUEST['documentoContratista']);
+        $arregloDatos = explode ( "@", $_REQUEST ['documentoContratista'] );
+		if (isset ( $_REQUEST ['documentoContratista'] ) && $_REQUEST ['documentoContratista'] != '') {
+			$docContratista = $arregloDatos [0];
+		} else {
+			$docContratista = '';
+		}
+       	$cadenaSql2 = $this->miSql->getCadenaSql('datosContratista', $docContratista);
         $datos_contratista = $esteRecursoDB->ejecutarAcceso($cadenaSql2, "busqueda");
         
-        
-//         var_dump($datos_contratista);
-
         $cadenaSql = $this->miSql->getCadenaSql ( 'datosFuncionario',$_REQUEST['funcionario'] );
         
         $funcionario = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
@@ -143,7 +144,7 @@ class RegistradorActa {
                     </tr>
                     <tr>
                      <td  style=\"text-align:justify;font-size:12px;\">
-                            Que el contratista <B>".$datos_contratista[0]["CON_NOMBRE"]."</B> con cédula de ciudadanía No. <B>".$datos_contratista[0]["CON_IDENTIFICACION"]."</B> con contrato Número <B>".$datos_contratista[0]["CON_NUMERO_CONTRATO"]."</B> y Vigencia <B>".$datos_contratista[0]["CON_VIGENCIA_FISCAL"]."</B>,  
+                            Que el contratista <B>".$datos_contratista[0]["CON_NOMBRE"]."</B> con cédula de ciudadanía No. <B>".$datos_contratista[0]["CON_IDENTIFICACION"]."</B> con contrato ".$_REQUEST['tipo_contrato']." Número <B>".$_REQUEST['numero_contrato']."</B> y Vigencia <B>".$_REQUEST['vigencia']."</B>,  
                             ha entregado los elementos correspondientes a su relación contractual y quien certifica es el Supervisor y/o Funcionario ".$funcionario [0]['FUN_NOMBRE']." por lo tanto se encuentra
                             a <b>PAZ Y SALVO</b> con la Universidad Distrital Francisco José de Caldas.
                             <br><br><br><br><br><br><br>

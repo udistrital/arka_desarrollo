@@ -104,6 +104,7 @@
 
 $('#<?php echo $this->campoSeguro('documentoContratista')?>').width(650);        
 $("#<?php echo $this->campoSeguro('documentoContratista') ?>").select2();
+$("#<?php echo $this->campoSeguro('selec_nivel') ?>").select2();
         
         
         

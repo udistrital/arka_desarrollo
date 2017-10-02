@@ -4,10 +4,12 @@ namespace inventarios\asignarInventarioC\asignarInventario;
 
 use inventarios\asignarInventarioC\asignarInventario\funcion\redireccion;
 
+
 if (!isset($GLOBALS ["autorizado"])) {
     include ("../index.php");
     exit();
 }
+
 
 include_once ("core/manager/Configurador.class.php");
 include_once ("core/builder/InspectorHTML.class.php");

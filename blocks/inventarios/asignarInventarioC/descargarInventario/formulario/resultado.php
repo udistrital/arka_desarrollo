@@ -22,6 +22,8 @@ class registrarForm {
 		$this->miSql = $sql;
 	}
 	function miForm() {
+		
+		// Rescatar los datos de este bloque
 		$esteBloque = $this->miConfigurador->getVariableConfiguracion ( "esteBloque" );
 		$miPaginaActual = $this->miConfigurador->getVariableConfiguracion ( 'pagina' );
 		
@@ -47,26 +49,31 @@ class registrarForm {
 		$_REQUEST ['tiempo'] = time ();
 		$tiempo = $_REQUEST ['tiempo'];
 		
-		// -------------------------------------------------------------------------------------------------
+		
 		$conexion = "inventarios";
 		$esteRecursoDB = $this->miConfigurador->fabricaConexiones->getRecursoDB ( $conexion );
+                
+                $conexion = "agora";
+		$esteRecursoAGORA = $this->miConfigurador->fabricaConexiones->getRecursoDB ( $conexion );
+                
+                $arregloDatos =  $_REQUEST ['documentoContratista'] ;
+                
+                $cadenaSql2 = $this->miSql->getCadenaSql ( 'nombreContratista',$arregloDatos );
+		$nombreContratista = $esteRecursoAGORA->ejecutarAcceso ( $cadenaSql2, "busqueda" );
+                
 		
 		
-		if (isset ( $_REQUEST ['documentoContratista'] ) && $_REQUEST ['documentoContratista'] != '') {
-			$docContratista = $_REQUEST ['documentoContratista'];
-		} else {
-			$docContratista = '';
-		}
 		
+	
 		$supervisor = $_REQUEST ['usuario'];
 		
-		$cadenaSql = $this->miSql->getCadenaSql ( 'consultarElementosContratista', $docContratista );
-		
+		$cadenaSql = $this->miSql->getCadenaSql ( 'consultarElementosContratista', $arregloDatos  );		
 		$elementos_contratista = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
+                
+            
 		$total_elementos = count ( $elementos_contratista );
 		
-		$cadenaSql2 = $this->miSql->getCadenaSql ( 'nombreContratista', $docContratista );
-		$nombreContratista = $esteRecursoDB->ejecutarAcceso ( $cadenaSql2, "busqueda" );
+
 		
 		// ---------------- SECCION: Parámetros Generales del Formulario ----------------------------------
 		$esteCampo = $esteBloque ['nombre'];
@@ -105,6 +112,26 @@ class registrarForm {
 		}
 		$variable = $this->miConfigurador->fabricaConexiones->crypto->codificar_url ( $variable, $directorio );
 		
+		if (isset ( $_REQUEST ['accesoCondor'] ) && $_REQUEST ['accesoCondor'] == 'true') {
+			$atributos ["id"] = "logos";
+			$atributos ["estilo"] = " ";
+			echo $this->miFormulario->division ( "inicio", $atributos );
+			unset ( $atributos );
+			{
+				
+				$esteCampo = 'logo';
+				$atributos ['id'] = $esteCampo;
+				$atributos ['tabIndex'] = $tab;
+				$atributos ['estilo'] = '';
+				$atributos ['enlaceImagen'] = $this->miConfigurador->getVariableConfiguracion ( 'rutaUrlBloque' ) . 'css/images/banner_arka.png';
+				$atributos ['ancho'] = '100%';
+				$atributos ['alto'] = '150px';
+				$tab ++;
+				echo $this->miFormulario->enlace ( $atributos );
+				unset ( $atributos );
+			}
+		}
+		
 		// ---------------- CONTROL: Cuadro de Texto --------------------------------------------------------
 		$esteCampo = 'botonRegresar';
 		$atributos ['id'] = $esteCampo;
@@ -123,7 +150,7 @@ class registrarForm {
 		$atributos ['id'] = $esteCampo;
 		$atributos ["estilo"] = "jqueryui";
 		$atributos ['tipoEtiqueta'] = 'inicio';
-		$atributos ["leyenda"] = "Descarga de Elementos: " . $docContratista . " - " . $nombreContratista [0] [1];
+		$atributos ["leyenda"] = "Descarga de Elementos: " . $arregloDatos . " - " . $nombreContratista [0] [0];
 		echo $this->miFormulario->marcoAgrupacion ( 'inicio', $atributos );
 		
 		if ($elementos_contratista !== false) {
@@ -244,7 +271,7 @@ class registrarForm {
 			$valorCodificado .= "&bloque=" . $esteBloque ['nombre'];
 			$valorCodificado .= "&bloqueGrupo=" . $esteBloque ["grupo"];
 			$valorCodificado .= "&opcion=descargar";
-			$valorCodificado .= "&contratista=" . $_REQUEST ['documentoContratista'];
+			$valorCodificado .= "&contratista=" . $arregloDatos ;
 			$valorCodificado .= "&num_elementos=" . $total_elementos;
 			$valorCodificado .= "&funcionario=" . $_REQUEST ['funcionario'];
 			$valorCodificado .= "&supervisor=" . $_REQUEST ['funcionario'];

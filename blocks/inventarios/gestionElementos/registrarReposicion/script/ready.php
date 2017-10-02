@@ -39,7 +39,7 @@ $("#<?php echo $this->campoSeguro('dependencia_salida') ?>").select2();
 $("#<?php echo $this->campoSeguro('ubicacion_salida') ?>").select2(); 
 
 
-  $("#<?php echo $this->campoSeguro('asignacionOrdenador')?>").select2();
+$("#<?php echo $this->campoSeguro('asignacionOrdenador') ?>").select2();
 $("#<?php echo $this->campoSeguro('sede') ?>").select2(); 
 $("#<?php echo $this->campoSeguro('dependencia') ?>").select2(); 
 $("#<?php echo $this->campoSeguro('funcionario_salida') ?>").select2({
@@ -53,8 +53,8 @@ placeholder: "Seleccione...",
 $("#<?php echo $this->campoSeguro('responsable') ?>").select2({
 placeholder: "",
 });
- 
- 
+
+
 
 $('#<?php echo $this->campoSeguro('fecha_factura') ?>').datepicker({
 dateFormat: 'yy-mm-dd',
@@ -164,6 +164,45 @@ $("#<?php echo $this->campoSeguro('total_iva_con') ?>").val(total);
 
 break;
 
+case '5':
+
+cantidad=Number($("#<?php echo $this->campoSeguro('cantidad') ?>").val());
+valor=Number($("#<?php echo $this->campoSeguro('valor') ?>").val());
+iva = Math.round(((cantidad * valor)* 0.1)*100)/100;
+precio = Math.round((cantidad*valor)*100)/100;
+total=Math.round((precio+iva)*100)/100;
+
+$("#<?php echo $this->campoSeguro('total_iva') ?>").val(iva);
+$("#<?php echo $this->campoSeguro('total_iva_con') ?>").val(total);
+
+break;
+
+case '6':
+
+cantidad=Number($("#<?php echo $this->campoSeguro('cantidad') ?>").val());
+valor=Number($("#<?php echo $this->campoSeguro('valor') ?>").val());
+iva = Math.round(((cantidad * valor)* 0.16)*100)/100;
+precio = Math.round((cantidad*valor)*100)/100;
+total=Math.round((precio+iva)*100)/100;
+
+$("#<?php echo $this->campoSeguro('total_iva') ?>").val(iva);
+$("#<?php echo $this->campoSeguro('total_iva_con') ?>").val(total);
+
+break;
+
+case '7':
+
+cantidad=Number($("#<?php echo $this->campoSeguro('cantidad') ?>").val());
+valor=Number($("#<?php echo $this->campoSeguro('valor') ?>").val());
+iva = Math.round(((cantidad * valor)* 0.19)*100)/100;
+precio = Math.round((cantidad * valor)*100)/100;
+total=Math.round((precio+iva)*100)/100;
+
+$("#<?php echo $this->campoSeguro('total_iva') ?>").val(iva);
+$("#<?php echo $this->campoSeguro('total_iva_con') ?>").val(total);
+
+break;
+
 
 default:
 $("#<?php echo $this->campoSeguro('total_iva') ?>").val('');
@@ -213,15 +252,6 @@ break;
 });  
 
 
-	   
-	          $('#tablaTitulos').dataTable( {
-                "sPaginationType": "full_numbers"
-                 } );
-	   
-          
-                 var table = $('#tablaTitulos').DataTable();
-
-   $(function(){$("#tablaTitulos").click(function(){$('.case').attr('checked',this.checked);});$(".case").click(function(){if($(".case").length==$(".case:checked").length){$("#tablaTitulos").attr("checked","checked");}else{$("#tablaTitulos").removeAttr("checked");}});});
 
 
 

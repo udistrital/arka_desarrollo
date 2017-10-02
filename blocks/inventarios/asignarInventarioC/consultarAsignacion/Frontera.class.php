@@ -70,6 +70,10 @@ class Frontera {
                 case "asociarActa":
                     include_once ($this->ruta . "/formulario/registro.php");
                     break;
+                
+                case "principal":
+                    include_once ($this->ruta . "/formulario/consulta.php");
+                    break;
             }
         } else {
             $_REQUEST ['opcion'] = "mostrar";

@@ -187,8 +187,8 @@ class Sql extends \Sql {
 				$cadenaSql .= "fecha_revision,revisor,observacionesacta ";
 				$cadenaSql .= "FROM registro_actarecibido ar ";
 				$cadenaSql .= "LEFT JOIN arka_parametros.arka_proveedor apr ON apr.\"PRO_NIT\" =  CAST(ar.proveedor AS CHAR(50))  ";
-				$cadenaSql .= "JOIN  arka_parametros.arka_dependencia dep ON dep.\"ESF_CODIGO_DEP\" = ar.dependencia	 ";
-				$cadenaSql .= "JOIN  arka_parametros.arka_sedes se ON se.\"ESF_ID_SEDE\" = ar.sede	 ";
+				$cadenaSql .= "LEFT JOIN  arka_parametros.arka_dependencia dep ON dep.\"ESF_CODIGO_DEP\" = ar.dependencia	 ";
+				$cadenaSql .= "LEFT JOIN  arka_parametros.arka_sedes se ON se.\"ESF_ID_SEDE\" = ar.sede	 ";
 				$cadenaSql .= "WHERE 1 = 1 ";
 				$cadenaSql .= "AND estado_registro = 1 ";
 				if ($variable ['numero_acta'] != '') {
@@ -387,7 +387,7 @@ class Sql extends \Sql {
 			
 			case "ingresar_elemento_tipo_1" :
 				$cadenaSql = " INSERT INTO ";
-				$cadenaSql .= " elemento_acta_recibido(
+				$cadenaSql .= " arka_inventarios.elemento_acta_recibido(
 							             fecha_registro, nivel, tipo_bien, descripcion, 
 							            cantidad, unidad, valor, iva, subtotal_sin_iva, total_iva, total_iva_con, 
 							             marca, serie, id_acta) ";
@@ -411,7 +411,7 @@ class Sql extends \Sql {
 			
 			case "ingresar_elemento_tipo_2" :
 				$cadenaSql = " INSERT INTO ";
-				$cadenaSql .= " elemento_acta_recibido(";
+				$cadenaSql .= " arka_inventarios.elemento_acta_recibido(";
 				$cadenaSql .= "  fecha_registro, nivel, tipo_bien, descripcion,
 											 cantidad, unidad, valor, iva, subtotal_sin_iva, total_iva, total_iva_con,
 											 tipo_poliza, fecha_inicio_pol, fecha_final_pol, marca, serie,

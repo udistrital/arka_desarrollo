@@ -49,8 +49,6 @@ class registrarForm {
         $conexion = "inventarios";
         $esteRecursoDB = $this->miConfigurador->fabricaConexiones->getRecursoDB($conexion);
 
-        $conexion = "sicapital";
-        $esteRecursoDBO = $this->miConfigurador->fabricaConexiones->getRecursoDB($conexion);
 
         $tab = 1;
 
@@ -119,6 +117,7 @@ class registrarForm {
                                     <th>Total Valor Histórico</th>
                                     <th>Total Ajuste Inflación</th>
                                     <th>Total Valor Ajustado</th>
+                                    <th>Total Cuota</th>
                                     <th>Total Depreciación</th>
                                     <th>Total Ajuste Inflacionario</th>
                                     <th>Total Circular Depreciación</th>

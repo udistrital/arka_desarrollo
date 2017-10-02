@@ -1,4 +1,4 @@
-<?php
+ <?php
 if (! isset ( $GLOBALS ["autorizado"] )) {
 	include ("../index.php");
 	exit ();
@@ -40,7 +40,13 @@ class registrarForm {
 		// -------------------------------------------------------------------------------------------------
 		$conexion = "inventarios";
 		$esteRecursoDB = $this->miConfigurador->fabricaConexiones->getRecursoDB ( $conexion );
-		
+                
+                $conexion = "argo";
+		$esteRecursoARGO = $this->miConfigurador->fabricaConexiones->getRecursoDB ( $conexion );
+                
+                $conexion = "agora";
+		$esteRecursoAGORA = $this->miConfigurador->fabricaConexiones->getRecursoDB ( $conexion );
+                
 		// Limpia Items Tabla temporal
 		// ---------------- SECCION: Parámetros Generales del Formulario ----------------------------------
 		$esteCampo = $esteBloque ['nombre'];
@@ -64,12 +70,39 @@ class registrarForm {
 		{
 			// ---------------- SECCION: Controles del Formulario -----------------------------------------------
 			
+			if (isset ( $_REQUEST ['accesoCondor'] ) && $_REQUEST ['accesoCondor'] == 'true') {
+				$atributos ["id"] = "logos";
+				$atributos ["estilo"] = " ";
+				echo $this->miFormulario->division ( "inicio", $atributos );
+				unset ( $atributos );
+				{
+					
+					$esteCampo = 'logo';
+					$atributos ['id'] = $esteCampo;
+					$atributos ['tabIndex'] = $tab;
+					$atributos ['estilo'] = '';
+					$atributos ['enlaceImagen'] = $this->miConfigurador->getVariableConfiguracion ( 'rutaUrlBloque' ) . 'css/images/banner_arka.png';
+					$atributos ['ancho'] = '100%';
+					$atributos ['alto'] = '150px';
+					$tab ++;
+					echo $this->miFormulario->enlace ( $atributos );
+					unset ( $atributos );
+				}
+			}
+			
 			$esteCampo = "marcoDatosBasicos";
 			$atributos ['id'] = $esteCampo;
 			$atributos ["estilo"] = "jqueryui";
 			$atributos ['tipoEtiqueta'] = 'inicio';
-			$atributos ["leyenda"] = "Consultar Contratista para Asignación de Elementos";
+			$atributos ["leyenda"] = "Consultar Contratista para Préstamo de Elementos";
 			echo $this->miFormulario->marcoAgrupacion ( 'inicio', $atributos );
+                        
+                        
+                        $atributos ['cadena_sql'] = $this->miSql->getCadenaSql ( "consecutivo_contratistas" );
+			$matrizConsecutivos = $esteRecursoARGO->ejecutarAcceso ( $atributos ['cadena_sql'], "busqueda" );
+                       
+                        
+                                      
 			
 			// ---------------- CONTROL: Cuadro de Texto --------------------------------------------------------
 			$esteCampo = 'documentoContratista';
@@ -83,7 +116,7 @@ class registrarForm {
 			$atributos ['tab'] = $tab;
 			$atributos ['tamanno'] = 1;
 			$atributos ['estilo'] = 'jqueryui';
-			$atributos ['validar'] = 'required, minSize[1],maxSize[15],custom[onlyNumberSp]';
+			$atributos ['validar'] = 'required';
 			$atributos ['limitar'] = false;
 			$atributos ['etiqueta'] = $this->lenguaje->getCadena ( $esteCampo );
 			$atributos ['anchoEtiqueta'] = 185;
@@ -94,8 +127,8 @@ class registrarForm {
 				$atributos ['valor'] = '';
 			}
 			
-			$atributos ['cadena_sql'] = $this->miSql->getCadenaSql ( "contratistas" );
-			$matrizItems = $esteRecursoDB->ejecutarAcceso ( $atributos ['cadena_sql'], "busqueda" );
+			$atributos ['cadena_sql'] = $this->miSql->getCadenaSql ( "contratistas", $matrizConsecutivos);
+			$matrizItems = $esteRecursoAGORA->ejecutarAcceso ( $atributos ['cadena_sql'], "busqueda" );
 			$atributos ['matrizItems'] = $matrizItems;
 			
 			// Utilizar lo siguiente cuando no se pase un arreglo:
@@ -158,12 +191,12 @@ class registrarForm {
 		$valorCodificado .= "&bloqueGrupo=" . $esteBloque ["grupo"];
 		$valorCodificado .= "&opcion=consultarContratista";
 		$valorCodificado .= "&usuario=" . $_REQUEST ['usuario'];
-		$valorCodificado .= "&funcionario=" . $_REQUEST ['usuario'];
+//                
+		$valorCodificado .= "&funcionario=" . str_replace("CC", "",$_REQUEST ['usuario']);
 		
 		if (isset ( $_REQUEST ['accesoCondor'] ) && $_REQUEST ['accesoCondor'] == 'true') {
 			
 			$valorCodificado .= "&accesoCondor=true";
-		
 		}
 		
 		/**

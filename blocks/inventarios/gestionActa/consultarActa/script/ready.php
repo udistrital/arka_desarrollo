@@ -23,10 +23,6 @@
             });
         });
 
-                     $('#tablaTitulos').dataTable( {
-                "sPaginationType": "full_numbers"
-                 } );
-
   	   
 	   
         $('#<?php echo $this->campoSeguro('fecha_recibido')?>').datepicker({
@@ -213,6 +209,20 @@
        			 iva = Math.round(((cantidad * valor)* 0.16)*100)/100;
        			 precio = Math.round((cantidad*valor)*100)/100;
        			 total=Math.round((precio+iva)*100)/100;
+       			 
+                 $("#<?php echo $this->campoSeguro('total_iva')?>").val(iva);
+                 $("#<?php echo $this->campoSeguro('total_iva_con')?>").val(total);
+                                     
+                break;
+
+		 case '7':
+                
+                 cantidad=Number($("#<?php echo $this->campoSeguro('cantidad')?>").val());
+            	 valor=Number($("#<?php echo $this->campoSeguro('valor')?>").val());
+       			 iva = Math.round(((cantidad * valor)* 0.19)*100)/100;
+       			 precio = Math.round((cantidad*valor)*100)/100;
+       			 total=Math.round((precio+iva)*100)/100;
+       			 
        			 
                  $("#<?php echo $this->campoSeguro('total_iva')?>").val(iva);
                  $("#<?php echo $this->campoSeguro('total_iva_con')?>").val(total);

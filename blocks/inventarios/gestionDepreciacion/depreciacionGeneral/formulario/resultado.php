@@ -59,8 +59,7 @@ class registrarForm {
         $conexion = "inventarios";
         $esteRecursoDB = $this->miConfigurador->fabricaConexiones->getRecursoDB($conexion);
 
-        $conexion = "sicapital";
-        $esteRecursoDBO = $this->miConfigurador->fabricaConexiones->getRecursoDB($conexion);
+       
 
         if (isset($_REQUEST['grupo_contable']) && $_REQUEST['grupo_contable'] != '') {
             $nivel = $_REQUEST['grupo_contable'];
