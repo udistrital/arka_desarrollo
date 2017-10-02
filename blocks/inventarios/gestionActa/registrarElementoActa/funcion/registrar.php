@@ -407,6 +407,11 @@ class RegistradorOrden {
 										$IVA = 0.16;
 										
 										break;
+                                                                        case "7" :
+										
+										$IVA = 0.19;
+										
+										break;   
 								}
 								
 								if ($datos [$i] ['Tipo_Bien'] == 1) {

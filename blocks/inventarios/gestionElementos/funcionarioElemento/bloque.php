@@ -1,5 +1,4 @@
 <?php
-
 namespace inventarios\gestionElementos\funcionarioElemento;
 
 // Evitar un acceso directo a este archivo

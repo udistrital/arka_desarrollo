@@ -122,7 +122,7 @@ class RegistradorActa {
             $contenido.= "<td style='text-align:right' >" . $datos_elementos[$key]['grupo_cuentaentrada'] . "</td> ";
             $contenido.= "<td style='text-align:center'>" . $datos_elementos[$key]['unidad'] . "</td> ";
             $contenido.= "<td style='text-align:center'>" . round($datos_elementos[$key]['cantidad'],2) . "</td> ";
-            $contenido.= "<td style='text-align:center' >" . wordwrap($datos_elementos[$key]['descripcion'], 80, "<br>") . "</td> ";
+            $contenido.= "<td style='text-align:center' >" . wordwrap($datos_elementos[$key]['descripcion'], 40, "<br>") . "</td> ";
             $contenido.= "<td style='text-align:right' >&nbsp;$&nbsp;" . number_format($datos_elementos[$key]['valor'], 2, ",", ".") . "</td> ";
             $contenido.= "<td style='text-align:right' >&nbsp;$&nbsp;" . number_format($datos_elementos[$key]['subtotal_sin_iva'], 2, ",", ".") . "</td> ";
             $contenido.= "<td style='text-align:right' >&nbsp;&nbsp;" . $datos_elementos[$key]['iva'] * 100 . "&nbsp;% </td> ";
@@ -157,7 +157,7 @@ class RegistradorActa {
         $contenido.= "<th style='text-align:center'>" . $cantidad_entrada . "</th> ";
         $contenido.= "<th  style=\"text-align:right;\" colspan=\"2\" >TOTAL ENTRADA</th> ";
         $contenido.= "<th style='text-align:right' >&nbsp;$&nbsp;" . number_format($subtotal_entrada, 2, ",", ".") . "</th> ";
-        $contenido.= "<th  style=\"text-align:right;\" colspan=\"2\" >&nbsp;$&nbsp;" . number_format($iva, 2, ",", ".") . "</th> ";
+        $contenido.= "<th  style=\"text-align:right;\" colspan=\"2\" >&nbsp;$&nbsp;" . number_format($iva_entrada, 2, ",", ".") . "</th> ";
         $contenido.= "<th style='text-align:right' >&nbsp;$&nbsp;" . number_format($total_entrada, 2, ",", ".") . "</th> ";
         $contenido.= "</tr> ";
 
@@ -196,17 +196,20 @@ class RegistradorActa {
 <page_header>
     <table align='center'>
         <thead>
-            <tr>
-                <th style=\"width:10px;\" colspan=\"1\">
-                    <img alt=\"Imagen\" src=" . $rutaBloque . "/css/images/escudo1.png\" />
-                </th>
-                <th style=\"width:845px;font-size:11px;\" colspan=\"1\">
-                    <br>UNIVERSIDAD DISTRITAL FRANCISCO JOSÉ DE CALDAS
-                    <br> NIT 899999230-7<br>
-                    <br> SISTEMA DE GESTIÓN DE INVENTARIOS Y ALMACÉN<br>
-                    <br> Reporte Entrada de Almacén<br>
-                </th>
-                            </tr>
+            <tr style=\"width:1px;\" colspan=\"1\">
+                <th rowspan='3'> <img alt=\"Imagen\" src=" . $rutaBloque . "/css/images/escudoDistrital.png\" /></th>
+                <th style=\"width:300px;font-size:11px;\" colspan=\"1\">COMPROBANTE DE ENTRADA ALMACÉN</th>            
+                <th style=\"width:100px;font-size:11px;\" colspan=\"1\">Código: GIF PR-002-FR-002</th>
+                <th rowspan='3'> <img alt=\"Imagen\" src=" . $rutaBloque . "/css/images/sigud.jpg\" /></th>
+            </tr>
+            <tr style=\"width:1px;\" colspan=\"1\">
+                <th style=\"width:300px;font-size:11px;\" colspan=\"1\">Macroproceso: Gestión de Recursos</th>            
+                <th style=\"width:100px;font-size:11px;\" colspan=\"1\">Versión: 03</th>  
+            </tr>
+            <tr style=\"width:1px;\" colspan=\"1\">
+                <th style=\"width:300px;font-size:11px;\" colspan=\"1\">Proceso: Gestión de Infraestructura Física</th>            
+                <th style=\"width:100px;font-size:11px;\" colspan=\"1\">Fecha de Aprobación: 23/03/16</th>  
+            </tr>
         </thead>        
                     <tr></tr>
     </table>  
@@ -233,26 +236,26 @@ class RegistradorActa {
    
  <table align='center'>
             <tr>
-                <th style=\"text-align:right;width:85px;font-size:10px;\" colspan=\"1\">Entrada:</th>
-                <td style='width:325px;text-align:center'>" . $datos[0]['consecutivo'] . "</td>
-                <th style=\"text-align:right;width:85px;font-size:10px;\" colspan=\"1\">Fecha:</th>
-                <td style='width:325px;text-align:center'>" . $datos[0]['fecha_registro'] . "</td>
+                <th style=\"text-align:right;width:85px;font-size:12px;\" colspan=\"1\">Entrada:</th>
+                <td style='width:320px;text-align:center;font-size:12px;'>" .  $datos[0]['consecutivo'] . "</td>
+                <th style=\"text-align:right;width:85px;font-size:12px;\" colspan=\"1\">Fecha:</th>
+                <td style='width:320px;text-align:center;font-size:12px;'>" . $datos[0]['fecha_registro'] . "</td>
             </tr>
             <tr>
-                <th style=\"text-align:right;width:85px;font-size:10px;\" colspan=\"1\">Clase Entrada:</th>
-                <td  style='text-align:center'  colspan=\"3\">" . $datos[0]['clase_entrada'] . "</td>
+                <th style=\"text-align:right;width:85px;;font-size:12px;\" colspan=\"1\">Clase Entrada:</th>
+                <td  style='text-align:center;font-size:12px;'  colspan=\"3\">" . $datos[0]['clase_entrada'] . "</td>
             </tr>
             <tr>
-                <th style=\"text-align:right;width:85px;font-size:10px;text-align:right\" colspan=\"1\">Tipo Contrato:</th>
-                <td  style='text-align:center'>" . $datos[0]['tipo_contrato'] . "</td>
-                <th style=\"text-align:right;width:85px;font-size:10px;\" colspan=\"1\">Número:</th>
-                <td  style='text-align:center'>" . $datos[0]['numero_contrato'] . " del " . $datos[0]['fecha_contrato'] . "</td>
+                <th style=\"text-align:right;width:85px;;font-size:12px;text-align:right\" colspan=\"1\">Tipo Contrato:</th>
+                <td  style='width:320px;text-align:center;font-size:12px;'>" . $datos[0]['tipo_contrato'] . "</td>
+                <th style=\"text-align:right;width:85px;;font-size:12px;\" colspan=\"1\">Número:</th>
+                <td  style='width:320px;text-align:center;font-size:12px;'>" . $datos[0]['numero_contrato'] . " del " . $datos[0]['fecha_contrato'] . "</td>
             </tr>
             <tr>
-                <th style=\"text-align:right;width:85px;font-size:10px;\" colspan=\"1\">Proveedor:</th>
-                <td  style='text-align:center'>" . $datos[0]['proveedor'] . " - " . $datos[0]['nombre_proveedor'] . "</td>
-                <th style=\"text-align:right;width:85px;font-size:10px;\" colspan=\"1\">Factura:</th>
-                <td  style='text-align:center'>" . $datos[0]['numero_factura'] . " del " . $datos[0]['fecha_factura'] . "</td>
+                <th style=\"text-align:right;width:85px;font-size:12px;\" colspan=\"1\">Proveedor:</th>
+                <td  style='width:320px;text-align:center;font-size:12px;'>" . $datos[0]['proveedor'] . " - " . $datos[0]['nombre_proveedor'] . "</td>
+                <th style=\"text-align:right;width:85px;font-size:12px;\" colspan=\"1\">Factura:</th>
+                <td  style='width:320px;text-align:center;font-size:12px;'>" . $datos[0]['numero_factura'] . " del " . $datos[0]['fecha_factura'] . "</td>
             </tr>
              <tr>
                 <th style=\"text-align:right;width:85px;font-size:10px;\" colspan=\"1\">Observaciones:</th>

@@ -80,7 +80,7 @@ class Funcion {
 			}
 			
 			if (isset($_REQUEST ['botonGenerarPdf'])) {
-			
+			    
 			$this->documentoPDF ();
 			}
 			

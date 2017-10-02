@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<projectDescription>
+	<name>arka_reportes</name>
+	<comment></comment>
+	<projects>
+	</projects>
+	<buildSpec>
+	</buildSpec>
+	<natures>
+		<nature>it.eng.spagobi.studio.core.spagoBIStudioNature</nature>
+	</natures>
+</projectDescription>

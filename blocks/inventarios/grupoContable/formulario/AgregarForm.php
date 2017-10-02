@@ -39,6 +39,10 @@ class Formulario {
     }
     
     function formulario(){
+        
+  
+        
+        
     	$nombre =  $this->lenguaje->getCadena ( 'nombreCatalogo' );
     	$nombreTitulo =  $this->lenguaje->getCadena ( 'nombreTitulo' );
     	$crear =  $this->lenguaje->getCadena ( 'crear' );

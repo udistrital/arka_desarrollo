@@ -135,16 +135,16 @@
             {
                 // Create Report Title Page Header on every page of PDF
                 //$reportico->create_page_header("H1", 1, "{REPORT_TITLE}{STYLE border-width: 1 0 1 0; margin: 15px 0px 0px 0px; border-color: #000000; font-size: 18; border-style: solid;padding:5px 0px 5px 0px; height:1cm; background-color: #000000; color: #ffffff; text-align: center}" );
-                $reportico->create_page_header("H1", 1, "{REPORT_TITLE}{STYLE font-size: 15; padding:5px 0px 5px 0px; color: #000000; text-align: center}" );
-                $reportico->set_page_header_attribute("H1", "ShowInHTML", "no" );
-                $reportico->set_page_header_attribute("H1", "ShowInPDF", "yes" );
-                $reportico->set_page_header_attribute("H1", "justify", "center" );
+               // $reportico->create_page_header("H1", 1, "{REPORT_TITLE}{STYLE font-size: 15; padding:5px 0px 5px 0px; color: #000000; text-align: center}" );
+               // $reportico->set_page_header_attribute("H1", "ShowInHTML", "no" );
+               // $reportico->set_page_header_attribute("H1", "ShowInPDF", "yes" );
+              //  $reportico->set_page_header_attribute("H1", "justify", "center" );
 
                 // Create Image on every page of PDF
                 
-                $reportico->create_page_header("H2", 1, "{STYLE width: 60; height: 60; margin: 0 0 0 0; background-color: #003333; background-image:images/udNombre.png;}" );
-                $reportico->set_page_header_attribute("H2", "ShowInHTML", "no" );
-                $reportico->set_page_header_attribute("H2", "ShowInPDF", "yes" );
+              //  $reportico->create_page_header("H2", 1, "{STYLE width: 60; height: 60; margin: 0 0 0 0; background-color: #003333; background-image:images/udNombre.png;}" );
+              //  $reportico->set_page_header_attribute("H2", "ShowInHTML", "no" );
+             //   $reportico->set_page_header_attribute("H2", "ShowInPDF", "yes" );
                 
                 // Create Image on every page of PDF
                 $reportico->create_page_header("H3", 1, "Fecha: date('Y-m-d H:i:s'){STYLE font-size: 8; text-align: right; font-style: italic;}" );

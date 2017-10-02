@@ -44,6 +44,12 @@ if (isset ( $_REQUEST ['ubicacion'] ) && $_REQUEST ['ubicacion'] != '') {
 } else {
 	$ubicacion = '';
 }
+if (isset ( $_REQUEST ['selec_nivel'] ) && $_REQUEST ['selec_nivel'] != '') {
+	$arreglo2 = $_REQUEST ['selec_nivel'];
+} else {
+	$arreglo2 = '';
+}
+
 
 $arreglo = array (
 		'funcionario' => $funcionario,
@@ -55,6 +61,7 @@ $arreglo = array (
 $arreglo = serialize ( $arreglo );
 
 $cadenaACodificar .= "&arreglo=" . $arreglo;
+$cadenaACodificar .= "&arreglo2=" . $arreglo2;
 
 // Codificar las variables
 $enlace = $this->miConfigurador->getVariableConfiguracion ( "enlace" );
@@ -62,6 +69,7 @@ $cadena = $this->miConfigurador->fabricaConexiones->crypto->codificar_url ( $cad
 
 // URL definitiva
 $urlFinal = $url . $cadena;
+
 
 ?>
 <script type='text/javascript'>
@@ -73,23 +81,19 @@ $(function() {
          	$('#tablaTitulos').ready(function() {
 
              $('#tablaTitulos').dataTable( {
-//              	 serverSide: true,
 				language: {
                 url: "<?php echo $urlDirectorio?>"
             			},
-             	processing: true,
-		"aLengthMenu": [[10,25, 50,100,300,500,1000,-1], [10,25, 50,100,300,500,1000,'Todos']],
-//                   ordering: true,
-                  searching: true,
-//                deferRender: true,
-      //             sScrollY: 500	,
-        //          bScrollCollapse: true,
-                  info:true,
-//                   lengthChange:true,
+          	processing: true,
+             searching: true,
+             "deferLoading": 500,
+             info:true,
+             "scrollY":"400px",
+             "scrollCollapse": false, 
    		    "pagingType": "full_numbers",
-//                   stateSave: true,
-         //          renderer: "bootstrap",
-         //          retrieve: true,
+   		   "bLengthChange": false,
+	   		  "bPaginate": false,
+
                   ajax:{
                       url:"<?php echo $urlFinal?>",
                       dataSrc:"data"                                                                  
@@ -101,7 +105,6 @@ $(function() {
                   { data :"sede" },
                   { data :"dependencia" },
                   { data :"espaciofisico" },
-                  { data :"estadoelemento" },
                   { data :"contratista" },
                   { data :"detalle" },
                   { data :"observaciones" },

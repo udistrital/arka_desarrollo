@@ -73,9 +73,14 @@ class Formulario {
     }
 
     public function dibujarCatalogo() {
+        
+        
 
+     
         //consultar elementos 
         $base = $this->consultarElementosNivel(0);
+        
+    
 
         $this->consultarDatosCatalogo();
 
@@ -116,7 +121,7 @@ class Formulario {
             echo '">';
             foreach ($base as $b) {
 
-                //var_dump($this->conteoListas);echo "<br>";
+                
                 $base2 = $this->consultarElementosNivel($b['elemento_id']);
 
                 echo '<div ';
@@ -165,6 +170,7 @@ class Formulario {
                     echo "</button>";
 
                     //editar
+                    
                     echo '<button title="Click para Editar" class="editar" ';
                     echo 'onclick="editarElementoCatalogo(' . $b['elemento_id'] . ',' . $b['elemento_padre'] . ',' . $b['elemento_codigo'] . ',\'' . $b['elemento_nombre'] . '\',' . $b['elemento_catalogo'] . ',' . $b['grupo_cuentasalida'] . ',' . $b['grupo_cuentaentrada'] . ',' . $b['grupo_vidautil'] . ',' . $b['grupo_dcuentadebito'] . ',' . $b['grupo_dcuentacredito'] . ',' . $b['grupo_depreciacion'] . ', ' . $b['elemento_tipobien'] . ',' . $b['codigo_padre'] . ')">';
                     echo "</button>";

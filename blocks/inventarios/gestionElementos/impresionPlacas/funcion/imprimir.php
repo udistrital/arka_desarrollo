@@ -96,7 +96,7 @@ class RegistradorOrden {
 						$contenidoPagina .= "<tr>";
 					}
 					
-					$contenidoPagina .= "<td style='width:33.31%; height: 64px; text-align=center;border-spacing: 11px;font-size: 7px;'>UNIVERSIDAD DISTRITAL<BR>FRANCISCO JOSE DE CALDAS<br><barcode type='CODABAR' value='" . $placaSencilla . "' style='width:30mm; height:4mm; font-size: 2mm'></barcode>" . '' . "<img src='" . $directorio . "/css/images/escudo2.jpeg'  width='20' height='20'><br>Inventarios</td>";
+					$contenidoPagina .= "<td style='width:33.31%; height: 64px; text-align=center;border-spacing: 11px;font-size: 7px;'>UNIVERSIDAD DISTRITAL<BR>FRANCISCO JOSE DE CALDAS<br><barcode type='CODABAR' value='" . $placaSencilla . "' style='width:30mm; height:4mm; font-size: 2mm'></barcode>" . ' ' . "<img src='" . $directorio . "/css/images/escudo.jpg' width='20' height='20'><br>Inventarios</td>";
 					
 					if ($contadorSaltoLinea == 3) {
 						

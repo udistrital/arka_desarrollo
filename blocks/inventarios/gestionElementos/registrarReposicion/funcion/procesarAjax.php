@@ -37,10 +37,10 @@ if ($_REQUEST ['funcion'] == 'consultaPlaca') {
 
 if ($_REQUEST ['funcion'] == 'SeleccionOrdenador') {
 	
-	$cadenaSql = $this->sql->getCadenaSql ( 'informacion_ordenadorConsultados', $_REQUEST ['ordenador'] );
+	$cadenaSql = $this->sql->getCadenaSql ( 'informacion_ordenadorConsultados2', $_REQUEST ['ordenador'] );
 	$resultadoItems = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
 	
-	$resultado = json_encode ( $resultadoItems [0] );
+	$resultado = json_encode ( $resultadoItems);
 	
 	echo $resultado;
 }

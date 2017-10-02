@@ -327,15 +327,15 @@ class Sql extends \Sql {
 				$cadenaSql .= ' dependencias."ESF_DEP_ENCARGADA" dependencia, espacios."ESF_NOMBRE_ESPACIO" ubicacion, salida.id_salida as salida, ';
 				$cadenaSql .= ' arka_parametros.arka_funcionarios."FUN_NOMBRE" as fun_nombre ';
 				$cadenaSql .= ' FROM arka_inventarios.baja_elemento ';
-				$cadenaSql .= ' JOIN arka_inventarios.elemento_individual ON elemento_individual.id_elemento_ind = baja_elemento.id_elemento_ind ';
-				$cadenaSql .= ' JOIN arka_inventarios.elemento ON elemento.id_elemento = elemento_individual.id_elemento_gen ';
-				$cadenaSql .= ' JOIN arka_inventarios.salida ON salida.id_salida = elemento_individual.id_salida ';
-				$cadenaSql .= ' JOIN arka_inventarios.tipo_bienes ON tipo_bienes.id_tipo_bienes = elemento.tipo_bien ';
+				$cadenaSql .= ' LEFT JOIN arka_inventarios.elemento_individual ON elemento_individual.id_elemento_ind = baja_elemento.id_elemento_ind ';
+				$cadenaSql .= ' LEFT JOIN arka_inventarios.elemento ON elemento.id_elemento = elemento_individual.id_elemento_gen ';
+				$cadenaSql .= ' LEFT JOIN arka_inventarios.salida ON salida.id_salida = elemento_individual.id_salida ';
+				$cadenaSql .= ' LEFT JOIN arka_inventarios.tipo_bienes ON tipo_bienes.id_tipo_bienes = elemento.tipo_bien ';
 				$cadenaSql .= ' LEFT JOIN arka_parametros.arka_funcionarios ON arka_parametros.arka_funcionarios."FUN_IDENTIFICACION" = baja_elemento.funcionario_dependencia ';
-				$cadenaSql .= ' JOIN catalogo.catalogo_elemento ON catalogo.catalogo_elemento.elemento_id = nivel ';
-				$cadenaSql .= ' JOIN arka_parametros.arka_espaciosfisicos as espacios ON espacios."ESF_ID_ESPACIO" = baja_elemento.ubicacion ';
-				$cadenaSql .= ' JOIN arka_parametros.arka_dependencia as dependencias ON dependencias."ESF_ID_ESPACIO" = espacios."ESF_ID_ESPACIO" ';
-				$cadenaSql .= ' JOIN arka_parametros.arka_sedes as sedes ON sedes."ESF_COD_SEDE" = espacios."ESF_COD_SEDE" ';
+				$cadenaSql .= ' LEFT JOIN catalogo.catalogo_elemento ON catalogo.catalogo_elemento.elemento_id = nivel ';
+				$cadenaSql .= ' LEFT JOIN arka_parametros.arka_espaciosfisicos as espacios ON espacios."ESF_ID_ESPACIO" = baja_elemento.ubicacion ';
+				$cadenaSql .= ' LEFT JOIN arka_parametros.arka_dependencia as dependencias ON dependencias."ESF_ID_ESPACIO" = espacios."ESF_ID_ESPACIO" ';
+				$cadenaSql .= ' LEFT JOIN arka_parametros.arka_sedes as sedes ON sedes."ESF_COD_SEDE" = espacios."ESF_COD_SEDE" ';
 				$cadenaSql .= ' WHERE 1 = 1 AND elemento.tipo_bien <> 1 AND baja_elemento.id_elemento_ind IN (SELECT id_elemento_ind FROM baja_elemento WHERE estado_aprobacion = FALSE)';
 				
 				if ($variable ['fecha_inicio'] != '' && $variable ['fecha_final'] != '') {
@@ -361,6 +361,7 @@ class Sql extends \Sql {
 					$cadenaSql .= ' AND espacios."ESF_ID_ESPACIO" = ';
 					$cadenaSql .= " '" . $variable ['ubicacion'] . "' ";
 				}
+                   
 				break;
 			
 			case "consultarElemento_0" :
@@ -479,26 +480,26 @@ class Sql extends \Sql {
 				break;
 			
 			case "registrarDepreciacion" :
-				$cadenaSql = " INSERT INTO registro_depreciacion( ";
-				$cadenaSql .= " dep_idelemento, ";
-				$cadenaSql .= " dep_grupocontable, ";
-				$cadenaSql .= " dep_meses, ";
-				$cadenaSql .= " dep_fechasalida, ";
-				$cadenaSql .= " dep_fechacorte, ";
-				$cadenaSql .= " dep_cantidad, ";
-				$cadenaSql .= " dep_precio, ";
-				$cadenaSql .= " dep_valorhistorico, ";
-				$cadenaSql .= " dep_valorajustado, ";
-				$cadenaSql .= " dep_cuota, ";
-				$cadenaSql .= " dep_periodo, ";
-				$cadenaSql .= " dep_depacumulada, ";
-				$cadenaSql .= " dep_circular56, ";
-				$cadenaSql .= " dep_cuotainflacion, ";
-				$cadenaSql .= " dep_apicacumulada, ";
-				$cadenaSql .= " dep_circulardeprecia, ";
-				$cadenaSql .= " dep_libros, ";
-				$cadenaSql .= " dep_estado, ";
-				$cadenaSql .= " dep_registro) ";
+				$cadenaSql = " INSERT INTO registro_depreciacion_contabilidad( ";
+				$cadenaSql .= " depcontable_idelemento, ";
+				$cadenaSql .= " depcontable_grupocontable, ";
+				$cadenaSql .= " depcontable_meses, ";
+				$cadenaSql .= " depcontable_fechasalida, ";
+				$cadenaSql .= " depcontable_fechacorte, ";
+				$cadenaSql .= " depcontable_cantidad, ";
+				$cadenaSql .= " depcontable_precio, ";
+				$cadenaSql .= " depcontable_valorhistorico, ";
+				$cadenaSql .= " depcontable_valorajustado, ";
+				$cadenaSql .= " depcontable_cuota, ";
+				$cadenaSql .= " depcontable_periodo, ";
+				$cadenaSql .= " depcontable_depacumulada, ";
+				$cadenaSql .= " depcontable_circular56, ";
+				$cadenaSql .= " depcontable_cuotainflacion, ";
+				$cadenaSql .= " depcontable_apicacumulada, ";
+				$cadenaSql .= " depcontable_circulardeprecia, ";
+				$cadenaSql .= " depcontable_libros, ";
+				$cadenaSql .= " depcontable_estado, ";
+				$cadenaSql .= " depcontable_registro) ";
 				$cadenaSql .= " VALUES ( ";
 				$cadenaSql .= "'" . $variable ['id_elemento'] . "', ";
 				$cadenaSql .= "'" . $variable ['grupo_contable'] . "', ";
@@ -519,7 +520,7 @@ class Sql extends \Sql {
 				$cadenaSql .= "'" . $variable ['valor_libros'] . "', ";
 				$cadenaSql .= "'" . $variable ['estado'] . "', ";
 				$cadenaSql .= "'" . $variable ['fregistro'] . "') ";
-				$cadenaSql .= " RETURNING dep_id; ";
+				$cadenaSql .= " RETURNING depcontable_id; ";
 				break;
 			
 			case "insertar_historico" :

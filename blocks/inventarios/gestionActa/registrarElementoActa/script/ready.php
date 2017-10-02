@@ -266,6 +266,20 @@ $("#<?php echo $this->campoSeguro('tipo_poliza')?>").select2();
                  $("#<?php echo $this->campoSeguro('total_iva_con')?>").val(total);
                                      
                 break;
+
+		case '7':
+                
+                 cantidad=Number($("#<?php echo $this->campoSeguro('cantidad')?>").val());
+            	 valor=Number($("#<?php echo $this->campoSeguro('valor')?>").val());
+       			 iva = Math.round(((cantidad * valor)* 0.19)*100)/100;
+       			 precio = Math.round((cantidad*valor)*100)/100;
+       			 total=Math.round((precio+iva)*100)/100;
+       			 
+       			 
+                 $("#<?php echo $this->campoSeguro('total_iva')?>").val(iva);
+                 $("#<?php echo $this->campoSeguro('total_iva_con')?>").val(total);
+                                     
+                break;
                 
 
                 default:
@@ -333,10 +347,7 @@ $("#<?php echo $this->campoSeguro('tipo_poliza')?>").select2();
 			
 	   });
 	   
-	          $('#tablaTitulos').dataTable( {
-                "sPaginationType": "full_numbers"
-                 } );
-	   
+	          
           
 
 

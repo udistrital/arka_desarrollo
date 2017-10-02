@@ -2,6 +2,7 @@
 
 namespace inventarios\asignarInventarioC\asignarInventario;
 
+
 if (!isset($GLOBALS ["autorizado"])) {
     include ("../index.php");
     exit();
@@ -64,8 +65,18 @@ class Frontera {
                     break;
 
                 case "consultarContratista" :
-                    include_once ($this->ruta . "/formulario/resultado.php");
+                   
+                    if ($_REQUEST['usuario'] == '41762709') {
+                        include_once ($this->ruta . "/formulario/resultadoParticular.php");
+                    } else {
+                        include_once ($this->ruta . "/formulario/resultado.php");
+                    }
+
                     break;
+
+                case "ConsultarParticular":
+                    include_once ($this->ruta . "/formulario/resultado.php");
+                    break;   
                 
                 case "asociarActa":
                     include_once ($this->ruta . "/formulario/registro.php");

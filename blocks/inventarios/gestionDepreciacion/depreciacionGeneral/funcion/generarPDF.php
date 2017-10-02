@@ -68,9 +68,10 @@ class RegistradorActa {
         $directorio .= $this->miConfigurador->getVariableConfiguracion("site") . "/index.php?";
         $directorio .= $this->miConfigurador->getVariableConfiguracion("enlace");
 
-        $rutaBloque = $this->miConfigurador->getVariableConfiguracion("host");
-        $rutaBloque .= $this->miConfigurador->getVariableConfiguracion("site") . "/blocks/";
-        $rutaBloque .= $esteBloque ['grupo'] . "/" . $esteBloque ['nombre'];
+        $rutaBloque = $this->miConfigurador->getVariableConfiguracion("raizDocumento");
+        $rutaBloque .= "/blocks/";
+        $rutaBloque .= $esteBloque ['grupo'] . "" . $esteBloque ['nombre'];
+        
 
         $fecha = date('d-m-Y');
         $dias = array('Domingo, ', 'Lunes, ', 'Martes, ', 'Miercoles, ', 'Jueves, ', 'Viernes, ', 'Sábado, ');
@@ -84,6 +85,7 @@ class RegistradorActa {
         $total_histórico = 0;
         $total_ainflacion = 0;
         $total_ajustado = 0;
+        $total_salidas = 0;
         $total_depreciacion = 0;
         $total_inflacionario = 0;
         $total_circular56 = 0;
@@ -97,6 +99,7 @@ class RegistradorActa {
             $contenido.= "<td style='text-align:right' >&nbsp;$&nbsp;" . number_format($depreciacion[$key]['total_valor_historico'], 2, ',', '.') . "</td> ";
             $contenido.= "<td style='text-align:right' >&nbsp;$&nbsp;" . number_format($depreciacion[$key]['total_ajuste_inflacion'], 2, ',', '.') . "</td> ";
             $contenido.= "<td style='text-align:right' >&nbsp;$&nbsp;" . number_format($depreciacion[$key]['total_valor_ajustado'], 2, ',', '.') . "</td> ";
+            $contenido.= "<td style='text-align:right' >&nbsp;$&nbsp;" . number_format($depreciacion[$key]['total_cuota'], 2, ',', '.') . "</td> ";
             $contenido.= "<td style='text-align:right' >&nbsp;$&nbsp;" . number_format($depreciacion[$key]['total_depreciacion'], 2, ',', '.') . "</td> ";
             $contenido.= "<td style='text-align:right' >&nbsp;$&nbsp;" . number_format($depreciacion[$key]['total_ajuste_inflacionario'], 2, ',', '.') . "</td> ";
             $contenido.= "<td style='text-align:right' >&nbsp;$&nbsp;" . number_format($depreciacion[$key]['total_depreciacion_circular56'], 2, ',', '.') . "</td> ";
@@ -107,6 +110,7 @@ class RegistradorActa {
             $total_histórico = $total_histórico + $depreciacion[$key]['total_valor_historico'];
             $total_ainflacion = $total_ainflacion + $depreciacion[$key]['total_ajuste_inflacion'];
             $total_ajustado = $total_ajustado + $depreciacion[$key]['total_valor_ajustado'];
+            $total_salidas = $total_salidas + $depreciacion[$key]['total_cuota'];
             $total_depreciacion = $total_depreciacion + $depreciacion[$key]['total_depreciacion'];
             $total_inflacionario = $total_inflacionario + $depreciacion[$key]['total_ajuste_inflacionario'];
             $total_circular56 = $total_circular56 + $depreciacion[$key]['total_depreciacion_circular56'];
@@ -194,6 +198,7 @@ class RegistradorActa {
         <th>TOTAL VALOR HISTÓRICO</th>
         <th>TOTAL AJUSTE<br>INFLACIÓN</th>
         <th>TOTAL VALOR<br>AJUSTADO</th>
+        <th>TOTAL SALIDAS</th>
         <th>TOTAL<br>DEPRECIACIÓN</th>
         <th>TOTAL AJUSTE<BR>INFLACIONARIO</th>
         <th>TOTAL DEPRECIACIÓN<BR>CIRCULAR 56</th>
@@ -208,6 +213,7 @@ class RegistradorActa {
         <th>&nbsp;$&nbsp;" . number_format($total_histórico, 2, ',', '.') . "</th>
         <th>&nbsp;$&nbsp;" . number_format($total_ainflacion, 2, ',', '.') . "</th>
         <th>&nbsp;$&nbsp;" . number_format($total_ajustado, 2, ',', '.') . "</th>
+        <th>&nbsp;$&nbsp;" . number_format($total_salidas, 2, ',', '.') . "</th>
         <th>&nbsp;$&nbsp;" . number_format($total_depreciacion, 2, ',', '.') . "</th>
         <th>&nbsp;$&nbsp;" . number_format($total_inflacionario, 2, ',', '.') . "</th>
         <th>&nbsp;$&nbsp;" . number_format($total_circular56, 2, ',', '.') . "</th>

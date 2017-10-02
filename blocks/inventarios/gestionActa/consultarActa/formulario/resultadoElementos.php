@@ -110,7 +110,7 @@ class registrarForm {
 		
 		if ($ActaElementos) {
 			
-			echo "<table id='tablaTitulos'>";
+			echo "<table id='tablaTitulosElementos'>";
 			
 			echo "<thead>
                              <tr>

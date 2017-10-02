@@ -1,0 +1,2417 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<report xmlns="http://www.eclipse.org/birt/2005/design" version="3.2.22" id="1">
+    <property name="createdBy">Eclipse BIRT Designer Version 2.6.2.r262_v20110209 Build &lt;2.6.2.v20110214-1523></property>
+    <property name="units">in</property>
+    <list-property name="propertyBindings">
+        <structure>
+            <property name="name">queryText</property>
+            <property name="id">8</property>
+        </structure>
+        <structure>
+            <property name="name">queryTimeOut</property>
+            <property name="id">8</property>
+        </structure>
+    </list-property>
+    <property name="iconFile">/templates/blank_report.gif</property>
+    <property name="layoutPreference">fixed layout</property>
+    <property name="bidiLayoutOrientation">ltr</property>
+    <property name="imageDPI">96</property>
+    <parameters>
+        <scalar-parameter name="identificacion" id="229">
+            <property name="valueType">static</property>
+            <property name="dataType">string</property>
+            <property name="distinct">true</property>
+            <property name="paramType">simple</property>
+            <property name="controlType">text-box</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+    </parameters>
+    <data-sources>
+        <oda-data-source extensionID="org.eclipse.birt.report.data.oda.jdbc" name="arka_reportes" id="7">
+            <list-property name="privateDriverProperties">
+                <ex-property>
+                    <name>disabledMetadataBidiFormatStr</name>
+                </ex-property>
+                <ex-property>
+                    <name>disabledContentBidiFormatStr</name>
+                </ex-property>
+                <ex-property>
+                    <name>contentBidiFormatStr</name>
+                    <value>ILYNN</value>
+                </ex-property>
+                <ex-property>
+                    <name>metadataBidiFormatStr</name>
+                    <value>ILYNN</value>
+                </ex-property>
+            </list-property>
+            <property name="odaDriverClass">org.postgresql.Driver</property>
+            <property name="odaURL">jdbc:postgresql://postgresproduccion.c8an9arwoaua.us-east-1.rds.amazonaws.com/arka</property>
+            <property name="odaUser">arka_inventarios</property>
+            <encrypted-property name="odaPassword" encryptionID="base64">MmlwXzV6c3V2N3h0YTZyPQ==</encrypted-property>
+        </oda-data-source>
+    </data-sources>
+    <data-sets>
+        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="inventarios_funcionarios_dev" id="8">
+            <property name="nullsOrdering">nulls lowest</property>
+            <list-property name="columnHints">
+                <structure>
+                    <property name="columnName">identificador_elemento_individual</property>
+                    <text-property name="displayName">identificador_elemento_individual</text-property>
+                    <text-property name="heading">identificador_elemento_individual</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">placa</property>
+                    <text-property name="displayName">placa</text-property>
+                    <text-property name="heading">placa</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">nombre_tipo_bienes</property>
+                    <text-property name="displayName">nombre_tipo_bienes</text-property>
+                    <text-property name="heading">nombre_tipo_bienes</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">tipo_bien</property>
+                    <text-property name="displayName">tipo_bien</text-property>
+                    <text-property name="heading">tipo_bien</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">marca</property>
+                    <text-property name="displayName">marca</text-property>
+                    <text-property name="heading">marca</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">serie</property>
+                    <text-property name="displayName">serie</text-property>
+                    <text-property name="heading">serie</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">marca_existencia</property>
+                    <text-property name="displayName">marca_existencia</text-property>
+                    <text-property name="heading">marca_existencia</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">identificacion_funcionario</property>
+                    <text-property name="displayName">identificacion_funcionario</text-property>
+                    <text-property name="heading">identificacion_funcionario</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">nombre_funcionario</property>
+                    <text-property name="displayName">nombre_funcionario</text-property>
+                    <text-property name="heading">nombre_funcionario</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">sede</property>
+                    <text-property name="displayName">sede</text-property>
+                    <text-property name="heading">sede</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">dependencia</property>
+                    <text-property name="displayName">dependencia</text-property>
+                    <text-property name="heading">dependencia</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">espacio_fisico</property>
+                    <text-property name="displayName">espacio_fisico</text-property>
+                    <text-property name="heading">espacio_fisico</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">estado_bien</property>
+                    <text-property name="displayName">estado_bien</text-property>
+                    <text-property name="heading">estado_bien</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">descripcion_elemento</property>
+                    <text-property name="displayName">descripcion_elemento</text-property>
+                    <text-property name="heading">descripcion_elemento</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">confirmada_existencia</property>
+                    <text-property name="displayName">confirmada_existencia</text-property>
+                    <text-property name="heading">confirmada_existencia</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">tipo_confirmada</property>
+                    <text-property name="displayName">tipo_confirmada</text-property>
+                    <text-property name="heading">tipo_confirmada</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">espaciofisico</property>
+                    <text-property name="displayName">espaciofisico</text-property>
+                    <text-property name="heading">espaciofisico</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">contratista</property>
+                    <text-property name="displayName">contratista</text-property>
+                    <text-property name="heading">contratista</text-property>
+                </structure>
+            </list-property>
+            <list-property name="parameters">
+                <structure>
+                    <property name="name">identificacion</property>
+                    <property name="nativeName"></property>
+                    <property name="dataType">integer</property>
+                    <property name="nativeDataType">4</property>
+                    <property name="position">1</property>
+                    <expression name="defaultValue" type="javascript">0</expression>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+            </list-property>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">identificador_elemento_individual</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">placa</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">3</property>
+                        <property name="name">nombre_tipo_bienes</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">4</property>
+                        <property name="name">tipo_bien</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">5</property>
+                        <property name="name">marca</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">6</property>
+                        <property name="name">serie</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">7</property>
+                        <property name="name">marca_existencia</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">8</property>
+                        <property name="name">identificacion_funcionario</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">9</property>
+                        <property name="name">nombre_funcionario</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">10</property>
+                        <property name="name">sede</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">11</property>
+                        <property name="name">dependencia</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">12</property>
+                        <property name="name">espacio_fisico</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">13</property>
+                        <property name="name">estado_bien</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">14</property>
+                        <property name="name">descripcion_elemento</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">15</property>
+                        <property name="name">confirmada_existencia</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">16</property>
+                        <property name="name">tipo_confirmada</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">17</property>
+                        <property name="name">espaciofisico</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">18</property>
+                        <property name="name">contratista</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <property name="dataSource">arka_reportes</property>
+            <list-property name="resultSet">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">identificador_elemento_individual</property>
+                    <property name="nativeName">identificador_elemento_individual</property>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="position">2</property>
+                    <property name="name">placa</property>
+                    <property name="nativeName">placa</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">3</property>
+                    <property name="name">nombre_tipo_bienes</property>
+                    <property name="nativeName">nombre_tipo_bienes</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">4</property>
+                    <property name="name">tipo_bien</property>
+                    <property name="nativeName">tipo_bien</property>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="position">5</property>
+                    <property name="name">marca</property>
+                    <property name="nativeName">marca</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">6</property>
+                    <property name="name">serie</property>
+                    <property name="nativeName">serie</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">7</property>
+                    <property name="name">marca_existencia</property>
+                    <property name="nativeName">marca_existencia</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">8</property>
+                    <property name="name">identificacion_funcionario</property>
+                    <property name="nativeName">identificacion_funcionario</property>
+                    <property name="dataType">decimal</property>
+                </structure>
+                <structure>
+                    <property name="position">9</property>
+                    <property name="name">nombre_funcionario</property>
+                    <property name="nativeName">nombre_funcionario</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">10</property>
+                    <property name="name">sede</property>
+                    <property name="nativeName">sede</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">11</property>
+                    <property name="name">dependencia</property>
+                    <property name="nativeName">dependencia</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">12</property>
+                    <property name="name">espacio_fisico</property>
+                    <property name="nativeName">espacio_fisico</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">13</property>
+                    <property name="name">estado_bien</property>
+                    <property name="nativeName">estado_bien</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">14</property>
+                    <property name="name">descripcion_elemento</property>
+                    <property name="nativeName">descripcion_elemento</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">15</property>
+                    <property name="name">confirmada_existencia</property>
+                    <property name="nativeName">confirmada_existencia</property>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="position">16</property>
+                    <property name="name">tipo_confirmada</property>
+                    <property name="nativeName">tipo_confirmada</property>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="position">17</property>
+                    <property name="name">espaciofisico</property>
+                    <property name="nativeName">espaciofisico</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">18</property>
+                    <property name="name">contratista</property>
+                    <property name="nativeName">contratista</property>
+                    <property name="dataType">string</property>
+                </structure>
+            </list-property>
+            <xml-property name="queryText"><![CDATA[SELECT DISTINCT eli.id_elemento_ind identificador_elemento_individual , eli.placa , tb.descripcion nombre_tipo_bienes, ele.tipo_bien tipo_bien, ele.marca marca, ele.serie serie, 
+CASE eli.confirmada_existencia WHEN 't' THEN 'X' ELSE ' ' END marca_existencia,"FUN_IDENTIFICACION" identificacion_funcionario, "FUN_NOMBRE" nombre_funcionario, sas."ESF_SEDE" sede,
+ ad."ESF_DEP_ENCARGADA" dependencia,espacios."ESF_NOMBRE_ESPACIO" espacio_fisico, CASE WHEN tfs.descripcion IS NULL THEN 'Activo' ELSE tfs.descripcion END as estado_bien, ele.descripcion descripcion_elemento, 
+ eli.confirmada_existencia , eli.tipo_confirmada, espacios."ESF_NOMBRE_ESPACIO" espaciofisico, crn."CON_IDENTIFICACION"||'-'||crn."CON_NOMBRE" contratista
+  FROM elemento_individual eli JOIN elemento ele ON ele.id_elemento =eli .id_elemento_gen JOIN tipo_bienes tb ON tb.id_tipo_bienes = ele.tipo_bien
+   LEFT JOIN estado_elemento est ON est.id_elemento_ind = eli.id_elemento_ind LEFT JOIN tipo_falt_sobr tfs ON tfs.id_tipo_falt_sobr = est.tipo_faltsobr 
+   LEFT JOIN arka_parametros.arka_funcionarios fn ON fn."FUN_IDENTIFICACION"= eli.funcionario 
+   LEFT JOIN arka_parametros.arka_espaciosfisicos as espacios ON espacios."ESF_ID_ESPACIO"=eli.ubicacion_elemento 
+   LEFT JOIN arka_parametros.arka_dependencia as ad ON ad."ESF_ID_ESPACIO"=eli.ubicacion_elemento 
+   LEFT JOIN arka_parametros.arka_sedes as sas ON sas."ESF_COD_SEDE"=espacios."ESF_COD_SEDE" 
+   LEFT JOIN asignar_elementos asl ON asl.id_elemento=eli.id_elemento_ind AND asl.estado = 1 
+   LEFT JOIN arka_parametros.arka_contratistas crn ON crn."CON_IDENTIFICACION"=asl.contratista 
+   LEFT JOIN arka_inventarios.baja_elemento bj ON bj.id_elemento_ind=eli.id_elemento_ind AND bj.estado_registro = TRUE
+    WHERE tb.id_tipo_bienes = 3 AND bj.id_elemento_ind IS NULL AND eli.estado_registro = 'TRUE' AND eli.funcionario= ?
+     ORDER BY ele.tipo_bien ASC, sede ASC ,dependencia ASC, espacio_fisico ASC,placa ASC ]]></xml-property>
+            <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
+  <Version>2.0</Version>
+  <DataSetParameters>
+    <parameter>
+      <design:ParameterDefinition>
+        <design:inOutMode>In</design:inOutMode>
+        <design:attributes>
+          <design:identifier>
+            <design:name></design:name>
+            <design:position>1</design:position>
+          </design:identifier>
+          <design:nativeDataTypeCode>4</design:nativeDataTypeCode>
+          <design:precision>0</design:precision>
+          <design:scale>0</design:scale>
+          <design:nullability>Unknown</design:nullability>
+        </design:attributes>
+      </design:ParameterDefinition>
+    </parameter>
+  </DataSetParameters>
+  <design:ResultSets derivedMetaData="true">
+    <design:resultSetDefinitions>
+      <design:resultSetColumns>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>identificador_elemento_individual</design:name>
+              <design:position>1</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>4</design:nativeDataTypeCode>
+            <design:precision>10</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>NotNullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>identificador_elemento_individual</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>identificador_elemento_individual</design:label>
+            <design:formattingHints>
+              <design:displaySize>11</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>placa</design:name>
+              <design:position>2</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>2147483647</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>placa</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>placa</design:label>
+            <design:formattingHints>
+              <design:displaySize>2147483647</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>nombre_tipo_bienes</design:name>
+              <design:position>3</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>2147483647</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>nombre_tipo_bienes</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>nombre_tipo_bienes</design:label>
+            <design:formattingHints>
+              <design:displaySize>2147483647</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>tipo_bien</design:name>
+              <design:position>4</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>4</design:nativeDataTypeCode>
+            <design:precision>10</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>NotNullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>tipo_bien</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>tipo_bien</design:label>
+            <design:formattingHints>
+              <design:displaySize>11</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>marca</design:name>
+              <design:position>5</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>2147483647</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>marca</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>marca</design:label>
+            <design:formattingHints>
+              <design:displaySize>2147483647</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>serie</design:name>
+              <design:position>6</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>2147483647</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>serie</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>serie</design:label>
+            <design:formattingHints>
+              <design:displaySize>2147483647</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>marca_existencia</design:name>
+              <design:position>7</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>2147483647</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Unknown</design:nullability>
+            <design:uiHints>
+              <design:displayName>marca_existencia</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>marca_existencia</design:label>
+            <design:formattingHints>
+              <design:displaySize>2147483647</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>identificacion_funcionario</design:name>
+              <design:position>8</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>2</design:nativeDataTypeCode>
+            <design:precision>11</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>NotNullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>identificacion_funcionario</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>identificacion_funcionario</design:label>
+            <design:formattingHints>
+              <design:displaySize>12</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>nombre_funcionario</design:name>
+              <design:position>9</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>50</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>NotNullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>nombre_funcionario</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>nombre_funcionario</design:label>
+            <design:formattingHints>
+              <design:displaySize>50</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>sede</design:name>
+              <design:position>10</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>32</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>sede</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>sede</design:label>
+            <design:formattingHints>
+              <design:displaySize>32</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>dependencia</design:name>
+              <design:position>11</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>2147483647</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>dependencia</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>dependencia</design:label>
+            <design:formattingHints>
+              <design:displaySize>2147483647</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>espacio_fisico</design:name>
+              <design:position>12</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>100</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>espacio_fisico</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>espacio_fisico</design:label>
+            <design:formattingHints>
+              <design:displaySize>100</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>estado_bien</design:name>
+              <design:position>13</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>2147483647</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Unknown</design:nullability>
+            <design:uiHints>
+              <design:displayName>estado_bien</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>estado_bien</design:label>
+            <design:formattingHints>
+              <design:displaySize>2147483647</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>descripcion_elemento</design:name>
+              <design:position>14</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>2147483647</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>NotNullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>descripcion_elemento</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>descripcion_elemento</design:label>
+            <design:formattingHints>
+              <design:displaySize>2147483647</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>confirmada_existencia</design:name>
+              <design:position>15</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>-7</design:nativeDataTypeCode>
+            <design:precision>1</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>confirmada_existencia</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>confirmada_existencia</design:label>
+            <design:formattingHints>
+              <design:displaySize>1</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>tipo_confirmada</design:name>
+              <design:position>16</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>4</design:nativeDataTypeCode>
+            <design:precision>10</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>tipo_confirmada</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>tipo_confirmada</design:label>
+            <design:formattingHints>
+              <design:displaySize>11</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>espaciofisico</design:name>
+              <design:position>17</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>100</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>espaciofisico</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>espaciofisico</design:label>
+            <design:formattingHints>
+              <design:displaySize>100</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>contratista</design:name>
+              <design:position>18</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>2147483647</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Unknown</design:nullability>
+            <design:uiHints>
+              <design:displayName>contratista</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>contratista</design:label>
+            <design:formattingHints>
+              <design:displaySize>2147483647</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+      </design:resultSetColumns>
+      <design:criteria/>
+    </design:resultSetDefinitions>
+  </design:ResultSets>
+</model:DesignValues>]]></xml-property>
+        </oda-data-set>
+        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="inventarios_funcionarios_cc" id="9">
+            <list-property name="columnHints">
+                <structure>
+                    <property name="columnName">identificador_elemento_individual</property>
+                    <text-property name="displayName">identificador_elemento_individual</text-property>
+                    <text-property name="heading">identificador_elemento_individual</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">placa</property>
+                    <text-property name="displayName">placa</text-property>
+                    <text-property name="heading">placa</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">nombre_tipo_bienes</property>
+                    <text-property name="displayName">nombre_tipo_bienes</text-property>
+                    <text-property name="heading">nombre_tipo_bienes</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">tipo_bien</property>
+                    <text-property name="displayName">tipo_bien</text-property>
+                    <text-property name="heading">tipo_bien</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">marca</property>
+                    <text-property name="displayName">marca</text-property>
+                    <text-property name="heading">marca</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">serie</property>
+                    <text-property name="displayName">serie</text-property>
+                    <text-property name="heading">serie</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">marca_existencia</property>
+                    <text-property name="displayName">marca_existencia</text-property>
+                    <text-property name="heading">marca_existencia</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">identificacion_funcionario</property>
+                    <text-property name="displayName">identificacion_funcionario</text-property>
+                    <text-property name="heading">identificacion_funcionario</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">nombre_funcionario</property>
+                    <text-property name="displayName">nombre_funcionario</text-property>
+                    <text-property name="heading">nombre_funcionario</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">sede</property>
+                    <text-property name="displayName">sede</text-property>
+                    <text-property name="heading">sede</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">dependencia</property>
+                    <text-property name="displayName">dependencia</text-property>
+                    <text-property name="heading">dependencia</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">espacio_fisico</property>
+                    <text-property name="displayName">espacio_fisico</text-property>
+                    <text-property name="heading">espacio_fisico</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">estado_bien</property>
+                    <text-property name="displayName">estado_bien</text-property>
+                    <text-property name="heading">estado_bien</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">descripcion_elemento</property>
+                    <text-property name="displayName">descripcion_elemento</text-property>
+                    <text-property name="heading">descripcion_elemento</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">confirmada_existencia</property>
+                    <text-property name="displayName">confirmada_existencia</text-property>
+                    <text-property name="heading">confirmada_existencia</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">tipo_confirmada</property>
+                    <text-property name="displayName">tipo_confirmada</text-property>
+                    <text-property name="heading">tipo_confirmada</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">espaciofisico</property>
+                    <text-property name="displayName">espaciofisico</text-property>
+                    <text-property name="heading">espaciofisico</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">contratista</property>
+                    <text-property name="displayName">contratista</text-property>
+                    <text-property name="heading">contratista</text-property>
+                </structure>
+            </list-property>
+            <list-property name="parameters">
+                <structure>
+                    <property name="name">identificacion</property>
+                    <property name="paramName">identificacion</property>
+                    <property name="dataType">integer</property>
+                    <property name="position">1</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+            </list-property>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">identificador_elemento_individual</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">placa</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">3</property>
+                        <property name="name">nombre_tipo_bienes</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">4</property>
+                        <property name="name">tipo_bien</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">5</property>
+                        <property name="name">marca</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">6</property>
+                        <property name="name">serie</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">7</property>
+                        <property name="name">marca_existencia</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">8</property>
+                        <property name="name">identificacion_funcionario</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">9</property>
+                        <property name="name">nombre_funcionario</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">10</property>
+                        <property name="name">sede</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">11</property>
+                        <property name="name">dependencia</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">12</property>
+                        <property name="name">espacio_fisico</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">13</property>
+                        <property name="name">estado_bien</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">14</property>
+                        <property name="name">descripcion_elemento</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">15</property>
+                        <property name="name">confirmada_existencia</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">16</property>
+                        <property name="name">tipo_confirmada</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">17</property>
+                        <property name="name">espaciofisico</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">18</property>
+                        <property name="name">contratista</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <property name="dataSource">arka_reportes</property>
+            <list-property name="resultSet">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">identificador_elemento_individual</property>
+                    <property name="nativeName">identificador_elemento_individual</property>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="position">2</property>
+                    <property name="name">placa</property>
+                    <property name="nativeName">placa</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">3</property>
+                    <property name="name">nombre_tipo_bienes</property>
+                    <property name="nativeName">nombre_tipo_bienes</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">4</property>
+                    <property name="name">tipo_bien</property>
+                    <property name="nativeName">tipo_bien</property>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="position">5</property>
+                    <property name="name">marca</property>
+                    <property name="nativeName">marca</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">6</property>
+                    <property name="name">serie</property>
+                    <property name="nativeName">serie</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">7</property>
+                    <property name="name">marca_existencia</property>
+                    <property name="nativeName">marca_existencia</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">8</property>
+                    <property name="name">identificacion_funcionario</property>
+                    <property name="nativeName">identificacion_funcionario</property>
+                    <property name="dataType">decimal</property>
+                </structure>
+                <structure>
+                    <property name="position">9</property>
+                    <property name="name">nombre_funcionario</property>
+                    <property name="nativeName">nombre_funcionario</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">10</property>
+                    <property name="name">sede</property>
+                    <property name="nativeName">sede</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">11</property>
+                    <property name="name">dependencia</property>
+                    <property name="nativeName">dependencia</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">12</property>
+                    <property name="name">espacio_fisico</property>
+                    <property name="nativeName">espacio_fisico</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">13</property>
+                    <property name="name">estado_bien</property>
+                    <property name="nativeName">estado_bien</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">14</property>
+                    <property name="name">descripcion_elemento</property>
+                    <property name="nativeName">descripcion_elemento</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">15</property>
+                    <property name="name">confirmada_existencia</property>
+                    <property name="nativeName">confirmada_existencia</property>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="position">16</property>
+                    <property name="name">tipo_confirmada</property>
+                    <property name="nativeName">tipo_confirmada</property>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="position">17</property>
+                    <property name="name">espaciofisico</property>
+                    <property name="nativeName">espaciofisico</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">18</property>
+                    <property name="name">contratista</property>
+                    <property name="nativeName">contratista</property>
+                    <property name="dataType">string</property>
+                </structure>
+            </list-property>
+            <xml-property name="queryText"><![CDATA[SELECT DISTINCT eli.id_elemento_ind identificador_elemento_individual , eli.placa , tb.descripcion nombre_tipo_bienes, ele.tipo_bien tipo_bien, ele.marca marca, ele.serie serie, 
+CASE eli.confirmada_existencia WHEN 't' THEN 'X' ELSE ' ' END marca_existencia,"FUN_IDENTIFICACION" identificacion_funcionario, "FUN_NOMBRE" nombre_funcionario, sas."ESF_SEDE" sede,
+ ad."ESF_DEP_ENCARGADA" dependencia,espacios."ESF_NOMBRE_ESPACIO" espacio_fisico, CASE WHEN tfs.descripcion IS NULL THEN 'Activo' ELSE tfs.descripcion END as estado_bien, ele.descripcion descripcion_elemento, 
+ eli.confirmada_existencia , eli.tipo_confirmada, espacios."ESF_NOMBRE_ESPACIO" espaciofisico, crn."CON_IDENTIFICACION"||'-'||crn."CON_NOMBRE" contratista
+  FROM elemento_individual eli JOIN elemento ele ON ele.id_elemento =eli .id_elemento_gen JOIN tipo_bienes tb ON tb.id_tipo_bienes = ele.tipo_bien
+   LEFT JOIN estado_elemento est ON est.id_elemento_ind = eli.id_elemento_ind LEFT JOIN tipo_falt_sobr tfs ON tfs.id_tipo_falt_sobr = est.tipo_faltsobr 
+   LEFT JOIN arka_parametros.arka_funcionarios fn ON fn."FUN_IDENTIFICACION"= eli.funcionario 
+   LEFT JOIN arka_parametros.arka_espaciosfisicos as espacios ON espacios."ESF_ID_ESPACIO"=eli.ubicacion_elemento 
+   LEFT JOIN arka_parametros.arka_dependencia as ad ON ad."ESF_ID_ESPACIO"=eli.ubicacion_elemento 
+   LEFT JOIN arka_parametros.arka_sedes as sas ON sas."ESF_COD_SEDE"=espacios."ESF_COD_SEDE" 
+   LEFT JOIN asignar_elementos asl ON asl.id_elemento=eli.id_elemento_ind AND asl.estado = 1 
+   LEFT JOIN arka_parametros.arka_contratistas crn ON crn."CON_IDENTIFICACION"=asl.contratista 
+   LEFT JOIN arka_inventarios.baja_elemento bj ON bj.id_elemento_ind=eli.id_elemento_ind AND bj.estado_registro = TRUE
+    WHERE tb.id_tipo_bienes = 2 AND bj.id_elemento_ind IS NULL AND eli.estado_registro = 'TRUE' AND eli.funcionario= ?
+     ORDER BY ele.tipo_bien ASC, sede ASC ,dependencia ASC, espacio_fisico ASC,placa ASC ]]></xml-property>
+            <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
+  <Version>2.0</Version>
+  <design:ResultSets derivedMetaData="true">
+    <design:resultSetDefinitions>
+      <design:resultSetColumns>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>identificador_elemento_individual</design:name>
+              <design:position>1</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>4</design:nativeDataTypeCode>
+            <design:precision>10</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>NotNullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>identificador_elemento_individual</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>identificador_elemento_individual</design:label>
+            <design:formattingHints>
+              <design:displaySize>11</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>placa</design:name>
+              <design:position>2</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>2147483647</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>placa</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>placa</design:label>
+            <design:formattingHints>
+              <design:displaySize>2147483647</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>nombre_tipo_bienes</design:name>
+              <design:position>3</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>2147483647</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>nombre_tipo_bienes</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>nombre_tipo_bienes</design:label>
+            <design:formattingHints>
+              <design:displaySize>2147483647</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>tipo_bien</design:name>
+              <design:position>4</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>4</design:nativeDataTypeCode>
+            <design:precision>10</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>NotNullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>tipo_bien</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>tipo_bien</design:label>
+            <design:formattingHints>
+              <design:displaySize>11</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>marca</design:name>
+              <design:position>5</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>2147483647</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>marca</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>marca</design:label>
+            <design:formattingHints>
+              <design:displaySize>2147483647</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>serie</design:name>
+              <design:position>6</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>2147483647</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>serie</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>serie</design:label>
+            <design:formattingHints>
+              <design:displaySize>2147483647</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>marca_existencia</design:name>
+              <design:position>7</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>2147483647</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Unknown</design:nullability>
+            <design:uiHints>
+              <design:displayName>marca_existencia</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>marca_existencia</design:label>
+            <design:formattingHints>
+              <design:displaySize>2147483647</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>identificacion_funcionario</design:name>
+              <design:position>8</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>2</design:nativeDataTypeCode>
+            <design:precision>11</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>NotNullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>identificacion_funcionario</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>identificacion_funcionario</design:label>
+            <design:formattingHints>
+              <design:displaySize>12</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>nombre_funcionario</design:name>
+              <design:position>9</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>50</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>NotNullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>nombre_funcionario</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>nombre_funcionario</design:label>
+            <design:formattingHints>
+              <design:displaySize>50</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>sede</design:name>
+              <design:position>10</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>32</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>sede</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>sede</design:label>
+            <design:formattingHints>
+              <design:displaySize>32</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>dependencia</design:name>
+              <design:position>11</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>2147483647</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>dependencia</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>dependencia</design:label>
+            <design:formattingHints>
+              <design:displaySize>2147483647</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>espacio_fisico</design:name>
+              <design:position>12</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>100</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>espacio_fisico</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>espacio_fisico</design:label>
+            <design:formattingHints>
+              <design:displaySize>100</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>estado_bien</design:name>
+              <design:position>13</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>2147483647</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Unknown</design:nullability>
+            <design:uiHints>
+              <design:displayName>estado_bien</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>estado_bien</design:label>
+            <design:formattingHints>
+              <design:displaySize>2147483647</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>descripcion_elemento</design:name>
+              <design:position>14</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>2147483647</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>NotNullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>descripcion_elemento</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>descripcion_elemento</design:label>
+            <design:formattingHints>
+              <design:displaySize>2147483647</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>confirmada_existencia</design:name>
+              <design:position>15</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>-7</design:nativeDataTypeCode>
+            <design:precision>1</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>confirmada_existencia</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>confirmada_existencia</design:label>
+            <design:formattingHints>
+              <design:displaySize>1</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>tipo_confirmada</design:name>
+              <design:position>16</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>4</design:nativeDataTypeCode>
+            <design:precision>10</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>tipo_confirmada</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>tipo_confirmada</design:label>
+            <design:formattingHints>
+              <design:displaySize>11</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>espaciofisico</design:name>
+              <design:position>17</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>100</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>espaciofisico</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>espaciofisico</design:label>
+            <design:formattingHints>
+              <design:displaySize>100</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>contratista</design:name>
+              <design:position>18</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>2147483647</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Unknown</design:nullability>
+            <design:uiHints>
+              <design:displayName>contratista</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>contratista</design:label>
+            <design:formattingHints>
+              <design:displaySize>2147483647</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+      </design:resultSetColumns>
+      <design:criteria/>
+    </design:resultSetDefinitions>
+  </design:ResultSets>
+</model:DesignValues>]]></xml-property>
+        </oda-data-set>
+        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="jefe_almacen" id="177">
+            <list-property name="columnHints">
+                <structure>
+                    <property name="columnName">identificacion</property>
+                    <text-property name="displayName">identificacion</text-property>
+                    <text-property name="heading">identificacion</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">nombre</property>
+                    <text-property name="displayName">nombre</text-property>
+                    <text-property name="heading">nombre</text-property>
+                </structure>
+            </list-property>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">identificacion</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">nombre</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <property name="dataSource">arka_reportes</property>
+            <list-property name="resultSet">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">identificacion</property>
+                    <property name="nativeName">identificacion</property>
+                    <property name="dataType">decimal</property>
+                    <property name="nativeDataType">2</property>
+                </structure>
+                <structure>
+                    <property name="position">2</property>
+                    <property name="name">nombre</property>
+                    <property name="nativeName">nombre</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+            </list-property>
+            <xml-property name="queryText"><![CDATA[SELECT "FUN_IDENTIFICACION" identificacion, "FUN_NOMBRE" nombre 
+FROM arka_parametros.arka_funcionarios 
+ WHERE 1=1  AND "FUN_ESTADO"='A'
+  AND "FUN_CARGO" ='JEFE DE SECCION' 
+   AND "FUN_DEP_COD_ACADEMICA"=60 ;]]></xml-property>
+            <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
+  <Version>2.0</Version>
+  <design:ResultSets derivedMetaData="true">
+    <design:resultSetDefinitions>
+      <design:resultSetColumns>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>identificacion</design:name>
+              <design:position>1</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>2</design:nativeDataTypeCode>
+            <design:precision>11</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>NotNullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>identificacion</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>identificacion</design:label>
+            <design:formattingHints>
+              <design:displaySize>12</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>nombre</design:name>
+              <design:position>2</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>50</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>NotNullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>nombre</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>nombre</design:label>
+            <design:formattingHints>
+              <design:displaySize>50</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+      </design:resultSetColumns>
+      <design:criteria/>
+    </design:resultSetDefinitions>
+  </design:ResultSets>
+</model:DesignValues>]]></xml-property>
+        </oda-data-set>
+    </data-sets>
+    <styles>
+        <style name="report" id="4">
+            <property name="fontFamily">sans-serif</property>
+            <property name="fontSize">10pt</property>
+        </style>
+        <style name="crosstab-cell" id="5">
+            <property name="borderBottomColor">#CCCCCC</property>
+            <property name="borderBottomStyle">solid</property>
+            <property name="borderBottomWidth">1pt</property>
+            <property name="borderLeftColor">#CCCCCC</property>
+            <property name="borderLeftStyle">solid</property>
+            <property name="borderLeftWidth">1pt</property>
+            <property name="borderRightColor">#CCCCCC</property>
+            <property name="borderRightStyle">solid</property>
+            <property name="borderRightWidth">1pt</property>
+            <property name="borderTopColor">#CCCCCC</property>
+            <property name="borderTopStyle">solid</property>
+            <property name="borderTopWidth">1pt</property>
+        </style>
+        <style name="crosstab" id="6">
+            <property name="borderBottomColor">#CCCCCC</property>
+            <property name="borderBottomStyle">solid</property>
+            <property name="borderBottomWidth">1pt</property>
+            <property name="borderLeftColor">#CCCCCC</property>
+            <property name="borderLeftStyle">solid</property>
+            <property name="borderLeftWidth">1pt</property>
+            <property name="borderRightColor">#CCCCCC</property>
+            <property name="borderRightStyle">solid</property>
+            <property name="borderRightWidth">1pt</property>
+            <property name="borderTopColor">#CCCCCC</property>
+            <property name="borderTopStyle">solid</property>
+            <property name="borderTopWidth">1pt</property>
+        </style>
+    </styles>
+    <page-setup>
+        <simple-master-page name="Simple MasterPage" id="2">
+            <property name="orientation">landscape</property>
+        </simple-master-page>
+    </page-setup>
+    <body>
+        <text id="12">
+            <property name="fontWeight">bold</property>
+            <property name="textAlign">center</property>
+            <property name="contentType">auto</property>
+            <text-property name="content"><![CDATA[UNIVERSIDAD DISTRITAL FRANCISCO JOSÉ DE CALDAS
+NIT: 899.999.230-7]]></text-property>
+        </text>
+        <text id="13">
+            <property name="fontWeight">bold</property>
+            <property name="textAlign">center</property>
+            <property name="contentType">auto</property>
+            <text-property name="content"><![CDATA[Almacén General e Inventarios
+Acta Inventario Individualizado]]></text-property>
+        </text>
+        <text id="14">
+            <property name="textAlign">center</property>
+            <property name="contentType">auto</property>
+            <text-property name="content"><![CDATA[www.udistrital.edu.co]]></text-property>
+        </text>
+        <text-data id="16">
+            <property name="textAlign">center</property>
+            <expression name="valueExpr">new Date()</expression>
+            <property name="contentType">html</property>
+        </text-data>
+        <grid id="17">
+            <property name="width">10.46875in</property>
+            <column id="18">
+                <property name="width">1.5520833333333333in</property>
+            </column>
+            <column id="19">
+                <property name="width">3.4791666666666665in</property>
+            </column>
+            <column id="27">
+                <property name="width">2.7916666666666665in</property>
+            </column>
+            <column id="25">
+                <property name="width">2.6458333333333335in</property>
+            </column>
+            <row id="20">
+                <cell id="21">
+                    <label id="23">
+                        <text-property name="text">Nombre funcionario :   </text-property>
+                    </label>
+                </cell>
+                <cell id="22">
+                    <data id="28">
+                        <property name="textAlign">center</property>
+                        <property name="whiteSpace">nowrap</property>
+                        <property name="dataSet">inventarios_funcionarios_cc</property>
+                        <list-property name="boundDataColumns">
+                            <structure>
+                                <property name="name">nombre_funcionario</property>
+                                <text-property name="displayName">nombre_funcionario</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["nombre_funcionario"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                        </list-property>
+                        <property name="resultSetColumn">nombre_funcionario</property>
+                    </data>
+                </cell>
+                <cell id="26">
+                    <label id="29">
+                        <property name="textAlign">right</property>
+                        <text-property name="text">C.C :</text-property>
+                    </label>
+                </cell>
+                <cell id="24">
+                    <data id="162">
+                        <property name="whiteSpace">nowrap</property>
+                        <property name="dataSet">inventarios_funcionarios_cc</property>
+                        <list-property name="boundDataColumns">
+                            <structure>
+                                <property name="name">identificacion_funcionario</property>
+                                <text-property name="displayName">identificacion_funcionario</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["identificacion_funcionario"]</expression>
+                                <property name="dataType">decimal</property>
+                            </structure>
+                        </list-property>
+                        <property name="resultSetColumn">identificacion_funcionario</property>
+                    </data>
+                </cell>
+            </row>
+        </grid>
+        <grid id="31">
+            <column id="32"/>
+            <row id="33">
+                <cell id="34">
+                    <label id="35">
+                        <property name="fontWeight">bold</property>
+                        <property name="fontStyle">italic</property>
+                        <text-property name="text">TIPO BIEN : CONSUMO CONTROLADO</text-property>
+                    </label>
+                </cell>
+            </row>
+        </grid>
+        <table id="36">
+            <property name="width">10.4375in</property>
+            <property name="dataSet">inventarios_funcionarios_cc</property>
+            <list-property name="boundDataColumns">
+                <structure>
+                    <property name="name">placa</property>
+                    <text-property name="displayName">placa</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["placa"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">sede</property>
+                    <text-property name="displayName">sede</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["sede"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">dependencia</property>
+                    <text-property name="displayName">dependencia</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["dependencia"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">espacio_fisico</property>
+                    <text-property name="displayName">espacio_fisico</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["espacio_fisico"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">descripcion_elemento</property>
+                    <text-property name="displayName">descripcion_elemento</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["descripcion_elemento"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">marca</property>
+                    <text-property name="displayName">marca</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["marca"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">estado_bien</property>
+                    <text-property name="displayName">estado_bien</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["estado_bien"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">contratista</property>
+                    <text-property name="displayName">contratista</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["contratista"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">confirmada_existencia</property>
+                    <text-property name="displayName">confirmada_existencia</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["confirmada_existencia"]</expression>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="name">marca_existencia</property>
+                    <text-property name="displayName">marca_existencia</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["marca_existencia"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+            </list-property>
+            <column id="67">
+                <property name="width">0.5104166666666666in</property>
+            </column>
+            <column id="68">
+                <property name="width">1.2291666666666667in</property>
+            </column>
+            <column id="69">
+                <property name="width">1.7604166666666667in</property>
+            </column>
+            <column id="70">
+                <property name="width">1.2083333333333333in</property>
+            </column>
+            <column id="71">
+                <property name="width">2.3125in</property>
+            </column>
+            <column id="72">
+                <property name="width">0.75in</property>
+            </column>
+            <column id="73">
+                <property name="width">0.6458333333333334in</property>
+            </column>
+            <column id="74">
+                <property name="width">1.2083333333333333in</property>
+            </column>
+            <column id="75">
+                <property name="width">0.8125in</property>
+            </column>
+            <header>
+                <row id="37">
+                    <cell id="38">
+                        <label id="76">
+                            <property name="fontSize">8pt</property>
+                            <property name="borderBottomColor">#000000</property>
+                            <property name="borderBottomStyle">double</property>
+                            <text-property name="text">Placa</text-property>
+                        </label>
+                    </cell>
+                    <cell id="39">
+                        <label id="78">
+                            <property name="fontSize">8pt</property>
+                            <property name="borderBottomColor">#000000</property>
+                            <property name="borderBottomStyle">double</property>
+                            <text-property name="text">Sede</text-property>
+                        </label>
+                    </cell>
+                    <cell id="40">
+                        <label id="80">
+                            <property name="fontSize">8pt</property>
+                            <property name="borderBottomColor">#000000</property>
+                            <property name="borderBottomStyle">double</property>
+                            <text-property name="text">Dependencia</text-property>
+                        </label>
+                    </cell>
+                    <cell id="41">
+                        <label id="82">
+                            <property name="fontSize">8pt</property>
+                            <property name="borderBottomColor">#000000</property>
+                            <property name="borderBottomStyle">double</property>
+                            <text-property name="text">Espacio Físico</text-property>
+                        </label>
+                    </cell>
+                    <cell id="42">
+                        <label id="84">
+                            <property name="fontSize">8pt</property>
+                            <property name="borderBottomColor">#000000</property>
+                            <property name="borderBottomStyle">double</property>
+                            <text-property name="text">Descripción</text-property>
+                        </label>
+                    </cell>
+                    <cell id="43">
+                        <label id="86">
+                            <property name="fontSize">8pt</property>
+                            <property name="borderBottomColor">#000000</property>
+                            <property name="borderBottomStyle">double</property>
+                            <text-property name="text">Marca</text-property>
+                        </label>
+                    </cell>
+                    <cell id="44">
+                        <label id="88">
+                            <property name="fontSize">8pt</property>
+                            <property name="borderBottomColor">#000000</property>
+                            <property name="borderBottomStyle">double</property>
+                            <text-property name="text">Estado</text-property>
+                        </label>
+                    </cell>
+                    <cell id="45">
+                        <label id="90">
+                            <property name="fontSize">8pt</property>
+                            <property name="borderBottomColor">#000000</property>
+                            <property name="borderBottomStyle">double</property>
+                            <text-property name="text">Contratista</text-property>
+                        </label>
+                    </cell>
+                    <cell id="46">
+                        <label id="94">
+                            <property name="fontSize">8pt</property>
+                            <property name="borderBottomColor">#000000</property>
+                            <property name="borderBottomStyle">double</property>
+                            <text-property name="text">Verificación</text-property>
+                        </label>
+                    </cell>
+                </row>
+            </header>
+            <detail>
+                <row id="47">
+                    <property name="borderBottomColor">#000000</property>
+                    <property name="borderBottomStyle">dotted</property>
+                    <property name="borderBottomWidth">thin</property>
+                    <property name="borderLeftColor">#000000</property>
+                    <property name="borderLeftStyle">dotted</property>
+                    <property name="borderLeftWidth">thin</property>
+                    <property name="borderRightColor">#000000</property>
+                    <property name="borderRightStyle">dotted</property>
+                    <property name="borderRightWidth">thin</property>
+                    <property name="borderTopColor">#000000</property>
+                    <property name="borderTopStyle">dotted</property>
+                    <property name="borderTopWidth">thin</property>
+                    <cell id="48">
+                        <data id="77">
+                            <property name="fontSize">8pt</property>
+                            <property name="whiteSpace">nowrap</property>
+                            <property name="resultSetColumn">placa</property>
+                        </data>
+                    </cell>
+                    <cell id="49">
+                        <data id="79">
+                            <property name="fontSize">8pt</property>
+                            <property name="whiteSpace">normal</property>
+                            <property name="resultSetColumn">sede</property>
+                        </data>
+                    </cell>
+                    <cell id="50">
+                        <data id="81">
+                            <property name="fontSize">8pt</property>
+                            <property name="whiteSpace">normal</property>
+                            <property name="resultSetColumn">dependencia</property>
+                        </data>
+                    </cell>
+                    <cell id="51">
+                        <data id="83">
+                            <property name="fontSize">8pt</property>
+                            <property name="resultSetColumn">espacio_fisico</property>
+                        </data>
+                    </cell>
+                    <cell id="52">
+                        <data id="237">
+                            <property name="fontSize">8pt</property>
+                            <property name="whiteSpace">normal</property>
+                            <property name="resultSetColumn">descripcion_elemento</property>
+                        </data>
+                    </cell>
+                    <cell id="53">
+                        <data id="87">
+                            <property name="fontSize">8pt</property>
+                            <property name="whiteSpace">nowrap</property>
+                            <property name="resultSetColumn">marca</property>
+                        </data>
+                    </cell>
+                    <cell id="54">
+                        <data id="89">
+                            <property name="fontSize">8pt</property>
+                            <property name="whiteSpace">nowrap</property>
+                            <property name="resultSetColumn">estado_bien</property>
+                        </data>
+                    </cell>
+                    <cell id="55">
+                        <data id="91">
+                            <property name="fontSize">8pt</property>
+                            <property name="whiteSpace">normal</property>
+                            <property name="resultSetColumn">contratista</property>
+                        </data>
+                    </cell>
+                    <cell id="56">
+                        <data id="95">
+                            <property name="fontSize">8pt</property>
+                            <property name="whiteSpace">nowrap</property>
+                            <property name="resultSetColumn">marca_existencia</property>
+                        </data>
+                    </cell>
+                </row>
+            </detail>
+            <footer>
+                <row id="57">
+                    <cell id="58"/>
+                    <cell id="59"/>
+                    <cell id="60"/>
+                    <cell id="61"/>
+                    <cell id="62"/>
+                    <cell id="63"/>
+                    <cell id="64"/>
+                    <cell id="65"/>
+                    <cell id="66"/>
+                </row>
+            </footer>
+        </table>
+        <grid id="97">
+            <column id="98"/>
+            <row id="99">
+                <cell id="100">
+                    <label id="101">
+                        <property name="fontWeight">bold</property>
+                        <property name="fontStyle">italic</property>
+                        <text-property name="text">TIPO BIEN : DEVOLUTIVO</text-property>
+                    </label>
+                </cell>
+            </row>
+        </grid>
+        <table id="102">
+            <property name="width">10.4375in</property>
+            <property name="dataSet">inventarios_funcionarios_dev</property>
+            <list-property name="boundDataColumns">
+                <structure>
+                    <property name="name">placa</property>
+                    <text-property name="displayName">placa</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["placa"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">sede</property>
+                    <text-property name="displayName">sede</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["sede"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">dependencia</property>
+                    <text-property name="displayName">dependencia</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["dependencia"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">espacio_fisico</property>
+                    <text-property name="displayName">espacio_fisico</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["espacio_fisico"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">descripcion_elemento</property>
+                    <text-property name="displayName">descripcion_elemento</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["descripcion_elemento"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">marca</property>
+                    <text-property name="displayName">marca</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["marca"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">estado_bien</property>
+                    <text-property name="displayName">estado_bien</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["estado_bien"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">contratista</property>
+                    <text-property name="displayName">contratista</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["contratista"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">marca_existencia</property>
+                    <text-property name="displayName">marca_existencia</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["marca_existencia"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+            </list-property>
+            <column id="133">
+                <property name="width">0.5416666666666666in</property>
+            </column>
+            <column id="134">
+                <property name="width">1.1770833333333333in</property>
+            </column>
+            <column id="135">
+                <property name="width">1.75in</property>
+            </column>
+            <column id="136">
+                <property name="width">1.21875in</property>
+            </column>
+            <column id="137">
+                <property name="width">2.34375in</property>
+            </column>
+            <column id="138">
+                <property name="width">0.6979166666666666in</property>
+            </column>
+            <column id="139">
+                <property name="width">0.6875in</property>
+            </column>
+            <column id="140">
+                <property name="width">1.1875in</property>
+            </column>
+            <column id="141">
+                <property name="width">0.8020833333333334in</property>
+            </column>
+            <header>
+                <row id="103">
+                    <cell id="104">
+                        <label id="142">
+                            <property name="fontSize">8pt</property>
+                            <property name="borderBottomColor">#000000</property>
+                            <property name="borderBottomStyle">double</property>
+                            <property name="borderBottomWidth">thin</property>
+                            <text-property name="text">Placa</text-property>
+                        </label>
+                    </cell>
+                    <cell id="105">
+                        <label id="144">
+                            <property name="fontSize">8pt</property>
+                            <property name="borderBottomColor">#000000</property>
+                            <property name="borderBottomStyle">double</property>
+                            <property name="borderBottomWidth">thin</property>
+                            <text-property name="text">Sede</text-property>
+                        </label>
+                    </cell>
+                    <cell id="106">
+                        <label id="146">
+                            <property name="fontSize">8pt</property>
+                            <property name="borderBottomColor">#000000</property>
+                            <property name="borderBottomStyle">double</property>
+                            <property name="borderBottomWidth">thin</property>
+                            <text-property name="text">Dependencia</text-property>
+                        </label>
+                    </cell>
+                    <cell id="107">
+                        <label id="148">
+                            <property name="fontSize">8pt</property>
+                            <property name="borderBottomColor">#000000</property>
+                            <property name="borderBottomStyle">double</property>
+                            <property name="borderBottomWidth">thin</property>
+                            <text-property name="text">Espacio Físico</text-property>
+                        </label>
+                    </cell>
+                    <cell id="108">
+                        <label id="150">
+                            <property name="fontSize">8pt</property>
+                            <property name="borderBottomColor">#000000</property>
+                            <property name="borderBottomStyle">double</property>
+                            <property name="borderBottomWidth">thin</property>
+                            <text-property name="text">Descripción</text-property>
+                        </label>
+                    </cell>
+                    <cell id="109">
+                        <label id="152">
+                            <property name="fontSize">8pt</property>
+                            <property name="borderBottomColor">#000000</property>
+                            <property name="borderBottomStyle">double</property>
+                            <property name="borderBottomWidth">thin</property>
+                            <text-property name="text">Marca</text-property>
+                        </label>
+                    </cell>
+                    <cell id="110">
+                        <label id="154">
+                            <property name="fontSize">8pt</property>
+                            <property name="borderBottomColor">#000000</property>
+                            <property name="borderBottomStyle">double</property>
+                            <property name="borderBottomWidth">thin</property>
+                            <text-property name="text">Estado</text-property>
+                        </label>
+                    </cell>
+                    <cell id="111">
+                        <label id="156">
+                            <property name="fontSize">8pt</property>
+                            <property name="borderBottomColor">#000000</property>
+                            <property name="borderBottomStyle">double</property>
+                            <property name="borderBottomWidth">thin</property>
+                            <text-property name="text">Contratista</text-property>
+                        </label>
+                    </cell>
+                    <cell id="112">
+                        <label id="158">
+                            <property name="fontSize">8pt</property>
+                            <property name="borderBottomColor">#000000</property>
+                            <property name="borderBottomStyle">double</property>
+                            <property name="borderBottomWidth">thin</property>
+                            <text-property name="text">Verificación</text-property>
+                        </label>
+                    </cell>
+                </row>
+            </header>
+            <detail>
+                <row id="113">
+                    <property name="borderBottomColor">#000000</property>
+                    <property name="borderBottomStyle">dotted</property>
+                    <property name="borderBottomWidth">thin</property>
+                    <property name="borderLeftColor">#000000</property>
+                    <property name="borderLeftStyle">dotted</property>
+                    <property name="borderLeftWidth">thin</property>
+                    <property name="borderRightColor">#000000</property>
+                    <property name="borderRightStyle">dotted</property>
+                    <property name="borderRightWidth">thin</property>
+                    <property name="borderTopColor">#000000</property>
+                    <property name="borderTopStyle">dotted</property>
+                    <property name="borderTopWidth">thin</property>
+                    <cell id="114">
+                        <data id="143">
+                            <property name="fontSize">8pt</property>
+                            <property name="whiteSpace">normal</property>
+                            <property name="resultSetColumn">placa</property>
+                        </data>
+                    </cell>
+                    <cell id="115">
+                        <data id="231">
+                            <property name="fontSize">8pt</property>
+                            <property name="whiteSpace">normal</property>
+                            <property name="resultSetColumn">sede</property>
+                        </data>
+                    </cell>
+                    <cell id="116">
+                        <data id="147">
+                            <property name="fontSize">8pt</property>
+                            <property name="whiteSpace">normal</property>
+                            <property name="resultSetColumn">dependencia</property>
+                        </data>
+                    </cell>
+                    <cell id="117">
+                        <data id="149">
+                            <property name="fontSize">8pt</property>
+                            <property name="whiteSpace">normal</property>
+                            <property name="resultSetColumn">espacio_fisico</property>
+                        </data>
+                    </cell>
+                    <cell id="118">
+                        <data id="151">
+                            <property name="fontSize">8pt</property>
+                            <property name="whiteSpace">normal</property>
+                            <property name="resultSetColumn">descripcion_elemento</property>
+                        </data>
+                    </cell>
+                    <cell id="119">
+                        <data id="153">
+                            <property name="fontSize">8pt</property>
+                            <property name="whiteSpace">normal</property>
+                            <property name="resultSetColumn">marca</property>
+                        </data>
+                    </cell>
+                    <cell id="120">
+                        <data id="155">
+                            <property name="fontSize">8pt</property>
+                            <property name="whiteSpace">normal</property>
+                            <property name="resultSetColumn">estado_bien</property>
+                        </data>
+                    </cell>
+                    <cell id="121">
+                        <data id="157">
+                            <property name="fontSize">8pt</property>
+                            <property name="whiteSpace">normal</property>
+                            <property name="resultSetColumn">contratista</property>
+                        </data>
+                    </cell>
+                    <cell id="122">
+                        <data id="159">
+                            <property name="fontSize">8pt</property>
+                            <property name="whiteSpace">normal</property>
+                            <property name="resultSetColumn">marca_existencia</property>
+                        </data>
+                    </cell>
+                </row>
+            </detail>
+            <footer>
+                <row id="123">
+                    <cell id="124"/>
+                    <cell id="125"/>
+                    <cell id="126"/>
+                    <cell id="127"/>
+                    <cell id="128"/>
+                    <cell id="129"/>
+                    <cell id="130"/>
+                    <cell id="131"/>
+                    <cell id="132"/>
+                </row>
+            </footer>
+        </table>
+        <label id="228"/>
+        <label id="226">
+            <structure name="toc"/>
+        </label>
+        <grid id="163">
+            <column id="164"/>
+            <column id="165"/>
+            <row id="166">
+                <cell id="167">
+                    <label id="175">
+                        <property name="textAlign">center</property>
+                        <text-property name="text">_________________________________</text-property>
+                    </label>
+                </cell>
+                <cell id="168">
+                    <label id="176">
+                        <property name="textAlign">center</property>
+                        <text-property name="text">_________________________________</text-property>
+                    </label>
+                </cell>
+            </row>
+            <row id="169">
+                <cell id="170">
+                    <data id="178">
+                        <property name="textAlign">center</property>
+                        <property name="whiteSpace">nowrap</property>
+                        <property name="dataSet">jefe_almacen</property>
+                        <list-property name="boundDataColumns">
+                            <structure>
+                                <property name="name">nombre</property>
+                                <text-property name="displayName">nombre</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["nombre"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                        </list-property>
+                        <property name="resultSetColumn">nombre</property>
+                    </data>
+                </cell>
+                <cell id="171">
+                    <data id="235">
+                        <property name="textAlign">center</property>
+                        <property name="whiteSpace">nowrap</property>
+                        <property name="dataSet">inventarios_funcionarios_cc</property>
+                        <list-property name="boundDataColumns">
+                            <structure>
+                                <property name="name">nombre_funcionario</property>
+                                <text-property name="displayName">nombre_funcionario</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["nombre_funcionario"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                        </list-property>
+                        <property name="resultSetColumn">nombre_funcionario</property>
+                    </data>
+                </cell>
+            </row>
+            <row id="172">
+                <cell id="173">
+                    <label id="179">
+                        <property name="textAlign">center</property>
+                        <text-property name="text">Almacenista General</text-property>
+                    </label>
+                </cell>
+                <cell id="174">
+                    <grid id="181">
+                        <column id="182"/>
+                        <column id="183"/>
+                        <row id="184">
+                            <cell id="185">
+                                <label id="187">
+                                    <property name="textAlign">right</property>
+                                    <text-property name="text">C.C :	</text-property>
+                                </label>
+                            </cell>
+                            <cell id="186">
+                                <data id="236">
+                                    <property name="whiteSpace">nowrap</property>
+                                    <property name="dataSet">inventarios_funcionarios_cc</property>
+                                    <list-property name="boundDataColumns">
+                                        <structure>
+                                            <property name="name">identificacion_funcionario</property>
+                                            <text-property name="displayName">identificacion_funcionario</text-property>
+                                            <expression name="expression" type="javascript">dataSetRow["identificacion_funcionario"]</expression>
+                                            <property name="dataType">decimal</property>
+                                        </structure>
+                                    </list-property>
+                                    <property name="resultSetColumn">identificacion_funcionario</property>
+                                </data>
+                            </cell>
+                        </row>
+                    </grid>
+                </cell>
+            </row>
+        </grid>
+        <grid id="189">
+            <column id="190"/>
+            <column id="191"/>
+            <column id="192"/>
+            <column id="193"/>
+            <row id="194">
+                <cell id="195">
+                    <label id="204">
+                        <text-property name="text">Realizó y Verificó existencia Física:</text-property>
+                    </label>
+                </cell>
+                <cell id="196"/>
+                <cell id="197"/>
+                <cell id="198"/>
+            </row>
+            <row id="199">
+                <cell id="200">
+                    <label id="205">
+                        <text-property name="text">Nombre:	</text-property>
+                    </label>
+                </cell>
+                <cell id="201">
+                    <label id="206">
+                        <text-property name="text">__________________________________</text-property>
+                    </label>
+                </cell>
+                <cell id="202">
+                    <label id="207">
+                        <property name="textAlign">right</property>
+                        <text-property name="text">Actualizado a:</text-property>
+                    </label>
+                </cell>
+                <cell id="203">
+                    <text-data id="208">
+                        <expression name="valueExpr">new Date()</expression>
+                        <property name="contentType">html</property>
+                    </text-data>
+                </cell>
+            </row>
+        </grid>
+        <text id="209">
+            <property name="contentType">auto</property>
+            <text-property name="content"><![CDATA[Para mayor información y solicitud de inventarios: almacen@udistrital.edu.co
+Ley 734 del 2002 :Delos deberes del Servidor Pùblico. Vigilar y salvaguardar los bienes y valores que le han sido encomendados y cuidar que sean utilizados debida y racionalmente, de conformidad con los
+fines a que han sido destinados.]]></text-property>
+        </text>
+    </body>
+</report>

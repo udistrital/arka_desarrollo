@@ -84,7 +84,7 @@ $cadena1 = $this->miConfigurador->fabricaConexiones->crypto->codificar_url($cade
 $urlFinal = $url . $cadena1;
 
 // Variables
-$cadenaACodificarPlaca = "pagina=" . $this->miConfigurador->getVariableConfiguracion ( "pagina" );
+$cadenaACodificarPlaca = "pagina=" . $this->miConfigurador->getVariableConfiguracion("pagina");
 $cadenaACodificarPlaca .= "&procesarAjax=true";
 $cadenaACodificarPlaca .= "&action=index.php";
 $cadenaACodificarPlaca .= "&bloqueNombre=" . $esteBloque ["nombre"];
@@ -93,14 +93,11 @@ $cadenaACodificarPlaca .= "&funcion=consultaPlaca";
 $cadenaACodificarPlaca .= "&tiempo=" . $_REQUEST ['tiempo'];
 
 // Codificar las variables
-$enlace = $this->miConfigurador->getVariableConfiguracion ( "enlace" );
-$cadena = $this->miConfigurador->fabricaConexiones->crypto->codificar_url ( $cadenaACodificarPlaca, $enlace );
+$enlace = $this->miConfigurador->getVariableConfiguracion("enlace");
+$cadena = $this->miConfigurador->fabricaConexiones->crypto->codificar_url($cadenaACodificarPlaca, $enlace);
 
 // URL definitiva
 $urlFinalPlaca = $url . $cadena;
-
-
-
 ?>
 <script type='text/javascript'>
     $(document).ready(function () {
@@ -108,8 +105,8 @@ $urlFinalPlaca = $url . $cadena;
             minLength: 2,
             serviceUrl: '<?php echo $urlFinal; ?>',
             onSelect: function (suggestion) {
-    	        $("#<?php echo $this->campoSeguro('proveedor') ?>").val(suggestion.data);
-    	    }
+                $("#<?php echo $this->campoSeguro('proveedor') ?>").val(suggestion.data);
+            }
         });
     });
 </script>
@@ -168,7 +165,41 @@ $urlFinalPlaca = $url . $cadena;
         });
     }
     ;
+    function datosOrdenador(elem, request, response) {
+        $.ajax({
+            url: "<?php echo $urlFinal6 ?>",
+            dataType: "json",
+            data: {ordenador: $("#<?php echo $this->campoSeguro('asignacionOrdenador') ?>").val()},
+            success: function (data) {
 
+                if (data[0] != 'null') {
+
+
+
+                    $("#<?php echo $this->campoSeguro('nombreOrdenador') ?>").html('');
+                    $("<option value=''>Seleccione  ....</option>").appendTo("#<?php echo $this->campoSeguro('nombreOrdenador') ?>");
+                    $.each(data, function (indice, valor) {
+                        $("<option value='" + data[ indice ].org_identificacion + "'>" + data[ indice ].org_nombre + "</option>").appendTo("#<?php echo $this->campoSeguro('nombreOrdenador') ?>");
+
+                    });
+
+                    $("#<?php echo $this->campoSeguro('nombreOrdenador') ?>").removeAttr('disabled');
+
+                    $('#<?php echo $this->campoSeguro('nombreOrdenador') ?>').width(350);
+                    $("#<?php echo $this->campoSeguro('nombreOrdenador') ?>").select2();
+                } else {
+
+
+
+
+
+                }
+
+            }
+
+        });
+    }
+    ;
 
 
     function consultarEspacio(elem, request, response) {
@@ -176,7 +207,7 @@ $urlFinalPlaca = $url . $cadena;
             url: "<?php echo $urlFinal4 ?>",
             dataType: "json",
             data: {valorD: $("#<?php echo $this->campoSeguro('dependencia_salida') ?>").val(),
-            	valorS: $("#<?php echo $this->campoSeguro('sede_salida') ?>").val()},
+                valorS: $("#<?php echo $this->campoSeguro('sede_salida') ?>").val()},
             success: function (data) {
 
                 if (data[0] != " ") {
@@ -202,19 +233,19 @@ $urlFinalPlaca = $url . $cadena;
     $(function () {
 
 
-    	 $("#<?php echo $this->campoSeguro('selec_placa') ?>").autocomplete({
-    	    	minChars: 3,
-    	    	serviceUrl: '<?php echo $urlFinalPlaca; ?>',
-    	    	onSelect: function (suggestion) {
-    	        	
-    	    	        $("#<?php echo $this->campoSeguro('placa') ?>").val(suggestion.data);
+        $("#<?php echo $this->campoSeguro('selec_placa') ?>").autocomplete({
+            minChars: 3,
+            serviceUrl: '<?php echo $urlFinalPlaca; ?>',
+            onSelect: function (suggestion) {
 
-    	       	        
-    	    	    }
-    	                
-    	    });
+                $("#<?php echo $this->campoSeguro('placa') ?>").val(suggestion.data);
 
-        
+
+            }
+
+        });
+
+
         $("#<?php echo $this->campoSeguro('sede') ?>").change(function () {
             if ($("#<?php echo $this->campoSeguro('sede') ?>").val() != '') {
                 consultarDependencia();
@@ -235,7 +266,7 @@ $urlFinalPlaca = $url . $cadena;
 
         $("#<?php echo $this->campoSeguro('sede_salida') ?>").change(function () {
             if ($("#<?php echo $this->campoSeguro('sede_salida') ?>").val() != '') {
-             $("#<?php echo $this->campoSeguro('ubicacion_salida') ?>").html('');
+                $("#<?php echo $this->campoSeguro('ubicacion_salida') ?>").html('');
                 $("<option value='0'>Seleccione  ....</option>").appendTo("#<?php echo $this->campoSeguro('ubicacion_salida') ?>");
                 $("#<?php echo $this->campoSeguro('ubicacion_salida') ?>").val('');
                 $("#<?php echo $this->campoSeguro('ubicacion_salida') ?>").prop('selectedIndex', 0);
@@ -251,39 +282,16 @@ $urlFinalPlaca = $url . $cadena;
         $("#<?php echo $this->campoSeguro('asignacionOrdenador') ?>").change(function () {
 
             if ($("#<?php echo $this->campoSeguro('asignacionOrdenador') ?>").val() != '') {
+                $("#<?php echo $this->campoSeguro('nombreOrdenador') ?>").removeAttr('disabled');
                 datosOrdenador();
             } else {
                 $("#<?php echo $this->campoSeguro('nombreOrdenador') ?>").val('');
+                $("#<?php echo $this->campoSeguro('id_ordenador') ?>").val('');
             }
         });
 
     });
 
-    function datosOrdenador(elem, request, response) {
-        $.ajax({
-            url: "<?php echo $urlFinal6 ?>",
-            dataType: "json",
-            data: {ordenador: $("#<?php echo $this->campoSeguro('asignacionOrdenador') ?>").val()},
-            success: function (data) {
 
-                if (data[0] != 'null') {
-
-                    $("#<?php echo $this->campoSeguro('nombreOrdenador') ?>").val(data[0]);
-                    $("#<?php echo $this->campoSeguro('id_ordenador') ?>").val(data[1]);
-                    $("#<?php echo $this->campoSeguro('tipo_ordenador') ?>").val(data[2]);
-                    $("#<?php echo $this->campoSeguro('identificacion_ordenador') ?>").val(data[1]);
-                } else {
-
-
-
-
-
-                }
-
-            }
-
-        });
-    }
-    ;
 </script>
 

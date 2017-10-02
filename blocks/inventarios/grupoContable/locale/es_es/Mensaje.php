@@ -33,8 +33,8 @@ $this->idioma["errorCatalogoExiste"]="Error. El catálogo NO existe";
 $this->idioma["errorIdE"]="Error. Identificador No Definido";
 $this->idioma["errorIdP"]="Error. Identificador Padre No definido";
 $this->idioma["errorLista"]="No se encuentran elementos registrados";
-$this->idioma["errorIdPadreExiste"] =" Error. El identificador Padre no es válido";
-$this->idioma["errorIdElementoExiste"] =" Error. El identificador ya está asociado al nivel Padre";
+$this->idioma["errorIdPadreExiste"] =" Error. El identificador ya está asociado a una Cuenta Contable.";
+$this->idioma["errorIdElementoExiste"] =" Error. El identificador ya está asociado a una Cuenta Contable.";
 $this->idioma["errorNombreElementoExiste"]=" Error. El nombre ya existe en ese nivel";
 $this->idioma["errorIdR"]=" Identificador No Definido";
 $this->idioma['errorCambioNombre']=" Error al cambiar Nombre";
@@ -50,12 +50,12 @@ $this->idioma["nombreTitulo"]=" Ingrese el Nombre del Catálogo Grupo de Manejo 
 $this->idioma["nombreBloqueTitulo"]="muchasCosas";
 
 
-$this->idioma["crear"]="Crear Catálogo Grupo de Manejo de Bienes";
+$this->idioma["crear"]="Crear Catálogo Cuentas Contables";
 $this->idioma["creacionExitosa"]="Creación exitosa";
 $this->idioma['operacionExitosa']="Operación Exitosa";
 
 
-$this->idioma["id"]="Código Elemento";
+$this->idioma["id"]="Código Cuenta Contable";
 $this->idioma["idPadre"]="Identificador Padre";
 $this->idioma["idPadreTitulo"]="Añadir Identificador";
 $this->idioma["idTitulo"]="Ingrese el Identificador Elemento";
@@ -71,7 +71,7 @@ $this->idioma["cuentaDebitoTitulo"]="";
 $this->idioma["cuentaCreditoTitulo"]="";
 $this->idioma["vidautil"]="Vida Útil";
 $this->idioma["vidautilTitulo"]="Digite Número de Meses";
-$this->idioma["nombreElemento"]="Nombre Elemento";
+$this->idioma["nombreElemento"]="Nombre Cuenta Contable";
 $this->idioma["nombreElementoTitulo"]="";
 $this->idioma["depreciacionTitulo"]="";
 $this->idioma["depreciacion"]="¿Aplica Depreciación?";
@@ -81,20 +81,20 @@ $this->idioma["tipoBien"]="Tipo de Bien";
 $this->idioma["reiniciar"]="Reiniciar";
 $this->idioma["reiniciarTitulo"]="Reiniciar valores";
 
-$this->idioma["agregar"]="Agregar Elemento";
-$this->idioma["agregarTitulo"]="Agregar Elemento";
+$this->idioma["agregar"]="Agregar Cuenta Contable";
+$this->idioma["agregarTitulo"]="Agregar Cuenta Contable";
 $this->idioma["catalogoVacio"]="El Catálogo Grupo de Manejo de Bienes se encuentra vacío";
 
 
 
-$this->idioma["nombreCatalogo"]="Nombre Catálogo Grupo de Manejo de Bienes";
+$this->idioma["nombreCatalogo"]="Nombre Catálogo Cuentas Contables";
 $this->idioma["nombreCatalogoTitulo"]="Modifique el nombre del Catálogo Grupo de Manejo de Bienes";
 
-$this->idioma["cambiarNombre"]=" Cambiar Nombre del Catálogo Grupo de Manejo de Bienes";
+$this->idioma["cambiarNombre"]=" Cambiar Nombre del Grupo";
 $this->idioma["cambiarNombreTitulo"]=" Cambiar Nombre";
 $this->idioma['cambioNombre']="El Nombre ha cambiado con éxito";
 
-$this->idioma['crearLabel']="Crear Catálogo Grupo de Manejo de Bienes";
+$this->idioma['crearLabel']="Crear Catálogo Cuentas Contables";
 
 
 $this->idioma["listaMostrar"]="Ver";
@@ -116,5 +116,5 @@ $this->idioma["listaActivar"]="Activar Catálogo";
 
 
 $this->idioma['catalogo']="Catálogo Grupo de Manejo de Bienes";
-$this->idioma['elementos']="Elementos";
+$this->idioma['elementos']="Cuentas Contables";
 ?>

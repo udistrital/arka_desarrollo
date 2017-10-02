@@ -101,9 +101,12 @@ class registrarForm {
             'cuenta_salida' => $cuenta_contable,
         );
 
-        $cadenaSql = $this->miSql->getCadenaSql('mostrarInfoDepreciar', $datos);
+        echo $cadenaSql = $this->miSql->getCadenaSql('mostrarInfoDepreciar', $datos);
         $elementos = $esteRecursoDB->ejecutarAcceso($cadenaSql, "busqueda");
 
+        
+        var_dump($elementos);
+        exit;
         // ---------------- SECCION: Parámetros Generales del Formulario ----------------------------------
         $esteCampo = $esteBloque ['nombre'];
         $atributos ['id'] = $esteCampo;

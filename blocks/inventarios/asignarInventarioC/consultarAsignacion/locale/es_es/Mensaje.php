@@ -26,6 +26,9 @@ $this->idioma ["aprobacionCheckTitulo"] ="Seleccione en caso de ser aprobado";
 $this->idioma ["botonDocumentoSoporte"] ="Documento Soporte Asignación Elementos ";
 
 $this->idioma ["botonAceptar"] ="Modificar Elementos";
+$this->idioma ["botonAceptar2"] ="Aceptar";
+
+
 $this->idioma ["botonCancelar"] ="Cancelar";
 $this->idioma ["botonContinuar"] ="Continuar";
 $this->idioma ["botonConsultar"] ="Consultar";

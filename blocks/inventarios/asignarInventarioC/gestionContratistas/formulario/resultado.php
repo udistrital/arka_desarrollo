@@ -65,10 +65,6 @@ class registrarForm {
 		
 		$resultado = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
 		
-		// $cadenaSql = $this->miSql->getCadenaSql ( 'consultarEntrada', $arreglo );
-		
-		// $entrada = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
-		
 		// ---------------- SECCION: Parámetros Generales del Formulario ----------------------------------
 		$esteCampo = $esteBloque ['nombre'];
 		$atributos ['id'] = $esteCampo;
@@ -92,9 +88,10 @@ class registrarForm {
 		// ---------------- SECCION: Controles del Formulario -----------------------------------------------
 		
 		if (isset ( $_REQUEST ['mensaje'] )) {
+			
 			switch ($_REQUEST ['mensaje']) {
 				case 'registro' :
-					$atributos ['mensaje'] = "<center>SE REGISTRO N#".$_REQUEST['num_exito']." CON EXITO LOS CONTRATISTAS VALIDOS </center>";
+					$atributos ['mensaje'] = "<center>SE REGISTRO N#" . $_REQUEST ['num_exito'] . " CON EXITO LOS CONTRATISTAS VALIDOS </center>";
 					$atributos ["estilo"] = 'success';
 					
 					break;
@@ -107,6 +104,11 @@ class registrarForm {
 				
 				case 'actualizo' :
 					$atributos ['mensaje'] = "<center>SE ACTUALIZO CONTRATO CON EXITO</center>";
+					$atributos ["estilo"] = 'success';
+					
+					break;
+				case 'elimino' :
+					$atributos ['mensaje'] = "<center>SE HA ELIMINADO CON EXITO EL CONTRATISTA</center>";
 					$atributos ["estilo"] = 'success';
 					
 					break;
@@ -130,6 +132,16 @@ class registrarForm {
 					$atributos ['mensaje'] = "<center>ERROR AL ACTUALIZAR EL TIPO DE CONTRATO.<BR>YA EXISTE UN CONTRATO VIGENTE DE ORDEN DE PRESTACIÓN DE SERVICIOS (OPS) CON EL CONTRATISTA.</center>";
 					$atributos ["estilo"] = 'error';
 					break;
+				
+				case 'errorActualizacion' :
+					$atributos ['mensaje'] = "<center>ERROR AL ACTUALIZAR EL CONTRATO.<BR>VERIFIQUE LOS DATOS</center>";
+					$atributos ["estilo"] = 'error';
+					break;
+				
+				case 'errorEliminar' :
+					$atributos ['mensaje'] = "<center>ERROR AL INTENTAR ELIMINAR CONTRATO CON EL CONTRATISTA<BR>Comuniquese con el Administrador</center>";
+					$atributos ["estilo"] = 'error';
+					break;
 			}
 			
 			if ($resultado != false) {
@@ -138,42 +150,17 @@ class registrarForm {
 					
 					$Log_errores = unserialize ( $_REQUEST ['log_error'] );
 					
+					// var_dump($Log_errores);exit;
+					
 					foreach ( $Log_errores as $valor => $key ) {
 						
-						$atributos ['mensaje'] .= "<br>" . $valor . " en los Siguientes Datos en el Archivo: ";
-						$atributos ['mensaje'] .= "<center><table>
-								<thead>
-					                <tr>
-					                   <th>Vigencia</th>
-					                    <th>Tipo de Contrato</th>
-										<th>Número de Contrato</th>
-					                    <th>Identificación<br>Contratista</th>
-										<th>Nombre y Apellidos<br>Contratistas</th>
-										<th>Fecha de Inicio<br>Contrato</th>
-								        <th>Fecha de Final<br>Contrato</th>
-									</tr>
-					            </thead>";
+						$atributos ['mensaje'] .= "<br>" . $valor . " en la(s) siguiente(s) fila(s):<br> ";
+						$atributos ['mensaje'] .= "";
 						
-						foreach ( $key as $val ) {
-							
-							if ($val ['tipo_contrato'] == '2') {
-								$val ['tipo_contrato'] = 'CPS';
-							} else {
-								
-								$val ['tipo_contrato'] = 'OPS';
-							}
-							$atributos ['mensaje'] .= "<tr>
-	                   					 		<td><center>" . $val ['vigencia'] . "</center></td>
-							                    <td><center>" . $val ['tipo_contrato'] . "</center></td>
-         					                    <td><center>" . $val ['numero'] . "</center></td> 		
-							                   	<td><center>" . $val ['identificacion'] . "</center></td>
-							                    <td><center>" . $val ['nombres'] . "</center></td>
-							                    <td><center>" . $val ['fecha_inicial'] . "</center></td>
-							                    <td><center>" . $val ['fecha_final'] . "</center></td>				
-						                    </tr>";
-						}
+						$filas = implode ( ",", $key );
+						$atributos ['mensaje'] .= $filas;
 						
-						$atributos ['mensaje'] .= "</table></center><br>";
+						$atributos ['mensaje'] .= "<br>";
 					}
 				}
 				
@@ -414,6 +401,7 @@ class registrarForm {
 							<th>Fecha de Inicio<br>Contrato</th>
 					        <th>Fecha de Final<br>Contrato</th>
 							<th>Modificar</th>
+						    <th>Eliminar</th>
 		                </tr>
 		            </thead>
             	</table>";

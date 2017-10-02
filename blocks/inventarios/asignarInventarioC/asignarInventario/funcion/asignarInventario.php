@@ -26,7 +26,6 @@ class RegistradorActa {
 	function procesarFormulario() {
 		
 		
-		
 		$fechaActual = date ( 'Y-m-d' );
 		
 		$esteBloque = $this->miConfigurador->getVariableConfiguracion ( "esteBloque" );
@@ -37,6 +36,17 @@ class RegistradorActa {
 		
 		$conexion = "inventarios";
 		$esteRecursoDB = $this->miConfigurador->fabricaConexiones->getRecursoDB ( $conexion );
+                
+                
+//                 $numeroaux=7;
+//           $cadenaSql2 = $this->miSql->getCadenaSql('estadoPazSalvo2',$numeroaux);
+//                $estado_pz = $esteRecursoDB->ejecutarAcceso($cadenaSql2, "acceso", "estadoPazSalvo");
+//                var_dump($estado_pz);
+//                $numeroaux=$numeroaux+1;
+//                 $cadenaSql2 = $this->miSql->getCadenaSql('estadoPazSalvo2',$numeroaux);
+//                $estado_pz = $esteRecursoDB->ejecutarAcceso($cadenaSql2, "acceso", "estadoPazSalvo");
+//                var_dump($estado_pz);
+//                exit;
 		
 		// recuperar datos de la asignacion
 		$datos = array (
@@ -52,15 +62,21 @@ class RegistradorActa {
 			}
 		}
 		;
-		
+		$_REQUEST ['supervisor']=str_replace("CC", "",$_REQUEST ['supervisor']);
 		foreach ( $items as $key => $values ) {
+                        
 			$datosAsignacion = array (
 					$_REQUEST ['contratista'],
 					$_REQUEST ['supervisor'],
 					$items [$key],
 					1,
-					$fechaActual 
-			);
+					$fechaActual,
+					'CPS',
+					'null',
+					date('Y'),
+                                        $_REQUEST ['nombreContratista'],
+			)
+			;
 			
 			$datosInactivar = array (
 					$items [$key],
@@ -74,14 +90,27 @@ class RegistradorActa {
 			$cadenaSql2 = $this->miSql->getCadenaSql ( 'inactivarElemento', $datosInactivar );
 			
 			$inactivar = $esteRecursoDB->ejecutarAcceso ( $cadenaSql2, "acceso", $datosInactivar, "inactivarElemento" );
+                        
+                       
 		}
+                
+                $datosPaz = array (
+					$_REQUEST ['contratista'],
+					0,
+					$fechaActual
+			)
+			;
+//                
+//                 $cadenaSql2 = $this->miSql->getCadenaSql ( 'actualizarPazSalvo', $datosPaz );			
+//		 $inactivarPaz = $esteRecursoDB->ejecutarAcceso ( $cadenaSql2, "acceso");
+//                 exit;
 		// inactivar item para asignar
 		if ($inactivar == true && $asignar == true) {
 			redireccion::redireccionar ( 'inserto', $datos );
-			exit;
+			exit ();
 		} else {
 			redireccion::redireccionar ( 'noInserto', $_REQUEST ['usuario'] );
-			exit;
+			exit ();
 		}
 	}
 	function resetForm() {

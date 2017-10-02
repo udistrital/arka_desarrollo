@@ -45,8 +45,8 @@ class Funcion {
     function funcionEjemplo() {
         include_once ($this->ruta . "/funcion/funcionEjemplo.php");
     }
-    
-     function descargarInventario() {
+
+    function descargarInventario() {
         include_once ($this->ruta . "/funcion/descargarInventario.php");
     }
 
@@ -54,12 +54,9 @@ class Funcion {
         include_once ($this->ruta . "funcion/procesarAjax.php");
     }
 
-  
     function action() {
 
 
-
-// 		
         // Evitar que se ingrese codigo HTML y PHP en los campos de texto
         // Campos que se quieren excluir de la limpieza de código. Formato: nombreCampo1|nombreCampo2|nombreCampo3
         $excluir = "";
@@ -88,7 +85,6 @@ class Funcion {
 
                 $this->consultarOrden();
             }
-
         }
     }
 
@@ -132,4 +128,5 @@ class Funcion {
     }
 
 }
+
 ?>

@@ -25,11 +25,7 @@
             });
         });
 
-                     $('#tablaTitulos').dataTable( {
-                "sPaginationType": "full_numbers",
-                "aLengthMenu": [[10,25, 50,100,-1], [10,25, 50,100,'Todos']]
-                 } );
-
+                 
 
                      
                      
@@ -46,8 +42,8 @@ $("#<?php echo $this->campoSeguro('selecc_registros')?>").select2();
  
  $('#<?php echo $this->campoSeguro('numero_entrada')?>').width(400);
  $("#<?php echo $this->campoSeguro('numero_entrada')?>").select2({
-             	 placeholder: "Ingrese Mínimo 3 Caracteres de Búsqueda",
-              	 minimumInputLength: 3,
+             	 placeholder: "Ingrese Mínimo 1 Caracter de Búsqueda",
+              	 minimumInputLength: 1,
               	 });
  $("#<?php echo $this->campoSeguro('sede')?>").select2();
  $("#<?php echo $this->campoSeguro('dependencia')?>").select2();

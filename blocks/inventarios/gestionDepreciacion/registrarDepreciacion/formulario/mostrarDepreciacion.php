@@ -121,6 +121,9 @@ class registrarForm {
                                     <th>Meses a Depreciar</th>
                                     <th>Fecha Salida</th>
                                     <th>Fecha Corte</th>
+				    <th>Descripcion</th>
+                                    <th>Sede</th>
+                                    <th>Ubicacion</th>
                                     <th>Periodos</th>
                                     <th>Valor Histórico</th>
                                     <th>Ajuste Inflacionario</th>

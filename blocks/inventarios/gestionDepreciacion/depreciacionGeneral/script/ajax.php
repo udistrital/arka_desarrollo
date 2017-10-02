@@ -83,6 +83,7 @@ $urlFinal2 = $url . $cadena2;
                     {data: "total_valor_historico"},
                     {data: "total_ajuste_inflacion"},
                     {data: "total_valor_ajustado"},
+                    {data: "total_cuota"},
                     {data: "total_depreciacion"},
                     {data: "total_ajuste_inflacionario"},
                     {data: "total_depreciacion_circular56"},

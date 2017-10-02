@@ -163,28 +163,34 @@ class Formulario {
 		}
 	}
 	function agregarElementoCatalogo() {
+            
 		$datos = array (
 				'idPadre' => $_REQUEST ['idPadre'],
 				'id' => $_REQUEST ['id'],
 				'idCatalogo' => $_REQUEST ['idCatalogo'],
-				'nombreElemento' => $_REQUEST ['nombreElemento'],
+				'nombreElemento' => strtoupper ($_REQUEST ['nombreElemento']),
 				'tipoBien' => $_REQUEST ['tipoBien'] 
 		);
 		
 		$cadena_sql = $this->sql->getCadenaSql ( "crearElementoCatalogo", $datos );
-		$registros = $this->esteRecursoDB->ejecutarAcceso ( $cadena_sql, 'acceso' ,$datos,"crearElementoCatalogo");
-		
+            
+               
+		$registros = $this->esteRecursoDB->ejecutarAcceso ( $cadena_sql, 'busqueda' ,$datos,"crearElementoCatalogo");
+                
+           
+             
 		if (! $registros) {
 			$this->miConfigurador->setVariableConfiguracion ( 'mostrarMensaje', 'errorCreacion' );
 			$this->mensaje ();
 			exit ();
 		}
 		
+              
 		$datos2 = array (
 				'idCuenta' => $registros [0] [0],
 				'cuentasalida' => (isset ( $_REQUEST ['cuentaSalida'] ) ? $_REQUEST ['cuentaSalida'] : ''),
 				'cuentaentrada' => (isset ( $_REQUEST ['cuentaEntrada'] ) ? $_REQUEST ['cuentaEntrada'] : ''),
-				'depreciacion' => (isset ( $_REQUEST ['depreciacion'] ) ? $_REQUEST ['depreciacion'] : ''),
+				'depreciacion' => (isset ( $_REQUEST ['depreciacion'] ) ? $_REQUEST ['depreciacion'] : '0'),
 				'vidautil' => (isset ( $_REQUEST ['vidautil'] ) ? $_REQUEST ['vidautil'] : ''),
 				'cuentacredito' => (isset ( $_REQUEST ['cuentaCredito'] ) ? $_REQUEST ['cuentaCredito'] : '0'),
 				'cuentadebito' => (isset ( $_REQUEST ['cuentaDebito'] ) ? $_REQUEST ['cuentaDebito'] : '0') 
@@ -192,6 +198,10 @@ class Formulario {
 		
 		$cadena_sql2 = $this->sql->getCadenaSql ( "crearElementoCatalogoDescripcion", $datos2 );
 		$registros2 = $this->esteRecursoDB->ejecutarAcceso ( $cadena_sql2,'acceso' ,$datos,"crearElementoCatalogoDescripcion"); 
+       
+                
+                
+               
 		
 		if (! $registros2) {
 			$this->miConfigurador->setVariableConfiguracion ( 'mostrarMensaje', 'errorCreacion' );

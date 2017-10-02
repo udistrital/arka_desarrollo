@@ -31,6 +31,11 @@ if ($_REQUEST ['funcion'] == 'Consulta') {
         $total_dep56 = 0;
         $total_libros = 0;
         $count = 0;
+        $validacion_consumo = 0;
+        $tipo_grupo = 0;
+        $cuenta_salida = 0;
+        $total_salidas = 0 ;
+        $total_cuota = 0;
 
         foreach ($items as $key => $values) {
             $fecha_nueva = $items[$key]['fecha_registro'];
@@ -74,16 +79,38 @@ if ($_REQUEST ['funcion'] == 'Consulta') {
             $total_ajusteinflacion = $total_ajusteinflacion + $items[$key]['ajuste_inflacionario'];
             $total_valorajustado = $total_valorajustado + $valor_ajustado;
             $total_depreciacion = $total_depreciacion + $dep_acumulada;
+            $total_cuota = $total_cuota + $items[$key]['valor_cuota'];
             $total_api = $total_api + $api_acumulada;
             $total_dep56 = $total_dep56 + $circular_depreciacion;
             $total_libros = $total_libros + $valor_libros;
             $nombre_cuenta = $items[$key]['grupo_nombre'];
 
+            if ($validacion_consumo == 0) {
+                $tipo_grupo = $items[$key]['tipo_grupo'];
+                $cuenta_salida = $items[$key]['grupo_cuentasalida'];
+                $validacion_consumo = 1;
+            }
 
 
             $count ++;
         }
+        if ($tipo_grupo == 1) {
+            $cadenaSql = $this->sql->getCadenaSql('mostrarEntradaConsumo', $cuenta_salida);
+            $total_entrada = $esteRecursoDB->ejecutarAcceso($cadenaSql, "busqueda");
+            
+            $total_salidas = $total_valorhistorico;
+            
+            $total_valorhistorico =  $total_entrada[0][0];
+            $total_valorajustado =  $total_entrada[0][0] - $total_salidas;
+            
+            $total_libros = $total_entrada[0][0] - $total_libros;
+            
+            
+           
+        }
 
+            
+             
         $codificar[$llave] = array(
             'cuenta' => $llave,
             'grupo' => $nombre_cuenta,
@@ -91,6 +118,7 @@ if ($_REQUEST ['funcion'] == 'Consulta') {
             'total_valor_historico' => $total_valorhistorico,
             'total_ajuste_inflacion' => $total_ajusteinflacion,
             'total_valor_ajustado' => $total_valorajustado,
+            'total_cuota' => $total_cuota,
             'total_depreciacion' => $total_depreciacion,
             'total_ajuste_inflacionario' => $total_api,
             'total_depreciacion_circular56' => $total_dep56,
@@ -104,6 +132,7 @@ if ($_REQUEST ['funcion'] == 'Consulta') {
             'total_valor_historico' => "<center>" . number_format($total_valorhistorico, 2, ',', '.') . "</center>",
             'total_ajuste_inflacion' => "<center>" . number_format($total_ajusteinflacion, 2, ',', '.') . "</center>",
             'total_valor_ajustado' => "<center>" . number_format($total_valorajustado, 2, ',', '.') . "</center>",
+            'total_cuota' => "<center>" . number_format($total_cuota, 2, ',', '.') . "</center>",
             'total_depreciacion' => "<center>" . number_format($total_depreciacion, 2, ',', '.') . "</center>",
             'total_ajuste_inflacionario' => "<center>" . number_format($total_api, 2, ',', '.') . "</center>",
             'total_depreciacion_circular56' => "<center>" . number_format($total_dep56, 2, ',', '.') . "</center>",

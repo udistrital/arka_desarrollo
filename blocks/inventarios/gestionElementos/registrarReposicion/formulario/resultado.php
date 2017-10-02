@@ -53,17 +53,23 @@ class registrarForm {
         $conexion = "inventarios";
         $esteRecursoDB = $this->miConfigurador->fabricaConexiones->getRecursoDB($conexion);
 
-        $conexion = "sicapital";
-        $esteRecursoDBO = $this->miConfigurador->fabricaConexiones->getRecursoDB($conexion);
 
         if (isset($_REQUEST ['responsable']) && $_REQUEST ['responsable'] != '') {
             $funcionario = $_REQUEST ['responsable'];
         } else {
             $funcionario = '';
         }
-
+        $reslentrada='si';
         if (isset($_REQUEST ['placa']) && $_REQUEST ['placa'] != '') {
             $placa = $_REQUEST ['placa'];
+            $cadenaSql = $this->miSql->getCadenaSql('consultarEstadoEntrada', $placa);
+            $resultadoPlaca = $esteRecursoDB->ejecutarAcceso($cadenaSql, "busqueda");
+            if($resultadoPlaca==false || $resultadoPlaca[0][0]!='2'){
+                $reslentrada='no';
+            }
+            else{
+                $reslentrada='si';
+            }
         } else {
             $placa = '';
         }
@@ -74,18 +80,22 @@ class registrarForm {
             $serial = '';
         }
 
-        if (isset($_REQUEST ['dependencia']) && $_REQUEST ['dependencia'] != '') {
-            $dependencia = $_REQUEST ['dependencia'];
+        if (isset($_REQUEST ['dependencia_salida']) && $_REQUEST ['dependencia_salida'] != '') {
+            $dependencia = $_REQUEST ['dependencia_salida'];
         } else {
             $dependencia = '';
         }
 
-        if (isset($_REQUEST ['sede']) && $_REQUEST ['sede'] != '') {
-            $sede = $_REQUEST ['sede'];
+        if (isset($_REQUEST ['sede_salida']) && $_REQUEST ['sede_salida'] != '') {
+            $sede = $_REQUEST ['sede_salida'];
         } else {
             $sede = '';
         }
-
+        if (isset($_REQUEST ['ubicacion_salida']) && $_REQUEST ['ubicacion_salida'] != '') {
+            $ubicacion = $_REQUEST ['ubicacion_salida'];
+        } else {
+            $ubicacion = '';
+        }
 
         if (isset($_REQUEST ['numero_entrada']) && $_REQUEST ['numero_entrada'] != '') {
             $entrada = $_REQUEST ['numero_entrada'];
@@ -113,14 +123,15 @@ class registrarForm {
             'fecha_inicio' => $finicio,
             'fecha_final' => $ffinal,
             'numero_entrada' => $entrada,
-            'sede' => $sede
+            'sede' => $sede,
+            'ubicacion' => $ubicacion
         );
 
-         $cadenaSql = $this->miSql->getCadenaSql('consultarAprobadas', $arreglo);
-         
-                  
+        $cadenaSql = $this->miSql->getCadenaSql('consultarAprobadas', $arreglo);
+
+
         $elemento = $esteRecursoDB->ejecutarAcceso($cadenaSql, "busqueda");
-        
+
 
 // ---------------- SECCION: Parámetros Generales del Formulario ----------------------------------
         $esteCampo = $esteBloque ['nombre'];
@@ -150,7 +161,7 @@ class registrarForm {
         $directorio .= $this->miConfigurador->getVariableConfiguracion("enlace");
 
         $variable = "pagina=" . $miPaginaActual;
-        $variable .= "&usuario=".$_REQUEST['usuario']; 
+        $variable .= "&usuario=" . $_REQUEST['usuario'];
         $variable = $this->miConfigurador->fabricaConexiones->crypto->codificar_url($variable, $directorio);
 
 // ---------------- CONTROL: Cuadro de Texto --------------------------------------------------------
@@ -185,8 +196,9 @@ class registrarForm {
 
             echo "<thead>
                         <tr>
-                        <th>Dependencia</th>
+                        
                             <th>Sede</th>
+                            <th>Dependencia</th>
                             <th>Ubicacion</th>
                             <th>ID Funcionario</th>
 			    <th>Nombre<br>Funcionario</th>
@@ -209,8 +221,9 @@ class registrarForm {
 
 
                 $mostrarHtml = "<tr>
-                                <td><center>" . $elemento [$i] ['dependencia'] . "</center></td>
+                                
                                 <td><center>" . $elemento [$i] ['sede'] . "</center></td>
+                                    <td><center>" . $elemento [$i] ['dependencia'] . "</center></td>
                                 <td><center>" . $elemento [$i] ['ubicacion'] . "</center></td>
                                 <td><center>" . $elemento [$i] ['funcionario'] . "</center></td>
                                 <td><center>" . $elemento [$i] ['funcionario_nombre'] . "</center></td>
@@ -239,6 +252,27 @@ class registrarForm {
             $atributos ['tipoEtiqueta'] = 'fin';
             echo $this->miFormulario->formulario($atributos);
         } else {
+            
+            if($reslentrada=='no'){
+                $mensaje = "La entrada No. ". $resultadoPlaca[0][1]." no se<br>encuentra en estado Aprobado.";
+
+// ---------------- CONTROL: Cuadro de Texto --------------------------------------------------------
+            $esteCampo = 'mensajeRegistro';
+            $atributos ['id'] = $esteCampo;
+            $atributos ['tipo'] = 'error';
+            $atributos ['estilo'] = 'textoCentrar';
+            $atributos ['mensaje'] = $mensaje;
+
+            $tab ++;
+
+// Aplica atributos globales al control
+            $atributos = array_merge($atributos, $atributosGlobales);
+            echo $this->miFormulario->cuadroMensaje($atributos);
+// --------------- FIN CONTROL : Cuadro de Texto --------------------------------------------------
+            }
+            else{
+                
+            
 
             $mensaje = "No Se Encontraron<br>Elementos Asociados.";
 
@@ -255,6 +289,7 @@ class registrarForm {
             $atributos = array_merge($atributos, $atributosGlobales);
             echo $this->miFormulario->cuadroMensaje($atributos);
 // --------------- FIN CONTROL : Cuadro de Texto --------------------------------------------------
+            }
         }
 
         echo $this->miFormulario->agrupacion('fin');

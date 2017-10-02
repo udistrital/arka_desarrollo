@@ -48,9 +48,7 @@ class registrarForm {
         $conexion = "inventarios";
         $esteRecursoDB = $this->miConfigurador->fabricaConexiones->getRecursoDB($conexion);
 
-        $conexion = "sicapital";
-        $esteRecursoDBO = $this->miConfigurador->fabricaConexiones->getRecursoDB($conexion);
-
+  
         $cadenaSql = $this->miSql->getCadenaSql("seleccion_info_elemento", $_REQUEST ['id_elemento_ind']);
 
         $elemento = $esteRecursoDB->ejecutarAcceso($cadenaSql, "busqueda");

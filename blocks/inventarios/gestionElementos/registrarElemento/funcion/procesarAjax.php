@@ -22,6 +22,7 @@ if ($_REQUEST ['funcion'] == 'consultaProveedor') {
 
 
 
+
 	$cadenaSql = $this->sql->getCadenaSql ( 'buscar_Proveedores', $_GET ['query'] );
 
 	$resultadoItems = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );

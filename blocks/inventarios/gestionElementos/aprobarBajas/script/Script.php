@@ -7,12 +7,12 @@ $funcion [$indice ++] = "jquery.validationEngine.js";
 $funcion [$indice ++] = "jquery.validationEngine-es.js";
 $funcion [$indice ++] = "jquery-te.js";
 $funcion [$indice ++] = "select2.js";
-$funcion[$indice++]="select2_locale_es.js";
+$funcion [$indice ++] = "select2_locale_es.js";
 $funcion [$indice ++] = "jquery.dataTables.js";
 $funcion [$indice ++] = "jquery.dataTables.min.js";
 $funcion [$indice ++] = "timepicker.js";
-$funcion[$indice ++]="modernizr.custom.js";
-$funcion[$indice ++]="jquery.dlmenu.js";
+$funcion [$indice ++] = "modernizr.custom.js";
+$funcion [$indice ++] = "jquery.dlmenu.js";
 
 $rutaBloque = $this->miConfigurador->getVariableConfiguracion ( "host" );
 $rutaBloque .= $this->miConfigurador->getVariableConfiguracion ( "site" );

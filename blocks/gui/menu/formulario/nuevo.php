@@ -26,6 +26,33 @@ $_REQUEST ['usuario'] = $id_usuario;
 $cadena_sql = $miSql->getCadenaSql ( "datosUsuario", $id_usuario );
 $regUser = $esteRecursoDB->ejecutarAcceso ( $cadena_sql, "busqueda" );
 
+{
+	$url = $this->miConfigurador->getVariableConfiguracion ( "host" );
+	$url .= $this->miConfigurador->getVariableConfiguracion ( "site" );
+	
+	$url .= "/index.php?";
+	
+	// WEB Services
+	$cadenaACodificar16 = "pagina=proveedor";
+	$cadenaACodificar16 .= "&procesarAjax=true";
+	$cadenaACodificar16 .= "&action=index.php";
+	$cadenaACodificar16 .= "&bloqueNombre=proveedor";
+	$cadenaACodificar16 .= "&bloqueGrupo=webServices";
+	$cadenaACodificar16 .= "&funcion=actualizarParametros";
+	$cadenaACodificar16 .= "&tipo_parametro=proveedores";
+	$cadenaACodificar16 .= "&webServices=true";
+	
+      
+        
+	// Codificar las variables
+	$enlace = $this->miConfigurador->getVariableConfiguracion ( "enlace" );
+	$cadena16 = $this->miConfigurador->fabricaConexiones->crypto->codificar_url ( $cadenaACodificar16, $enlace );
+	
+	// URL definitiva
+	$urlWS = $url . $cadena16;
+        
+}
+
 if ($regUser [0] ['estado'] != 1) {
 	$parametro ['cod_app'] = '';
 	$parametro ['cod_rol'] = '';

@@ -49,22 +49,32 @@ $(function() {
 
              $('#tablaTitulos').dataTable( {
 //              	 serverSide: true,
-				language: {
-                url: "<?php echo $urlDirectorio?>"
-            			},
-             	processing: true,
-		"aLengthMenu": [[10,25, 50,100,300,500,1000,-1], [10,25, 50,100,300,500,1000,'Todos']],
-//                   ordering: true,
-                  searching: true,
-//                deferRender: true,
-      //             sScrollY: 500	,
-        //          bScrollCollapse: true,
-                  info:true,
-//                   lengthChange:true,
-   		    "pagingType": "full_numbers",
-//                   stateSave: true,
-         //          renderer: "bootstrap",
-         //          retrieve: true,
+		
+             	"language": {
+                    "sProcessing": "Procesando...",
+                    "sLengthMenu": "Mostrar _MENU_ registros",
+                    "sZeroRecords": "No se encontraron resultados",
+                    "sSearch": "Buscar:",
+                    "sLoadingRecords": "Cargando...",
+                    "sEmptyTable": "Ningún dato disponible en esta tabla",
+                    "sInfo": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+                    "sInfoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
+                    "sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
+                    "oPaginate": {
+                        "sFirst": "Primero",
+                        "sLast": "Ãšltimo",
+                        "sNext": "Siguiente",
+                        "sPrevious": "Anterior"
+                    }
+                },
+                processing: true,
+                searching: true,
+                info:true,
+                "scrollY":"400px",
+                "scrollCollapse": false, 
+                "pagingType": "full_numbers",
+                "bLengthChange": false,
+                "bPaginate": false,
                   ajax:{
                       url:"<?php echo $urlFinal?>",
                       dataSrc:"data"                                                                  
@@ -78,6 +88,7 @@ $(function() {
                   { data :"fecha_inicio" },
                   { data :"fecha_final" },
                   { data :"modificar" },
+                  { data :"eliminar" },
                             ]
              });
                   

@@ -1,12 +1,10 @@
 <?php
-
 /**
  *
  * Los datos del bloque se encuentran en el arreglo $esteBloque.
  */
-
 // Variables
-$cadenaACodificar = "pagina=" . $this->miConfigurador->getVariableConfiguracion ( "pagina" );
+$cadenaACodificar = "pagina=" . $this->miConfigurador->getVariableConfiguracion("pagina");
 $cadenaACodificar .= "&procesarAjax=true";
 $cadenaACodificar .= "&action=index.php";
 $cadenaACodificar .= "&bloqueNombre=" . $esteBloque ["nombre"];
@@ -16,78 +14,90 @@ $cadenaACodificar .= "&usuario=" . $_REQUEST ['usuario'];
 $cadenaACodificar .= "&funcionario=" . $_REQUEST ['usuario'];
 $cadenaACodificar .= "&tiempo=" . $_REQUEST ['tiempo'];
 
-if (isset ( $_REQUEST ['accesoCondor'] ) && $_REQUEST ['accesoCondor'] == 'true') {
-	
-	$_REQUEST ['funcionario'] = $_REQUEST ['usuario'];
-	$cadenaACodificar .= "&accesoCondor='true'";
+if (isset($_REQUEST ['accesoCondor']) && $_REQUEST ['accesoCondor'] == 'true') {
+
+    $_REQUEST ['funcionario'] = $_REQUEST ['usuario'];
+    $cadenaACodificar .= "&accesoCondor='true'";
 }
 
-if (isset ( $_REQUEST ['funcionario'] ) && $_REQUEST ['funcionario'] != '') {
-	$funcionario = $_REQUEST ['funcionario'];
+if (isset($_REQUEST ['funcionario']) && $_REQUEST ['funcionario'] != '') {
+    $funcionario = $_REQUEST ['funcionario'];
 } else {
-	$funcionario = '';
+    $funcionario = '';
 }
-
-
+if (isset($_REQUEST ['selec_nivel']) && $_REQUEST ['selec_nivel'] != '') {
+    $arreglo2 = $_REQUEST ['selec_nivel'];
+} else {
+    $arreglo2 = '';
+}
+$cadenaACodificar .= "&arreglo2=" . $arreglo2;
 
 // Codificar las variables
-$enlace = $this->miConfigurador->getVariableConfiguracion ( "enlace" );
-$cadena = $this->miConfigurador->fabricaConexiones->crypto->codificar_url ( $cadenaACodificar, $enlace );
+$enlace = $this->miConfigurador->getVariableConfiguracion("enlace");
+$cadena = $this->miConfigurador->fabricaConexiones->crypto->codificar_url($cadenaACodificar, $enlace);
 
 // URL definitiva
 $urlFinal = $url . $cadena;
-
-
-$urlDirectorio="http://10.20.0.38/arka/plugin/scripts/javascript/dataTable/Spanish.json";
-
 ?>
 <script type='text/javascript'>
 
 
 
 
-$(function() {
-         	$('#tablaTitulos').ready(function() {
+    $(function () {
+        $('#tablaTitulos').ready(function () {
 
-             $('#tablaTitulos').dataTable( {
+            $('#tablaTitulos').dataTable({
 //              	 serverSide: true,
-				language: {
-                url: "<?php echo $urlDirectorio?>"
-            			},
-             	processing: true,
-		"aLengthMenu": [[10,25, 50,100,300,500,1000,-1], [10,25, 50,100,300,500,1000,'Todos']],
-//                   ordering: true,
-                  searching: true,
-//                deferRender: true,
-      //             sScrollY: 500	,
-        //          bScrollCollapse: true,
-                  info:true,
-//                   lengthChange:true,
-   		    "pagingType": "full_numbers",
-//                   stateSave: true,
-         //          renderer: "bootstrap",
-         //          retrieve: true,
-                  ajax:{
-                      url:"<?php echo $urlFinal?>",
-                      dataSrc:"data"                                                                  
-                  },
-                  columns: [
-				  { data :"placa" },
-				  { data :"descripcion" },
-	              { data :"marca" },
-                  { data :"serie" },
-                  { data :"sede" },
-                  { data :"dependencia" },
-                  { data :"ubicacion" },
-                  { data :"seleccion" },
-                            ]
-             });
-                  
-         		});
+                "language": {
+                    "sProcessing": "Procesando...",
+                    "sLengthMenu": "Mostrar _MENU_ registros",
+                    "sZeroRecords": "No se encontraron resultados",
+                    "sSearch": "Buscar:",
+                    "sLoadingRecords": "Cargando...",
+                    "sEmptyTable": "Ningún dato disponible en esta tabla",
+                    "sInfo": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+                    "sInfoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
+                    "sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
+                    "oPaginate": {
+                        "sFirst": "Primero",
+                        "sLast": "Ãšltimo",
+                        "sNext": "Siguiente",
+                        "sPrevious": "Anterior"
+                    }
+                },
+                processing: true,
+                searching: true,
+                "deferLoading": 500,
+                info: true,
+                "scrollY": "600px",
+                "scrollCollapse": false,
+                "pagingType": "full_numbers",
+                "bLengthChange": false,
+                "bPaginate": false,
+                ajax: {
+                    url: "<?php echo $urlFinal ?>",
+                    dataSrc: "data"
+                },
+                columns: [
+                    {data: "placa"},
+                    {data: "descripcion"},
+                    {data: "marca"},
+                    {data: "serie"},
+                    {data: "sede"},
+                    {data: "dependencia"},
+                    {data: "ubicacion"},
+                    {data: "seleccion"},
+                ]
+            });
 
-});
+        });
+
+    });
 
 
 
+
+ 
 
 </script>

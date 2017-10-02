@@ -79,6 +79,8 @@ class Formulario {
 
         $cadena_sql = $this->sql->getCadenaSql("buscarCatalogoId", $_REQUEST['idCatalogo']);
         $registros = $this->esteRecursoDB->ejecutarAcceso($cadena_sql, "busqueda");
+        
+       
 
 
         if (!$registros) {
@@ -101,9 +103,23 @@ class Formulario {
         echo '<fieldset class="ui-corner-all ui-widget ui-widget-content ui-corner-all">';
         echo '<legend>' . $this->lenguaje->getCadena('catalogo') . '</legend>';
         echo '<div style="float:left; width:200px"><label for="nombre">' . $nombre . '</label><span style="white-space:pre;"> </span></div>';
-        echo '<input type="text" maxlength="" size="50" value="' . $this->arrayDatos[0][1] . '" class="ui-widget ui-widget-content ui-corner-all  validate[required] " tabindex="1" name="nombreCatalogo" id="nombreCatalogo" title="' . $nombreTitulo . '">';
+        echo '<input type="text" maxlength="" size="40" value="' . $this->arrayDatos[0][1] . '" class="ui-widget ui-widget-content ui-corner-all  validate[required] " tabindex="1" name="nombreCatalogo" id="nombreCatalogo" title="' . $nombreTitulo . '">';
+        echo '<div id="botones"  class="marcoBotones">';
+        
+         $crear = $this->lenguaje->getCadena('cambiarNombre');
+        echo '<div class="campoBoton" style="float:center; width:200px";>';
+        echo '<button  onclick="cambiarNombreCatalogo()" type="button" tabindex="2" id="crearA" value="' . $crear . '" class="ui-button-text ui-state-default ui-corner-all ui-button-text-only">' . $crear . '</button>';
+
+        echo '</div>';
+        echo '</div>';
+        
+        
         echo '</fieldset>';
+        
+        
+        
         echo '</form>';
+       
     }
 
     private function edicionBotones() {
@@ -111,14 +127,14 @@ class Formulario {
         $crear = $this->lenguaje->getCadena('cambiarNombre');
         echo '<div id="botones"  class="marcoBotones">';
 
-        echo '<div class="campoBoton">';
-        echo '<button  onclick="cambiarNombreCatalogo()" type="button" tabindex="2" id="crearA" value="' . $crear . '" class="ui-button-text ui-state-default ui-corner-all ui-button-text-only">' . $crear . '</button>';
-
-        echo '</div>';
+//        echo '<div class="campoBoton">';
+//        echo '<button  onclick="cambiarNombreCatalogo()" type="button" tabindex="2" id="crearA" value="' . $crear . '" class="ui-button-text ui-state-default ui-corner-all ui-button-text-only">' . $crear . '</button>';
+//
+//        echo '</div>';
 
         echo '<div class="campoBoton">';
         echo '<button "="" onclick=" agregarElementoCatalogo()" type="button" tabindex="2" id="agregarA"';
-        echo 'value="Agregar Elemento" class="ui-button-text ui-state-default ui-corner-all ui-button-text-only">Agregar Elemento</button>';
+        echo 'value="Agregar Elemento" class="ui-button-text ui-state-default ui-corner-all ui-button-text-only">Agregar Cuenta Contable</button>';
         echo '</div><div class="campoBoton">';
         echo '<button "="" onclick=" reiniciarEdicion(' . $_REQUEST['idCatalogo'] . ')" type="button" tabindex="3" id="reiniciarA"';
         echo 'value="Reiniciar" class="ui-button-text ui-state-default ui-corner-all ui-button-text-only">Reiniciar</button>';
@@ -140,7 +156,7 @@ class Formulario {
         $atributos ['dobleLinea'] = 0;
         $atributos ['tabIndex'] = 1;
         $atributos ['etiqueta'] = $this->lenguaje->getCadena($esteCampo);
-        $atributos ['validar'] = 'required, minSize[1],maxSize[25],custom[onlyNumberSp]';
+        $atributos ['validar'] = 'required, minSize[1],maxSize[9],custom[onlyNumberSp]';
 
         if (isset($_REQUEST [$esteCampo])) {
             $atributos ['valor'] = $_REQUEST [$esteCampo];
@@ -162,8 +178,8 @@ class Formulario {
     private function campoPadre() {
         $idPadre = $this->lenguaje->getCadena('idPadre');
         echo '<div class="jqueryui  anchoColumna1">';
-        echo '<div style="float:left;display:inline; width:200px"><label for="idPadre">' . $idPadre . '</label></div>';
-        echo '<input type="text" onchange="cambiarPadre()" onkeyup="autocompletar()" class="ui-widget ui-widget-content ui-corner-all validate[required,custom[valorLista]]"  tabindex="3" size="50" value="0" name="lidPadre" id="lidPadre" title="" class="ui-widget ui-widget-content ui-corner-all"></input>';
+        echo '<div style="float:left;display:none; width:200px"><label for="idPadre">' . $idPadre . '</label></div>';
+        echo '<input type="hidden" onchange="cambiarPadre()" onkeyup="autocompletar()" class="ui-widget ui-widget-content ui-corner-all validate[required,custom[valorLista]]"  tabindex="3" size="50" value="0" name="lidPadre" id="lidPadre" title="" class="ui-widget ui-widget-content ui-corner-all"></input>';
         echo '</div>';
     }
 
@@ -180,7 +196,7 @@ class Formulario {
         $atributos ['dobleLinea'] = 0;
         $atributos ['tabIndex'] = 3;
         $atributos ['etiqueta'] = $this->lenguaje->getCadena($esteCampo);
-        $atributos ['validar'] = 'required, minSize[1],maxSize[75]';
+        $atributos ['validar'] = 'required, minSize[1],maxSize[50]';
 
         if (isset($_REQUEST [$esteCampo])) {
             $atributos ['valor'] = $_REQUEST [$esteCampo];
@@ -264,15 +280,15 @@ class Formulario {
     }
 
     private function campoTipoBien() {
-        $esteCampo = "tipoBien";
+       $esteCampo = "tipoBien";
         $atributos ['nombre'] = $esteCampo;
         $atributos ['id'] = $esteCampo;
         $atributos ['etiqueta'] = $this->lenguaje->getCadena($esteCampo);
-        $atributos ["etiquetaObligatorio"] = false;
-        $atributos ['tab'] = 1;
-        $atributos ['seleccion'] = - 1;
+        $atributos ["etiquetaObligatorio"] = true;
+        $atributos ['tab'] = 2;
+        $atributos ['seleccion'] = -1;
         $atributos ['anchoEtiqueta'] = 200;
-        $atributos ['evento'] = '';
+        $atributos ['evento'] = "3";
         if (isset($_REQUEST [$esteCampo])) {
             $atributos ['valor'] = $_REQUEST [$esteCampo];
         } else {
@@ -281,13 +297,14 @@ class Formulario {
         $atributos ['deshabilitado'] = false;
         $atributos ['columnas'] = 1;
         $atributos ['tamanno'] = 1;
-        $atributos ['ajax_function'] = "";
+        $atributos ['ajax_function'] = "cambioTipo()";
         $atributos ['ajax_control'] = $esteCampo;
         $atributos ['estilo'] = "jqueryui";
         $atributos ['validar'] = "required";
         $atributos ['limitar'] = 1;
         $atributos ['anchoCaja'] = 49;
-        $atributos ['miEvento'] = '';
+        $atributos ['miEvento'] = 'change';
+     
         $atributos ['cadena_sql'] = $this->sql->getCadenaSql("tipoBien");
         $matrizItems = array(
             array(
@@ -304,6 +321,8 @@ class Formulario {
 
     private function campoDepreciacion() {
 
+        
+        
         $esteCampo = "depreciacion";
         $atributos ['nombre'] = $esteCampo;
         $atributos ['id'] = $esteCampo;
@@ -451,7 +470,7 @@ class Formulario {
         $esteBloque = $this->miConfigurador->getVariableConfiguracion("esteBloque");
 
         $tab = 0;
-        $this->notaUso();
+//        $this->notaUso();
         $this->edicionNombreCatalogo();
 
         echo '<form id="catalogo" name="catalogo" action="index.php" method="post">';
